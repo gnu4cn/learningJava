@@ -13,3 +13,7 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 ```
 
 > 同时，`packege com.xfoss.com.learningJava;` 对应的包 `com.xfoss.learningJava` 必须以这个名字命名，这也是上面目录中 `/com/xfoss/learningJava` 的来源。
+
+## 2. 使用 `exec-maven-plugin`
+
+使用这个插件，可以开启 `mvn exec:java` 命令，实时运行（正在）编写的 Java 程序。该插件支持两种运行模式，一种是在 Maven 所在线程里运行（需要修改 MAVEN 运行参数 `export MAVEN_OPTS=-Xmx1024m`，以增加JVM虚拟机的运行内存）；另一种以独立线程运行（尚需测试）。
