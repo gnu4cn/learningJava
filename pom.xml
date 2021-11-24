@@ -25,6 +25,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.xfoss.learningJava.GameLauncher</mainClass>
+                    <environmentVaribles>
+                        <LANG>en_US</LANG>
+                    </environmentVaribles>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version> 
@@ -42,7 +60,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.PhraseOMatic</mainClass>
+                                    <mainClass>com.xfoss.learningJava.GameLauncher</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
