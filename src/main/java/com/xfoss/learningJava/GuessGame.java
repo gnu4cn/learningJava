@@ -38,21 +38,21 @@ public class GuessGame {
 			if (p1.guessed || p2.guessed || p3.guessed) {
 				System.out.println("We've got a winner!");
 				
-				System.out.format("Player one got it right?\t%s\n", 
+				System.out.println("Player one got it right?\t" + (
                         p1.guessed 
                         ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
                         : Ansi.colorize("No", Attribute.RED_TEXT())
-                        );
-				System.out.format("Player two got it right?\t%s\n", 
+                        ));
+				System.out.println("Player one got it right?\t" + (
                         p2.guessed 
                         ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
                         : Ansi.colorize("No", Attribute.RED_TEXT())
-                        );
-				System.out.format("Player three got it right?\t%s\n", 
+                        ));
+				System.out.println("Player one got it right?\t" + (
                         p3.guessed 
                         ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
                         : Ansi.colorize("No", Attribute.RED_TEXT())
-                        ); 
+                        ));
 				
 				System.out.println("----------------------------\nGame is over.\n");
 				break;
