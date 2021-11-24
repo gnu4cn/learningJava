@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xfoss.learningJava</groupId>
+    <artifactId>com.xfoss.learningJava</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>com.xfoss.learningJava</name>
+    <description>For learning Java</description>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/de.mirkosertic.bytecoder/java.desktop -->
+        <dependency>
+            <groupId>de.mirkosertic.bytecoder</groupId>
+            <artifactId>java.desktop</artifactId>
+            <version>2019-11-25</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
