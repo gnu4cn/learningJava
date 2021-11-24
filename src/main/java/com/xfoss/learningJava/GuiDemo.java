@@ -1,6 +1,7 @@
 package com.xfoss.learningJava;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GuiDemo {
 	public static void main (String[] args) {
@@ -12,7 +13,7 @@ public class GuiDemo {
 			f.getContentPane().add(b);
 			f.setSize(300, 300);
 			f.setVisible(true);
-		} catch (java.awt.HeadlessException e) {
+		} catch (HeadlessException e) {
 			System.out.format("没有显示器，无法运行本程序。\n"
 					+ "错误代码\n"
 					+ "------------------------------\n%s\n", e);
