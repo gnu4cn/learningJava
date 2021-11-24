@@ -30,7 +30,8 @@ public class SimpleGui implements ActionListener {
 		f.setVisible(true);
 	}
 	
-	public void actionPerformed (ActionEvent e) {
-		b.setText("我已经被点了！");
+	public void actionPerformed (ActionEvent ev) {
+		JButton x = (JButton) ev.getSource();
+		x.setText("我已经被点击了!");
 	}
 }
