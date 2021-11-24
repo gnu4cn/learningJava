@@ -5,7 +5,6 @@
     <artifactId>com.xfoss.learningJava</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>learningJava</name>
     <description>For learning Java</description>
 
     <dependencies>

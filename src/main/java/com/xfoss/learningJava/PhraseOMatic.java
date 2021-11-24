@@ -26,6 +26,6 @@ public class PhraseOMatic {
             phrase = String.format("%s %s", 
                     phrase, wordMatrix[n][(int) (Math.random() * wordMatrix[n].length)]);
 
-        System.out.format("What we need is a %s.\n", phrase);
+        System.out.format("What we need is a%s.\n", phrase);
     }
 }
