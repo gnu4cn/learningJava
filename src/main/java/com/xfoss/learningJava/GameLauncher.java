@@ -8,6 +8,7 @@ import com.sun.jna.platform.win32.WinNT.HANDLE;
 
 public class GameLauncher {
     private static void enableWindows10AnsiSupport() {        
+        <!-- 这段代码可以修改 Windows 注册表 -->
         Function GetStdHandleFunc = Function.getFunction("kernel32", "GetStdHandle");       
         DWORD STD_OUTPUT_HANDLE = new DWORD(-11);       
         HANDLE hOut = (HANDLE) GetStdHandleFunc.invoke(HANDLE.class, new Object[]{STD_OUTPUT_HANDLE});        
