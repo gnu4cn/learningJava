@@ -55,10 +55,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.xfoss.learningJava.GameLauncher</mainClass>
-                    <environmentVaribles>
-                        <LANG>en_US</LANG>
-                    </environmentVaribles>
+                    <mainClass>com.xfoss.learningJava.GuiDemo</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -79,7 +76,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.GameLauncher</mainClass>
+                                    <mainClass>com.xfoss.learningJava.GuiDemo</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
