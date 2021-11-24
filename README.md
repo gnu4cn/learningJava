@@ -25,4 +25,4 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 
 ## 目录
 
-[获得GUI：一个甚为形象的故事](docs/ch12_Getting_GUI_A_Very_Graphic_Story.md)
+- [获得GUI：一个甚为形象的故事](docs/ch12_Getting_GUI_A_Very_Graphic_Story.md)
