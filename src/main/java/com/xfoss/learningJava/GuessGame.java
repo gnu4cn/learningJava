@@ -1,4 +1,5 @@
 package com.xfoss.learningJava;
+import com.diogonunes.jcolor.*;
 
 public class GuessGame {
 	Player p1;
@@ -35,25 +36,28 @@ public class GuessGame {
 			if (p1.guessed || p2.guessed || p3.guessed) {
 				System.out.println("We've got a winner!");
 				
-				System.out.println("Player one got it right? " 
-						+ (p1.guessed ? Constants.ANSI_GREEN : Constants.ANSI_RED) 
-						+ Boolean.toString(p1.guessed) + Constants.ANSI_RESET);
-				System.out.println("Player two got it right? " 
-						+ (p2.guessed ? Constants.ANSI_GREEN : Constants.ANSI_RED) 
-						+ Boolean.toString(p2.guessed) + Constants.ANSI_RESET);
-				System.out.println("Player three got it right? " 
-						+ (p3.guessed ? Constants.ANSI_GREEN : Constants.ANSI_RED) 
-						+ Boolean.toString(p3.guessed) + Constants.ANSI_RESET);
+				System.out.format("Player one got it right?\t%s\n", 
+                        p1.guessed 
+                        ? colorize("Yes", GREEN_TEXT())
+                        : colorize("No", RED_TEXT())
+                        );
+				System.out.format("Player two got it right?\t%s\n", 
+                        p2.guessed 
+                        ? colorize("Yes", GREEN_TEXT())
+                        : colorize("No", RED_TEXT())
+                        );
+				System.out.format("Player three got it right?\t%s\n", 
+                        p3.guessed 
+                        ? colorize("Yes", GREEN_TEXT())
+                        : colorize("No", RED_TEXT())
+                        ); 
 				
-				System.out.println("Game is over.\n");
+				System.out.println("----------------------------\nGame is over.\n");
 				break;
 			} else {
 				System.out.println("---------------------\n"
 						+ "Players will have to try again.\n");
 			}
 		}
-		
-		
-		
 	}
 }
