@@ -1,5 +1,7 @@
 package com.xfoss.learningJava;
-import com.diogonunes.jcolor.*;
+
+import com.diogonunes.jcolor.Attribute;
+import com.diogonunes.jcolor.Ansi;
 
 public class GuessGame {
 	Player p1;
@@ -38,18 +40,18 @@ public class GuessGame {
 				
 				System.out.format("Player one got it right?\t%s\n", 
                         p1.guessed 
-                        ? colorize("Yes", GREEN_TEXT())
-                        : colorize("No", RED_TEXT())
+                        ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
+                        : Ansi.colorize("No", Attribute.RED_TEXT())
                         );
 				System.out.format("Player two got it right?\t%s\n", 
                         p2.guessed 
-                        ? colorize("Yes", GREEN_TEXT())
-                        : colorize("No", RED_TEXT())
+                        ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
+                        : Ansi.colorize("No", Attribute.RED_TEXT())
                         );
 				System.out.format("Player three got it right?\t%s\n", 
                         p3.guessed 
-                        ? colorize("Yes", GREEN_TEXT())
-                        : colorize("No", RED_TEXT())
+                        ? Ansi.colorize("Yes", Attribute.GREEN_TEXT())
+                        : Ansi.colorize("No", Attribute.RED_TEXT())
                         ); 
 				
 				System.out.println("----------------------------\nGame is over.\n");
