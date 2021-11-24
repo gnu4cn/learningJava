@@ -20,4 +20,5 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 
 ## 3. `pom.xml` 语法
 
-    - 可以在 `properties` tag里定义一些变量，在后面通过 `${x.y}` 的方式引用
+
+- 可以在 `properties` tag里定义一些变量，在后面通过 `${x.y}` 的方式引用
