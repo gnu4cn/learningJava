@@ -20,6 +20,8 @@
     <properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>    
+        <shade.version>3.2.4</shade.version>
+        <exec.version>3.0.0</exec.version>
     </properties>
 
     <build>
@@ -27,7 +29,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${exec.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -45,7 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version> 
+                <version>${shade.version}</version> 
                 <executions>
                 <execution>
                         <phase>package</phase>
