@@ -110,5 +110,11 @@ __Java的保留字__
 - 对象参考变量所存储的，是表示一种访问对象的方式的数据位（An object reference variable holds bits that represent a way to access an object）
 - 对象参考变量，并非保存的是对象本身，而是类似于指针的东西，或者说是一个内存地址。就算在不知道某个参考变量里头具体是什么，我们也明白他到底是个什么，参考变量代表着唯一的对象。同时JVM也知道如何使用这个引用，来获取到某个对象。
 
+__对象引用__ 只是另一个变量值（An object reference is just another variable value）。
 
+**对象声明、创建与赋值的三个步骤**
+
+| `Dog myDog` | `=` | `new Dog();` |
+| - | - |
+| 1 | 3 | 2 |
 
