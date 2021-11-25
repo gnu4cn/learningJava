@@ -98,6 +98,7 @@ java.lang.Error: Unresolved compilation problem:
 __Java的保留字__
 
 | boolean | byte | char | double | float | int | long | short | public | private |
+| :-: | :-: | :-: | :-: | :-： | :-: | :-: | :-: | :-: | :-: |
 | protected | abstract | final | native | static | strictfp | syschronized | transient | volatile | if |
 | else | do | while | switch | case | default | for | break | continue | assert |
 | class | extends | implements | import | instanceof | interface | new | package | super | this |
@@ -115,6 +116,6 @@ __对象引用__ 只是另一个变量值（An object reference is just another 
 **对象声明、创建与赋值的三个步骤**
 
 | `Dog myDog` | `=` | `new Dog();` |
-| - | - |
+| :-: | :-: | :-: |
 | 1 | 3 | 2 |
 
