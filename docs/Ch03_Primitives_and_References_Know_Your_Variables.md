@@ -75,7 +75,7 @@ float f = 32.5f;
 - 将一个变量的值赋给另一个变量 （比如 `x=y`）
 - 使用结合了变量与字面值的表达式 （比如 `x = y + 43`）
 
-> Java中声明了变量后需要初始化，若未初始化，将报出以下错误：
+> Java中声明了原生变量后需要初始化，若未初始化，将报出以下错误：
 
 ```java
 int y;
@@ -86,6 +86,8 @@ System.out.println(y);
 java.lang.Error: Unresolved compilation problem:
         The local variable y may not have been initialized
 ```
+
+__而对象中的变量，则不存在这样的问题，其在对象初始化时，会被自动赋值。__
 
 
 **变量命名规则**

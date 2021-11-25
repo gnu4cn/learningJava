@@ -3,9 +3,12 @@ package com.xfoss.learningJava;
 public class EncapsulationDemo {
 	public static void main (String[] args) {
 		Dog one = new Dog ();
+		System.out.format ("Dog one: %s\n", one.getSize());
 		one.setSize(75);
 		Dog two = new Dog ();
+		System.out.format ("Dog two: %s\n", two.getSize());
 		two.setSize(8);
+		
 		
 		System.out.format ("Dog one: %s\n", one.getSize());
 		System.out.format ("Dog two: %s\n", two.getSize());
