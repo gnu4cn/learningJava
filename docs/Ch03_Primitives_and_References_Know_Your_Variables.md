@@ -97,12 +97,12 @@ java.lang.Error: Unresolved compilation problem:
 
 __Java的保留字__
 
-| boolean | byte | char | double | float | int | long | short | public | private |
+| `boolean` | `byte` | `char` | `double` | `float` | `int` | `long` | `short` | `public` | `private` |
 | :-: | :-: | :-: | :-: | :-： | :-: | :-: | :-: | :-: | :-: |
-| protected | abstract | final | native | static | strictfp | syschronized | transient | volatile | if |
-| else | do | while | switch | case | default | for | break | continue | assert |
-| class | extends | implements | import | instanceof | interface | new | package | super | this |
-| catch | finally | try | throw | throws | return | void | const | goto | enum |
+| `protected` | `abstract` | `final` | `native` | `static` | `strictfp` | `syschronized` | `transient` | `volatile` | `if` |
+| `else` | `do` | `while` | `switch` | `case` | `default` | `for` | `break` | `continue` | `assert` |
+| `class` | `extends` | `implements` | `import` | `instanceof` | `interface` | `new` | `package` | `super` | `this` |
+| `catch` | `finally` | `try` | `throw` | `throws` | `return` | `void` | `const` | `goto` | `enum` |
 
 **关于参考变量**
 
