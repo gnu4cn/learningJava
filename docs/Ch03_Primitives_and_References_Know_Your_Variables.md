@@ -48,3 +48,67 @@ __原生类型__
 | 浮点数 | --- | --- |
 | 单精度浮点数（`float`） | 32位 | 根据JVM的不同而不同 |
 | 双精度浮点数（`double`） | 64位 | 根据JVM的不同而不同 |
+
+**带赋值的原生变量声明**：
+
+```java
+int x;
+x = 234;
+byte b = 89;
+boolean isFun = true;
+double d = 3456.98;
+char c = 'f';
+int z = x;
+boolean isPunkRock;
+isPunkRock = false;
+boolean powerOn;
+powerOn = isFun;
+long big = 3456789;
+float f = 32.5f;
+```
+
+> 注意最后一个中的 `f`，因为Java会将所有带着小数点的没有 `f` 的数，看着是双精度浮点数，因此要在后面加上 `f` 来表示单精度浮点数。
+
+**将值赋给变量的方式有以下三种**：
+
+- 在等号之后键入一个 _字面值_ （比如： `x=12`, `isGood=true`）
+- 将一个变量的值赋给另一个变量 （比如 `x=y`）
+- 使用结合了变量与字面值的表达式 （比如 `x = y + 43`）
+
+> Java中声明了变量后需要初始化，若未初始化，将报出以下错误：
+
+```java
+int y;
+System.out.println(y);
+```
+
+```bash
+java.lang.Error: Unresolved compilation problem:
+        The local variable y may not have been initialized
+```
+
+
+**变量命名规则**
+
+- 必须以字母、下划线（`_`）或美元符号（`$`）开头。那么就不能以数字开头。
+- 后面就可以使用数字了。只是不能以数字开头。
+- 可以是你所喜爱的任何字符串，除开上面两条规则外，还要不能是 Java 的保留字。
+
+
+__Java的保留字__
+
+| boolean | byte | char | double | float | int | long | short | public | private |
+| protected | abstract | final | native | static | strictfp | syschronized | transient | volatile | if |
+| else | do | while | switch | case | default | for | break | continue | assert |
+| class | extends | implements | import | instanceof | interface | new | package | super | this |
+| catch | finally | try | throw | throws | return | void | const | goto | enum |
+
+**关于参考变量**
+
+- 实际上是不存在 **对象** 变量的（There is actually no such thing as an **object** variable）
+- 有的只是对象 **参考** 变量（There's only an object **reference** variable）
+- 对象参考变量所存储的，是表示一种访问对象的方式的数据位（An object reference variable holds bits that represent a way to access an object）
+- 对象参考变量，并非保存的是对象本身，而是类似于指针的东西，或者说是一个内存地址。就算在不知道某个参考变量里头具体是什么，我们也明白他到底是个什么，参考变量代表着唯一的对象。同时JVM也知道如何使用这个引用，来获取到某个对象。
+
+
+

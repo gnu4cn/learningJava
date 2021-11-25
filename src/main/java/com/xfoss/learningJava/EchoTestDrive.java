@@ -5,7 +5,10 @@ public class EchoTestDrive {
         Echo e1 = new Echo ();
         Echo e2 = new Echo ();
         
+        int y;
+        
         int x = 0;
+        System.out.println(x+y);
         while ( x<4 ) {
         	e1.hello();
         	++e1.count;
