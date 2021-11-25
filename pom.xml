@@ -55,7 +55,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.xfoss.learningJava.EchoTestDrive</mainClass>
+                    <mainClass>com.xfoss.learningJava.EncapsulationDemo</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -76,7 +76,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.EchoTestDrive</mainClass>
+                                    <mainClass>com.xfoss.learningJava.EncapsulationDemo</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
