@@ -25,5 +25,5 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 
 ## 目录
 
-- [对象村之旅](docs/Ch02_A_Trip_to_Objectville.md)
+- [类与对象：对象村之旅](docs/Ch02_Class_and_Object_A_Trip_to_Objectville.md)
 - [获得GUI：一个甚为形象的故事](docs/Ch12_Getting_GUI_A_Very_Graphic_Story.md)
