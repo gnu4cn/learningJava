@@ -167,4 +167,49 @@ try {
 
 ## 对原生变量的修剪（Casting primitives）
 
+在第三章中，讨论了不同原生类型的大小，以及为何不能把大的变量硬塞进小的变量里。
 
+```java
+long y = 42;
+int x = y; // 不会被编译
+```
+
+会报错：
+
+```bash
+java.lang.Error: Unresolved compilation problem:
+        Type mismatch: cannot convert from long to int
+```
+
+`long` 是要比 `int` 大的（占用的数据位要多），同时编译器也不确定那个 `long` 的变量在哪里。为了强制编译器将一个较大的原生类型变量，塞进另一个较小的原生变量中，就要使用 `cast` 运算符。
+
+```java
+long y = 42;
+int x = (int) y;
+```
+
+放入了这个 `cast` 运算符后，就告诉了编译器，拿到 `y` 的值，将其修剪到 `int` 的大小，然后将 `x` 设置为剩下的部分。若 `y` 的值要比 `x` 的最大值更大，那么剩下的就会是一个奇怪的值（但可以计算出来）。比如：
+
+```java
+long y = 40002;
+// 40002 以及超出了短整型的最大值
+short x = (int) y; // x 现在等于 -25534!
+```
+
+> 这是因为，十进制的 `40002` 的有符号二进制形式为 `00000000000000001001110001000010`, 保留后 16 位就是 `1001110001000010`, 按照有符号短整数来看就是 `-25534`。
+
+对于浮点数来说，比如只想要某个浮点数的整数部分时：
+
+```java
+float f = 3.14f;
+int x = (int) f; // x 将等于 3
+```
+
+> 这里还比较一下 `cast` 运算符与 `Math.round`方法。
+
+```bash
+float f = 3.14f;        (int) f = 3     Math.round(f) = 3
+float p = 3.8f;         (int) p = 3     Math.round(p) = 4
+```
+
+> 说明 `cast` 运算符只是截取整数部分，而 `Math.round` 方法则会做四舍五入。

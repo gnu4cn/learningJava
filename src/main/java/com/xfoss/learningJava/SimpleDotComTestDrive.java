@@ -5,6 +5,14 @@ public class SimpleDotComTestDrive {
         int numOfGuesses = 0;
         GameHelper helper = new GameHelper ();
 
+
+        float f = 3.14f;
+        float p = 3.8f;
+
+        System.out.format("float f = 3.14f;\t(int) f = %s\tMath.round(f) = %s\n"
+                +"float p = 3.8f;\t\t(int) p = %s\tMath.round(p) = %s\n", 
+                (int)f, Math.round(f), (int) p, Math.round(p));
+
 		SimpleDotCom dot = new SimpleDotCom ();
 
         int randomNum = (int) (Math.random() * 5);
