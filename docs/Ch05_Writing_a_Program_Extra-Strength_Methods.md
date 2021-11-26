@@ -213,3 +213,30 @@ float p = 3.8f;         (int) p = 3     Math.round(p) = 4
 ```
 
 > 说明 `cast` 运算符只是截取整数部分，而 `Math.round` 方法则会做四舍五入。
+
+## 一个“有趣的类”
+
+```java
+public class Output {
+    public static void main (String[] args) {
+        Output o = new Output ();
+        o.go ();
+    }
+
+    void go () {
+        int y = 7;
+        for (int x = 1; x < 8; x++) {
+            y++;
+            if (x > 4) {
+                System.out.format("%s ", ++y);
+            }
+            if (y > 14) {
+                System.out.format(" x = %s", x);
+                break;
+            }
+        }
+    }
+}
+```
+
+> 参考：[在类中创建自己的对象](https://blog.csdn.net/qq_38374633/article/details/103977097)。
