@@ -74,3 +74,7 @@ XP基于一套验证过的实践方法，这些方法应该组合运用。不过
 - 根据小版本，设置合理可行的时间表（Set realistic schedules, based around small releases)
 - 保持代码简单（Keep it simple）
 - 结对编程，并定期调换人员岗位，从而令到每个人都对代码的各个部分有所了解（Program in pairs, and move ppl around so that everybody knows pretty much everything about the code）
+
+## `++n` 和 `n++` 的不同
+
+`++n` increments the value and returns the new one. `n++` increments the value and returns the old one. Thus, `n++` requires extra storage, as it has to keep track of the old value so it can return it after doing the increment.
