@@ -1,0 +1,26 @@
+{
+  "name": "learningjava",
+  "version": "0.1.0",
+  "description": "A project for learning JAVA language.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "mvn exec:java"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnu4cn/learningJava.git"
+  },
+  "keywords": [
+    "JAVA",
+    "learning"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnu4cn/learningJava/issues"
+  },
+  "homepage": "https://github.com/gnu4cn/learningJava#readme"
+}
