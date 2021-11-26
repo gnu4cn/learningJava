@@ -78,3 +78,93 @@ XP基于一套验证过的实践方法，这些方法应该组合运用。不过
 ## `++n` 和 `n++` 的不同
 
 `++n` increments the value and returns the new one. `n++` increments the value and returns the old one. Thus, `n++` requires extra storage, as it has to keep track of the old value so it can return it after doing the increment.
+
+## 增强版的`for` 循环
+
+```java
+for (String name: nameArray) {...}
+```
+
+上面的语句，用人话讲就是：将`nameArray` 里的每个元素，赋值给 `name` 变量，并运行循环体。
+
+编译器是这样理解上面的语句的：
+
+- 创建一个名为 `name` 的字符串变量，并将其置为 `null`（`null`也是一个值）
+- 将 `nameArray` 的第一个值赋给 `name`
+- 运行循环体（由花括弧(`{}`)包围起来的代码块）
+- 将 `nameArray`中的下一个值赋给 `name`
+- 重复这个过程，直到数组中最后一个元素为止
+
+**循环条件的第一部分：循环变量的声明（Part One: iteration variable declaration）**
+
+用此部分来声明和初始化一个在循环体中用到的变量。对于循环的每次迭代，该变量都将保存一个数组中的不同元素。此变量的类型，必须与数组中的各个元素的类型兼容！举例来说，就是不能声明一个 `int` 的迭代变量，与 `String[]` 的数组来一起使用。
+
+**循环条件的第二部分：目标数据集（Part Two: the actual collection）**
+
+这必须是到某个数组（`array`）或其他集合（`collection`）的引用。注意，这里对于其他非数组类别的数据集，也是使用的。这在后续章节会看到。
+
+
+## 把一个 `String` 转换成 `int`
+
+```java
+String num = "2";
+int x = 2;
+if (x == num) //horrible explosion!
+```
+
+这样写代码，编译器就会觉得你是个傻子！
+
+```bash
+[ERROR] xxx.java[x,y] bad operand types for binary operator '=='
+[ERROR]   first type:  int
+[ERROR]   second type: java.lang.String
+```
+
+对于语句：
+
+```java
+int guess = Integer.parseInt(stringGuess);
+```
+
+其中，`Integer`是Java语言自带的一个类；`parseInt`则是类`Integer`的一个方法，他知道怎样将某个字符串或其他类型的变量，解析为该变量所表示的 `int`数值。
+
+```java
+int n = 0;
+
+try {
+    n = Integer.parseInt("a");
+    System.out.format("\"a\" = %s\n", n);
+} catch (Exception e) {
+    System.out.println(e);
+}
+```
+
+这段代码，会报错错误：
+
+```bash
+java.lang.NumberFormatException: For input string: "a"
+```
+
+说明 `Integer.parseInt` 方法，是不能将除 `0` 到 `9` 字符的其他变量，解析为整数的。
+
+```java
+int n = 0;
+
+try {
+    n = Integer.parseInt("1024");
+    System.out.format("\"1024\" = %s\n", n);
+} catch (Exception e) {
+    System.out.println(e);
+}
+```
+
+这段代码的输出是：
+
+```bash
+"1024" = 1024
+```
+
+
+## 对原生变量的修剪（Casting primitives）
+
+
