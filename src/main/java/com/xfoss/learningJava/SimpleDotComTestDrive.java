@@ -5,15 +5,6 @@ public class SimpleDotComTestDrive {
         int numOfGuesses = 0;
         GameHelper helper = new GameHelper ();
 
-        int n = 0;
-
-        try {
-            n = Integer.parseInt("1024");
-            System.out.format("\"1024\" = %s\n", n);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
 		SimpleDotCom dot = new SimpleDotCom ();
 
         int randomNum = (int) (Math.random() * 5);
