@@ -239,5 +239,7 @@ public class Output {
 }
 ```
 
-> 参考：1. [在类中创建自己的对象](https://blog.csdn.net/qq_38374633/article/details/103977097)
->       2. [Can a Class instantiate itself?](https://stackoverflow.com/questions/18241281/can-a-class-instantiate-itself)
+> 参考：
+
+> - [在类中创建自己的对象](https://blog.csdn.net/qq_38374633/article/details/103977097)
+> - [Can a Class instantiate itself?](https://stackoverflow.com/questions/18241281/can-a-class-instantiate-itself)
