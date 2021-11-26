@@ -49,5 +49,28 @@ __每个类都要编写的三种代码__
 - 真实代码
     类的具体实现。这里才是编写Java代码的地方
 
+## 什么是预代码/伪代码（prepcode）
 
+是类的真实Java代码与其自然语言描述之间的中介。大多数预代码包含三个部分：实例变量的声明、方法的声明和方法的逻辑。预代码最重要的部分，就是方法的逻辑，因为方法的逻辑，对要发生什么进行了定义。
 
+## 编写方法的实现（Writing the method implementations）
+
+在编写方法之前，先要编写方法的测试代码。注意，这里是先于方法本身，编写方法的测试代码的。
+
+首先编写测试代码的做法，是极限编程（Extreme Programming, XP）的一种实践。采取这种方法，可以令到写代码更为容易和快速。当然并不是说非得要采用极限编程的方法，但真的喜欢首先编写测试代码的部分，同时极限编程听起来也很酷。
+
+## 关于极限编程
+
+极限编程，作为软件开发方法论领域的新兴成员，被许多程序员认为是“程序员正确的工作方式”，极限编程出现在1990年代，已经被许多公司所采行。XP的核心在于，软件用户在提出新的需求时，可以很快实现。
+
+XP基于一套验证过的实践方法，这些方法应该组合运用。不过业者通常只选取其中一些方法，同时仅采行XP规则中的一部分。这些实践方法包含下面这些：
+
+- 高频发布小版本（Make small, but frequent, releases）
+- 以迭代周期方式开发（Develop in interation cycles）
+- 绝不把不包含在软件规格中的功能/特性，加入到项目中去（不管有多想要以“为将来考虑”的原因，加入某项功能，Don't put in anything that's not in the spec(no matter how tempted you are to put int functionality "for the future")）
+- 首先编写测试代码
+- 不设苛刻时间表；不加班（No killer schedules; work regular hours）
+- 一有机会就搞重构（提升代码质量，Refactor(improve the code) whenever and wherever you notice the opportunity）
+- 根据小版本，设置合理可行的时间表（Set realistic schedules, based around small releases)
+- 保持代码简单（Keep it simple）
+- 结对编程，并定期调换人员岗位，从而令到每个人都对代码的各个部分有所了解（Program in pairs, and move ppl around so that everybody knows pretty much everything about the code）
