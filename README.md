@@ -29,4 +29,5 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 - [原生与引用：熟知你的变量](docs/Ch03_Primitives_and_References_Know_Your_Variables.md)
 - [方法对实例变量的使用：对象的行为方式](docs/Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.md)
 - [实战编程：给方法赋能](docs/Ch05_Writing_a_Program_Extra-Strength_Methods.md)
+- [了解Java API：使用Java的库](docs/Ch06_Get_to_Know_The_Java_API_Using_the_Java_Libarary.md)
 - [获得GUI：一个甚为形象的故事](docs/Ch12_Getting_GUI_A_Very_Graphic_Story.md)
