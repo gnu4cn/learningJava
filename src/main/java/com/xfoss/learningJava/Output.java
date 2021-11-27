@@ -15,7 +15,7 @@ public class Output {
                 System.out.format("%s ", ++y);
             }
             if (y > 14) {
-                System.out.format(" x = %s", x);
+                System.out.format(" x = %s\n", x);
                 break;
             }
         }
