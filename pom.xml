@@ -8,8 +8,8 @@
     <description>For learning Java</description>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>    
+        <maven.compiler.source>11.0.12</maven.compiler.source>
+        <maven.compiler.target>11.0.12</maven.compiler.target>    
         <shade.version>3.2.4</shade.version>
         <exec.version>3.0.0</exec.version>
         <JColor.version>5.2.0</JColor.version>
