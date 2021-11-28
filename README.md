@@ -8,6 +8,7 @@
 
 
 - 安装JDK
+
     JDK的当前LTS版是 `JDK 17.0.1`（Oracle, 2021-11），你可以直接从 [Java Downloads | Oracle](https://www.oracle.com/java/technologies/downloads/) 下载，本项目所使用的 `JDK 11.0.12` 需要在 Oracle 网站注册才能下载。`jdk-11.0.12_linux-x64_bin.tar.gz` 压缩包有 183M 大小。
 
     运行下面的命令，就安装好 Oracle 的 JDK 了。
@@ -22,6 +23,7 @@ $sudo update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/bin/javac
 运行 `$java -version` 与 `$javac -version` 测试 JDK 是否安装妥当。
 
 - 安装Maven
+
     [Apache Maven](http://maven.apache.org/) 可以直接下载，下载到的 `apache-maven-3.8.4-bin.tar.gz`压缩包，大小约 9M，安装步骤与JDK的略有不同：
 
 ```bash
@@ -31,7 +33,7 @@ $sudo vim.gtk /etc/profile.d/mvn.sh
 $sudo chmod +x /etc/profile.d/mvn.sh
 ```
 
-其中建立了一个 `/etc/profile.d/mvn/sh` 文件，并修改为了可执行文件。该文件的内容为：
+其中建立了一个 `/etc/profile.d/mvn.sh` 文件，并修改为了可执行文件。该文件的内容为：
 
 ```sh
 export JAVA_HOME=/opt/jdk
