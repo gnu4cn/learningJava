@@ -43,7 +43,7 @@ export PATH=${M2_HOME}/bin:${PATH}
 随后可将国内的华为 MAVEN 代码仓库，设置为MAVEN的默认代码仓库。运行如下命令：
 
 ```bash
-$if [ -d $HOME"/.m2" ]; then :; else echo "~/.abc not exist. Now make this directory"; mkdir $HOME"/.m2"; fi
+$if [ -d $HOME"/.m2" ]; then :; else echo "~/.abc not exist. Now create"; mkdir $HOME"/.m2"; fi
 $wget -qO ~/.m2/settings.xml https://mirrors.huaweicloud.com/api/v1/configurations/maven?
 ```
 
