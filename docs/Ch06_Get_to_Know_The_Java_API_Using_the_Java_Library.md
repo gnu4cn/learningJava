@@ -80,3 +80,40 @@ public DotCom (...) {
 ...
 }
 ```
+
+## 超级强大的布尔表达式（Supper Powerful Boolean Expressions）
+
+在 `DotComBust` 类中的循环或 `if` 条件测试里，就已经用到了布尔表达式，这些布尔表达式是很简单的。在后续代码中，将用到更加强大的布尔表达式。
+
+### “与”及“或”运算符（`&&`、`||`）
+
+假设我写一个 `chooseCamera()` 方法，有很多如何去选择一台相机的规则。也许要选择价钱在 $50 到 $1000 的相机，在某种情形下，要更精细地去限定价格范围。可能会这样：
+
+- “加入价钱在 $300 到 $400, 那么就选择 X”:
+
+```java
+if (price >= 300 && price < 400) {
+    camera = "X";
+}
+```
+
+- 在有10个相机品牌可供选择时，有一些适用于品牌清单中少数几个的规则：
+
+```java
+if (brand.equals("A") || brand.equals("B")) {
+    // 仅针对品牌 A 和 B 进行某些操作
+}
+```
+
+布尔表达式可以时相当大且复杂的：
+
+```java
+if ((zoomType.equals("optical") &&
+    (zoomDegree >= 3 && zoomDegree <= 8)) ||
+    (zoomType.equals("digital") && 
+    (zoomDegree >= 5 && zoomDegree <= 12))) {
+        // 对这种变焦，执行相应操作
+}
+```
+
+
