@@ -6,9 +6,7 @@ import java.util.ArrayList;
 public class GameHelper {
     private static final String alphabet = "abcdefg";
     private static final int gridLength = 7;
-    private static final int gridSize = 49;
-    private int [] grid = new int [gridSize];
-    private int comCount = 0;
+    private ArrayList<ArrayList<String>> alphaCellsList;
 
     public String getUserInput (String tips) {
         String inputLine = null;
@@ -28,52 +26,69 @@ public class GameHelper {
     public ArrayList<String> placeDotCom (int comSize) {
         ArrayList<String> alphaCells = new ArrayList<String> ();
 
-        String tmp = null;
-        int [] coords = new int [comSize];
-        int attempts = 0;
+        // 0 - Horizontal, 1 - Vertical
+        int direction = (int) (Math.round(Math.random()));
+
         boolean success = false;
-        int location = 0;
 
-        comCount++;
-        int incr = 1;
-        if ((comCount % 2) == 1) {
-            incr = gridLength;
-        }
+        outerLoop: {
+            while (!success) {
+                // Horizontal, 这个时候“abcdefg”都可以选择，0-6只能选择0-4
+                // Vertical，这个时候0-6都能选择，而“abcdefg”中只能选择“a-e”
+                int randY = (int) (
+                        direction == 0 ? 
+                        Math.random() * alphabet.length()
+                        : Math.random() * (alphabet.length() - comSize));
+                int randX = (int) (
+                        direction == 0 ?
+                        Math.random() * (gridLength - comSize)
+                        : Math.random() * gridLength);
 
-        while ( !success & attempts++ < 200 ) {
-            location  = (int) (Math.random() * gridSize);
+                // 得到一个随机的第一格
+                String initialCell = String.valueOf(alphabet.charAt(randY))
+                    .concat(Integer.toString(randX));
 
-            int x = 0;
-            success = true;
-            while (success && x < comSize) {
-                if (grid[location] == 0) {
-                    coords[x+1] = location;
-                    location += incr;
-                    if (location >= gridSize) {
-                        success = false;
+                // 对这个随机的第一格进行检查
+                if (alphaCellsList.size() == 0 ){
+                    // alphaCellsList 为空的情况 -- 直接添加
+                    alphaCells.add(initialCell);
+                    // 后续两个格子，直接添加
+                    for (int n = 1; n < comSize; n++) {
+                        String cell = null;
+                        if (direction == 0) {
+                            cell = String.valueOf(alphabet.charAt(randY + n))
+                                .concat(Integer.toString(randX));
+                        } else {
+                            cell = String.valueOf(alphabet.charAt(randY))
+                                .concat(Integer.toString(randX + n));
+                        }
+
+                        alphaCells.add(cell);
                     }
-                    if (x>0 && (location % gridLength == 0)) {
-                        success = false;
-                    }
-                } else {
-                    success = false;
+
+                    return alphaCells;
+
                 }
+                
+                // alphaCellsList 不为空时，就要进行检查了
+                for (ArrayList<String> alphaCellsToCheck : alphaCellsList) {
+                    if ( alphaCellsToCheck.contains(initialCell) ) break outerLoop;
+
+                    for (int n = 1; n < comSize; n++) {
+                        String cell = null;
+                        if (direction == 0) {
+                            cell = String.valueOf(alphabet.charAt(randY + n))
+                                .concat(Integer.toString(randX));
+                        } else {
+                            cell = String.valueOf(alphabet.charAt(randY))
+                                .concat(Integer.toString(randX + n));
+                        }
+
+                        if (alphaCellsToCheck.contains(cell)) break outerLoop;
+                    }
+                }
+                alphaCells.add(initialCell);
             }
         }
-
-        int x = 0;
-        int row = 0;
-        int column = 0;
-
-        while (x < comSize) {
-            grid[coords[x]] = 1;
-            row = (int) (coords[x] / gridLength);
-            column = coords[x] % gridLength;
-            tmp = String.valueOf(alphabet.charAt(column));
-
-            alphaCells.add(tmp.concat(Integer.toString(row)));
-        }
-
-        return alphaCells;
     }
 }
