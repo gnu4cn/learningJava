@@ -136,10 +136,20 @@ if (!brand.equals("X")) {
 }
 ```
 
-### 短路运算符（`&&`、`||`）
+### 短路运算符（Short circuit operators, `&&`、`||`）
 
 对于 `&&` 运算符，是要其两边都是 `true` 时，表达式才是 `true` 的。所以只要虚拟机看到其左边的值为 `false`，就不会在计算运算符右边的表达式了。所以他叫做短路运算符。
 
 同样对于 `||` 也是这样的，只要 JVM 看到他的左边是 `true`，会得出整个表达式就是 `true`，就不会再计算右边的值了。
+
+说这个有什么用呢？比如不确定某个引用变量是否已经被赋值了某个对象，就去调用某个使用了这个空引用变量（null reference variable, 也就是，尚未将对象赋值给该引用变量）的方法时，就会得到一个 `NullPointerException`的错误代码。那么就可以这样写：
+
+```java
+if (refVar != null && refVar.isValidType()) {
+    // 执行“已有某种类型”下的操作
+}
+```
+
+### 非短路运算符（Non Short Circuit Operators, `&`、`|`）
 
 
