@@ -1,15 +1,13 @@
 package com.xfoss.learningJava;
 
+import java.util.ArrayList;
+
 public class SimpleDotComTestDrive {
 	public static void main (String [] args) {
         int numOfGuesses = 0;
         GameHelper helper = new GameHelper ();
 
 		SimpleDotCom dot = new SimpleDotCom ();
-
-        int randomNum = (int) (Math.random() * 5);
-        int[] locations = {randomNum, randomNum+1, randomNum+2};
-        dot.setLocationCells(locations);
 
         boolean isAlive = true;
         while (isAlive) {
@@ -26,27 +24,30 @@ public class SimpleDotComTestDrive {
 }
 
 class SimpleDotCom {
-	private int [] locationCells;
-	private int numOfHits;
+	private ArrayList<String> locationCells = new ArrayList<String> ();
 	
-	public void setLocationCells (int[] locs) {
-		locationCells = locs;
-	}
+    // SimpleDotCom constructor
+    public SimpleDotCom () {
+        int randomNum = (int) (Math.random() * 5);
+        for (int t = 0; t < 3; t++) {
+            String tmp = Integer.toString(randomNum + t);
+            locationCells.add(tmp);
+        }
+    }
 
     public String checkYourself (String stringGuess) {
-        int guess = Integer.parseInt(stringGuess);
         String result = "脱靶";
 
-        for (int cell: locationCells) {
-            if (guess == cell) {
-                result = "命中";
-                ++numOfHits;
-                break;
-            }
-        }
+        int index = locationCells.indexOf(stringGuess);
 
-        if (numOfHits == locationCells.length) {
-            result = "击沉";
+        if (index >= 0) {
+            locationCells.remove(index);
+
+            if (locationCells.isEmpty()) {
+                result = "击沉";
+            } else {
+                result = "命中";
+            }
         }
 
         System.out.println(result);
