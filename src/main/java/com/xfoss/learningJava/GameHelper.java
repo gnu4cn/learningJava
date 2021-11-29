@@ -31,84 +31,36 @@ public class GameHelper {
 
         boolean success = false;
 
-        outerLoop: {
-            while (!success) {
-                // Horizontal, 这个时候“abcdefg”都可以选择，0-6只能选择0-4
-                // Vertical，这个时候0-6都能选择，而“abcdefg”中只能选择“a-e”
-                int randY = (int) (
-                        direction == 0 ? 
-                        Math.random() * alphabet.length()
-                        : Math.random() * (alphabet.length() - comSize));
-                int randX = (int) (
-                        direction == 0 ?
-                        Math.random() * (gridLength - comSize)
-                        : Math.random() * gridLength);
+        while (!success) {
+            // Horizontal, 这个时候“abcdefg”都可以选择，0-6只能选择0-4
+            // Vertical，这个时候0-6都能选择，而“abcdefg”中只能选择“a-e”
+            int randY = (int) (
+                    direction == 0 ? 
+                    Math.random() * alphabet.length()
+                    : Math.random() * (alphabet.length() - comSize));
+            int randX = (int) (
+                    direction == 0 ?
+                    Math.random() * (gridLength - comSize)
+                    : Math.random() * gridLength);
 
-                // 得到一个随机的第一格
-                String initialCell = String.valueOf(alphabet.charAt(randY))
-                    .concat(Integer.toString(randX));
+            // 得到一个随机的第一格
+            String initialCell = String.valueOf(alphabet.charAt(randY))
+                .concat(Integer.toString(randX));
 
-                // 对这个随机的第一格进行检查
-                if (alphaCellsList.size() == 0 ){
-                    // alphaCellsList 为空的情况 -- 直接添加
-                    alphaCells.add(initialCell);
-                    // 后续两个格子，直接添加
-                    for (int n = 1; n < comSize; n++) {
-                        String cell = null;
-                        if (direction == 0) {
-                            cell = String.valueOf(alphabet.charAt(randY + n))
-                                .concat(Integer.toString(randX));
-                        } else {
-                            cell = String.valueOf(alphabet.charAt(randY))
-                                .concat(Integer.toString(randX + n));
-                        }
+            // 先构造 alphaCells, 再检查
+            alphaCells.add(initialCell);
+            for (int n = 1; n < comSize; n++) {
+                String cell = (direction == 0)
+                    ? String.valueOf(alphabet.charAt(randY + n))
+                        .concat(Integer.toString(randX))
+                    : String.valueOf(alphabet.charAt(randY))
+                        .concat(Integer.toString(randX + n));
 
-                        alphaCells.add(cell);
-                    }
-
-                    success = true;
-                    return alphaCells;
-                }
-                
-                // alphaCellsList 不为空时，就要进行检查了
-                for (ArrayList<String> alphaCellsToCheck : alphaCellsList) {
-                    System.out.format("The initial cell is %s\n", initialCell);
-
-                    if ( alphaCellsToCheck.contains(initialCell) ) {
-                        break outerLoop;
-                    } else {
-                        alphaCells.add(initialCell);
-                    }
-
-                    for (int n = 1; n < comSize; n++) {
-                        String cell = null;
-                        if (direction == 0) {
-                            cell = String.valueOf(alphabet.charAt(randY + n))
-                                .concat(Integer.toString(randX));
-                        } else {
-                            cell = String.valueOf(alphabet.charAt(randY))
-                                .concat(Integer.toString(randX + n));
-                        }
-
-                        System.out.format("The followed cell is %s\n", cell);
-
-                        if (alphaCellsToCheck.contains(cell)) {
-                            break outerLoop;
-                        } else {
-                            alphaCells.add(cell);
-                        }
-                    }
-                }
-
-                if (alphaCells.size() == 3) {
-                    alphaCellsList.add(alphaCells);
-                    success = true;
-                } else {
-                    success = false;
-                    alphaCells = null;
-                    break outerLoop;
-                }
+                alphaCells.add(cell);
             }
+            
+            if (alphaCellsList == null) break;
+            if (alphaCellsList.contains(alphaCells)) continue;
         }
 
         return alphaCells;
