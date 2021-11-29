@@ -3,7 +3,7 @@ package com.xfoss.learningJava;
 import java.util.ArrayList;
 
 public class SimpleDotComTestDrive {
-	public static void main (String [] args) {
+    public static void main (String [] args) {
         int numOfGuesses = 0;
 
         GameHelper helper = new GameHelper ();
@@ -11,21 +11,21 @@ public class SimpleDotComTestDrive {
 
         boolean isAlive = true;
         while (isAlive) {
-           String guess = helper.getUserInput("请输入一个数字");
-           String result = dot.checkYourself(guess);
-           ++numOfGuesses;
+            String guess = helper.getUserInput("请输入一个数字");
+            String result = dot.checkYourself(guess);
+            ++numOfGuesses;
 
-           if (result.equals("击沉")) {
-               isAlive = false;
-               System.out.format("你击沉 DotCom 用了 %s 次。\n", numOfGuesses);
-           }
+            if (result.equals("击沉")) {
+                isAlive = false;
+                System.out.format("你击沉 DotCom 用了 %s 次。\n", numOfGuesses);
+            }
         }
-	}
+    }
 }
 
 class SimpleDotCom {
-	private ArrayList<String> locationCells = new ArrayList<String> ();
-	
+    private ArrayList<String> locationCells = new ArrayList<String> ();
+
     // SimpleDotCom constructor
     public SimpleDotCom () {
         int randomNum = (int) (Math.random() * 5);
