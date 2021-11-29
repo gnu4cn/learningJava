@@ -29,11 +29,9 @@ public class GameHelper {
         // 0 - Horizontal, 1 - Vertical
         int direction = (int) (Math.round(Math.random()));
 
-        boolean success = false;
-
-        while (!success) {
-            // Horizontal, 这个时候“abcdefg”都可以选择，0-6只能选择0-4
-            // Vertical，这个时候0-6都能选择，而“abcdefg”中只能选择“a-e”
+        while (true) {
+            // When placed in horizontal, the alphabet could be "a-g", but number could only be "0-5"
+            // When placed in vertical, the alphabe could only be "a-e", but numbe could be "0-6"
             int randY = (int) (
                     direction == 0 ? 
                     Math.random() * alphabet.length()
@@ -43,11 +41,11 @@ public class GameHelper {
                     Math.random() * (gridLength - comSize)
                     : Math.random() * gridLength);
 
-            // 得到一个随机的第一格
+            // Here we get the first cell
             String initialCell = String.valueOf(alphabet.charAt(randY))
                 .concat(Integer.toString(randX));
 
-            // 先构造 alphaCells, 再检查
+            // First contruct the alphaCells...
             alphaCells.add(initialCell);
             for (int n = 1; n < comSize; n++) {
                 String cell = (direction == 0)
@@ -59,6 +57,7 @@ public class GameHelper {
                 alphaCells.add(cell);
             }
             
+            // Then check whether the alphaCells available, need to be fixed.
             if (alphaCellsList == null) break;
             if (alphaCellsList.contains(alphaCells)) continue;
         }
