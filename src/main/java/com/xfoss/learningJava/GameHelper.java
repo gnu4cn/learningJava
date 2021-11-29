@@ -24,26 +24,31 @@ public class GameHelper {
     }
 
     public ArrayList<String> placeDotCom (int comSize) {
-        ArrayList<String> alphaCells = new ArrayList<String> ();
+        ArrayList<String> alphaCells;
 
         // 0 - Horizontal, 1 - Vertical
         int direction = (int) (Math.round(Math.random()));
 
         while (true) {
+            alphaCells = new ArrayList<String> ();
             // When placed in horizontal, the alphabet could be "a-g", but number could only be "0-5"
             // When placed in vertical, the alphabe could only be "a-e", but numbe could be "0-6"
-            int randY = (int) (
-                    direction == 0 ? 
-                    Math.random() * alphabet.length()
-                    : Math.random() * (alphabet.length() - comSize));
-            int randX = (int) (
-                    direction == 0 ?
-                    Math.random() * (gridLength - comSize)
-                    : Math.random() * gridLength);
+            int rangeX = (direction == 0)
+                ? (gridLength - comSize)
+                : gridLength;
+            int rangeY = (direction == 0)
+                ? alphabet.length()
+                : (alphabet.length() - comSize);
 
+            int randY = (int) (Math.random() * rangeY);
+            int randX = (int) (Math.random() * rangeX);
+
+            System.out.format("rangX is %s\trangY is %s\n", rangeX, rangeY);
             // Here we get the first cell
             String initialCell = String.valueOf(alphabet.charAt(randY))
                 .concat(Integer.toString(randX));
+
+            //System.out.format("randX is %s\trandY is %s\tinitialCell is %s\n", randX, randY, initialCell);
 
             // First contruct the alphaCells...
             alphaCells.add(initialCell);
