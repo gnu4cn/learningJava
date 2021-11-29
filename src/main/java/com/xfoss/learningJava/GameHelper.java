@@ -104,6 +104,7 @@ public class GameHelper {
                     alphaCellsList.add(alphaCells);
                     success = true;
                 } else {
+                    success = false;
                     alphaCells = null;
                     break outerLoop;
                 }
