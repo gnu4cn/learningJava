@@ -7,7 +7,6 @@
         "doc": "docs"
     },
     "scripts": {
-        "pack": "mvn install",
         "test": "mvn exec:java"
     },
     "repository": {
