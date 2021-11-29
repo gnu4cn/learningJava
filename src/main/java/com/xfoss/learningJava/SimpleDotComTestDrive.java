@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class SimpleDotComTestDrive {
 	public static void main (String [] args) {
         int numOfGuesses = 0;
-        GameHelper helper = new GameHelper ();
 
-		SimpleDotCom dot = new SimpleDotCom ();
+        GameHelper helper = new GameHelper ();
+        SimpleDotCom dot = new SimpleDotCom ();
 
         boolean isAlive = true;
         while (isAlive) {
