@@ -66,13 +66,19 @@ public class GameHelper {
                         alphaCells.add(cell);
                     }
 
+                    success = true;
                     return alphaCells;
-
                 }
                 
                 // alphaCellsList 不为空时，就要进行检查了
                 for (ArrayList<String> alphaCellsToCheck : alphaCellsList) {
-                    if ( alphaCellsToCheck.contains(initialCell) ) break outerLoop;
+                    System.out.format("The initial cell is %s\n", initialCell);
+
+                    if ( alphaCellsToCheck.contains(initialCell) ) {
+                        break outerLoop;
+                    } else {
+                        alphaCells.add(initialCell);
+                    }
 
                     for (int n = 1; n < comSize; n++) {
                         String cell = null;
@@ -84,11 +90,26 @@ public class GameHelper {
                                 .concat(Integer.toString(randX + n));
                         }
 
-                        if (alphaCellsToCheck.contains(cell)) break outerLoop;
+                        System.out.format("The followed cell is %s\n", cell);
+
+                        if (alphaCellsToCheck.contains(cell)) {
+                            break outerLoop;
+                        } else {
+                            alphaCells.add(cell);
+                        }
                     }
                 }
-                alphaCells.add(initialCell);
+
+                if (alphaCells.size() == 3) {
+                    alphaCellsList.add(alphaCells);
+                    success = true;
+                } else {
+                    alphaCells = null;
+                    break outerLoop;
+                }
             }
         }
+
+        return alphaCells;
     }
 }
