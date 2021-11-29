@@ -65,3 +65,18 @@ ArrayList<String>
 
 如今使用 `<type>` 这样的语法，就可以声明并创建 `ArrayList` 变量所能保存的对象类型。在“集合”章节将会仔细审视 `ArrayList` 中的参数化类型语法。现在只需要知道，这种语法是一种强制编译器，只允许特定类型的对象，放入到 `ArrayList` 中的办法。
 
+## 构造器函数（The `constructor` function）
+
+构造器函数是一个与类名称同名的特殊函数，在某个对象创建时运行，返回的是其所创建的对象（非 `void`），故构造器函数如下面这样：
+
+```java
+public class DotCom {
+...
+
+public DotCom (...) {
+    ...
+}
+
+...
+}
+```
