@@ -25,11 +25,14 @@ public class GameHelper {
 
     public ArrayList<String> placeDotCom (int comSize) {
         ArrayList<String> alphaCells = new ArrayList<String> ();
+        int tries = 0;
 
         // 0 - Horizontal, 1 - Vertical
         int direction = (int) (Math.round(Math.random()));
 
         while (true) {
+
+            tries++;
             // When placed in horizontal, the alphabet could be "a-g", but number could only be "0-5"
             // When placed in vertical, the alphabe could only be "a-e", but numbe could be "0-6"
             int rangeX = (direction == 0)
@@ -59,7 +62,7 @@ public class GameHelper {
             }
             
             // Then check whether the alphaCells available, need to be fixed.
-            if (alphaCellsList.size() == 0) break;
+            if (alphaCellsList.isEmpty()) break;
             if (alphaCellsList.contains(alphaCells)) {
                 alphaCells = new ArrayList<String> ();
                 continue;
@@ -76,11 +79,12 @@ public class GameHelper {
                 }
             }
 
-            if (alphaCells.size() == 0) continue;
+            if (alphaCells.isEmpty()) continue;
             else break;
         }
 
         alphaCellsList.add(alphaCells);
+        // System.out.format("Tried %s %s\n", tries, (tries > 1) ? "times" : "time");
         return alphaCells;
     }
 }
