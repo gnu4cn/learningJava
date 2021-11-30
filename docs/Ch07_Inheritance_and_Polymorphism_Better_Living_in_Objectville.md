@@ -17,3 +17,66 @@ __打心底里就要给你的程式谋划未来__。如果有某种可以休假�
 这就是面向对象的最后一步，`Amoeba` 类对 `Shape` 类的方法，进行 __重写（override）__。如此以来，在运行时，JVM就准确地知道，在其他代码调用到 `Amoeba` 去旋转时，该执行哪一个 `rotate()` 方法了。
 
 ![重写方法](images/Ch07_02.png)
+
+## BRAIN POWER
+
+对于家猫与老虎，以继承架构，该怎么来表示？该把家猫看成是老虎的特殊版本吗？他们中到底哪一个应该是子类，哪个应该是超类呢？又或者说他们都是另一个类的子类呢？
+
+怎样来设计一个继承架构？哪些方法需要重写？
+
+在翻开下一页之前，请思考一下。
+
+## 掌握继承
+
+__Understanding Inheritance__
+
+在设计继承时，是将共同的代码，放在一个类中，同时告诉其他更为特定的类，这个通用的（更为抽象的）类，是他们的超类。在某个类从其他类进行继承时，那么就是 __子类从超类进行继承__。
+
+在 Java语言中，有着 __子类对超类进行扩展__。继承关系（An inheritance relationship）的意思是，子类对超类成员的继承。在提及 “类成员” 时，意思就是实例变量与方法。
+
+比如，`PantherMan` 是 `SuperHero`的一个子类，`PantherMan` 类就自动继承了对于所有超级英雄来说，共同的实例变量，包括 `suit`、`tights`、`specialPower`、`useSpecialPower()`等等。同时 `PantherMan`  __子类还可以加入自己新的方法和实例变量__。同时他还 __可以对其继承自超类__ `SuperHero` __的方法进行重写__。
+
+相比 `PantherMan`, `FriedEggMan`就不需要任何独特的行为，因此他就没有重写任何的方法。此时`SuperHero`中的方法与实例变量，都还是有效的。
+
+但 `PantherMan` 则对他的外套有着特殊要求，同时还有两种特殊的威力，因此在 `PantherMan`类中，`useSpecialPower()`和`putOnSuit()`两个方法都被重写了。
+
+__实例变量不被重写__，因为没有必要。他们并没有定义什么特别的行为，因此子类可以赋给实例变量任何子类所需的值。`PantherMan`可以将他所继承的 `tights` 设置为紫色，同时 `FriedEggMan` 则可以设置为白色。
+
+# 一个继承的实例
+
+```java
+public class Doctor {
+
+    boolean worksAtHospital;
+
+    void treatPatient () {
+        // perform a checkup
+    }
+}
+```
+
+```java
+public class FamilyDoctor extends Doctor {
+
+    boolean makesHouseCalls;
+
+    void giveAdvice () {
+        // give homespun advice
+    }
+}
+```
+
+```java
+public class Surgeon extends Doctor {
+    
+    void treatPatient () {
+        // perform surgery
+    }
+
+    void makeIncision () {
+        // make incision (yikes!)
+    }
+}
+```
+
+![继承实例](images/Ch07_03.png)
