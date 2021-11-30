@@ -77,8 +77,10 @@ public class GameHelper {
             }
 
             if (alphaCells.size() == 0) continue;
+            else break;
         }
 
+        alphaCellsList.add(alphaCells);
         return alphaCells;
     }
 }
