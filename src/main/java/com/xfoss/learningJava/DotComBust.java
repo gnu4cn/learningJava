@@ -24,7 +24,6 @@ public class DotComBust {
         for (DotCom dC : dotComList) {
             ArrayList<String> newLocation = helper.placeDotCom(3);
             dC.setLocationCells(newLocation);
-            System.out.format("%s - %s\n", dC.getName(), newLocation);
         }
     }
 
