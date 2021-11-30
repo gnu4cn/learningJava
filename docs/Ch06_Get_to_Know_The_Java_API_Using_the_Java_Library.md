@@ -161,3 +161,79 @@ if (refVar != null && refVar.isValidType()) {
 __在 Java API 中，类是以包的形式分组的（In the Java API, classes are grouped into packages）__。
 
 ![In the Java API, classed are grouped into packages](images/Ch06_01.png)
+
+__要使用API中的某个类，就要知道他在哪个包里头__。
+
+Java 库中的每一个类，都是属于某个包的。那个包有个名字，比如 `javax.swing` （一个有着一些 Swing GUI 类的包）。`ArrayList`则是在名为 `java.util`的包中，这个包有一堆的 _工具（utility）_ 类。在第17章，将会学到更多的有关包的知识，包括如何将自己编写的类，放入自己组织的包中。
+
+在代码中使用API的类，是很简单的。只需将那个类当成自己编写的，自己编译的，就在那里等着使用就可以了。有一个不同点在于，在代码中的一些地方，需要用库类的 _完整_ 名字来表示，完整名字就是，包的名字 + 类的名字。
+
+就算对这个不了解，_实际上很早就用到了来自某个包的类_。`System`（`System.out.println`），`String`，以及 `Math` （`Math.random()`），这些类，都是属于 `java.lang` 包的。
+
+__对于在代码中要用到的类，就必须知道他的完整名字__。
+
+`ArrayList` 并不是 `ArrayList` 的完整名字，就如同 `Kathy` 不是一个全名一样（除非像是 Madonna 或 Cher 这样的人）。`ArrayList`的全名实际上是：
+
+```java
+java.util.ArrayList
+```
+
+其中 `java.util`是包的名字，`ArrayList`是类的名字。
+
+__必须告诉 Java，你要使用哪个 `ArrayList`__，有两种做法：
+
+- 导入（`IMPORT`）
+
+    在源代码文件的顶部，放上一个导入语句：
+
+```java
+import java.util.ArrayList;
+public class MyClass {...}
+```
+
+- 手动输入（TYPE）
+
+    在代码中使用到 `ArrayList` 的各处，输入完整的名字。
+
+    在声明或初始化某个 `ArrayList` 变量时：
+
+```java
+java.util.ArrayList<Dog> list = new java.util.ArrayList<Dog> ();
+```
+
+在使用 `ArrayList` 变量作为参数类型时：
+
+```java
+public void go (java.util.ArrayList<Dog> list) {...}
+```
+
+在将 `ArrayList` 作为返回值的类型时：
+
+```java
+public java.util.ArrayList<Dog> foo () {...}
+```
+
+_为什么这些库类，都必须有一个全名呢？难道这就是Java包的目的吗？_
+
+
+包的重要性，有三个方面。首先，包有助于某个项目或库的良好组织。相比于有着可怕的一大堆类文件，使用包就可以将众多的类文件，以不同目的（比如GUI的、数据结构的，或者数据库方面的等等），组织成包。
+
+其次，包的使用，可以带来名称上的范围限制，从而有助于防止冲突的发生。比如你和公司的其他12名程序员，都以同样的名字编写类文件时。再比如你自己编写了一个名为 `Set` 的类文件，其他人（包括 Java 的 API）也有同名的类文件，那么就要需要一种告诉 JVM，到底要使用那个 `Set` 类的机制。
+
+第三，包在一定程度上提供了安全性。因为可以对做编写的代码做了限制，从而只有同一包里的其他类，才能访问到这个包。这一点在第17章将会讲到。
+
+Java语言有一个命名约定，通常可以阻止冲突的发生。
+
+__包名字中 `x` 表示什么意思__
+
+在第一版和第二版的 Java 中（`1.02` 和 `1.1`），与 Java 语言一起发布的类（也就是标准库），都是以 `java` 打头的。这些都是 `java.lang` 的，也就是不必加以导入的。同时还有 `java.net`、`java.io`、`java.util`（尽管那个时候还没有 `ArrayList`），以及一些其他的类库，包括保存GUI相关类的 `java.awt`包。
+
+逐渐的，其他标准库中未包含的包一一出现了。这些类也就是我们所说的 __扩展（extensions）__，这些扩展又有两种： _标准（standard）_ 与 _非标准（not standard）_ 扩展。标准扩展时那些 Sun 公司认为是官方的扩展，他们与实验性扩展、早期版本或者说 beta 版，这样的或许永远也不会投入使用的包，有所不同。
+
+按照惯例，标准扩展都是在原本作为开头的 `java` 之后，追加了 `x` 打头的。而所有标准扩展的开创者，就是 Swing 库。这个库包含了若干个包，这些包都是以 `javax.swing` 开头的。
+
+而某些标准扩展，就有机会得到提升，从而成为头等的、Java自带的、标准的即开即用的库文件包。从 Java 1.2 开始，Swing就享受到了这样的待遇。
+
+“真不赖” ，所有都这样想，“往后所有装了Java的人就都有了 Swing 类文件了，就再也不需要给我们的终端用户去安装这个类了”。
+
+
