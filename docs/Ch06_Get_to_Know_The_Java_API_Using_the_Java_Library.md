@@ -154,4 +154,10 @@ if (refVar != null && refVar.isValidType()) {
 
 在布尔表达式中使用 `&` 与 `|` 运算符时，他们的表现，就跟他们的同伴 `&&` 与 `||` 相似，不同之处在于，这两个运算符，是要强制JVM对运算符的两边，都要进行检查。通常情况下，`&` 与 `|` 是用在不同的情形下的，比如对二进制位的操作。
 
-## 使用库（也就是 Java API）
+## 使用库（Java API）
+
+由于使用了 `ArrayList`，前面完成了 `DotComBust` 游戏。现在就是学习怎么用好 Java 库的时间了。
+
+__在 Java API 中，类是以包的形式分组的（In the Java API, classes are grouped into packages）__。
+
+![In the Java API, classed are grouped into packages](images/Ch06_01.png)
