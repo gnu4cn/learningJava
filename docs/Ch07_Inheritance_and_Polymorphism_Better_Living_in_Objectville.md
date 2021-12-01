@@ -303,6 +303,8 @@ __只需投放新修改的超类，所有对超类进行了扩展的那些子类
 
 __Inheritance lets you guarantee that all classes grouped under a certain supertype hava all the methods that the supertype has__
 
+> 在提及 “全部方法” 时，指的是 “全部可继承的方法”，目前实际上是指，“所有`public`方法”，不过后面会对这个定义做进一步修订
+
 也就是说，通过继承，给一组相关的类定义了一个共用的协议（In other words, you define a common protocol for a set of class related through inheritance）。
 
 在定义超类中可被子类们继承的那些方法时，就是在向其他代码通告某种协议，像是在说 “我的所有子类型（也就是子类）可以下面这些方法，完成这些事情...”。
@@ -314,3 +316,13 @@ __Inheritance lets you guarantee that all classes grouped under a certain supert
 | Animal |
 | :- |
 | makeNoise()<br>eat()<br>sleep()<br>roam()<br> |
+
+需要注意的时，当提及 *所有 `Animal`* 时，指的是 `Animal` *以及所有扩展了 `Animal` 的类*。还指的是 *所有的在继承层次中，可往上追溯到 `Animal` 的类*。
+
+对于 OO 中真正精彩的部分，还远未涉及，因为我们把其中最好的东西 -- *多态（polymorphism）* 留在了最后。
+
+在为一组类定义超类型的时候，*在用到超类型的所有地方，那个超类型的所有子类，都可以被取代（any subclass of that supertype can be substituted where the supertype is expected）*。
+
+然而这句话到底是什么意思呢？
+
+不要着急，现在还不能把这句话解释清楚。
