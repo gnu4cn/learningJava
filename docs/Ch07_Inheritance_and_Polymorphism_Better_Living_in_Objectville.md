@@ -345,3 +345,10 @@ __Inheritance lets you guarantee that all classes grouped under a certain supert
     这样就意味着，当你的同事忙着更新程序时，你还可以加勒比海享受假期，而你的同事们甚至不需要你的源码。
 
     在下一页就能了解到多态的原理。
+
+
+___要了解多态的原理，就要回顾一下声明引用变量和创建对象的寻常方式___。
+
+![常规的引用变量与对象创建方式](images/Ch07_11.png)
+
+*图 11 - 常规的引用变量与对象创建方式*
