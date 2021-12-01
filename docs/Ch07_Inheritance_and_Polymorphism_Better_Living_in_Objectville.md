@@ -311,6 +311,6 @@ __Inheritance lets you guarantee that all classes grouped under a certain supert
 
 类 `Animal` 为所有 `Animal` 的子类型，建立了这样一个共用协议：
 
-| ==Animal== |
+| Animal |
 | :- |
 | makeNoise()<br>eat()<br>sleep()<br>roam()<br> |
