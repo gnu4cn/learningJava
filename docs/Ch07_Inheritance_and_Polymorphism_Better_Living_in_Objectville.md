@@ -201,3 +201,13 @@ ___在类 B 对类 A 进行了扩展时，那么类 B IS-A 类 A。这在继承�
 ![IS-A 法则](images/Ch07_10.png)
 
 *图 10 - IS-A 法则*
+
+对于上图中的继承树，就可以说 “`Wolf` 扩展了 `Animal`” 或 “`Wolf` IS-A `Animal`”。就算`Animal`是`Wolf`超类的超类，也是没有影响的。事实上，____只要`Animal` 位于`Wolf`所在的继承树上部的某处，那么 `Wolf` IS-A `Animal` 这个判断，就始终是正确的。___
+
+这个 `Animal` 继承树的结构，向外界通告：
+
+“`Wolf` IS-A `Canine`，因此 `Wolf` 可以干 `Canine` 能干的那些事。同时 `Wolf` IS-A `Animal`, 因此 `Wolf` 也可以干 `Animal` 能干的事。”
+
+就算 `Wolf` 重写了 `Animal` 或 `Canine` 的一些方法，对此也没有影响。外界（其他代码）所知的，就是 `Wolf` 可以执行这四种方法。至于`Wolf`怎样去执行，或者说 ___这些方法在哪个类中被重写的___，无关紧要。某个 `Wolf` 可以 `makeNoise()`、`eat()`、`sleep()`及`roam()`，因为`Wolf`是扩展`Animal`得来的。
+
+
