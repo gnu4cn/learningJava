@@ -237,4 +237,31 @@ public void roam () {
 
 上面的代码首先调用了继承到的 `roam()` 版本，随后再回到特定于子类的代码。
 
-在设计超类方法时，虽然超类的各个子类会往这些方法“追加”代码，同样可以在超类的这些方法中，包含所有子类都适用的方法实现。在子类重写某个方法时，就可以使用关键字 `super`，来调用超类版本的这个方法。这样写就像是说，“先运行超类版本，然后回来继续完成子类自己的代码...”。
+在设计超类方法时，虽然超类的各个子类会往这些方法“追加”代码，同样可以在超类的这些方法中，包含所有子类都适用的方法实现。在子类重写某个方法时，就可以使用关键字 `super`，来调用超类版本的这个方法。这样写就像是说，“先运行超类版本，然后回来继续完成子类自己的代码..._”。
+
+## 怎样知道子类可以从超类继承到哪些东西
+
+子类对超类的成员加以继承。到目前为止，这些成员包括了实例变量与方法，后续会涉及其他被继承的成员。通过为成员设定不同的访问级别，超类是可以对其子类所要继承的成员加以选择的（A subclass inherits members of the superclass. Members include instance variables and methods, although later in this book we'll look at other inherited members. A superclass can choose whether or not it wants a subclass to inherit a particular member by the level of access the particular member is given）。
+
+本书中将涉及以下四个访问级别。从严到宽，这四个级别分别是：
+
+`private`、`default`、`protected`、 `public`
+
+**这些访问级别，控制了 *哪些对谁可见***，这对具备良好设计、健壮的 Java 代码来说至关重要。现阶段只关注 `public` 与 `private`。他们两的规则较为简单：
+
+- `public` 成员是继承得来的
+- `private` 成员不是继承得来的
+
+
+在子类继承到某个成员时，那么这个成员 __就好像是子类自己定义的一样__。在 `Shape` 的示例中，`Square`继承了 `rotate()` 与 `playSound()` 两个方法，而对于外界（其他代码）而言，就是 `Square` 有着这两个方法而已。
+
+某个类的成员，包括在这个类中所定义的变量与方法，加上这个类从他的超类所继承到的全部成员。
+
+> 注意：有关 `default` 与 `protected` 的细节，将在第 17 章及附录 B中涉及。
+
+## 正确运用继承，杜绝滥用
+
+下面的这些规则背后的缘由，要在后续章节才会揭示，现在只需了解，几条简单的规则，就可以助力构建良好的继承设计。
+
+- 在某个类确实是某个超类的更具体类型时，才使用继承。比如 `Willow` 是 `Tree` 的一个更具体的类型，因此 `Willow`对 `Tree` 进行扩展是讲得通的。
+- 存在确实可以在同一通用类型的多个类之间共用的行为表现（方法的实现代码）时，要考虑使用继承。比如，`Square`、`Circle`、`Triangle` 都需要 `rotate()` 与 `playSound()`，因此将这两个功能放入到 `Shape` 中就讲得通。不过要留意，尽管 __继承作为面向对象编程的关键特性之一__，但对于代码重用这个目的，继承却不是必要的。继承带你进入面向对象编程的世界，而且通常也是正确的设计选择，然而真正能让你见识到更多巧妙与灵活设计的，则是那些设计模式（Be aware, however, that while inheritance is one of the key features of object-oriented programming, it's not neccessarily the best way to achieve behavior reuse. It'll get you started, and often it's the right design choice, but design patterns will help you see other more subtle and flexible options）。若你对设计模式没有了解，那么可以看看另一本书 “*Head First Design Patterns*”。
