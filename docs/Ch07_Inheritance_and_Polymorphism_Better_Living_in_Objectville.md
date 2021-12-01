@@ -261,7 +261,25 @@ public void roam () {
 
 ## 正确运用继承，杜绝滥用
 
+
 下面的这些规则背后的缘由，要在后续章节才会揭示，现在只需了解，几条简单的规则，就可以助力构建良好的继承设计。
 
 - 在某个类确实是某个超类的更具体类型时，才使用继承。比如 `Willow` 是 `Tree` 的一个更具体的类型，因此 `Willow`对 `Tree` 进行扩展是讲得通的。
+
 - 存在确实可以在同一通用类型的多个类之间共用的行为表现（方法的实现代码）时，要考虑使用继承。比如，`Square`、`Circle`、`Triangle` 都需要 `rotate()` 与 `playSound()`，因此将这两个功能放入到 `Shape` 中就讲得通。不过要留意，尽管 __继承作为面向对象编程的关键特性之一__，但对于代码重用这个目的，继承却不是必要的。继承带你进入面向对象编程的世界，而且通常也是正确的设计选择，然而真正能让你见识到更多巧妙与灵活设计的，则是那些设计模式（Be aware, however, that while inheritance is one of the key features of object-oriented programming, it's not neccessarily the best way to achieve behavior reuse. It'll get you started, and often it's the right design choice, but design patterns will help you see other more subtle and flexible options）。若你对设计模式没有了解，那么可以看看另一本书 “*Head First Design Patterns*”。
+
+- 超类与子类之间的关系，违背了上面两条规则时，不要仅为了重用另一个类的代码，而使用继承。比如设想在已经编写好 `Alarm` 类中的打印代码后，又要编写 `Piano` 类的打印代码，于是就让 `Piano` 去继承 `Alarm`，目的是让`Piano`继承到这些打印代码。这样做毫无意义！因为某个`Piano`并不是`Alarm`的更为具体的类型（正确的做法，应该把打印代码放在一个 `Printer`的类中，如此所有可打印对象，都可以通过一种 `HAS-A` 关系而得到打印功能）。
+
+- 在子类与超类无法通过 `IS-A` 测试时，不使用继承。要一直询问，子类究竟是不是超类的更具体类型。比如，`Tea` IS-A `Beverage` 讲得通。`Beverage` IS-A `Tea` 就不行。
+
+
+## 本章重点
+
+
+- 子类对超类进行扩展
+- 子类继承到超类的所有 `public` 实例变量与方法，对超类的`private`实例变量和方法，不予继承
+- 继承到的方法可被重写；而实例变量则不能被重写（尽管实例变量可在子类中被重新定义，但与重写相比不是一回事，同时机会也完全没有这样做的必要）
+- 使用 `IS-A`测试来对继承层次进行有效性验证。若 `X` 对 `Y` 进行了扩展，那么 `X` IS-A `Y` 必须能说得通
+- `IS-A`关系只在一个方向上有效。某个 `Hippo` 是一个 `Animal`，但并非所有 `Animal` 都是 `Hippo`s
+- 在子类中重写了某个方法，且这个方法于此子类的某个对象中被调用到时，所调用的是重写后的版本（__最低者入选法则__）
+- 在类 `B` 扩展了类 `A`，同时类 `C`扩展了类`B`的情况下，那么类 `B` IS-A 类`A`，同时类 `C` IS-A 类`B`，此外类`C` IS-A 类`A`
