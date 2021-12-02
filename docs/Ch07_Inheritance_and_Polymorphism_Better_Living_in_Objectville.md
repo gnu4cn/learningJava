@@ -409,13 +409,13 @@ __运用多态特性，可以编写出无需修改，就可以引入新的子类
 
 > 除了在非常特殊的情况下，有一种现在还没有见过的，叫做 *内部* 类（an *inner* class）之外，是不存在 `private` 私有类的。有三种阻止某个类被子类化操作的办法：
 
-    - 第一个叫做访问控制。虽然类不能用 `private` 标注，但某个类可以是非公开的（non-public，只要不将类声明为 `public`就能得到）。非公开类只能在该类所在包中进行子类化操作。在其他包中就无法对非公开类进行子类操作（甚至无法使用）。
+> - 第一个叫做访问控制。虽然类不能用 `private` 标注，但某个类可以是非公开的（non-public，只要不将类声明为 `public`就能得到）。非公开类只能在该类所在包中进行子类化操作。在其他包中就无法对非公开类进行子类操作（甚至无法使用）。
 
-    - 第二种，就是使用 `final` 关键字。`final` 修饰的类，表示这个类已经是继承线（the inheritance line）的末端了。没有人可以再对 `final` 类进行扩展。
+> - 第二种，就是使用 `final` 关键字。`final` 修饰的类，表示这个类已经是继承线（the inheritance line）的末端了。没有人可以再对 `final` 类进行扩展。
 
-    - 第三，若某个类仅有 `private` 的构造器，那么他就是不能被子类的（The third issue is that if a class has only `private` constructors, it can't be subclassed）。
+> - 第三，若某个类仅有 `private` 的构造器，那么他就是不能被子类的（The third issue is that if a class has only `private` constructors, it can't be subclassed）。
 
-    - __设置 `final` 类的目的何在？阻止某个类被子类化能带来哪些好处呢？__
+> - __设置 `final` 类的目的何在？阻止某个类被子类化能带来哪些好处呢？__
 
 
 > 通常情况下，不需要将类设置为 `final`。但在需要考虑安全 -- 确保类中的那些方法一直按照编写的方式工作（由于某些原因不能被重写）时，使用 `final` 类就可以做到。Java API中的很多类，都是因为这个原因，而被设置为 `final`。比如 `String` 类就是 `final` 的，之所以这样做，你可以想象一些有人贸然去修改 `String` 的行为，将会带来多大的灾难。
