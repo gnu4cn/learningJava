@@ -53,4 +53,59 @@ __那些实例变量的值，都是些什么呀__？
 
 ***有些类就不应该被实例化***！
 
+去创建一个 `Wolf` 对象、一个 `Hippo` 对象，或者一个 `Tiger` 对象，这些都说得通，但一个 `Animal` 对象到底是个什么东西？它的形状是怎样？是什么颜色的？有多大？有几条腿......
 
+尝试去创建一个 `Animal` 类型的对象，就好像 __星际迷航中噩梦般的传输机故障__。
+
+怎样才能解决这个问题呢？为了实现继承和多态，`Animal`类肯定是需要的。但又要其他程序员只能对那些，`Animal`的不那么抽象的子类，而不是`Animal`本身进行初始化。我们要的是 `Tiger` 对象与 `Lion` 对象，而 *不是 `Animal` 对象*。
+
+好在有这么一种简单的方法，来防止某个类不被初始化。也就是通过将类标记为 `abstract`，从而阻止人们在他前面说 `new`，之后编译器就会在任何时候、任何地方，把那些试图创建那个类型实例的举动，拦截下来。
+
+仍可以将抽象类型，作为引用变量的类型使用。实际上这正是抽象类存在的首要原因（将抽象类用作多态参数或返回值的类型，或者用于构造多态数组）。
+
+在设计类继承层次结构时，就面临着确定哪些是抽象类、哪些是具体的问题（When you're designing your class inheritance stucture, you have to decide which classes are *abstract* and which are *concrete*）。具体类是那些足够具体、可被初始化的类。某个具体类，就应该是可以构造出其对象的类。
+
+要构造一个抽象类是很简单的 -- 将关键字 `abstract` 放在类的声明前面：
+
+```java
+abstract class Canine extends Animal {
+    public void roam () {}
+}
+```
+
+__编译器会阻止对某个抽象类的初始化__
+
+
+抽象类意味着无人能构造出他的新实例。但仍然可以出于多态目的，将其用作某个引用变量声明中的类型，由于编译器会确保抽象类不会被初始化，因此就无需担心有人构建出抽象类类型的对象来。
+
+```java
+abstract public class Canine extends Animal {
+    public void roam () {}
+}
+```
+
+```java
+public class MakeCanine {
+    public void go () {
+        Canine c;
+        c = new Dog ();
+        c = new Canine ();
+        c.roam();
+    }
+}
+```
+
+
+这个时候编译器就会报错：
+
+```console
+Canine is abstract; cannot be initiated
+```
+
+抽象类在未被扩展时，实质上毫无用处、不会有取值、没有目的。
+
+> 其中一个例外是，抽象类可以有静态成员，在 IO 那一章会涉及这个问题。
+
+使用到抽象类时，在运行时真正做事的，是那些抽象类的子类的实例。
+
+## 关于“抽象”与“具体”
