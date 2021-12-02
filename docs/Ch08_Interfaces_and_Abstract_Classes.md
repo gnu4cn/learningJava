@@ -9,3 +9,35 @@ __在设计 `Animal` 继承树时，是不是遗漏了什么__？
 ![Animal 继承树](images/Ch08_01.png)
 
 *图 1 - Animal 继承树*
+
+__我们可以这样说__：
+
+```java
+Wolf aWolf = new Wolf ();
+```
+
+![对象与对象的引用变量类型相同时](images/Ch08_02.png)]
+
+*图 2 - 对象与对象的引用变量类型相同时*
+
+__也可以这样说__：
+
+
+```java
+Animal aHippo = new Hippo ();
+```
+
+![对象与其引用变量的类型不同时](images/Ch08_03.png))]
+
+*图 3 - 对象与其引用变量的类型不同时*
+
+
+__但如果像下面这样，就会显得令人费解__：
+
+```java
+Animal anim = new Animal ();
+```
+
+![创建出一个 Animal 对象时](images/Ch08_04.png)
+
+*图 4 - 创建出一个 Animal 对象时*
