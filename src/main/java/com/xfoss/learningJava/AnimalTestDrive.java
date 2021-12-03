@@ -29,5 +29,7 @@ public class AnimalTestDrive {
         Cat c = new Cat ();
         list.add(d);
         list.add(c);
+
+        System.out.println(d.equals(c) ? "true" : "false");
     }
 }
