@@ -184,4 +184,28 @@ __构造自己的 `Dog` 专用清单__
 
 __哦吼，现在还需要保存 `Cat`s 了__
 
+现在有这么几个选择：
+
+1. 再单独构建一个类，`MyCatList`，来保存 `Cat` 的那些对象。这就相当笨拙。
+
+2. 仅构建一个类，`DogAndCatList`，其中有两个不同的数组，作为实例变量，同时还有不同的 `add()` 方法：`addCat(Cat c)` 与 `addDog(Dog d)`。这也是一个笨拙的方法。
+
+3. 构造一个可以接收所有 `Animal` 子类（就目前这种需求规格修改为要添加 `Cat`s来看，后面肯定还会有其他种类的动物要往里面添加）的、具异质性的 `AnimalList` 类。这当然是最好的方案了。那么就着手将这个类修改成更具通用性、可以接收所有 `Animal` 而不仅是 `Dog`s 的类吧。其中的关键修改，已被标记出来了（代码逻辑没有变，只是把代码中所有的 `Dog` 修改成了 `Animal`）。
+
+__构建自己的`Animal`专用清单__
+
+
+![第二版的 Animal 清单](images/Ch08_09.png)
+
+
+*图 9 - 第二版的 Animal 清单*
+
+运行结果：
+
+```java
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Animal added at 0.
+Animal added at 1.
+```
+
 
