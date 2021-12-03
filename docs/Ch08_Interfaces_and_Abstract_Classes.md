@@ -139,7 +139,7 @@ public abstract void eat();
 ```
 
 
-![没有函数体的抽象方法](images/Ch08_07.png)]
+![没有函数体的抽象方法](images/Ch08_07.png)
 
 *图 7 - 没有函数体的抽象方法*
 
@@ -209,3 +209,17 @@ Animal added at 1.
 ```
 
 
+__对于不是 `Animal` 的对象呢? 为什么不构造一个可接收所有东西的通用类呢__ ？
+
+
+你可能猜到了要做的是什么。这里就要将数组类型，与 `add()` 方法的参数类型，一并修改为`Animal` 类 *之上（above）* 的某个东西。某个比 `Animal` *更* 通用的、更为抽象的东西。然而怎么才能做到呢？毕竟示例中的 `Animal` 之上，已经没有超类了呀。
+
+再一次，也许我们可以......
+
+还记得`ArrayList`的那些方法吗？看看 `remove`、`contains`以及 `indexOf` 这些方法，他们都使用到一个类型为.....的对象，是的，那就是 `Object`！
+
+***Java 中的所有类，都是对类 `Object` 的扩展***。
+
+类 `Object` 是所有类的始祖；他是万事万物的超类。
+
+尽管运用了多态，但还必须创建一个有着接收和返回多态类型方法的类。如果在Java中缺少这么一个可以作为万物始祖的超类，那么Java程序员就无法创建出有着可以接收定制类型，*那些他们在编写类似 `ArrayList` 这样的类时无法想象到的各种各样的类型* ，的方法的各种类来（Even if you take advantage of polymorphism, you still have to create a class with methods that take and return your polymorphic type. Without a common superclass for everything in Java, there'd be no way for the developers of Java to create classes with methods that could take your custom types... *types they never knew about when they wrote the ArrayList class*）。
