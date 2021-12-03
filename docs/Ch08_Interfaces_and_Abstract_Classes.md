@@ -118,4 +118,27 @@ Canine is abstract; cannot be initiated
 
 通读 Java API 文档，就会发现很多的抽象类，尤其是在 GUI库中。那么某个GUI组件看起来是怎样的呢？所谓GUI组件类， 是指诸如按钮、文本框、滚动条、对话框等等这样的GUI相关的众多类的超类。比如在构建一个 `JButton`时，并没有构建这个通用组件的实例并把实例放在屏幕上的。而是对组件的一个具体子类进行实例化，绝不会对组件本身进行实例化。
 
+## 抽象与具体（abstract or concrete）？
 
+什么时候类应该是抽象的？__酒（Wine）__ 大概就是抽象的。但 __红葡萄就（Red）__ 和 __白葡萄酒（White）__ 呢？大概率也是抽象的（至少对部分人是这样的）。那到底在继承体系中的什么地方，其中的事物才成为具体的呢？
+
+是将 `PinotNoir` 设置为具体，还是同样作为抽象呢？看起来 “1997年份的骆驼庄园黑皮葡萄酒（the Camelot Vineyards 1997 Pinot Noir）” 好像是具体的，但又怎么确定呢？
+
+再看看上面的 `Animal` 继承树。再给各个类安排具体和抽象时，到底恰当吗？是不是要对这个`Animal`继承树加以改进呢（而不是仅仅添加更多的动物）？
+
+## 抽象方法
+
+除了可以将类标记为 `abstract`，也可以将方法标记为 `abstract`。抽象类意味着那个类必须被扩展；而抽象方法，则是那个方法必须被 __重写（be *overridden*）__；对于抽象类中的部分（或全部）行为/方法，可能断定他们不被抽象类的更具体子类实现时，会毫无用处（You might decide that some (or all) behaviors in an abstract class don't make any sense unless they're implemented by a more specific subclass）。简单地说，对于抽象类的各个子类，任何通用方法实现都没有价值。设想一下，一个通用的 `eat()` 方法，到底会是什么样子？
+
+__抽象方法，是没有函数体的__！
+
+现在既然已经断定抽象方法中的代码不会有任何意义，那么就没有必要再加上函数体了。因此就没有了那一对花括弧了 -- 那么就只需用分号结束抽象函数的声明即可。
+
+```java
+public abstract void eat();
+```
+
+
+![没有函数体的抽象方法](images/Ch08_07.png)]
+
+*图 7 - 没有函数体的抽象方法*
