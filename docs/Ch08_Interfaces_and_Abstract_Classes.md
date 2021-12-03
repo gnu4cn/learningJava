@@ -223,3 +223,20 @@ __对于不是 `Animal` 的对象呢? 为什么不构造一个可接收所有东
 类 `Object` 是所有类的始祖；他是万事万物的超类。
 
 尽管运用了多态，但还必须创建一个有着接收和返回多态类型方法的类。如果在Java中缺少这么一个可以作为万物始祖的超类，那么Java程序员就无法创建出有着可以接收定制类型，*那些他们在编写类似 `ArrayList` 这样的类时无法想象到的各种各样的类型* ，的方法的各种类来（Even if you take advantage of polymorphism, you still have to create a class with methods that take and return your polymorphic type. Without a common superclass for everything in Java, there'd be no way for the developers of Java to create classes with methods that could take your custom types... *types they never knew about when they wrote the ArrayList class*）。
+
+因此实际上在不知情的情况下，从一开始就已经在构造类 `Object` 的子类了。 ***你所编写的每一个类，都是对 `Object` 的扩展***，尽管没有提到 `Object`。但可以看着像是下面这个样子：
+
+```java
+public class Dog extends Object {}
+```
+
+等一下，`Dog` 不是已经扩展了 `Canine` 了吗？好吧，编译器将让 `Canine` 去扩展 `Object`，然而 `Canine`又是扩展的 `Animal`。还是没问题，这个时候编译器又会去让 `Animal` 对 `Object` 进行扩展。
+
+__所有的没有显式扩展另一个类的类，都是隐式地扩展了 `Object`。__ 
+
+那么，因为 `Dog` 扩展了 `Canine`，他就不算是直接扩展了 `Object`（但他还是间接扩展了 `Object`），对于 `Canine`，也是这样的，不过`Animal`则是直接扩展了 `Object`。
+
+![第三版的数组列表 -- ArrayList](images/Ch08_10.png)
+
+
+*图 10 - 第三版的数组列表 -- ArrayList*
