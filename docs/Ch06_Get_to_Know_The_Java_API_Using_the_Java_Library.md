@@ -4,7 +4,7 @@ Java语言本身，就带有多达数百个的预构建类。若掌握了如何�
 
 Java标准版带有数百个预构建类（除非使用的是针对小型设备的微型版本，那么Java标准版就是你手头的版本，The Java Standard Edition，which is what you have unless you're working on the Micro Edition for small devices and believe me, you'd know）。他们就和本书中这些编写好的代码一样，只是这些内建的类，时已经编译好的。
 
-_这就是说这些内建类无需再次输入了__。直接使用他们就好。
+__这就是说这些内建类无需再次输入了__。直接使用他们就好。
 
 `ArrayList` 是Java库中无数内建类之一。你可以在自己的代码中，如同是你自己编写的`ArrayList`一样使用他。
 
