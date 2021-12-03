@@ -31,5 +31,9 @@ public class AnimalTestDrive {
         list.add(c);
 
         System.out.println(d.equals(c) ? "true" : "false");
+
+        System.out.format("The type of d is: %s\n", d.getClass());
+        System.out.format("The hashcode of c is: %s\n", c.hashCode());
+        System.out.format("d.toString(): %s\n", d.toString());
     }
 }
