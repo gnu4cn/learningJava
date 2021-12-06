@@ -327,4 +327,37 @@ Dog d = myDogArrayList.get(0);
 
 *图 12 - `ArrayList<Object>`对象的存入与取出*
 
+__当一个 `Dog` 不再像一个 `Dog` 那样行事时__
 
+将所有东西都多态地处理，看成是一个 `Object`，这样做的问题就是，这些对象将失去（暂时，而不是永久）他们自己的特质。`Dog`将失去他的狗性。下面是一个传入`Dog` 类型对象，返回同一 `Dog` 对象，不过将返回类型声明为了类型 `Object` 而不是 `Dog` 的示例：
+
+```java
+public void go () {
+    Dog aDog = new Dog();
+    Dog sameDog = getObject (aDog); 
+}
+
+public Object getObject (Object o) {
+    return o;
+}
+```
+
+> 上面的 `Dog sameDog = getObject (aDog)` 是不会工作的！就是该方法返回了一个到与参数所引用的 `Dog` 非常相似的引用变量，但返回类型 `Object` 就意味着编译器不会让你将返回的引用变量，赋值给除了 `Object` 之外的任何类型的变量。
+> `getObject()` 方法中返回的是同一个 `Dog` 的引用，但是作为类型 `Object` 返回的。这样做仍然是合法的。注意：就与使用 `ArrayList<Object>` 而非 `ArrayList<Dog>` 时的 `get()`方法类似。
+
+```console
+incompatible types: Object cannot be converted to Dog
+```
+
+> 在所有东西都可以通过对 `Object` 的 `IS-A` 测试，所以可将所有东西都赋值给类型为 `Object` 的引用变量，而正因为如此，修改为下面这样，就可以运行（尽管这样的代码没有什么用处，马上就能见到）。因为对于Java中的所有类，在其继承树的顶端，都是 `Object`，正因为如此，Java 中所有东西，都是类型 `Object` 的实例。
+
+```java
+public void go () {
+    Dog aDog = new Dog ();
+    Object sameDog = getObject (aDog);
+}
+
+public Object getObject (Object o) {
+    return o;
+}
+```
