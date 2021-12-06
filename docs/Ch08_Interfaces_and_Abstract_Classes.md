@@ -280,4 +280,43 @@ __那么在这个超超元类的 `Object` 中究竟有些什么呢__ ？
 
 - __既然使用多态类型有这么多好处，那为什么不把 *所有* 方法都做成接收和返回 `Object` 类型呢__ ？
 
-> 呃......
+> 呃......想想这样做会发生什么。那样肯定会完全破坏“类型安全”（For one thing, you would defeat the whole point of 'type-safty'），而“类型安全”正是Java语言中，对代码的最大保护机制。Java的类型安全机制，确保不会在计划的对象类型之外，请求到其他对象类型。比如，让一个 `Ferrari` （以为是一个 `Toaster`）去烤面包。
+> 事实上即使在各处使用了 `Object` 类型的引用变量，也不必担心会出现热烘烘的`Ferrari`情形。因为当那些类型是由 `Object` 引用变量类型表示时，Java 就会将其视为类型 `Object` 的一个实例变量。那么就只能调用类 `Object` 中声明的那些方法！所以假如这样写代码：
+
+```java
+Object o = new Ferrari ();
+o.goFast (); // 这是非法的！
+```
+
+> 这样的代码甚至无法通过编译器检查。
+> Java作为强类型语言，其编译器将就所调用对象的某个方法，看这个对象是否实际有能力响应，进行检查（Because Java is a strongly-typed language, the compiler checks to make sure that you're calling a method on an object ）。也就是说，在调用某个对象引用变量上的方法时，只能调用该引用类型确实有的方法。在后续章节，会详细讨论Java的“类型安全”特性，所以即使现在还不是很明白，也没有关系。
+
+## 使用多态的`Object`类型的引用变量的代价
+
+在开始将类型`Object`用于所有超灵活参数级返回值之前，需要考虑一些将类型 `Object`作为参数使用时的一些小问题。同时记住这里不会涉及构造类型`Object`实例；这里讲的是构造其他类型的实例，而只是使用类型`Object`做引用变量（we're talking about making instances of some other type, but using a reference of type `Object`）。
+
+在将某个对象放入 `ArrayList<Dog>`时，是作为 `Dog`被放入进去的，同时取出来时也是一个 `Dog`:
+
+```java
+ArrayList<Dog> myDogArrayList = new ArrayList<Dog>;
+
+Dog aDog = new Dog ();
+myDogArrayList.add (aDog);
+Dog d = myDogArrayList.get(0);
+```
+
+而如果将其声明为了 `ArrayList<Object>` 时，会怎样呢？在要构造一个名义上要保存任何种类的`Object`的 `ArrayList`时，就可以这样声明：
+
+```java
+ArrayList<Object> myDogArrayList = new ArrayList<Object>;
+Dog aDog = new Dog();
+myDogArrayList.add(aDog);
+```
+
+但在尝试获取这个`Dog`对象，并将其赋值给一个 `Dog` 的引用变量时，会怎样呢？
+
+```java
+Dog d = myDogArrayList.get(0);
+```
+
+> 这样是行不通的。这不会被编译！！ 在使用`ArrayList<Object>`时，那么 `get()` 方法将返回类型 `Object`。编译器对象是从`Object`继承的（在其继承树的某处），但不知道对象就是 `Dog`！！
