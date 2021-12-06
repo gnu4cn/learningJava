@@ -319,4 +319,12 @@ myDogArrayList.add(aDog);
 Dog d = myDogArrayList.get(0);
 ```
 
-> 这样是行不通的。这不会被编译！！ 在使用`ArrayList<Object>`时，那么 `get()` 方法将返回类型 `Object`。编译器对象是从`Object`继承的（在其继承树的某处），但不知道对象就是 `Dog`！！
+> 这样是行不通的。这不会被编译！！ 在使用`ArrayList<Object>`时，那么 `get()` 方法将返回类型 `Object`。编译器知道对象是从`Object`继承的（在其继承树的某处），但不知道对象就是 `Dog`！！
+
+***所有从 `ArrayList<Object>` 中出来的东西，都是作为类型 `Object` 的一个引用变量，而不管他原本是个什么样的对象，或者在将其加入到清单时他的引用变量类型是什么***。
+
+![`ArrayList<Object>`对象的存入与取出](images/Ch08_12.png)
+
+*图 12 - `ArrayList<Object>`对象的存入与取出*
+
+
