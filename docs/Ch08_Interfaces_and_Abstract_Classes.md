@@ -361,3 +361,20 @@ public Object getObject (Object o) {
     return o;
 }
 ```
+
+__这些无法叫唤的对象__
+
+![到具体类型引用变量的类型为 `Object` 的多态引用变量](images/Ch08_13.png)
+
+*图 13 - 到具体类型引用变量的类型为 `Object` 的多态引用变量*
+
+到这里就清楚了，在某个对象是由声明为类型 `Object`的变量引用时，就无法将其赋值给声明为对象具体类型的变量了。还知道在返回值或参数类型被声明为类型 `Object`时，这种情况就会发生，如如同上面的示例，在将对象放入到一个使用 `ArrayList<Object>`的、类型为 `Object` 的 `ArrayList`中那样。然而这样会有什么影响呢？使用一个 `Object`的引用变量来表示一个 `Dog`对象会是一个问题吗？下面就来尝试在原本是`Dog`但编译器以为是`Object`的对象上，调用一下`Dog`的一些方法试试：
+
+```java
+Object o = al.get(index);
+int i = o.hashcode();
+o.bark();
+```
+
+> 其中的 `int i =o.hashcode();` 语句没有问题，类`Object`是有 `hashCode()`方法的，因此可以在 Java中的所有对象上调用这个方法。
+> `o.bark();`语句就不会被编译！`o` 做不了这事！类 `Object` 对 `bark()`是毫无头绪的。就是作为人类是知道位于 `index`处的对象实际上是一个 `Dog`对象，但作为机器的编译器是不知道的。
