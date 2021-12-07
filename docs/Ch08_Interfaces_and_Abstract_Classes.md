@@ -568,4 +568,18 @@ __那么我们真正需要的是什么呢__ ？
 
 *图 21 - 顶部有 `Animal` 和 `Pet` 两个超类的动物继承树*
 
+*这种 “两个超类” 的方案，只有一个问题* ......
+
+** 这种做法，叫做 “多重继承”，这样做可能成为 *相当糟糕的事情***。
+
+当然，这要是能在 Java 中做到才能称得上是“相当糟糕的事”。
+
+显然，Java是不允许多重继承的。因为多重继承有着著名的 “致命死亡钻石”问题（a problem known as The Deadly Diamond of Death）。
+
+![致命死亡钻石问题，the Deadly Diamon of Death](images/Ch08_22.png)]
+
+
+*图 22 - 致命死亡钻石问题，the Deadly Diamon of Death*
+
+
 
