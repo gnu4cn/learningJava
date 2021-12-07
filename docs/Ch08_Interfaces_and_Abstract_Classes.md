@@ -617,3 +617,6 @@ public class Dog extends Canine implements Pet {...}
 
 *图 24 - Pet `interface`的构造与实现*
 
+## 答疑
+
+- **等一下，由于不能把任何实现代码放在 `interface`s 里，那么这些 `interface`s 就没有真正带来多重继承。如果所有方法都是抽象的，那么 `interface`究竟有什么好处呢**？
