@@ -588,4 +588,10 @@ __那么我们真正需要的是什么呢__ ？
 
 Java给到了一个解决方案。就是 *接口*。这指的不是 *GUI* 中的接口，也不是通常说的接口，如“那是 `Button` 类 API 的公开接口”中的接口，这里的接口，是 Java 语言的关键字 `interface`。
 
-Java `interface` 在不带来致命死亡钻石（the Deadly Diamon of Death, DDD）伤害的同时，
+Java `interface` 在不带来致命死亡钻石（the Deadly Diamon of Death, DDD）伤害的同时，又带来了多重继承的大部分多态好处，从而解决了多重继承的问题。
+
+`interface` 避开 DDD 那些坑的方式，惊人的简单：***把所有方法做成抽象的方法***！照这种方式，子类就 __必须__ 实现这些方法（记住，抽象的方法，必须在第一个具体类中实现），因此在运行时JVM不会被到底应该调用两个继承版本中的哪一个搞晕。
+
+![Java 的 `interface`](images/Ch08_23.png)]
+
+*图 23 - Java 的 `interface`*
