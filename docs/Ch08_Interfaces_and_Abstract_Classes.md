@@ -576,7 +576,7 @@ __那么我们真正需要的是什么呢__ ？
 
 显然，Java是不允许多重继承的。因为多重继承有着著名的 “致命死亡钻石”问题（a problem known as The Deadly Diamond of Death）。
 
-![致命死亡钻石问题，the Deadly Diamon of Death](images/Ch08_22.png)]
+![致命死亡钻石问题，the Deadly Diamon of Death](images/Ch08_22.png)
 
 
 *图 22 - 致命死亡钻石问题，the Deadly Diamon of Death*
@@ -592,6 +592,28 @@ Java `interface` 在不带来致命死亡钻石（the Deadly Diamon of Death, DD
 
 `interface` 避开 DDD 那些坑的方式，惊人的简单：***把所有方法做成抽象的方法***！照这种方式，子类就 __必须__ 实现这些方法（记住，抽象的方法，必须在第一个具体类中实现），因此在运行时JVM不会被到底应该调用两个继承版本中的哪一个搞晕。
 
-![Java 的 `interface`](images/Ch08_23.png)]
+![Java 的 `interface`](images/Ch08_23.png)
 
 *图 23 - Java 的 `interface`*
+
+**这样来定义一个 `interface`**:
+
+```java
+public interface Pet {...}
+```
+
+> 使用关键字 `interface` 而不是 `class`。
+
+**这样来实现一个 `interface`**:
+
+```java
+public class Dog extends Canine implements Pet {...}
+```
+
+> 使用关键字 `implements` 带上 `interface` 的名字。注意在实现某个 `interface`时，同时仍然好对某个类进行扩展。
+
+![Pet `interface`的构造与实现](images/Ch08_24.png)
+
+
+*图 24 - Pet `interface`的构造与实现*
+
