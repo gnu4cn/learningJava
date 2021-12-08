@@ -622,6 +622,7 @@ public class Dog extends Canine implements Pet {...}
 - **等一下，由于不能把任何实现代码放在 `interface`s 里，那么这些 `interface`s 就没有真正带来多重继承。如果所有方法都是抽象的，那么 `interface`究竟有什么好处呢**？
 
 > 多态机制，多态机制，多态机制。使用 `interface`s 在灵活性上是终极的，因为使用 `interface`s 而不是具体子类（甚至抽象的超类类型），作为参数或返回值类型，就可以以实现了那个 `interface`的所有具体类类型，进行传递（Interfaces are the ultimate in flexibility, because if you use interfaces instead of concrete subclasses(or even abstract superclass types) as arguments and return types, you can pass anything that implements that interface）。同时可以试想一下， 在具备 `interface` 的情况下，类就不必只来自单一的继承树了。某个类可以对一个类进行扩展，再去实现某个 `interface`。而另一个类在实现同一个接口的同时，可以来自完全不同的继承树！所以就可以根据对象所扮演的角色，而不是其从哪个类类型初始化得来去对待他（So you can get treat an object by the role it plays, rather than by the class type from which it was instantiated）。
+
 > 事实上，在运用 `interface` 来编写代码后，甚至不需要将某个超类给到其他人去扩展。只需要给他们一个接口然后告诉他们：“这就够了，我不在乎你那边的继承结构是怎样的，只需要实现这个 `interface` 就可以了”。
 > 因为`interface`中的大多数方法，在进行通用实现后都没有什么意义，因此不将实现代码放在`interface`里头这种实践，对大多数优良设计就不再是个问题。也就是说，即使不强制将这些大多数`interface`方法设置为抽象方法，这些方法也需要被重写。
 
