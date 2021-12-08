@@ -668,4 +668,9 @@ public class Dog extends Animal implements Pet, Saveable, Paintable {...}
 
 - ***在构造某个具体子类时，既要重写某个方法，又需要该方法的超类版本的行为，该怎么办？也就是说，不希望通过重写来替换掉这个方法，而只想把一些额外特定代码，添加到这个方法***。
 
-> 呃... 
+> 呃... 请想想“扩展” 一词的意思。良好“面向对象”设计的一个方面，就是对如何去设计那些为了重写的代码的关注。也就是说，在抽象类中所写下的方法代码，就应该是可以支撑到具体实现的那些足够通用的代码（One area of good OO design looks at how to design concrete code that's meant to be overridden. In other words, you write method code in, say, an abstract class, that does work that's generic enough to support typical concrete implementations）。不过这些具体代码，并不足以应对 *全部* 特定于子类的工作。因此子类就会重写方法，并通过添加其剩余代码类进行 *扩展*。在子类里使用关键字 `super` ，就可以调用到某个重写方法的超类版本。
+
+![子类对超类方法的调用：关键字 `super`](images/Ch08_26.png)
+
+
+*图 26 - 子类对超类方法的调用：关键字 `super`*
