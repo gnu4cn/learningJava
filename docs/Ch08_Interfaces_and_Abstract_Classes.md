@@ -633,4 +633,22 @@ public class Dog extends Canine implements Pet {...}
 
 在将 *类* 作为多态类型（比如某个类型为 `Animal` 的数组，或者取 `Canine` 类型参数的某个方法）时，该类型下的对象，就只能来自同样的继承树。而且不能时继承树的所有地方，这些对象只能来自用作多态类型的超类的某个子类。类型 `Canine`的参数，就只能接受一个 `Wolf`或者`Dog`，而不能接受 `Cat` 或 `Hippo`。
 
+但在使用 ***`interface`*** 作为多态类型时（比如一个 `Pet` 的数组），该 `interface` 类型下的变量所指的对象，就可以来自继承树的任意位置了。唯一要求是这些对象，是来自某个实现了该 `interface` 的类。Java API中允许不同继承树中的类对同一 `interface` 进行实现，是非常关键的。想要某个对象能够将其状态保存到文件中？那么对 `Serializable` 这个 `interface` 进行实现就可以了。想要一些对象在一个单独的执行线程中运行他们的方法？那么对 `Runable` 这个 `interface`进行实现就可以了。明白了吧。在后续章节将了解更多有关 `Serializable` 和 `Runable` 这两个 `interface`的细节，这里就只是要记住，不管类来自继承树的哪里，都可能需要继承这些 `interface`s。几乎 *所有* 类，都是希望能进行保存或执行的。
+
+***更重要的是，一个类可以实现多个 `interface`s***！！
+
+某个 `Dog` 对象 `IS-A` `Canine`，同时 `IS-A` `Animal`，还 `IS-A` `Object`，这些都是通过继承得来的。但经由实现 `interface`得来的一个 `Dog` `IS-A` `Pet`，同时该`Dog`还可以实现其他的接口。可以这样写：
+
+```java
+public class Dog extends Animal implements Pet, Saveable, Paintable {...}
+```
+
+> ## 牢记
+>
+> 红玫瑰，白牡丹
+> 扩展一，实现俩
+>
+> Java重视家庭观
+>
+> **父辈只能有一个**！某个Java类只能有 **一个** 父辈（超类），而正是那个父辈，定义了你是谁。但你可以实现多个 `interface`s, 这些 `interface`s 定义了你可以扮演的角色。
 
