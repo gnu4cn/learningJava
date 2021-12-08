@@ -82,5 +82,5 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 - [了解Java API：使用Java的库](docs/Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.md)
 - [继承与多态：追求对象村的更好生活](docs/Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.md)
 - [接口与抽象类](docs/Ch08_Interfaces_and_Abstract_Classes.md)
-- [构造器与垃圾回收](docs/Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.md)]
+- [构造器与垃圾回收: 对象的生与死](docs/Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.md)
 - [获得GUI：一个甚为形象的故事](docs/Ch12_Getting_GUI_A_Very_Graphic_Story.md)
