@@ -668,9 +668,40 @@ public class Dog extends Animal implements Pet, Saveable, Paintable {...}
 
 - ***在构造某个具体子类时，既要重写某个方法，又需要该方法的超类版本的行为，该怎么办？也就是说，不希望通过重写来替换掉这个方法，而只想把一些额外特定代码，添加到这个方法***。
 
-> 呃... 请想想“扩展” 一词的意思。良好“面向对象”设计的一个方面，就是对如何去设计那些为了重写的代码的关注。也就是说，在抽象类中所写下的方法代码，就应该是可以支撑到具体实现的那些足够通用的代码（One area of good OO design looks at how to design concrete code that's meant to be overridden. In other words, you write method code in, say, an abstract class, that does work that's generic enough to support typical concrete implementations）。不过这些具体代码，并不足以应对 *全部* 特定于子类的工作。因此子类就会重写方法，并通过添加其剩余代码类进行 *扩展*。在子类里使用关键字 `super` ，就可以调用到某个重写方法的超类版本。
+> 呃... 请想想“扩展” 一词的意思。良好“面向对象”设计的一个方面，就是对如何去设计那些为了重写的代码的关注。也就是说，在抽象类中所写下的方法代码，就应该是可以支撑到具体实现的那些足够通用的代码（One area of good OO design looks at how to design concrete code that's meant to be overridden. In other words, you write method code in, say, an abstract class, that does work that's generic enough to support typical concrete implementations）。不过这些具体代码，并不足以应对 *全部* 特定于子类的工作。因此子类就会重写方法，并通过添加其剩余代码，对类进行 *扩展*。在子类里使用关键字 `super` ，就可以调用到某个重写方法的超类版本。
 
 ![子类对超类方法的调用：关键字 `super`](images/Ch08_26.png)
 
 
 *图 26 - 子类对超类方法的调用：关键字 `super`*
+
+
+## 重点
+
+- 在不希望某个类被实例化（也就是不希望有人构造那个类的对象）时，就将该类用关键字 `abstract` 标记起来；
+- 抽象类可以同时有抽象与非抽象方法；
+- 某个类就算只要有一个抽象方法，就必须被标记为抽象类；
+- 抽象方法没有方法体，同时其声明是以分号（`;`）结束的（没有花括弧）；
+- 继承树中的第一个具体类，必须实现全部抽象方法；
+- Java中每个类，都直接或间接是类 `Object`（`java.lang.Object`）的子类；
+- 可以 `Object` 类型的参数和/或返回值类型，来声明方法；
+- 对于某个对象，只能调用作为该对象的引用变量类型的类（或`interface`）中有的那些方法，这跟该对象实际类型无关。因此引用变量类型为 `Object` 类型的对象，就只能用于调用类 `Object`中定义的方法，而与该引用变量实际所指的对象类型无关；
+- 类型 `Object` 的引用变量，在不使用强制转换运算符的情况下，不能赋值给任何其他类型的引用变量。可使用强制转换，来将一种类型的引用变量，赋值给该类型的子类型的引用变量，但如果内存堆中的对象，与强制类型转换运算不兼容时，运行时就会转换失败。比如：
+
+```java
+Dog d = (Dog) x.getObject(aDog);
+```
+
+- 从 `ArrayList<Object>` 中拿出的所有对象的类型，都是 `Object`（意即除非使用强制类型转换，否则这些对象只能被 `Object` 类型的引用变量所引用）；
+- 由于多重继承会带来“致命死亡钻石”问题，因此Java中不允许多重继承。这就意味着只能对一个类进行扩展（也就是只能有一个直接的超类）；
+- `interface` 就像一个 100% 的抽象类。只用于定义抽象方法；
+- 使用关键字 `interface` ，而不是 `class`, 来创建 `interface`；
+- 使用关键字 `implements` 来实现 `interface`，比如：
+
+```java
+public class Dog extends Canine implements Pet
+```
+
+- 类可以实现多个 `interface`s；
+- 因为 *`interface`的全部方法，隐式的都是 `public` 与 `abstract` 的*，所以实现某个 `interface` 的类，就必须实现该 `interface` 的全部方法；
+- 使用关键字 `super` 来从子类中调用所重写方法的超类版本。比如 `super.runReport();`
