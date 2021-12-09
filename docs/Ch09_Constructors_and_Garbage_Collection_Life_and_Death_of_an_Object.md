@@ -41,7 +41,13 @@ public class StackRef {
     }
 
     public void barf () {
-        Duck d = new Duck (24);)
+        Duck d = new Duck (24);
     }
 }
 ```
+
+![本地变量为对象时的情况](images/Ch09_04.png)]
+
+
+*图 4 - 本地变量为对象时的情况*
+
