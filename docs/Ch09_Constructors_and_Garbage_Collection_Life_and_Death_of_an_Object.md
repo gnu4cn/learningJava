@@ -134,7 +134,21 @@ public Duck () {}
 
 ***注意到缺了什么吗？这和方法有什么不同的地方***？
 
-![构造器与方法的不同](images/Ch09_08.png)]
+![构造器与方法的不同](images/Ch09_08.png)
 
 
 *图 8 - 构造器与方法的不同*
+
+### 构造一个 `Duck`
+
+![构造器实例](images/Ch09_09.png)
+
+
+*图 9 - 构造器实例*
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Quack
+```
+
+
