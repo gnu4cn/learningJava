@@ -73,4 +73,23 @@ public class StackRef {
 
 请记住对象的实例变量的值，是存活在对象的内部的。在实例变量都是原生值时，Java根据原生变量类型，为这些实例变量分配空间。一个`int`实例变量，需要 32个二进制位，一个 `long`长整型需要 64个二进制位等等。Java并不去看原生变量里的值；对于一个 `int` 的变量，不管他的值是 `32,000,000`还是 `32`，其所占据的位大小，始终都是 32位。
 
+但如果实例变量是 *对象*，那又是怎样的呢？比如 `CellPhone` 就 `HAS-A` `Antenna`？也就是说，`CellPHone`有一个`Antenna`类型的引用变量。
 
+在对象有着一些除开原生变量的、对象引用变量的实例变量时，真正的问题就是：对象需要空间来保存他的那些引用变量所指的对象吗（When the new object has instance variables that are object references rather than primitives, the real question is: does the object need space for all of the objects it holds reference to）？答案是肯定的，但 *不准确*。不管哪种情况，Java都必须给实例变量 *值（values）* 分配空间。但要记住，引用变量不是 *对象* 本身，而仅仅是到对象的 *遥控器*。因此在 `CellPhone` 有一个声明为非原生类型的 `Antenna` 实例变量时，Java 就只需在 `CellPhone`对象里头，给 `Antenna` 的遥控器，而不是`Antenna`对象本身，分配空间即可。
+
+那么什么时候`Antenna`会在堆上获取到空间呢？首先就必须找到对象 `Antenna`本身在什么时候创建出来。这是由`Antenna`这个实例变量的声明决定的。在只声明了这个实例变量，而没有给他赋值的时候，就只有声明的这个引用变量（遥控器）的空间会被创建。
+
+```java
+private Antenna ant;
+```
+
+直到有新的 `Antenna` 对象赋值给这个对象引用实例变量，才会有真实的 `Antenna`对象在堆上创建出来。
+
+```java
+private Antenna ant = new Antenna();
+```
+
+![对象的实例变量](images/Ch09_05.png)
+
+
+*图 5 - 对象的实例变量*
