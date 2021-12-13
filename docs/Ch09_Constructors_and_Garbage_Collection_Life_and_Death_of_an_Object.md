@@ -434,3 +434,63 @@ Making a Hippo
 ![构造器链](images/Ch09_16.png)
 
 *图 16 - 构造器链（Constructor Chaining）*
+
+
+### 该怎样来亲自执行超类构造器？
+
+**How do you invoke a superclass constructor**?
+
+你可能已经想到，比如对于 `Duck` 的构造器，在 `Duck` 扩展了 `Animal`时，就会去调用 `Animal()`。但不是这样干的：
+
+```java
+class Duck extends Animal {
+    int size;
+
+    Duck (int newSize) {
+        Animal (); // 错！不行，这样是非法的！
+        size = newSize;
+    }
+}
+```
+
+调用超构造器（a super constructor）的唯一方式，是通过调用 `super()`。对 -- `super()` 就会调用到 ***超构造器***。
+
+时机在哪里呢（What are the odds）？
+
+```java
+class Duck extends Animal {
+    int size;
+
+    Duck (int newSize) {
+        super();
+        size = newSize;
+    }
+}
+```
+
+构造器 `Duck()` 中的 `super()` 调用，把超类构造器放置在栈顶部。而那个超类构造器又会干什么呢？*调用他自己的超类构造器*。如此这般，直到`Object`的构造器位于栈的顶部为止。一旦 `Object()` 运行完毕，他就从栈上被移除，同时栈上的下一个构造器（调用 `Object()` 的那个子类构造器）现在就位于顶部了。随后 *那个* 构造器也执行完毕，如此这般，直到最初的构造器位于栈顶部为止，到这里这个最初的构造器才执行完毕。
+
+> **那么之前为什么就没这么做呢（And how is it that we've gotten away without doing it）**?
+
+> 你或许已经接近发现事实真相了。
+> **在我们没有放入一个 `super()`时，我们的好友编译器就会放入一个**。
+> 因此编译器在介入到构造器构造时，有两种方式（So the compiler gets involved in constructor-making in two ways）：
+>
+> 1. 在我们不提供构造器时：
+> 编译器放入一个这样的构造器：
+
+```java
+class ClassName {
+    super();
+}
+```
+
+> 2. 在提供了构造器却没有放入一个到 `super()` 的调用时
+>
+> 编译器将在所有过载构造器中，放入一个到 `super()`的调用（除了那些调用了其他过载构造器的构造器中，这在后面会见到）。编译器所提供的调用是这样的：
+
+```java
+super();
+```
+
+> 且会一直是这样的。编译器插入的 `super()` 调用，始终是不带参数的。在超类有着过载构造器时，只会调用不带参数的构造器。
