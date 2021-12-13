@@ -392,3 +392,45 @@ public Duck (String name, int size) {}
 在构造器运行时，他就立即沿构造器链往上，调用他的超类构造器，直到类`Object`的构造器（When a contructor runs, it immediately calls its superclass constructor, all the way up the chain until you get to the class `Object` constructor）。
 
 在后面的内容中，将了解怎样调用超类构造器，以及怎么亲自去调用超类构造器。还会了解在超类构造器带有参数时，该怎样去调用他们。
+
+```java
+package com.xfoss.learningJava;
+
+abstract class Animal {
+    Animal () {
+        System.out.println ("Making an Animal");
+    }
+}
+
+abstract class Canine extends Animal {}
+abstract class Feline extends Animal {}
+
+class Dog extends Canine {}
+class Cat extends Feline {}
+class Hippo extends Animal {
+    Hippo () {
+        System.out.println("Making a Hippo");
+    }
+}
+
+public class AnimalTestDrive {
+    public static void main (String [] args) {
+        System.out.println("Starting...");
+        Hippo h = new Hippo();
+    }
+}
+```
+
+运行结果：
+
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Starting...
+Making an Animal
+Making a Hippo
+```
+
+![构造器链](images/Ch09_16.png)
+
+*图 16 - 构造器链（Constructor Chaining）*
