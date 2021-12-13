@@ -548,4 +548,8 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 Buffy
 ```
 
+### 从一个过载构造器运行另一个过载构造器
 
+在过载构造器具有处理不同参数类型的例外，而去做同样的事情时，会怎样呢（What if you have overloaded construtors that, with the exception of handling different argument types, all do the same thing）？显然是不希望在各个构造器中有 *重复（duplicate）* 代码（苦于维护等等），那么就有把大部分构造器代码（包括对 `super()` 的调用），放在 *一个* 过载构造器中。让其他构造器去运行这个真正构造器（The Real Constructor），并让这个真正构造器去完成对象构造工作。很简单：使用 `this()` 语句，或者 `this(aString)`，或者`this(27, x)`这样的语句即可。也就是说，只需将关键字 `this`，想象为 **当前对象** 即可。
+
+**只有在构造器中，才能写 `this`, 且必须是构造器的第一条语句**！
