@@ -508,3 +508,44 @@ super();
 ![对 `super()` 的调用](images/Ch09_17.png)
 
 *图 17 - 对 `super()` 的调用*
+
+
+### 带参数的超类构造器
+
+若超类构造器带有参数会怎样呢？可将某些东西传递进入到 `super()` 调用吗？当然可以。如若不能，就无法去扩展那些，没有不带参数的构造器的类了。设想这样的场景：所有动物都有个名字。类 `Animal` 中有个 `getName()` 的方法，返回实例变量 `name` 的值。该实例变量被标记为了`private`，但子类（此示例中的 `Hippo`）继承了 `getName()` 方法。那么就有这个问题：`Hippo`有着一个 `getName()`方法（通过继承得到），但并没有 `name`这个实例变量。`Hippo`就不得不依赖自己的 `Animal`部分，来保存那个`name`的实例变量，并在某人调用到 `Hippo`对象上的 `getName()`方法时，返回 `name` 的值。但 `Animal` 部分该怎样获取到这个 `name` 呢？`Hippo`到他的 `Animal`部分的唯一引用，是经由 `super()` 实现的，那么那里就是 `Hippo` 把 `Hippo` 的名字，发送给他的 `Animal` 部分的地方，如此这般，`Animal` 部分才可以将 `Hippo`的名字，存储在那个 `private` 的 `name` 实例变量中。
+
+```java
+abstract class Animal {
+    private String name; // 所有动物（包括子类）都有一个名字
+
+    public String getName () { // Hippo 继承到的一个读取器方法（a getter method）
+        return name;
+    }
+
+    Animal (String theName) {
+        name = theName; // 接收名字并将其赋值给 name 实例变量的构造器
+    }
+}
+
+class Hippo extends Animal {
+    Hippo (String name) { // Hippo构造器接收一个名字
+        super(name); // 这个语句将名字在栈上向上发送给 Animal 构造器
+    }
+}
+
+public class AnimalTestDrive {
+    public static void main (String [] args) {
+        Hippo h = new Hippo("Buffy"); // 构造一个 Hippo, 并将名字 "Buffy" 传递给 Hippo 构造器。
+        System.out.println(h.getName()); // 随后调用 Hippo 继承到的 getName() 方法
+    }
+}
+```
+
+运行结果：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Buffy
+```
+
+
