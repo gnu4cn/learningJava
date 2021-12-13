@@ -370,4 +370,25 @@ public Duck (String name, int size) {}
 
 *图 14 - 堆上的 Snowboard 类*
 
+### 超类构造器在对象生命周期中的角色
 
+**The role of superclass constructors in an object's life**
+
+***在构造新的对象时，对象继承树中的所有构造器都必须运行（All the constructors in an object's inheritace tree must run when you make a object）***。
+
+让我们细细品味这句话是什么意思（Let that sink in）。
+
+这意味着每个超类都有一个构造器（因为每个类都有一个构造器），同时沿继承层次往上的每个构造器，在子类的某个对象被创建出来时，都会运行。
+
+写下关键字 `new` 可是个大事情。这就开启了整个构造器链的反应（Saying `new` is a Big Deal. It starts the whole constructor chain reaction）。且就算抽象类，也是有构造器的。虽然不在在某个抽象类上写 `new`，但抽象类同样是超类，因此在有人构造某个具体类的实例时，抽象类的构造器同样会运行。
+
+超类构造器运行，是为了构造出对象的超类部分。记住，某个子类可能依据超类的状态（即超类实例变量的值），而继承超类的某些方法。对象要成型，他自身的所有超类部分必须要成型，这就是超类构造器 *必须* 运行的原因。继承树中所有类的实例变量，都必须被声明和初始化。基本 `Animal`中有 `Hippo` 未曾继承的实例变量（比如在实例变量为 `private`时），`Hippo`仍然会依赖`Animal`中 *使用* 到这些变量的方法。
+
+![构造器链](images/Ch09_15.png)
+
+*图 15 - 构造器链*
+
+
+在构造器运行时，他就立即沿构造器链往上，调用他的超类构造器，直到类`Object`的构造器（When a contructor runs, it immediately calls its superclass constructor, all the way up the chain until you get to the class `Object` constructor）。
+
+在后面的内容中，将了解怎样调用超类构造器，以及怎么亲自去调用超类构造器。还会了解在超类构造器带有参数时，该怎样去调用他们。
