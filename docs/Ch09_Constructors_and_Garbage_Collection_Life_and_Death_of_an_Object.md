@@ -213,4 +213,39 @@ __设想打算让 `Duck` 的使用者，在构造`Duck` 时有两个选项 -- �
 
 *图 12 - 只使用一个构造器*
 
+这样做还是要求构造新 `Duck` 对象的程序员知道，传入一个 `0` 就可以得到默认 `Duck` `size` 的约定。这就很恶心了。要是其他程序员不知道呢？或者某人真的需要一个大小为零的 `Duck`呢？（假设大小为零的 `Duck` 是允许的。就是真的不想要大小为零的 `Duck` 对象存在，就要在构造器中放入验证代码来防止）关键是，不总是能识别出`Duck`的使用者，到底是真的想要一个大小为零的 `Duck`，还是他要传入一个 `0`来得到默认的 `Duck` `size`。
 
+
+__实际上，需要的是有两种构造新 `Duck`的方式__ :
+
+```java
+public class Duck2 {
+    int size;
+
+    public Duck2 () {
+        // 提供一个默认的 size
+        size = 27;
+    }
+
+    public Duck2 (int duckSize) {
+        // 使用 duckSize 参数
+        size = duckSize;
+    }
+}
+```
+
+__要构造一个已知 `size` 的新 `Duck` 时__ ：
+
+
+```java
+Duck2 d = new Duck2 (15);
+```
+
+
+__要构造一个不知道 `size` 的 `Duck` 时__ ：
+
+```java
+Duck2 d2 = new Ducks()
+```
+
+因此这种 **构造 `Duck` 的双项选择** 做法，就需要 *两个* 构造器。其一接收一个 `int` 参数，其二没有参数。 ***在类中有着多个构造器时，就是说使用了过载的构造器（overloaded constructors）***。
