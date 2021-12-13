@@ -7,7 +7,7 @@
         "doc": "docs"
     },
     "scripts": {
-        "test": "mvn exec:java"
+        "start": "mvn install && mvn exec:java"
     },
     "repository": {
         "type": "git",
