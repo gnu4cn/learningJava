@@ -46,4 +46,7 @@ Math() has private access in java.lang.Math
 *图 2 - 常规方法与静态方法的区别*
 
 
+![静态方法与非静态方法的调用](images/Ch10_03.png)
 
+
+*图 3 - 静态方法与非静态方法的调用*
