@@ -28,6 +28,5 @@ public class AnimalTestDrive {
         Hippo h = new Hippo("Buffy");
         System.out.println(h.getName());
 
-        Math mathObj = new Math();
     }
 }
