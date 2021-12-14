@@ -13,6 +13,11 @@ abstract class Car {
     Car (int s) {
         size = s;
     }
+
+    Car (int s, String b) {
+        size = s;
+        brand = b;
+    }
 }
 
 class Mini extends Car {
@@ -28,7 +33,6 @@ class Mini extends Car {
     }
 
     Mini (int size) {
-        this(Color.RED);
         super(size);
     }
 }
