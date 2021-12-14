@@ -61,6 +61,39 @@ Math() has private access in java.lang.Math
 
 通常是要构造一个 `main()` 方法来启动或测试另一个类的，几乎总是要在 `main()` 方法中去实例化某个类，且随后会在构造的新实例上运行某个方法。
 
-因此虽然某个非静态方法就意味着一定有某种构造类实例的方式，但在类中结合静态和非静态方法一起使用，是自由的。获取新对象的唯二方式，是通过关键字 `new`，或者逆序列化（deserialization, 或称为Java Reflection API，附录会讲到）。此外并无他法。不过还有一个非常有趣的问题，那就是到底是 *谁* 来写下 `new`，后面会讨论这个问题。
+因此虽然存在一个非静态方法，就意味着一定有某种构造类实例的方式，但在类中结合静态和非静态方法一起使用，是自由的。获取新对象的唯二方式，是通过关键字 `new`，或者逆序列化（deserialization, 或称为Java Reflection API，附录会讲到）。此外并无他法。不过还有一个非常有趣的问题，那就是到底是 *谁* 来写下 `new`，后面会讨论这个问题。
 
 
+### 静态方法不能使用非静态（实例）变量！
+
+**Static methods can't use non-static (instance) variable**!
+
+静态方法的运行，无需对其所属类的任何特定实例有所了解。就如同前面所说的，静态方法所属类甚至没有实例变量。因为静态方法是使用 *类*（`Math.random()`），而非 *实例引用变量* （`t2.play()`）调用，所以静态方法就不能引用其所属类的任何实例变量。
+
+**若尝试编译这样的代码：**
+
+```java
+class Duck {
+    private int size;
+
+    public static void main (String [] args) {
+        System.out.format("Size of duck is %s\n", size);    // 哪个 Duck? 谁的 size ?
+    }                                                       // 若在内存堆上的某处有个 Duck, 这里也是对其一无所知的
+
+    public void setSize (int s) {
+        size = s;
+    }
+
+    public int getSize () {
+        return size;
+    }
+}
+```
+
+**将收到这样的错误信息**：
+
+```console
+non-static variable size cannot be reference from a static context
+```
+
+> **在某个静态方法中尝试使用实例变量时，编译器就会想 “我不知道你讲的是哪个对象的实例变量”！就算在内存堆上有 10 只鸭子，静态方法也对他们一无所知**。

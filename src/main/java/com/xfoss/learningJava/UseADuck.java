@@ -14,7 +14,10 @@ class Duck {
 }
 
 public class UseADuck {
+    private int size;
+
     public static void main (String [] args) {
+        System.out.format("Size of duck is %s\n", size);
         Duck d = new Duck (28);
         Duck d2 = new Duck ();
     }
