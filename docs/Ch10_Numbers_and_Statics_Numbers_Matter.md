@@ -97,3 +97,33 @@ non-static variable size cannot be reference from a static context
 ```
 
 > **在某个静态方法中尝试使用实例变量时，编译器就会想 “我不知道你讲的是哪个对象的实例变量”！就算在内存堆上有 10 只鸭子，静态方法也对他们一无所知**。
+
+### 静态方法也不能使用非静态方法！
+
+非静态方法是用来做什么的？***非静态方法通常要使用实例变量的状态，来影响他们自己的行为***。`getName()`方法，返回的是变量 `name` 的值。谁的名字？当然是用于运行 `getName()` 方法的那个对象的 `name`。
+
+**这段代码不会被编译**：
+
+```java
+class Duck {
+    private int size;
+
+    public static void main (String [] args) {
+        System.out.format("Size of duck is %s\n", getSize());    // 调用 getSize () 方法只是推迟了必然会出现的问题 -- getSize() 使用了实例变量 size
+    }
+
+    public void setSize (int s) {
+        size = s;
+    }
+
+    public int getSize () {
+        return size; // 这里又回到同样的问题......到底是谁的 size ？
+    }
+}
+```
+
+**错误信息**：
+
+```console
+non-static method getSize cannot be reference from a static context
+```
