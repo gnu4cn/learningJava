@@ -26,12 +26,14 @@ Math mathObj = new Math();
 Math() has private access in java.lang.Math
 ```
 
+> 该错误消息显示，`Math` 构造器是被标记为 `private` 的！那就是说，**绝** 不可以在类 `Math` 上写 `new` 来构造一个新的 `Math` 对象。
+
+
 ![类`Math`的方法](images/Ch10_01.png)
 
 
 *图 1 - 类`Math`的方法*
 
-> 该错误消息显示，`Math` 构造器是被标记为 `private` 的！那就是说，**绝** 不可以在类 `Math` 上写 `new` 来构造一个新的 `Math` 对象。
 
 
 ### 常规（非静态）方法与静态方法的区别
