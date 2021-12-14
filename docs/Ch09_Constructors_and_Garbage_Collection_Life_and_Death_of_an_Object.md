@@ -553,3 +553,15 @@ Buffy
 在过载构造器具有处理不同参数类型的例外，而去做同样的事情时，会怎样呢（What if you have overloaded construtors that, with the exception of handling different argument types, all do the same thing）？显然是不希望在各个构造器中有 *重复（duplicate）* 代码（苦于维护等等），那么就有把大部分构造器代码（包括对 `super()` 的调用），放在 *一个* 过载构造器中。让其他构造器去运行这个真正构造器（The Real Constructor），并让这个真正构造器去完成对象构造工作。很简单：使用 `this()` 语句，或者 `this(aString)`，或者`this(27, x)`这样的语句即可。也就是说，只需将关键字 `this`，想象为 **当前对象** 即可。
 
 **只有在构造器中，才能写 `this`, 且必须是构造器的第一条语句**！
+
+但那是个问题，不是吗？早先说过，`super()`必须是构造器中的第一条语句。好吧，上面这句话就是说，现在多了一个选择。
+
+**每个构造器都可以有一个 `super()` 或 `this()` 的调用，但不能两个同时调用**！
+
+> **在一个构造器中使用 `this()` 来调用同一类中的另一个构造器**。
+> **可以在构造器中使用对 `this()` 的调用，但必须是构造器的第一条语句**。
+> **构造器可以保有一个对 `super()` *或* `this()` 的调用，但不能同时使用 `super()` 和 `this()`**。
+
+![`this()` 与 `super()`](images/Ch09_18.png)
+
+*图 18 - `this()` 和 `super()`的使用* 
