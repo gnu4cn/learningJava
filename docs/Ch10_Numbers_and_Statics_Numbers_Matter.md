@@ -213,4 +213,37 @@ class Duck {
 
 在本章早先部分，我们见到了私有构造器表示类不可被类外部的代码实例化。也就是说，只有类里面的代码，才可以使用私有构造器，构造类的新实例。（这里就有了“鸡生蛋蛋生鸡”问题。）
 
+若要编写一个只能构造一个实例，且要使用类实例的所有人，就都只能使用这单个的实例，会怎样呢？
 
+### 静态变量的初始化
+
+**Initializing a static variable**
+
+静态变量是在 *类加载* 的时候初始化的。而类的加载，则是 JVM 判定应该加载他的时候，才加载的。通常情况下，JVM加载某个类，是因为第一次有人尝试构造那个类的新实例，或者使用该类的静态方法或静态变量。作为 Java 程序员，当然还有显式地让JVM去加载某个类的选项，不过极不可能需要去那样做的。在几乎所有情况下，都最好让JVM去决定何时加载类。
+
+同时静态变量初始化有两条定律：
+
+- 类中的静态变量，是在类的所有对象可被创建出来之前初始化的
+- 类中的静态变量，是在类的所有静态方法运行之前初始化的
+
+```java
+class Player {
+    static int playerCount = 0; // playerCount 是在类 Player 加载时初始化的。
+    private String name;        // 这里显式将其初始化为 0，不过并不需要，因为整数
+                                // 的默认值本来就是 0。静态变量获取默认值的方式，与
+                                // 实例变量是一样的。
+    Player (String n) {
+        name = n;
+        playerCount++;          // 已声明但未初始化的静态变量与实例变量，他们的默认值
+    }                           // 一样：
+}                               // 原生整数（长整形、短整型等）：0
+                                // 原生浮点数（单精度、双精度）：0.0
+                                // 布尔值：false
+public class PlayerTestDrive {  // 对象引用变量：null 
+    public static void main (String[] args) {
+        System.out.println(Player.playerCount);
+        Player one = new Player ("Tiger Woods");
+        System.out.println(Player.playerCount);
+    }                        // 对静态变量的访问，就如同对静态
+}                            // 方法的访问 -- 使用类的名字。
+```
