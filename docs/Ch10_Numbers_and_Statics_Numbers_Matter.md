@@ -155,3 +155,21 @@ d.main(s);
 > **实例变量的状态**
 >
 > **静态方法见不到**
+
+### 静态变量：对类的 *所有* 实例，其值保持一致
+
+**Static variable: value is the same for ALL instances of the class**
+
+设想打算数一下程序运行时创建了多少个 `Duck` 的实例。怎样才能做到呢？或许需要一个在构造器中递增的实例变量？
+
+```java
+clas Duck {
+    int duckCount = 0;
+
+    Duck () {
+        duckCount++; // 这会在每次构造出一个 Duck 时，将 duckCount 设置为 1
+    }
+}
+```
+
+
