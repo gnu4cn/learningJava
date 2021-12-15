@@ -247,3 +247,11 @@ public class PlayerTestDrive {  // 对象引用变量：null
     }                        // 对静态变量的访问，就如同对静态
 }                            // 方法的访问 -- 使用类的名字。
 ```
+
+运行结果：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+0 <-- 在没有构造任何实例时
+1 <-- 在构造了一个对象后
+```
