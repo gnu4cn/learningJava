@@ -172,4 +172,31 @@ clas Duck {
 }
 ```
 
+这样写是做不到的，因为`duckCount`是个实例变量，对每个 `Duck`都是以 `0` 开始的。当然可以再构造另一个类来完成 `Duck` 的计数，但那样就显得笨拙。这个时候就需要一个只有某变量的单份拷贝，且所有实例变量都共享那份拷贝的类。
 
+这就是静态变量可以给到的特性：可被所有类实例共享的值。也就是说，每个类一个值，而非每个实例一个值（In other words, one value per *class*, instead of one value per *instance*）。
+
+```java
+class Duck {
+    private int size;
+    private static int duckCount = 0;   // 这个静态变量 `duckCount` 只会在类第一次加载时初始化
+                                        // 而不会在每次构造新实例时初始化
+
+    Duck () {
+        duckCount++;    // 因为 duckCount 是静态的，且不会被重置为 0
+                        // 所以现在静态变量 duckCount 就会在 Duck 构造器每次运行时递增
+    }
+
+    public void setSize (int s) {
+        size = s;
+    }
+
+    public int getSize () {
+        return size;
+    }
+} 
+```
+
+![实例变量与静态变量的区别](images/Ch09_04.png)
+
+*图 4 - 实例变量与静态变量的区别*

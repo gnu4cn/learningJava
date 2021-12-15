@@ -1,15 +1,17 @@
 package com.xfoss.learningJava;
 
 class Duck {
-    int size = 32;
+    private int size;
+    private static int duckCount = 0;
 
     Duck () {
-        System.out.format("Quack... My size is %s\n", size);
+        this(32);
     }
 
     Duck (int s) {
         size = s;
-        System.out.format("Quack... My size is %s\n", size);
+        duckCount++;
+        System.out.format("Quack... My size is %s, my number is %s\n", size, duckCount);
     }
 }
 
@@ -17,7 +19,6 @@ public class UseADuck {
     private int size;
 
     public static void main (String [] args) {
-        System.out.format("Size of duck is %s\n", getSize());
         Duck d = new Duck (28);
         Duck d2 = new Duck ();
     }
