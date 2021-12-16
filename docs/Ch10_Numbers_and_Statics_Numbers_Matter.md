@@ -291,3 +291,35 @@ class Foo {
 
 
 *图 5 - 静态最终变量 -- 常量，与静态初始化器*
+
+
+### `final` 不止于 `static` 变量
+
+也可使用关键字 `final` 去修改非静态变量，包括实例变量、本地变量，甚至方法的参数。在每种情况下，关键字 `final` 都意味着同样的事情：再也不能改变值了。还可以使用关键字 `final` 去阻止别人重写方法，或构造子类。
+
+- **`final` 的那些非静态变量**
+
+```java
+class Foof {
+    final int size = 3; // 现在就再不能修改 size 了
+    final int whuffie;
+
+    Foof () {
+        whuffie = 42; // 这里是不能修改 whuffie 的
+    }
+
+    void doStuff (final int x) {
+        // 就无法改变 x 了
+    }
+
+    void doMore () {
+        final int z = 7;
+        // 就无法改变 z 了
+    }
+}
+```
+
+> 实际上这里有个问题。其中的 `final int whuffie;` 语句中的 `whuffie` 实例变量，其默认值不是 `0` 吗？怎么后面又可以再构造器中赋值呢？说明构造器是最先运行的。
+
+- **`final` 的方法**
+- **`final` 的类**
