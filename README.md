@@ -1,3 +1,4 @@
+<meta name="google-site-verification" content="OqM0vjX4RGGEgVAJq7pIhZ7Bc1Sp5C3fitR0tjeAFJk" />
 # Java 编程学习项目
 
 这是一个学习 Java 的项目。使用 Eclipse IDE/VIM、Maven/NPM 构建工具。后期会涉及到 NPM 的使用。主要学习 Java 的基础知识，Java 本地应用程序的编写。 __项目使用 JDK `11.0.12`__ 语言环境。
