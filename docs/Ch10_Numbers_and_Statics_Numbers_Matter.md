@@ -255,3 +255,9 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 0 <-- 在没有构造任何实例时
 1 <-- 在构造了一个对象后
 ```
+
+### 静态最终变量即为常量
+
+**`static` `final` variables are constants**
+
+
