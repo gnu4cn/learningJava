@@ -260,4 +260,31 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 **`static` `final` variables are constants**
 
+标记为 `final` 的变量，就意味着 -- 一旦被初始化 -- 就绝不会再改变。也就是说，静态最终变量的值，从类被加载开始，就始终保持一致。查看 Java API 中的 `Math.PI` ，就会发现：
+
+```java
+public static final double PI = 3.1415926535889793;
+```
+
+变量 `PI` 被标记为 `public` 表示所有代码都可以访问他。
+
+标记为`static`就无需类 `Math` 的实例就可以使用（还要记住不能创建类 `Math`的实例）。
+
+还因为 `PI` 是不会改变的，因此变量 `PI` 又被标记为了 `final`（就Java 这个编程语言来说）。
+
+除了上面这种方式，就再没有其他方式将变量指定为常量了，但对常量命名的约定，可以帮助我们识别出其为常量。***常量的名字，应全为大写***！
+
+
+> **静态初始化器（static initializer），是一个再类加载时，于外部代码可以使用这个类前，运行的一个代码块，因此这个代码块就是对静态最终变量进行初始化的好地方**。
+
+```java
+class Foo {
+    final static int X;
+
+    static {
+        X = 42;
+    }
+}
+```
+
 
