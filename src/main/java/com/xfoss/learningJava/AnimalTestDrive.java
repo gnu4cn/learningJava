@@ -7,16 +7,19 @@ abstract class Animal {
         return name;
     }
 
+    Animal () {}
+
     Animal (String theName) {
         name = theName;
     }
 }
 
-// abstract class Canine extends Animal {}
-// abstract class Feline extends Animal {}
+abstract class Canine extends Animal {}
 
-// class Dog extends Canine {}
-// class Cat extends Feline {}
+abstract class Feline extends Animal {}
+
+class Dog extends Canine {}
+class Cat extends Feline {}
 class Hippo extends Animal {
     Hippo (String name) {
         super(name);
