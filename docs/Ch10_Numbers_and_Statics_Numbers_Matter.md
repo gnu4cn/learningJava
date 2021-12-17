@@ -531,5 +531,104 @@ public void doNumsNewWay () {
 > 因为...不可以这样。请记住，泛型规则（the rule for generic types）就是，你只能指定的，仅为类或接口的类型，并非原生类型。因此 `ArrayList<int>` 是不会被编译的。不过就如同上面的代码，实际上这并不重要，因为编译器允许把整数放到 `ArrayList<Integer>` 中去。事实上，在使用兼容Java 5.0 的编译器时，对于把原生值放入到清单为原生值包装类类型的 `ArrayList`，是没有办法阻止的，也因为在这样的编译器下，自动打包是默认启用的。那么就可以把原生布尔值放入到 `ArrayList<Boolean>`中，把字符放入到 `ArrayList<Character>`里。
 
 
-### 
+### 自动打包几乎无处不在
 
+**Autoboxing works almost everywhere**
+
+自动打包特性不光是可以完成数据集（a collection）中原生值的打包和解包......还可以让我们在几乎所有期望得到原生值，或原生值包装的任何地方，去方便地直接二者互用。这就非常方便了！
+
+**自动打包的乐趣**
+
+- **作为方法的参数使用**
+
+> 在某个方法接收原生值包装类类型时，既可以传递一个引用变量，也可以直接传递一个与包装类类型匹配的原生值。反之依然 -- 在某个方法接收原生值时，既可以传递一个兼容的原生值，也可以传递一个原生值类型对应的包装类类型的引用变量。
+
+
+- **在返回值处运用**
+
+> 在某个方法声明了一个原生的返回类型时，既可以返回一个兼容的原生类型值，也可以返回一个声明的原生类型对应的包装类类型的引用变量。反之依然，在某个方法声明了一个原生的包装类类型时，既可以返回一个引用变量，也可以返回一个兼容原生类型的值。
+
+
+- **在布尔表达式中运用**
+
+> 在希望得到一个布尔值的任何地方，都既可以使用一个可以计算得到布尔值的表达式（比如：`4 > 2`），也可以直接使用一个原生布尔值，还可以使用一个到 `Boolean` 包装类的对象引用变量。
+
+- **在数字运算中的运用**
+
+> 这可能时最奇怪的运用了 -- 是的，运算中即使期望的是原生值，但仍然可以使用包装类类型。这就意味着可以把自增运算符（`++`）运用在类 `Integer` 的对象上！
+>
+> 但不必焦虑，这只是编译器的小把戏。并没有对Java语言本身进行修改来支持这样的在对象上应用运算符的特性；编译器只是在执行运算前，简单地把对象转换成了对象的原生值类型。不过这看起来还是很奇怪的。
+
+```java
+Integer i = new Integer(42);
+i++;
+```
+
+同样可以这样写：
+
+```java
+Integer j = new Integer (5);
+Integer k = j + 3;
+```
+
+- **用在赋值中**
+
+> 可把包装类类型对象或原生值，赋值给匹配的包装类类型引用变量或原生值。比如，一个原生值的 `int` 变量，就可以赋值给一个 `Integer`类类型的引用变量，反之亦然。
+
+下面的这个 `TestBox` 类，可以通过编译，但运行时会报错。
+
+```java
+package com.xfoss.learningJava;
+
+public class TestBox {
+    Integer i;
+    int j;
+
+    public static void main (String [] args) {
+        TestBox t = new TestBox ();
+        t.go();
+    }
+
+    public void go () {
+        j = i;
+        System.out.format("j is %s\n", j);
+        System.out.format("i is %s\n", i);
+    }
+}
+```
+
+错误信息为：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Exception in thread "main" java.lang.NullPointerException
+        at com.xfoss.learningJava.TestBox.go(TestBox.java:13)
+        at com.xfoss.learningJava.TestBox.main(TestBox.java:9)
+```
+
+### 等等！还有些东西呢！这些包装类还有自己的静态工具方法！
+
+**But wait! There's more! Wrappers hava static utility methods too!**
+
+除了可以像普通类那样行事，包装类还有一大堆相当有用的静态方法。前面就用到过一个 -- `Integer.parseInt()`。
+
+这些解析方法接收一个字符串，并返回一个原生值。
+
+**把字符串转换成原生值就很容易**：
+
+```java
+String s = "2";
+int x = Integer.parseInt(s); // 把 “2” 解析为 2 是没问题的。
+double d = Double.parseDouble("420.24");
+
+boolean b = Boolean.parseBoolean("True");
+                        // Java 1.5 中新的 parseBoolean() 方法会忽略那个字符串参数中的大小写字母。
+```
+
+**但如果这样写**：
+
+```java
+String t = "two";
+int y = Integer.parseInt(t);    //  噢。这可以通过编译，但在运行时会报错。所有不能被解析为数字的
+                                // 的东西，都将导致一个 NumberFormatException 的报错
+```
