@@ -649,4 +649,20 @@ Exception in thread "main" java.lang.NumberFormatException: For input string: "t
 
 > （在下一章就会讲到例外`Exception`。）
 
+### 现在反过来......把原生值转换成字符串
+
+**And now in reverse......turning a primitive number into a String**
+
+把数字转换成字符串的方法有好几种。最容易的就是，把数字直接连接到一个既有的字符串上。
+
+```java
+double d = 42.5;
+String doubleString = "" + d;   // 请记住这里的 ‘+’ 运算符，是 Java 中唯一的一个过载的
+                                // 运算符，在这里是一个字符串连接器。所有添加到某个字符串
+                                // 的东西，都将被字符串化。
+
+double d = 42.5;
+String doubleString = Double.toString(d);   // 另一种使用类 Double 中静态方法 toString()
+                                            // 的方式
+```
 
