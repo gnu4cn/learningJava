@@ -632,3 +632,21 @@ String t = "two";
 int y = Integer.parseInt(t);    //  噢。这可以通过编译，但在运行时会报错。所有不能被解析为数字的
                                 // 的东西，都将导致一个 NumberFormatException 的报错
 ```
+
+**将收到这样的运行时例外**：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Exception in thread "main" java.lang.NumberFormatException: For input string: "two"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at com.xfoss.learningJava.TestBox.go(TestBox.java:13)
+        at com.xfoss.learningJava.TestBox.main(TestBox.java:9)
+```
+
+**对字符串进行解析的所有方法或构造器，都可能抛出 `NumberFormatException`。这是运行时例外，因此可以不必对其加以处理或进行例外声明。不过或许会想要对其进行处理或进行例外声明的**。
+
+> （在下一章就会讲到例外`Exception`。）
+
+
