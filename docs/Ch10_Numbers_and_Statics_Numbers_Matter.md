@@ -439,3 +439,21 @@ double y = Math.min(90876.5, 90876.49); // 返回 90876.5
 - **`Math.max()`**
 
 > 与 `Math.min()` 类似，返回两个参数中的较大值。也是过载的方法。
+
+
+## 对原生值进行包装
+
+**Wrapping a primitive**
+
+一些时候要将原生值当作对象来对待。比如在 Java 早于5.0的全部版本中，是无法把原生值直接放入到 `ArrayList`或 `HashMap`等数据结构中去的：
+
+```java
+int x = 32;
+ArrayList list = new ArrayList();
+list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！！ 
+                // 那个时候 ArrayList 还没有 add(int) 方法
+                // 来接收整数！（那个时候的 ArrayList 只有
+                // 接收对象引用变量，而非原生值的 add() 方法）
+```
+
+
