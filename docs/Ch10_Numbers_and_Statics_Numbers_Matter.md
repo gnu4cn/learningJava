@@ -456,4 +456,13 @@ list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！�
                 // 接收对象引用变量，而非原生值的 add() 方法）
 ```
 
+每种原生值类型都有一个打包类，且因为这些打包类都是在 `java.lang` 包中，所有不必导入他们。由于这些类的名字，都是将（全小写字母的）原生值类型的首字母改为大写得来，因此就很容易识别和区分这些类。
+
+由于某种无人所知的原因，JAVA API 设计者们，决定了不把这些类的名字，按照原生值类型与类类型准确地映射起来（Oh yeah, for reasons absolutely nobody on the planet is certain of, the API designers decided not to map the names *exactly* from primitive type to class type）。后面就会明白这句话说的是什么。
+
+![原生类型包装类的名字：例外](images/Ch10_06.png)
+
+
+*图 6 - 原生类型包装类的名字：例外*
+
 
