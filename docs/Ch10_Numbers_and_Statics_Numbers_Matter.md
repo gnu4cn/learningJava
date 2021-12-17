@@ -478,9 +478,9 @@ list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！�
 
 在先于 5.0 版本的所有 Java 版本中，原生值就是原生值，对象引用就是对象引用，二者直接绝不会视为可互换的（In all versions of Java prior to 5.0, primitives were primitives and object references were object references, and they were NEVER treated interchangeably）。都是依赖程序员去完成打包和解包。并无将原生值传递给期望得到对象引用变量的方法，也没有方法来把方法返回的对象引用变量，直接赋值给原生值变量 -- 就算是返回的引用变量指向的是一个 `Integer`对象，要赋值的是个原生的 `int` 变量也是不行的。`Integer`与`int`两个类型之间，就是没有联系，而实际上 `Integer`是有一个类型为 `int` 的实例变量的（用于保存 `Integer` 所包裹的原生值）。这些事情，都有由程序员来亲自做。
 
-**一个原生的整数 `ArrayList`**
+**一个原生整数的 `ArrayList`**
 
-- ***在没有 “自动打包” 特性时（Java 5.0 之前的版本）***
+***在没有 “自动打包” 特性时（Java 5.0 之前的版本）***
 
 ```java
 public void doNumsOldWay () {
@@ -494,3 +494,42 @@ public void doNumsOldWay () {
     int intOne = one.intValue(); // 终于可以从 Integer 得到整个原生值了。
 }
 ```
+
+### 自动打包：模糊原生值与对象之间的界线
+
+***Autoboxing: bluring the line between primitive and object***
+
+Java 5.0 加入进来的自动打包特性（the autoboxing feature），就可以 *自动* 完成原生值到包装对象的转换！
+
+下面瞧瞧在构造一个保存整数的 `ArrayList` 时，发生了什么。
+
+**一个原生整数的 `ArrayList`**
+
+***有着自动打包时（Java 5.0 及以后的版本中）***
+
+```java
+public void doNumsNewWay () {
+                                    // 构造一个类型为 Integer 的 ArrayList 
+    ArrayList<Integer> listOfNumbers = new ArrayList<Integer>;
+
+    listOfNumbers.add(3); // 这样就加入进去了！
+                                    // 尽管 ArrayList 中没有 add(int) 的方法，编译器
+                                    // 仍然为你做了所有包装（打包）的工作。也就是说
+                                    // 现在确实有一个 Integer 对象存储在这个 ArrayList
+                                    // 中了，只不过这里 “假装” ArrayList 接收的是整数而已
+                                    // （既可以把整数，也可以把 Integer 对象添加到
+                                    // ArrayList<Integer>中去）
+
+    int num = listOfNumbers.get(0);
+        // 编译器还会自动将 Integer 对象解包，从而可将整数值直接赋值到原生变量
+        // 无需调用 Integer 对象上的 intValue() 方法
+}
+```
+
+- **既然要保存 `int`s, 为什么不声明一个 `ArrayList<int>` 呢**？
+
+> 因为...不可以这样。请记住，泛型规则（the rule for generic types）就是，你只能指定的，仅为类或接口的类型，并非原生类型。因此 `ArrayList<int>` 是不会被编译的。不过就如同上面的代码，实际上这并不重要，因为编译器允许把整数放到 `ArrayList<Integer>` 中去。事实上，在使用兼容Java 5.0 的编译器时，对于把原生值放入到清单为原生值包装类类型的 `ArrayList`，是没有办法阻止的，也因为在这样的编译器下，自动打包是默认启用的。那么就可以把原生布尔值放入到 `ArrayList<Boolean>`中，把字符放入到 `ArrayList<Character>`里。
+
+
+### 
+
