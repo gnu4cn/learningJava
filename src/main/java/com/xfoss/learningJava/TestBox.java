@@ -1,7 +1,7 @@
 package com.xfoss.learningJava;
 
 public class TestBox {
-    Integer i = new Integer(25);
+    Integer i =  25;
     int j;
 
     public static void main (String [] args) {
