@@ -674,4 +674,37 @@ String doubleString = Double.toString(d);   // 另一种使用类 Double 中静�
 
 在 Java 5.0 中，Java 团队通过 `java.util` 包中的 `Formatter` 类，带来了更加强大且灵活的格式化功能。不过无需自己去创建和调用`Formatter`类上的方法，因为Java 5.0 已经将一些便捷方法，添加到部分 `I/O` 类（包括 `printf()`）及`String`类了。因此调用 `String.format()`并把需要格式化的东西，以及格式化指令传递给他，就变得相当简单了。
 
+当然，还是必须知道该怎样去提供这些格式化指令，同时如果对 `C/C++` 中的 `printf()` 函数不熟悉，那就要费点劲儿了。幸运的是，就算不知道`printf()`，也可以按照指引，完成一些最基本的格式化操作（就是这里所展示的）。但如果要进行混合与匹配，来得到想要的全部，那么就要对`printf()`有所掌握了。
 
+下面以一个基本例子开始，并在其后看看数字格式化是怎样运作的。（注意：在 `I/O` 那一章，将再度回顾格式化）
+
+- **将数字格式化为逗号分组样式**
+
+**Formatting a number to use commas**
+
+```java
+package com.xfoss.learningJava;
+
+public class TestFormats {
+    public static void main (String [] args) {
+                                    // '1234567890' -- 要格式化的数字
+                                    // 这里希望让他有些逗号
+        System.out.format("%,d\n", 1234567890);
+                        // "%,d" 就是用于指示如何对作为第二个参数的数字（在
+                        // 此示例中，就是一个整数）进行格式化的指令。
+                        // 请记住，format() 方法仅有两个参数 -- 第一个逗号是
+                        // 在字符串字面值（the String literal, "%,d"）里面的
+                        // 因此这个逗号，与第二个逗号不同，他不是把参数分开
+                        // 提供给 format() 方法的。
+    }
+}
+```
+
+输出：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+1,234,567,890
+```
+
+> 于是就得到了插入到数字中的多个逗号了。
