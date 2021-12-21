@@ -708,3 +708,9 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 ```
 
 > 于是就得到了插入到数字中的多个逗号了。
+
+### 对格式化的解构
+
+**Formatting deconstructed...**
+
+
