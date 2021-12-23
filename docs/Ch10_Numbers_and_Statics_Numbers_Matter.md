@@ -713,4 +713,16 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 **Formatting deconstructed...**
 
+在格式化的最底层（At the most basic level），包含了两个主要部分（当然还有其他东西，不过这里为了简明目的，只讨论两个）：
+
+1. **格式化指令，Formatting instructions**
+
+使用了特定的，用于描述如何对参数进行格式化的 *格式化说明符*（You use special *format specifiers* that describe how the argument should be formatted）。
+
+2. **要格式化的参数，The argument to be formatted**
+
+虽然可以有多个参数，但这里会从一个开始。这个参数并非任何类型都可以的...... 只能是可以使用前面格式化指令的格式化说明符可以格式化的。比如在格式化指令指定了一个 *浮点数* 时，就不能传入一个 `Dog`，甚至一个看起来像浮点数的 `String`也是不可以的。
+
+> 注意：假如已经了解 `C/C++` 中的 `printf()` 函数，那么只要跳过接下来的本节的内容就好。
+
 
