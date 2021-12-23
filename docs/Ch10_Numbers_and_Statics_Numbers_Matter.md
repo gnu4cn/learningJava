@@ -725,6 +725,10 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 > 注意：假如已经了解 `C/C++` 中的 `printf()` 函数，那么只要跳过接下来的本节的内容就好。
 
-![结构格式化](images/Ch10_08.png)
+![解构格式化](images/Ch10_08.png)
 
-*图 8 - 结构格式化*
+*图 8 - 解构格式化*
+
+**那么这些指令到底说了什么呢**？
+
+“取该方法的第二个参数，并将其作为一个十进制整数进行格式化，并插入 **逗号** （Take the second argument to this method, and format it as a **d**ecimal and insert **commas**）”。
