@@ -725,4 +725,6 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 > 注意：假如已经了解 `C/C++` 中的 `printf()` 函数，那么只要跳过接下来的本节的内容就好。
 
+![结构格式化](images/Ch10_08.png)
 
+*图 8 - 结构格式化*
