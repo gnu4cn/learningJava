@@ -772,3 +772,9 @@ System.out.format("I have %,d bugs to fix.\n", 476578.09876);
 ```console
 Exception in thread "main" java.util.IllegalFormatConversionException: d != java.lang.Double
 ```
+
+> 那么到底是怎样知道指令在何处结束，以及剩余字符从哪里开始的呢？又为何没有把 `"%.2f"` 中的 `f` 打印出来呢？怎样才知道 `.2f` 是格式化指令的一部分，而不是字符串的一部分的呢？
+
+**格式化字符串，使用了他自己的小语言语法（The format String uses its' own little language syntax）**
+
+
