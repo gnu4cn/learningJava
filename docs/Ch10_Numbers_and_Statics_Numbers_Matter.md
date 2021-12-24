@@ -760,3 +760,15 @@ System.out.format("%, d", 1234567890);
 ![`"%,.2f"`示例](images/Ch10_10.png)
 
 *图 10 - `"%,.2f"`示例*
+
+> 注意：浮点数加入逗号，只会在整数部分，小数部分始终不会添加逗号。
+
+```java
+System.out.format("I have %,d bugs to fix.\n", 476578.09876);
+```
+
+上面的语句，可以通过编译，但会报出运行时例外报错：
+
+```console
+Exception in thread "main" java.util.IllegalFormatConversionException: d != java.lang.Double
+```
