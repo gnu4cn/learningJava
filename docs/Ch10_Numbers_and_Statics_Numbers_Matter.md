@@ -777,4 +777,18 @@ Exception in thread "main" java.util.IllegalFormatConversionException: d != java
 
 **格式化字符串，使用了他自己的小语言语法（The format String uses its' own little language syntax）**
 
+显然在百分号 `%` 后面是不能放上任意字符的。跟在百分号后面的东西的语法，要遵循非常明确的规则，这些百分号后面的部分，描述了对要插入到结果（已格式化）字符串的那个点上的参数，如何进行格式化（The syntax for what goes after the percent sign follows very specific rules, and describes how to format the argument that gets inserted at that point in the result(formatted) String）。
+
+已经见到的两个示例：
+
+- `%,d` 是指“插入逗号，并把那个数字作为十进制整数进行格式化” 
+
+以及
+
+- `%.2f` 指 “将那个数字作为具有两位小数精度的浮点数进行格式化”
+
+还有
+
+- `%,.2f` 指 “插入逗号，并将那个数字作为具有两位小数精度的浮点数进行格式化”
+
 
