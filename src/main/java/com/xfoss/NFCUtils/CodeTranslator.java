@@ -35,5 +35,7 @@ public class CodeTranslator {
                 }
             }
         }
+
+        System.exit(0);
     }
 }
