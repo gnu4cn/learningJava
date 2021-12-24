@@ -733,4 +733,10 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 “取该方法的第二个参数，并将其作为一个十进制整数进行格式化，并插入 **逗号** （Take the second argument to this method, and format it as a **d**ecimal and insert **commas**）”。
 
+**这些指令是怎样来描述的呢（How do they say that）**？
+
+接下来的内容将深入分析语法 `"%, d"` 的具体意义，但对于初学者来说，当你在某个格式化字符串（a format String, 格式化字符串始终是 `format()` 方法的第一个参数）中，看到百分号（`%`）时，把他想作表示某个变量就行了，而这个变量就是`format()`方法的第二个参数。百分号后其余的字符，描述的就是那个参数的格式指令。
+
+***百分号（`%`）说，“在这里插入参数”（并使用这些指令来对参数进行格式化）***
+
 
