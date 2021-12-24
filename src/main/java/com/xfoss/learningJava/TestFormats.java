@@ -11,5 +11,7 @@ public class TestFormats {
                                         // 两个空格都不可以 
 
         System.out.format("I have %,.2f bugs to fix.\n", 476578.09876);
+
+        System.out.println(String.format("I have %.2f, bugs to fix.", 476578.09876));
     }
 }

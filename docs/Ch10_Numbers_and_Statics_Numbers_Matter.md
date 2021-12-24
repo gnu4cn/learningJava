@@ -791,4 +791,20 @@ Exception in thread "main" java.util.IllegalFormatConversionException: d != java
 
 - `%,.2f` 指 “插入逗号，并将那个数字作为具有两位小数精度的浮点数进行格式化”
 
+真正的问题在于，“怎么知道，到底该在百分号后面放上什么，才能让 `format()` 按照自己的想法去执行？” 这就包括了对这些符号的掌握（比如`d`表示十进制，而`f`表示浮点数），以及百分号后面的指令放置顺序。比如在把逗号放在`d`后面，就像这样`%d,`，而不是`%,d`，就不会工作的！
+
+或者说，下面这个语句会输出什么呢：
+
+```java
+String.format("I have %.2f, bugs to fix.", 476578.09876);
+```
+
+其输出为：
+
+```console
+I have 476578.10, bugs to fix.
+```
+
+### 格式化说明符（The format specifier）
+
 
