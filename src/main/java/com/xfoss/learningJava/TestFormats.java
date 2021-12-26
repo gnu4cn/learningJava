@@ -13,5 +13,9 @@ public class TestFormats {
         System.out.format("I have %,.2f bugs to fix.\n", 476578.09876);
 
         System.out.println(String.format("I have %.2f, bugs to fix.", 476578.09876));
+
+        int one = 20456654;
+        double two = 100567890.248907;
+        System.out.format("排名为 %,.2f 中的第 %,d 位。\n", two, one);
     }
 }
