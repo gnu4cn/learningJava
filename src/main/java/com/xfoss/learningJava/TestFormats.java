@@ -1,5 +1,7 @@
 package com.xfoss.learningJava;
 
+import java.util.*;
+
 public class TestFormats {
     public static void main (String [] args) {
         System.out.format("The number is: %,d\n", 1234567890);
@@ -17,5 +19,10 @@ public class TestFormats {
         int one = 20456654;
         double two = 100567890.248907;
         System.out.format("排名为 %,.2f 中的第 %,d 位。\n", two, one);
+
+        Date now = new Date();
+        System.out.format("现在完整时间：%tc\n", now);
+        System.out.format("现在时间：%tr\n", now);
+        System.out.format("%tA, %tB %td\n", now, now, now);
     }
 }
