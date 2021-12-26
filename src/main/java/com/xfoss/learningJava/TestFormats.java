@@ -24,5 +24,6 @@ public class TestFormats {
         System.out.format("现在完整时间：%tc\n", now);
         System.out.format("现在时间：%tr\n", now);
         System.out.format("%tA, %tB %td\n", now, now, now);
+        System.out.format("%tA, %<tB %<td\n", now);
     }
 }

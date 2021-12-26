@@ -881,7 +881,7 @@ double two = 100567890.248907;
 String s = String.format("排名为 %.2f 中的第 %,d 位。", two, one);
 ```
 
-> 按照图11 中的说明，似乎格式化字符串（the format String）中的格式化说明符（the format specifier）中的第一部分（总共四个部分），可以指定使用哪个参数变量的。
+> 按照图11 中的说明，似乎格式化字符串（the format String）中的格式化说明符（the format specifier）中的第一个标志（总共四个标志），可以指定使用哪个参数变量的。
 
 到了日期格式化，就会看到可能会对同一参数变量运用不同格式化说明符的情况。在了解日期是如何格式化（与这里的数字格式化正好相反）之前，是很难设想这样的情况的。马上就会了解这方面的内容，就会看到怎样来更精细地控制哪个格式化说明符与哪个参数相对应。
 
@@ -956,4 +956,15 @@ System.out.format("%tA, %tB %td", now);
 java.util.MissingFormatArgumentException: Format specifier '%tB'
 ```
 
-- **与上一个相同，但无需重复的参数**
+- **与上一个相同，但无需重复的参数 -- `%tA, %<tB %<td`**
+
+```java
+Date today = new Date();
+String.format("%tA, %<tB %<td", today);
+```
+
+> 这里的简括符 `<`，只是说明符中的一个标志，他告诉格式化器去 “再次使用上一个参数（use the previous argument again）”。如此就避免了参数的重复，而是对同一个参数，进行三次不同方式的格式化。
+>
+> 可以把这样的用法想作是在`today`这个日期对象上调用三个不同的读取器（getter），来获取这个日期对象的三个不同片段的数据。
+
+
