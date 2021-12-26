@@ -978,4 +978,24 @@ String.format("%tA, %<tB %<td", today);
 
 当然可以构造自己的一套日历......（还请不要搞忘了那些闰年！）还有那些时不时的、讨厌的润秒。这样一来情况就会变得很复杂了。不过好消息是 Java API有着丰富的、可帮助对日期进行处理的一些类。甚至有的时候感觉这些类过于丰富了......
 
+### 在时间中前后移动
+
+**Moving backward and forward in time**
+
+假设公司的工作安排是周一至周五。安排的任务是找出今年各个日历月中的最后一个工作日......
+
+**这样看来`java.util.Date`，实际上就落伍了......**
+
+早先使用了 `java.util.Date`类来找出当天的日期，那么逻辑上看，这个类在需要一些临时日期处理能力时，比较适合，但只有翻阅一下 API 文档，就会发现 `Date` 的大部分方法，都已经弃用了！
+
+在获取一个表示当前日期和时间的对象，因此在想要表达“给我当下（give me NOW）”时，就要用到的时间戳时，类`Date`仍是一个不错的选择。
+
+好消息时，API推荐使用 **`java.util.Calender`** 来代替类 `Date`，所以就要检视一下这个类：
+
+**使用 `java.util.Calendar` 来操作日期**
+
+`Calendar` API 的设计者们，希望从全局、字面上进行思考（The designers of the `Calendar` API wanted to think globally, literally）。基本概念是在与日期打交道时，就会请求一个日历系统（通过类`Calendar`的一个静态方法），同时 JVM 把一个`Calendar`具体子类的实例递送回来。（`Calendar`实际上是一个抽象类，因此总是与某个具体子类打交道。）
+
+更有趣的时，所获取到的日历系统类别，将适配你的语言环境（More interesting, though, is that the *kind* of calendar you get back will be *appropriate for your locale*）。世界上大部分地区都使用的是格里历，而如果不在使用格里历的地区，也可以让 Java 库处理其他的比如佛历、伊斯兰历法或日本历法（Much of the world uses the Gregorian calendar, but if you're in an area that doesn't use a Gregorian calendar you can get Java libraries to handle other calendars such as Buddhist, or Islamic or Japanese）。
+
 
