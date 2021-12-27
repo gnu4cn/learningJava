@@ -18,7 +18,8 @@ public class TestFormats {
 
         int one = 20456654;
         double two = 100567890.248907;
-        System.out.format("排名为 %,.2f 中的第 %,d 位。\n", two, one);
+        // 这里演示了格式化说明符种的第一个标志（flag），第一个标志可以是 '<', 'n$'（其中'n'是参数编号，从1开始）
+        System.out.format("排名为 %,.2f(%<,.4f, %1$f) 中的第 %,d(%2$16d) 位。\n", two, one);
 
         Date now = new Date();
         System.out.format("现在完整时间：%tc\n", now);
