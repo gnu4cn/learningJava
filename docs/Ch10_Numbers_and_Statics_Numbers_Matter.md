@@ -1000,4 +1000,29 @@ String.format("%tA, %<tB %<td", today);
 
 更有趣的时，所获取到的日历系统类别，将适配你的语言环境（More interesting, though, is that the *kind* of calendar you get back will be *appropriate for your locale*）。世界上大部分地区都使用的是格里历，而如果不在使用格里历的地区，也可以让 Java 库处理其他的比如佛历、伊斯兰历法或日本历法（Much of the world uses the Gregorian calendar, but if you're in an area that doesn't use a Gregorian calendar you can get Java libraries to handle other calendars such as Buddhist, or Islamic or Japanese）。
 
+标准 Java API 本身带有 `java.util.GregorianCalendar`类，因此这里将使用格里历。大部分情况下，都不需要了解所使用的 `Calendar`资料属于何种类别，而是要关注类 `Calendar`的那些方法。
+
+### 获取一个对类 `Calendar`进行扩展的对象
+
+**Getting an object that extends `Calendar`**
+
+要获取某个抽象类的“实例”时，该怎么办呢？当然不会像下面这样，这样写是不行的：
+
+**这 *不会* 工作**：
+
+```java
+Calendar cal = new Calendar();
+                // 编译器不会允许这样干的！
+```
+
+**而是要使用静态的 `getInstance()` 方法**：
+
+```java
+Calendar cal = Calendar.getInstance();
+                // 到这里这个语法应该看起来不陌生了 --
+                // 这里运行了一个静态方法。
+```
+
+> **关于 call 和 invoke**：前者是 “调用”，后者是 “运行”。
+
 
