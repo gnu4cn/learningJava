@@ -1198,7 +1198,20 @@ import static java.lang.Math.*;
 class WithStatic {
     public static void main(String[] args){
         out.println("sqrt " + sqrt(2.0));
+                            // 运作中的静态导入
         out.println("tan " + tan(60));
+        // 运作中的静态导入
     }
 }
 ```
+
+> **注意事项（Caveats & Gotchas）**
+>
+> - 在只打算为数不多地使用某个静态成员时，为了让代码更具可读性，建议避免使用静态导入；
+>
+> - 在要大量使用某个静态成员时（比如要执行大量的数学计算），这个时候使用静态导入可能就不错；
+>
+> - 注意在静态导入声明中，可以使用通配符（`.*`）；
+>
+> - 静态导入的一个大问题是，容易造成命名冲突（A big issue with static imports is that it's not too hard to create naming conflicts）。
+> 比如，在两个不同类都有 `add()`方法时（`Math`和`Calendar`就是这样的情况），编译器和你自己就不知道到底该使用那个 `add()` 方法了。
