@@ -1215,3 +1215,17 @@ class WithStatic {
 >
 > - 静态导入的一个大问题是，容易造成命名冲突（A big issue with static imports is that it's not too hard to create naming conflicts）。
 > 比如，在两个不同类都有 `add()`方法时（`Math`和`Calendar`就是这样的情况），编译器和你自己就不知道到底该使用那个 `add()` 方法了。
+
+## 围炉夜话
+
+**Fireside Chats**
+
+今日主题：**实例变量鄙视静态变量**
+
+**Tonight's Talk: *An instance variable takes cheap shots at a static variable***
+
+- **实例变量（IV，Instance Variable）**：我甚至不明白为什么我们会在这里讨论。人人皆知静态变量只用在常量上。有几个静态变量啊？我想整个的 API 也就只有四个吧？又没人会用到。
+- **静态变量（SV，Static Variable）**：你真的应该检讨一下了。你都多久没有关注 API 了啊？API整个就是由静态加载的（It's frickin' loaded with statics）！API的一些类，全部都保存的常量值。比如就有一个名为 `SwingConstants`的类，其中就全是常量值。
+- **IV**：全都是。当然了，你还可以讲出来好几个这样子的。不错，在 `Swing`库中是有几个这样的，但大家都知道 `Swing` 只是个特殊案例。
+- **SV**：那可能只是个特例，但他确实是个重要的东西！那类 `Color`又怎么说？为了构造那些标准颜色去记住各种 RGB 数值，会不会很痛苦呢？可是类 `Color` 已经有着预先定义好的各种颜色了。这就非常方便了啊。
+- **IV**：好吧，不过除了这少数几个 GUI 的东西外，请举个每个人都会实实在在用到静态变量的例子好吗。在具体场合会用到的。
