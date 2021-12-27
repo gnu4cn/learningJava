@@ -878,7 +878,8 @@ format("%c", 42);
 ```java
 int one = 20456654;
 double two = 100567890.248907;
-String s = String.format("排名为 %.2f 中的第 %,d 位。", two, one);
+// 这里演示了格式化说明符种的第一个标志（flag），第一个标志可以是 '<', 'n$'（其中'n'是参数编号，从1开始）
+System.out.format("排名为 %,.2f(%<,.4f, %1$f) 中的第 %,d(%2$16d) 位。\n", two, one);
 ```
 
 > 按照图11 中的说明，似乎格式化字符串（the format String）中的格式化说明符（the format specifier）中的第一个标志（总共四个标志），可以指定使用哪个参数变量的。
