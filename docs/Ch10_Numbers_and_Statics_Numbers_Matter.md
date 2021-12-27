@@ -1075,3 +1075,7 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 往前滚动 35 天： Fri Feb 18 16:40:02 CST 2022
 日期设置到 1 号： Tue Feb 01 16:40:02 CST 2022
 ```
+
+> **注意**：The `java.util.Calendar.roll()` method adds(up) or subtracts(down) a single unit of time on the given time field without changing larger fields. -- *Java API* 
+> 
+> 这个方法有点古怪。
