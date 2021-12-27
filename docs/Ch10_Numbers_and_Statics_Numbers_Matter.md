@@ -1025,4 +1025,11 @@ Calendar cal = Calendar.getInstance();
 
 > **关于 call 和 invoke**：前者是 “调用”，后者是 “运行”。
 
+> 等一下。既然不能构造类 `Calendar` 的实例，那到底赋值给那个 `Calendar` 类型的引用变量了什么呢？
+
+**确实不能获取到一个类 `Calendar` 的实例，但可以获取一个`Calendar`具体子类的实例呀**。
+
+显然是无法获取到类 `Calendar` 的实例的，因为`Calendar`是一个抽象类。但对于调用 `Calendar`的静态方法没有影响，仍可以自由调用，因为静态方法是在类上，而不是某个特定实例上调用的。因此对`Calendar`类上的`getInstance()`方法进行调用，同时这个方法返回......一个具体子类的实例。这个实例对 `Calendar`进行扩展（也就是说这个实例可以多态地赋值给 `Calendar`类型的引用变量），且根据合约，这个实例还可以对类 `Calendar`的那些方法进行响应。
+
+在世界上大多数地方，同时大多数的 Java版本，都将从`getInstance()`获取到一个 `java.util.GregorianCalendar`的实例。
 
