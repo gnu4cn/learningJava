@@ -1090,3 +1090,78 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 > **注意**：The `java.util.Calendar.roll()` method adds(up) or subtracts(down) a single unit of time on the given time field without changing larger fields. -- *Java API* 
 > 
 > 这个方法有点古怪。
+
+### `Calendar` API的一些亮眼之处
+
+**Highlights of the `Calendar` API**
+
+上面刚粗略涉及了类 `Calendar` 中的一些字段及方法。`Calendar`作为一个大型API，因此这里只能展示一些会用到的最常用字段与方法。在理解了下面的少数几个字段与方法后，就应该能够游刃有余地使用这个API了。
+
++ **`Calendar`类的关键方法**
+
+    - **`add(int field, int amount)`**
+
+        在该日历字段上加减时间。
+
+    - **`get(int field)`**
+
+        返回给定日历字段的值。
+
+    - **`getInstance()`**
+
+        返回一个 `Calendar` 类类型对象，这里可以指定一个语言环境（`locale`）。
+
+    - **getTimeInMillis()**
+
+        以长整型数形式，返回此 `Calendar` 对象的时间毫秒数。
+
+    - **`roll(int field, boolean up)`**
+
+        在不改变较大字段的情况下加上或减去时间（Adds or subtracts time without changing larger fields）。
+
+    - **`set(int field, int value)`**
+
+        对给定`Calendar`字段进行设置。
+
+    - **`set(year, month, day, hour, minute)`（全为整数）**
+
+        `set()` 方法的一个常用变种，用来设置一个完整时间。
+
+    - **`setTimeInMillis(long millis)`**
+
+        使用一个长整型的时间，来设置某个 `Calendar` 类类型对象的时间。
+
+    - 其余...
+
+
++ **`Calendar` 类的关键字段**
+
+    - **`DATE`/`DATE_OF_MONTH`**
+
+        获取/设置日期中的几号。
+
+    - **`HOUR`/`HOUR_OF_DAY`**
+
+        获取/设置 12 小时或 24 小时值。
+
+    - **`MILLISECOND`**
+
+        获取/设置毫秒数。
+
+    - **`MINUTE`**
+
+        获取/设置分钟。
+
+    - **`MONTH`**
+
+        获取/设置月份。
+
+    - **`YEAR`**
+
+        获取/设置年份。
+
+    - **`ZONE_OFFSET`**
+
+        以毫秒数形式，来获取/设置与GMT的偏移量（Get/set raw offset of GMT in millis）。
+
+    - 更多字段......
