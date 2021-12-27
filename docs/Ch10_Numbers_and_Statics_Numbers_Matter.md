@@ -1033,3 +1033,45 @@ Calendar cal = Calendar.getInstance();
 
 在世界上大多数地方，同时大多数的 Java版本，都将从`getInstance()`获取到一个 `java.util.GregorianCalendar`的实例。
 
+
+## 运用 `Calendar` 对象
+
+为了运用好 `Calendar` 对象，就需要理解几个关键概念：
+
+- **字段保存 *状态*（Fields hold *state*）** -- `Calendar`类类型的对象，有着多个用于表示其最终状态、日期与时间等的字段。举例来说，可以设置某个 `Calendar` 的 *年份* 或者 *月份*；
+- **日期和时间，是可以 *增加的*** -- 类 `Calendar`有一些允许对不同字段的值进行加减的方法，比如“在月份上加一”，或“减去三年”；
+- **日期和时间可以 *毫秒* 表示** -- 类 `Calendar` 允许把日期转换成其毫秒表示，以及把毫秒表示转换成日期形式。（需要指出的是，毫秒表示指从 1970年元旦到具体日期的毫秒数。）这样既可以执行诸如“两个时间之间所经历的时间”，或者“在此时间上加63小时23分12秒”等这样的精确计算。
+
+**运用 `Calendar`对象的示例**：
+
+```java
+Calendar c = Calendar.getInstance();
+
+c.set(2022, 0, 7, 15, 40);
+long day1 = c.getTimeInMillis();
+System.out.format("以毫秒表示: %,d，正常表示：%s\n", day1, c.getTime());
+
+day1 += 1000*60*60;
+c.setTimeInMillis(day1);
+System.out.format("新的几点钟： %d\n", c.get(c.HOUR_OF_DAY));
+
+c.add(c.DATE, 35);
+System.out.format("加上了35天后： %s\n", c.getTime());
+
+c.roll(c.DATE, 35);
+System.out.format("往前滚动 35 天： %s\n", c.getTime());
+
+c.set(c.DATE, 1);
+System.out.format("日期设置到 1 号： %s\n", c.getTime());
+```
+
+输出为：
+
+```console
+$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+以毫秒表示: 1,641,541,202,162，正常表示：Fri Jan 07 15:40:02 CST 2022
+新的几点钟： 16
+加上了35天后： Fri Feb 11 16:40:02 CST 2022
+往前滚动 35 天： Fri Feb 18 16:40:02 CST 2022
+日期设置到 1 号： Tue Feb 01 16:40:02 CST 2022
+```
