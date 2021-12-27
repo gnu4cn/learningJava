@@ -1165,3 +1165,40 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
         以毫秒数形式，来获取/设置与GMT的偏移量（Get/set raw offset of GMT in millis）。
 
     - 更多字段......
+
+
+## 更多的静态！......静态的导入
+
+**Even more Statics!...static imports**
+
+这是 Java 5.0 引入的新特性......这是是喜忧参半的一个特性。一些人喜爱这个主意，另一些则讨厌这个点子。静态导入之所以存在，只是因为他可以节省一些按键输入的时间。在讨厌键盘输入时，就可能会喜欢上这个特性。静态导入的弊端就是 -- 在不注意的时候 -- 他们的使用会造成代码难于阅读。
+
+静态导入背后的基本概念就是，只要使用到静态类、静态变量，或者枚举变量（关于枚举变量，后续会涉及，an enum），就可以将其导入进来，从而节省一些键盘输入。
+
+**一些老式代码**：
+
+```java
+import java.lang.Math;
+
+class NoStatic {
+    public static void main(String [] args) {
+        System.out.println("sqrt " + Math.sqrt(2.0));
+        System.out.println("tan " + Math.tan(60));
+    }
+}
+```
+
+**具有静态导入特性时的代码**：
+
+```java
+// 在声明静态导入时，所用到的语法
+import static java.lang.System.out;
+import static java.lang.Math.*;
+
+class WithStatic {
+    public static void main(String[] args){
+        out.println("sqrt " + sqrt(2.0));
+        out.println("tan " + tan(60));
+    }
+}
+```
