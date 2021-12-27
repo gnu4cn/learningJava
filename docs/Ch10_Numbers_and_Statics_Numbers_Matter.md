@@ -1048,20 +1048,28 @@ Calendar cal = Calendar.getInstance();
 ```java
 Calendar c = Calendar.getInstance();
 
+// 将时间设置为 2022年1月7日，15：40：01（注意月份是从零开始的）
 c.set(2022, 0, 7, 15, 40);
+// 把这个时间转换成一个相当大的毫秒数
+//（Convert this to a big ol' amount of milliseconds.）
 long day1 = c.getTimeInMillis();
 System.out.format("以毫秒表示: %,d，正常表示：%s\n", day1, c.getTime());
 
+// 加上相当于一个小时的毫秒数，随后更新这个时间。
+// （注意这里的 '+='，作用与 day1 = day1 + ... 一样的）
 day1 += 1000*60*60;
 c.setTimeInMillis(day1);
 System.out.format("新的几点钟： %d\n", c.get(c.HOUR_OF_DAY));
 
+// 在日期上加 35， 这就会把我们带到二月份。
 c.add(c.DATE, 35);
 System.out.format("加上了35天后： %s\n", c.getTime());
 
+// 在此日期上往前“滚动” 35天。此操作把日期往前滚动 35天，但不会改变月份！
 c.roll(c.DATE, 35);
 System.out.format("往前滚动 35 天： %s\n", c.getTime());
 
+// 这里没有进行增减，而只是对日期字段执行了一个 “设置”。
 c.set(c.DATE, 1);
 System.out.format("日期设置到 1 号： %s\n", c.getTime());
 ```
