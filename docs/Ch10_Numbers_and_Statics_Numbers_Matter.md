@@ -1235,4 +1235,14 @@ class WithStatic {
         有些东西绝对是心胸狭隘的你不知道的 -- 请接受吧，静态变量更具效率。静态变量是每个类有一个的，而不像实例变量，是一个实例一个。这样节省下来的内存，是多么巨大！
 - **IV**：嗯，你是不是搞忘了什么？
 - **SV**：什么？
-- **IV**：静态变量天生就是反面向对象的吧！既然要使用静态变量，那为何不倒退回去，使用过程编程呢（Static variables are about as un-OO as it gets!! Gee why not just go take a giant backwards step and do some）？
+- **IV**：静态变量天生就是反面向对象的吧！既然要使用静态变量，那为何不倒退回去，使用过程编程呢（Static variables are about as un-OO as it gets!! Gee why not just go take a giant backwards step and do some procedural programming while we're at it）？
+- **SV**：你说反面向对象是什么意思？
+- **IV**：你静态变量就像是个全局变量，但凡是个程序员，就知道那通常不是件好事（any programmer worth his PDA knows that's usually a Bad Thing）。
+- **SV**：我不是全局变量。Java里根本就没有全局变量。我是存活在类中的！你应该明白，类是一个相当面向对象的东西。我只是呆在那里，在内存空间中的某个地方；我是对象状态的一个天数部分；唯一区别在于，我是类的全体对象所共有的。非常有效率。
+- **IV**：你是存活在类中，不过人们并没有把Java叫做面向类的编程。那样叫得多蠢。你就是个遗迹。你得存在是为了让那些旧时代的程序员过渡到 Java（You're a relic. Something to help the old-timers make the leap to java）。
+- **SV**：好吧就此打住。你真是一派胡言。某个系统的一些静态变量，对于系统至关重要。就算是不那么重要的静态变量，也是为了编码的便利。
+- **IV**：好吧，看起来静态变量/方法的使用似乎有点道理（Well, OK, every once in a while sure, it makes sense to use a static）。不过我告诉你，滥用静态变量（及方法），就是不成熟的面向对象程序员的标志。设计师应该考虑 *对象* 状态，而不是 *类* 的状态。
+- **SV**：你说这个做什么？静态方法有什么问题吗？
+- **IV**：静态方法是这中间最糟糕的了，因为使用静态方法常常意味着程序员是在进行过程思维，而没有以对象按照对象的独有状态来行事。
+- **SV**：当然，我知道应该把对象作为面向对象涉及的焦点，但正是由于有那么些无知的程序员......请不要全盘否定过程编程好吧。静态变量/方法仍然有其存在的必要，同时在需要到他们时，他们可以说是无可比拟的（don't throw the baby out with the bytecode. There's a time and place for statics, and when you need one, nothing else beats it）。
+- **IV**：好吧......你就自欺欺人吧（Riiiiiight. Whatever you need to tell yourself...）
