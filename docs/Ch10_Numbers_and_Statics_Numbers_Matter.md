@@ -1233,3 +1233,6 @@ class WithStatic {
 - **IV**：好吧，这也不过是另一个特殊用例。而且除了调试之外，没人会用到那个的。
 - **SV**：哦，难道程序调试不重要吗？
         有些东西绝对是心胸狭隘的你不知道的 -- 请接受吧，静态变量更具效率。静态变量是每个类有一个的，而不像实例变量，是一个实例一个。这样节省下来的内存，是多么巨大！
+- **IV**：嗯，你是不是搞忘了什么？
+- **SV**：什么？
+- **IV**：静态变量天生就是反面向对象的吧！既然要使用静态变量，那为何不倒退回去，使用过程编程呢（Static variables are about as un-OO as it gets!! Gee why not just go take a giant backwards step and do some）？
