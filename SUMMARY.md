@@ -10,3 +10,4 @@
 * [构造器与垃圾回收: 对象的生与死](docs/Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.md)
 * [数字与静态值：数字为要](docs/Ch10_Numbers_and_Statics_Numbers_Matter.md)
 * [获得GUI：一个甚为形象的故事](docs/Ch12_Getting_GUI_A_Very_Graphic_Story.md)
+* [例外处理：危险行为](docs/Ch11_Exception_Handling_Risky_Behavior.md)
