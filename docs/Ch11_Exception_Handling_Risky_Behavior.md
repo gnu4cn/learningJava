@@ -103,3 +103,51 @@ Java的异常处理机制，作为处理运行时发生的“例外情形”方�
 
 
 *图 4 - Java语言中方法抛出异常的约定示例*
+
+
+### 编译器也需要明确代码编写者是否知悉所调用的方法具有风险性
+
+**The compiler needs to know that YOU know you're calling a risky method**.
+
+如果能够把风险代码使用 `try/catch` 包装起来，那么编译器就会轻松很多。
+
+代码编写者运用`try/catch`代码块，就可以就告诉编译器，自己知道在所调用的方法中，可能会发生某种异常情况，同时准备好处理这种异常了。编译器不会关心怎样处理的异常；他只会关心代码编写者已经注意到有异常。
+
+> 亲爱的编译器：
+> 我了解这里会有风险，你认为这样做值得吗？我应该怎么做呢？
+> Waikiki的 geeky
+>
+> 亲爱的geeky:
+> 生命苦短（尤其是在内存堆上）。就承担那个风险吧。尝试（`try`）一下。只要在事情不妙的时候，在事情失控之前，可以捕获（`catch`）到所有问题就好。
+
+```java
+package com.xfoss.BeatBox;
+
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        try {
+            // 把有风险的东西放在一个 'try' 的代码块中
+            Sequencer seq = MidiSystem.getSequencer();
+            System.out.println("我们就得到了一个‘音序器（Sequencer）’");
+        } catch (MidiUnavailableException e) {
+            // 构造一个用于在异常情形发生时 -- 也就是调用 getSequencer() 时
+            // 抛出了 MidiUnavailableException 时，要做什么的 ‘catch’ 代码块 
+            System.out.println("Bummer");
+        }
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+```
+
+> 这里就要 **尝试（TRY）** 一下这个冒险的事，并且就要在失败时 **捕获（CATCH）** 自己了。
+
+
+### 异常就是一个......类型为 `Exception` 的对象
+
+
