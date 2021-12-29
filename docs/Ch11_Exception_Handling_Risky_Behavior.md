@@ -32,6 +32,12 @@
 
 ### 关于 `JavaSound` API
 
-`JavaSound`是自 1.3 版本开始加入到 Java 中的一套类与接口。这些类与接口并非特别的附加组件；他们是标准 J2SE 类库的一部分。`JavaSound`又被分为了两个部分：`MIDI`和`Sampled`。这里只使用到 `MIDI`。`MIDI`表示“乐器数字接口（Musical Instrument Digital Interface）”，同时也是各种不同种类的电音设备得以通信的标准协议（a standard protocol for getting different kinds of electronic sound equipment to communicate）。但对于这里的 `BeatBox` app，可以把 `MIDI` 想作 *某种类型的乐曲表格*，可将一些装置，比如某种高科技的“演奏钢琴”，放进这个表格。也就是说，MIDI数据本身并没有包含任何的 *声音*，他保存的是由MIDI所读取的、某种乐器的、可以回放的 *指令*（MIDI data doesn't actually include any *sound*, but it does include the *instructions* that a MIDI-reading instrument can play back）。或以另一个比方说，可把某个MIDI文件当作一个HTML文档，那么乐器就会对这个MIDI文件进行渲染（也就是演奏这个MIDI文件），如同Web浏览器渲染HTML文档一样。
+`JavaSound`是自 1.3 版本开始加入到 Java 中的一套类与接口。这些类与接口并非特别的附加组件；他们是标准 J2SE 类库的一部分。`JavaSound`又被分为了两个部分：`MIDI`和`Sampled`。这里只使用到 `MIDI`。`MIDI`表示“乐器数字接口（Musical Instrument Digital Interface）”，同时也是各种不同种类的电音设备得以通信的标准协议（a standard protocol for getting different kinds of electronic sound equipment to communicate）。但对于这里的 `BeatBox` app，可以把 `MIDI` 想作 *某种类型的乐谱*，可将一些装置，比如某种高科技的“演奏钢琴”，放进这个表格。也就是说，MIDI数据本身并没有包含任何的 *声音*，他保存的是由MIDI所读取的、某种乐器的、可以回放的 *指令*（MIDI data doesn't actually include any *sound*, but it does include the *instructions* that a MIDI-reading instrument can play back）。或以另一个比方说，可把某个MIDI文件当作一个HTML文档，那么乐器就会对这个MIDI文件进行渲染（也就是演奏这个MIDI文件），如同Web浏览器渲染HTML文档一样。
 
-MIDI数据说的是要做 *什么*（奏出一个中音`C`调，还有多大力度，以及这个音有多长等等），但MIDI数据并不会描述会听到的 *声音*。MIDI是不知道怎样去发出长笛、钢琴或者 Jimi Hendrix 吉他声的。对于这些真实的声音，是需要某种可以读取和演奏MIDI文件的乐器（即MIDI设备）的。
+MIDI数据说的是要做 *什么*（奏出一个中音`C`调，还有多大力度，以及这个音有多长等等），但MIDI数据并不会描述会听到的 *声音*。MIDI是不知道怎样去发出长笛、钢琴或者 Jimi Hendrix 吉他声的。对于这些真实的声音，是需要某种可以读取和演奏MIDI文件的乐器（即MIDI设备）的。不过MIDI设备通常更像 *一整个乐队或乐团* 的很多种乐器了。这些乐器可以是实体装置，比如摇滚乐手使用的电子键盘合成器，也可以是存在于电脑种的、完全由软件构建的乐器。
+
+对于这里的 `BeatBox`应用，只会使用到Java自带的、内建的、纯软件的乐器。这些乐器叫做 *合成器（synthesizer）* （有人也称他们为 *软件合成器（software synth）*），因为他们可以 *创建出* 声音来。就是能听到的声音。
+
+![关于MIDI文件](images/Ch11_02.png)
+
+*图 2 - 关于MIDI文件*
