@@ -7,7 +7,7 @@ public class MusicTest1 {
         try {
         Sequencer seq = MidiSystem.getSequencer();
         System.out.println("我们就得到了一个‘音序器（Sequencer）’");
-        } catch (MidiUnavailableException e) {
+        } catch (Exception ex) {
             System.out.println("Bummer");
         }
     }
