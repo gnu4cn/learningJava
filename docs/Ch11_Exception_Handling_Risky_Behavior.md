@@ -41,3 +41,41 @@ MIDI数据说的是要做 *什么*（奏出一个中音`C`调，还有多大力�
 ![关于MIDI文件](images/Ch11_02.png)
 
 *图 2 - 关于MIDI文件*
+
+
+### 首先需要一个 `Sequencer`
+
+在可以播放出一个声音出来之前，首先就需要一个 `Sequence`对象。音序器是一个可以接收全部MIDI数据并将其发送到相应乐器的对象（The sequencer is the object that takes all the MIDI data and sends it to the right instruments）。正是这个东东，负责把音乐 *播放* 出来。音序器可以完成很多不同的事情，这里只是将其作为一个回访设备使用而已。就跟立体声音响上的CD播放器一样，只不过还有一些其他附加功能特性。类 `Sequencer`是在 `javax.sound.midi`包中（这个包是自版本1.3开始的Java的标准库）。因此首先就要确保可以构造（或获取到）一个`Sequencer`对象。
+
+```java
+package com.xfoss.BeatBox;
+
+// 这里导入了 javax.sound.midi 包
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        // 这里需要一个 Sequencer 对象。他是要用到的MIDI设备/乐器
+        // 的主要部分。他就是把所有MIDI信息编排为一首“乐曲”的那个
+        // 东东。但这里不会由我们自己去构造一个全新的 Sequencer 
+        // 对象 -- 必须请求 MidiSystem 给出一个来（与之前的用到的 
+        // Calendar 类中的静态方法 getInstance() 类似）
+        Sequencer seq = MidiSystem.getSequencer();
+
+        System.out.println("我们就得到了一个‘音序器（Sequencer）’");
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+```
+
+然而在编译编译这段代码时，就会抛出错误：
+
+```console
+[ERROR] .../src/main/java/com/xfoss/BeatBox/MusicTest1.java:[7,48] unreported exception javax.sound.midi.MidiUnavailableException; must be caught or declared to be thrown
+```
+
+**显然有地方出错了**！
