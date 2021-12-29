@@ -79,3 +79,6 @@ public class MusicTest1 {
 ```
 
 **显然有地方出错了**！
+
+这段代码不会被编译！编译器说有一个必须被捕获或声明的“未报告的例外（异常）”（The compiler says there's an "unreported exception" that must be caught or declared）。
+
