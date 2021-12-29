@@ -82,3 +82,9 @@ public class MusicTest1 {
 
 这段代码不会被编译！编译器说有一个必须被捕获或声明的“未报告的例外（异常）”（The compiler says there's an "unreported exception" that must be caught or declared）。
 
+### 在打算调用的方法（在某个不是由自己本人编写的类中）存在风险时，会发生什么呢？
+
+![异常处理原理](images/Ch11_03.png)
+
+
+*图 3 - 异常处理原理*
