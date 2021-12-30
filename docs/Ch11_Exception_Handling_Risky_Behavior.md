@@ -282,7 +282,47 @@ throw new NoCaffeinException ();
 
 *图 8 - `try/catch` 代码块中的流程控制：无异常抛出时*
 
-![`try/catch` 代码块中的流程控制：无异常抛出时](images/Ch11_09.png)
+![`try/catch` 代码块中的流程控制：抛出异常时](images/Ch11_09.png)
 
 
-*图 9 - `try/catch` 代码块中的流程控制：无异常抛出时*
+*图 9 - `try/catch` 代码块中的流程控制：抛出异常时*
+
+## `finally`：不论何种情形，都要执行的操作
+
+**Finally: for the things you want to do no matter what**.
+
+在尝试煮饭时，总是要打开炉子的。
+
+即使煮饭 **失败**，也总是要关上炉子的。
+
+即便煮饭 **成功**，还是必须关上炉子。
+
+***不论发生什么，都是要关上炉子***!
+
+**`finally` 代码块就是放置那些与异常无关，必须要执行的代码的地方（A `finally` block is where you put code that must run regardless of an exception）**。
+
+```java
+try {
+    turnOvenOn ();
+    x.bake();
+} catch (BakingException ex) {
+    ex.printStackTrace();
+} finally {
+    turnOvenOff();
+}
+```
+
+若没有这么一个 `finally` 关键字，就必须把 `turnOvenOff()` 方法同时放在 `try` 和 `catch` 代码块中，就是因为 ***不论何种情况，都必须关掉炉子***。而有了这样一个 `finally` 的代码块，就可以把所以清理代码放在一处，而不是像下面这样重复：
+
+```java
+try {
+    turnOvenOn();
+    x.bake();
+    turnOvenOff();
+} catch (BakingException ex) {
+    ex.printStackTrace();
+    turnOvenOff();
+}
+```
+
+
