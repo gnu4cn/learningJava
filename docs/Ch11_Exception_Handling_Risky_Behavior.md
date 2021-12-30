@@ -271,7 +271,7 @@ throw new NoCaffeinException ();
 >
 > 要求得最好效果，最好是在睡觉前看这本书。
 
-## `try/catch` 代码块中的流控
+## `try/catch` 代码块中的流程控制
 
 **Flow control in `try/catch` blocks**
 
@@ -280,4 +280,9 @@ throw new NoCaffeinException ();
 ![`try/catch` 代码块中的流控：无异常抛出时](images/Ch11_08.png)
 
 
-*图 8 - `try/catch` 代码块中的流控：无异常抛出时*
+*图 8 - `try/catch` 代码块中的流程控制：无异常抛出时*
+
+![`try/catch` 代码块中的流程控制：无异常抛出时](images/Ch11_09.png)
+
+
+*图 9 - `try/catch` 代码块中的流程控制：无异常抛出时*
