@@ -432,4 +432,24 @@ try {
 }
 ```
 
+### 虽然可以使用一个大的超级多态捕获来捕获全部异常，但不表示应该这样做。
+
+**Just because you CAN catch everything with one big super polymorphic catch, doesn't always mean you SHOULD**.
+
+在编写异常处理代码时，可以在 `catch` 子语句处使用超级类型 `Exception`，从而仅用一个的 `catch` 代码块，就可以捕获到可能抛出的所有例外。
+
+```java
+try {
+    laundry.doLaundry ();
+} catch (Exception ex) {
+    // 恢复代码......
+    // 问题是，要从哪里恢复呢？这个 catch 代码块将捕获
+    // 所有全部的异常，那么就没法知道到底什么地方出错了。
+}
+```
+
+### 为需要专门处理的每个异常，都编写不同的 `catch` 代码块。
+
+**Write a different catch block for each exception that you need to handle uniquely**.
+
 
