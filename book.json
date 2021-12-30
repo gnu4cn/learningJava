@@ -7,7 +7,13 @@
         "readme": "README.md",
         "summary": "SUMMARY.md"
     },
+    "plugins": ["donate"],
     "pluginsConfig": {
+        "donate": {
+            "wechat": "docs/images/611739062.jpg",
+            "alipay": "docs/images/633086908.jpg",
+            "button": "打赏"
+        },
         "fontSettings": {
             "theme": "white",
             "family": "msyh",
@@ -24,6 +30,7 @@
         "fontFamily": "Arial",
         "fontSize": 12,
         "paperSize": "a4",
+        "headerTemplate": "_CHAPTER_ > _SECTION_",
         "margin": {
             "right": 22,
             "left": 26,
