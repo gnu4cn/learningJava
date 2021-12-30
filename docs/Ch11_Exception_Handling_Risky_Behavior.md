@@ -328,3 +328,63 @@ try {
 * **在 `try` 代码块失败（某个异常）时**，程序流程控制会立即移动至 `catch` 代码块。随着 `catch` 代码块执行完毕，`finally` 代码块就会运行。在 `finally` 代码块执行完毕后，会继续运行调用方法中的其余代码；
 * **在 `try` 代码块成功（无异常）时**，程序流程控制会跳过 `catch` 代码块并移动至 `finally` 代码块。在 `finally` 代码块执行完毕后，就继续运行调用方法的其余代码；
 * **即使 `try` 或 `catch` 代码块带有 `return` 语句，这里的 `finally` 代码块仍会运行**！程序流程会跳往 `finally` 代码块，然后在跳回到 `return` 语句。
+
+```java
+package com.xfoss.learningJava;
+
+class ScaryException extends Exception {};
+
+public class TestExceptions {
+    public static void main (String [] args) {
+        String test = "yes";
+
+        try {
+            System.out.println("开始尝试");
+            doRisky(test);
+            System.out.println("尝试结束");
+        } catch (ScaryException ex) {
+            System.out.println("可怕的异常");
+            ex.printStackTrace();
+        } finally {
+            System.out.println("`finally` 代码块");
+        }
+
+        System.out.println("main方法的结束");
+    }
+
+    static void doRisky (String test) throws ScaryException {
+        System.out.println("开始冒险");
+
+        if ("yes".equals(test)) {
+            throw new ScaryException ();
+        }
+
+        System.out.println("冒险结束");
+        return;
+    }
+}
+```
+
+上面的代码输出为：
+
+```console
+开始尝试
+开始冒险
+可怕的异常
+com.xfoss.learningJava.ScaryException
+        at com.xfoss.learningJava.TestExceptions.doRisky(TestExceptions.java:27)
+        at com.xfoss.learningJava.TestExceptions.main(TestExceptions.java:11)
+`finally` 代码块
+main方法的结束
+```
+
+在 `String test = "no"` 时，其输出为：
+
+```console
+开始尝试
+开始冒险
+冒险结束
+尝试结束
+`finally` 代码块
+main方法的结束
+```
