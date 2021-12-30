@@ -388,3 +388,48 @@ main方法的结束
 `finally` 代码块
 main方法的结束
 ```
+
+
+## 多态的异常
+
+**Exceptions are polymorphic**
+
+记住，异常都是些对象。与其他对象相比，异常没有什么特别之处，除了可被 ***抛出*** 之外。那么与其他良好的对象一样，异常也可被多态地予以引用。比如对于某个 `LingerieException` 类型的对象，就可以赋值给某个 `ClothingException` 的引用变量。而一个 `PantsException`，也可以赋值给某个 `Exception` 类类型的引用变量。明白了吗？异常的多态特性，所带来的好处就是，方法不必显式地声明其可能抛出的所以可能的异常（The benefit for exceptions is that a method doesn't have to explicitly declare every possible exception it might throw）；他只需要声明这些可能异常的超类即可。对于 `catch` 代码块同样如此 -- 只要`catch`代码块能够处理全部抛出的异常，就不必编写针对各种可能异常的 `catch` 代码块（或多个代码块）。
+
+![`Exception` 继承树](images/Ch11_10.png)
+
+
+*图 10 - `Exception` 继承树*
+
+
+1. **可使用那些抛出异常的超类，来进行异常的声明**。
+
+```java
+public void doLaundry () throws ClothingException {
+                                // 由于这里声明的是 ClothingException
+                                // 那么就可以抛出 ClothingException 的任意子类类型的异常对象
+                                // 就是说 doLaundry() 方法可抛出 PantsException、LingerieException
+                                // TeeShirtException 以及 DressShirtException，而无需显示地
+                                // 分别进行声明
+```
+
+2. **使用所抛出异常的超类，就可以 捕获 这些异常**。
+
+```java
+try {
+    laundry.doLaundry();
+} catch (ClothingException cex) { // 这就可以捕获到任意 ClothingException 的子类了
+    // 恢复代码
+}
+```
+
+
+```java
+try {
+    laundry.doLaundry();
+} catch (ShirtException sex) { // 这就只能捕获 TeeShirtException 与 DressShirtException
+    // 恢复代码
+}
+```
+
+
