@@ -28,25 +28,25 @@ Java程序设计当然要用到类与方法，但他们到底是怎样的呢？�
 
 每名程序员，都要有编写代码的方法论/流程/途径（As a programmer, you probably hava a methodology/process/approach）。当然Java程序员也是这样，下面的这个排序，就是在编写Java类的时候，所考虑到的事情。在现实工作中并非都要按照这样的顺序来执行。实际工作中，会按照自己偏好、项目的不同，甚至雇主的意愿来操作。基本上是可以想怎么来就怎么来的。不过这里以教学为目的，通常会按照下面的顺序进行类的编写：
 
-- 搞清楚所编写的类计划用来做什么
-- 列出其实例变量与方法
-- 编写方法的 **预代码（prepcode）**
-- 编写方法的 **测试代码（test code）**
-- 将类进行 **部署**（**Implement** the class）
-- 对方法进行 **测试**（**Test** the methods）
-- 进行必要的 **调试** 和 **再部署** （**Debug** and **reimplement** as needed）
-- 邀请真实用户，对应用进行测试
+* 搞清楚所编写的类计划用来做什么
+* 列出其实例变量与方法
+* 编写方法的 **预代码（prepcode）**
+* 编写方法的 **测试代码（test code）**
+* 将类进行 **部署**（**Implement** the class）
+* 对方法进行 **测试**（**Test** the methods）
+* 进行必要的 **调试** 和 **再部署** （**Debug** and **reimplement** as needed）
+* 邀请真实用户，对应用进行测试
 
 __每个类都要编写的三种代码__
 
 
-- 预编码，prep code
+* 预编码，prep code
     是一致伪代码（pseudocode）, 用于理清逻辑，而不用面对语法上的压力
 
-- 测试代码
+* 测试代码
     对真实代码进行测试，以验证真实代码是在正确工作
 
-- 真实代码
+* 真实代码
     类的具体实现。这里才是编写Java代码的地方
 
 ## 什么是预代码/伪代码（prepcode）
@@ -65,15 +65,15 @@ __每个类都要编写的三种代码__
 
 XP基于一套验证过的实践方法，这些方法应该组合运用。不过业者通常只选取其中一些方法，同时仅采行XP规则中的一部分。这些实践方法包含下面这些：
 
-- 高频发布小版本（Make small, but frequent, releases）
-- 以迭代周期方式开发（Develop in interation cycles）
-- 绝不把不包含在软件规格中的功能/特性，加入到项目中去（不管有多想要以“为将来考虑”的原因，加入某项功能，Don't put in anything that's not in the spec(no matter how tempted you are to put int functionality "for the future")）
-- 首先编写测试代码
-- 不设苛刻时间表；不加班（No killer schedules; work regular hours）
-- 一有机会就搞重构（提升代码质量，Refactor(improve the code) whenever and wherever you notice the opportunity）
-- 根据小版本，设置合理可行的时间表（Set realistic schedules, based around small releases)
-- 保持代码简单（Keep it simple）
-- 结对编程，并定期调换人员岗位，从而令到每个人都对代码的各个部分有所了解（Program in pairs, and move ppl around so that everybody knows pretty much everything about the code）
+* 高频发布小版本（Make small, but frequent, releases）
+* 以迭代周期方式开发（Develop in interation cycles）
+* 绝不把不包含在软件规格中的功能/特性，加入到项目中去（不管有多想要以“为将来考虑”的原因，加入某项功能，Don't put in anything that's not in the spec(no matter how tempted you are to put int functionality "for the future")）
+* 首先编写测试代码
+* 不设苛刻时间表；不加班（No killer schedules; work regular hours）
+* 一有机会就搞重构（提升代码质量，Refactor(improve the code) whenever and wherever you notice the opportunity）
+* 根据小版本，设置合理可行的时间表（Set realistic schedules, based around small releases)
+* 保持代码简单（Keep it simple）
+* 结对编程，并定期调换人员岗位，从而令到每个人都对代码的各个部分有所了解（Program in pairs, and move ppl around so that everybody knows pretty much everything about the code）
 
 ## `++n` 和 `n++` 的不同
 
@@ -89,11 +89,11 @@ for (String name: nameArray) {...}
 
 编译器是这样理解上面的语句的：
 
-- 创建一个名为 `name` 的字符串变量，并将其置为 `null`（`null`也是一个值）
-- 将 `nameArray` 的第一个值赋给 `name`
-- 运行循环体（由花括弧(`{}`)包围起来的代码块）
-- 将 `nameArray`中的下一个值赋给 `name`
-- 重复这个过程，直到数组中最后一个元素为止
+* 创建一个名为 `name` 的字符串变量，并将其置为 `null`（`null`也是一个值）
+* 将 `nameArray` 的第一个值赋给 `name`
+* 运行循环体（由花括弧(`{}`)包围起来的代码块）
+* 将 `nameArray`中的下一个值赋给 `name`
+* 重复这个过程，直到数组中最后一个元素为止
 
 **循环条件的第一部分：循环变量的声明（Part One: iteration variable declaration）**
 

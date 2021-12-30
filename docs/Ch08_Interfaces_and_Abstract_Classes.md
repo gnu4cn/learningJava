@@ -149,12 +149,12 @@ __在声明了一个抽象方法后，就必须把其所在的类也标记为 `a
 
 ## 答疑
 
-- 抽象方法有什么意义？我所知的是抽象类的意义在于，可把那些由各个子类继承的共用代码放在抽象类中。
+* 抽象方法有什么意义？我所知的是抽象类的意义在于，可把那些由各个子类继承的共用代码放在抽象类中。
 
     将那些可被继承的方法实现（也就是带有确切方法体的那些方法），放在超类中，确实是不错的做法。那只是在这些代码确实能被子类使用到的时候。但通常的情况是，这些方法实现，并不总是能用到，因为基本设想不到那些子类可以利用上的通用代码呀。抽象方法的意义就在于，就算不放入任何确切代码，任意可以为一组子类型（子类）定义出 *协议（protocol）*。
 
 
-- 为什么说这样做就好呢？
+* 为什么说这样做就好呢？
 
     就是为了多态！别忘了，我们所需要的，是将超类作为方法参数与返回值类型，或者数组类型。这样就可以在不必重新编写新的方法的情况下，加入很多新的子类型。设想如果不将 `Animal` 超类型（supertype）作为 `Vet` 中各个方法的参数类型，那么后续对 `Vet` 的修改将会多么麻烦。那就不得不给所有 `Animal` 的每个子类一个单独方法！一个用于 `Lion`，一个用于`Wolf`，一个用于......，明白了吧。那么现在就可以使用抽象方法，就是说“这个类型的所有类型，都有这个方法”。多态的好处，就在这里啦。
 
@@ -256,29 +256,29 @@ __那么在这个超超元类的 `Object` 中究竟有些什么呢__ ？
 
 ## 答疑
 
-- __类 `Object` 是抽象类吗__ ？
+* __类 `Object` 是抽象类吗__ ？
 
 > 不是。这不是通常意义上的抽象类（Well，not in the formal Java sense anyway）。由于 `Object`具有可被所有类继承、且开箱即用的方法实现代码，因此他是非抽象类。
 
 
-- __那么可以重写 `Object`中的这些方法吗__ ？
+* __那么可以重写 `Object`中的这些方法吗__ ？
 
 > 可以重写其中一些。但有些方法是被标记为 `final`的，因此就不能对其进行重写。对于 `hashCode()`、`equals()`及`toString()`三个方法，是强烈建议进行重写的，本书后面会叫你怎么去重写他们。对于另一些代码，比如`getClass()`，他们就必须以特定的、有保证的方式运作。
 
 
-- __既然 `ArrayList` 的那些方法，对于使用 `Object` 已经足够通用，那写 `ArrayList<DotCom>` 又有什么意义呢？是将 `ArrayList`限制为只能保存 `DotCom` 对象的意思吗__ ？
+* __既然 `ArrayList` 的那些方法，对于使用 `Object` 已经足够通用，那写 `ArrayList<DotCom>` 又有什么意义呢？是将 `ArrayList`限制为只能保存 `DotCom` 对象的意思吗__ ？
 
 > 那确实是在对其进行限制。在 Java 5.0 版本之前，`ArrayList`就是无法施加限制的。不过时至今日，在Java 5.0中，通过 `ArrayList<Object>` 这种方式对其进行限制，已成为必须的了。`ArrayList<Object>` 的意思，就是 __一个被限制为属于对象的任何东西的 `ArrayList`__ ，也就是Java中从任何类类型初始化得来的任何对象。后面会讨论到这种新的  `<type>` 语法。
 
-- __好的，回到类 `Object` 作为非抽象的问题上（那么我猜那意味着他是具体的），我们该 *怎样* 构造出一个 `Object` 的对象？ 那样做不就和构建一个 `Animal` 的对象一样古怪了吗__ ？
+* __好的，回到类 `Object` 作为非抽象的问题上（那么我猜那意味着他是具体的），我们该 *怎样* 构造出一个 `Object` 的对象？ 那样做不就和构建一个 `Animal` 的对象一样古怪了吗__ ？
 
 > 不错的问题！确实有构造 `Object` 实例的需求。在有的时候，就是只需要一个作为对象使用的通用对象。也就是一个 *轻量级（lightweight）* 对象。就目前所知，`Object`类型的实例最常用在线程同步上（将在第15章涉及，By far, the most common use of an instance of type `Object` is for thread synchronization）。现在可以不管这个，只需知道即使可以构造出 `Object` 的对象，也很少会用到这个。
 
-- __那么可以说 `Object` 类型的主要目的，就是用作多态下的参数和返回值类型，就像是在 `ArrayList`中那样吗__ ？
+* __那么可以说 `Object` 类型的主要目的，就是用作多态下的参数和返回值类型，就像是在 `ArrayList`中那样吗__ ？
 
 > `Object`类的主要目的有两个：其一是对于那些需要处理自己或其他人编写的所有类的方法，作为他们的多态类型；再者就是，为Java中所有对象，提供给他们在运行时所需要的方法代码（把这些代码都放在类 `Object`中，那么所有类都能继承到这些代码）。在 `Object`中的一些重要方法与线程相关，在本书的后面会看到。
 
-- __既然使用多态类型有这么多好处，那为什么不把 *所有* 方法都做成接收和返回 `Object` 类型呢__ ？
+* __既然使用多态类型有这么多好处，那为什么不把 *所有* 方法都做成接收和返回 `Object` 类型呢__ ？
 
 > 呃......想想这样做会发生什么。那样肯定会完全破坏“类型安全”（For one thing, you would defeat the whole point of 'type-safty'），而“类型安全”正是Java语言中，对代码的最大保护机制。Java的类型安全机制，确保不会在计划的对象类型之外，请求到其他对象类型。比如，让一个 `Ferrari` （以为是一个 `Toaster`）去烤面包。
 > 事实上即使在各处使用了 `Object` 类型的引用变量，也不必担心会出现热烘烘的`Ferrari`情形。因为当那些类型是由 `Object` 引用变量类型表示时，Java 就会将其视为类型 `Object` 的一个实例变量。那么就只能调用类 `Object` 中声明的那些方法！所以假如这样写代码：
@@ -555,9 +555,9 @@ __缺点__ ：
 __那么我们真正需要的是什么呢__ ？
 
 
-- 一种只在宠物类中才有的宠物行为的方式（A way to have pet behavior in just the pet classes）
-- 一种不需要重复的键盘输入，就能确保所有宠物类都具有同样的所定义全部方法的方式（这些方法名字相同、参数相同、同样的返回值类型、不会有找不着的方法等等），且所有程序员都能正确获取到这些方法。
-- 一种可以利用上多态优势，以便在无需对每个、每种宠物类，都使用参数、返回值类型及数组的情况下，所有宠物都能被调用到他们的方法（A way to take advantage of polymorphism so that all pets can have their pet methods called, without having to use arguments, return types, and arrays for each and every pet class）。
+* 一种只在宠物类中才有的宠物行为的方式（A way to have pet behavior in just the pet classes）
+* 一种不需要重复的键盘输入，就能确保所有宠物类都具有同样的所定义全部方法的方式（这些方法名字相同、参数相同、同样的返回值类型、不会有找不着的方法等等），且所有程序员都能正确获取到这些方法。
+* 一种可以利用上多态优势，以便在无需对每个、每种宠物类，都使用参数、返回值类型及数组的情况下，所有宠物都能被调用到他们的方法（A way to take advantage of polymorphism so that all pets can have their pet methods called, without having to use arguments, return types, and arrays for each and every pet class）。
 
 
 **看起来似乎需要在顶部放置 *两个* 超类**。
@@ -619,7 +619,7 @@ public class Dog extends Canine implements Pet {...}
 
 ## 答疑
 
-- **等一下，由于不能把任何实现代码放在 `interface`s 里，那么这些 `interface`s 就没有真正带来多重继承。如果所有方法都是抽象的，那么 `interface`究竟有什么好处呢**？
+* **等一下，由于不能把任何实现代码放在 `interface`s 里，那么这些 `interface`s 就没有真正带来多重继承。如果所有方法都是抽象的，那么 `interface`究竟有什么好处呢**？
 
 > 多态机制，多态机制，多态机制。使用 `interface`s 在灵活性上是终极的，因为使用 `interface`s 而不是具体子类（甚至抽象的超类类型），作为参数或返回值类型，就可以以实现了那个 `interface`的所有具体类类型，进行传递（Interfaces are the ultimate in flexibility, because if you use interfaces instead of concrete subclasses(or even abstract superclass types) as arguments and return types, you can pass anything that implements that interface）。同时可以试想一下， 在具备 `interface` 的情况下，类就不必只来自单一的继承树了。某个类可以对一个类进行扩展，再去实现某个 `interface`。而另一个类在实现同一个接口的同时，可以来自完全不同的继承树！所以就可以根据对象所扮演的角色，而不是其从哪个类类型初始化得来去对待他（So you can get treat an object by the role it plays, rather than by the class type from which it was instantiated）。
 
@@ -655,18 +655,18 @@ public class Dog extends Animal implements Pet, Saveable, Paintable {...}
 
 ***怎样才知道，究竟应该构造一个类，一个超类，一个抽象类，还是一个 `interface`呢***？
 
-- 在新的类不能通过既有类型的 `IS-A` 测试时，就要构造一个不对其他类（当然除了 `Object`）进行扩展的类了
+* 在新的类不能通过既有类型的 `IS-A` 测试时，就要构造一个不对其他类（当然除了 `Object`）进行扩展的类了
 
-- 仅在需要构造某个类的 **更具体** 版本，且需要重写或加入新的行为时，才去构建一个子类（也就是对某个类进行扩展）
+* 仅在需要构造某个类的 **更具体** 版本，且需要重写或加入新的行为时，才去构建一个子类（也就是对某个类进行扩展）
 
-- 在打算为一组子类定义一个 **模板**，且已经有一些所有子类都能使用的实现代码时，就要使用一个抽象类了。如果要保证其他人不能构造出某个类的对象，那么就让这个类作为抽象类。
+* 在打算为一组子类定义一个 **模板**，且已经有一些所有子类都能使用的实现代码时，就要使用一个抽象类了。如果要保证其他人不能构造出某个类的对象，那么就让这个类作为抽象类。
 
-- 在想要定义对于不论位处哪个继承树的类，都可以扮演的角色时，就要使用一个 `interface`。
+* 在想要定义对于不论位处哪个继承树的类，都可以扮演的角色时，就要使用一个 `interface`。
 
 
 ### 调用某个方法的超类版本
 
-- ***在构造某个具体子类时，既要重写某个方法，又需要该方法的超类版本的行为，该怎么办？也就是说，不希望通过重写来替换掉这个方法，而只想把一些额外特定代码，添加到这个方法***。
+* ***在构造某个具体子类时，既要重写某个方法，又需要该方法的超类版本的行为，该怎么办？也就是说，不希望通过重写来替换掉这个方法，而只想把一些额外特定代码，添加到这个方法***。
 
 > 呃... 请想想“扩展” 一词的意思。良好“面向对象”设计的一个方面，就是对如何去设计那些为了重写的代码的关注。也就是说，在抽象类中所写下的方法代码，就应该是可以支撑到具体实现的那些足够通用的代码（One area of good OO design looks at how to design concrete code that's meant to be overridden. In other words, you write method code in, say, an abstract class, that does work that's generic enough to support typical concrete implementations）。不过这些具体代码，并不足以应对 *全部* 特定于子类的工作。因此子类就会重写方法，并通过添加其剩余代码，对类进行 *扩展*。在子类里使用关键字 `super` ，就可以调用到某个重写方法的超类版本。
 
@@ -678,30 +678,30 @@ public class Dog extends Animal implements Pet, Saveable, Paintable {...}
 
 ## 重点
 
-- 在不希望某个类被实例化（也就是不希望有人构造那个类的对象）时，就将该类用关键字 `abstract` 标记起来；
-- 抽象类可以同时有抽象与非抽象方法；
-- 某个类就算只要有一个抽象方法，就必须被标记为抽象类；
-- 抽象方法没有方法体，同时其声明是以分号（`;`）结束的（没有花括弧）；
-- 继承树中的第一个具体类，必须实现全部抽象方法；
-- Java中每个类，都直接或间接是类 `Object`（`java.lang.Object`）的子类；
-- 可以 `Object` 类型的参数和/或返回值类型，来声明方法；
-- 对于某个对象，只能调用作为该对象的引用变量类型的类（或`interface`）中有的那些方法，这跟该对象实际类型无关。因此引用变量类型为 `Object` 类型的对象，就只能用于调用类 `Object`中定义的方法，而与该引用变量实际所指的对象类型无关；
-- 类型 `Object` 的引用变量，在不使用强制转换运算符的情况下，不能赋值给任何其他类型的引用变量。可使用强制转换，来将一种类型的引用变量，赋值给该类型的子类型的引用变量，但如果内存堆中的对象，与强制类型转换运算不兼容时，运行时就会转换失败。比如：
+* 在不希望某个类被实例化（也就是不希望有人构造那个类的对象）时，就将该类用关键字 `abstract` 标记起来；
+* 抽象类可以同时有抽象与非抽象方法；
+* 某个类就算只要有一个抽象方法，就必须被标记为抽象类；
+* 抽象方法没有方法体，同时其声明是以分号（`;`）结束的（没有花括弧）；
+* 继承树中的第一个具体类，必须实现全部抽象方法；
+* Java中每个类，都直接或间接是类 `Object`（`java.lang.Object`）的子类；
+* 可以 `Object` 类型的参数和/或返回值类型，来声明方法；
+* 对于某个对象，只能调用作为该对象的引用变量类型的类（或`interface`）中有的那些方法，这跟该对象实际类型无关。因此引用变量类型为 `Object` 类型的对象，就只能用于调用类 `Object`中定义的方法，而与该引用变量实际所指的对象类型无关；
+* 类型 `Object` 的引用变量，在不使用强制转换运算符的情况下，不能赋值给任何其他类型的引用变量。可使用强制转换，来将一种类型的引用变量，赋值给该类型的子类型的引用变量，但如果内存堆中的对象，与强制类型转换运算不兼容时，运行时就会转换失败。比如：
 
 ```java
 Dog d = (Dog) x.getObject(aDog);
 ```
 
-- 从 `ArrayList<Object>` 中拿出的所有对象的类型，都是 `Object`（意即除非使用强制类型转换，否则这些对象只能被 `Object` 类型的引用变量所引用）；
-- 由于多重继承会带来“致命死亡钻石”问题，因此Java中不允许多重继承。这就意味着只能对一个类进行扩展（也就是只能有一个直接的超类）；
-- `interface` 就像一个 100% 的抽象类。只用于定义抽象方法；
-- 使用关键字 `interface` ，而不是 `class`, 来创建 `interface`；
-- 使用关键字 `implements` 来实现 `interface`，比如：
+* 从 `ArrayList<Object>` 中拿出的所有对象的类型，都是 `Object`（意即除非使用强制类型转换，否则这些对象只能被 `Object` 类型的引用变量所引用）；
+* 由于多重继承会带来“致命死亡钻石”问题，因此Java中不允许多重继承。这就意味着只能对一个类进行扩展（也就是只能有一个直接的超类）；
+* `interface` 就像一个 100% 的抽象类。只用于定义抽象方法；
+* 使用关键字 `interface` ，而不是 `class`, 来创建 `interface`；
+* 使用关键字 `implements` 来实现 `interface`，比如：
 
 ```java
 public class Dog extends Canine implements Pet
 ```
 
-- 类可以实现多个 `interface`s；
-- 因为 *`interface`的全部方法，隐式的都是 `public` 与 `abstract` 的*，所以实现某个 `interface` 的类，就必须实现该 `interface` 的全部方法；
-- 使用关键字 `super` 来从子类中调用所重写方法的超类版本。比如 `super.runReport();`
+* 类可以实现多个 `interface`s；
+* 因为 *`interface`的全部方法，隐式的都是 `public` 与 `abstract` 的*，所以实现某个 `interface` 的类，就必须实现该 `interface` 的全部方法；
+* 使用关键字 `super` 来从子类中调用所重写方法的超类版本。比如 `super.runReport();`

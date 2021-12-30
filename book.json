@@ -4,7 +4,8 @@
     "description": "深入掌握Java, 不难",
     "language": "zh",
     "structure": {
-        "readme": "README.md"
+        "readme": "README.md",
+        "summary": "SUMMARY.md"
     },
     "pluginsConfig": {
         "fontSettings": {

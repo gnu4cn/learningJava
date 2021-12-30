@@ -89,7 +89,7 @@ public DotCom (...) {
 
 假设我写一个 `chooseCamera()` 方法，有很多如何去选择一台相机的规则。也许要选择价钱在 $50 到 $1000 的相机，在某种情形下，要更精细地去限定价格范围。可能会这样：
 
-- “加入价钱在 $300 到 $400, 那么就选择 X”:
+* “加入价钱在 $300 到 $400, 那么就选择 X”:
 
 ```java
 if (price >= 300 && price < 400) {
@@ -97,7 +97,7 @@ if (price >= 300 && price < 400) {
 }
 ```
 
-- 在有10个相机品牌可供选择时，有一些适用于品牌清单中少数几个的规则：
+* 在有10个相机品牌可供选择时，有一些适用于品牌清单中少数几个的规则：
 
 ```java
 if (brand.equals("A") || brand.equals("B")) {
@@ -182,7 +182,7 @@ java.util.ArrayList
 
 __必须告诉 Java，你要使用哪个 `ArrayList`__，有两种做法：
 
-- 导入（`IMPORT`）
+* 导入（`IMPORT`）
 
     在源代码文件的顶部，放上一个导入语句：
 
@@ -191,7 +191,7 @@ import java.util.ArrayList;
 public class MyClass {...}
 ```
 
-- 手动输入（TYPE）
+* 手动输入（TYPE）
 
     在代码中使用到 `ArrayList` 的各处，输入完整的名字。
 
@@ -244,20 +244,20 @@ __包名字中 `x` 表示什么意思__
 
 ## 知识点
 
-- `ArrayList` 是 Java API 中的一个类
-- 使用 `add()` 方法，往 `ArrayList` 中放入某些东西
-- 要从`ArrayList`中移除某物，使用 `remove()` 方法
-- 使用 `indexOf()`方法，来确定某对象是否在 `ArrayList` 中
-- 要确定某个 `ArrayList` 是否为空，使用 `isEmpty()` 方法
-- 使用 `size()` 方法，来获取某个 `ArrayList` 的大小（元素个数）
-- 对于常规的老式数组，要获取其长度（length, 元素个数），使用的是其变量`length`
-- `ArrayList` 引用变量的大小，可以根据需要动态的改变。在添加了对象后，就会变大；在移除对象后，相应地会变小
-- 在声明`ArrayList`引用变量的数组类型时，使用的是 __类型参数（type parameter）__，也就是在尖括号中的一个类型名称。比如，`ArrayList<Button>` 意思是这个 `ArrayList` 将只能保存类型为 `Button` 的对象（或者 `Button` 的子类，后续章节会学习相关的内容）。
-- 尽管 `ArrayList` 保存的是对象而非原生变量，但编译器会自动地对原生变量进行封装（ __wrap__, 并在从 `ArrayList` 中取出原生变量时，进行解封装， __unwrap__），使其成为一个对象，从而放入到 `ArrayList` 中的，就是封装后的对象，而不在时原来的原生变量了。
-- 类是以包的形式进行组织的。
-- 类有着由其所属包的名字，和类本身名字，组合而成的全名。类 `ArrayList` 实际上是 `java.util.ArrayList`
-- 要使用除 `java.lang` 之外的其他包中的某个类，就必须告诉 Java 那个类的全名
-- 要么在源代码文件的顶部使用一条导入语句，要么就在代码中所有要用到类的地方，输入这个类的全名
+* `ArrayList` 是 Java API 中的一个类
+* 使用 `add()` 方法，往 `ArrayList` 中放入某些东西
+* 要从`ArrayList`中移除某物，使用 `remove()` 方法
+* 使用 `indexOf()`方法，来确定某对象是否在 `ArrayList` 中
+* 要确定某个 `ArrayList` 是否为空，使用 `isEmpty()` 方法
+* 使用 `size()` 方法，来获取某个 `ArrayList` 的大小（元素个数）
+* 对于常规的老式数组，要获取其长度（length, 元素个数），使用的是其变量`length`
+* `ArrayList` 引用变量的大小，可以根据需要动态的改变。在添加了对象后，就会变大；在移除对象后，相应地会变小
+* 在声明`ArrayList`引用变量的数组类型时，使用的是 __类型参数（type parameter）__，也就是在尖括号中的一个类型名称。比如，`ArrayList<Button>` 意思是这个 `ArrayList` 将只能保存类型为 `Button` 的对象（或者 `Button` 的子类，后续章节会学习相关的内容）。
+* 尽管 `ArrayList` 保存的是对象而非原生变量，但编译器会自动地对原生变量进行封装（ __wrap__, 并在从 `ArrayList` 中取出原生变量时，进行解封装， __unwrap__），使其成为一个对象，从而放入到 `ArrayList` 中的，就是封装后的对象，而不在时原来的原生变量了。
+* 类是以包的形式进行组织的。
+* 类有着由其所属包的名字，和类本身名字，组合而成的全名。类 `ArrayList` 实际上是 `java.util.ArrayList`
+* 要使用除 `java.lang` 之外的其他包中的某个类，就必须告诉 Java 那个类的全名
+* 要么在源代码文件的顶部使用一条导入语句，要么就在代码中所有要用到类的地方，输入这个类的全名
 
 
 ## 关于 `import` 语句

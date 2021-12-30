@@ -2,8 +2,8 @@
 
 ## 笔记
 
-- `listener interface` -- 是收听者（listener）和事件源（event source, 窗口/GUI部件，window/widget）之间的桥梁
-- 往GUI上放东西有三种方式：把小部件放在帧上，在小部件上绘制2D图形，以及在小部件上放置图片。
+* `listener interface` -- 是收听者（listener）和事件源（event source, 窗口/GUI部件，window/widget）之间的桥梁
+* 往GUI上放东西有三种方式：把小部件放在帧上，在小部件上绘制2D图形，以及在小部件上放置图片。
 
 ## `event listener`、`event source` 与 `listener interface`
 

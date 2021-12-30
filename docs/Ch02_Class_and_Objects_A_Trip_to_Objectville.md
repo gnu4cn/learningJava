@@ -6,5 +6,5 @@
 
 ## `main` 方法的两个作用
 
-- 用来对类进行 **测试**（用在 `TestDrive` 中, to **test** your real class）
-- 用来 **启动** Java **应用** （to **launch/start** your Java **application**）
+* 用来对类进行 **测试**（用在 `TestDrive` 中, to **test** your real class）
+* 用来 **启动** Java **应用** （to **launch/start** your Java **application**）
