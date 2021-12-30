@@ -475,3 +475,7 @@ try {
 
 
 *图 11 - 多个`catch`代码块的排序*
+
+在`Exception`继承树越往上的类，他的捕获“筐子”就会越大。而沿继承树往下，到越来越精细的 `Exception` 类的时候，捕获“筐子”就会越来越小。这与先前的多态机制别无二致。
+
+`ShirtException`捕获对于接收 `TeeShirtException`或`DressShirtException`（以及将来的全部对`ShirtException`进行扩展的子类），是足够大的。而`C`
