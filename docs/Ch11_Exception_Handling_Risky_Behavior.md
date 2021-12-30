@@ -271,4 +271,13 @@ throw new NoCaffeinException ();
 >
 > 要求得最好效果，最好是在睡觉前看这本书。
 
+## `try/catch` 代码块中的流控
 
+**Flow control in `try/catch` blocks**
+
+在对具风险的方法进行调用事，可能发生两种情况。风险方法要么成功，这时`try`代码块就会跑完，要么风险方法抛回一个异常给调用方法。
+
+![`try/catch` 代码块中的流控：无异常抛出时](images/Ch11_08.png)
+
+
+*图 8 - `try/catch` 代码块中的流控：无异常抛出时*
