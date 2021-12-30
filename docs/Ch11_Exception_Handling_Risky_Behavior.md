@@ -452,4 +452,19 @@ try {
 
 **Write a different catch block for each exception that you need to handle uniquely**.
 
+比如在代码处理 `TeeShirtException`不同于处理 `LingrieException`时，就要为他们分别编写 `catch` 代码块。而假如可以同样方式对待`ClothingException`的其他子类型，那么就可以加入一个 `ClothingException`的 `catch` 代码块，来处理其余的异常。
+
+```java
+try {
+    laundry.doLaundry();
+} catch (TeeShirtException tex) {
+    // 从 TeeShirtException 中恢复过来
+} catch (LingrieException lex) {    // TeeShirtException 与 LingrieException 都需要
+                                    // 不同的恢复代码，因此就要使用不同的捕获代码块
+    // 从 LingrieException 中恢复过来
+} catch (ClothingException cex) { // 在这里捕获索取其他的 ClothingException 异常
+    // 从所有其他异常中恢复过来
+}
+```
+
 
