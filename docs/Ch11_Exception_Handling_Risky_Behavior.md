@@ -467,4 +467,11 @@ try {
 }
 ```
 
+### 有多个 `catch` 代码块时，必须以从小到大的顺序排序
 
+**Multiple catch blocks must be ordered from smallest to biggest**
+
+![多个`catch`代码块的排序](images/Ch11_11.png)
+
+
+*图 11 - 多个`catch`代码块的排序*
