@@ -527,3 +527,29 @@ public void foo() throws ReallyBadException {
     laundry.doLaundry();
 }
 ```
+
+### 通过声明异常的规避，只是延后了必然
+
+**Ducking (by declaring) only delays the inevitable**
+
+**迟早都要有人来处理异常。但要是 `main()` 方法规避了异常呢**？
+
+```java
+public class Washer {
+    Laundry laundry = new Laundry();
+
+    // 这里的 foo() 和 main() 两个方法都规避了那个异常
+    // （通过声明他），那么就没有人去处理这个异常了！
+    // 这对于编译来说毫无违和感。
+    public void foo() throws ClothingException {
+        laundry.doLaundry();
+    }
+
+    public static void main (String [] args) throws ClothingException {
+        Washer a = new Washer ();
+        a.foo();
+    }
+}
+```
+
+
