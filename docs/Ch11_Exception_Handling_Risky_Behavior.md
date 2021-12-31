@@ -618,4 +618,98 @@ public class Washer {
 }
 ```
 
+## 回到前面的 `BeatBox` app 的代码
 
+现在是不是完全忘掉了，这一章开始的时候，初步涉及了一些 `JavaSound` 的代码。在那里已经创建了一个 `Sequencer` 的对象，而由于`Midi.getSequencer()`方法声明了一个受检查的异常（a checked exception, `MidiUnavailableException`），导致那段代码无法编译。现在就可以通过把对该方法的调用，包装在一个 `try/catch` 中，修复这个问题了。
+
+```java
+package com.xfoss.BeatBox;
+
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        try {
+            // 因为把对风险方法 MidiSystem.getSequencer() 包装
+            // 在了 try/catch 代码块中，现在对该方法的调用就没有问题了
+            Sequencer seq = MidiSystem.getSequencer();
+            System.out.println("我们就得到了一个‘音序器（Sequencer）’");
+        } catch (MidiUnavailableException ex) {
+            // 这里的捕获参数必须是 “恰当” 的异常。若这里写
+            // catch(FileNetFoundException f)，那么这段代码也不会编译
+            // 因为从多态上讲，一个 MidiUnavailableException 并不适合
+            // FileNotFoundException
+            //
+            // 请记住光是有 catch 代码块还不够，还必须捕获到抛出的异常！
+            System.out.println("Bummer");
+        }
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+```
+
+
+### 异常处理的四条规则
+
+
+1. **不能在没有 `try` 的情况下使用 `catch` 或 `finally`关键字**
+
+**You cannot have a `catch` or `finally` without a `try`**
+
+```java
+void go () {
+    Foo f = new Foo ();
+
+    f.foo();
+
+    // 非法！`try` 在哪里？
+    catch (FooException ex) {}
+}
+```
+
+2. **在 `try` 与 `catch` 直接不能再放置代码**
+
+**You cannot put code between the `try` and the `catch`**
+
+```java
+try {
+    x.doStuff();
+}
+// 非法！不能在 `try` 与 `catch` 之间放置代码
+int y = 43;
+catch (Exception ex) {}
+```
+
+
+3. **`try`后面只能/且必须有 `catch` 或/及 `finally`**
+
+**A `try` MUST be followed by either a `catch` or a `finally`**
+
+
+```java
+try {
+    x.doStuff();
+} finally {
+    // 合法。因为这里尽管没有 `catch`，但却有个 `finally`。
+    // 但不能只有 `try` 一个
+    // 
+    // 清理工作
+}
+```
+
+4. **在`try`后只有`finally`（不带`catch`）时，仍然必须对异常进行声明**。
+
+**A `try` with only a `finally`(no `catch`) must still declare the exception**.
+
+```java
+// 不带 `catch` 的 `try`，不满足 `handl/declare` 法则
+void go() throws FooException {
+    try {
+        x.doStuff();
+    } finally {}
+}
+```
