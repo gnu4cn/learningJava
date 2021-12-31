@@ -579,3 +579,43 @@ try {
     // 恢复代码
 }
 ```
+
+
+2. **声明异常（规避异常, DECLARE(duck it)）**
+
+声明调用方法会抛出与所调用的风险方法同样的异常（Declare the YOUR method throws the same exceptions as the risky method you're calling）。
+
+```java
+// doLaundry()方法抛出了一个 ClothingException 类类型的异常
+// 而作为其调用者的 foo() 方法，只需要通过声明该异常，就可以
+// 避开这个异常。无需 try/catch
+void foo() throws ClothingException {
+    laundry.doLaundry();
+}
+```
+
+不过现在就意味着那些 `foo()` 方法的调用者就必须要遵守这条 “处理抑或声明” 的法则了。在 `foo()` 方法规避了这个例外（通过对其进行声明），同时 `main()` 调用了 `foo()` 时，那么 `main()` 就必须对该例外进行处理。
+
+```java
+public class Washer {
+    Laundry laundry = new Laundry();
+
+    public void foo () throws ClothingException {
+        laundry.doLaundry();
+    }
+
+    public static void main (String [] args) {
+        // 麻烦了！现在 main() 就不会编译了，同时
+        // 会收到一个 “unreported exception” 的报错。
+        // 编译器所关心的是，foo() 方法抛出了一个异常
+        Washer a = new Washer ();
+        // 因为 foo() 方法规避了由 doLaundry() 所抛出
+        // 的 ClothingException 类类型的异常，那么
+        // main() 就必须把 a.foo() 包装在一个 try/catch
+        // 中，或必须也要对异常进行声明，throws ClothingException !
+        a.foo();
+    }
+}
+```
+
+
