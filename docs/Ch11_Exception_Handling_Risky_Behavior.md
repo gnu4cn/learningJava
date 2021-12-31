@@ -552,4 +552,7 @@ public class Washer {
 }
 ```
 
+![`main()`方法抛出异常的特别情形](images/Ch11_13.png)
 
+
+*图 13 - `main()`方法抛出异常的特别情形*
