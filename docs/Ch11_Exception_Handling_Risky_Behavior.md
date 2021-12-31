@@ -478,4 +478,10 @@ try {
 
 在`Exception`继承树越往上的类，他的捕获“筐子”就会越大。而沿继承树往下，到越来越精细的 `Exception` 类的时候，捕获“筐子”就会越来越小。这与先前的多态机制别无二致。
 
-`ShirtException`捕获对于接收 `TeeShirtException`或`DressShirtException`（以及将来的全部对`ShirtException`进行扩展的子类），是足够大的。而`C`
+`ShirtException`捕获对于接收 `TeeShirtException`或`DressShirtException`（以及将来的全部对`ShirtException`进行扩展的子类），是足够大的。而`ClothingException`则要更大（即使用类型`ClothingException`可对更多的东西进行引用）。除了接收`ClothingException`的异常之外，他还可以接收全部`ClothingException`的那些子类：`PantsException`、`UniformException`、`LingrieException`及`ShirtException`等等。随意 `catch` 捕获参数的始祖，就是 **`Exception`**；他会捕获所有异常，包括运行时（不受检查）异常，因此除了测试目的之外，多半是用不到这个最大的 `Exception`类类型的。
+
+### 不能把较大的“筐子”放在比他们小的“筐子”之上
+
+**You can't put bigger baskets above smaller baskets**
+
+
