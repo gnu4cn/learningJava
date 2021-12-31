@@ -513,4 +513,17 @@ try {
 
 很简单 -- 只需要 *声明* 一下调用方法抛出异常即可。虽然在调用方法中声明了抛出异常，但抛出异常的却不是调用方法，这一点无关紧要。调用方法仍然是让异常直接通过的方法（It's easy -- all you have to do is *declare* that *you* throw the exceptions. Even though, technically, *you* aren't the one doing the throwing, it doesn't matter. You're still the one letting the exception whiz right on by）。
 
+然而在避开异常时，就不会有 `try/catch` 语句了，那么在风险方法（`doLaunch()`）真的抛出了异常时，会怎么样呢？
 
+在某个方法抛出异常时，则这个抛出异常的方法，就会立即被从栈上弹出，而异常就会被抛给栈上往下的第一个方法 -- 也就是那个 *调用者方法* （When a method throws an exception, that method is popped off the stack immediately， and the exception is thrown to the next method down the stack -- the *caller*）。但在调用者方法是个 *逃避者* 时，就没有这个异常的捕获了，因此调用者方法就立即从栈上弹出，而这个异常就被抛给栈上的下一个方法，如此这般......那么到哪里结束呢？后面就会看到。
+
+```java
+// foo()这个调用者方法，并没有真的抛出这个异常，而因为
+// 没有针对他调用的这个风险方法的 try/catch，所以 foo()
+// 就成了“风险方法”。这是因为现在不过哪个方法要调用 foo()
+// 都必须要对此异常进行处理。
+public void foo() throws ReallyBadException {
+    // 不带 try/catch 地调用某个风险方法
+    laundry.doLaundry();
+}
+```
