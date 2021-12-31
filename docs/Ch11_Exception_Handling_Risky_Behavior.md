@@ -556,3 +556,26 @@ public class Washer {
 
 
 *图 13 - `main()`方法抛出异常的特别情形*
+
+
+### 要么处理，要么声明。这是铁律。
+
+**Handle or Declare. It's the law**.
+
+**到这里，就见识过了在调用某个风险（有异常抛出）的方法时，满足编译器检查的两个方式**。
+
+1. **对异常进行处理（HANDLE）**
+
+将有风险的调用，放在某个 `try/catch` 中
+
+```java
+try {
+    laundry.doLaundry();
+} catch (ClothingException cex) {
+    // 这里的捕获参数，最好是一个可以捕获到 doLaundry() 所
+    // 抛出的全部异常、足够大的异常类类型。不然编译器仍然
+    // 会抱怨没有对所有异常进行捕获。
+    // 
+    // 恢复代码
+}
+```
