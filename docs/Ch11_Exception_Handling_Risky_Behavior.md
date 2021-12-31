@@ -706,10 +706,28 @@ try {
 **A `try` with only a `finally`(no `catch`) must still declare the exception**.
 
 ```java
-// 不带 `catch` 的 `try`，不满足 `handl/declare` 法则
+// 不带 `catch` 的 `try`，不满足 `handle/declare` 法则
 void go() throws FooException {
     try {
         x.doStuff();
     } finally {}
 }
 ```
+
+## 代码厨房
+
+> 虽然后面的代码不需要自己去编写（可以在后面找到已经编写好的），然如果能够自己动手编写，就会有很多乐趣。
+>
+> 本章接下来的部分是可选的；可使用这个 音乐app 的全部已编写好的代码；
+>
+> 但如果要了解有关 `JavaSound` 声音子系统的更多细节，那么就应该继续看下去。
+
+### 构造真实的声音
+
+**Making actual sound**
+
+还记得在本章开头的地方，我们在那里对 MIDI 数据如何保存那些，描述应该演奏些什么（以及该怎样演奏）的指令进行了审视，同时还提及了 MIDI 数据并没有真实地 *创建出我们所听到的任何声音*。要让声音从喇叭中发出来，就必须通过启动某种实体MIDI乐器，抑或“虚拟”乐器（软件合成器），把 MIDI数据交给一些接受 MIDI 指令，并将这些 MIDI 指令渲染出来的 MIDI 设备。这里只会用到软件装置，而下面就是 `JavaSound` 声音子系统中的运作方式：
+
+**需要 *四种* 东西**：
+
+
