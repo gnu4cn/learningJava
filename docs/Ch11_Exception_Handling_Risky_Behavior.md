@@ -728,6 +728,44 @@ void go() throws FooException {
 
 还记得在本章开头的地方，我们在那里对 MIDI 数据如何保存那些，描述应该演奏些什么（以及该怎样演奏）的指令进行了审视，同时还提及了 MIDI 数据并没有真实地 *创建出我们所听到的任何声音*。要让声音从喇叭中发出来，就必须通过启动某种实体MIDI乐器，抑或“虚拟”乐器（软件合成器），把 MIDI数据交给一些接受 MIDI 指令，并将这些 MIDI 指令渲染出来的 MIDI 设备。这里只会用到软件装置，而下面就是 `JavaSound` 声音子系统中的运作方式：
 
-**需要 *四种* 东西**：
+**需要 *四个* 东西**：
+
+![`JavaSound`中演奏出声音的四个要件](images/Ch11_14.png)
 
 
+*图 14 - `JavaSound`中演奏出声音的四个要件*
+
+**同时需要五个步骤**：
+
+1. 获取到一个 **`Sequencer`** 对象并打开他
+
+```java
+Sequencer player = MidiSystem.getSequencer();
+player.open();
+```
+
+2. 构造一个新的 **序列（Sequence）**
+
+```java
+Sequence seq = new Sequence(timing, 4);
+```
+
+
+3. 从新构造的 `Sequence` 获取到一个新的 **音轨（Track）**
+
+```java
+Track t = seq.createTrack();
+```
+
+4. 使用一系列的 **`MidiEvent`**s 来对音轨进行填充，然后把这个`Sequence`对象交给音序器
+
+```java
+t.add(myMidiEvent);
+player.setSetquence(seq);
+```
+
+5. 按下播放按钮（ ▶  ）。必须要启动 `start()` 这个音序器才行
+
+```java
+player.start();
+```
