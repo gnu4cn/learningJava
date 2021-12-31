@@ -484,4 +484,33 @@ try {
 
 **You can't put bigger baskets above smaller baskets**
 
+当然可以这样做，只是这样做编译不了的。这些捕获块与挑选最匹配的过载方法不一样。对于多个的 `catch` 代码块，JVM只是简单地从第一个捕获块开始，一直往下运作，直到发现一个可以处理异常的、足够宽泛的（也就是在继承树上足够高）捕获为止。若第一个`catch`代码块的就是 `catch (Exception ex)`，那么编译器就已经知道，没有地方再添加其他捕获参数了 -- 所以永远不会走到后面的捕获代码块。
+
+![不良的`catch`代码块顺序](images/Ch11_12.png)
+
+
+*图 12 - 不良的`catch`代码块顺序*
+
+
+> 在有着多个 `catch` 代码块时，捕获参数的大写至关重要（Size matters when you have multiple catch blocks）。有着最大“筐子”的捕获参数，就必须放在底部。否则那些较小的“筐子”就变得无用了。
+>
+> ***（继承树上）同辈份异常类的顺序没什么讲究，因为他们不会捕获到归属对方的异常***。
+>
+> 没人会介意把 `ShirtException` 放在 `LingrieException` 之上。因为尽管由于 `ShirtException` 可以捕获到其他一些类（他自己的那些子类）， 而相比于 `LingrieException` 是个更大（更宽泛）的类型，但 `ShirtException` 是捕获不到 `LingrieException` 的，因此就不存在问题。
+
+
+## 在不打算处理异常时，只需躲开即可
+
+**When you don't want to handle an exception... just duck it**
+
+**在不打算对某个异常进行处理时，可通过 *声明* 这个异常，来 *躲开* 该异常**。
+
+**If you don't want ot handle an exception, you can *duck* it by *declaring* it**.
+
+> 这是什么鬼？我可不会捕获这个鬼东西。我要闪人了 -- 就让后来者去处理吧。
+
+在对某个风险方法进行调用时，编译器需要明确调用者对此有所知悉。多数情况下，是通过把风险调用包装在 `try/catch` 中告知编译器的。但也有别的方式，那就是 *避开* 异常，而让那些对这个调用方法进行调用的方法去捕获该异常。
+
+很简单 -- 只需要 *声明* 一下调用方法抛出异常即可。虽然在调用方法中声明了抛出异常，但抛出异常的却不是调用方法，这一点无关紧要。调用方法仍然是让异常直接通过的方法（It's easy -- all you have to do is *declare* that *you* throw the exceptions. Even though, technically, *you* aren't the one doing the throwing, it doesn't matter. You're still the one letting the exception whiz right on by）。
+
 
