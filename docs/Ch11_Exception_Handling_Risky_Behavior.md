@@ -769,3 +769,64 @@ player.setSetquence(seq);
 ```java
 player.start();
 ```
+
+### 一个非常早期的声音播放器 app
+
+**Your very first sound player app**
+
+编写下面的代码并运行。就会听到有人在演奏钢琴上的一个音符！（好吧，可能不是某 *人*，而是某 *物* 在演奏。）
+
+```java
+package com.xfoss.BeatBox;
+
+// 不要忘记导入 midi 包
+import javax.sound.midi.*;
+
+public class MiniMiniMusicApp {
+    public static void main (String [] args){
+        MiniMiniMusicApp mini = new MiniMiniMusicApp();
+        mini.play();
+    }
+
+    public void play () {
+        try {
+            // 获取一个音序器 Sequencer 并把他打开（这样就可以对其进行使用......
+            // 音序器不会一来就是打开的）
+            Sequencer player = MidiSystem.getSequencer();
+            player.open();
+
+            // 不要急于了解这些音序 Sequence 构造器的参数。这里只需要拷贝下来
+            // 就可以了（把他们当作已编写好的参数）
+            Sequence seq = new Sequence(Sequence.PPQ, 4);
+
+            // 从上面构造的 Sequence 实例请求一个音轨 Track。
+            // 请记住音轨是存在于音序上的，同时 MIDI 数据又
+            // 存在于音轨中
+            Track track = seq.createTrack();
+
+            // 把一些 MIDI 事件（MidiEvent）放入到音轨中。这部分就更是
+            // 些已经编写好的代码了。需要留意的就是 setMessage() 方法的
+            // 那些参数，还有 MidiEvent 构造器的那些参数。接下来就会看到
+            // 这些参数。
+            ShortMessage a = new ShortMessage();
+            a.setMessage(144, 1, 44, 100);
+            MidiEvent noteOn = new MidiEvent(a, 1);
+            track.add(noteOn);
+
+            ShortMessage b = new ShortMessage();
+            b.setMessage(128, 1, 44, 100);
+            MidiEvent noteOff = new MidiEvent(b, 16);
+            track.add(noteOff);
+
+            // 把这个音序交给音序器（就好比把光盘放入到光盘播放器）
+            player.setSequence(seq);
+            // 启动（start()）音序器，就好比按下 PLAY 按键
+            player.start();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+}
+```
+
+
