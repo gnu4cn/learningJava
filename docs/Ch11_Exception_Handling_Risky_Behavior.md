@@ -187,7 +187,7 @@ try {
 
 在编写的代码会抛出异常时，就必须 *声明* 那个异常。
 
-1. **具风险性的方法的异常抛出代码**：
+1) **具风险性的方法的异常抛出代码**：
 
 ```java
 // 该方法 必须 告诉（通过声明）外部世界，他抛出了一个 BadException
@@ -199,7 +199,7 @@ public void takeRisk () throws BadException {
 }
 ```
 
-2. **调用这个风险方法的代码**：
+2) **调用这个风险方法的代码**：
 
 ```java
 public void crossFingers () {
@@ -222,9 +222,9 @@ public void crossFingers () {
 
 **编译器要确保**：
 
-1. 在代码中抛出了某个异常时，就必须在方法声明中，使用关键字 `throws` 对其进行声明。
+1) 在代码中抛出了某个异常时，就必须在方法声明中，使用关键字 `throws` 对其进行声明。
 
-2. 在调用到某个抛出了异常的方法时（也就是说，该方法声明了他会抛出异常），就必须就已经注意到可能的异常进行 *通告（acknowledge）*。让编译器得以放行的一种方式，就是把调用包装在一个 `try/catch` 中。（本章后面就会讲到第二种方法）
+2) 在调用到某个抛出了异常的方法时（也就是说，该方法声明了他会抛出异常），就必须就已经注意到可能的异常进行 *通告（acknowledge）*。让编译器得以放行的一种方式，就是把调用包装在一个 `try/catch` 中。（本章后面就会讲到第二种方法）
 
 ![运行时异常与非运行时异常](images/Ch11_07.png)
 
@@ -402,7 +402,7 @@ main方法的结束
 *图 10 - `Exception` 继承树*
 
 
-1. **可使用那些抛出异常的超类，来进行异常的声明**。
+1) **可使用那些抛出异常的超类，来进行异常的声明**。
 
 ```java
 public void doLaundry () throws ClothingException {
@@ -413,7 +413,7 @@ public void doLaundry () throws ClothingException {
                                 // 分别进行声明
 ```
 
-2. **使用所抛出异常的超类，就可以 捕获 这些异常**。
+2) **使用所抛出异常的超类，就可以 捕获 这些异常**。
 
 ```java
 try {
@@ -564,7 +564,7 @@ public class Washer {
 
 **到这里，就见识过了在调用某个风险（有异常抛出）的方法时，满足编译器检查的两个方式**。
 
-1. **对异常进行处理（HANDLE）**
+1) **对异常进行处理（HANDLE）**
 
 将有风险的调用，放在某个 `try/catch` 中
 
@@ -581,7 +581,7 @@ try {
 ```
 
 
-2. **声明异常（规避异常, DECLARE(duck it)）**
+2) **声明异常（规避异常, DECLARE(duck it)）**
 
 声明调用方法会抛出与所调用的风险方法同样的异常（Declare the YOUR method throws the same exceptions as the risky method you're calling）。
 
@@ -656,7 +656,7 @@ public class MusicTest1 {
 ### 异常处理的四条规则
 
 
-1. **不能在没有 `try` 的情况下使用 `catch` 或 `finally`关键字**
+1) **不能在没有 `try` 的情况下使用 `catch` 或 `finally`关键字**
 
 **You cannot have a `catch` or `finally` without a `try`**
 
@@ -671,7 +671,7 @@ void go () {
 }
 ```
 
-2. **在 `try` 与 `catch` 直接不能再放置代码**
+2) **在 `try` 与 `catch` 直接不能再放置代码**
 
 **You cannot put code between the `try` and the `catch`**
 
@@ -685,7 +685,7 @@ catch (Exception ex) {}
 ```
 
 
-3. **`try`后面只能/且必须有 `catch` 或/及 `finally`**
+3) **`try`后面只能/且必须有 `catch` 或/及 `finally`**
 
 **A `try` MUST be followed by either a `catch` or a `finally`**
 
@@ -701,7 +701,7 @@ try {
 }
 ```
 
-4. **在`try`后只有`finally`（不带`catch`）时，仍然必须对异常进行声明**。
+4) **在`try`后只有`finally`（不带`catch`）时，仍然必须对异常进行声明**。
 
 **A `try` with only a `finally`(no `catch`) must still declare the exception**.
 
@@ -737,34 +737,34 @@ void go() throws FooException {
 
 **同时需要五个步骤**：
 
-1. 获取到一个 **`Sequencer`** 对象并打开他
+1) 获取到一个 **`Sequencer`** 对象并打开他
 
 ```java
 Sequencer player = MidiSystem.getSequencer();
 player.open();
 ```
 
-2. 构造一个新的 **序列（Sequence）**
+2) 构造一个新的 **序列（Sequence）**
 
 ```java
 Sequence seq = new Sequence(timing, 4);
 ```
 
 
-3. 从新构造的 `Sequence` 获取到一个新的 **音轨（Track）**
+3) 从新构造的 `Sequence` 获取到一个新的 **音轨（Track）**
 
 ```java
 Track t = seq.createTrack();
 ```
 
-4. 使用一系列的 **`MidiEvent`**s 来对音轨进行填充，然后把这个`Sequence`对象交给音序器
+4) 使用一系列的 **`MidiEvent`**s 来对音轨进行填充，然后把这个`Sequence`对象交给音序器
 
 ```java
 t.add(myMidiEvent);
 player.setSetquence(seq);
 ```
 
-5. 按下播放按钮（ ▶  ）。必须要启动 `start()` 这个音序器才行
+5) 按下播放按钮（ ▶  ）。必须要启动 `start()` 这个音序器才行
 
 ```java
 player.start();
@@ -862,7 +862,7 @@ ShortMessage a = new ShortMessage();
 a.setMessage(144, 1, 44, 10);
 ```
 
-3）使用这个 `Message` 对象，来构造出一个新的 `MidiEvent` 对象
+3) 使用这个 `Message` 对象，来构造出一个新的 `MidiEvent` 对象
 
 ```java
 // 所有指令都是在消息中，而 MidiEvent对象加入则是，应在何时
@@ -887,3 +887,14 @@ track.add(noteOn);
 
 MIDI 消息保存了 MIDI 事件中指出要做什么的部分。即要音序器干什么的具体指令。指令的第一个参数，总会是消息/报文的类型。而其他三个参数的取值，就依赖于报文的类型。比如，类型编号为 `144` 的报文，表示的是 `NOTE ON`类型。而音序器为了执行一个 `NOTE ON` 指令，就需要了解其他一些东西。可以设想音序器在讲，“好的，我将演奏一个音符，但是 *在哪个通道* 呢？也就是说，是要演奏一个鼓的音符，还是钢琴的音符？还有是 *哪个音符* 呢？ 是中音 C 调，还是 D 调高音？还有在演奏时，以 *什么样的速度* 来演奏这个音符呢？”
 
+> `Message`对象，讲了要做什么，`MidiEvent`对象讲的是何时来做这些（The `Message` says what to do, the `MidiEvent` says when to do it）。
+
+要构造一个 MIDI 报文，就要构造一个 `ShortMessage` 类的实例，并在运行其 `setMessage()` 方法时，传入报文的四个参数。但要记住，报文只讲了要做什么，因此还需要把报文“发出”的时间添加上，从而让报文成为一个事件（But remember, the message says only *what* to do, so you still need to stuff the message into an event that adds *when* that message should 'fire'）。
+
+**报文剖析（Anatomy of a message）**
+
+`setMessage()` 方法的第一个参数，表示的是报文的 “类型（type）”，根据这个表示类型的参数的不同，其他三个参数就会表示不同的东西。
+
+![MIDI 报文解析](images/Ch11_15.png)
+
+*图 15 - MIDI 报文解析*

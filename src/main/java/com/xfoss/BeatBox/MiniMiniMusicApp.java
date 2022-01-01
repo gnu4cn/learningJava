@@ -5,6 +5,7 @@ import javax.sound.midi.*;
 public class MiniMiniMusicApp {
     public static void main (String [] args){
         MiniMiniMusicApp mini = new MiniMiniMusicApp();
+
         mini.play();
     }
 
@@ -24,6 +25,12 @@ public class MiniMiniMusicApp {
             ShortMessage b = new ShortMessage();
             b.setMessage(128, 1, 44, 100);
             MidiEvent noteOff = new MidiEvent(b, 16);
+            track.add(noteOff);
+
+            noteOn = new MidiEvent(a, 8);
+            track.add(noteOn);
+
+            noteOff = new MidiEvent(b, 24);
             track.add(noteOff);
 
             player.setSequence(seq);

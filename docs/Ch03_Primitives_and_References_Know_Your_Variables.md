@@ -122,15 +122,15 @@ __对象引用__ 只是另一个变量值（An object reference is just another 
 | 1 | 3 | 2 |
 
 
-1. 声明一个引用变量（Declare a reference variable）
+1) 声明一个引用变量（Declare a reference variable）
 
 告诉JVM为某个引用变量分配空间，同时给变量命名。引用变量的类型，就固定下来了（`Dog`）。
 
-2. 创建一个对象
+2) 创建一个对象
 
 告诉虚拟机给新的对象，在内存堆上分配空间。
 
-3. 将对象和对象引用连接起来（Link the object and the reference）
+3) 将对象和对象引用连接起来（Link the object and the reference）
 
 将新的对象赋值给引用变量（实际上是把新对象在内存堆上的地址，赋值给对象的引用）。
 
