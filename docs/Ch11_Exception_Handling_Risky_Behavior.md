@@ -829,4 +829,14 @@ public class MiniMiniMusicApp {
 }
 ```
 
+### 构造一个 `MidiEvent` （乐曲数据）
+
+**Making a `MidiEvent` (song data)**
+
+一个 `MidiEvent` 对象，就是构成乐曲组成部分的一条指令（A `MidiEvent` is an instruction for part of a song）。而一系列的 `MidiEvent` 对象，就像是乐谱一样，或者像是自动钢琴的卷轴。这里所关心的绝大部分`MidiEvent`，都是描述 ***要做的事*** 以及 ***做这事的时刻***。时间部分的时刻尤其重要，因为对于音乐来说，时机就是全部（The moment in time part matters, since timing is everything in music）。音符接着一个音符。正是由于 `MidiEvent`如此详细，所以就必须要讲清楚，在什么时候 *开始* 演奏音符（即一个 `NOTE ON` 事件），还有在什么时候 *停止* 演奏这个音符（即 `NOTE OFF` 事件）。那么就可以联想到，在“开始演奏音符 G”（`NOTE ON`）消息之前，去发出“停止演奏音符 G”（`NOTE OFF` 消息），是不行的。
+
+MIDI 指令实际上是放在 `Message` 类类型的对象中的；而 `MidiEvent` 则是结合 `Message`与发出这个`Message`的时间维度上的某个时刻，而的来的。也就是说，某个`Message`对象可能为 “开始演奏中音C调”，然后对应的`MidiEvent`对象可能说的是“在第4拍处出发这个消息”。
+
+那么这样看来，总是需要（同时）一个 `Message` 与一个 `MidiEent`。
+
 
