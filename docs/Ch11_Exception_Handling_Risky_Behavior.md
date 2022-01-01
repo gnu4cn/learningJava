@@ -839,4 +839,51 @@ MIDI 指令实际上是放在 `Message` 类类型的对象中的；而 `MidiEven
 
 那么这样看来，总是需要（同时）一个 `Message` 与一个 `MidiEent`。
 
+`Message` 对象将的是要做 *什么*，而 `MidiEvent` 讲的是 *什么时候* 做这个事情。
+
+> `MidiEvent` 对象描述了要做 **什么** 以及 **何时** 做这个事情。
+>
+> 每条指令都必须包含用于该指令的时刻（Every instruction must include the **timing** for that instruction）。
+>
+> 也就是说，某个动作应该在 **哪一** 拍出现（In other words, at which **beat** that thing should happen）。
+
+
+1) 构造一个 `Message` 对象
+
+```java
+ShortMessage a = new ShortMessage();
+```
+
+2) 把 **指令** （`Instruction`） 放在 `Message` 对象里
+
+```java
+// 此消息（报文，message）讲的是，“开始演奏 44 号音符”
+// （在下面的内容中，将涉及其他 3 个数字说的是什么）
+a.setMessage(144, 1, 44, 10);
+```
+
+3）使用这个 `Message` 对象，来构造出一个新的 `MidiEvent` 对象
+
+```java
+// 所有指令都是在消息中，而 MidiEvent对象加入则是，应在何时
+// 触发指令的、时间维度中的时刻。这个 MidiEvent 说的就是在
+// 第一拍的时候，触发消息 'a'。
+MidiEvent noteOn = new MidiEvent(a, 1);
+```
+
+4) 把`MidiEvent`添加到 **音轨`Track`上**
+
+```java
+// 音轨（a Track） 保存了全部的 MidiEvent 对象。音序 Sequence 对象
+// 是通过各个 MidiEvent 事件对象应在何时发生的方式，来组织这些
+// MidiEvent 对象的，且随后的音序器 Sequencer 对象，便以这种顺序，把
+// 这些 MidiEvent 对象回放出来。在时间维度上的某个精准的同一时刻，可以有
+// 很多 MidiEvent 事件发出。比如，可能想要同时演奏两个音符，或者要两种
+// 不同乐器在同一时间演奏不同的声音等等。
+track.add(noteOn);
+```
+
+### MIDI 消息/报文：`MidiEvent`对象的核心所在
+
+MIDI 消息保存了 MIDI 事件中指出要做什么的部分。即要音序器干什么的具体指令。指令的第一个参数，总会是消息/报文的类型。而其他三个参数的取值，就依赖于报文的类型。比如，类型编号为 `144` 的报文，表示的是 `NOTE ON`类型。而音序器为了执行一个 `NOTE ON` 指令，就需要了解其他一些东西。可以设想音序器在讲，“好的，我将演奏一个音符，但是 *在哪个通道* 呢？也就是说，是要演奏一个鼓的音符，还是钢琴的音符？还有是 *哪个音符* 呢？ 是中音 C 调，还是 D 调高音？还有在演奏时，以 *什么样的速度* 来演奏这个音符呢？”
 
