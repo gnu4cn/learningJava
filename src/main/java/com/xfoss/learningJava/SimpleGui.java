@@ -33,5 +33,6 @@ public class SimpleGui implements ActionListener {
 	public void actionPerformed (ActionEvent ev) {
 		JButton x = (JButton) ev.getSource();
 		x.setText("我已经被点击了!");
+        System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
 	}
 }
