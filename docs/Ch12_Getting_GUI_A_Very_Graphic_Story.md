@@ -32,6 +32,37 @@
 在有了一个 `JFrame` 之后，通过把物件（小部件，“widgets”）添加到这个 `JFrame`，这样就把这些物件放进了这个`JFrame`所表示的视窗中了。可以添加到`JFrame`的 `Swing` 组件相当多；在 `javax.swing`包中可以找到他们。最常用部件包括 `JButton`、`JRadioButton`、`JCheckBox`、`JLabel`、`JList`、`JScrollPane`、`JSlider`、`JTextArea`、`JTextField`，以及`JTable`等。其中大部分使用起来都很简单，但有些（比如 `JTable`）用起来就有点复杂。
 
 
+### 构造一个GUI不难：
+
+1) 构造一个帧（一个 `JFrame`）:
+
+
+```java
+JFrame frame = new JFrame();
+```
+
+2) 构造一个小部件（widget, 如按钮、文本字段等等）：
+
+```java
+JButton button = new JButton("点我");
+```
+
+3) 把这个小部件添加到帧
+
+```java
+// 并没有 直接 把物件添加到帧。可把帧当作是视窗周围的
+// 窗框（the trim around the window），而把物件放在窗玻璃上的
+frame.getContentPane().add(button);
+```
+
+4) 显示这个帧（给予其一个尺寸并令其可见）
+
+```java
+frame.setSize(300, 300);
+frame.setVisible(true);
+```
+
+
 ## 笔记
 
 * `listener interface` -- 是收听者（listener）和事件源（event source, 窗口/GUI部件，window/widget）之间的桥梁
