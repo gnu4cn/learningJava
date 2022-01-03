@@ -921,7 +921,7 @@ MIDI 消息保存了 MIDI 事件中指出要做什么的部分。即要音序器
 
 **Where we're headed with the rest of the `CodeKitchens`**
 
-### 第15章：目标app
+**第15章：目标app**
 
 在做完后，就会有个可用的 `BeatBox` app，同时也是一个 `Drum Chat`的客户端。那需要学习有关GUI（包括事件处理）、`I/O`、网络通信以及线程等知识。后面连续三章（12、13及14）将先后学习这些内容。
 
@@ -929,3 +929,15 @@ MIDI 消息保存了 MIDI 事件中指出要做什么的部分。即要音序器
 
 
 *图 17 - 完成后的 `BeatBox` app*
+
+---
+
+**第12章：MIDI 事件**
+
+在第12章，会构建一个小型的、给MIDI 音乐的节拍绘制上随机矩形的 "音乐视频（music video）"（这样讲是有点牵强的，This CodeKitchen lets us build a little "music video"(bit of a stretch to call it that...) that draws random rectrangles to the beat of the MIDI music）。那里将学习到构建并演奏很多的MIDI事件（相比于这里的仅仅一两个事件而言）。
+
+
+![第12章构建的 `BeatBox` app](images/Ch11_18.png)
+
+
+*图 18 - 第12章构建的 `BeatBox` app*
