@@ -66,18 +66,28 @@ frame.setVisible(true);
 
 
 ```java
-// 
+// 不要忘了导入这个 swing 包（这里的 ‘x’ 表示 'extension'）
 import javax.swing.*;
 
 public class SimpleGui1 {
     public static void main (String [] args) {
+        // 构造一个帧与按钮（可把希望在按钮上显示的文本，传递
+        // 给按钮的构造器）
         JFrame frame = new JFrame();
         JButton button = new JButton("点击我");
 
+        // 这行语句使得程序可在关闭视窗时，尽快退出（若没有
+        // 这行语句，那么程序就会一直在屏幕上）
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // 将上面构造的按钮，添加到帧的窗格
         frame.getContentPane().add(button);
+
+        // 给予该帧一个尺寸，是以像素为单位的
         frame.setSize(300, 300);
+
+        // 最后，让该帧可见！！！（若忘记这一步，那么在运行
+        // 这段代码时什么也看不到。）
         frame.setVisible(true);
     }
 }
