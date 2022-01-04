@@ -171,3 +171,20 @@ public void changeIt () {
 > 注：可以看着是注册一个 GUI 组件的事件收听者。
 
 **收听者 `interface`** 是 **收听者（`listener`）** （你）与 **事件源（event source）** （按钮） 之间的桥梁。
+
+`Swing` GUI 的那些组件，都属于是事件源。在 Java 词汇表中，事件源指的是可将用户动作（鼠标点击、键盘按键及关闭视窗等），转换为事件的对象（In Java terms, an event source is an object that can turn user actions(click a mouse, type a key, close a window) into events）。与Java中所有其他东西一样，事件本身也是以对象表示的。称之为某事件类的一个对象。通读 API 文档中的 `java.awt.event` 包就会发现，那里有着一大堆的事件类（很容易区分出来 -- 他们的名字中都有 `Event`）。将发现 `MouseEvent`、`KeyEvent`、`WindowEvent`、`ActionEvent`及其他好几种。
+
+事件 *源*（比如一个按钮）在用户执行某些重要的操作时（比如 *点击* 按钮），就会创建处一个 *事件对象（event object）*。我们所要编写的大部分代码（以及这里的全部代码），都将 *接收* 事件，而不会 *创建* 事件。也就是说，编程生涯中花的大部分时间，都是作为事件的 *收听者*，而不是作为事件 *源*。
+
+每种事件类型（即每个事件类），都有着一个相匹配的收听者 `interface`。在希望收听到那些 `MouseEvent` 事件时，就要去实现 `MouseLister` `interface`。要收听那些 `WindowEvent` 事件，就去实现 `WindowLister`。明白了吧。还有记住这些 `interface` 的规则 -- 要实现某个 `interface`，就要 *声明* 实现了他（`class Dog implement Pet`），这意味着必须那个 `interface` 中全部方法的具体实现代码。
+
+因为事件本身有着各种区别，造成有些 `interface` 有着不止一个的方法。比如在实现 `MouseListener`时，就会收到 `mousePressed`、`mouseReleased`、`mouseMoved`等等不同事件。尽管这些不同鼠标事件都叫做`MouseEvent`，他们在 `interface` 中却都有单独方法。在实现 `MouseListener`时，在用户（猜测到的）按下鼠标时，就会调用到 `mousePressed()`方法。而在用户放开手指时，就会调用到`mouseReleased()`方法。那么对于这些鼠标事件，就只有一个事件 *对象*，那就是 `MouseEvent`，但却有多个不同的事件 *方法*，用以表示鼠标事件的不同 *类别*。
+
+> 在实现收听者 `interface` 时，就是在赋予给按钮某种呼回的方式。而这个 `interface`，正是这个呼回方法声明的地方。
+>
+> When you implement a listener interface, you give the button a way to call you back. The interface is where the call-back method is declared.
+
+![各种不同的收听者 `interface`](images/Ch12_04.png)
+
+
+*图 4 - 各种不同的收听者 `interface`*
