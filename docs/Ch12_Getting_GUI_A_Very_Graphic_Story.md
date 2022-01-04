@@ -62,6 +62,27 @@ frame.setSize(300, 300);
 frame.setVisible(true);
 ```
 
+### 第一个GUI：在帧上的一个按钮
+
+
+```java
+// 
+import javax.swing.*;
+
+public class SimpleGui1 {
+    public static void main (String [] args) {
+        JFrame frame = new JFrame();
+        JButton button = new JButton("点击我");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.getContentPane().add(button);
+        frame.setSize(300, 300);
+        frame.setVisible(true);
+    }
+}
+```
+
 
 ## 笔记
 

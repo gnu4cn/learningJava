@@ -160,7 +160,10 @@ if (refVar != null && refVar.isValidType()) {
 
 __在 Java API 中，类是以包的形式分组的（In the Java API, classes are grouped into packages）__。
 
-![In the Java API, classed are grouped into packages](images/Ch06_01.png)
+![在 Java API 中，类被分组为各种包](images/Ch06_01.png)
+
+
+*图 1 - 在 Java API 中，类被分组为各种包*
 
 __要使用API中的某个类，就要知道他在哪个包里头__。
 
