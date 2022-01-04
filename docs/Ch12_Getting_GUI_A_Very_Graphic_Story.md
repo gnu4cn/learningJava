@@ -170,6 +170,8 @@ public void changeIt () {
 
 > 注：可以看着是注册一个 GUI 组件的事件收听者。
 
+**收听者 `interface`** 是 **收听者（`listener`）** （你）与 **事件源（event source）** （按钮） 之间的桥梁。
+
 ## 笔记
 
 * `listener interface` -- 是收听者（listener）和事件源（event source, 窗口/GUI部件，window/widget）之间的桥梁
