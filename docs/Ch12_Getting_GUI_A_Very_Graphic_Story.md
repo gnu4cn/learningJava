@@ -361,4 +361,15 @@ graphics.fillOval(70, 70, 100, 100);
 
 除了方块和圆形之外，还可以绘制很多很多的形状；`Java2D` API 充满了有趣、复杂的图形方法。
 
+![往GUI上放东西之二：运用 `Java2D` API 在小部件上绘制图形](images/Ch12_08.png)
 
+
+3) 把 JPEG 图片放在小部件上
+
+可将自己的图像放在某个小部件上。
+
+```java
+graphics.drawImage(myPic, 10, 10, this);
+```
+
+![往GUI上放东西之三：将图像放在小部件上](images/Ch12_09.png)
