@@ -345,5 +345,20 @@ frame.getContentPane().add(myButton);
 
 `javax.swing`包有着十多种小部件类型。
 
+![往GUI上放东西之一：把`javax.swing`中的小部件放在帧上](images/Ch12_07.png)
+
+
+*图 7 - 往GUI上放东西之一：把`javax.swing`中的小部件放在帧上*
+
 
 2) **在小部件上绘制 2D 图形**
+
+运用图形对象，来绘制形状。
+
+```java
+graphics.fillOval(70, 70, 100, 100);
+```
+
+除了方块和圆形之外，还可以绘制很多很多的形状；`Java2D` API 充满了有趣、复杂的图形方法。
+
+
