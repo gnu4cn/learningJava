@@ -278,4 +278,12 @@ public class SimpleGui implements ActionListener {
 }
 ```
 
+## 收听者、事件源与事件
 
+**Listeners，Sources，and Events**
+
+对于今后闪亮的Java职业生涯而言，咱们自己多半不会成为事件 *源*。
+
+（不管在你的社交圈子中有多么的优秀）。
+
+要习惯这一点。*作为Java程序员，做好事件收听者就够了*。
