@@ -34,7 +34,7 @@
 
 ### 构造一个GUI不难：
 
-1) 构造一个帧（一个 `JFrame`）:
+1) 构造一个视窗窗框（一个 `JFrame`）:
 
 
 ```java
@@ -47,22 +47,22 @@ JFrame frame = new JFrame();
 JButton button = new JButton("点我");
 ```
 
-3) 把这个小部件添加到帧
+3) 把这个小部件添加到窗框
 
 ```java
-// 并没有 直接 把物件添加到帧。可把帧当作是视窗周围的
+// 并没有 直接 把物件添加到窗框。可把窗框当作是视窗周围的
 // 窗框（the trim around the window），而把物件放在窗玻璃上的
 frame.getContentPane().add(button);
 ```
 
-4) 显示这个帧（给予其一个尺寸并令其可见）
+4) 显示这个窗框（给予其一个尺寸并令其可见）
 
 ```java
 frame.setSize(300, 300);
 frame.setVisible(true);
 ```
 
-### 第一个GUI：在帧上的一个按钮
+### 第一个GUI：在窗框上的一个按钮
 
 
 ```java
@@ -71,7 +71,7 @@ import javax.swing.*;
 
 public class SimpleGui1 {
     public static void main (String [] args) {
-        // 构造一个帧与按钮（可把希望在按钮上显示的文本，传递
+        // 构造一个窗框与按钮（可把希望在按钮上显示的文本，传递
         // 给按钮的构造器）
         JFrame frame = new JFrame();
         JButton button = new JButton("点击我");
@@ -80,13 +80,13 @@ public class SimpleGui1 {
         // 这行语句，那么程序就会一直在屏幕上）
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // 将上面构造的按钮，添加到帧的窗格
+        // 将上面构造的按钮，添加到窗框的窗格
         frame.getContentPane().add(button);
 
-        // 给予该帧一个尺寸，是以像素为单位的
+        // 给予该窗框一个尺寸，是以像素为单位的
         frame.setSize(300, 300);
 
-        // 最后，让该帧可见！！！（若忘记这一步，那么在运行
+        // 最后，让该窗框可见！！！（若忘记这一步，那么在运行
         // 这段代码时什么也看不到。）
         frame.setVisible(true);
     }
@@ -334,7 +334,7 @@ addKeyListener(KeyListener k)
 
 **往GUI上放物件有三种方式**：
 
-1) **在帧上放置小部件（Put widgets on a frame）**
+1) **在窗框上放置小部件（Put widgets on a frame）**
 
 此方式可以把按钮、菜单、单选按钮等小部件放上去。
 
@@ -345,10 +345,10 @@ frame.getContentPane().add(myButton);
 
 `javax.swing`包有着十多种小部件类型。
 
-![往GUI上放东西之一：把`javax.swing`中的小部件放在帧上](images/Ch12_07.png)
+![往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上](images/Ch12_07.png)
 
 
-*图 7 - 往GUI上放东西之一：把`javax.swing`中的小部件放在帧上*
+*图 7 - 往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上*
 
 
 2) **在小部件上绘制 2D 图形**
@@ -379,8 +379,10 @@ graphics.drawImage(myPic, 10, 10, this);
 
 **Make your own drawing widget**
 
-在打算把自己的图形放到屏幕上时，最好是构造自己的可绘制小部件。随后把自己构造的可绘制小部件，就像按钮或所有其他小部件一样，丢到帧上即可，不同之处在于，可在自己构造的小部件上，显示出自己的图像来。此外甚至还可以令到这些图像以动画的形式动起来，或者制作出伴随鼠标点击，而改变屏幕上颜色的效果。
+在打算把自己的图形放到屏幕上时，最好是构造自己的可绘制小部件。随后把自己构造的可绘制小部件，就像按钮或所有其他小部件一样，丢到窗框上即可，不同之处在于，可在自己构造的小部件上，显示出自己的图像来。此外甚至还可以令到这些图像以动画的形式动起来，或者制作出伴随鼠标点击，而改变屏幕上颜色的效果。
 
 在 Java GUI 种实现这些特效，就是小菜一碟的事情（It's a piece of cake）。
 
 只需 **构造一个 `JPanel` 的子类，并重写 `JPanel` 中的一个方法 `paintComponent()`** 即可。
+
+把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗窗框显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
