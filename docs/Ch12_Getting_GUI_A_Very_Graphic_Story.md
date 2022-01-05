@@ -287,3 +287,10 @@ public class SimpleGui implements ActionListener {
 （不管在你的社交圈子中有多么的优秀）。
 
 要习惯这一点。*作为Java程序员，做好事件收听者就够了*。
+
+（实际上在社交生活中，做好一名默默的听别人讲话的听众，也是有利于社交技能的。）
+
+![Java GUI 事件处理：事件收听者、源与事件对象](images/Ch12_06.png)
+
+
+*图 6 - Java GUI 事件处理：事件收听者、源与事件对象*
