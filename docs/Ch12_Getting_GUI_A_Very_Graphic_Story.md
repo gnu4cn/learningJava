@@ -269,11 +269,13 @@ public class SimpleGui implements ActionListener {
     // 参数。这里知道事件发生了就足够了。
 	public void actionPerformed (ActionEvent ev) {
         // 可以这样写：
-		// JButton x = (JButton) ev.getSource();
-		// x.setText("我已经被点击了!");
+        // JButton x = (JButton) ev.getSource();
+        // x.setText("我已经被点击了!");
         //
-		b.setText("我已经被点击了!");
+        b.setText("我已经被点击了!");
         System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
 	}
 }
 ```
+
+
