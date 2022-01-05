@@ -70,26 +70,26 @@ frame.setVisible(true);
 import javax.swing.*;
 
 public class SimpleGui1 {
-public static void main (String [] args) {
-// 构造一个帧与按钮（可把希望在按钮上显示的文本，传递
-// 给按钮的构造器）
-JFrame frame = new JFrame();
-JButton button = new JButton("点击我");
+    public static void main (String [] args) {
+        // 构造一个帧与按钮（可把希望在按钮上显示的文本，传递
+        // 给按钮的构造器）
+        JFrame frame = new JFrame();
+        JButton button = new JButton("点击我");
 
-// 这行语句使得程序可在关闭视窗时，尽快退出（若没有
-// 这行语句，那么程序就会一直在屏幕上）
-frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 这行语句使得程序可在关闭视窗时，尽快退出（若没有
+        // 这行语句，那么程序就会一直在屏幕上）
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-// 将上面构造的按钮，添加到帧的窗格
-frame.getContentPane().add(button);
+        // 将上面构造的按钮，添加到帧的窗格
+        frame.getContentPane().add(button);
 
-// 给予该帧一个尺寸，是以像素为单位的
-frame.setSize(300, 300);
+        // 给予该帧一个尺寸，是以像素为单位的
+        frame.setSize(300, 300);
 
-// 最后，让该帧可见！！！（若忘记这一步，那么在运行
-// 这段代码时什么也看不到。）
-frame.setVisible(true);
-}
+        // 最后，让该帧可见！！！（若忘记这一步，那么在运行
+        // 这段代码时什么也看不到。）
+        frame.setVisible(true);
+    }
 }
 ```
 
@@ -115,18 +115,18 @@ frame.setVisible(true);
 
 - **在Windows 上运行 Java GUI程序时，按钮看起来会像个 Windows 的按钮吗**？
 
-    > 想要就可以。可从少数几种“外观及体验” -- 对应核心库中控制用户界面式样的几个类中加以选择。多数情况下，可以在至少两种外观之间加以选择：一种是被称作 ***`Metal`*** 的Java 标准的、同时也是平台的原生外观与体验；而这本书中使用的 Mac OS X 截屏，有的是 OS X 的 ***`Aqua`*** 主题，有的则是 ***`Metal`*** 外观与体验。
+> 想要就可以。可从少数几种“外观及体验” -- 对应核心库中控制用户界面式样的几个类中加以选择。多数情况下，可以在至少两种外观之间加以选择：一种是被称作 ***`Metal`*** 的Java 标准的、同时也是平台的原生外观与体验；而这本书中使用的 Mac OS X 截屏，有的是 OS X 的 ***`Aqua`*** 主题，有的则是 ***`Metal`*** 外观与体验。
 
 
 - **可以构造一个总是 Aqua 主题的程序吗？即便是运行在Windows下也要一直是Aqua主题的**。
 
-    > 注：Aqua 是苹果公司 MacOS 的主题外观。参见：[Aqua(GUI)](https://zh.wikipedia.org/wiki/Aqua_(GUI))
+> 注：Aqua 是苹果公司 MacOS 的主题外观。参见：[Aqua(GUI)](https://zh.wikipedia.org/wiki/Aqua_(GUI))
 
-    > 不可以。并不是在每个平台上全部外观与体验都是可行的。为了保持安全，那么就应该把外观和体验都设置为 ***`Metal`***，这样不管 app 运行在哪里，都能准确知道可以得到什么外观与体验，否则就干脆不指定外观与体验，而接受默认的样子。
+> 不可以。并不是在每个平台上全部外观与体验都是可行的。为了保持安全，那么就应该把外观和体验都设置为 ***`Metal`***，这样不管 app 运行在哪里，都能准确知道可以得到什么外观与体验，否则就干脆不指定外观与体验，而接受默认的样子。
 
 - **听说 `Swing` 慢如蜗牛，没有人用这玩意儿**。
 
-    > 以前或许是这样，现在可不是这样了。在性能差的机器上，或许会感受到 `Swing` 的痛点。但只要是一台不那么老旧的机器，在使用 Java 版本1.3及以后的版本的情况下，甚至感受不到 `Swing` GUI 与原生GUI的有什么不同。时至今日，`Swing`在所有类别的app中都有重度使用。 
+> 以前或许是这样，现在可不是这样了。在性能差的机器上，或许会感受到 `Swing` 的痛点。但只要是一台不那么老旧的机器，在使用 Java 版本1.3及以后的版本的情况下，甚至感受不到 `Swing` GUI 与原生GUI的有什么不同。时至今日，`Swing`在所有类别的app中都有重度使用。 
 
 
 ## 获取用户事件
@@ -137,7 +137,7 @@ frame.setVisible(true);
 
 ```java
 public void changeIt () {
-button.setText("我已被点击");
+    button.setText("我已被点击");
 }
 ```
 
@@ -232,50 +232,50 @@ import java.awt.event.*;
 // ActionListener”。
 // （按钮只会把事件，交给那些 ActionListener 的实现者们）
 public class SimpleGui implements ActionListener {
-JButton b;
-
-public static void main (String[] args) {
-try {
-SimpleGui gui = new SimpleGui();
-gui.go();
-} catch (HeadlessException e) {
-System.out.format("没有显示器，无法运行本程序。\n"
-                    + "错误代码\n"
-                    + "------------------------------\n%s\n", e);			
-                    }
-                    }
-
-                    public void go () {
-                    JFrame f = new JFrame ();
-                    b = new JButton ("点我");
-
-                    // 2) 在按钮上注册对按钮事件感兴趣。这行对按钮讲，“把我
-                    // 添加到你的收听者清单”。
-                    // 这里传递的参数，必须 是某个实现了 ActionListener 接口
-                    // 的类的对象！！！
-                    b.addActionListener(this);
-
-                    f.getContentPane().add(b);
-                    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    f.setSize(300, 300);
-                    f.setVisible(true);
-                    }
-
-                    // 3) 对 ActionListener 接口的 actionPerformed() 方法进行实现......
-                    // 这就是那个具体的事件处理方法!
-                    // 
-                    // 按钮调用他的这个方法，来让用户知道某个事件发生了。此方法会将一个
-                    // ActionEvent 对象，作为参数发送给收听者，不过这里并不需要这个
-                    // 参数。这里知道事件发生了就足够了。
-                    public void actionPerformed (ActionEvent ev) {
-                    // 可以这样写：
-                    // JButton x = (JButton) ev.getSource();
-                    // x.setText("我已经被点击了!");
-                    //
-                    b.setText("我已经被点击了!");
-                    System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
-                    }
-                    }
-                    ```
+	JButton b;
+	
+	public static void main (String[] args) {
+		try {
+		SimpleGui gui = new SimpleGui();
+		gui.go();
+		} catch (HeadlessException e) {
+			System.out.format("没有显示器，无法运行本程序。\n"
+					+ "错误代码\n"
+					+ "------------------------------\n%s\n", e);			
+		}
+	}
+	
+	public void go () {
+		JFrame f = new JFrame ();
+		b = new JButton ("点我");
+		
+        // 2) 在按钮上注册对按钮事件感兴趣。这行对按钮讲，“把我
+        // 添加到你的收听者清单”。
+        // 这里传递的参数，必须 是某个实现了 ActionListener 接口
+        // 的类的对象！！！
+		b.addActionListener(this);
+		
+		f.getContentPane().add(b);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setSize(300, 300);
+		f.setVisible(true);
+	}
+	
+    // 3) 对 ActionListener 接口的 actionPerformed() 方法进行实现......
+    // 这就是那个具体的事件处理方法!
+    // 
+    // 按钮调用他的这个方法，来让用户知道某个事件发生了。此方法会将一个
+    // ActionEvent 对象，作为参数发送给收听者，不过这里并不需要这个
+    // 参数。这里知道事件发生了就足够了。
+	public void actionPerformed (ActionEvent ev) {
+        // 可以这样写：
+        // JButton x = (JButton) ev.getSource();
+        // x.setText("我已经被点击了!");
+        //
+        b.setText("我已经被点击了!");
+        System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
+	}
+}
+```
 
 
