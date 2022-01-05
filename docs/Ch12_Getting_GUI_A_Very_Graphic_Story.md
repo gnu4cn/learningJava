@@ -190,3 +190,10 @@ public void changeIt () {
 
 
 *图 4 - 各种不同的收听者 `interface`*
+
+
+### 收听者与事件源之间通信的方式
+
+**How the listener and source communicate**：
+
+
