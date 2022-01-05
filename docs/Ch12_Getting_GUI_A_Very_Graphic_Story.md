@@ -294,3 +294,11 @@ public class SimpleGui implements ActionListener {
 
 
 *图 6 - Java GUI 事件处理：事件收听者、源与事件对象*
+
+
+## 答疑
+
+- **为什么编写的类自己不能成为事件源（Why can't I be a source of events）**？
+
+> 这是可以的。上面说的只是多数时候我们是事件接收者（至少在Java编程生涯的早期阶段是这样）。
+- **在上面的代码实例中，并未见识到传递给事件回调方法参数的重要性（the importance of the event object that's passed to the event call-back methods）。在有人调用了我的 `mousePressed` 方法时，我还需要其他的什么信息吗**？
