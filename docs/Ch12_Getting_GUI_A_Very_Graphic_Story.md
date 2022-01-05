@@ -300,5 +300,9 @@ public class SimpleGui implements ActionListener {
 
 - **为什么编写的类自己不能成为事件源（Why can't I be a source of events）**？
 
-> 这是可以的。上面说的只是多数时候我们是事件接收者（至少在Java编程生涯的早期阶段是这样）。
+> 这是可以的。上面说的只是多数时候我们是事件接收者（至少在Java编程生涯的早期阶段是这样）。我们所可能关注的绝大部分事件，都是由 Java API 中的类“启动”的，这样所有要做的，就是做好这些事件的收听者。当然也会遇到设计的程序需要某种定制事件的情形，比如一个股市盯盘 app 发现发生了 app 认为重要的事情时，就会抛出一个 `StockMarketEvent`的事件出来。这时就要把 `StockWatcher` 对象造成一个事件源，不仅如此，还要完成与按钮（或其他事件源）所完成的那些一样的事情 -- 为定制事件构造收听者`interface`，提供到事件注册方法（`addStockListener()`），以及在有人调用到`StockWatcher`对象时，将调用者（某个收听者）添加到他自己的收听者清单。完成这些之后，那么当出现某个股市事件时，`StockWatcher`对象，就会实例化出一个 `StockEvent`（另一个需要编写的类） 对象，并通过调用那些收听者的 `stockChanged(StockEvent ev)`方法，把这个对象发送给那些收听者。还有不要忘记，对于每种 *事件类型*，都必须要有一个 *相应的收听者接口（a matching listener interface）*（那么就需要创建一个带有 `stockChanged()` 方法的 `StockListener` 接口出来）。
+
+
 - **在上面的代码实例中，并未见识到传递给事件回调方法参数的重要性（the importance of the event object that's passed to the event call-back methods）。在有人调用了我的 `mousePressed` 方法时，我还需要其他的什么信息吗**？
+
+> 
