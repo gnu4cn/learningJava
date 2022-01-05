@@ -11,7 +11,7 @@ public class CustomWidgetTestDrive {
             f.add(p);
 
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setSize(300, 300);
+            f.setSize(1024, 768);
             f.setVisible(true);
         } catch (HeadlessException e) {
             System.out.format("没有显示器，无法运行本程序。\n"
@@ -23,7 +23,7 @@ public class CustomWidgetTestDrive {
 
 class CustomDrawPanel extends JPanel {
     public void paintComponent (Graphics g) {
-        g.setColor(Color.orange);
-        g.fillRect(20, 50, 100, 100);
+        Image image = new ImageIcon("Default.jpeg").getImage();
+        g.drawImage(image, 3, 4, this);
     }
 }

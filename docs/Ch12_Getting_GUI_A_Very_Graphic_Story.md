@@ -417,3 +417,15 @@ class MyDrawPanel extends JPanel {
 ![Java GUI 中编写自己的小部件示例：绘制一个橙色的矩形](images/Ch12_10.png)
 
 *图 10 - Java GUI 中编写自己的小部件示例：绘制一个橙色的矩形*
+
+
+## 在 `paintComponent()` 方法中干些有趣的事情
+
+**Fun things to do in `paintComponent()`**
+
+
+下面来看看在 `paintComponent()` 中可以干点别的什么事。最好玩的，就在自己开始体验的时候了。开始是以一些数字来操纵这个方法，然后检查类 `Graphics` 的API文档（后面还会发现，可以类 `Graphics` 本身的那些东西之外，还可以有更多玩法）。
+
+### 显示一张 `JPEG` 图片
+
+
