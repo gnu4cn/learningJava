@@ -223,9 +223,14 @@ public void changeIt () {
 package com.xfoss.learningJava;
 
 import javax.swing.*;
+// 一条新的、对 ActionListener 和 ActionEvent 所在包
+// 进行导入的导入语句
 import java.awt.event.*;
-import java.awt.*;
 
+
+// 1) 实现这个接口。这一行讲的是，“SimpleGui 的实例 IS-A
+// ActionListener”。
+// （按钮只会把事件，交给那些 ActionListener 的实现者们）
 public class SimpleGui implements ActionListener {
 	JButton b;
 	
@@ -244,6 +249,10 @@ public class SimpleGui implements ActionListener {
 		JFrame f = new JFrame ();
 		b = new JButton ("点我");
 		
+        // 2) 在按钮上注册对按钮事件感兴趣。这行对按钮讲，“把我
+        // 添加到你的收听者清单”。
+        // 这里传递的参数，必须 是某个实现了 ActionListener 接口
+        // 的类的对象！！！
 		b.addActionListener(this);
 		
 		f.getContentPane().add(b);
@@ -252,9 +261,18 @@ public class SimpleGui implements ActionListener {
 		f.setVisible(true);
 	}
 	
+    // 3) 对 ActionListener 接口的 actionPerformed() 方法进行实现......
+    // 这就是那个具体的事件处理方法!
+    // 
+    // 按钮调用他的这个方法，来让用户知道某个事件发生了。此方法会将一个
+    // ActionEvent 对象，作为参数发送给收听者，不过这里并不需要这个
+    // 参数。这里知道事件发生了就足够了。
 	public void actionPerformed (ActionEvent ev) {
-		JButton x = (JButton) ev.getSource();
-		x.setText("我已经被点击了!");
+        // 可以这样写：
+		// JButton x = (JButton) ev.getSource();
+		// x.setText("我已经被点击了!");
+        //
+		b.setText("我已经被点击了!");
         System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
 	}
 }
