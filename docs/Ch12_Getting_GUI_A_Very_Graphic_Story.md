@@ -210,3 +210,52 @@ public void changeIt () {
 按钮就是 `ActionEvent` 事件源，因此他必须知悉哪些对象是感兴趣的收听者。按钮有个`addActionListener()`方法，这样那些感兴趣对象（收听者）就有一种告诉按钮，他们对按钮的`ActionEvent`事件感兴趣的方式。
 
 由于某个潜在的收听者的运行，`addActionListener()`就运行起来了，此时按钮就取得整个方法的参数（到收听者对象的引用变量），并存储在他的一个清单中。在用户点击按钮时，按钮就会“启动”通过调用 `actionPerformed()`方法，在清单中的各个收听者上，“启动” 该事件。
+
+### 获取按钮的 `ActionEvent`
+
+1) 实现 `ActionListener` 的 `interface`
+
+2) 在按钮上进行注册（告诉按钮所编写的类想要收听按钮的事件）
+
+3) 定义一个事件处理方法（对 `ActionListener`接口的 `actionPerformed()` 方法加以实现）
+
+```java
+package com.xfoss.learningJava;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class SimpleGui implements ActionListener {
+	JButton b;
+	
+	public static void main (String[] args) {
+		try {
+		SimpleGui gui = new SimpleGui();
+		gui.go();
+		} catch (HeadlessException e) {
+			System.out.format("没有显示器，无法运行本程序。\n"
+					+ "错误代码\n"
+					+ "------------------------------\n%s\n", e);			
+		}
+	}
+	
+	public void go () {
+		JFrame f = new JFrame ();
+		b = new JButton ("点我");
+		
+		b.addActionListener(this);
+		
+		f.getContentPane().add(b);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setSize(300, 300);
+		f.setVisible(true);
+	}
+	
+	public void actionPerformed (ActionEvent ev) {
+		JButton x = (JButton) ev.getSource();
+		x.setText("我已经被点击了!");
+        System.out.format("按钮 “%s” 被点击\n", ev.getActionCommand());
+	}
+}
+```
