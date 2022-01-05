@@ -196,4 +196,8 @@ public void changeIt () {
 
 **How the listener and source communicate**：
 
+![Java GUI 事件处理：事件源与收听者](images/Ch12_05.png)
+
+*图 5 - Java GUI 事件处理：事件源与收听者*
+
 
