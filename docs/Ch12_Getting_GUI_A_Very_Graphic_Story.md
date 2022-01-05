@@ -385,4 +385,35 @@ graphics.drawImage(myPic, 10, 10, this);
 
 只需 **构造一个 `JPanel` 的子类，并重写 `JPanel` 中的一个方法 `paintComponent()`** 即可。
 
-把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗窗框显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
+把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗窗框，显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
+
+
+此外，*这个方法绝不会由代码编写者自己去调用*！该方法的参数（一个 `Graphics` 对象），就是那个真正的、贴到 *真实* 显示器上的绘制画布（the actual drawing canvas that gets slapped onto the *real* display）。代码编写者是无法自己获取到这个 `Graphics` 对象的；而只能由系统交到代码编写者手上。这一点在后面就能看到，不过 *可以* 请求系统刷新显示屏（即`repaint()`方法），这种刷新最终也是导致 `paintComponent()` 方法的调用。
+
+```java
+// 同时需要下面的两个包
+import java.awt.*;
+import javax.swing.*;
+
+// 构造一个 JPanel 的子类，即一个可像其他小部件一样，添加
+// 到视窗窗框的小部件。不过这样的小部件是自己定制的而已。
+class MyDrawPanel extends JPanel {
+
+    // 这可是终极图形方法（This is the Big Important 
+    // Graphics method）。代码编写者绝不会自己调用到这个
+    // 方法的。系统会调用这个方法，并说，“这里有个类型为 Graphics 
+    // 现在就可以在上面绘画的、很好的绘制平面。”
+    public void paintComponent (Graphics g) {
+
+        // 可把 'g' 想象为一台绘画机器。我们就在告诉
+        // 他用哪种颜色绘画，以及要绘制什么形状（以坐标
+        // 表示这个形状在哪里以及又多大）
+        g.setColor(Color.orange);
+        g.fillRect(20, 50, 100, 100);
+    }
+}
+```
+
+![Java GUI 中编写自己的小部件示例：绘制一个橙色的矩形](images/Ch12_10.png)
+
+*图 10 - Java GUI 中编写自己的小部件示例：绘制一个橙色的矩形*
