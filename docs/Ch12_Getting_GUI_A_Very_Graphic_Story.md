@@ -201,3 +201,12 @@ public void changeIt () {
 *图 5 - Java GUI 事件处理：事件源与收听者*
 
 
+**事件收听者**
+
+若所编写的类希望获知某个按钮的那些 `ActionEvent` 事件，这个类就要实现 `ActionListener` 的 `interface`。那个按钮需要知道这个类对他的事件感兴趣，因此就要通过调用其`addActionListener(this)`方法，以及将一个`ActionListener` 类型的引用变量传递给`addActionListener()` 方法（在这个示例中，收听者就是所编写的类，因此传递了 `this`），从而注册到这个按钮。按钮需要一种在事件发生时呼回的方式，因此他会调用收听者`interface`中的方法。而作为一名收听者，所编写的类就 *必须* 实现那个接口中的唯一一个方法，`actionPerformed()`。整个过程中，编译器参与进来，确保没有差错。
+
+**事件源**
+
+按钮就是 `ActionEvent` 事件源，因此他必须知悉哪些对象是感兴趣的收听者。按钮有个`addActionListener()`方法，这样那些感兴趣对象（收听者）就有一种告诉按钮，他们对按钮的`ActionEvent`事件感兴趣的方式。
+
+由于某个潜在的收听者的运行，`addActionListener()`就运行起来了，此时按钮就取得整个方法的参数（到收听者对象的引用变量），并存储在他的一个清单中。在用户点击按钮时，按钮就会“启动”通过调用 `actionPerformed()`方法，在清单中的各个收听者上，“启动” 该事件。
