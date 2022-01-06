@@ -540,4 +540,10 @@ d.bark();
 
 > 注：这实际上是 Java 的 `cast` 运算符。
 
+那么接下来的这行带有 `Graphics` 对象的代码，是这个意思：
 
+**在需要使用`Graphics2D`上的某个方法时，无法从`paintComponent()` 方法参数 `g` 直接调用到那个方法。不过可以使用一个新的 `Graphics2D` 变量，来对 `g` 进行 *`cast`* 操作**。
+
+```java
+Graphics2D g2d = (Graphics2D) g;
+```
