@@ -748,4 +748,53 @@ frame.getContentPane().add(BorderLayout.CENTER, button);
 ![Java GUI layout: 视窗框分区及单个参数的 `add()` 方法下的默认分区](images/Ch12_15.png)
 
 
-*图 15 - Java GUI layout: 视窗框分区及单个参数的 `add()` 方法下的默认分区*
+*图 15 - Java GUI layout: 视窗框分区及单个参数的 `add()` 方法下的默认区域*
+
+### 每次点击按钮，圆圈的颜色都会改变。
+
+**The circle changes color each time you click the button**.
+
+```java
+package com.xfoss.learningJava;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SimpleGui3C implements ActionListener {
+    JFrame frame;
+    public static void main (String[] args) {
+        SimpleGui3C gui = new SimpleGui3C();
+        gui.go();
+    }
+
+    public void go () {
+        frame = new JFrame("事件与绘制图形联动：点击按钮改变圆圈填充颜色实例");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton button = new JButton("改变颜色");
+        // 把事件收听者（this），添加到按钮。
+        button.addActionListener(this);
+
+        CustomDrawPanel drawPanel = new CustomDrawPanel();
+        
+        // 把这两个小部件（按钮与绘制面板），分别添加到
+        // 视窗框的两个区域
+        frame.getContentPane().add(BorderLayout.SOUTH, button);
+        frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
+        frame.setSize(640, 480);
+        frame.setVisible(true);
+    }
+    public void actionPerformed (ActionEvent ev) {
+        frame.repaint();
+    }
+}
+```
+
+![Java GUI 实例：事件与绘制图形关联](images/Ch12_16.png)
+
+> 定制的绘制面板小部件（即 `CustomDrawPanel` 实例），现在位于视窗框的 `CENTER` 区域。
+>
+> 按钮则是在视窗框的 `SOUTH` 区域。
+
+*图 16 - Java GUI 实例：事件与绘制图形关联*
