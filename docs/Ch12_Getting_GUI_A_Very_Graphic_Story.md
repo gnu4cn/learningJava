@@ -627,3 +627,78 @@ public void paintComponent (Graphics g) {
     g2d.fillOval(70, 70, 100, 70);
 }
 ```
+
+## 重点
+
+### 关于 Java GUI 的事件
+
+- 以一个视窗，通常为 `JFrame` 开始构造 GUI
+
+```java
+JFrame frame = new JFrame();
+```
+
+- 使用下面这样的代码，可将各种小部件（按钮、文本字段等等）添加到 `JFrame`：
+
+```java
+frame.getContentPane().add(button);
+```
+
+- `JFrame` 与其他大多数组件不同，`JFrame` 不允许直接添加小部件，而必须将小部件添加到 `JFrame` 的内容窗格
+- 为了让视窗（`JFrame`）显示出来，就必须给他一个大小，并让其可见：
+
+```java
+frame.setSize(640, 480);
+frame.setVisible(true);
+```
+
+- 为了获知何时用户点击了某个按钮（或在用户界面上进行的其他操作），就需要对GUI事件进行监听
+- 必须在事件源上注册为事件的攸关方，才能收听到那个事件。所谓事件源，指的是在用户操作基础上，“启动”某个事件的物件（按钮、勾选框等等）
+- 由于事件收听者 `interface`定义了在事件出现后事件源所调用的方法，从而给到一种事件源对收听者进行回调的方式
+- 通过调用事件源的注册方法，在事件源上对事件源的事件进行注册。把收听者的事件处理代码，放在收听者的回调方法中。比如对于 `ActionEvent` 事件，该方法就是：
+
+```java
+public void actionPerformed (ActionEvent ev) {
+    button.setText("你已点击！");
+}
+```
+
+- 传入到事件处理器方法的事件对象，承载了包括事件源的等事件有关的信息。
+
+
+### 关于 Java GUI 中的图形
+
+- 可在小部件上直接绘制 2D 图形；
+- 可在小部件上直接绘制 `.gif` 或 `.jpeg`；
+- 而要绘制自己的图形（包括 `.gif` 或 `.jpeg`），就要构造一个 `JPanel` 的子类，并重写 `paintComponent()` 方法；
+- `paintComponent()` 方法是由 GUI 系统调用的。**绝不会自己调用到这个方法**。`paintComponent()`的参数，是提供最终在屏幕上显示出来的绘制表面的一个 `Graphics` 对象。此对象不能由代码编写者自己构建；
+- 在 `Graphics` 对象上调用到的典型方法有：
+
+```java
+g.setColor(Color.blue);
+g.fillRect(20, 50, 100, 120);
+```
+
+- 使用下面的代码，来构建一个 `Image`，进而绘制出某个 `.jpg`来：
+
+```java
+Image image = new ImageIcon("Default.jpg").getImage();
+```
+
+并使用下面的语句绘制出该图像：
+
+```java
+g.drawImage(image, 3, 4, this);
+```
+
+- `paintComponent()` 方法的 `Graphics` 参数所指向的对象，实际上是 `Graphics2D` 类的一个实例。`Graphics2D`类有着多种方法，包括下面这些：
+
+```console
+fill3DRect(), draw3DRect(), rotate(), scale(), shear(), transform().......
+```
+
+- 必须将 `paintComponent()` 方法的`Graphics`参数，进行 `cast` 操作得到 `Graphics2D`对象引用变量，才能运行`Graphics2D`中的那些方法：
+
+```java
+Graphics2D g2d = (Graphics2D) g;
+```
