@@ -500,3 +500,21 @@ public void paintComponent (Graphics g) {
     g.fillOval(70, 70, 100, 100);
 }
 ```
+
+
+### 本质：在每个优良的 `Grphics` 引用变量后面，都有一个 `Graphics2D` 对象
+
+**Behind every good `Graphics` reference is a `Graphics2D` object**
+
+
+`paintComponent()`的参数，被声明为类型 `Graphics` （`java.awt.Graphics`）。
+
+```java
+public void paintComponent(Graphics g) {}
+```
+
+那么这个参数 `g` IS-A `Graphics` 对象。这就意味着他 *可以* 是 `Graphics` 的 *子类* （因为多态机制）。实际上他 *就是*。
+
+***参数 `g` 所指向的对象，实际上是类* `Graphics2D` 的一个实例**。
+
+
