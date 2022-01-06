@@ -796,10 +796,10 @@ public class SimpleGui3C implements ActionListener {
 
 ![Java GUI 实例：事件与绘制图形关联](images/Ch12_16.png)
 
+*图 16 - Java GUI 实例：事件与绘制图形关联*
+
 > 定制的绘制面板小部件（即 `CustomDrawPanel` 实例），现在位于视窗框的 `CENTER` 区域。
 >
 > 按钮则是在视窗框的 `SOUTH` 区域。
-
-*图 16 - Java GUI 实例：事件与绘制图形关联*
 
 > 现在定制绘制面板（`CustomDrawPanel` 类）的 `paintComponent()` 方法，在每次用户点击时都会被调用到。
