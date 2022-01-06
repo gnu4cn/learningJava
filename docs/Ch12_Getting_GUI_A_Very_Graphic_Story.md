@@ -602,4 +602,28 @@ public void paintComponent (Graphics g) {
 
 ![Java GUI定制小部件：经由`Graphics2D` 绘制渐变色填充的圆形](images/Ch12_13.png)
 
-*图 13 - Java GUI定制小部件：经由`Graphics2D` 绘制渐变色填充的圆形
+*图 13 - Java GUI定制小部件：经由`Graphics2D` 绘制渐变色填充的圆形*
+
+---
+
+```java
+// 这段代码与上面的很像，不过这里为渐变笔刷的开始与
+// 结束颜色，构造了随机颜色。可以尝试一下！
+public void paintComponent (Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
+
+    int red = (int) (Math.random() * 256);
+    int green = (int) (Math.random() * 256);
+    int blue = (int) (Math.random() * 256);
+    Color startColor = new Color(red, green, blue);
+
+    red = (int) (Math.random() * 256);
+    green = (int) (Math.random() * 256);
+    blue = (int) (Math.random() * 256);
+    Color endColor = new Color(red, green, blue);
+
+    GradientPaint gradient = new GradientPaint(70, 70, startColor, 150, 150, endColor);
+    g2d.setPaint(gradient);
+    g2d.fillOval(70, 70, 100, 70);
+}
+```
