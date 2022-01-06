@@ -473,3 +473,30 @@ class CustomDrawPanel extends JPanel {
 
 
 *图 11 - Java GUI构造自己的小部件：显示一个图片*
+
+
+### 在黑背景上绘制一个随机颜色的圆圈
+
+```java
+public void paintComponent (Graphics g) {
+    // 用黑色（默认颜色）填充整个窗格
+    //
+    // 前两个参数，定义了绘制开始的地方，也就是窗格左上角的
+    // 相对于整个窗格的（x, y）坐标，因此 （0，0）就表示
+    // “从离左边缘 0 像素及从上边缘的 0 像素开始”。另外两个
+    // 参数说，“让该矩形的宽度为窗格的宽度（this.width()）
+    // 且让其高度与窗格的高度（this.height()）一样高”
+    g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+    int red = (int) (Math.random() * 256);
+    int green = (int) (Math.random() * 256);
+    int blue = (int) (Math.random() * 256);
+
+    // 可通过传入 3 个表示 RGB 数值的整数，来构造某种颜色。
+    Color randomColor = new Color(red, green, blue);
+    g.setColor(randomColor);
+    // 从离左边缘 70 像素，离顶部 70 像素的地方
+    // 开始，让其宽度为 100 像素，高度为 100 像素
+    g.fillOval(70, 70, 100, 100);
+}
+```
