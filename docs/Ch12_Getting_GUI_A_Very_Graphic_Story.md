@@ -517,4 +517,27 @@ public void paintComponent(Graphics g) {}
 
 ***参数 `g` 所指向的对象，实际上是类* `Graphics2D` 的一个实例**。
 
+为什么要留意这个呢？因为用 `Graphics2D` 能够办到的很多事，是 `Graphics` 类类型的引用变量所无法做到的。`Graphics2D`对象可以完成比 `Graphics` 对象更多的事情，而实际上在这个 `Graphics` 引用变量背后，就是 `Graphics2D` 对象在发力。
+
+请牢记多态机制。编译器是基于引用变量类型，而不是对象本身类型，来确定可以调用到哪些方法。比如某个 `Dog`类类型的对象，被一个 `Animal` 类型的引用变量所引用时：
+
+```java
+Animal a = new Dog();
+```
+
+那就不能这样写：
+
+```java
+a.bark();
+```
+
+就算我们知道那里确实是个 `Dog` 对象。编译器盯住的是 `a`，他所见到的 `a` 就是一个 `Animal` 类型，进而发现在 `Animal` 类上并没有 `bark()` 的遥控器。不过还是可以通过下面这样，把这个对象变为他本来 *就是* 的`Dog`类型：
+
+```java
+Dog d = (Dog) a;
+d.bark();
+```
+
+> 注：这实际上是 Java 的 `cast` 运算符。
+
 
