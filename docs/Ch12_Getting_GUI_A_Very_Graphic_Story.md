@@ -599,3 +599,7 @@ public void paintComponent (Graphics g) {
     g2d.fillOval(70, 70, 100, 100);
 }
 ```
+
+![Java GUI定制小部件：对 `Graphics` 参数 `g` 进行 `cast` 操作](images/Ch12_13.png)
+
+*图 13 - Java GUI定制小部件：对 `Graphics` 参数 `g` 进行 `cast` 操作*
