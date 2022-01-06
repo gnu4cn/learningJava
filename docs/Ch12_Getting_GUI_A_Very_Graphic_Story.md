@@ -810,8 +810,12 @@ public class SimpleGui3C implements ActionListener {
 
 南方的按钮，仍将以目前的方式行事，就是调用视窗框上的 `repaint()`。而新增的第二个按钮（会固定在东方区域）将改变那个标签上的文字。（所谓标签，就是屏幕上的文字，A lable is just text on the screen.）
 
-**那么现在就有了四个小部件了**。
+### 那么现在就有了四个小部件了
 
 ![Java GUI 之：小部件布局](images/Ch12_17.png)
 
 *图 17 - Java GUI 之：小部件布局*
+
+### 同时还需要 *两个* 事件
+
+**And we need to get TWO events**
