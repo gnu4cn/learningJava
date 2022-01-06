@@ -547,3 +547,32 @@ d.bark();
 ```java
 Graphics2D g2d = (Graphics2D) g;
 ```
+
++ **在 `Graphics` 类型引用变量上可以调用的方法**：
+    - `drawImage()`
+    - `drawLine()`
+    - `drawPolygon()`
+    - `drawRect()`
+    - `drawOval()`
+    - `fillRect()`
+    - `fillRoundRect()`
+    - `setColor()`
+
+
++ **把实际上的 `Graphics2D` 对象，进行 `cast` 操作而得到一个 `Graphics2D` 的引用变量**：
+
+```java
+Graphics2D g2d = (Graphics2D) g;
+```
+
++ **在 `Graphics2D` 类型引用变量上可以调用的方法**：
+
+    - `fill3DRect()`
+    - `draw3DRect()`
+    - `rotate()`
+    - `scale()`
+    - `shear()`
+    - `transform()`
+    - `setRenderingHints()`
+
+> 注：这并不是完整的方法清单，可查阅 API 文档了解其他方法。
