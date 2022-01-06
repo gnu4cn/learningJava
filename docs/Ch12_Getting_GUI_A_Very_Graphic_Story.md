@@ -802,4 +802,4 @@ public class SimpleGui3C implements ActionListener {
 
 *图 16 - Java GUI 实例：事件与绘制图形关联*
 
-> 定制的绘制面板（`CustomDrawPanel` 类）的 `paintComponent()` 方法，在每次用户点击时都会被调用到。
+> 现在定制绘制面板（`CustomDrawPanel` 类）的 `paintComponent()` 方法，在每次用户点击时都会被调用到。
