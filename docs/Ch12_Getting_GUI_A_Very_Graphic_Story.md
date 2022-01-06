@@ -819,3 +819,12 @@ public class SimpleGui3C implements ActionListener {
 ### 同时还需要 *两个* 事件
 
 **And we need to get TWO events**
+
+呜哦。
+
+这样会可行吗？在只有一个 `actionPerformed()`方法的时候，怎样才能获取到 *两个* 事件呢？
+
+![Java GUI 示例：获取两个事件之小部件布局](images/Ch12_18.png)
+
+
+*图 18 - Java GUI 示例：获取两个事件之小部件布局*
