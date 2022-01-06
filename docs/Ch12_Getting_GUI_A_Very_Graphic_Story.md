@@ -786,6 +786,9 @@ public class SimpleGui3C implements ActionListener {
         frame.setVisible(true);
     }
     public void actionPerformed (ActionEvent ev) {
+        // 在用户点击时，就让视窗框去 repaint() 他
+        // 自己。而那就意味着视窗框中的所有小部件中的
+        // paintComponent() 方法，都会被调用到。
         frame.repaint();
     }
 }
