@@ -575,4 +575,27 @@ Graphics2D g2d = (Graphics2D) g;
     - `transform()`
     - `setRenderingHints()`
 
-> 注：这并不是完整的方法清单，可查阅 API 文档了解其他方法。
+> 注：（这并不是完整的方法清单，可查阅 API 文档了解其他方法）。
+
+### 既然有渐变色来绘制圆圈，那么就不要浪费时间去绘制纯色的了
+
+**Because life's too short to paint the circle a solid color when there's a gradient blend waiting for you**.
+
+```java
+// 这里的 'g' 实际上是个 Graphics2D 对象，这里只不过
+// 伪装成了一个 Graphics 对象。
+public void paintComponent (Graphics g) {
+    // 对 'g' 进行 cast 操作，从而就可以调用 Graphics2D
+    // 上有，Graphics 上所没有的其余方法
+    Graphics2D g2d = (Graphics2D) g;
+
+    // 这里的 (70, 70, Color.blue, 150, 150, Color.orange) 分别是：
+    // 开始点（70, 70）、开始的颜色（Color.blue）、结束点（150, 150）和结束颜色
+    GradientPaint gradient = new GradientPaint(70, 70, Color.blue, 150, 150, Color.orange);
+
+    // 这行代码将系统的虚拟笔刷，设置为渐变，而不是某种固定颜色
+    g2d.setPaint(gradient);
+    // fillOval() 方法的本来意思“以系统加载的笔刷（也就是这里的渐变），来填满这个椭圆”
+    g2d.fillOval(70, 70, 100, 100);
+}
+```
