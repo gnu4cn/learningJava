@@ -385,6 +385,8 @@ graphics.drawImage(myPic, 10, 10, this);
 
 只需 **构造一个 `JPanel` 的子类，并重写 `JPanel` 中的一个方法 `paintComponent()`** 即可。
 
+> 注意：这里的 `JPanel` 与上面出现的 `pane`，一字之差，`JPanel` 是面板小部件，可直接绘制，而 `pane` 是视窗格，有区别。
+
 把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗框，显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
 
 
@@ -715,3 +717,34 @@ Graphics2D g2d = (Graphics2D) g;
 
 
 *图 14 - Java GUI 之：事件驱动的图形绘制*
+
+## GUI布局：在一个视窗框上放置多个小部件
+
+> 等一下......怎样才能把两个 **物件** 放在一个视窗框？
+
+**GUI layouts: putting more than one widget on a frame**
+
+虽然下一章才会涵盖有关 GUI 布局的详细内容，但这里还是要稍微讲一下，方便实现上一小节提出的事件与绘制联动的问题。默认情况下，视窗框有五个可以添加小部件的区域。对于视窗框的这五个区域中的每一个，都只能添加 *一个* 物件，但不要惊慌！因为放在每个区域的物件，可能是可以驻留另外三个其他物件，包括又一个可以放入两个物件的面板的面板......明白了吧。实际上之前在把按钮添加到视窗框时，刷了个“诡计”：
+
+```java
+// 真正意义上说，并不应该这样写（使用这种单个参数的添加
+// 方式，This isn't really the way you're supposed to do it(the 
+// one-arg method)）。
+frame.getContentPane().add(button);
+```
+
+```java
+// 这里调用的是带有两个参数的 add() 方法，其中第一个
+// 取的是区域（使用了GUI系统的一个常量），另一个就是
+// 要添加到那个区域的小部件。
+//
+// 要把物件添加到视窗框的默认内容窗格，这样写就更好（且通常
+// 是强制要求的）。就是全都要指定把小部件放到 哪里 （那个
+// 区域）。
+frame.getContentPane().add(BorderLayout.CENTER, button);
+```
+
+![Java GUI layout: 视窗框分区及单个参数的 `add()` 方法下的默认分区](images/Ch12_15.png)
+
+
+*图 15 - Java GUI layout: 视窗框分区及单个参数的 `add()` 方法下的默认分区*
