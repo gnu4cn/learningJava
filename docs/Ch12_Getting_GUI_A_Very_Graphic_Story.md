@@ -600,6 +600,6 @@ public void paintComponent (Graphics g) {
 }
 ```
 
-![Java GUI定制小部件：对 `Graphics` 参数 `g` 进行 `cast` 操作](images/Ch12_13.png)
+![Java GUI定制小部件：经由`Graphics2D` 绘制渐变色填充的圆形](images/Ch12_13.png)
 
-*图 13 - Java GUI定制小部件：对 `Graphics` 参数 `g` 进行 `cast` 操作*
+*图 13 - Java GUI定制小部件：经由`Graphics2D` 绘制渐变色填充的圆形
