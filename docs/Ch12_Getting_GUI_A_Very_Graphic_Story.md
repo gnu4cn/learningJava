@@ -725,7 +725,7 @@ Graphics2D g2d = (Graphics2D) g;
 
 > 等一下......怎样才能把两个 **物件** 放在一个视窗框？
 
-虽然下一章才会涵盖有关 GUI 布局的详细内容，但这里还是要稍微讲一下，方便实现上一小节提出的事件与绘制联动的问题。默认情况下，视窗框有五个可以添加小部件的区域。对于视窗框的这五个区域中的每一个，都只能添加 *一个* 物件，但不要惊慌！因为放在每个区域的物件，可能是可以驻留另外三个其他物件，包括又一个可以放入两个物件的面板的面板......明白了吧。实际上之前在把按钮添加到视窗框时，刷了个“诡计”：
+虽然下一章才会涵盖有关 GUI 布局的详细内容，但这里还是要稍微讲一下，方便实现上一小节提出的事件与绘制联动的问题。默认情况下，视窗框有五个可以添加小部件的区域。对于视窗框的这五个区域中的每一个，都只能添加 *一个* 物件，但不要惊慌！因为放在每个区域的物件，可能是可以驻留另外三个其他物件，包括又一个可以放入两个物件的面板的面板......明白了吧（You can add only *one* this to each region of a frame, but don't panic! That one thing might be a panel that holds three other things including a panel that holds three other things including a panel that holds two more things and... you get the idea）。实际上之前在把按钮添加到视窗框时，刷了个“诡计”：
 
 ```java
 // 真正意义上说，并不应该这样写（使用这种单个参数的添加
