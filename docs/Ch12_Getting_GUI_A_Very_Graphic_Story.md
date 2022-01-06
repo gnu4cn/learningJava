@@ -34,7 +34,7 @@
 
 ### 构造一个GUI不难：
 
-1) 构造一个视窗窗框（一个 `JFrame`）:
+1) 构造一个视窗框（一个 `JFrame`）:
 
 
 ```java
@@ -385,7 +385,7 @@ graphics.drawImage(myPic, 10, 10, this);
 
 只需 **构造一个 `JPanel` 的子类，并重写 `JPanel` 中的一个方法 `paintComponent()`** 即可。
 
-把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗窗框，显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
+把自己的有关图形的全部代码，都放在 `paintComponent()` 方法中。可把 `paintComponent()`方法，当作由系统调用的方法，他讲到，“你好呀，小部件，现在要给你绘图了。” 而比如在想要绘制一个圆圈时，`paintComponent()`方法中就应该放入画圆圈的代码。就在那个驻留着正在绘制的视窗窗格的视窗框，显示出来的时候，就会调用到`paintComponent()`方法，从而所画的圆圈就会呈现出来。在用户最小化而把视窗隐藏起来时，JVM 就知道，这个窗框需要在其重新显示的时候“加以修复”，那么 JVM 就会再次调用 `paintComponent()`。而后只要JVM认为显示内容需要刷新，他都会对我们编写的 `paintComponent()`方法进行调用。
 
 
 此外，*这个方法绝不会由代码编写者自己去调用*！该方法的参数（一个 `Graphics` 对象），就是那个真正的、贴到 *真实* 显示器上的绘制画布（the actual drawing canvas that gets slapped onto the *real* display）。代码编写者是无法自己获取到这个 `Graphics` 对象的；而只能由系统交到代码编写者手上。这一点在后面就能看到，不过 *可以* 请求系统刷新显示屏（即`repaint()`方法），这种刷新最终也是导致 `paintComponent()` 方法的调用。
@@ -396,7 +396,7 @@ import java.awt.*;
 import javax.swing.*;
 
 // 构造一个 JPanel 的子类，即一个可像其他小部件一样，添加
-// 到视窗窗框的小部件。不过这样的小部件是自己定制的而已。
+// 到视窗框的小部件。不过这样的小部件是自己定制的而已。
 class MyDrawPanel extends JPanel {
 
     // 这可是终极图形方法（This is the Big Important 
@@ -428,4 +428,48 @@ class MyDrawPanel extends JPanel {
 
 ### 显示一张 `JPEG` 图片
 
+```java
+package com.xfoss.learningJava;
 
+import java.awt.*;
+import javax.swing.*;
+
+public class CustomWidgetTestDrive {
+    public static void main (String[] args) {
+        try {
+            CustomDrawPanel p = new CustomDrawPanel();
+            JFrame f = new JFrame ();
+            f.add(p);
+
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setSize(1024, 768);
+            f.setVisible(true);
+        } catch (HeadlessException e) {
+            System.out.format("没有显示器，无法运行本程序。\n"
+                    + "错误代码\n"
+                    + "------------------------------\n%s\n", e);			
+        }
+    }
+}
+
+class CustomDrawPanel extends JPanel {
+    public void paintComponent (Graphics g) {
+        // 图像文件名放在这一行中。注意：在使用某种IDE而
+        // 有困难时，可尝试使用下面的代码：
+        Image image = new ImageIcon(getClass().getResource("Defautl.jpeg")).getImage();
+        // Image image = new ImageIcon("Default.jpeg").getImage();
+        //
+        // 这里的 '3, 4' x/y 坐标，表示图片的左上角应该在
+        // 的位置。意思是“离窗格左边缘 3 个像素，离窗格
+        // 上边缘 4 个像素”。这些数字，都是相对于小部件
+        // 的（此示例中，就是这里的 JPanel 的子类），而
+        // 不是整个的视窗框
+        g.drawImage(image, 3, 4, this);
+    }
+}
+```
+
+![Java GUI构造自己的小部件：显示一个图片](images/Ch12_11.png)
+
+
+*图 11 - Java GUI构造自己的小部件：显示一个图片*
