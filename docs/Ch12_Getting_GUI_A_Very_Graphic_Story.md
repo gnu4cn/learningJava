@@ -702,3 +702,16 @@ fill3DRect(), draw3DRect(), rotate(), scale(), shear(), transform().......
 ```java
 Graphics2D g2d = (Graphics2D) g;
 ```
+
+## 既然能获取到事件，也可以绘制图形了，那能不能在获取到事件的时候，绘制图形呢？
+
+**We can get an event**.
+**We can paint graphics**.
+**But can we paint graphics *when* we get an event**?
+
+下面就来把事件与绘制面板上的变化连接起来（Let's hook up an event to a change in our drawing panel）。这里将在每次点击那个“改变颜色”按钮时，令到圆圈的颜色改变。以下就是这个程序运行的流程：
+
+![Java GUI 之：事件驱动的图形绘制](images/Ch12_14.png)
+
+
+*图 14 - Java GUI 之：事件驱动的图形绘制*

@@ -7,7 +7,7 @@ public class CustomWidgetTestDrive {
     public static void main (String[] args) {
         try {
             CustomDrawPanel p = new CustomDrawPanel();
-            JFrame f = new JFrame ();
+            JFrame f = new JFrame ("使用 Graphics2D 绘制渐变色填充的圆形");
             f.add(p);
 
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
