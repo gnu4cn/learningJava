@@ -827,4 +827,4 @@ public class SimpleGui3C implements ActionListener {
 ![Java GUI 示例：获取两个事件之小部件布局](images/Ch12_18.png)
 
 
-*图 18 - Java GUI 示例：获取两个事件之小部件布局*
+*图 18 - Java GUI 示例：获取两个事件效果展示*
