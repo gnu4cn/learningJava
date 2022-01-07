@@ -102,7 +102,7 @@
                             <jar>target/com.xfoss.learningJava-0.0.1.jar</jar>
                             <outfile>target/learningJava.exe</outfile>
                             <downloadUrl>https://github.com/gnu4cn/learningJava</downloadUrl>
-                            <errTitle>发生错误</errTitle>
+                            <errTitle>Error Occured...</errTitle>
                             <classPath>
                                 <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
                             </classPath>
