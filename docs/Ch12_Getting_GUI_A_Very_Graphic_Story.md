@@ -1046,4 +1046,72 @@ class Foo {
 
 **Now we can get the two-button code working**
 
+```java
+package com.xfoss.learningJava;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+// 现在的 GUI 主类，就不再实现 ActionListener 了
+public class MultiWidgetsAndEvents {
+    JFrame frame;
+    JLabel label;
+
+    public static void main (String[] args) {
+        MultiWidgetsAndEvents gui = new MultiWidgetsAndEvents();
+        gui.go();
+    }
+
+    public void go () {
+        frame = new JFrame("事件与绘制图形联动：多个事件源（小部件）与处理器");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton btnChangeCircle = new JButton("改变圆圈");
+        // 这里不再传递 this 给按钮的事件收听者注册方法，而是传递
+        // 各自的事件收听者对象。
+        btnChangeCircle.addActionListener(new CircleBtnListener());
+
+        JButton btnChangeLabel = new JButton("改变标签");
+        // 同上。
+        btnChangeLabel.addActionListener(new LabelBtnListener());
+
+        CustomDrawPanel drawPanel = new CustomDrawPanel();
+        label = new JLabel("这是一个标签");
+
+        frame.getContentPane().add(BorderLayout.SOUTH, btnChangeCircle);
+        frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
+        frame.getContentPane().add(BorderLayout.EAST, btnChangeLabel);
+        frame.getContentPane().add(BorderLayout.WEST, label);
+
+        frame.setSize(640, 480);
+        frame.setVisible(true);
+    }
+
+    // 现在有了两个都是单独类中的 ActionListener 事件收听者了
+    class CircleBtnListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 内部类就可以使用到实例变量 ‘frame’了，且无需
+            // 显式的到外层类对象的引用变量。
+            frame.repaint();
+        }
+    }
+
+    class LabelBtnListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 内部类是了解 'label' 变量的。
+            label.setText("那真痛！");
+        }
+    }
+}
+```
+
+![Java GUI 之：运用内部类特性，解决多个小部件与多个事件处理器的问题](images/Ch12_22.png)
+
+*图 22 - Java GUI 之：运用内部类特性，解决多个小部件与多个事件处理器的问题*
+
+
+![Java GUI之：点击“改变标签”按钮后的效果](images/Ch12_23.png)
+
+
+*图 23 - Java GUI之：点击“改变标签”按钮后的效果*

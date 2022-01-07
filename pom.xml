@@ -57,7 +57,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.xfoss.learningJava.SimpleGui3C</mainClass>
+                    <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -78,7 +78,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.SimpleGui3C</mainClass>
+                                    <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
