@@ -1028,3 +1028,22 @@ class OuterClass {
 ![外层与内部对象的构造](images/Ch12_21.png)
 
 *图 21 - 外层与内部对象的构造*
+
+> 附加题（Side bar）
+>
+> 运行在外层类外部的代码，也可以对该外层类的内部类进行实例化，但必须使用特殊语法。这种从外部构造内部对象的情况极少，很多人一辈子都不会碰到，写在这里只是为了满足好奇心而已......
+
+```java
+class Foo {
+    public static void main (String[] args) {
+        OuterClass outerObj = new OuterClass();
+        OuterClass.InnerClass innerObj = outerObj.new InnerClass();
+    }
+}
+```
+
+### 现在就可以让之前提出的双按钮代码运行起来了
+
+**Now we can get the two-button code working**
+
+
