@@ -1092,7 +1092,7 @@ public class MultiWidgetsAndEvents {
     class CircleBtnListener implements ActionListener {
         public void actionPerformed (ActionEvent ev) {
             // 内部类就可以使用到实例变量 ‘frame’了，且无需
-            // 显式的到外层类对象的引用变量。
+            // 显式的那个指向外层类对象的引用变量。
             frame.repaint();
         }
     }
