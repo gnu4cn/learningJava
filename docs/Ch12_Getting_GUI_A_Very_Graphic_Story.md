@@ -880,4 +880,45 @@ class MyGui implements ActionListener {
 
 **缺点：这样写确实能行，但这多半不是那么的面向对象不是。** 单个的事件处理器去做许多不同的事情，就意味着让单个方法去完成许多不同的事情。那么在需要修改要处理的某个 *事件源* 的时候，就必定会去动那个 *所有事件源* 的事件处理器。这样的写法有时 *确实是* 一个好办法，但通常这样写会破坏可维护性及扩展性。
 
+3) 选项三
 
+**构造两个单独的 `ActionListener` 类**
+
+```java
+class MyGui {
+    JFrame frame;
+    JLabel label;
+
+    void gui () {
+        // 用于初始化出两个事件收听者，并把其一注册到修改圆圈
+        // 按钮，另一个注册到修改标签按钮的代码
+    }
+} // 类结束
+```
+
+---
+
+```java
+class ColorButtonListener implements ActionListener {
+    public void actionPerformed (ActionEvent ev) {
+        // 这里不会运作！因为这个类中没有到 'MyGui' 类中
+        // 变量 'frame' 的引用
+        frame.repaint();
+    }
+}
+```
+
+---
+
+```java
+class ColorButtonListener implements ActionListener {
+    public void actionPerformed (ActionEvent ev) {
+        // 有问题！因为这个类中没有到变量 'label' 的引用
+        label.setText("那真痛！");
+    }
+}
+```
+
+**缺点：这些事件收听者类，不会具有到他们需要进行操作的那些变量 -- `frame`及`label` 的访问**。这一点是可以修复的，但就不得不给到这两个事件收听者类，到GUI主类 `MyGui` 的引用变量，这样才能在 `actionPerformed()` 方法内部，使用上 GUI 类 `MyGui` 的引用变量，从而访问到 GUI 主类 `MyGui` 的变量 `frame`与`label`。然而那样做就破坏了封装，因此可能就需要构造各个 GUI 小部件的获取器方法（getter methods, 比如`getFrame()`、`getLabel` 等等）。并且还可能需要给这两个事件收听者类编写构造器，从而可将GUI主类的引用变量，在这些事件收听者对象实例化时，传递给这些事件收听者。好吧，这就编程更加乱糟糟，还更复杂了。
+
+***必须要有别的办法才行***！
