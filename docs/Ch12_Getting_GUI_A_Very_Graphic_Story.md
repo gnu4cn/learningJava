@@ -851,4 +851,33 @@ class MyGui implements ActionListener {
 }
 ```
 
+**缺点是：做不到**！在Java类中不能实现同一个方法两次。这样不会编译的。并且就是 *可以*，那么事件源又怎样知道应该调用两个方法中的哪一个呢？
+
+
 2）选项二
+
+**把同一事件收听者，同时注册到两个按钮上**。
+
+```java
+class MyGui implements ActionListener {
+    // 在这里声明一堆实例
+
+    public void go {
+        // 构建 GUI
+        colorButton = new JButton("改变圆圈");
+        labelButton = new JButton("修改标签");
+        colorButton.addActionListener(this);
+        labelButton.addActionListener(this);
+        // 这里有更多的 GUI 代码 ......
+    }
+
+    public void actionPerformed(ActionEvent ev) {
+        if(ev.getSource() == colorButton) frame.repaint();
+        else label.setText("那真痛！");
+    }
+}
+```
+
+**缺点：这样写确实能行，但这多半不是那么的面向对象不是。** 单个的事件处理器去做许多不同的事情，就意味着让单个方法去完成许多不同的事情。那么在需要修改要处理的某个 *事件源* 的时候，就必定会去动那个 *所有事件源* 的事件处理器。这样的写法有时 *确实是* 一个好办法，但通常这样写会破坏可维护性及扩展性。
+
+
