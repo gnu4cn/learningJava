@@ -982,6 +982,10 @@ class OuterClass {
 
 > **内部对象与其外层对象，有着特殊关系 ♥（An inner object shares a special bond with an outer object）**。
 
-***在内存堆上，内部**对象必须与指定的**外层**对象绑在一起*（*An **inner** object must be tied to a specific **outer** object on the heap*）。
+*在内存堆上，**内部** 对象必须与指定的 **外层** 对象绑在一起*（*An **inner** object must be tied to a specific **outer** object on the heap*）。
 
 > 注：这实际上与对象关系模型（Oject Relational Model, ORM） 中的内连接（inner join）类似。
+
+![外层对象与内部对象的构造过程](images/Ch12_19.png)
+
+*图 19 - 外层对象与内部对象的构造过程*
