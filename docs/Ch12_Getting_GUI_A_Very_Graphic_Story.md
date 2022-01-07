@@ -991,8 +991,40 @@ class OuterClass {
 *图 19 - 外层对象与内部对象的构造过程*
 
 
-
 ![畅销书：找寻你自己的内部类](images/Ch12_20.png)
 
 
 *图 20 - 畅销书：找寻你自己的内部类*
+
+
+## 怎样构造一个内部类的实例
+
+在从外层类的代码处实例化内部类时，那么外层类的实例就是，就是内部对象所要 “绑定” 的外层对象。比如在某个方法中的代码实例化内部类时，那么内部对象就会绑定到那个运行此方法的外部实例上（If you instantiate an inner class from code *within* an outer class, the instance of the outer class is the one that the inner object will 'bond' with. For example, if code within a method instantiates the inner class, the inner object will bond to the instance whose method is running）。
+
+外层类中的代码，可以与实例化其他类完全一样的方式，对其自身的内部类进行实例化，即 `new InnerClass();`。
+
+
+```java
+class OuterClass {
+    // 外层类有一个私有实例变量 'x'
+    private int x;
+
+    // 构造一个内部类的实例
+    InnerClass inner = new InnerClass();
+    
+    public void doStuff () {
+        // 调用内部对象上的方法
+        inner.go();
+    }
+
+    class InnerClass {
+        void go () {
+            x = 42;
+        }
+    } // 内部类结束
+} // 外层类结束
+```
+
+![外层与内部对象的构造](images/Ch12_21.png)
+
+*图 21 - 外层与内部对象的构造*
