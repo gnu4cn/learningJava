@@ -919,6 +919,14 @@ class ColorButtonListener implements ActionListener {
 }
 ```
 
-**缺点：这些事件收听者类，不会具有到他们需要进行操作的那些变量 -- `frame`及`label` 的访问**。这一点是可以修复的，但就不得不给到这两个事件收听者类，到GUI主类 `MyGui` 的引用变量，这样才能在 `actionPerformed()` 方法内部，使用上 GUI 类 `MyGui` 的引用变量，从而访问到 GUI 主类 `MyGui` 的变量 `frame`与`label`。然而那样做就破坏了封装，因此可能就需要构造各个 GUI 小部件的获取器方法（getter methods, 比如`getFrame()`、`getLabel` 等等）。并且还可能需要给这两个事件收听者类编写构造器，从而可将GUI主类的引用变量，在这些事件收听者对象实例化时，传递给这些事件收听者。好吧，这就编程更加乱糟糟，还更复杂了。
+**缺点：这些事件收听者类，不会具有到他们需要进行操作的那些变量 -- `frame`及`label` 的访问**。这一点是可以修复的，但就不得不给到这两个事件收听者类，到GUI主类 `MyGui` 的引用变量，这样才能在 `actionPerformed()` 方法内部，使用上 GUI 类 `MyGui` 的引用变量，从而访问到 GUI 主类 `MyGui` 的变量 `frame`与`label`。然而那样做就破坏了封装，因此可能就需要构造各个 GUI 小部件的获取器方法（getter methods, 比如`getFrame()`、`getLabel` 等等）。并且还可能需要给这两个事件收听者类编写构造器，从而可将GUI主类的引用变量，在这些事件收听者对象实例化时，传递给这些事件收听者。好吧，这就变得更加乱糟糟，还更复杂了。
 
 ***必须要有别的办法才行***！
+
+> 若既可以有两个不同的事件收听者类，同时这两个类还能够访问到 GUI 主类中的实例变量，也就是这两个事件收听者类，看起来会属于那个GUI 主类，这要是能做到可就太好了。这样就可以鱼与熊掌二者兼得了（Then you'd have the best of both worlds）。好吧，这可能只是个美梦罢了。不过这只是脑洞大一点而已......
+
+## 内部类来拯救！[InnerClassToTheRescue]
+
+**Inner class to the rescue!**
+
+> 注：听起来是不是很熟悉？哈哈，这里的内部类，就跟之前的 [`interface` 拯救了死亡钻石问题](Ch08_Interfaces_and_Abstract_Classes.md#InterfaceToTheRescue)（the Dead Diamon of Death）一样，解决了GUI中多个事件处理器的问题。
