@@ -1115,3 +1115,11 @@ public class MultiWidgetsAndEvents {
 
 
 *图 23 - Java GUI之：点击“改变标签”按钮后的效果*
+
+
+## Java 大曝光 -- 本周采访：内部类的实例
+
+**Java Exposed -- this weeks interview: Instance of an Inner Class**
+
+- **HeadFirst(HF)**: 内部类为何重要？
+- **内部对象（Inner object, Io）**: 我要从哪里说起呢，正是我们给到了在类中多次实现 `interface` 的机会，对吧。
