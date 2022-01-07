@@ -975,3 +975,13 @@ class OuterClass {
 **An inner class instance must be tied to an outer class instance**.
 
 > 有个十分异常情形下的例外 -- 定义了静态方法的内部类。但这里不会涉及到整个问题，同时贯穿整个Java编程生涯，估计也不会遇到这种情况。
+
+请记住，在提及某个内部 *类* 访问其外层类的某个东西时，是真说的是内部类的某个实例，在访问其外层类某个实例中的某个东西。然而到底是 *哪个实例* 呢？
+
+是任意的内部类实例都可以访问外层类全部实例的变量与方法吗？显然 **不是**！（Can *any* arbitary instance of the inner class access the methods and variables of *any* instance of the outer class? **No**!）
+
+> **内部对象与其外层对象，有着特殊关系 ♥（An inner object shares a special bond with an outer object）**。
+
+***在内存堆上，内部**对象必须与指定的**外层**对象绑在一起*（*An **inner** object must be tied to a specific **outer** object on the heap*）。
+
+> 注：这实际上与对象关系模型（Oject Relational Model, ORM） 中的内连接（inner join）类似。
