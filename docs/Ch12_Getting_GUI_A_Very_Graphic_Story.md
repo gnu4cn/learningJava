@@ -822,9 +822,33 @@ public class SimpleGui3C implements ActionListener {
 
 呜哦。
 
-这样会可行吗？在只有一个 `actionPerformed()`方法的时候，怎样才能获取到 *两个* 事件呢？
+这样可行吗？在只有一个 `actionPerformed()`方法的时候，怎样才能获取到 *两个* 事件呢？
 
 ![Java GUI 示例：获取两个事件之小部件布局](images/Ch12_18.png)
 
 
 *图 18 - Java GUI 示例：获取两个事件效果展示*
+
+### 在两个按钮需要完成不同事情时，该怎样获取到两个不同按钮的动作事件呢？
+
+**How do you get action events for two different buttons, when each button needs to do something different**?
+
+1) 选项一
+
+**实现两个 `actionPerformed()` 方法**
+
+```java
+class MyGui implements ActionListener {
+    // 很多代码过后：
+    public void actionPerformed(ActionEvent ev) {
+        frame.repaint();
+    }
+
+    // 然而这样写是行不通的！（回顾一下方法过载就知道）
+    public void actionPerformed(ActionEvent ev) {
+        label.setText("那真痛！");
+    }
+}
+```
+
+2）选项二
