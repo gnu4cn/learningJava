@@ -135,7 +135,9 @@
                     <execution>
                         <id>assembly</id>
                         <phase>package</phase>
-                        <goals><goal>single</goal></goals>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                         <configuration>
                             <descriptors>
                                 <descriptor>assembly.xml</descriptor>
