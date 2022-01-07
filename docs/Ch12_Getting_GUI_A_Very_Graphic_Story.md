@@ -932,3 +932,11 @@ class ColorButtonListener implements ActionListener {
 **Inner class to the rescue!**
 
 > 注：听起来是不是很熟悉？哈哈，这里的内部类，就跟之前的 [`interface` 拯救了死亡钻石问题](Ch08_Interfaces_and_Abstract_Classes.md#shi-yong-jie-kou-lai-zheng-jiu)（the Dead Diamon of Death）一样，解决了GUI中多个事件处理器的问题。
+
+*可* 将一个类嵌套在另一个类中。很简单吧。只需要确保内部类的定义，位于外层类的花括弧内部即可。
+
+> **内部类可使用其外层类的全部方法及实例变量，*就是私有的也可以***。
+> **An inner class can use all the methods and variables of the outer class, *even the private ones***.
+> 
+> **内部类在使用这些变量与方法时，就好像这些方法与变量是在他自己里声明的一样**。
+> **The inner class gets to use those variables and methods just as if the methods and variables were declared within the inner class**。
