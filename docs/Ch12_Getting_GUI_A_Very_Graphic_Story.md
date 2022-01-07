@@ -940,3 +940,38 @@ class ColorButtonListener implements ActionListener {
 > 
 > **内部类在使用这些变量与方法时，就好像这些方法与变量是在他自己里声明的一样**。
 > **The inner class gets to use those variables and methods just as if the methods and variables were declared within the inner class**。
+
+**一个简单的内部类**：
+
+```java
+class OuterClass {
+    // 内部类是整个被外层类包裹起来的
+    class InnerClass {
+        void go () {}
+    }
+}
+```
+
+内部类有着运用其外层类物件的特权（An inner class gets a special pass to use the outer class's stuff）。*甚至外层类私有的方法与变量都可以使用*。并且内部类在运用这些外层类的私有变量及方法时，就像这些变量与成员是在他自己中定义的一样。那么内部类就很好用了 -- 他们除了有着普通类的绝大部分益处，还有着特别的访问权限。
+
+**内部类对外层类变量的运用**：
+
+```java
+class OuterClass {
+    private int x;
+
+    class InnerClass {
+        void go () {
+            // 这里对 'x' 的使用方式，就
+            // 如同 'x' 是在内部类中定义的一样！
+            x = 42;
+        }
+    } // 内部类结束
+} // 外层类结束
+```
+
+### 内部类实例必须与其外层类实例绑在一起。
+
+**An inner class instance must be tied to an outer class instance**.
+
+> 有个十分异常情形下的例外 -- 定义了静态方法的内部类。但这里不会涉及到整个问题，同时贯穿整个Java编程生涯，估计也不会遇到这种情况。
