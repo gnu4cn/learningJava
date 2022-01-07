@@ -6,6 +6,7 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
     <description>For learning Java</description>
+    <name>轻松学Java</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -81,6 +82,64 @@
                                     <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
                                 </transformer>
                             </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- LAUNCH4J -->
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>l4j-gui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <jar>target/com.xfoss.learningJava-0.0.1.jar</jar>
+                            <outfile>target/learningJava.exe</outfile>
+                            <downloadUrl>https://github.com/gnu4cn/learningJava</downloadUrl>
+                            <errTitle>发生错误</errTitle>
+                            <classPath>
+                                <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
+                            </classPath>
+                            <jre>
+                                <bundledJre64Bit>false</bundledJre64Bit>
+                                <bundledJreAsFallback>false</bundledJreAsFallback>
+                                <minVersion>1.8.0</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                                <runtimeBits>64</runtimeBits>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>0.0.1.4</fileVersion>
+                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileDescription>${project.name}</fileDescription>
+                                <copyright>C</copyright>
+                                <productVersion>0.0.1.4</productVersion>
+                                <txtProductVersion>0.0.1.4</txtProductVersion>
+                                <productName>${project.name}</productName>
+                                <internalName>JavaGUI</internalName>
+                                <originalFilename>learningJava.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--maven-assembly-plugin-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>assembly</id>
+                        <phase>package</phase>
+                        <goals><goal>single</goal></goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly.xml</descriptor>
+                            </descriptors>
                         </configuration>
                     </execution>
                 </executions>
