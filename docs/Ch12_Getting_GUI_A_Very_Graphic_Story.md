@@ -1122,4 +1122,16 @@ public class MultiWidgetsAndEvents {
 **Java Exposed -- this weeks interview: Instance of an Inner Class**
 
 - **HeadFirst(HF)**: 内部类为何重要？
-- **内部对象（Inner object, Io）**: 我要从哪里说起呢，正是我们给到了在类中多次实现 `interface` 的机会，对吧。
+- **内部对象（Inner object, Io）**: 我要从哪里说起呢，正是我们给到了在类中多次实现 `interface` 的机会，对吧。请记住，在正常Java类中，无法多次实现接口方法。然而使用 *内部* 类的话，每个内部类都可以对 *同一* `interface` 进行实现，那么就可以有着这些高度一致的接口方法的全部 *不同* 实现（But using *inner* classes, each inner class can implement the *same* interface, so you can have all these *different* implementations of the very same interface methods）。
+- **HF**: 然而究竟为什么要对同一方法实现两次呢？
+- **Io**：回顾一下 GUI 的事件处理器吧。设想一下......在想要三个分别具有不同事件行为的按钮，并使用三个都实现了 `ActionListener` 接口的内部类时，那就意味着这每个内部类，都实现了他自己的 `actionPerformed()` 方法。
+- **HF**：所以说事件处理器是采用内部类的唯一理由吗？
+- **Io**：天哪，绝不是的。事件处理器只是一个明显的例子。任何在需要单独类，但还需要那个类表现得他好像 *另一个* 类的某个部分时，那么内部类就是最佳 -- 且某些时候唯一 -- 的完成方式（Anytime you need a sperate class, but still want that class to behave as if it were part of *another* class, an inner class is the best--and sometimes *only*--way to do it）。
+- **HF**: 这里我还是犯迷糊。若希望内部类以属于外层类一部分的方式 *行事*，那为何首先考虑的是一个单独类？为何不首先考虑把内部类的代码，就放在外层类中呢？
+- **Io**：上面就才 *给出* 一个，需要多次对某个接口加以实现的场景吗。即便不是在使用接口，仍然是需要两个不同的类，因为这些类表示了两种不同的 *事物*。这便是良好的面向对象。
+- **HF**: 喔。这里打住。我原以为面向对象设计很大程度上是关于重用与可维护性呢。你应该知道，关键在于有两个单独类的时候，就可以对他们分别加以修改和使用，这正好与把所有东西都放在一个类中相反，Blah, blah, blah。然而在使用 *内部* 类时，还是最终与一个 *真正的* 类打交道，不是吗？最后可重用且对其他人来讲作为单独类的，也只是那个封闭类（the enclosing class） 而已。准确地说，内部类并不是可重用的。事实上，我听说这些内部类被叫做 “毫无重用性 -- 永远没用（Reuseless--useless over and over again）”
+- **Io**: 说内部类不可重用没错，事实上有的时候内部类真是完全无法重用的，这是由于内部类被紧密地与外层类的实例变量与方法绑在一起。然而--
+- **HF**：那正好说明我的看法没错！若他们不可重用，为何还要在单独类上花心思呢（If they're not reusable, why bother with a speparate class）？我的意思是说，与其解决说是解决了接口的问题，不如说这是一种权宜之计。
+- **Io**: 正如我前面说过的，你需要考虑一下 `IS-A` 与多态机制的问题。
+- **HF**：好呀。现在我就在考虑这方面的问题，因为......
+- **Io**: 因为外层类与内部类，可能要通过 *不同* 的 `IS-A` 测试！还是以这个多态的 GUI 事件收听者的例子开始。
