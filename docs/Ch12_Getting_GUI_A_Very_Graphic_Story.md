@@ -1136,4 +1136,5 @@ public class MultiWidgetsAndEvents {
 - **HF**：好呀。现在我就在考虑这方面的问题，因为......
 - **Io**: 因为外层类与内部类，可能要通过 *不同* 的 `IS-A` 测试！还是以这个多态的 GUI 事件收听者的例子开始。按钮的事件收听者注册方法中，参数类型被声明为什么了？也就是说，对照API文档，必须传递给 `addActionListener()`方法何种 *物件* （即什么样的类或接口类型）？
 - **HF**：当然必须传递一个事件接受者了。也就是某个实现了特定收听者接口，在这个示例中也就是`ActionListener`接口的东西。时把，我们对这个还是了解的。你问这些，到底是要说什么呢？
-- **Io**：我说的是，从多态上讲，一个方法就只会接收一种特定 *类型*。也就是某种通过 `ActionListener` 接口的 `IS-A`测试的类型。然而 -- 同时也是重点 -- 在类需要
+- **Io**：我说的是，从多态上讲，一个方法就只会接收一种特定 *类型*。也就是某种通过 `ActionListener` 接口的 `IS-A`测试的类型。然而 -- 同时也是重点 -- 在类需要作为 `IS-A` 某个 *类* 类型，而不是某个接口类型时，会怎样呢（My point is that polymorphically, you have a method that takes only one particular *type*. Something that passes the `IS-A` test for `ActionListener`. But--and here's the big thing--what if your class needs to be an `IS-A` of something that'a *class* type rather than an interface）？
+- **HF**：难道不可以让单独类仅仅去 *扩展* 那个要成为其一部分的类吗？那不就是子类化运作的要义所在吗？在 `B` 是 `A` 的一个子类时，那么在那些期望获得 `A` 的地方，就可以使用 `B`。这就是“在声明了`Animal`类型的地方传递一个`Dog`”的样子（Wouldn't you have your class just *extend* the class you need to be part of? Isn't that the whole point of how subclassing works? If `B` is a subclass of `A`, then anywhere an `A` is expected a `B` can be used. The whole pass-a-`Dog`-where-an-`Animal`-is-the-declared-type thing）。
