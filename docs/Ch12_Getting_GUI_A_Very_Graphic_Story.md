@@ -1143,5 +1143,23 @@ public class MultiWidgetsAndEvents {
 - **Io**: 就是这样！是的，不能同时是 `Dog` 和 `Button`。但是若一个 `Dog` 在某些时候需要成为一个 `Button`（为了把这个`Dog`传递给那些取 `Button` 类类型参数的方法），这时这个`Dog`类（由于扩展了`Animal`而不能再对`Button`进行扩展）就可以通过对`Button`进行扩展，而再有一个代表`Dog`的、像`Button`那样行事的 *内部* 类，这样，`Dog`就可以把他的内部类，而不是他本身，传递给那些要求是`Button`的地方。就比如，与其是`x.takeButton(this)`，在运用Java内部类特性后，`Dog`对象就会调用`x.takeButton(new MyInnerButton())`（Well done! Yes, you can't be both a `Dog` and a `Button`. But if you're a `Dog` that needs to sometimes be a `Button`(in order to pass yourself to methods that take a `Button`), the `Dog` class(which extends `Animal` so it can't extend `Button` again) can have an *inner* class that acts on the `Dog`'s behalf as a `Button`, by extending `Button`, and thus wherever a `Button` is required the `Dog` can pass his inner `Button` instead of himeself. In other words, instead of saying `x.takeButton(this)`, the `Dog` object calls `x.takeButton(new MyInnerButton())`）。
 - **HF**: 可以给我一个明确的例子吗？
 - **Io**：还记得上面用到的那个绘制面板，那里我们构造了自己定制的`JPanel`子类吧？那么现在，那个类就是个单独的、不带内部类的类。当然这是没问题的，因为这个类并不需要对主GUI类的实例有什么特别访问。然而假如他真的要对GUI主类的实例进行访问呢？比如需要在那个定制面板小部件上完成动画，进而需要从主应用获取他自己的坐标（即基于用户在GUI中的操作），会怎样呢？那样的话，如果可以给这个定制绘制面板构造一个内部类，那么这个绘制面板就仍然是 `JPanel`的子类，同时他作为外层类，还可以是其他一些类的子类（Right now, that class is a separate, non-inner, class. And that's fine, because the class doesn't need special access to the instance variables of the main GUI. But what if it did? What if we're doing an animation on that panel, and it's getting is coordinates from the main application(say, based on something the use does elsewhere in the GUI). In that case, if we make the drawing panel an inner class, the drawing panel class gets to be a subclass of `JPanel`, while the outer class is still free to be a subclass of something else）。
-- **HF**: 
+- **HF**: 我算是搞明白了！而且那个绘制面板本来作为一个单独类就不怎么够得上是可重用，因为这种具体的绘制，就是针对这一个GUI应用的（Yes I see! And the drawing panel isn't reusable enough to be a separate class anyway, since what it's actually painting is specific to this one GUI application）。
+- **Io**: 对呀！你可算搞明白了！
+- **HF**：好。现在就可以继续聊聊内部对象（内部类实例）与外层实例之间 *关系* 本质了。
+- **Io**：你们这些人类是怎么了？是觉得像多态机制这样严肃的话题的绯闻不够多吗（What is it with you people? Not enough sordid gossip in a serious topic like polymorphism）?
+- **HF**: 你可是对那些无脑公众一点也不了解，他们可是舍得为这些小道消息买单。如此说来，有人把你们内部对象创建出来，然后就立即与外层对象绑在一起，对吗？
+- **Io**：对的。同时也有人把这比作是一场包办婚姻。不过并没有那种内部对象绑定到哪个对象的说法（Yes that's right. And yes, some have compared it to an arranged marriage. We don't have a say in which object we're bonded to）。
+- **HF**: 那么好吧，我会沿用这个婚姻的比喻。内部对象与外层对象，你们可以 *离婚* 然后 *还可以* 与其他对象再婚吗？
+- **Io**：不行，这种密切关系是终身的。
+- **HF**：谁的终身？你们的终身吗？还是外层对象的终身？抑或你们二者的终身？
+- **Io**：是作为内部对象我的终身啦。内部对象是再也无法与其他外层对象有关系了。内部对象的唯一归宿，就是垃圾回收了。
+- **HF**：那外层对象会怎样呢？他还可以和其他的内部对象发生关系吗？
+- **Io**：哦哦，总算说到这个话题了。这大概是你真正 *想要* 的吧。是的，是的。我那称之为“老公”的混蛋，确实可以想要多少内部对象就要多少个。
+- **HF**：这就好比连续性一夫一妻（serial monogamy）吗？还是可以同时拥有全部的内部对象呢？
+- **Io**：同时拥有所有内部对象的。就算这样。满意了吧？
+- **HF**：好吧，这就说得通了。不过还请不要忘了，正是你内部对象对“同一接口的多重实现”赞赏有佳（And let's not forget, it was *you* extolling the virtues of "mulitple implementations of the same interface"）。那对于这种外层类有着三个按钮，就需要三个不同的内部类（并因此有三个不同内部对象）来处理那些事件的情况，就说的通了。非常感谢。给你一张面巾纸。
 
+![内部对象与外层对象的恩怨情仇](images/Ch12_24.png)
+
+
+*图 24 - 内部对象与外层对象的恩怨情仇*
