@@ -1163,3 +1163,16 @@ public class MultiWidgetsAndEvents {
 
 
 *图 24 - 内部对象与外层对象的恩怨情仇*
+
+## 运用内部类实现动画
+
+**Using an inner class for animation**
+
+前面已经见识到了对于事件收听者来讲，内部类是多么的便利，这正是因为有了内部类，才能够多次对同一个事件处理方法加以实现。不过现在是要看看，把内部类用作某个外层类未进行扩展的类的子类时，会多么的有用（But now we'll look at how useful an inner class is when used as a subclass of something the outer class doesn't extend）。也就是，外层类与内部类，是在不同的继承树上！
+
+目标是构造一个简单的动画，其中的圆圈将从左上部移动到右下部。
+
+![Java GUI 动画：效果](images/Ch12_25.png)
+
+
+*图 25 - Java GUI 动画：效果*
