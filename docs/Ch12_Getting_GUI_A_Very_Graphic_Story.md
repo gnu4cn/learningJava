@@ -1176,3 +1176,7 @@ public class MultiWidgetsAndEvents {
 
 
 *图 25 - Java GUI 动画：效果*
+
+**简单动画的工作原理**
+
+1) 在特定 `x` 与 `y` 坐标绘制一个物体
