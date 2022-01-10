@@ -1515,4 +1515,70 @@ public class MiniMusicPlayer1 {
 
 **Version Two: registering and getting `ControllerEvent`s**
 
+```java
+package com.xfoss.learningJava;
 
+import javax.sound.midi.*;
+
+// 这里需要收听 ControllerEvent 事件，因此就要实现这个事件收听
+// 者的接口
+public class MiniMusicPlayer2 implements ControllerEventListener {
+    public static void main (String[] args) {
+        MiniMusicPlayer2 mini = new MiniMusicPlayer2();
+        mini.go();
+    }
+
+    public void go () {
+        try {
+            Sequencer s = MidiSystem.getSequencer();
+            s.open();
+
+            // 对音序器上的这些事件进行注册。这个事件注册方法
+            // 会取得事件收听者 以及 一个表示需要的 ControllerEvent
+            // 事件代码清单。这里想要的只是编号 127 
+            // 的 ControllerEvent
+            int [] eventsIWant = {127};
+            s.addControllerEventListener(this, eventsIWant);
+
+            Sequence seq = new Sequence(Sequence.PPQ, 4);
+            Track t = seq.createTrack();
+
+            for (int i = 5; i < 60; i+=4) {
+                t.add(makeEvent(144, 1, i, 100, i));
+                // 这里就是拾取节拍的方式 -- 以一个事件编号127 的参数，插入
+                // 了 自己的 ControllerEvent
+                // （代码 176 说的是事件类型为 ControllerEvent）。该事件
+                // 什么也不会做！把这个事件放进去就 只是 为了可以在
+                // 每次演奏一个音符时，可以获取到一个事件。也就是说，这个插入
+                // 的事件的唯一目的，就是一个可以发出可以监听到的事件（这里
+                // 是无法监听到 NOTE ON/OFF 事件的）。请注意这里构造的这个
+                // 事件，是和MIDI事件 NOTE ON 发生在同一节拍中的。因此在
+                // NOTE ON 事件发生时，代码就能获悉到，因为这里插入的事件
+                // 会在同样时间发生。
+                t.add(makeEvent(176, 1, 127, 0, i));
+                t.add(makeEvent(128, 1, i, 100, i + 2));
+            }
+
+            s.setSequence(seq);
+            s.setTempoInBPM(220);
+            s.start();
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+
+    // 这是事件处理器方法（来自 ControllerEvent 事件收听者接口）。在每次
+    // 获取到上面的事件时，就会打印一个 ‘la’ 到命令行。
+    public void controlChange (ShortMessage ev) {System.out.println("la");}
+
+    public MidiEvent makeEvent (int comd, int chan, int one, int two, int tick) {
+        MidiEvent ev = null;
+        
+        try {
+            ShortMessage a = new ShortMessage();
+            a.setMessage(comd, chan, one, two);
+            ev = new MidiEvent(a, tick);
+        } catch (Exception e) {}
+
+        return ev;
+    }
+}
+```
