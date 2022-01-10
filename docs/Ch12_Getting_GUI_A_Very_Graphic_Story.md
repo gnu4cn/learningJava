@@ -1393,4 +1393,73 @@ BEAT 4 - NOTE OFF
 
 ## 构造报文/事件的较容易方式
 
+此刻，MIDI 报文及事件的构造与添加到音轨，就变得索然无味了。对于每条MIDI报文，都不得不构造报文实例（在此示例中，也就是`ShortMessage`），接着调用 `setMessage()`，接着又要为这条报文构造一个 `MidiEvent`，并还要把这个事件添加到音轨上。在前一章的代码中，就曾贯穿了每条报文的这些步骤。那意味着仅仅一个音符的演奏和停止演奏，就需要多达八行的代码！其中四行用于添加 `NOTE ON` 事件，另外四行用于添加`NOTE OFF`事件。
+
+```java
+ShortMessage a = new ShortMessage();
+a.setMessage(144, 1, note, 100);
+MidiEvent noteOn = new MidiEvent(a, 1);
+track.add(noteOn);
+
+ShortMessage b = new ShortMessage();
+a.setMessage(128, 1, note, 100);
+MidiEvent noteOff = new MidiEvent(b, 16);
+track.add(noteOff);
+```
+
+**对于每个MIDI事件，都必须完成的事情**：
+
+1) 构造一个报文示例：
+
+```java
+ShortMessage first = new ShortMessage();
+```
+
+2) 以各种MIDI指令来调用 `setMessage()` 方法（Call `setMessage()` with the instructions）
+
+```java
+first.setMessage(192, 1, instrument, 0);
+```
+
+3) 给此报文构造一个 `MidiEvent` 事件
+
+```java
+MidiEvent noteOn = new MidiEvent(first, 1);
+```
+
+4) 将该事件添加到音轨上
+
+```java
+track.add(notOn);
+```
+
+**下面就来构建一个构造报文并返回一个 `MidiEvent` 对象的静态工具方法（Let's build a static utility method that makes a message and returns a `MidiEvent`）**
+
+```java
+// 前四个参数用于报文
+//
+// 最后一个事件的 'tick' 表示报文应在什么时候出现
+//
+// 噢！有五个参数的方法呢。
+public static MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
+    MidiEvent event = null;
+
+    try {
+        // 这些语句使用方法的参数，构造出报文和事件
+        ShortMessage a = new ShortMessage();
+        a.setMessage(comd, chan, one, two);
+        event = new MidiEvent(a, tick);
+    } catch (Exception ex){}
+
+    // 返回这个事件（一个已经加载好报文的 `MidiEvent` 对象）
+    return event;
+}
+```
+
+### 示例：如何使用这个新的静态 `makeEvent()` 方法
+
+**Example: how to use the new static `makeEvent()` method**
+
+现在还不涉及到事件处理或图形，而仅有15个音符的规模。下面这段代码的要点，就是简单学习一下怎样运用这个新的 `makeEvent()` 方法。正是有了这个工具方法，后两版的代码才可以较小较简单。
+
 
