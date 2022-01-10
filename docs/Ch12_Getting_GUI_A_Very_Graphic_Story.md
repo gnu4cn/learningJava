@@ -1462,4 +1462,57 @@ public static MidiEvent makeEvent(int comd, int chan, int one, int two, int tick
 
 现在还不涉及到事件处理或图形，而仅有15个音符的规模。下面这段代码的要点，就是简单学习一下怎样运用这个新的 `makeEvent()` 方法。正是有了这个工具方法，后两版的代码才可以较小较简单。
 
+```java
+package com.xfoss.learningJava;
+
+// 不用忘了这个导入
+import javax.sound.midi.*;
+
+public class MiniMusicPlayer1 {
+    public static void main (String[] args) {
+        try {
+            // 构造（并打开）一个音序器
+            Sequencer s = MidiSystem.getSequencer();
+            s.open();
+
+            // 构造一个音序和音轨
+            Sequence seq = new Sequence(Sequence.PPQ, 4);
+            Track t = seq.createTrack();
+
+            // 构造一堆产生一些持续升高音符（从钢琴的 5 号音符
+            // 一直到 61 号音符）的事件
+            for (int i = 5; i < 61; i+=4){
+                // 这里调用新的 makeEvent() 方法来构造MIDI报文
+                // 与事件，并将结果（从 makeEvent() 方法返回
+                // 的 MidiEvent 对象）添加到音轨上。这些都是
+                // NOTE ON（144）和 NOTE OFF（128）事件对
+                t.add(makeEvent(144, 1, i, 100, i));
+                t.add(makeEvent(128, 1, i, 100, i + 2));
+            } // 循环结束
+
+            // 启动这个音序的运行
+            s.setSequence(seq);
+            s.setTempoInBPM(220);
+            s.start();
+        } catch (Exception ex){ex.printStackTrace();}
+    } // main 函数结束
+
+    public static MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
+        MidiEvent ev = null;
+
+        try {
+            ShortMessage a = new ShortMessage();
+            a.setMessage(comd, chan, one, two);
+            ev = new MidiEvent(a, tick);
+        } catch (Exception ex) {}
+
+        return ev;
+    }
+} // 主类结束
+```
+
+### 版本二：对`ControllerEvent`事件进行注册与获取
+
+**Version Two: registering and getting `ControllerEvent`s**
+
 
