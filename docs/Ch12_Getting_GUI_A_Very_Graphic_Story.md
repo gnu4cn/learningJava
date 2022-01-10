@@ -1302,3 +1302,31 @@ public class SimpleAnimation {
 ![`SimpleAnimation` GUI app 的运行效果](images/SimpleAnimation.gif)
 
 *图 26 - `SimpleAnimation` GUI app 的运行效果*
+
+### 喔。那可不是在移动......那是在涂抹。
+
+**Uh-oh. It didn't move...it smeared**.
+
+到底在哪里搞错了呢？
+
+这是因为在 `paintComponent()` 方法中有瑕疵的原因（There's one little flaw in the `paintComponent()` method）。
+
+**上面的代码忘记了 *擦除* 已经有的圆圈了！因此看到的就是这些痕迹**。
+
+要修复这个问题，就必须使用背景颜色来填充整个面板。下面的代码在 `paintComponent()` 方法的开头加入了两行：一行把颜色设置为白色（绘制面板的背景色），同时另一行用那个颜色来填充整个面板。说人话就是，下面的代码讲了“从 `x` 与 `y` 坐标为 `0` （离左边 `0` 像素及离顶部 `0` 像素）开始填充一个矩形，并让这个矩形与当前面板同样宽同样高”。
+
+```java
+public void paintComponent(Graphics g ) {
+    g.setColor(Color.white);
+    // 这里的 getWidth() 和 getHeight() 方法，是从 JPanel
+    // 那里继承来的。
+    g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+    g.setColor(Color.green);
+    g.fillOval(x, y, 20, 20);
+}
+```
+
+![改进版的 `SimpleAnimation`: 消除涂抹的动画](images/SimpleAnimation-beta.gif)
+
+*图 27 - 改进版的 `SimpleAnimation`: 消除涂抹的动画*

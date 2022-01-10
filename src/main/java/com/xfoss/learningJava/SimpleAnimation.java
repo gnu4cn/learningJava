@@ -51,6 +51,9 @@ public class SimpleAnimation {
     // 现在这就是个内部类了。
     class DrawingPanel extends JPanel {
         public void paintComponent(Graphics g) {
+            g.setColor(Color.white);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
             g.setColor(Color.green);
             // 这里使用了外层类中持续更新的 x 与 y 坐标。
             g.fillOval(x, y, 40, 40);
