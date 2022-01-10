@@ -1330,3 +1330,11 @@ public void paintComponent(Graphics g ) {
 ![改进版的 `SimpleAnimation`: 消除涂抹的动画](images/SimpleAnimation-beta.gif)
 
 *图 27 - 改进版的 `SimpleAnimation`: 消除涂抹的动画*
+
+## 代码厨房
+
+**Code Kitchen**
+
+![构造一个音乐视频的app](images/Ch12_27.png)
+
+*图 27 - 构造一个音乐视频的app*
