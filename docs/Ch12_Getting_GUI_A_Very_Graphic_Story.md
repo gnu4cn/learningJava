@@ -1338,3 +1338,31 @@ public void paintComponent(Graphics g ) {
 ![构造一个音乐视频的app](images/Ch12_27.png)
 
 *图 27 - 构造一个音乐视频的app*
+
+
+> **接下来会构造一个音乐视频的app。其中会运用到 Java 生成、与音乐节拍同步的随机图形**。
+>
+> **期间会注册（并收听）一种新类别的、由音乐自身所触发的非 GUI 事件（Along the way we'll register (and listen for) a new kind of non-GUI event, triggered by the music itself）**。
+
+> 请记住，这整个部分都是可选读的。不过这里认为过目一下对掌握 Java 颇有好处。并且会喜欢上整个部分的。可以用这里的 app 去打动别人。
+>
+> （好吧，必然的，这个简单的app也就只能对那些容易被打动的人有效果，不过还是要......）
+
+### 收听非GUI事件
+
+**Listening for non-GUI event**
+
+好吧，这或许并不是个音乐视频，不过这里将构造一个在屏幕上随着音乐节奏而绘制随机图形的程序。简而言之，程序将监听音乐的节拍，并在每一拍时绘制一个随机的矩形图形出来。
+
+这种需求就带来了一些新问题。到目前为止，我们监听的都仅仅是GUI的事件，而现在就要监听一种特殊的MIDI事件了。结果证明，监听非 GUI 事件就跟监听GUI事件一样：无非是实现一个监听者接口，把这个监听者注册到某个事件源上，然后就静静等待事件源对你的事件处理器方法（就是在收听者接口中定义的方法）进行调用即可。
+
+监听音乐节拍的最简单方式，差不多就是对具体MIDI事件进行注册和监听，这样的话无论音序器在什么时候获取到事件，代码都将同时获取到，进而就可以绘制图形。然而......仍然有个问题。实际上是个程序漏洞，这个漏洞不会让我们去监听那些 *正在构造* 的MIDI事件（就是那些 `NOTE ON` 的 MIDI事件，The simplest way to listen for the beat of the music would be to register and listen for the actual MIDI events, so that whenever the sequencer gets the event, our code will get it too and can draw the grphic. But... there's a problem. A bug, actually, that won't let us listen for the MIDI events *we're* making(the ones for `NOTE ON`)）。
+
+因此这里就必须做一些折衷。仍有其他一些可以监听的 MIDI 事件，也就是 `ControllerEvent`。这里的解决办法就是对这些 `ControllerEvent` 事件进行注册，并随后确保对于每个 `NOTE ON`事件，都有一个与之匹配的 `ControllerEvent` 在同一 ‘拍’ 处发出。是怎样确保在同一时间有 `ControllerEvent` 事件发出的呢？这里是将 `ControllerEvent` 与其他事件一样，加入到音轨上的！也就是说，这里的音乐序列将会像下面这样：
+
+```console
+BEAT 1 - NOTE ON, CONTROLLER EVENT
+BEAT 2 - NOTE OFF
+BEAT 3 - NOTE ON, CONTROLLER EVENT
+BEAT 4 - NOTE OFF
+```
