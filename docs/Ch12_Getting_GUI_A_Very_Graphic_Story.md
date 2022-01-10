@@ -1180,3 +1180,26 @@ public class MultiWidgetsAndEvents {
 **简单动画的工作原理**
 
 1) 在特定 `x` 与 `y` 坐标绘制一个物体
+
+```java
+// 里左边 20 像素，离顶部 50 像素
+g.fillOval(20, 50, 100, 100);
+```
+
+2) 在不同的 `x` 与 `y` 坐标重绘
+
+```java
+// 离左边 25 像素，离顶部 55 像素
+// （该物体就往下和往右移动了一点点）
+g.fillOval(25, 55, 100, 100);
+```
+
+3) 以不断变化的 x 与 y 值，继续重复之前的步骤，直到应该停下来为止。
+
+### 答疑
+
+- **这里为什么要了解动画呢？是不是要构造一个游戏啊**？
+
+> 不会去构造游戏的，不过可能会创建一些对物体随着时间而改变的过程进行模拟，进而对此过程的结果加以展示，这样的一些模拟程序。或者会构建一个可视化工具，比如对图形进行更新，从而展示出某个程序当前所使用的内存数量，或者对经过负载均衡服务器的流量情况加以展示等等。那些需要取得持续变化数字集，且需要把这些数字翻译成，可从单纯的数字获取到有用信息的其他形式的应用，都可以用这样的程序来实现（You might not be making games, but you might be creating simulations, where things change over time to show the results of a process. Or you might be building a visualization tool that, for example, updates a graphic to show how much memeory a program is using, or to show you how much traffic is coming through your load-balance server. Anything that needs to take a set fo continuous-changing numbers and translate them into something useful for getting information out the numbers）。
+>
+> 上面讲到的那些应用情形，是不是听起来都是业务类的app啊？当然那只是“官方措辞”而已。这里之所以要涉及到动画，真正原因，就只是因为这个示例可以简单地验证内部类的另一种用法。（还因为这里只是喜欢动画，后面的一本书 `Head First J2EE`中，就直到把动画放在那里不合适，Doesn't that all sound business-like? That's just the "offical justification", of course. The real reason we're covering it here is just because it's a simple way to demonstrate another use of inner class. (And because we just *like* animation, and our next Head First book is about J2EE and we *know* we can't get animation in that one.)）
