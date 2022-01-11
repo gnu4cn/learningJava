@@ -69,4 +69,19 @@ frame.setVisible(true);
 myPanel.add(button);
 ```
 
+布局管理器有着数种样式，同时各个背景组件可以有着各自的布局管理器。在构建某种布局时，布局管理器有着他们各自要遵循的策略（Layout managers come in several flavors, and each background component can have its own layout manager. Layout managers have their own policies to follow when building a layout）。比如，一直布局管理器就会坚持让面板中的各个组件保持大小一致，并以网格方式进行排布；而另一种则会让这些面板中的各个组件选择他自己的大小，却是纵向堆叠起来的。下面就是一个嵌套式布局的示例：
 
+```java
+JPanel panelA = new JPanel();
+JPanel panelB = new JPanel();
+
+panelB.add(new JButton("按钮1"));
+panelB.add(new JButton("按钮2"));
+panelB.add(new JButton("按钮3"));
+
+panelA.add(panelB);
+```
+
+![组件嵌套及其布局管理器作用范围](images/Ch13_03.png)
+
+*图 3 - 组件嵌套及其布局管理器作用范围*
