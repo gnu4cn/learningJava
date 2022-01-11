@@ -1557,13 +1557,13 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
                 // 会在同样时间发生。
                 t.add(makeEvent(176, 1, 127, 0, i));
                 t.add(makeEvent(128, 1, i, 100, i + 2));
-            }
+            } // 循环结束
 
             s.setSequence(seq);
             s.setTempoInBPM(220);
             s.start();
         } catch (Exception ex) {ex.printStackTrace();}
-    }
+    } // main 方法结束
 
     // 这是事件处理器方法（来自 ControllerEvent 事件收听者接口）。在每次
     // 获取到上面的事件时，就会打印一个 ‘la’ 到命令行。
@@ -1580,6 +1580,51 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
 
         return ev;
     }
-}
+} // 主类结束
 ```
 
+> 请留意这段代码与前一版不同的地方。
+
+
+### 第三版：随音乐而绘制图形
+
+**Version Three: drawing graphics in time with the music**
+
+该最终版本是在版本二的基础上，通过加入图形部分构建起来的。这里要构建一个视窗框，随后往视窗框添加一个绘制面板，从而在每次获取到一个事件时，就绘制一个新的矩形并重绘屏幕。此外的其他修改，就只是这里会随机地演奏音符，而不在是版本二中简单的升高音调。
+
+代码中最重要的修改（除开构建要给简单的GUI外），就是这里要让绘制面板来实现 `ControllerEventListener` 接口，而不再是GUI主程序本身了。那么在绘制面板（一个内部类）获取到事件时，他就直到怎样通过绘制矩形，来管好自己。
+
+此版本的完整代码在稍后一些。
+
+**关于绘制面板这个内部类**：
+
+```java
+class DrawingPanel extends JPanel implements ControllerEventListener {
+    boolean msg = false;
+
+    public void controlChange(ShortMessage ev) {
+        msg = true;
+        repaint();
+    }
+
+    public void paintComponent(Graphics g) {
+        if (msg) {
+            Grahpics2D g2 = (Graphics2D) g;
+
+            int r = (int) (Math.random() * 250);
+            int gr = (int) (Math.random() * 250);
+            int b = (int) (Math.random() * 250);
+
+            g.setColor(new Color(r, gr, b));
+            
+            int ht = (int)(Math.random() * 120 + 10);
+            int width = (int) (Math.random() * 120 + 10);
+            int x = (int) (Math.random() * 40 + 10);
+            int y = (int) (Math.random() * 40 + 10);
+            
+            g.fillRect(x, y, width, ht);
+            msg = false;
+        }
+    }
+}
+```
