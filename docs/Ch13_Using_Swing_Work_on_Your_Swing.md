@@ -144,3 +144,9 @@ panelA.add(panelB);
 *图 7 - `FlowLayout`布局管理器的图示*
 
 ### `BoxLayout`
+
+`BoxLayout` 管理器与 `FlowLayout` 类似的地方在于，各个组件都会获得自己想要的大小，组件按照添加的先后顺序放置。与 `FlowLayout` 的不同之处在于，`BoxLayout`管理器可将所布局的组件，进行竖直方向上的堆叠（或水平方向，不过通常只关心竖直方向）。`BoxLayout`与`FlowLayout`相似，不过与 `FlowLayout`的自动"组件换行"不同，可以插入某种程度上称之为“组件回车键”的东西，然后 **强制** 组件开启新行（It's like a `FlowLayout` but instead of having automatic 'component wrapping', you can insert a sort of 'component return key' and **force** the components to start a new line）。
+
+![`BoxLayout` 布局管理器图示](images/Ch13_08.png)
+
+*图 8 - `BoxLayout` 布局管理器图示*
