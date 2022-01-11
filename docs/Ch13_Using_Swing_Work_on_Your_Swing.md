@@ -150,3 +150,37 @@ panelA.add(panelB);
 ![`BoxLayout` 布局管理器图示](images/Ch13_08.png)
 
 *图 8 - `BoxLayout` 布局管理器图示*
+
+### `BorderLayout`关注五个区域：东西南北中
+
+**`BorderLayout` cares about five regions: east, west, north, south, and center**
+
+**下面把一个按钮添加到东部区域**：
+
+```java
+package com.xfoss.learningJava;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Button1 {
+    public static void main (String[] args) {
+        Button1 gui = new Button1 ();
+        gui.go();
+    }
+
+    public void go () {
+        JFrame f = new JFrame ("BorderLayout 示例：一个放在东部区域的按钮");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton btn = new JButton ("点我");
+
+        f.getContentPane().add(BorderLayout.EAST, btn);
+        f.setSize(640, 480);
+        f.setVisible(true);
+    }
+}
+```
+
+![`BorderLayout` 示例一：把一个按钮放在东部区域](images/Ch13_09.png)
+
+*图 9 - `BorderLayout` 示例一：把一个按钮放在东部区域*
