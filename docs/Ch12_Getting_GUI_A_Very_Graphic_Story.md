@@ -1599,16 +1599,27 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
 **关于绘制面板这个内部类**：
 
 ```java
+// 后面的 implements ControllerEventListener 表明该面板是个事件收听者
 class DrawingPanel extends JPanel implements ControllerEventListener {
+    // 这里设置了一个为 false 的标志，在收到一个事件时，就
+    // 会把这个标志设置为 true
     boolean msg = false;
 
     public void controlChange(ShortMessage ev) {
+        // 这里就收到了一个事件，因此就要把之前的标志
+        // 设置为 true, 并调用 repaint() 方法
         msg = true;
         repaint();
     }
 
     public void paintComponent(Graphics g) {
+        // 
+        // 这里必须要使用一个标志变量，因为 别的 一些东西也可能会触发
+        // repaint()，而这里只希望在有 ControllerEvent 才进行绘制
+        //
         if (msg) {
+            // 这些代码产生一种随机颜色，并绘制出一个一半大小的随机
+            // 矩形
             Grahpics2D g2 = (Graphics2D) g;
 
             int r = (int) (Math.random() * 250);
@@ -1624,6 +1635,111 @@ class DrawingPanel extends JPanel implements ControllerEventListener {
             
             g.fillRect(x, y, width, ht);
             msg = false;
+        } // if 结束
+    } // paintComponent() 方法结束
+} // 内部类 DrawingPanel 结束
+```
+
+### 小练习
+
+> 下面是版本三的全部代码。版本三是从版本二之上直接构建得来。现在可以试着不参考之前的注释，自己来添加注释。
+
+```java
+package com.xfoss.learningJava;
+
+import javax.sound.midi.*;
+import java.io.*;
+import javax.swing.*;
+import java.awt.*;
+
+public class MiniMusicPlayer3 {
+    static JFrame f = new JFrame("Java GUI示例: 内部类与监听非 GUI 事件");
+    static DrawingPanel p;
+    static int fWidth = 640;
+    static int fHeight = 480;
+
+    public static void main (String[] args) {
+        MiniMusicPlayer3 mini = new MiniMusicPlayer3();
+        mini.go();
+    }
+
+    public void setUpGui () {
+        p = new DrawingPanel();
+        f.setContentPane(p);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setBounds(30, 30, fWidth, fHeight);
+        f.setVisible(true);
+    }
+
+    public void go () {
+        setUpGui();
+
+        try {
+            Sequencer s = MidiSystem.getSequencer();
+            s.open();
+
+            s.addControllerEventListener(p, new int[] {127});
+
+            Sequence seq = new Sequence(Sequence.PPQ, 4);
+            Track t = seq.createTrack();
+
+            int r = 0;
+            for (int i = 0; i < 360; i+=4) {
+                r = (int) (Math.random() * 50 + 1);
+
+                t.add(makeEvent(144, 1, r, 100, i));
+                t.add(makeEvent(176, 1, 127, 0, i));
+                t.add(makeEvent(128, 1, r, 100, i + 2));
+            }
+
+            s.setSequence(seq);
+            s.setTempoInBPM(220);
+            s.start();
+        } catch (Exception ex){ex.printStackTrace();}
+    }
+
+    public MidiEvent makeEvent (int comd, int chan, int one, int two, int tick) {
+        MidiEvent ev = null;
+        
+        try {
+            ShortMessage a = new ShortMessage();
+            a.setMessage(comd, chan, one, two);
+            ev = new MidiEvent(a, tick);
+        } catch (Exception e) {}
+
+        return ev;
+    }
+
+    class DrawingPanel extends JPanel implements ControllerEventListener {
+        boolean msg = false;
+
+        public void controlChange(ShortMessage ev) {
+            msg = true;
+            repaint();
+        }
+
+        public void paintComponent(Graphics g) {
+            if (msg) {
+                g.setColor(Color.white);
+                g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+                Graphics2D g2 = (Graphics2D) g;
+
+                int r = (int) (Math.random() * 250);
+                int gr = (int) (Math.random() * 250);
+                int b = (int) (Math.random() * 250);
+
+                g.setColor(new Color(r, gr, b));
+                 
+                int x = (int) (Math.random() * 40 + 10);
+                int y = (int) (Math.random() * 40 + 10);
+               
+                int ht = (int)(Math.random() * fHeight / 2 + 10);
+                int width = (int) (Math.random() * fWidth / 2 + 10);
+                
+                g.fillRect(x, y, width, ht);
+                msg = false;
+            }
         }
     }
 }

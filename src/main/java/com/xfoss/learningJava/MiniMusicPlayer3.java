@@ -83,11 +83,12 @@ public class MiniMusicPlayer3 {
                 int b = (int) (Math.random() * 250);
 
                 g.setColor(new Color(r, gr, b));
-                
-                int ht = (int)(Math.random() * fHeight / 2 + 10);
-                int width = (int) (Math.random() * fWidth / 2 + 10);
+                 
                 int x = (int) (Math.random() * 40 + 10);
                 int y = (int) (Math.random() * 40 + 10);
+               
+                int ht = (int)(Math.random() * fHeight / 2 + 10);
+                int width = (int) (Math.random() * fWidth / 2 + 10);
                 
                 g.fillRect(x, y, width, ht);
                 msg = false;
