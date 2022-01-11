@@ -12,4 +12,8 @@
 
 **`Swing` components**
 
+对于先前一直讲的小部件（*widget*），其实更准确的叫法应该是***组件（Component）***。就是那些放到GUI中的 *物件（things）*。也即是 *用户所见到并与之交互的那些东西*。文本字段、按钮、滚动清单、单选按钮等等，这些全都是组件。事实上他们都扩展了 `javax.swing.JComponent`类。
+
+> **小部件从技术上讲就是 `Swing` 组件。几乎所有可粘在 GUI 中的东西，都扩展自 `javax.swing.JComponent` 类**。
+
 
