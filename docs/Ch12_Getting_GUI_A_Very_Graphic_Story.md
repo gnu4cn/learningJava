@@ -1548,9 +1548,9 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
                 // 这里就是拾取节拍的方式 -- 以一个事件编号127 的参数，插入
                 // 了 自己的 ControllerEvent
                 // （代码 176 说的是事件类型为 ControllerEvent）。该事件
-                // 什么也不会做！把这个事件放进去就 只是 为了可以在
-                // 每次演奏一个音符时，可以获取到一个事件。也就是说，这个插入
-                // 的事件的唯一目的，就是一个可以发出可以监听到的事件（这里
+                // 什么也不会做！把这个事件放进去就 只是 为了在
+                // 每次演奏一个音符时，可以获取到一个事件。也就是说，插入
+                // 事件的唯一目的，就是发出一个可被监听到的事件（这里
                 // 是无法监听到 NOTE ON/OFF 事件的）。请注意这里构造的这个
                 // 事件，是和MIDI事件 NOTE ON 发生在同一节拍中的。因此在
                 // NOTE ON 事件发生时，代码就能获悉到，因为这里插入的事件
@@ -1582,3 +1582,4 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
     }
 }
 ```
+
