@@ -115,3 +115,32 @@ panelA.add(panelB);
 ![布局管理器的运作方式](images/Ch13_05.png)
 
 *图 5 - 布局管理器的运作方式*
+
+### 不同布局管理器有着不同策略
+
+**Different layout managers have different policies**
+
+一些布局管理器会依照所布局组件想要的大小。比如有按钮想要 30 像素 x 50 像素大小，那么这就是布局管理器分配给他的大小。另一些布局管理器则只会部分依照所布局组件的首选大小。比如有按钮想要 30 像素 x 50 像素时，该按钮将会是 30 像素高，而宽度则会与其背景 *面板* 的宽度相同。还要其他一些布局管理器，只会参考所布局组件中 *最大的* 那个，并令到面板中的其余组件与最大的那个同样大小。某些情况下，布局管理器的工作会变得极度复杂，而大多数时候，只有在了解了布局管理器的策略时，才能搞清楚那个布局管理器将做些什么（In some cases, the work of the layout manager can get very complex, but most of the time you can figure out what the layout manager will probably do, once you get to know that layout manager's policies）。
+
+## 三大布局管理器：边缘、流与盒子
+
+**The Big Three layout managers: border, flow and box**
+
+### `BorderLayout`
+
+`BorderLayout` 管理器将背景组件划分为五个区域。对于每个区域，仅可添加一个组件到由一个`BorderLayer`管理器控制的背景。由此管理器排布的组件，通常不会有他们所选的大小。**`BorderLayout` 是视窗框默认的布局管理器**！（A `BorderLayout` manager divides a background component into five regions. You can add only one component per region to a background controlled by a `BorderLayout` manager. Components laid out by this manager usually don't get to have their prefered size. **`BorderLayout` is the default layout manager for a frame**!）
+
+![`BorderLayout` 布局管理器图示](images/Ch13_06.png)
+
+*图 6 - `BorderLayout` 布局管理器图示*
+
+### `FlowLayout`
+
+`FlowLayout` 管理器的行事方式，就好比文字处理器，不同之处就在于他处理的是组件，而不是文字处理器中的单词。每个组件都有他想要的大小，同时这些组件按照添加的先后顺序，从左到右排列起来，期间还开启了“自动换行”。因此在出现放不下某个组件的情况时，这个组件就会自动落到布局的下一“行”去。**`FlowLayout`是面板的默认布局管理器**！
+
+![`FlowLayout`布局管理器的图示](images/Ch13_07.png)
+
+
+*图 7 - `FlowLayout`布局管理器的图示*
+
+### `BoxLayout`
