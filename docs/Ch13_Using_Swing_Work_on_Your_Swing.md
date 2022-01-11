@@ -50,3 +50,7 @@ frame.getContentPane().add(BorderLayout.EAST, button);
 frame.setSize(300, 300);
 frame.setVisible(true);
 ```
+
+![构造Java GUI 的步骤](images/Ch13_02.png)
+
+*图 2 - 构造Java GUI 的步骤*
