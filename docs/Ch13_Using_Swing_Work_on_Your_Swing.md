@@ -375,9 +375,13 @@ public void go () {
     p.setBackground(Color.darkGray);
 
     JButton btn = new JButton("吓我一跳！");
-    p.add(btn);
     
+    // 把按钮添加到面板，并把面板添加到视窗框。面板的布局
+    // 管理器（FlowLayout）控制着按钮，而视窗框的布局管理
+    // 器（BorderLayout）控制着面板。
+    p.add(btn);
     f.getContentPane().add(BorderLayout.EAST, p);
+
     f.setSize(640, 480);
     f.setVisible(true);
 }
@@ -385,5 +389,10 @@ public void go () {
 
 ![`FlowLayout` 管理器：再添加一个按钮到面板里](images/Ch13_17.png)
 
-
 *图 17 - `FlowLayout` 管理器：再添加一个按钮到面板里*
+
+> 这时面板变宽了！而由于面板使用的流布局，从而按钮同时得到了他的宽度与高度，还有按钮是面板（而非视窗框）的组成部分。
+
+![`BorderLayout` 与 `FlowLayout`](images/Ch13_18.png)
+
+*图 18 - `BorderLayout` 与 `FlowLayout`*
