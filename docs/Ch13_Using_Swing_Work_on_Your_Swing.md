@@ -243,3 +243,29 @@ public void go () {
 
 
 *图 11 - `BorderLayout` 布局：把按钮放在北部区域*
+
+
+**现在让按钮去请求要 *更高一些***
+
+**Now let's make the button ask to be *taller***
+
+> 该怎样实现呢？按钮已经尽可能的宽了 -- 跟视窗框一样宽。不过还是可以通过给与他内部文字更大的字体，来令到按钮更高一些。
+
+```java
+public void go () {
+    JFrame f = new JFrame ("BorderLayout 示例：通过Button类的setFont()，让按钮变得更高");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
+    Font bigFont = new Font("STXingkai", Font.BOLD, 32);
+    btn.setFont(bigFont);
+
+    f.getContentPane().add(BorderLayout.NORTH, btn);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`BorderLayout`管理器：通过运用`Button`类的`setFont()`方法，让按钮变得更高](images/Ch13_12.png)
+
+*图 12 - `BorderLayout`管理器：通过运用`Button`类的`setFont()`方法，让按钮变得更高*
