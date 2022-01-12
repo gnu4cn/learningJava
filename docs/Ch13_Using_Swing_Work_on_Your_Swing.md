@@ -363,3 +363,27 @@ public class Panel1 {
 
 
 *图 16 - `FlowLayout` 管理器：从把一个面板添加到视窗框的东部区域开始*
+
+**把一个按钮添加到面板**：
+
+```java
+public void go () {
+    JFrame f = new JFrame("FlowLayout 管理器：添加一个按钮到面板");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JPanel p = new JPanel();
+    p.setBackground(Color.darkGray);
+
+    JButton btn = new JButton("吓我一跳！");
+    p.add(btn);
+    
+    f.getContentPane().add(BorderLayout.EAST, p);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`FlowLayout` 管理器：再添加一个按钮到面板里](images/Ch13_17.png)
+
+
+*图 17 - `FlowLayout` 管理器：再添加一个按钮到面板里*

@@ -10,11 +10,14 @@ public class Panel1 {
     }
 
     public void go () {
-        JFrame f = new JFrame("FlowLayout 管理器：从添加一个面板到视窗框的东部区域开始");
+        JFrame f = new JFrame("FlowLayout 管理器：添加一个按钮到面板");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel p = new JPanel();
         p.setBackground(Color.darkGray);
+
+        JButton btn = new JButton("吓我一跳！");
+        p.add(btn);
         
         f.getContentPane().add(BorderLayout.EAST, p);
         f.setSize(640, 480);
