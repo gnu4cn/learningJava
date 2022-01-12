@@ -10,14 +10,21 @@ public class Button1 {
     }
 
     public void go () {
-        JFrame f = new JFrame ("BorderLayout 示例：通过Button类的setFont()方法，让按钮变得更高");
+        JFrame f = new JFrame ("BorderLayout 示例：关于中部区域");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
-        Font bigFont = new Font("STXingkai", Font.BOLD, 32);
-        btn.setFont(bigFont);
+        JButton btnEast = new JButton ("东部");
+        JButton btnWest = new JButton ("西部");
+        JButton btnNorth = new JButton ("北部");
+        JButton btnSouth = new JButton ("南部");
+        JButton btnCenter = new JButton ("中央");
 
-        f.getContentPane().add(BorderLayout.NORTH, btn);
+        f.getContentPane().add(BorderLayout.EAST, btnEast);
+        f.getContentPane().add(BorderLayout.WEST, btnWest);
+        f.getContentPane().add(BorderLayout.NORTH, btnNorth);
+        f.getContentPane().add(BorderLayout.SOUTH, btnSouth);
+        f.getContentPane().add(BorderLayout.CENTER, btnCenter);
+
         f.setSize(640, 480);
         f.setVisible(true);
     }

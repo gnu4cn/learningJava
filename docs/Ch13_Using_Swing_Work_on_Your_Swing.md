@@ -276,3 +276,37 @@ public void go () {
 ![`BorderLayout` 管理器](images/Ch13_13.png)
 
 *图 13 - `BorderLayout` 管理器*
+
+**中部区域得到了剩下的空间**！
+
+（除了一种稍后会看到的特殊情况）
+
+**The center region gets whatever's left**!
+
+(except in one special case we'll look later)
+
+```java
+public void go () {
+    JFrame f = new JFrame ("BorderLayout 示例：关于中部区域");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JButton btnEast = new JButton ("东部");
+    JButton btnWest = new JButton ("西部");
+    JButton btnNorth = new JButton ("北部");
+    JButton btnSouth = new JButton ("南部");
+    JButton btnCenter = new JButton ("中央");
+
+    f.getContentPane().add(BorderLayout.EAST, btnEast);
+    f.getContentPane().add(BorderLayout.WEST, btnWest);
+    f.getContentPane().add(BorderLayout.NORTH, btnNorth);
+    f.getContentPane().add(BorderLayout.SOUTH, btnSouth);
+    f.getContentPane().add(BorderLayout.CENTER, btnCenter);
+
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`BorderLayout` 管理器：关于中央区域](images/Ch13_14.png)
+
+*图 14 - `BorderLayout` 管理器：关于中央区域*
