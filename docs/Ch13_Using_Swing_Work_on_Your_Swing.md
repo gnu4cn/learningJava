@@ -502,4 +502,33 @@ public void go () {
 
 **Unlike `FlowLayout`, `BoxLayout` can force a 'new line' to make the components wrap to the next line, even if there's room for them to fit horizontally**.
 
+不过现在就必须把面板的布局管理器从 `FlowLayout` 修改为 `BoxLayout`。
 
+```java
+public void go () {
+    JFrame f = new JFrame("BoxLayout 管理器：把面板的布局管理器从默认的 FlowLayout 修改为 BoxLayout");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JPanel p = new JPanel();
+    p.setBackground(Color.darkGray);
+    
+    // 把布局管理器修改为 BoxLayout 的一个新实例
+    //
+    // BoxLayout 的构造器，需要知道他要布局的组件（即这个面板）
+    // 以及使用哪个轴（这里使用垂直堆叠的 Y_AXIS ）
+    p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+
+    JButton btn = new JButton ("吓我一跳！");
+    JButton btnTwo = new JButton ("祈福");
+    p.add(btn);
+    p.add(btnTwo);
+    
+    f.getContentPane().add(BorderLayout.EAST, p);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`BoxLayout`管理器：修改面板的布局管理器为 `BoxLayout`](images/Ch13_22.png)
+
+*图 22 - `BoxLayout`管理器：修改面板的布局管理器为 `BoxLayout`*

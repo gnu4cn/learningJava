@@ -10,16 +10,17 @@ public class Panel1 {
     }
 
     public void go () {
-        JFrame f = new JFrame("FlowLayout 管理器：添加 50 个按钮到面板");
+        JFrame f = new JFrame("BoxLayout 管理器：把面板的布局管理器从默认的 FlowLayout 修改为 BoxLayout");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel p = new JPanel();
         p.setBackground(Color.darkGray);
+        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 
-        for (int t = 0; t < 50; t++) {
-            JButton btn = new JButton(String.format("按钮 - %s", t));
-            p.add(btn);
-        }
+        JButton btn = new JButton ("吓我一跳！");
+        JButton btnTwo = new JButton ("祈福");
+        p.add(btn);
+        p.add(btnTwo);
         
         f.getContentPane().add(BorderLayout.EAST, p);
         f.setSize(640, 480);
