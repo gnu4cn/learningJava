@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class SwingComponentsDemo {
     JTextField txtField;
+    boolean txtFieldOriginal = true;
 
     public static void main (String[] args) {
         SwingComponentsDemo gui = new SwingComponentsDemo ();
@@ -23,19 +24,9 @@ public class SwingComponentsDemo {
         p.add(l);
 
         txtField = new JTextField("你的姓名", 20);
-        txtField.addFocusListener(new txtFieldFocusListener());
-
         p.add(txtField);
 
         f.setSize(640, 480);
         f.setVisible(true);
-    }
-
-    class txtFieldFocusListener implements FocusListener {
-        public void focusGained(FocusEvent e) {
-            txtField.setText("");
-        }
-
-        public void focusLost(FocusEvent e){}
     }
 }

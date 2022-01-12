@@ -653,4 +653,21 @@ field.setText("内容");
 field.setText("");
 ```
 
+3) 在用户按下回车时获取到一个 `ActionEvent`
 
+```java
+// 若真的想要在用户每次按键时听到，那还可以对按键事件进行注册
+field.addActionListener(myActionListener);
+```
+
+4) 选择/高亮字段中的文本
+
+```java
+field.selectAll();
+```
+
+5) 将光标放回到该文本字段（这样用户才可以开始输入）
+
+```java
+filed.requestFocus();
+```
