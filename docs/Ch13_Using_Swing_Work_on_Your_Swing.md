@@ -221,3 +221,25 @@ public void go () {
 - **`Button` 对象**：现在我有了很多个字，那么我就倾向于要60像素宽，25像素高。
 - **`BorderLayout` manager**: 由于按钮是在边框布局的东部区域，那么我就会依照他所选的宽度。但是我不会关心他有多高；这个按钮将会与视窗框一样高，因为这是我的策略。
 - **`Button` 对象**：`：（` 下次就就要和 `FlowLayout` 在一起，那样的话我就会得到想要的一切了。
+
+**再试试把按钮放在北部区域**：
+
+**Let's try a button in the NORTH region**
+
+```java
+public void go () {
+    JFrame f = new JFrame ("BorderLayout 示例：放在北部区域的按钮");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
+
+    // 注意这里的 NORTH
+    f.getContentPane().add(BorderLayout.NORTH, btn);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`BorderLayout` 布局：把按钮放在北部区域](images/Ch13_11.png)
+
+
+*图 11 - `BorderLayout` 布局：把按钮放在北部区域*
