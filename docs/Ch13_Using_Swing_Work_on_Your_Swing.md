@@ -781,3 +781,37 @@ public class TextAreaDemo {
 ![`JTextArea`示例效果](images/JTextAreaDemo.gif)
 
 *图 25 - `JTextArea`示例效果*
+
+
+### `JCheckBox`
+
+**构造器**
+
+```java
+JCheckBox check = new JCheckBox("前往 11 层");
+```
+
+**用法**
+
+1) 监听某个条目的事件（在该条目被勾选或取消勾选时）
+
+```java
+check.addItemListener(this);
+```
+
+2) 处理事件（并搞清楚该条目是否被勾选）
+
+```java
+public void itemStateChanged (ItemEvent ev){
+    String onOrOff = "off";
+    if (check.isSelected()) onOrOff = "on";
+    System.out.format("勾选框是 %s", onOrOff);
+}
+```
+
+3) 以代码方式勾选或取消勾选条目
+
+```java
+check.setSelected(true);
+check.setSelected(false);
+```
