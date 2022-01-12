@@ -12,7 +12,7 @@ public class Button1 {
     public void go () {
         JFrame f = new JFrame ("BorderLayout 示例：一个放在东部区域的按钮");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JButton btn = new JButton ("点我");
+        JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
 
         f.getContentPane().add(BorderLayout.EAST, btn);
         f.setSize(640, 480);

@@ -120,7 +120,7 @@ panelA.add(panelB);
 
 **Different layout managers have different policies**
 
-一些布局管理器会依照所布局组件想要的大小。比如有按钮想要 30 像素 x 50 像素大小，那么这就是布局管理器分配给他的大小。另一些布局管理器则只会部分依照所布局组件的首选大小。比如有按钮想要 30 像素 x 50 像素时，该按钮将会是 30 像素高，而宽度则会与其背景 *面板* 的宽度相同。还要其他一些布局管理器，只会参考所布局组件中 *最大的* 那个，并令到面板中的其余组件与最大的那个同样大小。某些情况下，布局管理器的工作会变得极度复杂，而大多数时候，只有在了解了布局管理器的策略时，才能搞清楚那个布局管理器将做些什么（In some cases, the work of the layout manager can get very complex, but most of the time you can figure out what the layout manager will probably do, once you get to know that layout manager's policies）。
+一些布局管理器会依照所布局组件想要的大小。比如有按钮想要 30 像素 x 50 像素大小，那么这就是布局管理器分配给他的大小。另一些布局管理器则只会部分依照所布局组件的首选大小。比如有按钮想要 30 像素 x 50 像素时，该按钮将会是 30 像素高，而宽度则会与其背景 *面板* 的宽度相同。还有其他一些布局管理器，只会参考所布局组件中 *最大的* 那个，并令到面板中的其余组件与最大的那个同样大小。某些情况下，布局管理器的工作会变得极度复杂，而大多数时候，只有在了解了布局管理器的策略时，才能搞清楚那个布局管理器将做些什么（In some cases, the work of the layout manager can get very complex, but most of the time you can figure out what the layout manager will probably do, once you get to know that layout manager's policies）。
 
 ## 三大布局管理器：边缘、流与盒子
 
@@ -161,6 +161,7 @@ panelA.add(panelB);
 package com.xfoss.learningJava;
 
 import javax.swing.*;
+// BorderLayout 是在 java.awt 包里头的
 import java.awt.*;
 
 public class Button1 {
@@ -174,6 +175,7 @@ public class Button1 {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JButton btn = new JButton ("点我");
 
+        // 这行语句就指定了放置区域
         f.getContentPane().add(BorderLayout.EAST, btn);
         f.setSize(640, 480);
         f.setVisible(true);
@@ -184,3 +186,33 @@ public class Button1 {
 ![`BorderLayout` 示例一：把一个按钮放在东部区域](images/Ch13_09.png)
 
 *图 9 - `BorderLayout` 示例一：把一个按钮放在东部区域*
+
+### 脑力锻炼
+
+- `BorderLayout` 管理器是怎样判定按钮的大小的（How did the `BorderLayout` manager come up with this size for the button）?
+
+- 此布局管理器考虑了哪些因素（What are the factors the layout manager has to consider）？
+
+- 这个按钮为什么没有更宽或更高（Why isn't it wider or taller）？
+
+### 观察一下在给到按钮更多字符时会发生什么......
+
+**Watch what happens when we give the button more characters...**
+
+```java
+public void go () {
+    JFrame f = new JFrame ("BorderLayout 示例：一个放在东部区域的按钮");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // 这里只修改了按钮上的文本
+    JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
+
+    f.getContentPane().add(BorderLayout.EAST, btn);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`BorderLayout` 管理器判定所布局组件大小影响因素测试](images/Ch13_10.png)
+
+
+*图 10 - `BorderLayout` 管理器判定所布局组件大小影响因素测试*
