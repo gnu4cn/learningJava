@@ -532,3 +532,48 @@ public void go () {
 ![`BoxLayout`管理器：修改面板的布局管理器为 `BoxLayout`](images/Ch13_22.png)
 
 *图 22 - `BoxLayout`管理器：修改面板的布局管理器为 `BoxLayout`*
+
+> 请留意因为面板现在不需要去适应水平方向上并排的两个按钮，所以他又变窄了。那么面板就告诉视窗框，他只需要那个最大的“吓我一跳！”按钮大小的空间。
+
+## 答疑
+
+- **怎么不直接把交互性组件（比如这里的按钮），像添加到面板上那样，直接添加到视窗框呢**？
+
+> 由于在将物件呈现在屏幕上的过程中，到`JFrame`这里，属于至关重要的节点，因此 `JFrame` 具有特殊性。与所有`Swing`组件都是纯 Java 代码不同之处在于，为了访问到显示器，`JFrame`就必须要去与底层 OS 系统连接起来。可把内容窗格当作一个处于 `JFrame` 之上的 100% 纯 Java 层。或者在把 `JFrame` 当作窗框的时候，把内容窗格当作......窗户玻璃。知道窗户的窗格把。还甚至可以用 `JPanel` 去与内容窗格互换，来将自己的 `JPanel` 作为视窗框的内容窗格，这样写就可以（A `JFrame` is special because it's where the rubber meets the road in making something appear on the screen. While all your `Swing` components are pure Java, a `JFrame` has to connect to the underlying OS in order to access the display. Think of the content pane as a 100% pure Java layer that sits on *top* of the `JFrame`. Or think of it as though `JFrame` is the window frame and the content pane is the...glass. You know, the window *pane*. And you can even swap the content pane with your own `JPanel`, to make your `JPanel` the frame's content pane）：
+
+```java
+myFrame.setContentPane(myPanel);
+```
+
+
+- **可以修改视窗框的布局管理器吗？我想要在视窗框上使用流式布局，而不是默认的边框布局，会怎样呢**？
+
+> 要实现这些，最简单的办法，就是构造一个面板，在这个面板中按照想要的样子去构建GUI，然后运用上一个答案中的方法，把这个面板设置为视窗框的内容窗格（就不会用到视窗框的默认内容窗格了）。
+
+
+- **对于这些添加到布局组件（视窗框、面板）上的交互性组件，若需要不同的所选大小，该怎样做呢？交互性组件有 `setSize()`方法吗**？
+
+> 是的，交互性小部件是有这个 `setSize()` 方法的，然而布局管理器只会忽视之。组件的 *优先大小（preferred size）* 与我们想要的大小，二者之间是有差异的。优先大小（preferred size）基于组件实际 *所需* 的大小（由组件自己决断）。布局管理器调用的是组件的 `getPreferredSize()` 方法，而这个方法并不会去理会那个先前在组件上调用的 `setSize()`方法。
+
+- **就不能把物件放在自己想要地方吗？可以把布局管理器关掉吗**？
+
+> 当然可以。基于单个的布局组件，是可以调用 `setLayout(null)` 方法的，随后就由自己去把确切的屏幕位置坐标进行硬编码吧。长远来看，还是使用布局管理器更容易一点（Yep. On a component by component basis, you can call `setLayout(null)` and then it's up to you to hard-code the excat screen locations and dimensions. In the long run, though, it's almost always easier to use layout managers）。
+
+## 重点
+
+- 布局管理器控制着嵌套在其他组件中的那些组件的大小及位置（Layout managers control the size and location of components nested within other components）;
+- 在将组件添加到另一组件（这样的组件有时被成为 *背景* 组件，不过那并不是技术上的区别）时，被添加的这些组件，是受那个背景组件的布局管理器控制的；
+- 布局管理器在做出布局决定之前，会询问他所布局的那些组件的优先大小。依据自己的策略，他可能会依照全部、部分，或不依照所布局组件的期望；
+- `BorderLayout` 管理器运行把组件添加到他的五个区域之一。在添加组件时，必须使用下面的语法，对区域进行指定：
+
+```java
+add(BorderLayout.EAST, panel);
+```
+
+- 在 `BorderLayout` 管理器控制下，位处北部与南部两个区域的组件，会得到他们自己优先高度，但得不到宽度。而在东部与西部的组件，则得到他们自己优先的宽度，而得不到高度。在中央区域的组件，将获得其他部分剩下了的空间（除非使用了 `pack()` 方法）。
+- `pack()` 方法就如同那些组件的热缩膜；他用到中央组件的完整优先大小，然后将中心用作起点，来确定视窗框的大小，并基于其他区域中的东西，来构建出其余部分（The `pack()` method is like shrink-wrap for the components; it uses the full preferred size of the center component, then determines the size of the frame using the center as a starting point, building the rest based on what's in the other regions）；
+- `FlowLayout` 会把他所布局的组件，从做往右、自顶向下，以这些组件添加的顺序进行放置，并只在这些组件无法水平排布时，开启新行（`FlowLayout` places components left to right, top to bottom, in the order they were added, wrapping to a new line of components only when the components won't fit horizontally）；
+- `FlowLayout` 给到组件长和宽两个维度上组件自己的优先大小；
+- 即使所布局的组件可以一一并排，`BoxLayout` 也允许将组件纵向堆叠起来。与 `FlowLayout` 类似，`BoxLayout`也使用所布局组件的长和宽两个维度的优先大小；
+- 视窗框的默认布局管理器是`BorderLayout`；面板的默认布局管理器是 `FlowLayout`；
+- 在想要面板使用有别于流式布局之外的其他布局管理器时，就必须调用面板上的 `setLayout()` 方法。
