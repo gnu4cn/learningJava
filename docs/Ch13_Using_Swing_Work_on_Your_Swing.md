@@ -423,3 +423,67 @@ public void go () {
 ![`FlowLayout` 管理器：添加两个按钮](images/Ch13_19.png)
 
 *图 19 - `FlowLayout` 管理器：添加两个按钮*
+
+> 这里想要的是这两个按钮堆叠起来。
+>
+> 然而面板为适应这两个并排起来，而再次变宽了。
+>
+> 注意这里的“祈福”按钮要比“吓我一跳！”按钮要小一些......那就是流式布局运作的方式了。按钮只会获得他所需的大小（而没有多余的空间）。
+
+### 小练习
+
+在把上面的代码修改为：
+
+```java
+public void go () {
+    JFrame f = new JFrame("FlowLayout 管理器：添加两个按钮到面板");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JPanel p = new JPanel();
+    p.setBackground(Color.darkGray);
+
+    JButton btn = new JButton("吓我一跳！");
+    JButton btnTwo = new JButton("祈福");
+    JButton btnThree = new JButton("哈？！");
+    p.add(btn);
+    p.add(btnTwo);
+    p.add(btnThree);
+    
+    f.getContentPane().add(BorderLayout.EAST, p);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+后，得到的窗口如下所示：
+
+![三个按钮的情形](images/Ch13_20.png)
+
+
+*图 20 - 三个按钮的情形*
+
+**添加 50 个按钮到面板的情况**：
+
+```java
+public void go () {
+    JFrame f = new JFrame("FlowLayout 管理器：添加 50 个按钮到面板");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JPanel p = new JPanel();
+    p.setBackground(Color.darkGray);
+
+    for (int t = 0; t < 50; t++) {
+        JButton btn = new JButton(String.format("按钮 - %s", t));
+        p.add(btn);
+    }
+    
+    f.getContentPane().add(BorderLayout.EAST, p);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![添加 50 个按钮到面板](images/Ch13_21.png)
+
+
+*图 21 - 添加 50 个按钮到面板*
