@@ -58,7 +58,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.xfoss.learningJava.Panel1</mainClass>
+                    <mainClass>com.xfoss.learningJava.SwingComponentsDemo</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -79,7 +79,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.Panel1</mainClass>
+                                    <mainClass>com.xfoss.learningJava.SwingComponentsDemo</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

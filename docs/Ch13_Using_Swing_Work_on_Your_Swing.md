@@ -577,3 +577,46 @@ add(BorderLayout.EAST, panel);
 - 即使所布局的组件可以一一并排，`BoxLayout` 也允许将组件纵向堆叠起来。与 `FlowLayout` 类似，`BoxLayout`也使用所布局组件的长和宽两个维度的优先大小；
 - 视窗框的默认布局管理器是`BorderLayout`；面板的默认布局管理器是 `FlowLayout`；
 - 在想要面板使用有别于流式布局之外的其他布局管理器时，就必须调用面板上的 `setLayout()` 方法。
+
+## 运用 `Swing` 的那些组件
+
+**Play with `Swing` components**
+
+在依据了解了布局管理器的基础后，就可以尝试几个最常用的组件了：文本字段、滚动式文本区、勾选框和清单等。这里并不会给出这些组件的完整API文档，而只提到几个入门所需的方法。
+
+### `JTextField`
+
+```java
+package com.xfoss.learningJava;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class SwingComponentsDemo {
+    public static void main (String[] args) {
+        SwingComponentsDemo gui = new SwingComponentsDemo ();
+        gui.go();
+    }
+
+    public void go () {
+        JFrame f = new JFrame ("Swing 常用组件演示：JLabel 与 JTextField");
+        f.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+
+        JPanel p = new JPanel ();
+        f.setContentPane(p);
+
+        JLabel l = new JLabel ("你的姓名");
+        p.add(l);
+        JTextField txtField = new JTextField(20);
+        p.add(txtField);
+
+        f.setSize(640, 480);
+        f.setVisible(true);
+    }
+}
+```
+
+![`Swing` 常用组件演示：`JLabel` 与 `JTextField`](images/Ch13_24.png)
+
+
+*图 24 - `Swing` 常用组件演示：`JLabel` 与 `JTextField`*
