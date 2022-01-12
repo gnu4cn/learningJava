@@ -671,3 +671,63 @@ field.selectAll();
 ```java
 filed.requestFocus();
 ```
+
+### `JTextArea`
+
+与 `JTextField` 不同之处在于，`JTextArea`可以有多行文本。由于`JTextArea`在开箱即用的情况下并不带有滚动条或自动换行，因此构造一个 `JTextArea` 需要一点配置。要让某个`JTextArea`滚动，那么就要把他附着在一个 `ScrollPane`中。`ScrollPane`是个真正喜欢滚动的对象，还会照顾到文本区的滚动需求。
+
+**构造器**
+
+```java
+// 显然 JTextArea 的构造器也是过载了的
+// 
+// 这里的 10 表示 10 行（设置了优先的高度）
+// 20 表示 20 列（对优先宽度进行设置）
+JTextArea text = new JTextArea(10, 20);
+JTextArea text = new JTextArea("关于你......", 10, 20);
+```
+
+**用法**：
+
+1) 令其只有纵向的滚动条
+
+```java
+// 构造一个 JScrollPane 并给到那个要滚动的文本区
+JScrollPane scroller = new JScrollPane(text);
+// 开启自动换行
+text.setLineWrap(true);
+
+// 告诉滚动窗格仅使用一个纵向的滚动条
+scroller.setVerticalScollBarPolicy(ScrollPaneConstants.VERICAL_SCROLLBAR_ALWAYS);
+scroller.setHorizontalScollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+// 重要！！是把文本区给到滚动窗格（经由滚动窗格的构造器），随后
+// 把滚动窗格添加到面板。不是直接把文本区添加到面板！
+panel.add(scroller);
+```
+
+2) 替换文本区中的文本
+
+```java
+text.setText("并非所有失踪的人都在流浪");
+```
+
+3) 往文本区中的文本追加内容
+
+```java
+text.append("按钮已被点击");
+```
+
+4) 选择/高亮显示文本区中的文本
+
+```java
+text.selectAll();
+```
+
+5) 把光标放回文本区（这样用户就可以开始输入）
+
+```java
+text.requestFocus();
+```
+
+
