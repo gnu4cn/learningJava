@@ -122,7 +122,7 @@ panelA.add(panelB);
 
 一些布局管理器会依照所布局组件想要的大小。比如有按钮想要 30 像素 x 50 像素大小，那么这就是布局管理器分配给他的大小。另一些布局管理器则只会部分依照所布局组件的首选大小。比如有按钮想要 30 像素 x 50 像素时，该按钮将会是 30 像素高，而宽度则会与其背景 *面板* 的宽度相同。还有其他一些布局管理器，只会参考所布局组件中 *最大的* 那个，并令到面板中的其余组件与最大的那个同样大小。某些情况下，布局管理器的工作会变得极度复杂，而大多数时候，只有在了解了布局管理器的策略时，才能搞清楚那个布局管理器将做些什么（In some cases, the work of the layout manager can get very complex, but most of the time you can figure out what the layout manager will probably do, once you get to know that layout manager's policies）。
 
-## 三大布局管理器：边缘、流与盒子
+## 三大布局管理器：边框、流与盒子
 
 **The Big Three layout managers: border, flow and box**
 
@@ -328,3 +328,38 @@ public void go () {
 **`FlowLayout` cares about the flow of the components: left to right, top to bottom, in the order they were added**.
 
 
+**将一个面板添加到东部区域**：
+
+`JPanel`的布局管理器默认是 `FlowLayout`。在将面板添加到视窗框时，面板的大小和放置方式，仍然受 `BorderLayout` 管理的控制。不过 *面板内部* 的所有东西（也就是通过调用 `panel.add(aComponent)`添加到面板的那些组件），则是受 `FlowLayout` 管理器的控制了。这里将从放入一个面板到视窗框东部区域中开始，后面就会把物件添加到面板。
+
+```java
+package com.xfoss.learningJava;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Panel1 {
+    public static void main (String[] args) {
+        Panel1 gui = new Panel1();
+        gui.go();
+    }
+
+    public void go () {
+        JFrame f = new JFrame("FlowLayout 管理器：从添加一个面板到视窗框的东部区域开始");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel p = new JPanel();
+        // 这里把面板做成灰色，从而可以看到面板在视窗框的哪里
+        p.setBackground(Color.darkGray);
+        
+        f.getContentPane().add(BorderLayout.EAST, p);
+        f.setSize(640, 480);
+        f.setVisible(true);
+    }
+}
+```
+
+![`FlowLayout` 管理器：从把一个面板添加到视窗框的东部区域开始](images/Ch13_16.png)
+
+
+*图 16 - `FlowLayout` 管理器：从把一个面板添加到视窗框的东部区域开始*
