@@ -309,13 +309,22 @@ public void go () {
 
 ![`BorderLayout` 管理器：关于中央区域](images/Ch13_14.png)
 
-*图 14 - `BorderLayout` 管理器：关于中央区域*
+*图 14 - `BorderLayout` 管理器：关于中央区域（Windows 10）*
 
 ![上面的代码运行在 Ubuntu 20.04 LTS中的输出](images/Ch13_15.png)
 
+*图 15 - `BorderLayout` 管理器：关于中央区域（Ubuntu 20.04 LTS）*
 
-*图 15 - 上面的代码运行在 Ubuntu 20.04 LTS中的输出*
-
-> 在把物件放入到内部或南部区域时，物件就会占据整个视窗框的宽度，这样的话东部和西部的物件，就不会有原来北部和南部区域空着的时候那么高了。
+> 在把物件放入到北部或南部区域时，物件就会占据整个视窗框的宽度，这样的话东部和西部的物件，就不会有原来北部和南部区域空着的时候那么高了。
 >
-> 注意，上面的尺寸是在 `Windows 10` 上运行的大小；在 `Ubuntu 20.04 LTS` 上，整个窗口的大小为 `640x480` 大小。
+> 基于视窗框大小（这段代码就是 300 x 300 像素点），中央区域中的那些组件，获得剩下的那些空间。
+>
+> 东部与西部区域的那些组件，将得到他们所选的宽度。
+>
+> 北部与南部区域的组件，得到他们选定的高度。
+
+### `FlowLayout` 关心的是组件流：自左往右、自上往下，以组件添加的顺序一一排布
+
+**`FlowLayout` cares about the flow of the components: left to right, top to bottom, in the order they were added**.
+
+
