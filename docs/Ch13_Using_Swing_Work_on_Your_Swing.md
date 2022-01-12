@@ -396,3 +396,30 @@ public void go () {
 ![`BorderLayout` 与 `FlowLayout`](images/Ch13_18.png)
 
 *图 18 - `BorderLayout` 与 `FlowLayout`*
+
+**把两个按钮添加到面板，会怎样呢？**
+
+```java
+public void go () {
+    JFrame f = new JFrame("FlowLayout 管理器：添加两个按钮到面板");
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JPanel p = new JPanel();
+    p.setBackground(Color.darkGray);
+
+    // 这里构造两个按钮
+    JButton btn = new JButton("吓我一跳！");
+    JButton btnTwo = new JButton("祈福");
+    //把这两个按钮都添加到面板
+    p.add(btn);
+    p.add(btnTwo);
+    
+    f.getContentPane().add(BorderLayout.EAST, p);
+    f.setSize(640, 480);
+    f.setVisible(true);
+}
+```
+
+![`FlowLayout` 管理器：添加两个按钮](images/Ch13_19.png)
+
+*图 19 - `FlowLayout` 管理器：添加两个按钮*
