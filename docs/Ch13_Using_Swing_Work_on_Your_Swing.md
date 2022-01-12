@@ -257,6 +257,7 @@ public void go () {
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JButton btn = new JButton ("因为你愿意所以点我，表示确定你真的要点我");
+    // 较大的字体，就会强制视窗框给按钮高度分配更多空间
     Font bigFont = new Font("STXingkai", Font.BOLD, 32);
     btn.setFont(bigFont);
 
@@ -269,3 +270,9 @@ public void go () {
 ![`BorderLayout`管理器：通过运用`Button`类的`setFont()`方法，让按钮变得更高](images/Ch13_12.png)
 
 *图 12 - `BorderLayout`管理器：通过运用`Button`类的`setFont()`方法，让按钮变得更高*
+
+> 宽度仍保持不变，但现在的按钮更高了。北部的那个区域被拉伸，以适配按钮新的优先高度（The north region stretched to accomodate the button's new preferred height）。
+
+![`BorderLayout` 管理器](images/Ch13_13.png)
+
+*图 13 - `BorderLayout` 管理器*
