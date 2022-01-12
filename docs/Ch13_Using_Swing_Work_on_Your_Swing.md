@@ -620,3 +620,37 @@ public class SwingComponentsDemo {
 
 
 *图 24 - `Swing` 常用组件演示：`JLabel` 与 `JTextField`*
+
+**构造器**
+
+```java
+// JTextField 组件的构造器显然是有多个过载方法的
+//
+// 传入数字时，表示文本字段有多少个字符宽，而非多少个像素宽
+// 这定义了文本字段的优先宽度
+// 
+// 传入一个字符串时，就是文本字段的默认文本
+//
+// 两个都传入时（此时必须字符串在前，数字在后），分别表示各自的意义
+JTextField field = new JTextField(20);
+JTextField field = new JTextField("你的姓名");
+JTextField field = new JTextField("你的姓名", 20);
+```
+
+**使用方法**：
+
+1) 从 `JTextField` 实例获取文本
+
+```java
+System.out.println(field.getText());
+```
+
+2) 放入文本
+
+```java
+field.setText("内容");
+// 这行语句清空该字段
+field.setText("");
+```
+
+
