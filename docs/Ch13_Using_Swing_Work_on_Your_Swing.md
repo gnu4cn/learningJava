@@ -490,6 +490,13 @@ public void go () {
 
 > 注：这个例子可以看出，`FlowLayout` 只是单纯的从左往右一一排布他所布局的组件。暂时并未“自动换行”。
 
+
+但若把 `f.getContentPane().add(BorderLayout.EAST, p)` 改为 `f.getContentPane().add(BorderLayout.CENTER, p)`，就会得到：
+
+![`FlowLayout` 管理器下的自动换行](images/Ch13_21-1.png)
+
+*图 21-1 `FlowLayout` 管理器下的自动换行*
+
 ### `BoxLayout`来补救！
 
 **就是有空间来让他所布局的那些组件挨着一一放置，`BoxLayout`仍会让这些组件堆叠起来**。
