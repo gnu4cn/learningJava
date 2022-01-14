@@ -14,6 +14,7 @@ public class Button1 {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel p = new JPanel();
+        p.setBackground(Color.darkGray);
 
         for (int i = 0; i < 50; i++) {
             JButton btn = new JButton (String.format("按钮 - %d", i));
