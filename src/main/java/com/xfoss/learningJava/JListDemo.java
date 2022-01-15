@@ -3,26 +3,24 @@ package com.xfoss.learningJava;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class JListDemo {
-    JList l;
-    public static void main (String[] args) {
-        String [] listEntries = {"apple", "banana", "carriot", "donut",
-            "fish", "egg"};
+    JList<String> l;
 
+    public static void main (String[] args) {
         JListDemo gui = new JListDemo();
-        gui.go(listEntries);
+        gui.go();
     }
 
-    public void go (String[] lEntries) {
+    public void go () {
         JFrame f = new JFrame("JList Demo");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel p = new JPanel();
         p.setBackground(Color.darkGray);
 
-        l = new JList(lEntries);
+        String [] listEntries = {"apple", "banana", "carriot", "donut", "fish", "egg", "grapes"};
+        l = new JList<String>(listEntries);
         l.setVisibleRowCount(4);
         l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         l.addListSelectionListener(new ListSelectionHandler());
@@ -42,8 +40,7 @@ public class JListDemo {
     class ListSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent ev) {
             if(!ev.getValueIsAdjusting()) {
-                String selection = (String) l.getSelectedValue();
-                System.out.format("所选的是：%s\n", selection);
+                System.out.format("所选的是：%s\n", l.getSelectedValue());
             }
         }
     }
