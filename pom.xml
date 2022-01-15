@@ -58,7 +58,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.xfoss.learningJava.Button1</mainClass>
+                    <mainClass>com.xfoss.learningJava.JListDemo</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -79,7 +79,7 @@
                                         Error: Could not find or load main class learningJava.PhraseOMatic
                                         Caused by: java.lang.ClassNotFoundException: learningJava.PhraseOMatic
                                     ” -->
-                                    <mainClass>com.xfoss.learningJava.Button1</mainClass>
+                                    <mainClass>com.xfoss.learningJava.JListDemo</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -104,7 +104,7 @@
                             <downloadUrl>https://github.com/gnu4cn/learningJava</downloadUrl>
                             <errTitle>Error Occured...</errTitle>
                             <classPath>
-                                <mainClass>com.xfoss.learningJava.MultiWidgetsAndEvents</mainClass>
+                                <mainClass>com.xfoss.learningJava.JListDemo</mainClass>
                             </classPath>
                             <jre>
                                 <bundledJre64Bit>false</bundledJre64Bit>
