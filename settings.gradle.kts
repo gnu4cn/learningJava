@@ -5,4 +5,3 @@
  */
 
 rootProject.name = "com.xfoss.learningJava"
-include("JListDemo")

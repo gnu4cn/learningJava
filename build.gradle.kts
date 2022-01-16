@@ -34,3 +34,15 @@ application {
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
 }
+
+tasks.jar {
+    manifest {
+        attributes (mapOf("Main-Class" to "com.xfoss.learningJava.JListDemo"))
+    }
+    from(configurations.runtimeClasspath.get().map {
+        if (it.isDirectory) it else zipTree(it)
+    })
+    val sourcesMain = sourceSets.main.get()
+    sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
+    from(sourcesMain.output)
+}
