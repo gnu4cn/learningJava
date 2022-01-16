@@ -5,14 +5,13 @@
  */
 
 plugins {
-    java
-    `maven-publish`
+    application
 }
 
 repositories {
     mavenLocal()
     maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
+        url = uri("https://mirrors.huaweicloud.com/repository/maven/")
     }
 }
 
@@ -28,10 +27,8 @@ version = "0.0.1"
 description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
+application {
+    mainClass.set("com.xfoss.learningJava.JListDemo")
 }
 
 tasks.withType<JavaCompile>() {
