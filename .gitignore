@@ -1,4 +1,3 @@
-target/
 .gradle
 **/build/
 !src/**/build/
