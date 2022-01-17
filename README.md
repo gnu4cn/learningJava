@@ -24,6 +24,10 @@ $sudo update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/bin/javac
 
 运行 `$java -version` 与 `$javac -version` 测试 JDK 是否安装妥当。
 
+- 安装 [Gradle](https://gradle.org/)
+
+    参考 Gradle 官网上使用 [SDKMAN!](http://sdkman.io/) 直接安装即可。
+
 - 安装Maven
 
     [Apache Maven](http://maven.apache.org/) 可以直接下载，下载到的 `apache-maven-3.8.4-bin.tar.gz`压缩包，大小约 9M，安装步骤与JDK的略有不同：
