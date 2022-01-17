@@ -21,7 +21,7 @@ public class JListDemo {
 
         String [] listEntries = {"apple", "banana", "carriot", "donut", "fish", "egg", "grapes"};
         l = new JList<String>(listEntries);
-        l.setVisibleRowCount(4);
+        l.setVisibleRowCount(5);
         l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         l.addListSelectionListener(new ListSelectionHandler());
 

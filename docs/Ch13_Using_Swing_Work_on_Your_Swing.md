@@ -837,3 +837,63 @@ check.setSelected(false);
 ![`JList` Demo](images/Ch13_26.png)
 
 *图 26 - `JList` Demo*
+
+
+**构造器**
+
+```java
+// JList 构造器会接收一个任意对象类型的数组。这些对象类型一定非得要是字符串，但不论
+// 什么对象类型，在清单上出现的，将都会是一个字符的表示（JList constructor takes an array
+// of any object type. They don't have to be Strings, but a String representation will
+// appear in the list）。
+String [] listEntries = {"apple", "banana", "carriot", "donut", "fish", "egg", "grapes"};
+JList<String> l = new JList<String>(listEntries);
+```
+
+
+**用法**
+
+1) 令到其有个垂直的滚动条
+
+```java
+// 这就跟 JTextArea 一样 -- 构造一个 JScrollPane（并给他清单）
+// 随后把这个滚动区域（而非这个清单）添加到面板
+JScrollPane scroller = new JScrollPane(list);
+scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+panel.add(scroller);
+```
+
+2) 设置滚动前显示的行数
+
+```java
+list.setVisibleRowCount(4);
+```
+
+3) 限制用户一次选择一个物件
+
+```java
+list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+```
+
+4) 对清单选择事件进行注册
+
+```java
+list.addListSelectionListener(this);
+```
+
+5) 对事件进行处理（找出清单中哪个物件被选中）
+
+```java
+public void valueChanged(ListSelectionEvent lse) {
+    // 若不加入这个 if 条件测试，那么就会收到这个
+    // 事件两次
+    if (!lse.getValueIsAdjusting()) {
+        // getSelectedValue() 方法返回的其实是一个对象。清单
+        // 并不止于字符串对象。
+        String selection = (String) list.getSelectedValue();
+        System.out.println(selection);
+    }
+}
+```
