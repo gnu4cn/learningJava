@@ -31,18 +31,21 @@ application {
     mainClass.set("com.xfoss.learningJava.JListDemo")
 }
 
-tasks.withType<JavaCompile>() {
-    options.encoding = "UTF-8"
-}
-
-tasks.jar {
-    manifest {
-        attributes (mapOf("Main-Class" to "com.xfoss.learningJava.JListDemo"))
+tasks {
+    withType<JavaCompile>() {
+        options.encoding = "UTF-8"
     }
-    from(configurations.runtimeClasspath.get().map {
-        if (it.isDirectory) it else zipTree(it)
-    })
-    val sourcesMain = sourceSets.main.get()
-    sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
-    from(sourcesMain.output)
+
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest {
+            attributes (mapOf("Main-Class" to "com.xfoss.learningJava.JListDemo"))
+        }
+        from(configurations.runtimeClasspath.get().map {
+            if (it.isDirectory) it else zipTree(it)
+        })
+        val sourcesMain = sourceSets.main.get()
+        sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
+        from(sourcesMain.output)
+    }
 }
