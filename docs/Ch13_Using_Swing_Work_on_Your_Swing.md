@@ -897,3 +897,24 @@ public void valueChanged(ListSelectionEvent lse) {
     }
 }
 ```
+
+## 代码厨房
+
+![代码厨房](images/Ch13_27.png)
+
+*图 27 - 第 13 章代码厨房配图*
+
+此部分是可选的。这里在构造完整版的 `BeatBox`，GUI及全部的东西。在保存对象那一章，将学习怎样去保存与恢复鼓的各种模式（编曲）。最后在网络通信那一章（“构造连接”），就会把 `BeatBox` 做成一个可工作的聊天客户端。
+
+
+### 构造 `BeatBox`
+
+下面是这个版本的 `BeatBox` 的完整代码清单，有用于开始、停止及修改速度的那些按钮（This is the full code listing for this version of the `BeatBox`, with buttons for starting, stopping, and changing the tempo）。此清单是完整的，并且是重复注释的，而下面就是个概述：
+
+1) 构造一个有着 256 个开始都是未勾选单选框（`JCheckBox`）、16个用于表示乐器名字的标签（`JLabel`），以及四个按钮的 GUI；
+
+2) 对四个按钮都注册一个 `ActionListener`。由于这里还不准备动态修改声音编排模式（即在用户勾选某个单选框时，立即反应出来），所以对于单个的单选框，并不需要事件收听者。而是在用户点击“开始”按钮时，才去对全部256个单选框跑一遍，来取得他们的状态，并构造出一个 MIDI 音轨；
+
+3) 建立起一个包含获取音序器（`Sequencer`）、构造序列（`Sequence`）及创建音轨的MIDI 系统（在这之前就已经完成了）。这里将使用到 Java 5.0 中才引入的一个音序器方法，`setLoopCount()`。这个方法允许我们指定某个序列循环多少次。这里还会用到序列的快慢因子，来提升或降低序列的速度，并在循环回访中维持新的速度（We're also using the sequence's tempo factor to adjust the tempo up or down, and maintain the new tempo from one iteration of the loop to the next）。
+
+4) 在用户点击 “开始” 时，就会开始真正的动作。“开始”按钮的事件处理方法调用 `buildTrackAndStart()` 方法。在那个方法中，将对全部 256 个单选框都跑一遍（每次一行，单个乐器的全部16拍），来获取这些单选框的状态，随后使用这些信息来构建出一个 MIDI 音轨（使用前一章中用到的那个方便的 `makeEvent()` 方法）。在音轨构建好了之后，就启动音序器（the sequencer），音序器将一直演奏（因为设置了循环演奏）直到用户点击了“停止”按钮。
