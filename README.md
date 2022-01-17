@@ -2,7 +2,7 @@
 
 在线阅读 [java-learning.xfoss.com](https://java-learning.xfoss.com)。
 
-这是一个学习 Java 的项目。使用 Eclipse IDE/VIM、Maven/NPM 构建工具。后期会涉及到 NPM 的使用。主要学习 Java 的基础知识，Java 本地应用程序的编写。 __项目使用 JDK `11.0.12`__ 语言环境。
+这是一个学习 Java 的项目。使用 Eclipse IDE/VIM、Gradle/NPM 构建工具。后期会涉及到 NPM 的使用。主要学习 Java 的基础知识，Java 本地应用程序的编写。 __项目使用 JDK `11.0.12`__ 语言环境。
 
 ## 0. 环境搭建
 
