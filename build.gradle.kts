@@ -28,7 +28,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClass.set("com.xfoss.learningJava.JListDemo")
+    mainClass.set("com.xfoss.BeatBox.BeatBox")
 }
 
 tasks {
@@ -39,7 +39,7 @@ tasks {
     jar {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest {
-            attributes (mapOf("Main-Class" to "com.xfoss.learningJava.JListDemo"))
+            attributes (mapOf("Main-Class" to "com.xfoss.BeatBox.BeatBox"))
         }
         from(configurations.runtimeClasspath.get().map {
             if (it.isDirectory) it else zipTree(it)

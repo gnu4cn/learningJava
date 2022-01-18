@@ -13,6 +13,7 @@ public class BeatBox {
     Sequence seq;
     Track t;
     JFrame f;
+    JLabel tempoLabel = null;
 
     String [] instrumentNames = {"贝斯鼓（低音鼓）", "闭镲（闭合击镲）",
         "空心钹（开音踩钹）", "小鼓（军鼓）", "双面钹（强音钹）", "拍手（拍掌声）",
@@ -44,13 +45,16 @@ public class BeatBox {
         btnStop.addActionListener(new StopListener());
         btnBox.add(btnStop);
 
-        JButton btnUpTempo = new JButton("加速");
+        JButton btnUpTempo = new JButton("加速>>");
         btnUpTempo.addActionListener(new UpTempoListener());
         btnBox.add(btnUpTempo);
 
-        JButton btnDownTempo = new JButton("减慢");
+        JButton btnDownTempo = new JButton("减慢<<");
         btnDownTempo.addActionListener(new DownTempoListener());
         btnBox.add(btnDownTempo);
+
+        tempoLabel = new JLabel(String.format("速度因子：%s", 1.00f)); 
+        btnBox.add(tempoLabel);
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
@@ -77,7 +81,7 @@ public class BeatBox {
 
         setUpMidi();
 
-        f.setBounds(50, 50, 300, 300);
+        f.setBounds(50, 50, 640, 480);
         f.pack();
         f.setVisible(true);
     }
@@ -126,23 +130,49 @@ public class BeatBox {
     }
 
     class StartListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev) {}
+        public void actionPerformed(ActionEvent ev) {
+            buildTrackAndStart();
+        }
     }
 
     class StopListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev) {}
+        public void actionPerformed(ActionEvent ev) {
+            s.stop();
+        }
     }
 
     class UpTempoListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev) {}
+        public void actionPerformed(ActionEvent ev) {
+            s.setTempoFactor(s.getTempoFactor() + 0.03f);
+            tempoLabel.setText(String.format("速度因子：%s", s.getTempoFactor()));
+        }
     }
 
     class DownTempoListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev) {}
+        public void actionPerformed(ActionEvent ev) {
+            s.setTempoFactor(s.getTempoFactor() - 0.03f);
+            tempoLabel.setText(String.format("速度因子：%s", s.getTempoFactor()));
+        }
     }
 
-    public void makeTracks(int [] list) {}
+    public void makeTracks(int [] list) {
+        for(int i = 0; i < 16; i++) {
+            int k = list[i];
 
-    public MidiEvent makeEvent(int cmod, int chan, int one, int two, int tick){
+            if(k != 0) {
+                t.add(makeEvent(144, 9, k, 100, i));
+                t.add(makeEvent(128, 8, k, 100, i+1));
+            }
+        }
+    }
+
+    public MidiEvent makeEvent(int comd, int chan, int one, int two, int tick){
+        MidiEvent ev = null;
+        try {
+            ShortMessage a = new ShortMessage();
+            a.setMessage(comd, chan, one, two);
+            ev = new MidiEvent(a, tick);
+        } catch (Exception e) {e.printStackTrace();}
+        return ev;
     }
 }
