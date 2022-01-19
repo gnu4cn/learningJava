@@ -74,10 +74,12 @@ Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
 
 使用这个插件，可以开启 `mvn exec:java` 命令，实时运行（正在）编写的 Java 程序。该插件支持两种运行模式，一种是在 Maven 所在线程里运行（需要修改 MAVEN 运行参数 `export MAVEN_OPTS=-Xmx1024m`，以增加JVM虚拟机的运行内存）；另一种以独立线程运行（尚需测试）。
 
-## 3. `pom.xml` 语法
+## 3. `build.gradle.kts` 文件中的 kotlin dsl 语法
 
+Kotlin DSL, 领域特定语言，Domain Specific Language
 
-- 可以在 `properties` tag里定义一些变量，在后面通过 `${x.y}` 的方式引用
+> 参考： [Kotlin 之美 -- DSL 篇](https://juejin.cn/post/6844903569372479501)
+
 
 ## 目录
 
