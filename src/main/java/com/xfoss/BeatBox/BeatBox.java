@@ -53,7 +53,7 @@ public class BeatBox {
         btnDownTempo.addActionListener(new DownTempoListener());
         btnBox.add(btnDownTempo);
 
-        tempoLabel = new JLabel(String.format("速度因子：%s", 1.00f)); 
+        tempoLabel = new JLabel(String.format("速度因子：%.2f", 1.00f)); 
         btnBox.add(tempoLabel);
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
@@ -144,14 +144,14 @@ public class BeatBox {
     class UpTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             s.setTempoFactor(s.getTempoFactor() + 0.03f);
-            tempoLabel.setText(String.format("速度因子：%s", s.getTempoFactor()));
+            tempoLabel.setText(String.format("速度因子：%.2f", s.getTempoFactor()));
         }
     }
 
     class DownTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             s.setTempoFactor(s.getTempoFactor() - 0.03f);
-            tempoLabel.setText(String.format("速度因子：%s", s.getTempoFactor()));
+            tempoLabel.setText(String.format("速度因子：%.2f", s.getTempoFactor()));
         }
     }
 
