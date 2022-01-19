@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
     implementation("net.java.dev.jna:jna:5.5.0")
     implementation("net.java.dev.jna:jna-platform:5.5.0")
@@ -37,15 +38,21 @@ tasks {
     }
 
     jar {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest {
             attributes (mapOf("Main-Class" to "com.xfoss.BeatBox.BeatBox"))
         }
-        from(configurations.runtimeClasspath.get().map {
-            if (it.isDirectory) it else zipTree(it)
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        // archiveClassifier.set("uber")
+        dependsOn(configurations.runtimeClasspath)
+        from({
+            configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }
         })
         val sourcesMain = sourceSets.main.get()
-        sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
+        sourcesMain.allSource.forEach { 
+            println("add from sources: ${it.name}") 
+        }
         from(sourcesMain.output)
     }
 }

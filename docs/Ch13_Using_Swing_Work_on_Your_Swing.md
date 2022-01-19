@@ -928,6 +928,8 @@ import javax.swing.*;
 import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
+// 导入 java.net 包的目的，是为了使用下面的 URL 类型
+import java.net.*;
 
 public class BeatBox {
     JPanel mainPanel;
@@ -958,7 +960,19 @@ public class BeatBox {
 
     public void buildGUI () {
         f = new JFrame("赛博 BeatBox");
+
+        // 这里给视窗加上一个 ico 图标，为了兼容性使用的是 PNG 图片
+        // 
+        // 其中用到的图片，作为与代码分离的措施，放在 src/main 目录的
+        // resources 文件夹下的 images 目录里
+        //
+        // build.gradle.kts 构建配置文件中，有语句将这些 resources 
+        // 拷贝到打包的jar中
+        URL icoURI = getClass().getResource("/images/ico.png");
+        ImageIcon ico = new ImageIcon(icoURI);
+        f.setIconImage(ico.getImage());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         BorderLayout l = new BorderLayout();
         JPanel bg = new JPanel(l);
         // 这里创建了一个“空白边框（EmptyBorder）”对象（并调用 JPanel 的

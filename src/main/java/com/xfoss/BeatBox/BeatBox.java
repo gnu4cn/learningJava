@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
+import java.net.*;
 
 public class BeatBox {
     JPanel mainPanel;
@@ -30,6 +31,11 @@ public class BeatBox {
     public void buildGUI () {
         f = new JFrame("赛博 BeatBox");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        URL icoURI = getClass().getResource("/images/ico.png");
+        ImageIcon ico = new ImageIcon(icoURI);
+        f.setIconImage(ico.getImage());
+
         BorderLayout l = new BorderLayout();
         JPanel bg = new JPanel(l);
         bg.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
