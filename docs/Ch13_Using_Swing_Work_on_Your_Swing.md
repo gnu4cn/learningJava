@@ -1157,3 +1157,8 @@ public class BeatBox {
     }
 }
 ```
+
+![`BeatBox` app 第一版](images/Ch13_28.png)
+
+
+*图 28 - `BeatBox` app 第一版*
