@@ -947,6 +947,9 @@ public class BeatBox {
         "牛铃（牛颈铃）", "颤音叉", "中低音桶鼓", "高音撞铃",
         "开音高音手鼓"};
 
+    // 这些表示了各种真实鼓的“按键”。鼓通道就如同钢琴一样，只是钢琴上各个“琴键”
+    // 是为某种不同的鼓而已。因此数字 ‘35’ 就是贝斯鼓的按键，而 ‘42’ 则是高音钹的
+    // 按键。
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
 
     public static void main (String[] args) {
@@ -958,8 +961,13 @@ public class BeatBox {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout l = new BorderLayout();
         JPanel bg = new JPanel(l);
+        // 这里创建了一个“空白边框（EmptyBorder）”对象（并调用 JPanel 的
+        // setBorder() 方法，设置到 bg 上），给到面板各个边缘和放置的
+        // 组件之间的一个外边距。看起来颇具美感。
         bg.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // 后面就没什么特别的了，只是很多的 GUI 组件。
+        // 其中大部分在之前就已经看到过了。
         checkBoxList = new ArrayList<JCheckBox> ();
         Box btnBox = new Box(BoxLayout.Y_AXIS);
 
@@ -970,6 +978,10 @@ public class BeatBox {
         JButton btnStop = new JButton("停止◾");
         btnStop.addActionListener(new StopListener());
         btnBox.add(btnStop);
+
+        btnBox.add(Box.createHorizontalStrut(5));
+        btnBox.add(new JSeparator(SwingConstants.VERTICAL));
+        btnBox.add(Box.createHorizontalStrut(5));
 
         JButton btnUpTempo = new JButton("加速>>");
         btnUpTempo.addActionListener(new UpTempoListener());
@@ -990,6 +1002,7 @@ public class BeatBox {
         bg.add(BorderLayout.EAST, btnBox);
         bg.add(BorderLayout.WEST, nameBox);
 
+        // 还是些建立 GUI 的代码。并无不同之处。
         f.getContentPane().add(bg);
 
         GridLayout g = new GridLayout(16, 16);
@@ -998,6 +1011,9 @@ public class BeatBox {
         mainPanel = new JPanel(g);
         bg.add(BorderLayout.CENTER, mainPanel);
 
+        // 这里构造出那些单选框，将他们设置为‘false’（从而使得他们
+        // 保持未被勾选），然后将他们添加到那个 ArrayList 以及 GUI
+        // 面板上。
         for (int i = 0; i < 256; i++) {
             JCheckBox c = new JCheckBox();
             c.setSelected(false);
@@ -1012,6 +1028,8 @@ public class BeatBox {
         f.setVisible(true);
     }
 
+    // 这里是常见的用于获取音序器（the Sequencer）、MIDI序列（the Sequence）
+    // 以及MIDI音轨（the Track），从而建立起 MIDI 的代码。
     public void setUpMidi () {
         try {
             s = MidiSystem.getSequencer();
@@ -1022,19 +1040,35 @@ public class BeatBox {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    // 这里是全部事情发生的地方！正是在这里把单选框的状态，转换成
+    // MIDI 事件，并把这些MIDI事件添加到MIDI音轨。
     public void buildTrackAndStart () {
+        // 这里将会构造一个有16个元素的数组，来保存一种具体
+        // 乐器 16 个节拍的各个取值。若该种乐器即将在那个节拍
+        // 上奏乐时，那么那个节拍所在的值，就会是此种乐器的按键编号。
+        // 若在那个节拍上该种乐器不会奏乐，那么在该节拍上就会放入一个零。
         int [] trackList = null;
 
+        // 对原有的音轨进行处理，并构造一个全新的音轨。
         seq.deleteTrack(t);
         t = seq.createTrack();
 
+        // 这个循环是对 16 行进行的（即：那些贝斯鼓、Congo等等）
         for (int i = 0; i < 16; i++){
             trackList = new int[16];
 
+            // 对乐器的‘按键’编号进行设置。表示当前是何种乐器（贝斯、Hi-Hat等
+            // 数组 instruments 保存了各个乐器的真实 MIDI 编号。
             int key = instruments[i];
 
+            // 这个循环是对这一行的 16 个节拍进行的
             for (int j = 0; j < 16; j++) {
+
                 JCheckBox jc = checkBoxList.get(j + 16*i);
+                // 在这个节拍上的单选框是勾选了的吗？若被勾选，那么就把
+                // 此乐器的按键编号放入数组该节拍对应的槽中（该槽位（the slot）就
+                // 表示了这个节拍）。否则就表示该乐器在这个节拍不应奏乐，因此就要
+                // 把这个槽位设置为零。
                 if (jc.isSelected()) {
                     trackList[j] = key;
                 } else {
@@ -1042,25 +1076,36 @@ public class BeatBox {
                 }
             }
 
+            // 对于当前乐器，以及整个16拍，进行MIDI事件的构造并将这些MIDI事件
+            // 添加到 MIDI 音轨上。
             makeTracks(trackList);
             t.add(makeEvent(176, 1, 127, 0, 16));
         }
 
+        // 这里总是要确保在第16拍处有必须有一个事件。否则 BeatBox app就不会
+        // 在重新回放前跑满完整的 16 拍（We always want to make sure that there
+        // IS an event for beat 16(it goes 0 to 15). Otherwise, the BeatBox might
+        // not go the full 16 beats before it starts over）。
         t.add(makeEvent(192, 9, 1, 0, 15));
         try {
             s.setSequence(seq);
+            // 这里 Sequencer 的 setLoopCount() 方法，预先指定循环次数，或者
+            // 像这里这样，持续不停的循环下去。
             s.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
+            // 这里就开始演奏上面的编排了。
             s.start();
             s.setTempoInBPM(120);
         } catch(Exception e) {e.printStackTrace();}
     }
 
+    // 第一个内部类，这些内部类都是按钮的事件收听者。并无特别之处。
     class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             buildTrackAndStart();
         }
     }
 
+    // 其他的那些内部类。
     class StopListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             s.stop();
@@ -1069,6 +1114,9 @@ public class BeatBox {
 
     class UpTempoListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
+            // 速度因子（The Tempo Factor） 通过所提供的速度因数
+            // (the factor provided) 对音序器的速度进行调节。默认的
+            // 速度因数为 1.0，那么这里就是每点击一次，纠正 +/- 3%
             s.setTempoFactor(s.getTempoFactor() + 0.03f);
             tempoLabel.setText(String.format("速度因子：%.2f", s.getTempoFactor()));
         }
@@ -1081,6 +1129,11 @@ public class BeatBox {
         }
     }
 
+    // 这个方法每次给一种乐器的全部 16 个节拍构造MIDI事件。
+    // 那么他就应获取到每个乐器的一个 int[] 数组，该数组的各个索引
+    // 下要么是乐器的按键编号，否则就会是0。在某个索引下的值为零时
+    // 该乐器就认为不会在那个节拍上奏乐。否则就要构造一个事件并把
+    // 所构造的事件添加到音轨上。
     public void makeTracks(int [] list) {
         for(int i = 0; i < 16; i++) {
             int k = list[i];
@@ -1092,6 +1145,7 @@ public class BeatBox {
         }
     }
 
+    // 这个方法实际上是上一章中的那个工具方法。并无新意。
     public MidiEvent makeEvent(int comd, int chan, int one, int two, int tick){
         MidiEvent ev = null;
         try {

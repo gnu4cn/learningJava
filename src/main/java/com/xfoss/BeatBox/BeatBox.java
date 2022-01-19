@@ -45,6 +45,13 @@ public class BeatBox {
         btnStop.addActionListener(new StopListener());
         btnBox.add(btnStop);
 
+        JButton btnReset = new JButton("重置🔄");
+        btnReset.addActionListener(new ResetListener());
+        btnBox.add(btnReset);
+
+        btnBox.add(Box.createHorizontalStrut(5));
+        btnBox.add(new JSeparator(SwingConstants.HORIZONTAL));
+
         JButton btnUpTempo = new JButton("加速>>");
         btnUpTempo.addActionListener(new UpTempoListener());
         btnBox.add(btnUpTempo);
@@ -138,6 +145,14 @@ public class BeatBox {
     class StopListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             s.stop();
+        }
+    }
+
+    class ResetListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            for(int i = 0; i < 256; i++) {
+                checkBoxList.get(i).setSelected(false);
+            }
         }
     }
 
