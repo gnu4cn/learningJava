@@ -125,4 +125,6 @@ Java 的 `I/O` API，有着各种表示到诸如文件或网络套接字这类�
 
 不同连接与链接流组合的混搭能力，赋予到我们惊人的灵活性！若强制要求使用仅仅 *单个* 的流类，那么就会受 API 设计者们的支配，就会希望他们能考虑到咱们所期望的所有功能。然而有了流链接特性，就可以组装出自己 *定制* 的各种流链（The ability to mix and match different combinations of connection and chain streams gives you tremendous flexibility! If you were forced to use only a *single* stream class, you'd be at the mercy of the API designers, hoping they'd thought of *everything* you might ever want to do. But with chaining, you can patch together your own *custom* chains）。
 
+![Java对象写入文件过程](images/Ch14_03.png)
 
+*图 3 - Java对象写入文件过程*
