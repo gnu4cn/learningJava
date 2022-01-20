@@ -128,3 +128,15 @@ Java 的 `I/O` API，有着各种表示到诸如文件或网络套接字这类�
 ![Java对象写入文件过程](images/Ch14_03.png)
 
 *图 3 - Java对象写入文件过程*
+
+## 在对象被序列化时，到底发生了什么？
+
+**What really happens to an object when it's serialized**?
+
+![图解存活对象与序列化对象的区别](images/Ch14_04.png)
+
+*图 4 - 图解存活对象与序列化对象的区别*
+
+![Java保存对象实例](images/Ch14_05.png)
+
+*图 5 - Java保存对象实例*
