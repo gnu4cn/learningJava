@@ -177,3 +177,63 @@ Java 的 `I/O` API，有着各种表示到诸如文件或网络套接字这类�
 **If you want your class to be serializable, implement `Serializable`**
 
 由于 `Serializable` 接口没有要实现的方法，因此又被称作 *标记* 或者说 *标签* 接口（The `Serializable` interface is known as a *marker* or *tag* interface, because the interface doesn't have any methods to implement）。 其唯一目的，就是通告实现了他的类，是 *可被序列化的（serializable）*。也就是说，`Serializable` 类型的类，可通过序列化机制加以保存（In other words, objects of that type are saveable through the serialization mechanism）。在有超类是可序列化的类时，那么其子类将自动成为可序列化类，即使其子类并未显示声明 *`implements Serializable`*。（这也是接口一贯的 *运作* 方式。在某个类的超类 `IS-A` `Serializable`时，那么这个类同样是 `Serializable`的）。
+
+```java
+// 这里传递给 writeObject() 方法的参数，必须 实现了 Serializable
+// 接口，否则在运行时就会失败
+objectOutputStream.writeObject(myBox);
+```
+
+--
+
+```java
+package com.xfoss.learningJava;
+
+// 接口 Serializable 是在 java.io 包中，因此要需要这个 import 语句
+import java.io.*;
+
+// 虽然没有要实现的方法，但在写下这里的 "implements Serializable"
+// 时，就等于告诉了JVM，“可对这种类型的对象进行序列化。”
+public class Box implements Serializable {
+
+    // 这两个值将会被保存起来
+    private int width;
+    private int height;
+
+    public void setWidth (int w) {
+        width = w;
+    }
+
+    public void setHeight (int h) {
+        height = h;
+    }
+
+    public static void main (String[] args) {
+        Box box = new Box();
+        box.setWidth(50);
+        box.setHeight(20);
+
+        // I/O 操作可能抛出异常。
+        try {
+            // 若存在一个名为“Box.ser”的文件，那么就连接到这个文件。而若不
+            // 存在，就构造一个新的名为 “Box.ser” 的文件。
+            FileOutputStream fStream = new FileOutputStream("Box.ser");
+            // 构造一个链接到连接流 FileOutputStream 的 ObjectOutputStream 对象
+            // 让他写入对象 box。
+            ObjectOutputStream oStream = new ObjectOutputStream(fStream);
+            oStream.writeObject(box);
+            oStream.close();
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+}
+```
+
+运行这段代码将创建出一个 `Box.ser` 的文件，其内容为：
+
+```console
+¬í sr com.xfoss.learningJava.Boxý	¼%~FH I heightI widthxp      2
+```
+
+以后不管运行多少次，`Box.ser` 的内容都不会改变。
+
+
