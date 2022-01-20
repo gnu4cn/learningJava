@@ -236,4 +236,8 @@ public class Box implements Serializable {
 
 以后不管运行多少次，`Box.ser` 的内容都不会改变。
 
+## 序列化就是全部，或者全无。
+
+**Serialization is all or nothing**.
+
 
