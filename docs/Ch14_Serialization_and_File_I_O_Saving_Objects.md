@@ -140,3 +140,23 @@ Java 的 `I/O` API，有着各种表示到诸如文件或网络套接字这类�
 ![Java保存对象实例](images/Ch14_05.png)
 
 *图 5 - Java保存对象实例*
+
+### 然而对象状态 *究竟是* 个什么呢？到底需要保存什么呢？
+
+**But what exactly *IS* an object's state? What needs to be saved**?
+
+现在就开始变得有趣起来了。要保存 *原生* 值 `37` 与 `70` 是相当容易。但如果对象有着一个是对象 *引用* 的实例变量呢？某个对象有着五个的对象引用的实例变量又会怎样呢？如果这些对象实例变量本身又有实例变量的话，又会怎样呢（Easy enough to save the *primitive* values `37` and `70`. But what if an object has an instance variable that's an object *reference*? What about an object that has five instance variables that are object references? What if those object instance variables themselves have instance variables）？
+
+请想想。对象的什么部分，是潜在唯一的？试想一下为了获得一个与所保存对象一致的对象，究竟需要恢复的是什么。当然对象将有着不同的内存位置，然而对于这一点我们并不关心。这里所关心的，全是在内存堆上得出的结果，将获取到一个与对象被保存时有着相同状态的一个内存堆上的存活对象。
+
+## 脑力锻炼
+
+![如何保存带有到其他对象引用变量的对象](images/Ch14_06.png)
+
+*图 6 - 如何保存带有到其他对象引用变量的对象*
+
+必须要怎样保存 `Car` 对象，才能从 `Car` 副本中恢复到其原先的状态？
+
+试想一下要保存 `Car` 对象会需要些什么 -- 以及怎样去保存他。
+
+同时在 `Engine` 对象又有着到 `Carburetor` 对象的引用时，会怎样呢？以及在 `Tire []` 这个数组对象中又有着什么呢？
