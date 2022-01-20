@@ -72,3 +72,57 @@
 
 
 *图 2 - 对象存储图解*
+
+## 把序列化对象写到某个文件
+
+以下就是将对象进行序列化（保存）的步骤（Here are the steps for serializing(saving) an object）。不用纠结于把这些步骤都记住；本章后续会深入讲解。
+
+1) **构造一个 *`FileOutputStream`* 对象**
+
+```java
+// 构造出一个 FileOutputStream 对象。FileOutputStream 知道怎样去
+// 连接（并创建出）一个文件。
+// 
+// 若这个 “MyGame.ser” 文件不存在，那么他就会被自动创建出来。
+FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
+```
+
+2) **构造一个 *`ObjectOutputStream` 对象***
+
+```java
+// ObjectOutputStream 实现对象写到文件，但他无法直接连接到
+// 文件。他需要喂入一个“helper”。这实际上就是把一个流“链接”
+// 到另一个上（This is actually called 'chaining' one stream
+// to another）。
+ObjectOutputStream oStream = new ObjectOutputStream(fileStream);
+```
+
+3) **写入对象**
+
+```java
+// 对这些由 characterOne, Two, Three 所表示的对象进行序列化操作
+// 并将他们写到文件 “MyGame.ser” 中。
+oStream.writeObject(characterOne);
+oStream.writeObject(characterTwo);
+oStream.writeObject(characterThree);
+```
+
+4) **关闭 `ObjectOutputStream`**
+
+```java
+// 关闭了顶部的流，就会关闭其下所有的其他流，因此 `FileOutputStream` 
+// （及那个文件）就会自动关闭。
+oStream.close();
+```
+
+**在各种流中，数据从一处往另一处移动（Data moves in streams from one place to another）**。
+
+Java 的 `I/O` API，有着各种表示到诸如文件或网络套接字这类目的与源的连接，以及将那些只有被链接到其他流才会工作的流 ***链接*** 起来的 *连接性* 流（The Java `I/O` API has ***connection*** streams, that represent connections to destinations and sources such as files or network sockets, and ***chain*** streams that work only if chained to other streams）。
+
+通常，要至少同时钩起两个流流，才能完成有用的事情 -- *一个* 表示连接，而 *另一个* 则是要调用到他的方法。为什么是两个呢？因为 *连接* 流通常都是很低级别的。就拿 `FileOutputStream`（就是一个连接流）来说，就有写入 *字节* 的一些方法。但这里并不想要写入 *字节*！这里要的是写入 *对象*，因此就需要一个高级别的 *链接* 流（Often, it takes at least two streams hooked together to do something useful -- *one* to represent the connection and *another* to call methods on. Why two? Because *connection* streams are usually too low-level. `FileOutputStream`(a connection stream), for example, has methods for writing *bytes*. But we don't want to write *bytes*! We want to write *objects*, so we need a higher-level *chain* stream）。
+
+好，那么又为什么不只要精准完成所需的单个流呢？一个实现对象写入并同时将对象转换成字节的流？这就要考虑良好的面向对象了。每个类做好 *一件* 事情。`FileOutputStream` 就是把字节写入到文件。`ObjectOutputStream` 就是把对象转换成可写入到流的数据。所以这里构造一个 `FileOutputStream` 来实现到文件的写入，并在 `FileOutputStream` 末尾钩起一个 `ObjectOutputStream`（一个链接流）。在调用`ObjectOutputStream`上的 `writeObject()` 方法时，对象就被泵入到流中，随后就移动到 `FileOutputStream`，在那里最终被作为一些字节，写到某个文件。
+
+不同连接与链接流组合的混搭能力，赋予到我们惊人的灵活性！若强制要求使用仅仅 *单个* 的流类，那么就会受 API 设计者们的支配，就会希望他们能考虑到咱们所期望的所有功能。然而有了流链接特性，就可以组装出自己 *定制* 的各种流链（The ability to mix and match different combinations of connection and chain streams gives you tremendous flexibility! If you were forced to use only a *single* stream class, you'd be at the mercy of the API designers, hoping they'd thought of *everything* you might ever want to do. But with chaining, you can patch together your own *custom* chains）。
+
+
