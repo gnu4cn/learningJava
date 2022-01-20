@@ -36,4 +36,39 @@
 
 ## 对状态进行保存
 
+**Saving State**
 
+设想有这么一个程序，比方说，一个奇幻冒险游戏，需要与玩家进行多次会话才能完成。随着游戏的进展，游戏中的角色变得愈加强大、弱小、灵巧等等，并会收集（或丢失）各种武器。那么就肯定不愿意每次启动游戏都又从头开始玩 -- 那样你的游戏角色就永远不会在某次激烈战斗中有最佳状态。那么就需要一种保存游戏角色状态的方式，以及在继续游戏时对状态进行恢复的方式。而由于作为游戏程序的编写者，就会希望整个保存与恢复，应该尽可能是容易实现（且简单明了）。
+
+1) 选项一
+
+**把这三个序列化的游戏角色写到某个文件**
+
+创建出一个文件，并写入三个序列化角色对象。这个文件在作为文本进行读取时，并无任何意义：
+
+```console
+ ̈ÌsrGameCharacter 
+ ̈%gê8MÛIpowerLjava/lang/
+ String;[weaponst[Ljava/lang/
+ String;xp2tlfur[Ljava.lang.String;≠“VÁ
+ È{Gxptbowtswordtdustsq~»tTrolluq~tb
+ are handstbig axsq~xtMagicianuq~tspe
+ llstinvisibility
+ ```
+
+ 2) 选项二
+
+ **写入普通文本文件**
+
+ 创建出一个文件，并写入三行文本，每行一个游戏角色，用逗号分隔角色状态的各个部分：
+
+ ```console
+ 50,Elf,bow, sword,dust
+ 200,Troll,bare hands,big ax
+ 120,Magician,spells,invisibility
+ ```
+
+ ![对象存储图解](images/Ch14_02.png)
+
+
+*图 2 - 对象存储图解*
