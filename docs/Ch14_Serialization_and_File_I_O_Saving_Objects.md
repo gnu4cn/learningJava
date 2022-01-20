@@ -17,3 +17,19 @@
 对于保存Java 程序状态来说，有很多个选项，至于具体选用何种选项，将取决于计划怎样去 *使用* 所保存的状态（You have lots of options for how to save the state of your Java program, and what you choose will probably depend on how you plan to *use* the saved state）。本章要检视的几种选项如下所示。
 
 **在数据只会被生成数据的 Java 程式使用到时（If your data will be used by only the Java program that generated it）**：
+
+1) **运用对象序列化**
+
+**Use *serialization***
+
+对留存了被压扁（序列化的）对象的一个文件进行写入。随后程序就从这个文件读取这些序列化的对象，并将他们充实回到活生生的、有呼吸的、存在于内存堆的对象（Write a file that holds flattened(serialized) objects. Then have your program read the serialized objects from the file and inflate them back into living, breathing, heap-inhabiting objects）。
+
+**在数据会被其他程序使用到时**：
+
+2) **写入 *普通文本* 文件**
+
+**Write *a plain text* file**
+
+写入到一个带有分隔符，从而可被其他程序解析的文件。比如就可以写入到一个由制表符分隔的、可被电子表格或数据库应用使用的文件（Write a file, with delimiters that other programs can parse. For example, a tab-delimited file that a spreadsheet or database application can use）。
+
+
