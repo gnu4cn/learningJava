@@ -2,6 +2,7 @@
 target
 **/build/
 !src/**/build/
+*.ser
 
 # Ignore Gradle GUI config
 gradle-app.setting
