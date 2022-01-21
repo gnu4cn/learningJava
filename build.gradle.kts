@@ -29,7 +29,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClass.set("com.xfoss.learningJava.Box")
+    mainClass.set("com.xfoss.learningJava.Pond")
 }
 
 tasks {
@@ -39,7 +39,7 @@ tasks {
 
     jar {
         manifest {
-            attributes (mapOf("Main-Class" to "com.xfoss.learningJava.Box"))
+            attributes (mapOf("Main-Class" to "com.xfoss.learningJava.Pond"))
         }
 
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE

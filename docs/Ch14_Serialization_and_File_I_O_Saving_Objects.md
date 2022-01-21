@@ -240,4 +240,58 @@ public class Box implements Serializable {
 
 **Serialization is all or nothing**.
 
+**设想一下如果对象的某些状态没有正确保存，会发生什么呢**？
 
+![序列化对象恢复的风险](images/Ch14_08.png)
+
+*图 8 - 序列化对象恢复的风险*
+
+**要么整个的对象图面被正确序列化，但凡有一个差错，那么就算作序列化失败（Either the entire object graph is serialized correctly or serialization fails）**。
+
+**在对一个 `Pond` 对象进行序列化时，若他 `Duck` 实例变量拒绝被实例化（因为没有对 `Serializable` 接口进行实现），那么就无法实例化这个 `Pond` 对象**。
+
+```java
+package com.xfoss.learningJava;
+
+import java.io.*;
+
+// Pond 的对象，可被序列化
+public class Pond implements Serializable {
+    // 类 Pond 有一个实例变量，是到一个 Duck 
+    // 对象的引用。
+    private Duck duck = new Duck();
+    
+    public static void main (String[] args) {
+        Pond pond = new Pond();
+
+        try {
+            FileOutputStream fStream = new FileOutputStream("Pond.ser");
+            ObjectOutputStream oStream = new ObjectOutputStream(fStream);
+
+            // 在对 pond （一个 Pond 的对象）进行序列化时，该对象
+            // 的 Duck 实例变量会自动被序列化。
+            oStream.writeObject(pond);
+            oStream.close();
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+}
+
+// 然而！！Duck（在 com.xfoss.learningJava.UseADuck中声明） 并
+// 不是可序列化的！Duck 类并没有实现 Serializable, 因此在对
+// Pond 对象进行序列化时，由于该 Pond 对象的 Duck 实例变量
+// 无法被保存，而失败。
+```
+
+将报出以下错误：
+
+```console
+Quack... My size is 32, my number is 1
+java.io.NotSerializableException: com.xfoss.learningJava.Duck
+        at java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1185)
+        at java.base/java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1553)
+        at java.base/java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1510)
+        at java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1433)
+        at java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1179)
+        at java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:349)
+        at com.xfoss.learningJava.Pond.main(Pond.java:15)
+```
