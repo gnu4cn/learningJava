@@ -299,3 +299,27 @@ java.io.NotSerializableException: com.xfoss.learningJava.Duck
 ![非 `Serializable` 对象无法被序列化的麻烦](images/Ch14_09.png)
 
 *图 9 - 非 `Serializable` 对象无法被序列化的麻烦*
+
+**在实例变量无法（或不应）被保存时，就要把他标记为 *瞬态* 实例变量（Mark an instance variable as *transient* if it can't (or shouldn't) be saved）**。
+
+若希望某个实例变量跳过对象的序列化过程，那么就要使用 `transient` 关键字，对该变量进行标记。
+
+```java
+import java.net.*;
+
+class Chat implements Serializable {
+    // 关键字 transient, 说的是 “在序列化期间不要
+    // 保存这个变量，只要跳过他就好。”
+    transient String currentID;
+
+    // 在序列化期间，变量 userName 将被保存为该对象
+    // 的一部分。
+    String userName;
+
+    // 其他代码
+}
+```
+
+在有着一个因为本身不是可序列化，而无法被保存的实例变量时，就可以使用 `transient` 关键字对那个变量进行标记，从而序列化过程就会精准地跳过他。
+
+**然而一个变量无法被序列化的原因又究竟为何呢**？其中可能简单地就是，那个类的设计者仅仅是 *忘了* 把其构造为对 `Serializable` 接口进行实现。或者由于对象依赖于一些特定于运行时信息，因此就直接无法保存（So why would a variable not be seralizable? It could be that the class designer simply *forgot* to make the class implement `Serializable`. Or it might be because the object relies on runtime-specific information that simply can't be saved）。
