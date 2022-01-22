@@ -295,3 +295,7 @@ java.io.NotSerializableException: com.xfoss.learningJava.Duck
         at java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:349)
         at com.xfoss.learningJava.Pond.main(Pond.java:15)
 ```
+
+![非 `Serializable` 对象无法被序列化的麻烦](images/Ch14_09.png)
+
+*图 9 - 非 `Serializable` 对象无法被序列化的麻烦*
