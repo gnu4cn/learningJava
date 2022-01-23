@@ -332,6 +332,10 @@ class Chat implements Serializable {
 
 
 - **究竟为何要编写一个不可序列化的类**？
+
+> 编写不可序列化类的理由极少，然而比如在不希望某个口令对象被存储起来地方，如果将其编写为可序列化对象而被保存了起来，那么就会有着安全问题。有比如在有着某个由于其关键实例变量就是不可序列化的他们本身，而保存起来没什么意义的类时，那么这个时候如果再把他们构造为可序列化的类，就没有什么有用处，多此一举了（There are very few reasons, but you might, for example, have a security issue where you don't want a password object stored. Or you might have an object that makes no sense to save, because its key instance variables are themselves not serializable, so there's no useful way for you to make your class serializable）。
+
+
 - **在所使用的类不是可序列化的，又没有什么好的理由去使用不可序列化类（仅仅由于这个类的设计者忘记给这个类实现 `Serializable` 接口，或由于其设计者的愚蠢），那么可以对这个“不良”的类进行子类化，从而将子类构造为可序列化的吗**？
 - **你所提到的：何为从不可序列化类构造出可序列化类**？
 - **噢！我是不是发现了了不起的东西......只要使某个变量成为“瞬态（`transient`）”，就意味着在序列化过程中该变量的值被跳过。那么这个瞬态变量究竟发生了什么？这里通过将不可序列化实例变量构造为瞬态变量的方式，解决了实例变量不可序列化问题，然而在将其所属对象复活时，难道就不再需要那个瞬态变量了吗？也就是说，难道整个序列化操作的目的，不就是保留对象的状态吗**？
