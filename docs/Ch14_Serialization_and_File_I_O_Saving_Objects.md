@@ -322,4 +322,17 @@ class Chat implements Serializable {
 
 在有着一个因为本身不是可序列化，而无法被保存的实例变量时，就可以使用 `transient` 关键字对那个变量进行标记，从而序列化过程就会精准地跳过他。
 
-**然而一个变量无法被序列化的原因又究竟为何呢**？其中可能简单地就是，那个类的设计者仅仅是 *忘了* 把其构造为对 `Serializable` 接口进行实现。或者由于对象依赖于一些特定于运行时信息，因此就直接无法保存（So why would a variable not be seralizable? It could be that the class designer simply *forgot* to make the class implement `Serializable`. Or it might be because the object relies on runtime-specific information that simply can't be saved）。
+**然而一个变量无法被序列化的原因又究竟为何呢**？其中可能简单地就是，那个类的设计者仅仅是 *忘了* 把其构造为对 `Serializable` 接口进行实现。或者由于对象依赖于一些特定于运行时信息，因此就直接无法保存。虽然 Java 类库中绝大多数物件都是可序列化的，但对于诸如网络连接、线程或文件对象等物件，是无法保存的。这些物件，全都依赖于（特定于）某种特别运行时 “体验”。也就是说，这些对象是以专为所编在程序，在特定平台上、在特定的JVM中的一次特定运行，而进行初始化的。一旦程序关闭，就没有了将这些物件，以任何有意义的方式，再复活过来的办法；这些对象，每次都要从头创建出来（So why would a variable not be seralizable? It could be that the class designer simply *forgot* to make the class implement `Serializable`. Or it might be because the object relies on runtime-specific information that simply can't be saved. Although most things in the Java class libraries are serializable, you can't save things like network connections, threads, or file systems. They're all dependent on (and specific to) a particular runtime 'experience'. In other words, they're instantiated in a way that's unique to a particular run of your program, on a particular platform, in a particular JVM. Once the program shuts down, there's no way to bring those thins back to life in any meaningful way; they have to be created from scratch each time）。
+
+## 答疑
+
+- **既然序列化如此重要，那为何不是全部类都默认可序列化呢？为何类 `Object` 没有实现 `Serializable` 接口，这样所有子类就自动地可被序列化了呀**？
+
+> 尽管绝大多数类都会，且都应对 `Serializable` 接口进行实现，不过仍然可以选择选择不予实现此接口。对于所设计的类，必须逐一审视，在是否要通过实现 `Serializable` 来 “开启” 序列化功能上，作出慎重决定。那么首先，如果序列化作为默认了，又该怎样把他关掉呢？**接口就意味着功能，而非功能的消减（Interfaces indicate functionality, not a *lack* of functionality）**，那么如果这样来告诉外部世界某个对象无法保存：`implements NonSerializable`，多态机制模型就会无法正确运作了。
+
+
+- **究竟为何要编写一个不可序列化的类**？
+- **在所使用的类不是可序列化的，又没有什么好的理由去使用不可序列化类（仅仅由于这个类的设计者忘记给这个类实现 `Serializable` 接口，或由于其设计者的愚蠢），那么可以对这个“不良”的类进行子类化，从而将子类构造为可序列化的吗**？
+- **你所提到的：何为从不可序列化类构造出可序列化类**？
+- **噢！我是不是发现了了不起的东西......只要使某个变量成为“瞬态（`transient`）”，就意味着在序列化过程中该变量的值被跳过。那么这个瞬态变量究竟发生了什么？这里通过将不可序列化实例变量构造为瞬态变量的方式，解决了实例变量不可序列化问题，然而在将其所属对象复活时，难道就不再需要那个瞬态变量了吗？也就是说，难道整个序列化操作的目的，不就是保留对象的状态吗**？
+- **若对象图面中的两个对象引用变量，指向了相同对象，这个时候会怎样呢？比如说，在 `Kennel` 中有两个不同的 `Cat` 对象引用变量，但这两个`Cat`引用变量都是同一具体对象的引用。那么那个具体`Cat`对象会被保存两次吗？我倒希望不会**。
