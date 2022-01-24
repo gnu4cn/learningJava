@@ -333,10 +333,27 @@ class Chat implements Serializable {
 
 - **究竟为何要编写一个不可序列化的类**？
 
-> 编写不可序列化类的理由极少，然而比如在不希望某个口令对象被存储起来地方，如果将其编写为可序列化对象而被保存了起来，那么就会有着安全问题。有比如在有着某个由于其关键实例变量就是不可序列化的他们本身，而保存起来没什么意义的类时，那么这个时候如果再把他们构造为可序列化的类，就没有什么有用处，多此一举了（There are very few reasons, but you might, for example, have a security issue where you don't want a password object stored. Or you might have an object that makes no sense to save, because its key instance variables are themselves not serializable, so there's no useful way for you to make your class serializable）。
+> 编写不可序列化类的理由极少，比如在不希望某个口令对象被存储起来地方，如果将其编写为可序列化对象而被保存了起来，那么就会有着安全问题。有比如在有着某个由于其关键实例变量就是不可序列化的他们本身，而保存起来没什么意义的类时，那么这个时候如果再把他们构造为可序列化的类，就没有什么有用处，多此一举了（There are very few reasons, but you might, for example, have a security issue where you don't want a password object stored. Or you might have an object that makes no sense to save, because its key instance variables are themselves not serializable, so there's no useful way for you to make your class serializable）。
 
 
-- **在所使用的类不是可序列化的，又没有什么好的理由去使用不可序列化类（仅仅由于这个类的设计者忘记给这个类实现 `Serializable` 接口，或由于其设计者的愚蠢），那么可以对这个“不良”的类进行子类化，从而将子类构造为可序列化的吗**？
-- **你所提到的：何为从不可序列化类构造出可序列化类**？
+- **在所使用的类不是可序列化的，又没有什么好的理由去来让这个类不可序列化（仅仅由于这个类的设计者忘记给这个类实现 `Serializable` 接口，或由于其设计者的愚蠢），那么可以对这个“不良”的类进行子类化，从而将子类构造为可序列化的吗**？
+
+> 当然可以！在类本身为可扩展时（即非 `final`），就可以构造一个可序列化子类，并只要在那些期望那个超类类型的地方，用这个子类去替换即可。（请记住，多态机制是允许这样做的。）不过这又提出了另一个有趣的问题：超类不可序列化究竟意味着什么呢？
+
+- **你所提到的：从不可序列化类构造出可序列化类，意味着什么**？
+
+> 这里就要先看看在类解序列化时，会发生什么，（后面很快就会讨论到这个问题）。简而言之，在对象被解序列化且对象的超类为不可序列化的情况下，那么其超类的构造器就会运行，从而创建出那种类型的一个对象来。在没有让某个类成为不可序列化类的适当理由的情况下，那么构造一个可序列化的子类，将是一种良好的做法（In a nutshell, when an object is deserialized and its superclass is not serializable, the superclass constructor will run just as though a new object of that type were bebing created. If there's no decent reason for a class to not be serializable, make a serializable subclass might be a good solution）。
+
 - **噢！我是不是发现了了不起的东西......只要使某个变量成为“瞬态（`transient`）”，就意味着在序列化过程中该变量的值被跳过。那么这个瞬态变量究竟发生了什么？这里通过将不可序列化实例变量构造为瞬态变量的方式，解决了实例变量不可序列化问题，然而在将其所属对象复活时，难道就不再需要那个瞬态变量了吗？也就是说，难道整个序列化操作的目的，不就是保留对象的状态吗**？
-- **若对象图面中的两个对象引用变量，指向了相同对象，这个时候会怎样呢？比如说，在 `Kennel` 中有两个不同的 `Cat` 对象引用变量，但这两个`Cat`引用变量都是同一具体对象的引用。那么那个具体`Cat`对象会被保存两次吗？我倒希望不会**。
+
+> 是的，这确实是个问题，不过幸运的是，有办法解决这个问题。在对某个对象进行序列化操作时，不论瞬态引用实例变量在保存时的值为何，他们都将将恢复到 `null`。这就意味着连接到那个特定实例变量的整个对象图面，都不会被保存。显然，这样处理会有坏处，因为可能需要那个变量为非空值（Yes, this is an issue, but fortunately there's a solution. If you serialize an object, a transient reference instance variable will be brought back as `null`, regardless of the value it had at the time it was saved. That means the entire object graph connected to that particular instance variable won't be saved. This could be bad, obviously, because you probably need a `non-null` value for that variable）。
+>
+> 这个时候就有两个选项：
+>
+> 1) 在将对象恢复过来时，将那个 `null` 的实例变量，重新初始化回某种默认状态。在所解序列化的对象不依赖特定值的那个瞬态变量时，这种做法是可行的。也就是比如对于`Dog`对象，带有一个 `Collar` 的属性，就比较重要，而或许所有的 `Collar` 对象都是同样的，那么在给到所有复活过来的 `Dog` 一个全新的 `Collar`，就无关紧要；没有人会知道其中的差别（When the object is brought back, reinitialize that `null` instance variable back to some default state. This works if your deseralized object isn't dependent on a particular value for that transient variable. In other words, it might be important that the `Dog` have a `Collar`, but perhaps all `Collar` objects are the same so it doesn't matter if you give the resurrected `Dog` a brand new `Collar`; nobody will know the difference）。
+>
+> 2) 在瞬态变量的取值确实至关重要时（比如每个 `Dog` 对象的瞬态变量 `Collar` 的颜色与式样都不相同），那么就需要对 `Collar` 的关键属性值进行保存，并在复活 `Dog` 对象时，使用这些关键属性值来再造一个与原先一致的全新 `Collar` 对象出来。
+
+- **若对象图面中的两个对象引用变量，指向了相同对象，这个时候会怎样呢？比如说，在 `Kennel` 中有两个不同的 `Cat` 对象引用变量，但这两个`Cat`引用变量都是同一具体对象的引用。那么那个具体`Cat`对象会被保存两次吗？我倒希望不会**。 
+
+> 非常棒的问题！Java的序列化特性是足够聪明的，可以了解到图面中那两个对象是同样的。在图面中有两个同样对象时，那么就只有其中一个会被保存，而在解序列化过程中，所有到那个对象引用，都会被恢复出来。
