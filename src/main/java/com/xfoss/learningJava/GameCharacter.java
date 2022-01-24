@@ -1,5 +1,7 @@
 package com.xfoss.learningJava;
 
+import java.io.*;
+
 public class GameCharacter implements Serializable {
     int power;
     String type;

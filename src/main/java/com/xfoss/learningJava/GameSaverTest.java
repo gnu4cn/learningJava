@@ -12,9 +12,11 @@ public class GameSaverTest {
 
         File dir = new File(dataDir);
         if(!dir.exists()) dir.mkdirs();
+        
+        String serFile = String.format("%s/GameCharacter.ser", dataDir);
 
         try {
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(String.format("%s/GameCharacter.ser", dataDir)));
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(serFile));
             os.writeObject(one);
             os.writeObject(two);
             os.writeObject(three);
@@ -26,6 +28,15 @@ public class GameSaverTest {
         three = null;
 
         try {
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(serFile));
+            GameCharacter oneRestore = (GameCharacter) is.readObject();
+            GameCharacter twoRestore = (GameCharacter) is.readObject();
+            GameCharacter threeRestore = (GameCharacter) is.readObject();
+            is.close();
+
+            System.out.format("One's type: %s\n", oneRestore.getType());
+            System.out.format("Two's type: %s\n", twoRestore.getType());
+            System.out.format("Three's type: %s\n", threeRestore.getType());
         } catch (Exception ex) {ex.printStackTrace();}
     }
 }
