@@ -426,3 +426,17 @@ os.close();
 ![对象解序列化的过程](images/Ch14_11.png)
 
 *图 11 - 对象解序列化的过程*
+
+1) 从流 **读取到** 对象；
+
+2) JVM推断出对象的 **类类型**（通过序列化的对象中存储的信息，The JVM determines (through info stored with the serialized object) the object's **class type**）；
+
+3) JVM 尝试 **找到并加载** 该对象的 **类**。若 JVM 无法找到并/或加载该类，那么 JVM 就会抛出一个异常，同时解序列化宣告失败（The JVM attempts to **find and load** the object's **class**. If the JVM can't find and/or load the class, the JVM throws an exception and the deserialization fails）；
+
+4) 在内存堆上，一个新的对象被分配到空间，但 **被序列化对象的构造器并 *不会* 运行**！显然，若该构造器运行，就会把那个对象的状态，恢复到其原本的“新”状态，不过这并不是这里所想要的。这里要的时对象被恢复到他被序列化时所具有的状态，而不是他最开始被创建出时的状态（A new object is given space on the heap, but the **serialized object's constructor doess NOT run**! Obviously, if the constructor ran, it would restore the state of the object back to its original 'new' state, and that's not what we want. We want the object to be restored to the state it had *when it was serialized*, not when it was first created）;
+
+5) 若该对象在其继承树往上的某处，有着一个不可序列化类，那么随着这个不可序列化类之上的其他全部构造器的运行（即使这些往上的类是可序列化的）， **那个不可序列化类的构造器也将运行起来**。一旦构造器链式运行起来，就无法停止了，这就意味着从第一个不可序列化类开始的所有超类，都会重新初始化出他们的状态（If the object has a non-serializable class somewhere up its inheritance tree, the **constructor for that non-serializable class will runn** along with any constructors above that(even if they're serializable). Once the constructor chaining begins, you can't stop it, which means all superclasses, beginning with the first non-serializable one, will reinitialize their state）;
+
+6) 对象的 **那些实例变量，都被赋予到来自序列化状态时的值**。那些瞬态变量，被赋予对象引用变量的默认值 `null`，以及原生类型下相应的默认值（`0`、`false`等等）。
+
+
