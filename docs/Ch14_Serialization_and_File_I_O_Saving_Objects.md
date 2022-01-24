@@ -416,3 +416,13 @@ GameCharacter magician = (GameCharacter) three;
 // （以及那个文件）就会自动关闭。
 os.close();
 ```
+
+### 解序列化期间发生了什么？
+
+**What happens during deserialization**?
+
+在对象被解序列化时，JVM尝试通过在内存堆上构造一个新的、与对象在被序列化时有着同样状态的对象，来把对象复活过来。当然，这是排除了那些瞬态变量的，那些瞬态变量要么以`null`值（对于那些对象的引用变量）再现，要么以默认原生值再现。
+
+![对象解序列化的过程](images/Ch14_11.png)
+
+*图 11 - 对象解序列化的过程*
