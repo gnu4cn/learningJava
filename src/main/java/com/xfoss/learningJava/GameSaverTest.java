@@ -9,6 +9,7 @@ public class GameSaverTest {
         GameCharacter three = new GameCharacter(120, "Magician", new String[] {"spells", "invisibility"});
 
         String dataDir = String.format("%s/learningJava/data", System.getenv("LOCALAPPDATA"));
+        System.out.format("The LOCALAPPDATA directory: %s\n", dataDir);
 
         File dir = new File(dataDir);
         if(!dir.exists()) dir.mkdirs();
