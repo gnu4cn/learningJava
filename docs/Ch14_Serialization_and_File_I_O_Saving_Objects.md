@@ -365,3 +365,54 @@ class Chat implements Serializable {
 ![序列化对象与解序列化对象](images/Ch14_10.png)
 
 *图 10 - 序列化对象与解序列化对象*
+
+给对象进行序列化的关键，就是在往后某一天，与不同JVM的“运行”里（甚至在不同于对象被序列化时所运行的同一JVM里），可以把对象恢复到其原本状态。解序列化与序列化十分相像，只是过程相反。
+
+1) **构造一个 `FileInputStream`**
+
+```java
+// 构造一个 FileInputStream 对象。这里的 FileInputStream 就
+// 知道怎样去连接上要给既有的文件。
+//
+// 在文件 "MyGame.ser" 不存在时，将得到一个异常。
+FileInputStream fileStream = new FileInputStream("MyGame.ser");
+```
+
+2) **构造一个 `ObjectInputStream`**
+
+```java
+// ObjectInputStream 允许读取对象，但他无法直接连接到某个
+// 文件。他需要被链接到一个连接性流，这个示例中就是链接到
+// 的一个 FileInputStream。
+ObjectInputStream os = new ObjectInputStream(fileStream)
+```
+
+3) **读取那些对象**
+
+```java
+// 在每次写下 readObject() 方法时，就获得了流中的下一个
+// 对象。因此将以这些对象被写入的同样顺序，把这些对象读取
+// 回来。若尝试读取多于写入的对象时，就会得到一个大大的异常。
+Object one = os.readObject();
+Object two = os.readObject();
+Object three = os.readObject();
+```
+
+4) **对读取到的这些对象，进行类型强制转换**
+
+```java
+// readObject() 方法的返回值是类型 Object 的（就跟
+// ArrayList那里的情况一样），因此就必须将其强制
+// 转换回所知的真实类型。
+GameCharacter elf = (GameCharacter) one;
+GameCharacter troll = (GameCharacter) two;
+GameCharacter magician = (GameCharacter) three;
+```
+
+5) **关闭 `ObjectInputStream`**
+
+```java
+// 关闭了顶部的流也就关闭了其下的那些流，因此 FileInputStream
+// （以及那个文件）就会自动关闭。
+os.close();
+```
