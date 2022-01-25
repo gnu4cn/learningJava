@@ -619,3 +619,9 @@ class WriteAFile {
     }
 }
 ```
+
+## 文本文件示例：`e-Flashcards`
+
+**Text File Example: `e-Flashcards`**
+
+
