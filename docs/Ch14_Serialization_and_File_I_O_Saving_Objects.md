@@ -583,3 +583,39 @@ public class GameCharacter implements Serializable {
 ![以文本文件方式保存对象数据](images/Ch14_13.png)
 
 *图 13 - 以文本文件方式保存对象数据*
+
+**要写入序列化对象**：
+
+```java
+objectOutputStream.writeObject(someObject);
+```
+
+**而要写入一个字符串**：
+
+```java
+fileWriter.write("My first String to save");
+```
+
+```java
+// 这里需要 java.io 包来提供到 FileWriter 类
+import java.io.*;
+
+class WriteAFile {
+    public static void main (String[] args) {
+        // 所以 I/O 操作，都必须在一个 try/catch 代码块中。其中的
+        // 全部操作都能抛出 IOException 异常！！
+        try {
+            // 如果这个 “Foo.txt” 文件不存在，FileWriter就会创建他。
+            FileWriter writer = new FileWriter("Foo.txt");
+            
+            // write() 方法取的是一个字符串参数
+            writer.write("hello foo!");
+
+            // 在完成写入后要关闭这个 FileWriter 对象！
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+```
