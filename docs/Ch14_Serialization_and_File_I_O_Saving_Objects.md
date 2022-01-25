@@ -571,3 +571,15 @@ public class GameCharacter implements Serializable {
 - 读取对象（使用 `readObject()` 方法）是以所读取的那些对象原先写入的顺序读出；
 - `readObject()` 方法返回值类型为 `Object` 类型，因此解序列化出的对象，必须被强制转换（`cast`）到他们真实类型；
 - 静态变量不会被序列化！将静态变量作为特定对象状态的一部分进行保存没有意义，因为那种类型的所有对象，都共享着仅仅这一个值 -- 就是类中的那个；
+
+## 写入一个字符串到文本文件
+
+**Writing a `String` to a `Text` File**
+
+经由序列化特性保存对象，是在某个Java程序的不同运行之间，进行数据保存与恢复的最容易方式（Saving objects, through serialization, is the easiest way to save and restore data between runnings of a Java program）。不过有时候仍需要把数据保存到普通老式文本文件。设想有Java程序必须把数据，写入到某个其他（极有可能为非Java的）程序需要读取的简单文本文件。比如说，有这样一个Java编写的、获取用户输入到浏览器的表单数据的小服务程序（a servlet），并把这些表单数据，写入到一个其他程序也会加载到某个电子表单进而加以分析的文本文件。
+
+写入文本数据（实际上是一个字符串），跟写入对象类似，只是写入的是一个字符串而不再是对象，还有使用的是 `FileWriter`而不是`FileOutputStream`（并且也不是链接到 `ObjectOutputStream`的）。
+
+![以文本文件方式保存对象数据](images/Ch14_13.png)
+
+*图 13 - 以文本文件方式保存对象数据*
