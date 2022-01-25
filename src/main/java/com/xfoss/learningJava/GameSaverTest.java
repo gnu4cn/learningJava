@@ -1,6 +1,7 @@
 package com.xfoss.learningJava;
 
 import java.io.*;
+import com.xfoss.Utils.*;
 
 public class GameSaverTest {
     public static void main (String[] args) {
@@ -8,7 +9,8 @@ public class GameSaverTest {
         GameCharacter two = new GameCharacter(200, "Troll", new String[] {"bare hands", "big ax"});
         GameCharacter three = new GameCharacter(120, "Magician", new String[] {"spells", "invisibility"});
 
-        String dataDir = String.format("%s/learningJava/data", System.getenv("LOCALAPPDATA"));
+        XPlatformThings th = new XPlatformThings();
+        String dataDir = th.getWorkingDir("learningJava");
         System.out.format("The LOCALAPPDATA directory: %s\n", dataDir);
 
         File dir = new File(dataDir);
