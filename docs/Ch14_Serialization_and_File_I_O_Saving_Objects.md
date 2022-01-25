@@ -450,3 +450,64 @@ os.close();
 - **那些静态变量呢？他们会被序列化吗**？
 
 > 不会。请记住，静态就表示“每个类一个”，而不是“每个对象一个”。静态变量不被保存，且在某个对象被解序列化时，该对象的类 *当前* 有什么静态变量，那么该对象就会有什么静态变量。谨记：不要构造那些对动态改变的静态变量有依赖的可序列化对象！那样的话在恢复出对象时，就会出现与原先不一致的情况（Nope. Remember, static means "one per class" not "one per object". Static variables are not saved, and when an object is deserialized, it will have whatever static variable its calss *currently* has. The moral: don't make serializable objects dependent on a dynamically-changing static variable! It might not be the same when the object comes back）。
+
+## 游戏角色的保存与恢复
+
+**Saving and restoring the game characters**
+
+```java
+
+package com.xfoss.learningJava;
+
+import java.io.*;
+import com.xfoss.Utils.*;
+
+public class GameSaverTest {
+    public static void main (String[] args) {
+        // 构造一些角色......
+        GameCharacter one = new GameCharacter(50, "Elf", new String[] {"bow", "sword", "dust"});
+        GameCharacter two = new GameCharacter(200, "Troll", new String[] {"bare hands", "big ax"});
+        GameCharacter three = new GameCharacter(120, "Magician", new String[] {"spells", "invisibility"});
+
+        XPlatformThings th = new XPlatformThings();
+        String dataDir = th.getWorkingDir("learningJava");
+
+        File dir = new File(dataDir);
+        if(!dir.exists()) dir.mkdirs();
+        
+        String serFile = String.format("%s/GameCharacter.ser", dataDir);
+
+        // 设想对这些角色进行操作的代码，可能改变这些角色的状态
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(serFile));
+            os.writeObject(one);
+            os.writeObject(two);
+            os.writeObject(three);
+            os.close();
+        } catch (IOException ex) {ex.printStackTrace();}
+
+        // 这里把这些角色设置为 null, 这样就无法在内存堆上访问到这些对象了
+        one = null;
+        two = null;
+        three = null;
+
+        try {
+            // 现在从文件把这些角色读取回来......
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(serFile));
+            GameCharacter oneRestore = (GameCharacter) is.readObject();
+            GameCharacter twoRestore = (GameCharacter) is.readObject();
+            GameCharacter threeRestore = (GameCharacter) is.readObject();
+            is.close();
+
+            // 检查一下这样的保存与读取是否可行。
+            System.out.format("One's type: %s\n", oneRestore.getType());
+            System.out.format("Two's type: %s\n", twoRestore.getType());
+            System.out.format("Three's type: %s\n", threeRestore.getType());
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+}
+```
+
+![对象序列化实例运行效果](images/Ch14_12.png)
+
+*图 12 - 对象序列化实例运行效果*

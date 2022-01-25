@@ -11,7 +11,6 @@ public class GameSaverTest {
 
         XPlatformThings th = new XPlatformThings();
         String dataDir = th.getWorkingDir("learningJava");
-        System.out.format("The LOCALAPPDATA directory: %s\n", dataDir);
 
         File dir = new File(dataDir);
         if(!dir.exists()) dir.mkdirs();
