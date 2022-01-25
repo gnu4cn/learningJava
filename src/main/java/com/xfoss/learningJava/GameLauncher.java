@@ -1,6 +1,6 @@
 package com.xfoss.learningJava;
 
-import com.xfoss.winUtils.*;
+import com.xfoss.Utils.*;
 
 public class GameLauncher {
 	

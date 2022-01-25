@@ -1,4 +1,4 @@
-package com.xfoss.winUtils;
+package com.xfoss.Utils;
 
 import com.sun.jna.Function;
 import com.sun.jna.platform.win32.WinDef.BOOL;
