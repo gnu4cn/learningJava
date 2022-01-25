@@ -511,3 +511,63 @@ public class GameSaverTest {
 ![对象序列化实例运行效果](images/Ch14_12.png)
 
 *图 12 - 对象序列化实例运行效果*
+
+### 类 `GameCharacter`
+
+```java
+// 这是一个简单的仅用于测试序列化操作的类，同时这里也并没有一个
+// 真正的游戏，不过实现游戏的过程，可以自己去完成。
+package com.xfoss.learningJava;
+
+import java.io.*;
+
+public class GameCharacter implements Serializable {
+    int power;
+    String type;
+    String [] weapons;
+
+    public GameCharacter (int p, String t, String [] w) {
+        power = p;
+        type = t;
+        weapons = w;
+    }
+
+    public int getPower () {
+        return power;
+    }
+
+    public String getType () {
+        return type;
+    }
+
+    public String getWeapons () {
+        String weaponList = "";
+
+        for (int i = 0; i < weapons.length; i++) {
+            String.format("%s %s", weaponList, weapons[i]);
+        }
+
+        return weaponList;
+    }
+}
+```
+
+## 对象序列化的重点
+
+**Object Serialization, BULLET POINTS**
+
+- 通过将对象序列化，可保存对象的状态；
+- 要序列化某个对象，就需要一个 `ObjectOutputStream`（来自 `java.io`包） 对象；
+- 流要么是连接流，要么是链式流；
+- 连接流可表示到源或目的地，典型的就是某个文件、网络套接字，或控制台，的一个连接；
+- 链式流无法连接到源或目的地，而必须链接到连接（或其他）流；
+- 要将对象序列化到文件，就要构造一个 `FileOutputStream` 对象，并将这个对象链接进入一个 `ObjectOutputStream`;
+- 调用 `ObjectOutputStream` 对象上的 *`writeObject(theObject)`* 方法，来对这个 `theObject` 进行序列化。这里无需调用 `FileOutputStream` 上的那些方法；
+- 对象要被序列化，就必须实现 `Serializable` 接口。在该类的超类实现了 `Serializable`，那么进行这个子类没有特别声明 *implements Serializable*，也自动成为可被序列化；
+- 在对象被序列化时，他的整个对象图面都被序列化了。那就意味着被该序列化对象的那些实例变量所引用的全部对象，以及这些被引用对象所应用的全部对象......等等都被序列化了；
+- 若图面中有任何对象不可被序列化，那么在运行时就会抛出异常，除非指向这个不可序列化对象的实例变量被跳过；
+- 若希望序列化操作跳过某个变量，使用关键字 `transient` 标记这个变量即可。这个被 `transient` 关键字标记过的变量，将被恢复到 `null` （对于对象引用变量），或默认值（对于原生类型变量）；
+- 在解序列化过程中，对象图面中所有对象的类，必须对JVM可用；
+- 读取对象（使用 `readObject()` 方法）是以所读取的那些对象原先写入的顺序读出；
+- `readObject()` 方法返回值类型为 `Object` 类型，因此解序列化出的对象，必须被强制转换（`cast`）到他们真实类型；
+- 静态变量不会被序列化！将静态变量作为特定对象状态的一部分进行保存没有意义，因为那种类型的所有对象，都共享着仅仅这一个值 -- 就是类中的那个；
