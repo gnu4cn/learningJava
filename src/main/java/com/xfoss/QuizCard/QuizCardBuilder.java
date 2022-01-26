@@ -85,9 +85,13 @@ public class QuizCardBuilder {
 
     private class NextCardListener implements ActionListener {
         public void actionPerformed (ActionEvent ev) {
-            QuizCard card = new QuizCard(question.getText(), answer.getText());
-            cardList.add(card);
-            clearCard();
+            if(question.getText().length() > 0 && answer.getText().length() > 0) {
+                QuizCard card = new QuizCard(question.getText(), answer.getText());
+                cardList.add(card);
+                clearCard();
+            }
+
+            question.requestFocus();
         }
     }
 
@@ -120,7 +124,8 @@ public class QuizCardBuilder {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 
             for (QuizCard c:cardList) {
-                writer.write(String.format("%s/%s\n", c.getQuestion(), c.getAnswer()));
+                if(c.getQuestion().length() > 0 && c.getAnswer().length() > 0)
+                    writer.write(String.format("%s/%s\n", c.getQuestion(), c.getAnswer()));
             }
 
             writer.close();

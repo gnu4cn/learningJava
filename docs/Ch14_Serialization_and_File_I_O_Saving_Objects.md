@@ -704,3 +704,176 @@ public class QuizCardBuilder {
         // 在卡片各个部分之间有明确的间隔），写入到一个文本文件
     }
 }
+```
+
+### `QuizCardBuilder` 代码
+
+```java
+package com.xfoss.QuizCard;
+
+import java.util.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.net.*;
+
+public class QuizCardBuilder {
+    private JTextArea question;
+    private JTextArea answer;
+    private ArrayList<QuizCard> cardList;
+    private JFrame frame;
+
+    public static void main (String[] args) {
+        QuizCardBuilder builder = new QuizCardBuilder();
+        builder.go();
+    }
+
+    private void go() {
+        // 构建出 GUI
+        // 
+        // 这里全是 GUI 的代码。没有什么特别的，不过可能会
+        // 看看这里的 MenuBar、Menu及 MenuItems 等代码。
+        frame = new JFrame("测试卡构建器");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        URL icoURI = getClass().getResource("/images/flashcards.png");
+        ImageIcon ico = new ImageIcon(icoURI);
+        frame.setIconImage(ico.getImage());
+
+        JPanel mainPanel = new JPanel();
+
+        Font bigFont = new Font("sanserif", Font.BOLD, 24);
+
+        question = new JTextArea(6, 20);
+        question.setLineWrap(true);
+        question.setWrapStyleWord(true);
+        question.setFont(bigFont);
+
+        JScrollPane qScroller = new JScrollPane(question);
+        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        answer = new JTextArea(6, 20);
+        answer.setLineWrap(true);
+        answer.setWrapStyleWord(true);
+        answer.setFont(bigFont);
+
+        JScrollPane aScroller = new JScrollPane(answer);
+        aScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        aScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        JButton nextBtn = new JButton("下一卡片");
+        nextBtn.addActionListener(new NextCardListener());
+
+        cardList = new ArrayList<QuizCard> ();
+
+        JLabel qLabel = new JLabel("问题：");
+        JLabel aLabel = new JLabel("答案：");
+
+        mainPanel.add(qLabel);
+        mainPanel.add(qScroller);
+        mainPanel.add(aLabel);
+        mainPanel.add(aScroller);
+        mainPanel.add(nextBtn);
+
+        // 这里构造了一个菜单栏，一个文件菜单，随后把
+        // "新建" 与 “保存” 菜单项放入到文件菜单。然后
+        // 把这个菜单添加到菜单栏，并告诉视窗框使用这个
+        // 菜单栏。菜单项可以发起 ActionEvent 事件。
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("文件（F）");
+
+        JMenuItem newMenuItem = new JMenuItem("新建（N）");
+        newMenuItem.addActionListener(new NewMenuItemListener());
+
+        JMenuItem saveMenuItem = new JMenuItem("保存（S）");
+        saveMenuItem.addActionListener(new SaveMenuItemListener());
+
+        fileMenu.add(newMenuItem);
+        fileMenu.add(saveMenuItem);
+
+        menuBar.add(fileMenu);
+
+        frame.setJMenuBar(menuBar);
+        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+        frame.setSize(480, 640);
+        frame.setVisible(true);
+    }
+
+    private class NextCardListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            if(question.getText().length() > 0 && answer.getText().length() > 0) {
+                QuizCard card = new QuizCard(question.getText(), answer.getText());
+                cardList.add(card);
+                clearCard();
+            }
+
+            question.requestFocus();
+        }
+    }
+
+    private class NewMenuItemListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            cardList.clear();
+            clearCard();
+        }
+    }
+
+    private class SaveMenuItemListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            QuizCard card = new QuizCard(question.getText(), answer.getText());
+            cardList.add(card);
+
+            // 这里拉起（bring up） 一个文件对话框并等待用户选择对话框
+            // 中的 “保存”按钮。文件对话框的全部导航及文件选择工作等，都是
+            // 由 JFileChooser 替咱们完成的！就这么容易。
+            JFileChooser fileSave = new JFileChooser();
+            fileSave.showSaveDialog(frame);
+            saveFile(fileSave.getSelectedFile());
+        }
+    }
+
+    private void clearCard () {
+        question.setText("");
+        answer.setText("");
+        question.requestFocus();
+    }
+
+    // 正是这个方法，完成文件写入（由 SaveMenuListener 的事件处理器调用）。
+    // 这里的参数就是那个用户要保存的 'File' 对象。在后面就会讨论到类 File。
+    private void saveFile (File f) {
+        try {
+            // 这里把一个 BufferedWriter 对象，链接到一个新创建的 FileWriter
+            // 对象上，以令到写入更加高效（稍后不久就会讨论到这个问题）。
+            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+
+            // 对这个 QuizCard 的 ArrayList 进行遍历，并将这些卡片写出来，每行
+            // 一张卡片，其中的问题与答案之间用 “/” 分隔开，之后每行在加上
+            // 一个另起一行字符（“\n”）
+            for (QuizCard c:cardList) {
+                if(c.getQuestion().length() > 0 && c.getAnswer().length() > 0)
+                    writer.write(String.format("%s/%s\n", c.getQuestion(), c.getAnswer()));
+            }
+
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("无法将卡片清单 cardList 写出");
+            ex.printStackTrace();
+        }
+    }
+}
+
+class QuizCard {
+    private String question;
+    private String answer;
+
+    public QuizCard(String q, String a) {
+        question = q;
+        answer = a;
+    }
+
+    public String getQuestion () {return question;}
+    public String getAnswer() {return answer;}
+}
+```
