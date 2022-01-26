@@ -65,15 +65,23 @@ public class QuizCardBuilder {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("文件（F）");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
 
         JMenuItem newMenuItem = new JMenuItem("新建（N）");
         newMenuItem.addActionListener(new NewMenuItemListener());
+        newMenuItem.setMnemonic(KeyEvent.VK_N);
 
         JMenuItem saveMenuItem = new JMenuItem("保存（S）");
         saveMenuItem.addActionListener(new SaveMenuItemListener());
+        saveMenuItem.setMnemonic(KeyEvent.VK_S);
+
+        JMenuItem quitMenuItem = new JMenuItem("退出（Q）");
+        quitMenuItem.addActionListener(new QuitMenuItemListener());
+        quitMenuItem.setMnemonic(KeyEvent.VK_Q);
 
         fileMenu.add(newMenuItem);
         fileMenu.add(saveMenuItem);
+        fileMenu.add(quitMenuItem);
 
         menuBar.add(fileMenu);
 
@@ -81,6 +89,13 @@ public class QuizCardBuilder {
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(480, 640);
         frame.setVisible(true);
+    }
+
+    private class QuitMenuItemListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            frame.dispose();
+            System.exit(0);
+        }
     }
 
     private class NextCardListener implements ActionListener {
