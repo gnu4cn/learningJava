@@ -643,3 +643,17 @@ class WriteAFile {
 | `QuizCard(q, a)` |
 | `question` <br /> `answer` |
 | `getQuestion()` <br /> `getAnswer()` |
+
+![`QuizCardBuilder`](images/Ch14_15.png)
+
+*图 15 - `QuizCardBuilder`*
+
+有着带有用于把当前这套卡牌，保存到文本文件的 “保存” 选项的 “文件” 菜单。
+
+![`QuizCardPlayer`](images/Ch14_16.png)
+
+*图 16 - `QuizCardPlayer`*
+
+有着用于从文本文件加载一套卡牌的“加载”选项的“文件”菜单。
+
+
