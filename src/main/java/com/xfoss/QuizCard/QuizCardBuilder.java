@@ -87,7 +87,7 @@ public class QuizCardBuilder {
 
         frame.setJMenuBar(menuBar);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setSize(480, 640);
+        frame.setSize(576, 720);
         frame.setVisible(true);
     }
 
@@ -124,7 +124,8 @@ public class QuizCardBuilder {
 
             JFileChooser fileSave = new JFileChooser();
             fileSave.showSaveDialog(frame);
-            saveFile(fileSave.getSelectedFile());
+            File fileChoice = fileSave.getSelectedFile();
+            if( fileChoice != null)saveFile(fileChoice);
         }
     }
 
