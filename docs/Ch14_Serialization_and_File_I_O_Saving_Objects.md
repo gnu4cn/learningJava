@@ -624,4 +624,18 @@ class WriteAFile {
 
 **Text File Example: `e-Flashcards`**
 
+还记得上学时用过的那些学习卡片（flashcards）吗？那种卡片一面有个问题，背后就是问题的答案。虽然这些学习卡片对于掌握理解某些内容没有帮助，但用于简单操练和死记硬背，他们是无可比拟的。*尤其是在必须把某个事实刻入脑中的时候*。同时这样的卡牌，用于益智猜谜竞赛中也非常棒。
 
+**接下来就要构造以恶有三个类的电子版卡牌**：
+
+1) 类`QuizCardBuilder`，用于一套电子卡牌的创建及存储的一个简单创作工具；
+
+2) 类 `QuizCardPlayer`，一个可加载进一套电子卡牌，并给用户玩这套卡牌的回放引擎；
+
+3) 类`QuizCard`，一个表示卡牌数据的简单类。这里会贯穿卡牌构建器与卡牌播放器的代码，而把 `QuizCard`类留给读者自己取构造，使用下表：
+
+| `QuizCard` |
+| |-- |
+| `QuizCard(q, a)` |
+| `question` <br /> `answer` |
+| `getQuestion()` <br /> `getAnswer()` |
