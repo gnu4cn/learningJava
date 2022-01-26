@@ -656,4 +656,51 @@ class WriteAFile {
 
 有着用于从文本文件加载一套卡牌的“加载”选项的“文件”菜单。
 
+### `QuizCardBuilder` （代码大纲）
 
+```java
+public class QuizCardBuilder {
+    // 构建并显示GUI，包括事件收听者的构造与注册。
+    public void go () {
+        // GUI的构建及显示
+    }
+
+    // 内部类
+    private class NextCardListener implements ActionListener {
+        // 当用户点击 “下一卡片” 按钮时，触发这个事件处理
+        // 方法；表示用户希望把那个卡片存储在清单中，并
+        // 开始制作一张新卡片。
+        public void actionPerformed (ActionEvent ev) {
+            // 将当前卡牌添加到清单并清空那两个文本区
+        }
+    }
+
+    // 内部类
+    private class SaveMenuListener implements ActionListener {
+        // 在用户选择了文件菜单中的 “保存” 菜单项时触发
+        // 这个事件处理方法；表示用户希望以“套”的形式
+        // （比如，“量子力学卡套（Quantum Mechanics Set）”，“好莱坞
+        // 趣闻（Hollywood Trivia）”，“Java规则集”等等），保存当前
+        // 清单中的全部卡片。
+        public void actionPerformed (ActionEvent ev) {
+            // 拉起一个文件对话框
+            // 让用户命名并保存这套卡片
+        }
+    }
+
+    // 内部类
+    private class NewMenuListener implements ActionListener {
+        // 在点选了文件菜单中的“新建”菜单项后触发这个事件处理
+        // 方法；表示用户希望开始创建一套全新卡片（因此就要
+        // 情况卡片清单及文本区）。
+        public void actionPerformed (ActionEvent ev) {
+            // 清空卡片清单，还要情况那两个文本区
+        }
+    }
+
+    // 此方法被 SaveMenuListener 调用；完成具体的文件写入。
+    private void saveFile(File file) {
+        // 对卡片清单进行遍历，并把各个卡片，以可解析的方式（也就是
+        // 在卡片各个部分之间有明确的间隔），写入到一个文本文件
+    }
+}
