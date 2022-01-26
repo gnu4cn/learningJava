@@ -877,3 +877,7 @@ class QuizCard {
     public String getAnswer() {return answer;}
 }
 ```
+
+![`QuizCardBuilder`运行效果](images/Ch14_17.png)
+
+*图 17 - `QuizCardBuilder`运行效果*
