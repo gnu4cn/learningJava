@@ -635,7 +635,7 @@ class WriteAFile {
 3) 类`QuizCard`，一个表示卡牌数据的简单类。这里会贯穿卡牌构建器与卡牌播放器的代码，而把 `QuizCard`类留给读者自己取构造，使用下表：
 
 | `QuizCard` |
-| |-- |
+| :--- |
 | `QuizCard(q, a)` |
 | `question` <br /> `answer` |
 | `getQuestion()` <br /> `getAnswer()` |
