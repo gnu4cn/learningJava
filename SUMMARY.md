@@ -1,6 +1,5 @@
 # 轻松学Java（Head First Java）
 
-- Docs
   * [Ch 01 Dive In A Quick Dip: Breaking The Surface](docs/Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.md)
   * [Ch 02 Class And Objectsr: A Trip To Objectville](docs/Ch02_Class_and_Objects_A_Trip_to_Objectville.md)
   * [Ch 03 Primitives And References: Know Your Variables](docs/Ch03_Primitives_and_References_Know_Your_Variables.md)
