@@ -3,11 +3,13 @@
  *
  * This project uses @Incubating APIs which are subject to change.
  */
-import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("java")
-    id("application")
+    application
+    kotlin("jvm") version "1.3.50"
+    id("com.github.johnrengelman.shadow") version "5.1.0"
     id("edu.sc.seis.launch4j")  version "2.5.1"
 }
 
@@ -34,6 +36,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
     mainClass.set("com.xfoss.QuizCard.QuizCardBuilder")
+    mainClassName = "QuizCardBuilder"
 }
 
 tasks {
@@ -62,9 +65,18 @@ tasks {
 
 }
 
-tasks.withType<DefaultLaunch4jTask> {
-    outfile = "QuizCardBuilder.exe"
-    icon = "${projectDir}/src/main/resources/images/icon.ico"
-    mainClassName = "com.xfoss.QuizCard.QuizCardBuilder"
-    productName = "com.xfoss.QuizCard"
+tasks.withType<KotlinCompile> {
+  kotlinOptions.jvmTarget = "1.8"
 }
+
+launch4j {
+    val shadowJar by tasks.getting(ShadowJar::class)
+    
+    copyConfigurable = shadowJar.outputs.files
+    jar = "lib/${shadowJar.archiveFileName.get()}"
+    jreMinVersion = "1.8.0"
+    headerType = "gui"
+    chdir = ""
+}
+
+
