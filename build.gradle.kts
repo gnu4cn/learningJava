@@ -3,9 +3,12 @@
  *
  * This project uses @Incubating APIs which are subject to change.
  */
+import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 plugins {
-    application
+    id("java")
+    id("application")
+    id("edu.sc.seis.launch4j")  version "2.5.1"
 }
 
 repositories {
@@ -16,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation("edu.sc.seis.launch4j:launch4j:2.5.1")
     implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
     implementation("net.java.dev.jna:jna:5.5.0")
@@ -55,4 +59,12 @@ tasks {
         }
         from(sourcesMain.output)
     }
+
+}
+
+tasks.withType<DefaultLaunch4jTask> {
+    outfile = "QuizCardBuilder.exe"
+    icon = "${projectDir}/src/main/resources/images/icon.ico"
+    mainClassName = "com.xfoss.QuizCard.QuizCardBuilder"
+    productName = "com.xfoss.QuizCard"
 }

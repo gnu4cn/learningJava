@@ -20,7 +20,7 @@ public class QuizCardBuilder {
 
     private void go() {
         // 构建出 GUI
-        frame = new JFrame("测试卡构建器");
+        frame = new JFrame("测试卡构建器-GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/flashcards.png");
@@ -28,6 +28,8 @@ public class QuizCardBuilder {
         frame.setIconImage(ico.getImage());
 
         JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
