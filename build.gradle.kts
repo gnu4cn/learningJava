@@ -5,6 +5,7 @@
  */
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 plugins {
     application
@@ -35,8 +36,8 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClass.set("com.xfoss.QuizCard.QuizCardBuilder")
-    mainClassName = "QuizCardBuilder"
+    getMainClass().set("com.xfoss.QuizCard.QuizCardBuilder")
+    mainClassName = "com.xfoss.QuizCard.QuizCardBuilder"
 }
 
 tasks {
@@ -69,14 +70,8 @@ tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "1.8"
 }
 
-launch4j {
-    val shadowJar by tasks.getting(ShadowJar::class)
-    
-    copyConfigurable = shadowJar.outputs.files
-    jar = "lib/${shadowJar.archiveFileName.get()}"
-    jreMinVersion = "1.8.0"
-    headerType = "gui"
-    chdir = ""
+tasks.withType<DefaultLaunch4jTask> {
+    outfile = "QuizCardBuilder.exe"
+    icon = "$projectDir/src/main/resources/images/icon.ico"
+    productName = "QuizCard"
 }
-
-

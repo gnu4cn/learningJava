@@ -20,7 +20,7 @@ public class QuizCardBuilder {
 
     private void go() {
         // 构建出 GUI
-        frame = new JFrame("测试卡构建器-GUI");
+        frame = new JFrame("测试卡构建器");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/flashcards.png");
