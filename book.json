@@ -3,6 +3,8 @@
     "title": "轻松学Java（Head First Java）",
     "description": "深入掌握Java, 不难",
     "language": "zh",
+    "catalog": ["docs"],
+    "outputfile": "summary-gen.md",
     "structure": {
         "readme": "README.md",
         "summary": "SUMMARY.md"
