@@ -2,6 +2,7 @@ package com.xfoss.learningJava;
 
 import java.io.*;
 import com.xfoss.Utils.*;
+import java.util.*;
 
 public class GameSaverTest {
     public static void main (String[] args) {
@@ -31,14 +32,14 @@ public class GameSaverTest {
 
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(serFile));
-            GameCharacter oneRestore = (GameCharacter) is.readObject();
-            GameCharacter twoRestore = (GameCharacter) is.readObject();
-            GameCharacter threeRestore = (GameCharacter) is.readObject();
+            while (true) {
+                Object o = is.readObject();
+                if(Objects.isNull(o)) break;
+                System.out.format("One's type: %s\n", ((GameCharacter) o).getType());
+            }
             is.close();
-
-            System.out.format("One's type: %s\n", oneRestore.getType());
-            System.out.format("Two's type: %s\n", twoRestore.getType());
-            System.out.format("Three's type: %s\n", threeRestore.getType());
-        } catch (Exception ex) {ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

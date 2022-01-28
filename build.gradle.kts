@@ -36,8 +36,8 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    getMainClass().set("com.xfoss.QuizCard.QuizCardBuilder")
-    mainClassName = "com.xfoss.QuizCard.QuizCardBuilder"
+    mainClassName = "com.xfoss.learningJava.ReadFile"
+    getMainClass().set(mainClassName)
 }
 
 tasks {
@@ -47,7 +47,7 @@ tasks {
 
     jar {
         manifest {
-            attributes (mapOf("Main-Class" to "com.xfoss.QuizCard.QuizCardBuilder"))
+            attributes (mapOf("Main-Class" to application.mainClassName))
         }
 
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE

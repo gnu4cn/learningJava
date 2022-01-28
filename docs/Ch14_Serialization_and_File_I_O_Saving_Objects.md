@@ -960,3 +960,64 @@ BufferedWriter writer = new BufferedWriter(new FileWriter(aFile));
 缓存酷的地方，在于比起不使用缓存，他们的效率高很多。可通过调用 `FileWriter`对象上的 `write(someString)`，单独使用 `FileWriter` 来写入某个文件，不过 `FileWriter` 是每次一个地写入传递给他的东西。而相比于操作内存中的数据，每次去访问磁盘就是件十分耗时的事情，由于这个原因，直接使用 `FileWriter` 每次一个地写入，就带来我们所不希望的开销。而通过在 `FileWriter` 上连接一个 `BufferedWriter`时，这个 `BufferedWriter`就会在缓存放满之前，把要写入的东西暂时留存起来。*只有在缓存充满时，才会告诉 `FileWriter` 往磁盘上的文件写入*。
 
 若希望在缓存尚未充满前就要发送其中的数据，可是可以的。***只需刷新缓存即可（Just flush it）***。调用 `writer.flush()` 就是说，“发送缓存中的内容，立即！”
+
+## 从文本文件读取数据
+
+**Reading from a Text File**
+
+从文件读取文本是简单的，不过这里要使用一个 `File` 对象来表示那个文件，使用一个 `FileReader` 来完成实际读取，还要使用一个`BufferedReader`，来令到读取更具效率。
+
+读取是通过在一个 *`while`* 的循环中，去读取那些行进行，在 `readLine()` 返回结果为 `null` 时，终止这个循环。这也正是数据读取（针对几乎所有非序列化对象的那些数据）最常见的方式：在 `while` 循环（实际上是`while` 循环的 *条件测试*）中，进行数据读取，在没有东西要读取时循环终止（因为不论使用何种读取方法，其结果都是 `null`，故直到已经读取完毕）。
+
+![一个有着两行文本的文件](images/Ch14_21.png)
+
+*图 21 - 一个有着两行文本的文件*
+
+```java
+package com.xfoss.learningJava;
+
+import java.io.*;
+import java.util.Objects;
+import com.xfoss.Utils.*;
+
+public class ReadFile {
+    public static void main (String[] args) {
+        XPlatformThings xpt = new XPlatformThings();
+        String wd = xpt.getWorkingDir("learningJava");
+
+        try {
+            File f = new File(String.format("%s/data/MyText.txt", wd));
+            // 这里的FileReader，时用于字符的、连接到某个文本文件的连接流
+            FileReader fReader = new FileReader(f);
+
+            // 这里将这个 FileReader 连接到一个 BufferedReader，目的是
+            // 更高效的读取数据。这样就只会在缓存为空时（因为这个程序要
+            // 读取文件中的全部数据），才回到文件去读取。
+            BufferedReader reader = new BufferedReader(fReader);
+
+            // 构造一个字符串变量，用来在每次读取行时，留存住这个行
+            String line = null;
+            // 这里讲了 “读取一行文本，并将其赋值给这个字符串变量'line'.
+            // 在那个变量不为 'null'时（由于在这之前还有东西可读）把刚
+            // 读取到的那行打印出来。”
+            //
+            // 或者以另外一种讲法，“在仍有文本行可读取的情况下，对这些文本
+            // 行加以读取并打印出来。”
+            while(!Objects.isNull(line = reader.readLine())) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (Exception ex) {}
+    }
+}
+```
+
+![一个有三行文本的文本文件](images/Ch14_22.png)
+
+*图 22 - 一个有三行文本的文本文件*
+
+
+![`ReadFile`的输出](images/Ch14_23.png)
+
+
+*图 23 - `ReadFile`的输出*
