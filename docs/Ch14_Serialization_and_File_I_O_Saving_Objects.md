@@ -956,3 +956,7 @@ boolean isDeleted = f.delete();
 // 同时会照顾到该数据写入链条上的其余部分。
 BufferedWriter writer = new BufferedWriter(new FileWriter(aFile));
 ```
+
+缓存酷的地方，在于比起不使用缓存，他们的效率高很多。可通过调用 `FileWriter`对象上的 `write(someString)`，单独使用 `FileWriter` 来写入某个文件，不过 `FileWriter` 是每次一个地写入传递给他的东西。而相比于操作内存中的数据，每次去访问磁盘就是件十分耗时的事情，由于这个原因，直接使用 `FileWriter` 每次一个地写入，就带来我们所不希望的开销。而通过在 `FileWriter` 上连接一个 `BufferedWriter`时，这个 `BufferedWriter`就会在缓存放满之前，把要写入的东西暂时留存起来。*只有在缓存充满时，才会告诉 `FileWriter` 往磁盘上的文件写入*。
+
+若希望在缓存尚未充满前就要发送其中的数据，可是可以的。***只需刷新缓存即可（Just flush it）***。调用 `writer.flush()` 就是说，“发送缓存中的内容，立即！”
