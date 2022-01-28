@@ -896,3 +896,41 @@ class QuizCard {
 
 
 *图 18 - `File`对象与磁盘文件及文件内部数据*
+
+### 使用 `File` 对象可以完成的一些事情
+
+1) **构造一个表示既有文件的 `File` 对象**
+
+```java
+File f = new File("MyCode.txt");
+```
+
+2) **新建一个目录**
+
+```java
+File dir = new File("Chapter7");
+dir.mkdir();
+```
+
+3) **列出某个目录的内容**
+
+```java
+if (dir.isDirectory()) {
+    String[] dirContents = dir.list();
+    for (int i = 0; i < dirContents.length; i++) {
+        System.out.println(dirContents[i]);
+    }
+}
+```
+
+4) **获取文件或目录的绝对路径**
+
+```java
+System.out.println(dir.getAbsolutePath());
+```
+
+5) **删除某个文件或目录（删除成功时返回 `true`）**
+
+```java
+boolean isDeleted = f.delete();
+```
