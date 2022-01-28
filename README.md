@@ -11,13 +11,13 @@
 
 - 安装JDK
 
-    JDK的当前LTS版是 `JDK 17.0.1`（Oracle, 2021-11），你可以直接从 [Java Downloads | Oracle](https://www.oracle.com/java/technologies/downloads/) 下载，本项目所使用的 `JDK 11.0.12` 需要在 Oracle 网站注册才能下载。`jdk-11.0.12_linux-x64_bin.tar.gz` 压缩包有 183M 大小。
+    JDK的当前LTS版是 `JDK 17.0.1`（Oracle, 2021-11），你可以直接从 [Java Downloads | jdk.java.net](https://jdk.java.net/java-se-ri/11) 下载。openjdk-11+28_linux-x64_bin.tar.gz` 压缩包有 178.9M 大小。
 
     运行下面的命令，就安装好 Oracle 的 JDK 了。
 
 ```bash
-$sudo tar xf /path/to/jdk-11.0.12_linux-x64_bin.tar.gz -C /opt/
-$sudo ln -s /opt/jdk-11.0.12 /opt/jdk
+$sudo tar xf /path/to/openjdk-11+28_linux-x64_bin.tar.gz -C /opt/
+$sudo ln -s /opt/openjdk-11+28 /opt/jdk
 $sudo update-alternatives --install "/usr/bin/java" "java" "/opt/jdk/bin/java" 1
 $sudo update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/bin/javac" 1
 ```
