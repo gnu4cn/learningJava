@@ -944,3 +944,7 @@ boolean isDeleted = f.delete();
 ![缓存器与购物推车](images/Ch14_19.png)
 
 *图 19 - 缓存器与购物推车*
+
+![缓存器在写入文件中的作用](images/Ch14_20.png)
+
+*图 20 - 缓存器在写入文件中的作用*
