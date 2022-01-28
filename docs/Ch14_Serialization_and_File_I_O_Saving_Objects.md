@@ -948,3 +948,11 @@ boolean isDeleted = f.delete();
 ![缓存器在写入文件中的作用](images/Ch14_20.png)
 
 *图 20 - 缓存器在写入文件中的作用*
+
+```java
+// 请注意这里甚至不需要保留一个到FileWriter 对象的引用（注：即并没有
+// 为这个对象设置一个变量）。这里只关心这个 BufferedWriter，因为正是
+// 要调用这个对象上的方法，且在关闭这个 BufferedWriter 时，这个对象
+// 同时会照顾到该数据写入链条上的其余部分。
+BufferedWriter writer = new BufferedWriter(new FileWriter(aFile));
+```
