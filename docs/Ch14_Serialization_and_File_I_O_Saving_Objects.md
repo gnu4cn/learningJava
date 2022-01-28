@@ -934,3 +934,13 @@ System.out.println(dir.getAbsolutePath());
 ```java
 boolean isDeleted = f.delete();
 ```
+
+## 缓存之美
+
+**The beauty of buffers**
+
+**没有缓存器，就如同逛超市没有购物推车。就不得不把买的东西一件件地搬到车上，一次拿一个汤罐头或一卷厕纸**。
+
+![缓存器与购物推车](images/Ch14_19.png)
+
+*图 19 - 缓存器与购物推车*
