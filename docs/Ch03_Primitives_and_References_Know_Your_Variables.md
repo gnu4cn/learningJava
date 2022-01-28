@@ -31,7 +31,7 @@ int count;
 
 > 注意：如果你遇到这样一个语句时：`an object of type X`，就把 `type`和`class`当成同义词吧。
 
-**变量是一个容器，用于_保存_ 某个事物。（A variable is just a cup. A container. It _holds_ something）**
+**变量是一个容器，用于 _保存_ 某个事物。（A variable is just a cup. A container. It _holds_ something）**
 
 __原生类型__
 
