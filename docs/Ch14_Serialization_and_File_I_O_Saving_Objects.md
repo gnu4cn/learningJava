@@ -1021,3 +1021,48 @@ public class ReadFile {
 
 
 *图 23 - `ReadFile`的输出*
+
+## `QuizCardPlayer` （代码大纲）
+
+**`QuizCardPlayer` (code outline)**
+
+```java
+public class QuizCardPlayer {
+    public void go () {
+        // 构建并显示 GUI
+    }
+
+    class NextCardListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 若这是个问题，那么就展示其答案，否则就显示下一问题
+            // 对一个用于表示是在查看问题还是答案的标志标量进行设置
+        }
+    }
+
+    class OpenMenuListener implements Action Listener {
+        public void actionPerformed (ActionEvent ev) {
+            // 拉起一个文件对话框（bring up a file dialog box）
+            // 让用户导航到某个卡片集，并选中要打开的卡片集
+        }
+    }
+
+    private void loadFile(File file) {
+        // 这里必须通过从文本文件读取一些卡片，然后构建出
+        // 一个卡片的 ArrayList
+        //
+        // 此方法是从 OpenMenuListener 事件处理器中进行调用的，以一次
+        // 读取一行的方式来读取文件，并让 makeCard() 方法来从读取到的行
+        // 构造出新的卡片
+        //
+        // （文件中的一行，同时保存了问题与答案，问题与答案通过一个 '/'
+        // 分隔开）
+    }
+
+    private void makeCard(String lineToParse) {
+        // 由 loadFile() 方法调用，从文本文件拿到一行并
+        // 将改行解析为两个片段 -- 问题与答案 -- 还要创建出一个
+        // 新的 QuizCard 对象出来，然后把这个新的 QuizCard 对象添加
+        // 到名为 CardList 的 ArrayList
+    }
+}
+```
