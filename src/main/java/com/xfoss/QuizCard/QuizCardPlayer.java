@@ -6,14 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
-public class QuizCardPlayer extends {
+public class QuizCardPlayer extends JFrame {
 
     private JTextArea display;
     private JTextArea answer;
     private ArrayList<QuizCard> cardList;
     private QuizCard currentCard;
     private int currentCardIndex;
-    private JFrame frame;
     private JButton nextBtn;
     private boolean isShowAnswer;
 
@@ -38,8 +37,9 @@ public class QuizCardPlayer extends {
         qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        nextBtn = new JButton("揭开答案");
+        nextBtn = new JButton("给出问题");
         nextBtn.addActionListener(new NextCardListener());
+        nextBtn.setEnabled(false);
 
         mainPanel.add(qScroller);
         mainPanel.add(nextBtn);
@@ -69,17 +69,64 @@ public class QuizCardPlayer extends {
 
     private class QuitMenuItemListener implements ActionListener {
         public void actionPerformed (ActionEvent ev) {
-            frame.dispose();
+            dispose();
             System.exit(0);
         }
     }
 
     private class NextCardListener implements ActionListener {
-        public void actionPerformed (ActionEvent ev) {}
+        public void actionPerformed (ActionEvent ev) {
+            if (isShowAnswer) {
+                display.setText(currentCard.getAnswer());
+                nextBtn.setText("下一卡片");
+                isShowAnswer = false;
+            } else {
+                if (currentCardIndex < cardList.size()) showNextCard();
+                else {
+                    display.setText("这已是最后一张卡片。");
+                    nextBtn.setEnabled(false);
+                }
+            }
+        }
     }
 
     private class OpenMenuListener implements ActionListener {
-        public void actionPerformed (ActionEvent ev) {}
+        public void actionPerformed (ActionEvent ev) {
+            JFileChooser fileOpen = new JFileChooser();
+            fileOpen.showOpenDialog(QuizCardPlayer.this);
+            loadFile(fileOpen.getSelectedFile());
+        }
     }
 
+    private void loadFile(File file) {
+        cardList = new ArrayList<QuizCard> ();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                makeCard(line);
+            }
+            nextBtn.setEnabled(true);
+            reader.close();
+        } catch (Exception ex) {
+            System.out.println("无法读取卡片集文件");
+            ex.printStackTrace();
+        }
+    }
+
+    private void makeCard (String lineToParse) {
+        String [] result = lineToParse.split("/");
+        QuizCard card = new QuizCard(result[0], result[1]);
+        cardList.add(card);
+        System.out.println("构造好了一个卡片");
+    }
+
+    private void showNextCard () {
+        currentCard = cardList.get(currentCardIndex);
+        currentCardIndex++;
+        display.setText(currentCard.getQuestion());
+        nextBtn.setText("揭示答案");
+        isShowAnswer = true;
+    }
 }

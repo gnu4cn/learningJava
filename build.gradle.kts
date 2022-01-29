@@ -30,13 +30,13 @@ dependencies {
     testImplementation("de.mirkosertic.bytecoder:java.desktop:2019-11-25")
 }
 
-group = "com.xfoss.learningJava"
+group = "Head First Java, Java 教程"
 version = "0.0.1"
 description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.Utils.XMenuBarTestDrive"
+    mainClassName = "com.xfoss.QuizCard.QuizCardPlayer"
     getMainClass().set(mainClassName)
 }
 
