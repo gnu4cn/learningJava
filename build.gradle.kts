@@ -36,7 +36,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.learningJava.ReadFile"
+    mainClassName = "com.xfoss.Utils.XMenuBarTestDrive"
     getMainClass().set(mainClassName)
 }
 
