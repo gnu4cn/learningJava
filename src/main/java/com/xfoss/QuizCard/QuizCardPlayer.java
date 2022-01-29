@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
-public class QuizCardPlayer {
+public class QuizCardPlayer extends {
 
     private JTextArea display;
     private JTextArea answer;
@@ -19,11 +19,13 @@ public class QuizCardPlayer {
 
     public static void main (String[] args) {
         QuizCardPlayer player = new QuizCardPlayer();
-        player.go();
     }
 
-    public void go () {
+    public QuizCardPlayer () {
         // 构建 GUI
+        super("测试卡播放器");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         JPanel mainPanel = new JPanel();
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
@@ -43,18 +45,33 @@ public class QuizCardPlayer {
         mainPanel.add(nextBtn);
 
         JMenuBar menuBar = new JMenuBar ();
+
         JMenu fileMenu = new JMenu("文件（F）");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+
         JMenuItem loadMenuItem = new JMenuItem("加载卡片集（L）");
+        loadMenuItem.setMnemonic(KeyEvent.VK_L);
         loadMenuItem.addActionListener(new OpenMenuListener());
+
+        JMenuItem quitMenuItem = new JMenuItem("退出（Q）");
+        quitMenuItem.addActionListener(new QuitMenuItemListener());
+        quitMenuItem.setMnemonic(KeyEvent.VK_Q);
+
         fileMenu.add(loadMenuItem);
+        fileMenu.add(quitMenuItem);
         menuBar.add(fileMenu);
 
-        frame = new JFrame("测试卡播放器");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setSize(640, 500);
-        frame.setVisible(true);
+        setJMenuBar(menuBar);
+        getContentPane().add(BorderLayout.CENTER, mainPanel);
+        setSize(640, 500);
+        setVisible(true);
+    }
+
+    private class QuitMenuItemListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            frame.dispose();
+            System.exit(0);
+        }
     }
 
     private class NextCardListener implements ActionListener {
