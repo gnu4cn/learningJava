@@ -126,7 +126,7 @@ public class QuizCardPlayer extends JFrame {
         currentCard = cardList.get(currentCardIndex);
         currentCardIndex++;
         display.setText(currentCard.getQuestion());
-        nextBtn.setText("揭示答案");
+        nextBtn.setText("揭开答案");
         isShowAnswer = true;
     }
 }
