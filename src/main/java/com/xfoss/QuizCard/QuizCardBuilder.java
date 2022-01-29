@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.net.*;
+import com.xfoss.Utils.*;
 
 public class QuizCardBuilder {
     private JTextArea question;
