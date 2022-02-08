@@ -1093,6 +1093,8 @@ public class QuizCardPlayer extends JFrame {
         QuizCardPlayer player = new QuizCardPlayer();
     }
 
+    // 这个构造函数，就相当于之前的方法 go(), 用来构建 GUI
+    // 并省略了 main() 方法中的一个对 go() 的调用
     public QuizCardPlayer () {
         // 构建 GUI
         super("测试卡播放器");
@@ -1148,6 +1150,9 @@ public class QuizCardPlayer extends JFrame {
     }
 
     private class NextCardListener implements ActionListener {
+        // 这里对 isShowAnswer 这个布尔值标志进行检查，从而获悉
+        // 用户当前所查看的，究竟是问题还是答案，并根据具体情况
+        // 来进行适当的操作。
         public void actionPerformed (ActionEvent ev) {
             if (isShowAnswer) {
                 display.setText(currentCard.getAnswer());
@@ -1165,6 +1170,7 @@ public class QuizCardPlayer extends JFrame {
 
     private class OpenMenuListener implements ActionListener {
         public void actionPerformed (ActionEvent ev) {
+            // 拉起文件对话框并让用户进行导航，从而选择要打开的文件。
             JFileChooser fileOpen = new JFileChooser();
             fileOpen.showOpenDialog(QuizCardPlayer.this);
             loadFile(fileOpen.getSelectedFile());
@@ -1175,6 +1181,13 @@ public class QuizCardPlayer extends JFrame {
         cardList = new ArrayList<QuizCard> ();
 
         try {
+            // 构造一个链接到新的 FileReader 对象的 BufferedReader 对象
+            // 把用户从“打开文件”对话框中选择的文件对象，交给这里的
+            // FileReader 对象。
+            //
+            // 这里一次读取一行，然后把读到的行传递给对其进行解析
+            // 并将其转换到真正 QuizCard 对象、然后把这个对象添加到
+            // ArrayList 的 makeCard() 方法。
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -1189,6 +1202,11 @@ public class QuizCardPlayer extends JFrame {
     }
 
     private void makeCard (String lineToParse) {
+        // 每行文本对应单个的卡片，不过这里必须把问题与答案
+        // 分别作为单独部分解析出来。这里使用了字符串 String 
+        // 的 split() 方法来把文本行拆分成两个令牌（tokens, 
+        // 以恶用作问题，一个用作答案）。后面就会介绍到这个 split()
+        // 方法。
         String [] result = lineToParse.split("/");
         QuizCard card = new QuizCard(result[0], result[1]);
         cardList.add(card);
@@ -1204,3 +1222,10 @@ public class QuizCardPlayer extends JFrame {
     }
 }
 ```
+
+
+### 使用 `String` 的 `split()` 方法来解析
+
+**Parsing wih `String` `split()`**
+
+
