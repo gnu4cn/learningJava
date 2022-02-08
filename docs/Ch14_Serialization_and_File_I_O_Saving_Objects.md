@@ -1232,3 +1232,19 @@ public class QuizCardPlayer extends JFrame {
 
 
 *图 24 - 以文本文件方式保存对象数据*
+
+**怎样区分出问题和答案**？
+
+**How do you separate he question and answer**?
+
+在读取这个文件时，问题与答案是挤在一行里头的，以一个正斜杠（`/`）分隔开（由于这正是在 `QuizCodeBuilder` 代码中写到文件的方式）。
+
+**`String` 的静态方法 `split()` 实现了将字符串拆开为多个片段**。
+
+**`String` `split()` lets you break a String into pieces**.
+
+方法 `split()` 是指，“给我一个分隔符，我就会为你拆分出这个字符串的所有片段，并把他们放到一个字符串数组中。”
+
+![`String`类的静态方法 `split()`](images/Ch14_25.png)
+
+*图 25 - `String`类的静态方法 `split()`*
