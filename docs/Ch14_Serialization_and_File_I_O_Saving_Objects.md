@@ -1204,7 +1204,7 @@ public class QuizCardPlayer extends JFrame {
     private void makeCard (String lineToParse) {
         // 每行文本对应单个的卡片，不过这里必须把问题与答案
         // 分别作为单独部分解析出来。这里使用了字符串 String 
-        // 的 split() 方法来把文本行拆分成两个令牌（tokens, 
+        // 的 split() 方法来把文本行拆分成两个分词（tokens, 
         // 以恶用作问题，一个用作答案）。后面就会介绍到这个 split()
         // 方法。
         String [] result = lineToParse.split("/");
@@ -1248,3 +1248,43 @@ public class QuizCardPlayer extends JFrame {
 ![`String`类的静态方法 `split()`](images/Ch14_25.png)
 
 *图 25 - `String`类的静态方法 `split()`*
+
+
+```java
+// 在 QuizCardPlayer 应用中，这就是从文件中读取到单行
+// 文本时看起来的样子
+String toTest = "What i blue + yellow?/green";
+
+// split() 方法取得这个正斜杠 '/' ，并使用这个正斜杠
+// 来将这个字符串拆分成两个片段（在此示例中）。（请
+// 注意：split() 要远比这里的用法强大。在与
+// 过滤器、通配符等工具结合使用时，可以完成极为复杂的解析。）
+String[] result = toTest.split("/");
+
+// 对这个字符串字符进行遍历，并把各个分词（token，片段）打印
+// 出来。在此示例中，就只有两个分词：“What is blue + yellow?”
+// 以及 “green”。
+for (String token:result) {
+    System.out.println(token);
+}
+```
+
+
+## 答疑
+
+- **好吧，我看了看你 API 文档，发现在 `java.io` 包中差不多有 5 百万个类。到底该怎样知道要用哪些类呢**？
+
+> `I/O` API 用到了模块化的 ‘链接’ 概念，因此就可以对这些连接性流与链式流（也叫做“过滤器”流），以相当宽泛的组合方式进行调用，从而获取到想要的几乎全部东西（The `I/O` API uses the modular 'chaining' concept so that you can hook together connection streams and chain streams(also called 'filter' streams) in a wide range of combinations to get just about anything you could want）。
+>
+> 这些处理链，不必仅止于两层；可在一个链式流上调用多个链式流，来获取到所需的恰当数量流程（The chains don't have to stop at two levels; you can hook multiple chain streams to one another to get just the right amount of processing you need）。
+>
+> 不过多数时候，都仅会用到上面这样的小而好用的类。比如在写入文本文件时，`BufferedReader`与`BufferedWriter`（分别链接到 `FileReader`与 `FileWriter`）差不多就是所需的全部了。而在写入序列化对象时，就可以使用`ObjectOutputStream`与`ObjectInputStream`（分别链接到 `FileInputStream` 与 `FileOutputStream`）。
+>
+> 也就是说，今后要使用 Java `I/O` 来完成的操作，90% 都只会涉及到上面讲的两种情况。
+
+- **请讲讲Java 1.4 中引入的新 `I/O` 包 `nio` 中那些类的情况吧**（**What about the new `I/O` `nio` class added in `1.4`**）
+
+
+> `java.nio` 包中的类，带来了大大的性能提升，并更好地利用了程序运行所在机器的原生优势（The `java.nio` classes bring a big performance improvement and take greater advantage of native capatibilities of the maching your program is running on）。`nio` 包的关键特性之一，就是让Java程序员可以对缓存进行直接控制。值得一提另一项新特性，则是非阻塞 `I/O` （non-blocking `I/O`），指的是所编写的 `I/O` 代码，在没有要读取或写入的数据时，不会只是在那里发呆等候。`nio` 中的一些既有类（包括 `FileInputStream` 与 `FileOutputStream`），也都受益于一些新特性，等着我们去运用。不过这些 `nio` 类使用起来要复杂一些，所以除非 *真的* 需要这些新特性，那么就一直使用这里用到的简单版本就好。另外，在不小心的情况下，`nio` 还会导致性能上的 *损失*。对于日常需要完成的 `I/O` 操作，这里用到的非 `nio` 的 `I/O`，大约已经可以满足 90% 了，尤其是刚开始使用 Java 编程语言的时候。
+>
+>
