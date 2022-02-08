@@ -1287,4 +1287,24 @@ for (String token:result) {
 
 > `java.nio` 包中的类，带来了大大的性能提升，并更好地利用了程序运行所在机器的原生优势（The `java.nio` classes bring a big performance improvement and take greater advantage of native capatibilities of the maching your program is running on）。`nio` 包的关键特性之一，就是让Java程序员可以对缓存进行直接控制。值得一提另一项新特性，则是非阻塞 `I/O` （non-blocking `I/O`），指的是所编写的 `I/O` 代码，在没有要读取或写入的数据时，不会只是在那里发呆等候。`nio` 中的一些既有类（包括 `FileInputStream` 与 `FileOutputStream`），也都受益于一些新特性，等着我们去运用。不过这些 `nio` 类使用起来要复杂一些，所以除非 *真的* 需要这些新特性，那么就一直使用这里用到的简单版本就好。另外，在不小心的情况下，`nio` 还会导致性能上的 *损失*。对于日常需要完成的 `I/O` 操作，这里用到的非 `nio` 的 `I/O`，大约已经可以满足 90% 了，尤其是刚开始使用 Java 编程语言的时候。
 >
->
+> 然而可以通过使用 `FileInputStream` ，并经由其 `getChannel()` 方法（是在Java 1.4 版本中添加到 `FileInputStream` 类的），去访问他的 *通道（channel）* ，以此来让切换到 `nio` 的那些类更容易。
+
+---
+
+*Roses are first, violets are netx*.
+
+**`Readers`* and *`Writers` are only for *text***.
+
+## 重点
+
+- 对于写文本文件，要以 `FileWriter` 连接性流开头；
+- 为效率着想，要将 `FileWriter` 链接到 `BufferedWriter`；
+- `File`对象表示在特定路径的文件，而不表示文件的具体内容；
+- 有了`File`对象，就可以对目录进行创建、遍历及删除操作；
+- 可使用字符串的文件名的那些流，大多数也可以使用`File`对象，同时`File`对象用起来更加安全；
+- 要读取文本文件，就要以一个 `FileReader` 连接性流开头；
+- 为效率着想，要将`FileReader`链接到 `BufferedReader`；
+- 要解析文本文件，就要确保该文件是以某种识别出不同元素的方式写下来的（To parse a text file, you need to be sure the file is written with some way to recognize the different elements）。而常见的方法，则是使用某种字符来将那些单独片段分隔开来；
+- 使用`String`类的`split()`方法，将字符串切分为多个单独分词。带有一个分隔符的字符串将有两个分词，分隔符的两侧各有一个。*分隔符本身不被算作是分词*。
+
+
