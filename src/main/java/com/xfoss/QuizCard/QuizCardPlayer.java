@@ -17,12 +17,12 @@ public class QuizCardPlayer extends JFrame {
 
     public static void main (String[] args) {
         QuizCardPlayer player = new QuizCardPlayer();
+        player.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public QuizCardPlayer () {
         // 构建 GUI
         super("测试卡播放器");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
