@@ -1308,3 +1308,14 @@ for (String token:result) {
 - 使用`String`类的`split()`方法，将字符串切分为多个单独分词。带有一个分隔符的字符串将有两个分词，分隔符的两侧各有一个。*分隔符本身不被算作是分词*。
 
 
+## 版本ID：序列化的大问题
+
+**Version ID: A Big Serialization Gotcha**
+
+现在已经看到，Java中的 `I/O`实际上是相当简单的了，在一直使用最常见的连接/链式流时尤其如此。然而这里有个 *或许* 真的应该关注的问题。
+
+## 版本控制至关重要！
+
+**Version Control is crucial**!
+
+
