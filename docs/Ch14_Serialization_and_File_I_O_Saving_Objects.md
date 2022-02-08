@@ -1228,4 +1228,7 @@ public class QuizCardPlayer extends JFrame {
 
 **Parsing wih `String` `split()`**
 
+![以文本文件方式保存对象数据](images/Ch14_24.png)
 
+
+*图 24 - 以文本文件方式保存对象数据*
