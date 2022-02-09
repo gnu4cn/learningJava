@@ -167,19 +167,19 @@ public class BeatBox extends JFrame{
                 if (check.isSelected()) checkboxesState[i] = true;
             }
 
-            try {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.showSaveDialog(BeatBox.this);
-                File fileChoice = fileChooser.getSelectedFile();
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showSaveDialog(BeatBox.this);
+            File fileChoice = fileChooser.getSelectedFile();
 
-                if (fileChoice != null) {
+            if (fileChoice != null) {
+                try {
                     FileOutputStream fileStream = new FileOutputStream(fileChoice);
                     ObjectOutputStream os = new ObjectOutputStream(fileStream);
                     os.writeObject(checkboxesState);
                     os.close();
+                }catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         }
     }
@@ -188,30 +188,33 @@ public class BeatBox extends JFrame{
         public void actionPerformed(ActionEvent ev) {
             boolean[] checkboxesState = null;
 
-            try {
-                JFileChooser f = new JFileChooser();
-                f.showOpenDialog(BeatBox.this);
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showOpenDialog(BeatBox.this);
 
-                File fileSelected = f.getSelectedFile();
-                if (fileSelected != null) {
+            File fileSelected = fileChooser.getSelectedFile();
+
+            if (fileSelected != null) {
+                try {
                     FileInputStream fileIn = new FileInputStream(fileSelected);
                     ObjectInputStream is = new ObjectInputStream(fileIn);
                     checkboxesState = (boolean[]) is.readObject();
                     is.close();
+                } catch (Exception ex) {
+                    System.out.println("打开编曲出错");
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                System.out.println("读取编曲出错");
-                ex.printStackTrace();
             }
 
-            for (int i = 0; i < 256; i++) {
-                JCheckBox check = (JCheckBox) checkboxList.get(i);
-                if(checkboxesState[i]) check.setSelected(true);
-                else check.setSelected(false);
-            }
+            if (checkboxesState != null) {
+                for (int i = 0; i < 256; i++) {
+                    JCheckBox check = (JCheckBox) checkboxList.get(i);
+                    if(checkboxesState[i]) check.setSelected(true);
+                    else check.setSelected(false);
+                }
 
-            s.stop();
-            buildTrackAndStart();
+                s.stop();
+                buildTrackAndStart();
+            }
         }
     }
 
