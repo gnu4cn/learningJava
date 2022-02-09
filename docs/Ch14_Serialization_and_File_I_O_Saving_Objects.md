@@ -1339,4 +1339,7 @@ for (String token:result) {
 - 往类加入新的实例变量（原有的那些对象，将以默认值来解序列化那些他们被序列化时所没有的那些实例变量）；
 - 往继承树加入一些类；
 - 从继承树移除一些类；
--
+- 修改实例变量呃访问级别，对解序列化操作对该变量的赋值没有影响（Changing the access level of an instance variable has no effect on the ability of deserialization to assign a value to the variable）；
+- 将某个瞬态实例变量，修改为非瞬态（先前被序列化的那些对象，将直接给先前瞬态的那些实例变量一个默认值）。
+
+
