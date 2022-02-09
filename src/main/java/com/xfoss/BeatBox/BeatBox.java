@@ -11,7 +11,7 @@ import com.xfoss.Utils.XPlatformThings;
 
 public class BeatBox extends JFrame{
     JPanel mainPanel;
-    ArrayList<JCheckBox> checkBoxList;
+    ArrayList<JCheckBox> checkboxList;
     Sequencer s;
     Sequence seq;
     Track t;
@@ -41,7 +41,7 @@ public class BeatBox extends JFrame{
         JPanel bg = new JPanel(l);
         bg.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        checkBoxList = new ArrayList<JCheckBox> ();
+        checkboxList = new ArrayList<JCheckBox> ();
         Box btnBox = new Box(BoxLayout.Y_AXIS);
 
         JButton btnS = new JButton("开始▶");
@@ -61,7 +61,7 @@ public class BeatBox extends JFrame{
         btnBox.add(btnSerializeIt);
 
         JButton btnRestore = new JButton("恢复🔙");
-        btnRestore.addActionListener(new RestoreListener());
+        btnRestore.addActionListener(new ReadInPatternListener());
         btnBox.add(btnRestore);
 
         btnBox.add(Box.createHorizontalStrut(1));
@@ -97,7 +97,7 @@ public class BeatBox extends JFrame{
         for (int i = 0; i < 256; i++) {
             JCheckBox c = new JCheckBox();
             c.setSelected(false);
-            checkBoxList.add(c);
+            checkboxList.add(c);
             mainPanel.add(c);
         }
 
@@ -130,7 +130,7 @@ public class BeatBox extends JFrame{
             int key = instruments[i];
 
             for (int j = 0; j < 16; j++) {
-                JCheckBox jc = checkBoxList.get(j + 16*i);
+                JCheckBox jc = checkboxList.get(j + 16*i);
                 if (jc.isSelected()) {
                     trackList[j] = key;
                 } else {
@@ -162,7 +162,7 @@ public class BeatBox extends JFrame{
             boolean[] checkboxesState = new boolean[256];
 
             for (int i = 0; i < 256; i++){
-                JCheckBox check = (JCheckBox) checkBoxList.get(i);
+                JCheckBox check = (JCheckBox) checkboxList.get(i);
 
                 if (check.isSelected()) checkboxesState[i] = true;
             }
@@ -179,8 +179,26 @@ public class BeatBox extends JFrame{
         }
     }
 
-    class RestoreListener implements ActionListener {
+    class ReadInPatternListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
+            boolean[] checkboxesState = null;
+
+            try {
+                FileInputStream fileIn = new FileInputStream(new File(String.format("%s/pattern.ser", 
+                                XPlatformThings.getWorkingDir("BeatBox"))));
+                ObjectInputStream is = new ObjectInputStream(fileIn);
+                checkboxesState = (boolean[]) is.readObject();
+                is.close();
+            } catch (Exception ex) {ex.printStackTrace();}
+
+            for (int i = 0; i < 256; i++) {
+                JCheckBox check = (JCheckBox) checkboxList.get(i);
+                if(checkboxesState[i]) check.setSelected(true);
+                else check.setSelected(false);
+            }
+
+            s.stop();
+            buildTrackAndStart();
         }
     }
 
@@ -193,7 +211,7 @@ public class BeatBox extends JFrame{
     class ResetListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             for(int i = 0; i < 256; i++) {
-                checkBoxList.get(i).setSelected(false);
+                checkboxList.get(i).setSelected(false);
             }
         }
     }

@@ -1460,3 +1460,42 @@ class SendPatternListener implements ActionListener {
 ### `BeatBox`编曲的恢复
 
 **Restoring a `BeatBox` pattern**
+
+这就刚好与保存操作是反过来的了......读取那个序列化的布尔值数组对象，然后利用这个复活过来的数组对象，恢复GUI的那些勾选框状态。曲目恢复操作，全部发生自用户点击了“恢复”按钮的一瞬间。
+
+**编曲的恢复（Restoring a pattern）**
+
+```java
+// 这是另一个 BeatBox 代码里头的内部类。
+class ReadInPatternListener implements ActionListener {
+    public void actionPerformed(ActionEvent ev) {
+        boolean[] checkboxesState = null;
+
+        try {
+            FileInputStream fileIn = new FileInputStream(new File(String.format("%s/pattern.ser", 
+                            XPlatformThings.getWorkingDir("BeatBox"))));
+            ObjectInputStream is = new ObjectInputStream(fileIn);
+            // 读取文件中那单独对象（即那个布尔值数组），并将其强制转换回到
+            // 布尔值数组（请记住，readObject() 方法返回的是一个类型为 Object
+            // 的引用变量。）
+            checkboxesState = (boolean[]) is.readObject();
+            is.close();
+        } catch (Exception ex) {ex.printStackTrace();}
+
+        // 现在对那些真正 JCheckBox 对象的 ArrayList 中各个勾选框状态
+        // 进行恢复。
+        for (int i = 0; i < 256; i++) {
+            JCheckBox check = (JCheckBox) checkboxList.get(i);
+            if(checkboxesState[i]) check.setSelected(true);
+            else check.setSelected(false);
+        }
+
+        // 此时要停止当前所演奏的任何曲目，并使用这个 JCheckBox ArrayList
+        // 中的那些勾选框状态，重建出 MIDI 序列。
+        s.stop();
+        buildTrackAndStart();
+    }
+}
+```
+
+
