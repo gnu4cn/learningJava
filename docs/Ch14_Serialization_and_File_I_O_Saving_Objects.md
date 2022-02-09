@@ -1426,10 +1426,17 @@ public class Dog {
 **对编曲进行序列化（Serializing a pattern）**
 
 ```java
+// 这是一个`BeatBox`代码里面的内部类。
 class SendPatternListener implements ActionListener {
+    // 编曲保存操作，全部发生在用户点击了那个按钮，而发出了
+    // 这个 ActionEvent 的时候。
     public void actionPerformed(ActionEvent ev) {
+        // 构造一个保存各个勾选框状态的布尔值数组。
         boolean[] checkboxesState = new boolean[256];
 
+        // 对 checkBoxList（即那些勾选框的 ArrayList）进行遍历
+        // 并获得各个勾选框的状态，再将状态添加到这个布尔值
+        // 的数组中。
         for (int i = 0; i < 256; i++){
             JCheckBox check = (JCheckBox) checkBoxList.get(i);
 
@@ -1437,6 +1444,7 @@ class SendPatternListener implements ActionListener {
         }
 
         try {
+            // 这里就是小菜一碟了。只是将这个布尔值数组进行写入/序列化！
             String serFile = String.format("%s/pattern.ser", XPlatformThings.getWorkingDir("BeatBox"));
             FileOutputStream fileStream = new FileOutputStream(new File(serFile));
             ObjectOutputStream os = new ObjectOutputStream(fileStream);
@@ -1448,3 +1456,7 @@ class SendPatternListener implements ActionListener {
     }
 }
 ```
+
+### `BeatBox`编曲的恢复
+
+**Restoring a `BeatBox` pattern**
