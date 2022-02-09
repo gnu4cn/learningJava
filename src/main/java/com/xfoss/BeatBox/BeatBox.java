@@ -205,6 +205,7 @@ public class BeatBox extends JFrame{
                 }
             }
 
+            // 这里有可能未选择文件，而导致checkboxesState 为 null
             if (checkboxesState != null) {
                 for (int i = 0; i < 256; i++) {
                     JCheckBox check = (JCheckBox) checkboxList.get(i);

@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    files("./")
     implementation("edu.sc.seis.launch4j:launch4j:2.5.1")
     implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
