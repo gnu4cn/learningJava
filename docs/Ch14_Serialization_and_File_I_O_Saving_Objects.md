@@ -1342,4 +1342,16 @@ for (String token:result) {
 - 修改实例变量呃访问级别，对解序列化操作对该变量的赋值没有影响（Changing the access level of an instance variable has no effect on the ability of deserialization to assign a value to the variable）；
 - 将某个瞬态实例变量，修改为非瞬态（先前被序列化的那些对象，将直接给先前瞬态的那些实例变量一个默认值）。
 
+## 使用 `serialVersionID`
+
+在每次对象被序列化时，对象（包括其对象图面中的所有对象），就会被“印上（stamped）”一个其所属类的版本ID编号（a version ID number for the object's class）。这个ID就叫做 `serialVersionID`，是依据类的结构信息计算得到的。在对象被解序列化时，若在对象被序列化后类被修改了，那么类就会有一个与被序列化对象所印上的不同 `serialVersionID`，那么解序列化就会失败！然而对此可以自己掌控。
+
+**在认为类会有可能在今后 *演化*的情况下，就要在类中放入一个序列版本ID（If you think there is ANY possibility that your class might *evolve*, put a serial version ID in your class）**
+
+在Java尝试对某个对象解序列化时，他会对这个被序列化对象的 `serialVersionID` 与 JVM 用来对这个对象进行解序列化的类`serialVersionID`加以比较。比如，在某个 `Dog` 实例被以 `ID` `23`（现实中 `serialVersionID` 要长得多） 进行序列化时，那么在 JVM 对这个 `Dog` 对象解序列化时，就会首先拿这个 `Dog` 对象的 `serialVesionID` 与 `Dog` 类的 `serialVersionID` 进行比较。在两个数字不匹配时，JVM 就会假定用于解序列化呃类，与先前被序列化的对象不兼容，同时在解序列化过程中会抛出一个异常。
+
+那么解决办法就是在类中放入一个 `serialVersionID`，然会随着类的演化，`serialVersionID`将保持一致，这个时候就算类发生了改变， JVM 也会认为，“好吧，很好，这个类与这个被序列化对象是兼容的。”
+
+这样处理也 *只会* 在对类修改小心谨慎时才凑效！也就是说，若在将旧有的对象以新的类复活时，有任何问题出现，都要由 *代码编写者* 来负责（In other words, *you* are taking responsibility for any issues that come up when an older object is brought back to life with a newer class）。
+
 
