@@ -199,7 +199,10 @@ public class BeatBox extends JFrame{
                     checkboxesState = (boolean[]) is.readObject();
                     is.close();
                 }
-            } catch (Exception ex) {ex.printStackTrace();}
+            } catch (Exception ex) {
+                System.out.println("读取编曲出错");
+                ex.printStackTrace();
+            }
 
             for (int i = 0; i < 256; i++) {
                 JCheckBox check = (JCheckBox) checkboxList.get(i);
