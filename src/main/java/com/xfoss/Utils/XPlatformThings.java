@@ -5,27 +5,23 @@ import java.io.File;
 public class XPlatformThings {
     public static String getWorkingDir (String appName) {
         String OS = (System.getProperty("os.name")).toUpperCase();
+        String workingDir;
+
         if (OS.contains("WIN")) {
-            String workingDir = String.format("%s\\%s", System.getenv("AppData"), appName);
-
-            File d = new File(workingDir);
-
-            if(!d.exists()) d.mkdirs();
-
-            return workingDir;
+            workingDir = String.format("%s\\%s", System.getenv("AppData"), appName);
         }
         else {
-            String workingDir = String.format("%s%s", 
+            workingDir = String.format("%s%s", 
                 System.getProperty("user.home"), 
                 OS.contains("LINUX") 
                 ? String.format("/.%s", appName)
                 : String.format("/Library/Application Support/%s", appName));
-
-            File d = new File(workingDir);
-
-            if(!d.exists()) d.mkdirs();
-
-            return workingDir;
         }
+
+        File d = new File(workingDir);
+
+        if(!d.exists()) d.mkdirs();
+
+        return workingDir;
     }
 }
