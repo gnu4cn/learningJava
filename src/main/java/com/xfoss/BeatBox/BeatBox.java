@@ -168,11 +168,16 @@ public class BeatBox extends JFrame{
             }
 
             try {
-                String serFile = String.format("%s/pattern.ser", XPlatformThings.getWorkingDir("BeatBox"));
-                FileOutputStream fileStream = new FileOutputStream(new File(serFile));
-                ObjectOutputStream os = new ObjectOutputStream(fileStream);
-                os.writeObject(checkboxesState);
-                os.close();
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showSaveDialog(BeatBox.this);
+                File fileChoice = fileChooser.getSelectedFile();
+
+                if (fileChoice != null) {
+                    FileOutputStream fileStream = new FileOutputStream(fileChoice);
+                    ObjectOutputStream os = new ObjectOutputStream(fileStream);
+                    os.writeObject(checkboxesState);
+                    os.close();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -184,11 +189,16 @@ public class BeatBox extends JFrame{
             boolean[] checkboxesState = null;
 
             try {
-                FileInputStream fileIn = new FileInputStream(new File(String.format("%s/pattern.ser", 
-                                XPlatformThings.getWorkingDir("BeatBox"))));
-                ObjectInputStream is = new ObjectInputStream(fileIn);
-                checkboxesState = (boolean[]) is.readObject();
-                is.close();
+                JFileChooser f = new JFileChooser();
+                f.showOpenDialog(BeatBox.this);
+
+                File fileSelected = f.getSelectedFile();
+                if (fileSelected != null) {
+                    FileInputStream fileIn = new FileInputStream(fileSelected);
+                    ObjectInputStream is = new ObjectInputStream(fileIn);
+                    checkboxesState = (boolean[]) is.readObject();
+                    is.close();
+                }
             } catch (Exception ex) {ex.printStackTrace();}
 
             for (int i = 0; i < 256; i++) {

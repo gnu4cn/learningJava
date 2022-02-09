@@ -1376,7 +1376,7 @@ Class com.xfoss.learningJava.Dog is not Serializable.
 
 *图 28 - 不可序列化对象的 `serialver` 输出*
 
-### 在有人已经序列化了某个类的对象，而意识到这个类会进行演化时......
+### 在有人已经序列化了某个类的对象后，而意识到这个类会进行演化时......
 
 **When you think your class might evolve after someone has serialized objects from it**...
 
@@ -1498,4 +1498,10 @@ class ReadInPatternListener implements ActionListener {
 }
 ```
 
+### 动手练习
 
+**Sharpen your pencil**
+
+此版本有着巨大局限！在点击了 "对其序列化" 按钮时，程序将自动进行序列化操作，到一个名为“pattern.ser”的文件（若该文件不存在，就会被创建出来）。不过在每次保存时，都将覆写先前保存的文件。
+
+请通过结合 `JFileChooser`，对这里的保存与恢复特性加以改进，从而可以随意命名，并保存出许多不同的曲目，同时还能够从先前所保存的文件，加载/恢复出 *任意* 的曲目。

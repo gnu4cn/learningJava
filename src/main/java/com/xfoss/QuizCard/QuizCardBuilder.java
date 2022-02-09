@@ -8,25 +8,23 @@ import java.io.*;
 import java.net.*;
 import com.xfoss.Utils.*;
 
-public class QuizCardBuilder {
+public class QuizCardBuilder extends JFrame{
     private JTextArea question;
     private JTextArea answer;
     private ArrayList<QuizCard> cardList;
-    private JFrame frame;
 
     public static void main (String[] args) {
-        QuizCardBuilder builder = new QuizCardBuilder();
-        builder.go();
+        new QuizCardBuilder("测试卡构建器");
     }
 
-    private void go() {
+    public QuizCardBuilder (String windowTitle) {
         // 构建出 GUI
-        frame = new JFrame("测试卡构建器");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super(windowTitle);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/flashcards.png");
         ImageIcon ico = new ImageIcon(icoURI);
-        frame.setIconImage(ico.getImage());
+        setIconImage(ico.getImage());
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -88,15 +86,15 @@ public class QuizCardBuilder {
 
         menuBar.add(fileMenu);
 
-        frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setSize(576, 720);
-        frame.setVisible(true);
+        setJMenuBar(menuBar);
+        getContentPane().add(BorderLayout.CENTER, mainPanel);
+        setSize(576, 720);
+        setVisible(true);
     }
 
     private class QuitMenuItemListener implements ActionListener {
         public void actionPerformed (ActionEvent ev) {
-            frame.dispose();
+            dispose();
             System.exit(0);
         }
     }
@@ -126,7 +124,7 @@ public class QuizCardBuilder {
             cardList.add(card);
 
             JFileChooser fileSave = new JFileChooser();
-            fileSave.showSaveDialog(frame);
+            fileSave.showSaveDialog(QuizCardBuilder.this);
             File fileChoice = fileSave.getSelectedFile();
             if( fileChoice != null)saveFile(fileChoice);
         }

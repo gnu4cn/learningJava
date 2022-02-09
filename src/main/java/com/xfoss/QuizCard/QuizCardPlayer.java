@@ -16,13 +16,13 @@ public class QuizCardPlayer extends JFrame {
     private boolean isShowAnswer;
 
     public static void main (String[] args) {
-        QuizCardPlayer player = new QuizCardPlayer();
-        player.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new QuizCardPlayer();
     }
 
     public QuizCardPlayer () {
         // 构建 GUI
         super("测试卡播放器");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
@@ -93,7 +93,9 @@ public class QuizCardPlayer extends JFrame {
         public void actionPerformed (ActionEvent ev) {
             JFileChooser fileOpen = new JFileChooser();
             fileOpen.showOpenDialog(QuizCardPlayer.this);
-            loadFile(fileOpen.getSelectedFile());
+            File fileSelected = fileOpen.getSelectedFile();
+
+            if (fileSelected != null) loadFile(fileSelected);
         }
     }
 
