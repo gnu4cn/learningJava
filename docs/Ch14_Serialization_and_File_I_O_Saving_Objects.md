@@ -1411,4 +1411,40 @@ public class Dog {
 
 **这里要让 `BeatBox` 把那些喜欢的曲目，加以保存并恢复**。
 
+### 保存 `BeatBox` 编曲
 
+**Saving a `BeatBox` pattern**
+
+请记住，在 `BeatBox` 中，鼓编排无非就是一堆勾选框。在要演奏序列时，代码就会遍历这些勾选框，找出哪些鼓乐器的声音在总的16个节拍中的每个节拍会演奏（When it's time to play the sequence, the code walks through the checkboxes to figure out which drums sounds are playing at each of the 16 beats）。那么要保存编曲，只需把这些勾选框的状态保存下来即可。
+
+这里可以构造一个简单的布尔值数组，来保存总共256个勾选框中各个勾选框的状态。由于数组 *中的* 那些东西可被序列化，因此数组亦是可序列化的，因此在保存布尔值的数组时没有问题。
+
+而要将编曲加载回来，就要读取这个单个的布尔值数组对象（对其进行解序列化），并对这些勾选框加以恢复。在之前构建 `BeatBox` GUI的代码厨房中，已经见到了绝大部分的代码，那么在这一章中，就只会看到保存与恢复的代码了。
+
+本次的代码厨房，将为下一章做好准备，在下一章中不再是把编曲写入 *文件（file）*，而是要将编曲透过 *网络（network）* 发送到服务器。同时与从文件加载 *进* 编曲不同，下一章会从 *服务器* 获取到编曲，用户一次会发送一个编曲到服务器。
+
+**对编曲进行序列化（Serializing a pattern）**
+
+```java
+class SendPatternListener implements ActionListener {
+    public void actionPerformed(ActionEvent ev) {
+        boolean[] checkboxesState = new boolean[256];
+
+        for (int i = 0; i < 256; i++){
+            JCheckBox check = (JCheckBox) checkBoxList.get(i);
+
+            if (check.isSelected()) checkboxesState[i] = true;
+        }
+
+        try {
+            String serFile = String.format("%s/pattern.ser", XPlatformThings.getWorkingDir("BeatBox"));
+            FileOutputStream fileStream = new FileOutputStream(new File(serFile));
+            ObjectOutputStream os = new ObjectOutputStream(fileStream);
+            os.writeObject(checkboxesState);
+            os.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+```

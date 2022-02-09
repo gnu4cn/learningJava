@@ -1,14 +1,31 @@
 package com.xfoss.Utils;
 
-public class XPlatformThings {
-    private String OS = (System.getProperty("os.name")).toUpperCase();
+import java.io.File;
 
-    public String getWorkingDir (String appName) {
-        if (OS.contains("WIN")) return String.format("%s\\%s", System.getenv("AppData"), appName);
-        else return String.format("%s%s", 
+public class XPlatformThings {
+    public static String getWorkingDir (String appName) {
+        String OS = (System.getProperty("os.name")).toUpperCase();
+        if (OS.contains("WIN")) {
+            String workingDir = String.format("%s\\%s", System.getenv("AppData"), appName);
+
+            File d = new File(workingDir);
+
+            if(!d.exists()) d.mkdirs();
+
+            return workingDir;
+        }
+        else {
+            String workingDir = String.format("%s%s", 
                 System.getProperty("user.home"), 
                 OS.contains("LINUX") 
                 ? String.format("/.%s", appName)
                 : String.format("/Library/Application Support/%s", appName));
+
+            File d = new File(workingDir);
+
+            if(!d.exists()) d.mkdirs();
+
+            return workingDir;
+        }
     }
 }

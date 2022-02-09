@@ -6,6 +6,8 @@ import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
 import java.net.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
 
 public class BeatBox extends JFrame{
     JPanel mainPanel;
@@ -55,7 +57,7 @@ public class BeatBox extends JFrame{
         btnBox.add(btnReset);
 
         JButton btnSerializeIt = new JButton("将其序列化💾");
-        btnSerializeIt.addActionListener(new SerializeItListener());
+        btnSerializeIt.addActionListener(new SendPatternListener());
         btnBox.add(btnSerializeIt);
 
         JButton btnRestore = new JButton("恢复🔙");
@@ -155,8 +157,25 @@ public class BeatBox extends JFrame{
         }
     }
 
-    class SerializeItListener implements ActionListener {
+    class SendPatternListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
+            boolean[] checkboxesState = new boolean[256];
+
+            for (int i = 0; i < 256; i++){
+                JCheckBox check = (JCheckBox) checkBoxList.get(i);
+
+                if (check.isSelected()) checkboxesState[i] = true;
+            }
+
+            try {
+                String serFile = String.format("%s/pattern.ser", XPlatformThings.getWorkingDir("BeatBox"));
+                FileOutputStream fileStream = new FileOutputStream(new File(serFile));
+                ObjectOutputStream os = new ObjectOutputStream(fileStream);
+                os.writeObject(checkboxesState);
+                os.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

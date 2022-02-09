@@ -1,7 +1,7 @@
 package com.xfoss.learningJava;
 
 import java.io.*;
-import com.xfoss.Utils.*;
+import com.xfoss.Utils.XPlatformThings;
 import java.util.*;
 
 public class GameSaverTest {
@@ -10,13 +10,7 @@ public class GameSaverTest {
         GameCharacter two = new GameCharacter(200, "Troll", new String[] {"bare hands", "big ax"});
         GameCharacter three = new GameCharacter(120, "Magician", new String[] {"spells", "invisibility"});
 
-        XPlatformThings th = new XPlatformThings();
-        String dataDir = th.getWorkingDir("learningJava");
-
-        File dir = new File(dataDir);
-        if(!dir.exists()) dir.mkdirs();
-        
-        String serFile = String.format("%s/GameCharacter.ser", dataDir);
+        String serFile = String.format("%s/GameCharacter.ser", XPlatformThings.getWorkingDir("learningJava"));
 
         try {
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(serFile));
