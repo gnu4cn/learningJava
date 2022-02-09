@@ -7,13 +7,12 @@ import java.util.*;
 import java.awt.event.*;
 import java.net.*;
 
-public class BeatBox {
+public class BeatBox extends JFrame{
     JPanel mainPanel;
     ArrayList<JCheckBox> checkBoxList;
     Sequencer s;
     Sequence seq;
     Track t;
-    JFrame f;
     JLabel tempoLabel = null;
 
     String [] instrumentNames = {"贝斯鼓（低音鼓）", "闭镲（闭合击镲）",
@@ -25,16 +24,16 @@ public class BeatBox {
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
 
     public static void main (String[] args) {
-        new BeatBox().buildGUI();
+        new BeatBox();
     }
 
-    public void buildGUI () {
-        f = new JFrame("赛博 BeatBox");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public BeatBox () {
+        super("赛博 BeatBox");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/ico.png");
         ImageIcon ico = new ImageIcon(icoURI);
-        f.setIconImage(ico.getImage());
+        setIconImage(ico.getImage());
 
         BorderLayout l = new BorderLayout();
         JPanel bg = new JPanel(l);
@@ -55,7 +54,15 @@ public class BeatBox {
         btnReset.addActionListener(new ResetListener());
         btnBox.add(btnReset);
 
-        btnBox.add(Box.createHorizontalStrut(5));
+        JButton btnSerializeIt = new JButton("将其序列化💾");
+        btnSerializeIt.addActionListener(new SerializeItListener());
+        btnBox.add(btnSerializeIt);
+
+        JButton btnRestore = new JButton("恢复🔙");
+        btnRestore.addActionListener(new RestoreListener());
+        btnBox.add(btnRestore);
+
+        btnBox.add(Box.createHorizontalStrut(1));
         btnBox.add(new JSeparator(SwingConstants.HORIZONTAL));
 
         JButton btnUpTempo = new JButton("加速>>");
@@ -77,7 +84,7 @@ public class BeatBox {
         bg.add(BorderLayout.EAST, btnBox);
         bg.add(BorderLayout.WEST, nameBox);
 
-        f.getContentPane().add(bg);
+        getContentPane().add(bg);
 
         GridLayout g = new GridLayout(16, 16);
         g.setVgap(1);
@@ -94,9 +101,9 @@ public class BeatBox {
 
         setUpMidi();
 
-        f.setBounds(50, 50, 640, 480);
-        f.pack();
-        f.setVisible(true);
+        setBounds(50, 50, 640, 480);
+        pack();
+        setVisible(true);
     }
 
     public void setUpMidi () {
@@ -145,6 +152,16 @@ public class BeatBox {
     class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             buildTrackAndStart();
+        }
+    }
+
+    class SerializeItListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+        }
+    }
+
+    class RestoreListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
         }
     }
 

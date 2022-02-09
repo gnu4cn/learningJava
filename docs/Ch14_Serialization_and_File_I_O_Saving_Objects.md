@@ -1402,4 +1402,11 @@ public class Dog {
 
 3) 确保在对这个类做出修改时，自己要对这个类做出修改所带来的后果负责！比如就要确保新的 `Dog` 类能够以默认值，来处理在 `Dog` 被序列化后，所添加的那些实例变量的解序列化（For example, be sure that your new `Dog` class can deal with an old `Dog` be deserialized with default values for instance variables added to the class after the `Dog` was serialized）。
 
+## 代码厨房
+
+![第14章代码厨房：`BeatBox` app 曲目数据的保存与恢复](images/Ch14_30.png)
+
+
+*图 30 - 第14章代码厨房：`BeatBox` app 曲目数据的保存与恢复*
+
 
