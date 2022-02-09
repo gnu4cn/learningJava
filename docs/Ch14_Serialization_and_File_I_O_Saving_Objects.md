@@ -1354,4 +1354,24 @@ for (String token:result) {
 
 这样处理也 *只会* 在对类修改小心谨慎时才凑效！也就是说，若在将旧有的对象以新的类复活时，有任何问题出现，都要由 *代码编写者* 来负责（In other words, *you* are taking responsibility for any issues that come up when an older object is brought back to life with a newer class）。
 
+使用与 Java 开发包（Java development kit, jdk）一起发布的 `serialver` 工具，来获取类的 `serialVersionID`:
 
+```console
+$ serialver -classpath build/libs/com.xfoss.learningJava-0.0.1.jar com.xfoss.learningJava.Dog
+com.xfoss.learningJava.Dog:    private static final long serialVersionUID = 1720600418317157466L;
+```
+
+![`serialver` 命令工具的使用和输出](images/Ch14_27.png)
+
+*图 27 - `serialver` 命令工具的使用和输出*
+
+> 注：若类声明中没有 `implements Serializable`，那么 `serialver` 命令工具将给出如下输出：
+
+```console
+$ serialver -classpath build/libs/com.xfoss.learningJava-0.0.1.jar com.xfoss.learningJava.Dog
+Class com.xfoss.learningJava.Dog is not Serializable.
+```
+
+![不可序列化对象的 `serialver` 输出](images/Ch14_28.png)
+
+*图 28 - 不可序列化对象的 `serialver` 输出*
