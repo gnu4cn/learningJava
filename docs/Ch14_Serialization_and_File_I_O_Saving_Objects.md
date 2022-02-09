@@ -1375,3 +1375,31 @@ Class com.xfoss.learningJava.Dog is not Serializable.
 ![不可序列化对象的 `serialver` 输出](images/Ch14_28.png)
 
 *图 28 - 不可序列化对象的 `serialver` 输出*
+
+### 在有人已经序列化了某个类的对象，而意识到这个类会进行演化时......
+
+**When you think your class might evolve after someone has serialized objects from it**...
+
+1) 使用命令行工具 `serialver` 获取这个类的版本 ID（`serialVersionID`）
+
+![使用命令行工具`serialver`，获取类的 `serialVersionID`](images/Ch14_29.png)
+
+*图 29 - 使用命令行工具`serialver`，获取类的 `serialVersionID`*
+
+2) 将上面的输出，粘贴到类中
+
+```java
+public class Dog {
+    private static final long serialVersionUID = 1720600418317157466L;
+
+    private String name;
+    private int size;
+
+    // 以下是方法的代码
+}
+```
+
+
+3) 确保在对这个类做出修改时，自己要对这个类做出修改所带来的后果负责！比如就要确保新的 `Dog` 类能够以默认值，来处理在 `Dog` 被序列化后，所添加的那些实例变量的解序列化（For example, be sure that your new `Dog` class can deal with an old `Dog` be deserialized with default values for instance variables added to the class after the `Dog` was serialized）。
+
+
