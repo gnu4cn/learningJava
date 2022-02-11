@@ -33,20 +33,30 @@
 
 **How it Works**:
 
-1) 客户端连接到服务器
+1) **客户端连接到服务器**
 
 **Client connects to the server**
 
 ![`SimpleChat`应用原理（一）](images/Ch15_04.png)
 
-*图 4 - `SimpleChat`应用原理（一）*
+*图 4 - `SimpleChat`应用原理（一）- 客户端连接到服务器*
 
 
-2) 服务器构造一个连接，并将该客户端加入到参与者清单
+2) **服务器构造一个连接，并将该客户端加入到参与者清单**
 
 **The server makes a connection and adds the client to the list of participants**
 
 ![`SimpleChat`应用原理（二）](images/Ch15_05.png)
 
-*图 4 - `SimpleChat`应用原理（二）*
+*图 5 - `SimpleChat`应用原理（二） - 服务器构造一个连接，并将该客户端加入到参与者清单*
+
+
+3) **另一客户端进行连接**
+
+**Another client connects**
+
+
+![`SimpleChat`应用原理（三）](images/Ch15_06.png)
+
+*图 6 - `SimpleChat`应用原理（三） - 另一客户端进行连接*
 
