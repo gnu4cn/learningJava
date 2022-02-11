@@ -25,6 +25,28 @@
 
 **Chat Program Overview**
 
-![`SimpleChat`应用概览（一）](images/Ch15_03.png)
+![`SimpleChat`应用概览](images/Ch15_03.png)
 
-*图 3 - `SimpleChat`应用概览（一）*
+*图 3 - `SimpleChat`应用概览*
+
+### 工作原理
+
+**How it Works**:
+
+1) 客户端连接到服务器
+
+**Client connects to the server**
+
+![`SimpleChat`应用原理（一）](images/Ch15_04.png)
+
+*图 4 - `SimpleChat`应用原理（一）*
+
+
+2) 服务器构造一个连接，并将该客户端加入到参与者清单
+
+**The server makes a connection and adds the client to the list of participants**
+
+![`SimpleChat`应用原理（二）](images/Ch15_05.png)
+
+*图 4 - `SimpleChat`应用原理（二）*
+
