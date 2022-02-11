@@ -96,3 +96,4 @@ Kotlin DSL, 领域特定语言，Domain Specific Language
 - [获得GUI：一个甚为形象的故事](docs/Ch12_Getting_GUI_A_Very_Graphic_Story.md)
 - [运用 `Swing`: 在 `Swing` 上干活](docs/Ch13_Using_Swing_Work_on_Your_Swing.md)
 - [对象序列化与文件的输入/输出：对象保存](docs/Ch14_Serialization_and_File_I_O_Saving_Objects.md)
+- [联网与线程：构造连接](docs/Ch15_Networking_and_Threads_Make_a_Connection.md)
