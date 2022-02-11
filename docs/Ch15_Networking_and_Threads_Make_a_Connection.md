@@ -20,3 +20,11 @@
 ![`SimpleChatClient` 应用](images/Ch15_02.png)
 
 *图 2 - `SimpleChatClient` 应用*
+
+## 聊天程序概览
+
+**Chat Program Overview**
+
+![`SimpleChat`应用概览（一）](images/Ch15_03.png)
+
+*图 3 - `SimpleChat`应用概览（一）*
