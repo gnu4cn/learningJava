@@ -72,3 +72,9 @@
 ![`SimpleChat`应用原理（五） - 该条消息被发布到全体参与者](images/Ch15_08.png)
 
 *图 8 - `SimpleChat`应用原理（五） - 该条消息被发布到全体参与者*
+
+## 建立连接、发送数据，与数据接收
+
+**Connecting, Sending, and Receiving**
+
+
