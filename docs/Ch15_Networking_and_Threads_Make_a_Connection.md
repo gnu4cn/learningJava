@@ -194,4 +194,9 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 
 **To read data from a `Socket`, use a `BufferedReader`**
 
-要透过`Socket`连接来进行通信，就要用到流。常规的那些老式 `I/O` 流，就如同上一章中用到的那些。Java中最酷特性之一，就是
+要透过`Socket`连接来进行通信，就要用到流。常规的那些老式 `I/O` 流，就如同上一章中用到的那些。Java中最酷特性之一，就是大部分的 `I/O` 工作，都不会关心高级别链式流具体连接到的何种连接性流（One of the coolest features in Java is that most of your `I/O` work won't care what your high-level chain stream is actually connected to）。也就是说，可就像之前写入文件时那样使用 `BufferedReader`，不同之处在于这里所采用的连接性流，是连接到一个 *套接字（`Socket`）*，而不再是之前的 *文件（`File`）*！
+
+![Java网络通信中的输入与输出流，都是套接字连接](images/Ch15_16.png)
+
+
+*图 16 - Java网络通信中的输入与输出流，都是套接字连接*
