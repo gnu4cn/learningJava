@@ -61,13 +61,13 @@
 *图 6 - `SimpleChat`应用原理（三） - 另一客户端进行连接*
 
 
-4) 客户端 A 发送一条消息给聊天服务
+4) **客户端 A 发送一条消息给聊天服务**
 
 ![`SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务](images/Ch15_07.png)
 
 *图 7 - `SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务*
 
-5) 服务器将该条消息，发布给所有参与者（包括原本的发送者）
+5) **服务器将该条消息，发布给所有参与者（包括原本的发送者）**
 
 ![`SimpleChat`应用原理（五） - 该条消息被发布到全体参与者](images/Ch15_08.png)
 
@@ -76,5 +76,15 @@
 ## 建立连接、发送数据，与数据接收
 
 **Connecting, Sending, and Receiving**
+
+为了让 `SimpleChat` 客户端运作，必须掌握以下三件事：
+
+1) 如何建立客户端与服务器之间最开始的 **连接**（How to establish the initial **connection** between the client and server）；
+2) 如何把消息 **发送给** 服务器（How to **send** messages *to* the server）；
+3) 如何从服务器 **接收** 消息（How to **receive** messages *from* the server）。
+
+这些事项要能运行起来，就必须要有大量底层的操作要实现（There's a lot of low-level stuff that has to happen for these things to work）。不过值得庆幸的是，Java 的网络通信包 API （`java.net`）让这一切，都变成了小菜一碟。因此相比于网络通信与 `I/O` 代码，看到的更多的是 GUI 代码。
+
+而且这还不是全部。
 
 
