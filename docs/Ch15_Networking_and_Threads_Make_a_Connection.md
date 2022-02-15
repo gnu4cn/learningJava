@@ -200,3 +200,18 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 
 
 *图 16 - Java网络通信中的输入与输出流，都是套接字连接*
+
+
+1) **构造一个到服务器的 `Socket` 连接**
+
+**Make a `Socket` connection to the server**
+
+```java
+// '127.0.0.1' 是 “localhost”，也就是此代码
+// 运行所在的机器的 IP 地址。在单台、独立机器上对客户端
+// 和服务器进行测试时，可使用这个 IP 地址。
+//
+// 而这个端口号，之前就讲过，5000是这里聊天服务器
+// 的端口号。
+Socket chatSocket = new Socket("127.0.0.1", 5000);
+```
