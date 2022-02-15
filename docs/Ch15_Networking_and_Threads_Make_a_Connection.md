@@ -129,4 +129,20 @@
 >
 > 换句话说，
 >
-> 即**IP 地址和 TCP 端口编号**。
+> 即 **IP 地址和 TCP 端口编号**。
+
+
+```java
+// '196.164.1.103' 是服务器的 IP 地址
+//
+// '5000' 是 TCP 端口号
+Socket chatSocket = new Socket("196.164.1.103", 5000);
+```
+
+![Java网络通信套接字的构造原理](images/Ch15_12.png)
+
+*图 12 - Java网络通信套接字的构造原理*
+
+**`Socket` 连接是指两台机器有着对方的信息，包括网络位置（即 IP 地址）以及 TCP 端口（A `Socket` connection means the two machines have information about each other, including network location(IP address) and TCP port）**。
+
+
