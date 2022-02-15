@@ -188,3 +188,10 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 
 
 *图 15 - 思考题：聊天室客户端与服务器之间如何进行会话*
+
+
+## 使用 `BufferedReader` 从套接字读取数据
+
+**To read data from a `Socket`, use a `BufferedReader`**
+
+要透过`Socket`连接来进行通信，就要用到流。常规的那些老式 `I/O` 流，就如同上一章中用到的那些。Java中最酷特性之一，就是
