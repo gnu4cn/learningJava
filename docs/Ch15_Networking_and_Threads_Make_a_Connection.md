@@ -419,3 +419,18 @@ Socket sock = new Socket("190.165.1.103", 4242);
 
 *图 22 - 客户端构造一个连接到服务器应用的 `Socket`*
 
+
+3) 服务器构造一个新的、与此客户端通信的 `Socket`
+
+**Server makes a new `Socket` to communicate with this client**
+
+```java
+Socket sock = serverSock.accept();
+```
+
+在等待某个客户端 `Socket` 连接期间，这个`accept()`方法会阻塞（即闲在那里）。在有客户端最终尝试进行连接时，该方法就会返回一个知道怎样与客户端进行通信（即知道 *客户端* 的 IP地址和端口号），的普通老式套接字（在某个 *不同* 的端口上）。这个 `Socket`是在不同于 `ServerSocket` 的端口上的，因此 `ServerSocket` 才可以回去继续等待其他客户端的连接（The `accept()` method blocks(just sits there) while it's waiting for a client `Socket` connection. When a client finally tries to connect, the method returns a plain old `Socket` (on a *different* port) that knows how to communicate with the client(i.e., knows the *client*'s IP address and port number). The `Socket` is on a different port than the `ServerSocket`, so that the `ServerSocket` can go back to waiting for other clients）。
+
+
+![服务器程序构造一个新的、与客户端通信的 `Socket`](images/Ch15_23.png)
+
+*图 23 - 服务器程序构造一个新的、与客户端通信的 `Socket`*
