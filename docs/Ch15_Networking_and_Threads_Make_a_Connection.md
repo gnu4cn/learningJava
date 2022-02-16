@@ -216,7 +216,7 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 Socket chatSocket = new Socket("127.0.0.1", 5000);
 ```
 
-2) 构造一个链接到这个套接字底层（连接性）输入流的 `InputStreamReader`
+2) **构造一个链接到这个套接字底层（连接性）输入流的 `InputStreamReader`**
 
 **Make an `InputStreamReader` chained to the `Socket`'s low-level (connection) input stream**
 
@@ -233,7 +233,7 @@ Socket chatSocket = new Socket("127.0.0.1", 5000);
 InputStreamReader stream = new InputStreamReader(chatSocket.getInputStream());
 ```
 
-3) 构造一个 `BufferedReader`然后读取就是了！
+3) **构造一个 `BufferedReader`然后读取就是了**！
 
 **Make a `BufferedReader` and read**!
 
