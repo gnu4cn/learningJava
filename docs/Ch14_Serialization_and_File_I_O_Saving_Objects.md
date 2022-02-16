@@ -1291,9 +1291,9 @@ for (String token:result) {
 
 ---
 
-*Roses are first, violets are netx*.
+> *Roses are first, violets are next*.
 
-**`Readers`* and *`Writers` are only for *text***.
+> **`Readers`* and *`Writers` are only for *text***.
 
 ## 重点
 

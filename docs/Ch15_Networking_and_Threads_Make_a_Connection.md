@@ -215,3 +215,36 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 // 的端口号。
 Socket chatSocket = new Socket("127.0.0.1", 5000);
 ```
+
+2) 构造一个链接到这个套接字底层（连接性）输入流的 `InputStreamReader`
+
+**Make an `InputStreamReader` chained to the `Socket`'s low-level (connection) input stream**
+
+```java
+// InputStreamReader 是底层字节流（就比如这里的从套接字获取
+// 到的那个），与高级别字符流（如同后面那个作为链式流顶部的
+// `BufferedReader`）
+// 
+// 这里只须从该套接字请求一个输入流即可！所获取到的，就是
+// 一个低级别的连接性流，不过这里只要将其链接到某个对文本
+// 更加友好的东西上（All we have to do is ASK the socket for
+// an input stream! It's a low-level connection stream, but we're
+// just gonna chain it to something more text-friendly）。
+InputStreamReader stream = new InputStreamReader(chatSocket.getInputStream());
+```
+
+3) 构造一个 `BufferedReader`然后读取就是了！
+
+**Make a `BufferedReader` and read**!
+
+```java
+// 把这个 BufferedReader 链接到 InputStreamReader （他又
+// 是链接到那个从套接字获得的底层连接性流的）。
+BufferedReader reader = new BufferedReader(stream);
+String message = reader.readLine();
+```
+
+![从网络通信套接字读取数据的流链条](images/Ch15_17.png)
+
+
+*图 17 - 从网络通信套接字读取数据的流链条*
