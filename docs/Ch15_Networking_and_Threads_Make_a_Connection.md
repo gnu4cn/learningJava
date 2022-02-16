@@ -223,7 +223,7 @@ Socket chatSocket = new Socket("127.0.0.1", 5000);
 ```java
 // InputStreamReader 是底层字节流（就比如这里的从套接字获取
 // 到的那个），与高级别字符流（如同后面那个作为链式流顶部的
-// `BufferedReader`）
+// `BufferedReader`）之间的“桥梁”
 // 
 // 这里只须从该套接字请求一个输入流即可！所获取到的，就是
 // 一个低级别的连接性流，不过这里只要将其链接到某个对文本
@@ -248,3 +248,44 @@ String message = reader.readLine();
 
 
 *图 17 - 从网络通信套接字读取数据的流链条*
+
+
+## 使用 `PrintWriter`往套接字写数据
+
+**To write data to a `Socket`, use a `PrintWriter`**
+
+在最后一章用到的并不是`PrintWriter`，那里用了 `BufferedWriter`。虽然这里有选择，不过在一次写一个字符串时，`PrintWriter`就是标准选择。同时也会认识到，`PrintWriter`中的两个关键方法，`print()`与`println()`，就如同先前 `System.out`中的两个一样。
+
+1) **构造一个到服务器的 `Socket` 连接**
+
+**Make a `Socket` connection to the server**
+
+```java
+// 此部分与先前从套接字读取数据时一样 -- 要写到
+// 服务器，仍必须连接到服务器。
+Socket chatSocket = new Socket("127.0.0.1", 5000);
+```
+
+
+2) **构造一个链接到套接字底层（连接性）输出流的 `PrintWriter`**
+
+**Make a `PrintWriter` chained to the `Socket`'s low-level(connection) output stream**
+
+```java
+// InputStreamReader 扮演了字符数据与从套接字低级别输出流获取到
+// 的字节之间的桥梁。通过将 PrintWriter 链接到套接字的输出流，就可以
+// 将字符串写到套接字连接了（PrintWriter acts as its own bridge
+// between character data and the bytes it gets from the Socket's
+// low-level output stream. By chaining a PrintWriter to the Socket's
+// output stream, we can write Strings to the Socket connection）。
+//
+// 这个套接字给到一个低级别连接性流，同时这里通过将这个连接性流
+// 交给 PrintWriter 的构造器，而把这个连接性流链接到
+// 新构造的 PrintWriter。
+PrintWriter writer = new PrintWriter(chatSocket.getOutputStream());
+```
+
+
+3) **写（`print`）下某些内容**
+
+**Write(`print`) something**
