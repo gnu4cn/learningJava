@@ -286,6 +286,18 @@ PrintWriter writer = new PrintWriter(chatSocket.getOutputStream());
 ```
 
 
-3) **写（`print`）下某些内容**
+3) **写（`print`）下一些内容**
 
 **Write(`print`) something**
+
+```java
+// println() 会在他发送的东西末尾加一个另起一行（'/n'）
+writer.println("要发送的消息");
+// print() 不会添加那个另起一行（'/n'）
+writer.print("另一条消息");
+```
+
+![往套接字写入数据的流链条](images/Ch15_18.png)
+
+
+*图 18 - 往套接字写入数据的流链条*
