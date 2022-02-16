@@ -334,3 +334,88 @@ writer.print("另一条消息");
 
 
 *图 20 - `AdviceGuy` app 读取消息*
+
+
+### `DailyAdviceClient` 的代码
+
+**`DailyAdviceClient` code**
+
+这个程序构造一个 `Socket`，并构造一个 `BufferedReader`（有着其他流的辅助），进而从服务器应用（即运行在端口`4242`的那个）读取单行文本。
+
+```java
+package com.xfoss.AdviceGuy;
+
+import java.io.*;
+// 类 Socket 是在 java.net 包中
+import java.net.*;
+
+public class DailyAdviceClient {
+    public DailyAdviceClient () {
+        // 这里有很多会出错的代码
+        try {
+            // 构造一个到位于此代码运行所在的同一主机
+            // （即 'localhost'）、端口 4242 上程序的套接字连接
+            Socket s = new Socket("127.0.0.1", 4242);
+
+            InputStreamReader streamReader = new InputStreamReader(s.getInputStream());
+            // 把一个 BufferedReader 链接到一个 InputStreamReader
+            // 这个 InputStreamReader 又是链接到来自套接字的输入流
+            BufferedReader reader = new BufferedReader(streamReader);
+
+            // 这个 readLine() 与之前用到的、链接到文件的
+            // BufferedReader 时的那个一模一样。也就是说在
+            // 调用 BufferedReader 的某个方法时，读取器（the reader）
+            // 是不知道或不关心字符是从何处而来的。
+            String advice = reader.readLine();
+            System.out.format("今日宜：%s\n", advice);
+
+            reader.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        new DailyAdviceClient();
+    }
+}
+```
+
+
+### 编写一个简单的服务器
+
+**Writing a simple server**
+
+那么编写一个服务器应用需要用到哪些东西呢？只需要一对套接字就行。是的，一对就是 *两个*。一个 `ServerSocket`，等待客户端的那些请求（在客户端构造新的 `Socket()` 时），还要一个普通的老式 `Socket` 套接字，用于与客户端进行通信。
+
+**服务器工作原理（How it works）**:
+
+1) 服务器应用在某个特定端口上，构造一个 `ServerSocket`
+
+```java
+ServerSocket serverSock = new ServerSocket(4242);
+```
+
+这行语句就启动了服务器应用收听那些目的为端口`4242`、进入的客户端请求（This starts the server application listening for client requests coming in for port `4242`）。
+
+![服务器应用构造一个 `ServerSocket`](images/Ch15_21.png)
+
+
+*图 21 - 服务器应用构造一个 `ServerSocket`*
+
+
+2) 客户端构造一个到服务器应用的 `Socket` 连接
+
+**Client makes a `Socket` connection to the server application**
+
+```java
+Socket sock = new Socket("190.165.1.103", 4242);
+```
+
+客户端了解 IP 地址以及端口号（是由将改服务器app配置在那个端口上的人公布或给到编写客户端的人）
+
+![客户端构造一个连接到服务器应用的 `Socket`](images/Ch15_22.png)
+
+
+*图 22 - 客户端构造一个连接到服务器应用的 `Socket`*
+
