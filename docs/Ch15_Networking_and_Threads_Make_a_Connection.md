@@ -434,3 +434,8 @@ Socket sock = serverSock.accept();
 ![服务器程序构造一个新的、与客户端通信的 `Socket`](images/Ch15_23.png)
 
 *图 23 - 服务器程序构造一个新的、与客户端通信的 `Socket`*
+
+
+### `DailyAdviceServer` 程序代码
+
+**`DailyAdviceServer` code**
