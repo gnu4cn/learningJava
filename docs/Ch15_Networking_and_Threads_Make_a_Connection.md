@@ -301,3 +301,36 @@ writer.print("另一条消息");
 
 
 *图 18 - 往套接字写入数据的流链条*
+
+
+## `DailyAdviceClient` 程序
+
+**The `DailyAdviceClient`**
+
+在开始构建 `SimpleChat` app前，先来做一个较小的东西。`AdviceGuy`是一个提供实用、励志的一些提示的服务器程序，从而让我们度过漫长编写代码的日子。
+
+这里要构建的是一个 `AdviceGuy`程序的客户端，他在每次连接服务器时，从服务器拉取一条消息。
+
+你还等什么呢，若没有这个 app，没人知道你会失去些什么机会。
+
+1） **连接**
+
+**Connect**
+
+客户端连接到服务器，并从他获取到一个输入流（Client connects to the server and gets an input stream from it）。
+
+![`AdviceGuy` app 建立连接](images/Ch15_19.png)
+
+*图 19 - `AdviceGuy` app 建立连接*
+
+
+2) **读取**
+
+**Read**
+
+客户端从服务器读取一条消息（Client reads a message from the server）。
+
+![`AdviceGuy` app 读取消息](images/Ch15_20.png)
+
+
+*图 20 - `AdviceGuy` app 读取消息*
