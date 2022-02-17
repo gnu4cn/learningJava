@@ -515,8 +515,10 @@ public class DailyAdviceServer {
 }
 ```
 
-### 思考
+### 脑力锻炼
 
 **服务器怎样知道他与客户端如何通信**？
 
-客户端
+客户端知悉服务器的 IP 地址与端口编号，然而服务器又是怎样能构造一个跟客户端的套接字连接（进而构造输入和输出流）呢？
+
+请思考一下服务器怎样/于何时/何处获悉到客户端的知识的（Think about how/when/where the server gets knowledge about the client）。

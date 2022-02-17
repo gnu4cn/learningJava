@@ -24,10 +24,9 @@ public class DailyAdviceServer {
             writer.println(advice);
             writer.close();
 
-            System.out.format("客户端在 %s:%s, RemoteSocketAdress: %s, 发送的劝解为：%s\n", 
-                    sock.getInetAddress(), 
-                    sock.getPort(),
+            System.out.format("RemoteSocketAdress: %s, LocalSocketAddress: %s, 发送的劝解为：%s\n", 
                     sock.getRemoteSocketAddress(),
+                    sock.getLocalSocketAddress(),
                     advice);
         }
         } catch (IOException ex) {
