@@ -560,3 +560,19 @@ sock.getOutputStream();
 - 要向服务器写数据，就要创建直接链接到套接字输出流的 `PrintWriter`对象。调用其 `print()` 或 `println()` 方法，来将字符串发送给服务器；
 - 服务器会用到在特定端口号上等待客户端请求的 `ServerSocket`；
 - 在 `ServerSocket` 收到请求时，`ServerSocket`就会通过构造跟客户端的套接字连接，而 “受理” 这个请求。
+
+## 编写 `ChatClient`
+
+**Writing a `ChatClient`**
+
+这里将通过两阶段，来编写 `ChatClient`。首先要构造一个把消息发送给服务器，但尚不会读取其他聊天室参与者发出消息的仅发送版本（一个对完整聊天室概念的激动人心又神秘的曲解，First we'll make a send-only version that sends messages to the server but doesn't get to read any of the messages from other paritcipants(an exciting and mysterious twist to the whole chat room concept)）。
+
+随后就会实现完善的聊天方式，而构造一个兼具聊条消息发送 *与* 接收的 `ChatClient`。
+
+### 第一版：仅发送
+
+**Version One: send-only**
+
+![`LudicrouslySimpleChatClient`聊天室客户端第一版](images/Ch15_24.png)
+
+*图 24 - `LudicrouslySimpleChatClient`聊天室客户端第一版*
