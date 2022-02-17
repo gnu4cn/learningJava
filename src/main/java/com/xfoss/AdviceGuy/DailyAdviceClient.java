@@ -6,9 +6,9 @@ import java.net.*;
 public class DailyAdviceClient {
     public DailyAdviceClient () {
         try {
-            Socket s = new Socket("127.0.0.1", 4242);
+            Socket s = new Socket("192.168.153.134", 4242);
 
-            InputStreamReader streamReader = new InputStreamReader(s.getInputStream());
+            InputStreamReader streamReader = new InputStreamReader(s.getInputStream(), "UTF-8");
             BufferedReader reader = new BufferedReader(streamReader);
 
             String advice = reader.readLine();

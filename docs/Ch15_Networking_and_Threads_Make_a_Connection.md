@@ -357,7 +357,11 @@ public class DailyAdviceClient {
             // （即 'localhost'）、端口 4242 上程序的套接字连接
             Socket s = new Socket("127.0.0.1", 4242);
 
-            InputStreamReader streamReader = new InputStreamReader(s.getInputStream());
+            // 这里 InputStreamReader 构造函数的第二个参数，指定了字符串
+            // 编码，表示 InputStreamReader 的构造函数是过载的。
+            // 若不加入这个参数，当服务器和客户端运行在不同平台时
+            // 会出现乱码。
+            InputStreamReader streamReader = new InputStreamReader(s.getInputStream(), "UTF-8");
             // 把一个 BufferedReader 链接到一个 InputStreamReader
             // 这个 InputStreamReader 又是链接到来自套接字的输入流
             BufferedReader reader = new BufferedReader(streamReader);
@@ -487,7 +491,11 @@ public class DailyAdviceServer {
                 // now we use the Socket connection to the client to make a 
                 // PrintWriter and send it (println()) a String advice message
                 // Then we close the Socket because we're done with this client.
-                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                //
+                // PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                // 这里进行了修改，加入了字符串编码，解决服务器与客户端运行于
+                // 不同 OS 下时乱码问题。
+                PrintWriter writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
                 String advice = getAdvice();
                 writer.println(advice);
                 writer.close();
@@ -506,3 +514,9 @@ public class DailyAdviceServer {
     public static void main (String[] args) {new DailyAdviceServer();}
 }
 ```
+
+### 思考
+
+**服务器怎样知道他与客户端如何通信**？
+
+客户端

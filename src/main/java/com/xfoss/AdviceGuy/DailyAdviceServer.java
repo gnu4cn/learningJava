@@ -19,11 +19,16 @@ public class DailyAdviceServer {
         while (true) {
             Socket sock = serverSock.accept();
 
-            PrintWriter writer = new PrintWriter(sock.getOutputStream());
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
             String advice = getAdvice();
             writer.println(advice);
             writer.close();
-            System.out.println(advice);
+
+            System.out.format("客户端在 %s:%s, RemoteSocketAdress: %s, 发送的劝解为：%s\n", 
+                    sock.getInetAddress(), 
+                    sock.getPort(),
+                    sock.getRemoteSocketAddress(),
+                    advice);
         }
         } catch (IOException ex) {
             ex.printStackTrace();

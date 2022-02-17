@@ -3,8 +3,9 @@ package com.xfoss.Utils;
 import java.io.File;
 
 public class XPlatformThings {
+    private static String OS = (System.getProperty("os.name")).toUpperCase();
+
     public static String getWorkingDir (String appName) {
-        String OS = (System.getProperty("os.name")).toUpperCase();
         String workingDir;
 
         if (OS.contains("WIN")) {
