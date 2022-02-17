@@ -439,3 +439,70 @@ Socket sock = serverSock.accept();
 ### `DailyAdviceServer` 程序代码
 
 **`DailyAdviceServer` code**
+
+```java
+package com.xfoss.AdviceGuy;
+
+// 要记得这些导入
+import java.io.*;
+import java.net.*;
+
+public class DailyAdviceServer {
+    // 日常劝解来自这个数组
+    // （请记住，这些字符串是由编码编辑器包装起来的单词。绝不要在字符串
+    // 中间敲入回车（remember, these Strings were word-wrapped by 
+    // the code editor. Never hit return in the middle of a String）！）
+    String[] adviceList = {
+        "少食多餐", 
+        "买些紧身牛仔裤。他们不会让你看起来显胖。", 
+        "一个字：不合适",
+        "就今天而言，要诚实，告诉你的老板你的真实想法。",
+        "对于这个发型，你应该三思而后行"
+        };
+
+    public DailyAdviceServer () {
+        try {
+            // 这里的 ServerSocket 对象，令到此服务器应用在该
+            // 代码运行所在机器的端口 4242 上，“收听” 那些
+            // 客户端请求。
+            ServerSocket serverSock = new ServerSocket(4242);
+
+            // 服务器进入到一个永久循环，等待（并服务）那些
+            // 客户端请求。
+            while (true) {
+                // 这个 accept() 方法将会阻塞（即处于空闲状态），直到
+                // 有请求进来，并在有请求进来时返回一个用于与
+                // 客户端通信的 `Socket`（在某个匿名端口）
+                //
+                // the accept method blocks (just sits there) until
+                // a request comes in, and then the method returns 
+                // a Socket(on some anonymous port) for communicating
+                // with the client
+                Socket sock = serverSock.accept();
+
+                // 此时就要是由这个到客户端的套接字连接，来构造一个
+                // PrintWriter，并把一个字符串的劝解消息，发送给他（println()）
+                // 而由于完成了这个客户端的请求，所以随后就要关闭这个套接字。
+                //
+                // now we use the Socket connection to the client to make a 
+                // PrintWriter and send it (println()) a String advice message
+                // Then we close the Socket because we're done with this client.
+                PrintWriter writer = new PrintWriter(sock.getOutputStream());
+                String advice = getAdvice();
+                writer.println(advice);
+                writer.close();
+                System.out.println(advice);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private String getAdvice() {
+        int random = (int) (Math.random() * adviceList.length);
+        return adviceList[random];
+    }
+
+    public static void main (String[] args) {new DailyAdviceServer();}
+}
+```
