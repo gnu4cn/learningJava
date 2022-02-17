@@ -576,3 +576,32 @@ sock.getOutputStream();
 ![`LudicrouslySimpleChatClient`聊天室客户端第一版](images/Ch15_24.png)
 
 *图 24 - `LudicrouslySimpleChatClient`聊天室客户端第一版*
+
+**代码大纲**
+
+```java
+public class SimpleChatClientA extends JFrame {
+    JTextField outgoing;
+    PrintWriter writer;
+    Socket sock;
+
+    public SimleChatClientA () {
+        // SimpleChatClientA 类构造函数
+        // 构造 GUI 及在发送按钮上注册事件收听者
+        // 调用下面的 setUpNetworking() 方法
+    }
+
+    private void setUpNetworking () {
+        // 构造一个 Socket 对象，随后构造一个 PrintWriter 对象
+        // 将 PrintWriter 指派给实例变量 writer
+    }
+
+    public class SendButtonListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 从文本字段获取文本，并
+            // 使用 writer 实例变量（即一个 PrintWriter 对象），把
+            // 获取到的文本发送给服务器
+        }
+    }
+}
+```
