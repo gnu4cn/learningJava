@@ -735,4 +735,6 @@ public class SimpleChatClientA extends JFrame {
 
 **你肯定明白从现在开始就要采行选项三了吧**。
 
+这里要的是持续运行对来自服务消息进行检查，而又 *不会对用户与 GUI 交互能力造成干扰* 的东西（We want something to run continuously, checking for messages from the server, but *without interrupting the user's ability to interact with the GUI*）！那么在用户开心地输入消息，或者在众多传入消息中愉悦地滚动翻阅的同时，所需要的就是 *这美好场景背后*，有代码去持续读取来自服务器的新输入。
 
+这就意味着这里需要要给新的线程。一个新的、独立的栈（That means we finally need a new thread. A new, separate stack）。

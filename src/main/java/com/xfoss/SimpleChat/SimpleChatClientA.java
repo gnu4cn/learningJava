@@ -55,7 +55,7 @@ public class SimpleChatClientA extends JFrame {
 
     private void setUpNetworking () {
         try {
-            sock = new Socket("192.168.153.134", 5000);
+            sock = new Socket("192.168.153.1", 5000);
             writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
             System.out.println("网络通信已建立");
         } catch (IOException ex) {ex.printStackTrace();}
