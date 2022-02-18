@@ -605,3 +605,87 @@ public class SimpleChatClientA extends JFrame {
     }
 }
 ```
+
+```java
+package com.xfoss.SimpleChat;
+
+// 各种流（java.io）、套接字（java.net）及GUI等得各种导入
+import java.io.*;
+import java.net.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SimpleChatClientA extends JFrame {
+
+    JTextField outgoing;
+    PrintWriter writer;
+    Socket sock;
+
+    public SimpleChatClientA () {
+        // 这里只是构建 GUI，没有什么新东西，且不涉及到网络通信
+        // 或 I/O 操作
+        super("搞笑的简单聊天客户端");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+
+        outgoing = new JTextField(20);
+
+        JButton sendButton = new JButton("发送");
+        sendButton.addActionListener(new SendButtonListener());
+
+        mainPanel.add(outgoing);
+        mainPanel.add(sendButton);
+
+        getContentPane().add(BorderLayout.CENTER, mainPanel);
+
+        setUpNetworking();
+
+        setSize(640, 480);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent winEvt) {
+                writer.close();
+                System.exit(0);
+            }
+        });
+    }
+
+    // 此时完成具体写入。请记住，这里的 writer 对象，链接的是来自
+    // Socket 对象的输出流，因此不能何时执行 println() 方法，都会
+    // 透过网络抵达服务器！
+    //
+    // Now we actually do the writing. Remember, the writer is chained
+    // to the output stream from the Socket, so whenever we do a println()
+    // it goes over the network to the server!
+    public class SendButtonListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            try {
+                writer.println(outgoing.getText());
+                writer.flush();
+            } catch (Exception ex) {ex.printStackTrace();}
+
+            outgoing.setText("");
+            outgoing.requestFocus();
+        }
+    }
+
+    private void setUpNetworking () {
+        try {
+            // 由于用的是 localhost ，因此可以在一台机器上测试客户端
+            // 和服务器。
+            // 
+            // 这里就是构造 Socket 与 PrintWriter （这个 setUpNetworking() 
+            // 方法，是在刚刚显示出该 app 的 GUI 界面后，从类 SimpleChatClientA 
+            // 构造器调用）。
+            sock = new Socket("127.0.0.1", 5000);
+            writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
+            System.out.println("网络通信已建立");
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+}
+```
+
+> **若现在就想尝试运行，那么就要输入本章末尾处的已编写好的服务器代码。现在一个终端启动服务器，接着用另一个终端启动这个客户端即可**。
