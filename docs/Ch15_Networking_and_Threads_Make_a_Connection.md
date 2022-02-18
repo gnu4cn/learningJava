@@ -647,7 +647,7 @@ public class SimpleChatClientA extends JFrame {
 
         addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent winEvt) {
-                writer.close();
+                if(writer != null) writer.close();
                 System.exit(0);
             }
         });
@@ -699,3 +699,40 @@ public class SimpleChatClientA extends JFrame {
 
 
 *图 25 - 具备发送和接收功能的 `SimpleChatClient` app*
+
+**大问题：怎样从服务器获取消息**？
+
+应该不难；建立起网络通讯时，就要同时构造一个输入流（应该是个`BufferedReader`）。随后使用 `readLine()`读取消息。
+
+
+**更大的问题：何时从服务器获取消息**？
+
+**Bigger Question: WHEN do you get messages from the server**?
+
+请思考一下这个问题。有哪些选项？
+
+1) **选项一：每隔20秒轮询一次服务器（Option One: Poll the server every 20 seconds）**
+
+**优点（Pros）**: 是的，这是可行的。
+
+**弊端（Cons）**：服务器怎么知道客户端已经收到的消息与尚未收到的消息？服务器就不得不把消息存储起来，而不是在每次收到消息后只要分发并忘却。并且为什么间隔是20秒？这样的延迟对可用性有影响，而如果降低这个延迟值，又会带来对服务器不必要冲击。这个选项效率底下（The server would have to store the messages, rather than just doing a distribute-and-forget each time it gets one. And why 20 seconds? A delay like this affects usability, but as you reduce the delay, you risk hitting your server needlessly. Inefficient）。
+
+2) **选项二：在用户每次发送消息时从服务器读入一些东西（Option Two: Read something in from the server each time the user sends a message）**。
+
+**优点（Pros）**: 可行，很容易。
+
+**弊端（Cons）**：笨办法。为什么要选择这样的任意时间去查收那些消息？如果用户一直潜水不发送任何消息会怎样呢？
+
+
+3) **选项三：在服务器发出消息后立即读取消息（Option Three: Read messages as soon as they're sent from the server）**。
+
+**优点（Pros）**: 最为高效，最佳可用性。
+
+**弊端（Cons）**: 怎样在同一时间完成两件事情？应该把代码放在何处？这就会涉及到某处的一个一直等待着从服务器读取的循环。然而这个循环应该放在哪里呢？在启动了 GUI后，就只有在GUI部件发出事件后，程序才有动作了，其他情况下程序是不会有任何动作的（How do you do two things at the same time? Where would you put this code? You'd need a loop somewhere that was always waiting to read from the server. But where would that go? Once you launch the GUI, nothing happens until an event is fired by a GUI component）。
+
+> **在 Java 中，真的可以一边走路一边嚼口香糖**。
+
+
+**你肯定明白从现在开始就要采行选项三了吧**。
+
+
