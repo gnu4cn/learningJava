@@ -35,7 +35,7 @@ public class SimpleChatClientA extends JFrame {
 
         addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent winEvt) {
-                writer.close();
+                if(writer != null) writer.close();
                 System.exit(0);
             }
         });
@@ -59,5 +59,9 @@ public class SimpleChatClientA extends JFrame {
             writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
             System.out.println("网络通信已建立");
         } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    public static void main (String[] args) {
+        new SimpleChatClientA();
     }
 }
