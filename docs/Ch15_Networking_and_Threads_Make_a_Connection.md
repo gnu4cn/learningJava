@@ -689,3 +689,13 @@ public class SimpleChatClientA extends JFrame {
 ```
 
 > **若现在就想尝试运行，那么就要输入本章末尾处的已编写好的服务器代码。现在一个终端启动服务器，接着用另一个终端启动这个客户端即可**。
+
+
+### 版本二：发送与接收
+
+**Version Two: send and receive**
+
+![具备发送和接收功能的 `SimpleChatClient` app](images/Ch15_25.png)
+
+
+*图 25 - 具备发送和接收功能的 `SimpleChatClient` app*
