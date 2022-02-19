@@ -970,4 +970,8 @@ $java -jar learningJava/build/libs/com.xfoss.learningJava-0.0.1.jar
 线程栈的顶部，收到主线程的消息：你好，用户线程！
 ```
 
+### 脑力锻炼
+
+在运行 `ThreadTester` 类时，为什么会有上面这样的输出？
+
 
