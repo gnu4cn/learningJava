@@ -899,3 +899,7 @@ public void run () {
     // 将被新线程运行的代码
 }
 ```
+
+线程怎样知道该放那个方法在执行栈的底部呢？因为`Runnable`接口定义了合约。因为`Runnable`是个接口。线程作业可被定义在任何的实现了`Runnable`接口的类里头。线程仅关心传递给`Threa`类构造器的，十一个实现了`Runnable`接口的类的对象（How does the thread know which method to put at the bottom of the stack? Because `Runnable` defines a contract. Because `Runnable` is an interface. A thread's job can be defined in any class that implements the `Runnable` interface. The thread cares only that you pass the `Thread` cnstructor an object of a class that implements `Runnable`）。
+
+在将`Runnable`类型对象传递给`Thread`构造器时，真的就只是给予了那个`Thread`对象，一种抵达`run()`方法的方式。实在给予那个`Thread`对象其要执行的作业（When you pass a `Runnable` to a `Thread` constructor, you're really just giving the `Thread` a way to get to a `run()` method. You're giving the `Thread` its job to do）。
