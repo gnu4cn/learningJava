@@ -859,3 +859,16 @@ Thread myThread = new Thread(threadJob);
 ![以这个`Runnable`对象做参数，构造一个`Thread`对象](images/Ch15_32.png)
 
 将上面构造的新`Runnable`对象传递给 `Thread` 类构造器。这就告诉了新的`Thread`对象，要将哪个方法放在新执行栈 的底部 -- 当然是那个 `Runnable` 对象的 `run()` 方法。
+
+
+3) **启动该线程（Start the `Thread`）**
+
+```java
+myThread.start();
+```
+
+在调用该`Thread`对象的`start()`方法前，什么也不会发生。对此方法的调用，正是由一个`Thread`实例，向一条新执行线程转变的时间点。在新线程启动起来时，新线程就取得那个`Runnable`对象的`run()`方法，并将其放在新线程栈的底部（Nothing happens until you call the `Thread`'s `start()` method. That's when you go from having just a `Thread` instance to having a new thread of execution. When the new thread starts up, it takes the `Runnable` object's `run()` method and puts it on the bottom of the new thread's stack）。
+
+![启动线程](images/Ch15_33.png)
+
+*图 33 - 启动线程*
