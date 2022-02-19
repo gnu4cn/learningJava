@@ -903,3 +903,69 @@ public void run () {
 线程怎样知道该放那个方法在执行栈的底部呢？因为`Runnable`接口定义了合约。因为`Runnable`是个接口。线程作业可被定义在任何的实现了`Runnable`接口的类里头。线程仅关心传递给`Threa`类构造器的，十一个实现了`Runnable`接口的类的对象（How does the thread know which method to put at the bottom of the stack? Because `Runnable` defines a contract. Because `Runnable` is an interface. A thread's job can be defined in any class that implements the `Runnable` interface. The thread cares only that you pass the `Thread` cnstructor an object of a class that implements `Runnable`）。
 
 在将`Runnable`类型对象传递给`Thread`构造器时，真的就只是给予了那个`Thread`对象，一种抵达`run()`方法的方式。实在给予那个`Thread`对象其要执行的作业（When you pass a `Runnable` to a `Thread` constructor, you're really just giving the `Thread` a way to get to a `run()` method. You're giving the `Thread` its job to do）。
+
+### 要构造线程的作业，就要实现`Runnable`接口
+
+**To mke a job for your thread, implement the `Runnable` interface**
+
+```java
+// Runnable 是在 java.lang 包中，因此无需导入。
+public class MyRunnable implements Runnable {
+    private String incomingMessage;
+
+    public MyRunnable (String message) {
+        incomingMessage = message;
+    }
+
+    // Runnable只有一个要实现的方法：
+    // public void run() （不带参数）
+    // 这就是放置线程将要运行作业方法的地方。这也是那个
+    // 位于新执行栈底部的方法。
+    public void run () {
+        go();
+    }
+
+    public void go () {
+        doMore ();
+    }
+
+    public void doMore () {
+        System.out.println("这是执行栈的顶部");
+    }
+}
+
+class ThreadTester {
+    public static void main (String[] args) {
+        Runnable threadJob = new MyRunnable("你好，用户线程！");
+        // 将新构造的Runnable实例，传入到这个
+        // 新 Thread 构造器。这就告诉线程，把什么样的
+        // 方法放在新执行栈的底部。也就是新执行栈将运行的
+        // 第一个方法。
+        Thread myThread = new Thread(threadJob);
+
+        // 在没有调用这个 Thread 实例上的 start() 方法前，不会
+        // 得到新的执行线程。在启动线程前，线程还不成其为线程。
+        // 在启动 Thread 实例之前，他就跟其他的对象一样，
+        // 只是个 Tread 的实例，而不会有任何真实的 “线程特征”（
+        // Before that, it's just a Thread instance, like any 
+        // other object, but it won't have any real 'threadness'）。
+        myThread.start();
+
+        System.out.println("回到主线程");
+    }
+}
+```
+
+![示例代码的执行栈图解](images/Ch15_34.png)
+
+*图 34 - 示例代码的执行栈图解*
+
+上面代码的输出，如下所示：
+
+```console
+$java -jar learningJava/build/libs/com.xfoss.learningJava-0.0.1.jar
+回到主线程
+线程栈的顶部，收到主线程的消息：你好，用户线程！
+```
+
+

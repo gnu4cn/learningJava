@@ -37,7 +37,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.SimpleChat.SimpleChatClientA"
+    mainClassName = "com.xfoss.learningJava.ThreadTester"
     getMainClass().set(mainClassName)
 }
 
