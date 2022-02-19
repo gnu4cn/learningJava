@@ -858,6 +858,8 @@ Thread myThread = new Thread(threadJob);
 
 ![以这个`Runnable`对象做参数，构造一个`Thread`对象](images/Ch15_32.png)
 
+*图 32 - 以这个`Runnable`对象做参数，构造一个`Thread`对象*
+
 将上面构造的新`Runnable`对象传递给 `Thread` 类构造器。这就告诉了新的`Thread`对象，要将哪个方法放在新执行栈 的底部 -- 当然是那个 `Runnable` 对象的 `run()` 方法。
 
 
@@ -872,3 +874,28 @@ myThread.start();
 ![启动线程](images/Ch15_33.png)
 
 *图 33 - 启动线程*
+
+
+### 每个`Thread`对象都需要一项要执行的作业。即一个要放到新线程栈上的方法。
+
+**Every `Thread` needs a job t do. A method to puton the new thread stack**.
+
+> **`Runnable`对象之于`Thread`对象，就好比某项作业任务之于一名工人。`Runnable`对象就是线程要运行的作业（`Runnable` is to a `Thread` what a job is to a worker. A `Runnable` is the job a thread is supposed to run）。**
+>
+> **`Runnable`对象保存着那个将要放到新线程执行栈底部的方法：`run()`（A `Runnable` holds the method that goes on the bottom of the new thread's stack: `run()`）**。
+
+`Thread`对象需要作业。在现场启动起来时，线程就会运行一项作业。而那项作业，实际上就是去到新线程执行栈上的第一个方法，且作业务必总是一个看起来像这样的方法：
+
+```java
+// 接口 Runnable 只定义了一个方法，那就是 public void run()
+// （请记住，由于他是个接口，因此这个方法是 public 的，与
+// 这里的是否像这样输入代码无关。）
+//
+// The Runnable interface defines only one method,
+// public void run(). (Remember, it's an interface so the 
+// method is public regardless of whether you type it in that
+// way.)
+public void run () {
+    // 将被新线程运行的代码
+}
+```
