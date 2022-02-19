@@ -930,7 +930,7 @@ public class MyRunnable implements Runnable {
     }
 
     public void doMore () {
-        System.out.println("这是执行栈的顶部");
+        System.out.format("这是执行栈的顶部, 收到主线程传入的消息：%s\n", incomingMessage);
     }
 }
 
