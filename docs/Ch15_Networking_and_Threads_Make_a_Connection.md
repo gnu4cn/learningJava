@@ -831,3 +831,31 @@ Dog d = new Dog();
 
 
 *图 30 - 进入多线程执行阶段，在全部线程栈运行完毕之前，JVM于这些栈之间不断切换*
+
+
+### 怎样启动一个新线程
+
+**How to launch a new thread**
+
+1) **构造一个 `Runnable` 对象（即该新线程的作业）**
+
+```java
+Runnable treadJob = new MyRunnable();
+```
+
+![构造一个`Runnable` 对象](images/Ch15_31.png)
+
+*图 31 - 构造一个`Runnable` 对象*
+
+`Runnable` 是一个接口，后面马上就会学到。将会编写一个对 `Runnable` 接口进行实现的类，而正是在这个类中，去定义某个线程要执行的任务工作。也就是那些要在线程的新调用栈上运行的那个方法（`Runnable` is an interface you'll learn about on the next page. You'll write a class that implements the `Runnable` interface, and that class is where you'll define the work that a thread will perform. In other words, the method that will be run from the thread's new call stack）。
+
+
+2) **构造一个`Thread` 对象（即工具人线程）并把一个`Runnable`对象（即作业）交给他（Make a `Thread` object(the worker) and give tit a `Runnable`(the job)）**
+
+```java
+Thread myThread = new Thread(threadJob);
+```
+
+![以这个`Runnable`对象做参数，构造一个`Thread`对象](images/Ch15_32.png)
+
+将上面构造的新`Runnable`对象传递给 `Thread` 类构造器。这就告诉了新的`Thread`对象，要将哪个方法放在新执行栈 的底部 -- 当然是那个 `Runnable` 对象的 `run()` 方法。
