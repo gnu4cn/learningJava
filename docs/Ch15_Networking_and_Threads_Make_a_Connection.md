@@ -809,3 +809,17 @@ public static void main(String[] args) {
 ![主进程](images/Ch15_28.png)
 
 *图 28 - 主进程*
+
+2) `main()` 启动一个新线程。在新线程开始运行的同时，主线程被临时冻结（`main()` starts a new thread. The main thread is temporarily frozen while the new thread starts running）。
+
+```java
+// 很快就会学到这里的 Runnable 对象 r 是什么意思。
+Runnable r = new MyThreadJob();
+Thread t = new Thread(t);
+t.start();
+Dog d = new Dog();
+```
+
+![主线程启动一个新的线程](images/Ch15_29.png)
+
+*图 29 - 主线程启动一个新的线程*
