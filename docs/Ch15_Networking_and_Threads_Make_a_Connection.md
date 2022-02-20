@@ -1011,7 +1011,9 @@ t.start();
 **然而关于线程状态，还有更多的东西。一旦线程成为可运行状态，他就可以在可运行状态（runnable）、运行状态（running），以及一些其他状态：*临时非可运行状态（temporarily not runnable）*（也叫做“阻塞状态（blocked）”） 之间交互变化**。
 
 
-**典型的可运行/运行状态循环（Typical runnable/running loop）**
+### 典型的可运行/运行状态循环
+
+**Typical runnable/running loop**
 
 典型情况下，JVM线程调度器选出某个线程来运行，并在随后将其踢回，而让另一线程有时机运行，如此线程是在可运行状态与运行状态直接来回切换的（Typically, a thread moves back and forth between runnable and running, as the JVM thread scheduler selects a thread to run and then kicks it bak out so another thread gets a chance）。
 
@@ -1019,3 +1021,11 @@ t.start();
 
 
 *图 36 - 典型状况下线程从可运行状态与运行状态之间变换*
+
+
+### 线程可被置为暂时非可运行状态
+
+**A thread can be made temporarily not-runnable**
+
+
+：
