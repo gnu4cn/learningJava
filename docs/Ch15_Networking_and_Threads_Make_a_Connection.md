@@ -985,3 +985,25 @@ Threed t = new Thread(r);
 ![线程的三种状态](images/Ch15_35.png)
 
 *图 35 - 线程的三种状态*
+
+**新构建（NEW）状态**
+
+```java
+Thread t = new Thread(r);
+```
+
+线程已被创建但未被启动。也就是说，已经有了一个`Thread`对象，但还没有 *执行线*（A `Thread` instance has been created but not started. In other words, there is a `Thread` *object*, but no *thread of execution*）。
+
+
+**可运行（RUNNABLE）状态**
+
+```java
+t.start();
+```
+
+在启动这个线程时，他便进入到可运行状态。这意味着该线程准备好了运行，只是在等待着他被选着执行的时机。这个时候，就有了此线程的调用栈了（When you start the thread, it moves into the runnable state. This means the thread is ready to run and just waiting for its Big Change to be selected for execution. At this point, there is a new call stack for this thread）。
+
+
+**运行（RUNNING）状态**
+
+这是所有线程渴望的状态！成为被选中的那个线程。那个当前运行线程。而只有JVM的线程调度器，才能做出决定。有时可人为对该决定 *施加影响*，但无法强制某个线程从可运行状态转换成运行状态。在运行状态，线程（且 **只有** 这个线程）有着活动的调用栈，同时该调用栈顶部的那个方法在执行（This is the state all thread lust after! To be The Chosen One. The Currently Running Thread. Only the JVM thread scheduler can make that decision. You can sometimes *influence* that decision, but you cannot force a thread to move from runnable to running. In the running state, a thread (and ONLY this thread) has an active call stack, and the method on the top of the stack is executing）。
