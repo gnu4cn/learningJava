@@ -1009,3 +1009,13 @@ t.start();
 这是所有线程渴望的状态！成为被选中的那个线程。那个当前运行线程。而只有JVM的线程调度器，才能做出决定。有时可人为对该决定 *施加影响*，但无法强制某个线程从可运行状态转换成运行状态。在运行状态，线程（且 **只有** 这个线程）有着活动的调用栈，同时该调用栈顶部的那个方法在执行（This is the state all thread lust after! To be The Chosen One. The Currently Running Thread. Only the JVM thread scheduler can make that decision. You can sometimes *influence* that decision, but you cannot force a thread to move from runnable to running. In the running state, a thread (and ONLY this thread) has an active call stack, and the method on the top of the stack is executing）。
 
 **然而关于线程状态，还有更多的东西。一旦线程成为可运行状态，他就可以在可运行状态（runnable）、运行状态（running），以及一些其他状态：*临时非可运行状态（temporarily not runnable）*（也叫做“阻塞状态（blocked）”） 之间交互变化**。
+
+
+**典型的可运行/运行状态循环（Typical runnable/running loop）**
+
+典型情况下，JVM线程调度器选出某个线程来运行，并在随后将其踢回，而让另一线程有时机运行，如此线程是在可运行状态与运行状态直接来回切换的（Typically, a thread moves back and forth between runnable and running, as the JVM thread scheduler selects a thread to run and then kicks it bak out so another thread gets a chance）。
+
+![典型状况下线程从可运行状态与运行状态之间变换](images/Ch15_36.png)
+
+
+*图 36 - 典型状况下线程从可运行状态与运行状态之间变换*
