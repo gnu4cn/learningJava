@@ -974,4 +974,14 @@ $java -jar learningJava/build/libs/com.xfoss.learningJava-0.0.1.jar
 
 在运行 `ThreadTester` 类时，为什么会有上面这样的输出？
 
+### 新线程的三种状态
 
+**The three state of a new thread**
+
+```java
+Threed t = new Thread(r);
+```
+
+![线程的三种状态](images/Ch15_35.png)
+
+*图 35 - 线程的三种状态*
