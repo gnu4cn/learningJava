@@ -1027,5 +1027,6 @@ t.start();
 
 **A thread can be made temporarily not-runnable**
 
+![线程的阻塞状态](images/Ch15_37.png)
 
-：
+*图 37 - 线程的阻塞状态*
