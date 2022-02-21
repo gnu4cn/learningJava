@@ -12,6 +12,9 @@ public class MyRunnable implements Runnable {
     }
 
     public void go () {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {ex.printStackTrace();}
         doMore();
     }
 
@@ -26,10 +29,6 @@ class ThreadTester {
         Thread myThread = new Thread(threadJob);
 
         myThread.start();
-
-        try {
-        Thread.sleep(500);
-        } catch (InterruptedException ex) {ex.printStackTrace();}
 
         System.out.println("回到主线程");
     }

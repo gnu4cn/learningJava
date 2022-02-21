@@ -1053,3 +1053,25 @@ t.start();
 *图 38 - 工作中的线程调度器*
 
 > **线程调度器就谁运行谁不运行做出所有决定。他通常会让线程们有着良好的队列。然而对此并无保证。线程调度器可能会让一个线程心满意足地运行的同时，而让其他线程饱受“饥饿”之苦（The thread scheduler makes all the decisions about who runs and who doesn't. He usually makes the threads take turns, nicely. But there's no guarantee about that. He might let one thread run to its heart's content while the other threads 'starve'）**。
+
+这些东西的秘诀，几乎都在于 *睡眠*。对的，就是 *睡眠*。将某个线程置于睡眠中，即使几个毫秒的时间，就可以强制当前正在运行的线程离开运行状态，因此而给到另一线程运行的机会。`Thread`的静态方法 `sleep()`，有着 *一项* 明确的保证：在休眠时间超时之前，休眠中的线程，是不会成为当前运行线程的。比如，在告诉了线程休眠两秒（`2000`毫秒）后，那么在两秒钟时间过去之前，那个线程就绝不可能再度成为运行线程（The secret to almost everything is *sleep*. That's right, *sleep*. Putting a thread to sleep, even for a few milliseconds, forces the currently-running thread to leave the running state, thus giving another thread a chance to run. The `Thread`'s `sleep()` method does come with *one* guarantee: a sleeping thread will *not* become the currently-running thread before the length of its sleep time has expired. For example, if you tell your thread to sleep for two seconds (`2000` milliseconds), that thread can never become the running thread again until sometime *after* the two seconds have passed）。
+
+### 关于调度器不可预测的示例
+
+> 此示例即上面的 `MyRunable` 程序，经测试，在 `jdk11` 下输出实际上是恒定的。故在此省略。
+
+
+### 为何会有不同的输出？
+
+**How did we end up with different results**?
+
+**有时程序像这样运行（Sometimes it runs like this）**:
+
+![示例程序线程执行顺序之一](images/Ch15_39.png)
+
+
+*图 39 - 线程执行顺序之一*
+
+**而有时他会这样运行**：
+
+![示例程序线程执行顺序之二](images/Ch15_40.png)
