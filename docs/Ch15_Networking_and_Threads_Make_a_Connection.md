@@ -1075,3 +1075,15 @@ t.start();
 **而有时他会这样运行**：
 
 ![示例程序线程执行顺序之二](images/Ch15_40.png)
+
+## 答疑
+
+- **之前曾看到过一些没有使用单个 `Runnable` 实现，而是只构造了一个`Thread`子类并重写了`Thread`得 `run()` 方法的示例。那样的话，在构造新线程时，就相当于调用了 `Thread` 的无参数构造器（I've seen examples that don't use a separate `Runnable` implementation, but instead just make a subclass of `Thread` and override the `Thread`'s `run()` method. That way, you call the `Thread`'s no-arg constructor when you make the new thread）**；
+
+```java
+Thread t = new Thread(); // 没有 Runnable
+```
+
+> 是的，这是另一种构造自己的线程的方式，不过请从面向对象角度来思考这个问题。子类化操作的目的何在？请记住这里讲的是两个不同的事情 -- 类 `Thread` 与线程的 *作业（job）*。从面向对象视角来看，这二者有着完全不同的性质，且属于不同的类。在打算对类 `Thread` 进行子类化/扩展时，唯一目的就是要构造一个新的且更具体的`Thread`。也就是说，在将 `Thread` 当作工作者（worker）时，除非需要更具体的 *工作者（worker）* 行为，那么就请不要对 `Thread` 进行扩展。而在仅需要某个新 *作业* 由工作线程去运行时，就要对 `Runnable` 接口，在一个单独的、特定于*作业（job）* （而非特定于 *工作线程*） 的类中进行实现（Yes, that *is* another way of making your own thread, but think about it from an OO perspective. What's the purpose of subclassing? Remember that we're talking about two different things here -- the `Thread` and the thread's *job*. From an OO view, those two are very separate activities, and belong in separate classes. The only time you want to subclass/extend the `Thread` class, is if you are making a new and more specific type of `Thread`. In other words, if you think of the `Thread` as the worker, don't extend the `Thread` class unless you need more specific *worker* behaviors. But if all you need is a new *job* to be run by a `Thread`/worker, then implement `Runnable` in a separate, *job*-specific (not *worker*-specific) class）。
+>
+> 这是个设计问题，而非性能或语言问题。对`Thread`进行子类化，以及重写 `run()` 方法，是完全合法的，但这样做只有在极少的情况下，才是不错的主意（This is a design issue and not a performance or language issue. It's perfectly legal to subclass `Thread` and override the `run()` method, but it's rarely a good idea）。
