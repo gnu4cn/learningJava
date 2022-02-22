@@ -1108,3 +1108,27 @@ Thread t = new Thread(); // 没有 Runnable
 - 在 JVM 的线程调度器将某个线程选中去作为当前运行线程时，这个线程就被成为 运行中的 线程。在单个处理器的机器上，某个时刻只能有一个当前运行线程；
 - 有的时候线程可从 运行（RUNNING）状态，被移动到 阻塞（临时非可运行，BLOCKING，temporarily non-runnable）状态。线程可能由于等待来自某个流的数据，或由于已进入睡眠，抑或由于等待某个对象的锁，而进入阻塞状态；
 - 线程调度是不保证以某种特定方式去运作的，因此就无法确定线程们会良好地排队。通过将线程间歇地置入睡眠状态，可对调度排队施加影响（Thread scheduling is not guaranteted to work in any particular way, so you cannot be certain that threads will take turns nicely. You can help influence turn-taking by putting your threads to sleep periodically）。
+
+### 将线程置为睡眠状态
+
+**Putting a thread to sleep**
+
+帮助线程获取运行机会的最佳方式之一，就是将这些线程定期置于睡眠状态。需要做的仅是调用静态的`sleep()`方法，传递给他以毫秒计算的睡眠时长（One of the best ways to help your threads take turns is to put them to sleep periodically. All you need to do is call the static `sleep()` method, passing it the sleep duration, in milliseconds）。
+
+比如：
+
+```java
+Thread.sleep(2000);
+```
+
+就好将某个线程从运行状态敲出去，然后让其保持在可运行状态之外两秒钟。这样在至少两秒钟时间过去之前，这个线程是无法再度成为运行线程的（will knock a thread out of the running state, and keep it out of the runnable state for two seconds. The thread *can't* become the running thread again until after at least two seconds have passed）。
+
+有点遗憾的是，这个 `sleep()` 方法会抛出一个 `InterruptedException` 异常，这是一个受检查的异常，因此所有对 `sleep()` 的调用，都必须封装在 `try/catch` 代码块（或被声明出来）。因此一个真正的 `sleep()` 调用，看起来是这样的：
+
+```java
+try {
+    Thread.sleep(2000);
+} catch (InterruptedException ex) {ex.printStackTrace();}
+```
+
+线程几乎绝不会被睡眠中断；这个异常是在 API 中的，为了支持线程通信的机制，而这种机制在现实中几乎不会被用到。不过仍必须遵从异常处理或声明的原则，因此就需要习惯将这个 `sleep()` 方法，封装在 `try/catch` 中（Your thread will probably *never* be interrupted from sleep; the exception is in the API to support a thread communication mechanism that almost nobody uses in the Real World. But, you still have to obey the handle or declare law, so you need to get used to wrapping your `sleep()` calls in a `try/catch`）。
