@@ -1093,3 +1093,18 @@ Thread t = new Thread(); // 没有 Runnable
 > 不行。一旦线程的 `run()`方法执行完毕，那么这个线程就再也不能被重启了。事实上，线程在那个时间点就过渡到一种还不曾讲到的状态 -- ***死亡（dead）*** 状态。在死亡状态，线程已经完成他的 `run()` 方法，且绝不可能被重启。那个`Thread`对象可能仍在内存堆上，作为一个存活的对象，可调用其另外的方法（只有一些适当的方法），然而这个`Thread`对象已经永远失去了他的 “线程性质”。也就是说，已经没有了单独的调用栈，同事这个 `Thread` 对象也不在是一个 *线程（thread）*了。这个时候他就仅仅是个对象，与其他对象别无二致（No. Once a thread's `run()` method has completed, the thread can never be restarted. In fact, at that point the thread moves into a state we haven't talked about -- ***dead***. In the dead state, the thread has finished its `run()` method and can never be restarted. The `Thread` object might still be on the heap, as a living object that you can call other methods(if appropriate), but the `Thread` object has permanently lost its 'threadness'. In other words, there is no longer a separate call stack, and the `Thread` object is no longer a *thread*. It's just an object, at that point, like all other objects）。
 >
 > 然而，是有一些构造线程池的设计模式的，在这样的设计模式下，就可以持续使用`Thread`对象来完成不同作业。但不是通过调用死亡线程上的 `restaring()` 方法来完成的（But, there are design patterns for making a pool of threads that you can keep using to perform different jobs. But you don't do it by `restarting()` a dead thread）。
+
+
+## 重点知识
+
+- Java中带小写字母 `t` 的 `thread`，指的是一条单独的执行线（A thread with a lower-case 't' is a separate thread of execution）；
+- Java 中所有线程都有自己的调用栈（Every thread in Java has its own call stack）；
+- 带大写字母`T`的 `Thread`，指的是类 `java.lang.Thread`。而`Thread`对象，则表示一条执行线；
+- `Thread`对象需要一项去完成的作业。而`Thread`对象的作业，是某个实现了`Runnable`接口的东西；
+- `Runnable`接口只有一个方法，那就是`run()`方法。这个方法会去往新调用栈的底部。也就是说，这是在新线程中第一个运行的方法；
+- 要启动新线程，就需要将一个`Runnable`类型的对象，传递给类`Thread`的构造器；
+- 在已经实例化出一个 `Thread`对象，而尚未调用该对象的 `start()` 方法时，线程是在一种 新建（NEW） 状态中的；
+- 在启动了某个线程（通过调用这个 `Thread` 对象的 `start()` 方法）时，就创建出了一个新栈，这个新栈的底部，就是 `Runnable` 类型对象的 `run()` 方法。这个线程现在处于 可运行（RUNNABLE） 状态，等待着被 JVM 选去运行；
+- 在 JVM 的线程调度器将某个线程选中去作为当前运行线程时，这个线程就被成为 运行中的 线程。在单个处理器的机器上，某个时刻只能有一个当前运行线程；
+- 有的时候线程可从 运行（RUNNING）状态，被移动到 阻塞（临时非可运行，BLOCKING，temporarily non-runnable）状态。线程可能由于等待来自某个流的数据，或由于已进入睡眠，抑或由于等待某个对象的锁，而进入阻塞状态；
+- 线程调度是不保证以某种特定方式去运作的，因此就无法确定线程们会良好地排队。通过将线程间歇地置入睡眠状态，可对调度排队施加影响（Thread scheduling is not guaranteted to work in any particular way, so you cannot be certain that threads will take turns nicely. You can help influence turn-taking by putting your threads to sleep periodically）。
