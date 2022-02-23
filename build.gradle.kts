@@ -37,7 +37,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.learningJava.ThreadTester"
+    mainClassName = "com.xfoss.learningJava.RunThreads"
     getMainClass().set(mainClassName)
 }
 
