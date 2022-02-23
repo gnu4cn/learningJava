@@ -1199,4 +1199,134 @@ class ThreadTester {
 
 线程是有名称的。可给线程取一个自己选择的名字，或者可以接收线程的默认名称。然而关于线程名称的有趣一面在于，可使用他们来了解哪个线程是在运行中。下面的示例，启动了两个线程。两个线程的作业相同：运行一个循环，每次迭代时打印出当前运行线程的名称（Threads have names. You can give your threads a name of your choosing, or you can accept their default names. But the cool thing about names is that you can use them to tell which thread is running. The following example starts two threads. Each thread has the same job: run in a loop, printing the currently-running thread's name with each iteration）。
 
+```java
+package com.xfoss.learningJava;
 
+public class RunThreads implements Runnable {
+    private Thread alpha;
+    private Thread beta;
+
+    public RunThreads () {
+        alpha = new Thread(RunThreads.this);
+        beta = new Thread(RunThreads.this);
+
+        alpha.setName("Alpha thread");
+        beta.setName("Beta thread");
+        
+        alpha.start();
+        beta.start();
+    }
+
+    public static void main (String[] args) {
+        new RunThreads();
+    }
+
+    public void run () {
+        for (int i = 0; i < 5; i++) {
+            String threadName = Thread.currentThread().getName();
+            System.out.format("%s is running.\n", threadName);
+        }
+    }
+}
+```
+
+经测试（重复运行 20 遍），上面的代码，运行的结果均为：
+
+```console
+$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar 
+Alpha thread is running.
+Alpha thread is running.
+Alpha thread is running.
+Alpha thread is running.
+Alpha thread is running.
+Beta thread is running.
+Beta thread is running.
+Beta thread is running.
+Beta thread is running.
+Beta thread is running.
+```
+
+将上面的 `RunThreads` 修改为下面这样：
+
+```java
+package com.xfoss.learningJava;
+
+public class RunThreads implements Runnable {
+    private Thread alpha;
+    private Thread beta;
+
+    public RunThreads () {
+        alpha = new Thread(RunThreads.this);
+        beta = new Thread(RunThreads.this);
+
+        alpha.setName("Alpha thread");
+        beta.setName("Beta thread");
+        
+        alpha.start();
+        beta.start();
+    }
+
+    public static void main (String[] args) {
+        new RunThreads();
+    }
+
+    public void run () {
+        for (int i = 0; i < 5; i++) {
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {ex.printStackTrace();}
+
+            String threadName = Thread.currentThread().getName();
+            System.out.format("%s is running.\n", threadName);
+        }
+    }
+}
+```
+
+
+运行结果就变成：
+
+```console
+$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar 
+Alpha thread is running.
+Beta thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+```
+
+```console
+$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar 
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+```
+
+```console
+$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar 
+Alpha thread is running.
+Beta thread is running.
+Beta thread is running.
+Alpha thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+Alpha thread is running.
+Beta thread is running.
+```
+
+可以看出，输出结果具有不确定性了。
