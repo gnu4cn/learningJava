@@ -1143,4 +1143,58 @@ try {
 
 **Using sleep to make our program more predictable**
 
+还记得先前那个在每次运行时都会给出不同结果的示例吧（注：实际上那个示例不会）？请回顾并对代码和样本输出加以研究。有的时候主线程必须等待那个新线程执行完毕（并打印出“位于栈顶部”），而另一些时候新线程在他执行完毕之前会被送回到可运行状态，而允许主线程回来执行并打印出“回到主线程”。那么该怎样来修复这种不确定性呢？请停下来思考一下，然后回答这个问题：“在那个地方可以放入一个`sleep()`的调用，从而确保始终在打印出‘位于栈的顶部’之前，先打印出‘回到主线程’”（Remember our earlier example that kept giving us different results each time we ran it? Look back and study the code and the sample output. Sometimes main had to wait until the new thread finished(and printed "top o' the stack"), while other times the new thread would be sent back to runnable before tit was finished, allowing the main thread to come back in and print out "back in main". How can we fix this? Stop for a moment and answer this question: "Where can you put a `sleep()` call, to make sure the 'back in main' always prints before 'top o' the stack'"）？
+
+在你得出答案前，这里会等待（当然答案不止一个）。
+
+想到答案了吗？
+
+```java
+package com.xfoss.learningJava;
+
+public class MyRunnable implements Runnable {
+    private String incomingMessage;
+
+    public MyRunnable (String message) {
+        incomingMessage = message;
+    }
+
+    public void run () {
+        go();
+    }
+
+    public void go () {
+        doMore();
+    }
+
+    public void doMore () {
+    
+        // 在这里调用 sleep() 将强制新线程离开当前运行状态！
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {ex.printStackTrace();}
+
+        // 主线程将再次成为当前运行线程，并打印出 “回到主线程”。随后
+        // 在到这条语句打印出“线程栈的顶部......”之前，就会有个
+        // 暂停（大概两秒钟时间）了
+        System.out.format("线程栈的顶部，收到主线程的消息：%s\n", incomingMessage);
+    }
+}
+
+class ThreadTester {
+    public static void main (String[] args) {
+        Runnable threadJob = new MyRunnable("你好，用户线程！");
+        Thread myThread = new Thread(threadJob);
+
+        myThread.start();
+
+        System.out.println("回到主线程");
+    }
+}
+```
+
+## 构造并启动两个线程
+
+**Making and starting two threads**
+
 

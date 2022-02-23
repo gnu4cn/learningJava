@@ -12,13 +12,14 @@ public class MyRunnable implements Runnable {
     }
 
     public void go () {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {ex.printStackTrace();}
         doMore();
     }
 
     public void doMore () {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {ex.printStackTrace();}
+
         System.out.format("线程栈的顶部，收到主线程的消息：%s\n", incomingMessage);
     }
 }
