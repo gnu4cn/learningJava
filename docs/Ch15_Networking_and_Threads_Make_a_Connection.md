@@ -1207,21 +1207,29 @@ public class RunThreads implements Runnable {
     private Thread beta;
 
     public RunThreads () {
+        // 构造两个线程，他们有着同样的 Runnable 实例（
+        // 即同样的作业 -- 接下来会讲到更多有关 “两个线程与一个
+        // Runnable 作业”这种情况）。
         alpha = new Thread(RunThreads.this);
         beta = new Thread(RunThreads.this);
 
+        // 给这两个线程取名字。
         alpha.setName("Alpha thread");
         beta.setName("Beta thread");
         
+        // 启动这两个线程。
         alpha.start();
         beta.start();
     }
 
     public static void main (String[] args) {
+        // 这里构造了一个 Runnable 类型的实例。
         new RunThreads();
     }
 
     public void run () {
+        // 两个线程都会贯通行这个循环，每次迭代
+        // 都会打印出线程的名称。
         for (int i = 0; i < 5; i++) {
             String threadName = Thread.currentThread().getName();
             System.out.format("%s is running.\n", threadName);
@@ -1256,17 +1264,23 @@ public class RunThreads implements Runnable {
     private Thread beta;
 
     public RunThreads () {
+        // 构造两个线程，他们有着同样的 Runnable 实例（
+        // 即同样的作业 -- 接下来会讲到更多有关 “两个线程与一个
+        // Runnable 作业”这种情况）。
         alpha = new Thread(RunThreads.this);
         beta = new Thread(RunThreads.this);
 
+        // 给这两个线程取名字。
         alpha.setName("Alpha thread");
         beta.setName("Beta thread");
         
+        // 启动这两个线程。
         alpha.start();
         beta.start();
     }
 
     public static void main (String[] args) {
+        // 这里构造了一个 Runnable 类型的实例。
         new RunThreads();
     }
 
