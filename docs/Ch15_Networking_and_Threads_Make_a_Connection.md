@@ -1408,6 +1408,44 @@ Ryan有次需要取 $50，所以他检查了账户余额，看到账户里有 $1
 
 类`MonicaAndRyanJob`有个类型为 `BankAccount`的实例变量，表示他们共用的账户。
 
+![Ryan和Monica问题代码实现的设计](images/Ch15_41.png)
+
+*图 41 - Ryan和Monica问题代码实现的设计*
+
 此代码工作原理如下：
 
+1) **构造一个 `RyanAndMonicaJob`的实例**
 
+类`RyanAndMonicaJob`是 `Runnable`（即要执行的作业）的，同时 Monica 和 Ryan 都进行同样的事（检查余额与取钱），因此这里只需要一个实例。
+
+```java
+RyanAndMonicaJob theJob = new RyanAndMonicaJob();
+```
+
+2) **以这同样的 `Runnable` 实例（即上面那个 `RyanAndMonicaJob`实例），构造两个线程**
+
+```java
+Thread one = new Thread(theJob);
+Thread two = new Thread(theJob);
+```
+
+3) **分别对这两个线程进行命名和启动**
+
+```java
+one.setName("Ryan");
+two.setName("Monica");
+
+one.start();
+two.start();
+```
+
+4） **同时对两个线程执行他们的 `run()` 方法加以观察**（检查余额并取钱）
+
+一个线程代表 Ryan, 另一个表示 Monica。两个线程都持续对余额进行检查，并随后取出一笔钱，不过只有在不透支的情况下才支取！
+
+```java
+if (accout.getBalance() >= amount) {
+    try {
+        Thread.sleep()
+    }
+}
