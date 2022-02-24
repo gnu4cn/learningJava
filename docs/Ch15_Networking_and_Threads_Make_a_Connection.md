@@ -1398,4 +1398,16 @@ Ryan有次需要取 $50，所以他检查了账户余额，看到账户里有 $1
 
 在切进广告期间，请花点时间来思考这个问题。
 
+### Ryan 与 Monica 问题的代码实现
+
+**The Ryan and Monica problem, in code**
+
+下面的示例，展示了在 *两个* 线程共用 *同一个* 对象时，所发生的事情（The following example show what can happen when *two* threads(Ryan and Monica) share a *single* object(the bank account)）。
+
+该代码有两个类，`BankAccoutn` 与 `MonicaAndRyanJob`，类 `MonicaAndRyanJob` 实现了 `Runnable`，并表示 Ryan 与 Monica 俩都具备的行为 -- 检查账户余额并进行取款操作。然而显然，两个线程在检查余额和真正取钱 *之间*，会睡过去的。
+
+类`MonicaAndRyanJob`有个类型为 `BankAccount`的实例变量，表示他们共用的账户。
+
+此代码工作原理如下：
+
 
