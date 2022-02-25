@@ -1446,6 +1446,14 @@ two.start();
 ```java
 if (accout.getBalance() >= amount) {
     try {
-        Thread.sleep()
-    }
+        Thread.sleep(500);
+    } catch (InterruptedException ex) {ex.printStackTrace();}
 }
+```
+
+**在方法 `run()` 里头，完成 Ryan 和 Monica 正要做的 -- 检查账户余额，并在有足够钱的情况下，取出一笔钱**。
+
+**这样处理应该可以保护到免受透支的问题**。
+
+**除非......Ryan 和 Monica 在检查完余额后、在完成账户支取前，总是会睡过去**。
+

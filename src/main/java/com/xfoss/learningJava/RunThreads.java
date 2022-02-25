@@ -8,8 +8,8 @@ public class RunThreads implements Runnable {
         alpha = new Thread(RunThreads.this);
         beta = new Thread(RunThreads.this);
 
-        alpha.setName("Alpha thread");
-        beta.setName("Beta thread");
+        alpha.setName("线程 Alpha");
+        beta.setName("线程 Beta");
         
         alpha.start();
         beta.start();
@@ -22,12 +22,12 @@ public class RunThreads implements Runnable {
     public void run () {
         for (int i = 0; i < 5; i++) {
 
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException ex) {ex.printStackTrace();}
+            // try {
+            //    Thread.sleep(500);
+            //} catch (InterruptedException ex) {ex.printStackTrace();}
 
             String threadName = Thread.currentThread().getName();
-            System.out.format("%s is running.\n", threadName);
+            System.out.format("%s 此时正在运行。\n", threadName);
         }
     }
 }
