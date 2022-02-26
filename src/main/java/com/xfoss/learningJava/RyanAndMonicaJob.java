@@ -47,7 +47,7 @@ public class RyanAndMonicaJob implements Runnable {
 
             makeWithdrawal(random*10);
             if (account.getBalance() < 0) {
-                System.out.println("账户已透支！");
+                System.out.format("账户已透支！余额为 %d\n", account.getBalance());
                 break;
             }
         }
