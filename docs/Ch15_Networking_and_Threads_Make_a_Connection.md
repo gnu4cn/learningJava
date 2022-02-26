@@ -1466,6 +1466,7 @@ if (accout.getBalance() >= amount) {
 package com.xfoss.learningJava;
 
 class BankAccount {
+    // 账户以余额 100 块开始。
     private int balance = 100;
 
     public int getBalance () {
@@ -1478,10 +1479,15 @@ class BankAccount {
 }
 
 public class RyanAndMonicaJob implements Runnable {
-
+    // 只有一个 RyanAndMonicaJob 的实例。这就意味着只有一个
+    // 银行账户的实例。两个线程都将对这个账户进行操作。
     private BankAccount account = new BankAccount ();
 
+    // 这是 RyanAndMonicaJob 的构造函数。
     public RyanAndMonicaJob () {
+        // 构造两个线程，把同样的这个 Runnable 作业交给这两个
+        // 线程。这就意味着两个线程都将对这个Runnable类型类
+        // 中的账户实例进行操作。
         Thread one = new Thread(RyanAndMonicaJob.this);
         Thread two = new Thread(RyanAndMonicaJob.this);
 
@@ -1497,7 +1503,10 @@ public class RyanAndMonicaJob implements Runnable {
     }
 
     public void run () {
-        for (int x = 0; x < 5; x++) {
+        // 在这个 run() 方法中，线程会遍历循环，并尝试在
+        // 每次迭代中对银行账户进行支取。在每次支取后，会
+        // 再次检查余额，看账户是否已经透支。
+        for (int x = 0; x < 10; x++) {
             int random;
 
             while (true) {
@@ -1525,6 +1534,9 @@ public class RyanAndMonicaJob implements Runnable {
         System.out.format("%s 即将进行支取，数额为 %d, 此时余额为 %d\n", 
                 currentThread, amount, account.getBalance());
 
+        // 检查余额，在余额不足以进行支取时，只打印一条消息。而有
+        // 足够支取的余额时，进入睡眠，随后在醒过来并完成支取，就
+        // 跟上面 Ryan 做的那样。
         if (account.getBalance() >= amount){
 
             try {
@@ -1540,6 +1552,8 @@ public class RyanAndMonicaJob implements Runnable {
                     currentThread, amount, account.getBalance());
         }
         else {
+            // 程序中放了很多 System.out.format 语句，为的是可以看到在程序
+            // 运行时都发生了些什么。
             System.out.format("抱歉，%s, 已经余额不足\n", currentThread);
         }
     }
@@ -1549,22 +1563,17 @@ public class RyanAndMonicaJob implements Runnable {
 该程序某次运行的输出为：
 
 ```console
-$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                         ✔ 
-Monica 即将进行支取，数额为 70, 此时余额为 100
-Ryan 即将进行支取，数额为 90, 此时余额为 100
+java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                         ✔ 
+Monica 即将进行支取，数额为 80, 此时余额为 100
+Ryan 即将进行支取，数额为 30, 此时余额为 100
 Ryan 即将睡过去
 Monica 即将睡过去
 Ryan 醒过来了
-Ryan 完成了支取，支出数额 90, 此时账户余额为 10
-Ryan 即将进行支取，数额为 90, 此时余额为 10
-抱歉，Ryan, 已经余额不足
-Ryan 即将进行支取，数额为 50, 此时余额为 10
-抱歉，Ryan, 已经余额不足
-Ryan 即将进行支取，数额为 60, 此时余额为 10
-抱歉，Ryan, 已经余额不足
-Ryan 即将进行支取，数额为 50, 此时余额为 10
-抱歉，Ryan, 已经余额不足
 Monica 醒过来了
-Monica 完成了支取，支出数额 70, 此时账户余额为 -60
-账户已透支！
+Monica 完成了支取，支出数额 80, 此时账户余额为 -10
+Ryan 完成了支取，支出数额 30, 此时账户余额为 70
+账户已透支！余额为 -10
+账户已透支！余额为 -10
 ```
+
+

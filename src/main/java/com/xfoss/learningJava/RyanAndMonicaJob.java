@@ -32,7 +32,7 @@ public class RyanAndMonicaJob implements Runnable {
     }
 
     public void run () {
-        for (int x = 0; x < 5; x++) {
+        for (int x = 0; x < 10; x++) {
             int random;
 
             while (true) {
