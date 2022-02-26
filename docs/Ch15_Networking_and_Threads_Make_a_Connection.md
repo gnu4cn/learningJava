@@ -1457,3 +1457,114 @@ if (accout.getBalance() >= amount) {
 
 **除非......Ryan 和 Monica 在检查完余额后、在完成账户支取前，总是会睡过去**。
 
+
+### Ryan和Monica 示例
+
+**The Ryan and Monica example**
+
+```java
+package com.xfoss.learningJava;
+
+class BankAccount {
+    private int balance = 100;
+
+    public int getBalance () {
+        return balance;
+    }
+
+    public void withdraw (int amount) {
+        balance = balance - amount;
+    }
+}
+
+public class RyanAndMonicaJob implements Runnable {
+
+    private BankAccount account = new BankAccount ();
+
+    public RyanAndMonicaJob () {
+        Thread one = new Thread(RyanAndMonicaJob.this);
+        Thread two = new Thread(RyanAndMonicaJob.this);
+
+        one.setName("Ryan");
+        two.setName("Monica");
+
+        one.start();
+        two.start();
+    }
+
+    public static void main (String[] args) {
+        new RyanAndMonicaJob();
+    }
+
+    public void run () {
+        for (int x = 0; x < 5; x++) {
+            int random;
+
+            while (true) {
+                double mathRandom = Math.random();
+
+                if ( mathRandom < 0.1) continue;
+                else {
+                    random = (int) (mathRandom * 10);
+                    break;
+                }
+            }
+
+            makeWithdrawal(random*10);
+            if (account.getBalance() < 0) {
+                System.out.println("账户已透支！");
+                break;
+            }
+        }
+    }
+
+    private void makeWithdrawal (int amount) {
+
+        String currentThread = Thread.currentThread().getName();
+
+        System.out.format("%s 即将进行支取，数额为 %d, 此时余额为 %d\n", 
+                currentThread, amount, account.getBalance());
+
+        if (account.getBalance() >= amount){
+
+            try {
+                System.out.format("%s 即将睡过去\n", currentThread);
+
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {ex.printStackTrace();}
+
+            System.out.format("%s 醒过来了\n", currentThread);
+
+            account.withdraw(amount);
+            System.out.format("%s 完成了支取，支出数额 %d, 此时账户余额为 %d\n", 
+                    currentThread, amount, account.getBalance());
+        }
+        else {
+            System.out.format("抱歉，%s, 已经余额不足\n", currentThread);
+        }
+    }
+}
+```
+
+该程序某次运行的输出为：
+
+```console
+$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                         ✔ 
+Monica 即将进行支取，数额为 70, 此时余额为 100
+Ryan 即将进行支取，数额为 90, 此时余额为 100
+Ryan 即将睡过去
+Monica 即将睡过去
+Ryan 醒过来了
+Ryan 完成了支取，支出数额 90, 此时账户余额为 10
+Ryan 即将进行支取，数额为 90, 此时余额为 10
+抱歉，Ryan, 已经余额不足
+Ryan 即将进行支取，数额为 50, 此时余额为 10
+抱歉，Ryan, 已经余额不足
+Ryan 即将进行支取，数额为 60, 此时余额为 10
+抱歉，Ryan, 已经余额不足
+Ryan 即将进行支取，数额为 50, 此时余额为 10
+抱歉，Ryan, 已经余额不足
+Monica 醒过来了
+Monica 完成了支取，支出数额 70, 此时账户余额为 -60
+账户已透支！
+```

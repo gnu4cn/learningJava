@@ -46,7 +46,10 @@ public class RyanAndMonicaJob implements Runnable {
             }
 
             makeWithdrawal(random*10);
-            if(account.getBalance() < 0){System.out.println("账户已透支！");}
+            if (account.getBalance() < 0) {
+                System.out.println("账户已透支！");
+                break;
+            }
         }
     }
 
@@ -54,10 +57,10 @@ public class RyanAndMonicaJob implements Runnable {
 
         String currentThread = Thread.currentThread().getName();
 
+        System.out.format("%s 即将进行支取，数额为 %d, 此时余额为 %d\n", 
+                currentThread, amount, account.getBalance());
+
         if (account.getBalance() >= amount){
-
-            System.out.format("%s 即将进行支取，数额为 %d\n", currentThread, amount);
-
             try {
                 System.out.format("%s 即将睡过去\n", currentThread);
 
@@ -67,7 +70,8 @@ public class RyanAndMonicaJob implements Runnable {
             System.out.format("%s 醒过来了\n", currentThread);
 
             account.withdraw(amount);
-            System.out.format("%s 完成了支取，支出数额 %d, 账户余额 %d\n", currentThread, amount, account.getBalance());
+            System.out.format("%s 完成了支取，支出数额 %d, 此时账户余额为 %d\n", 
+                    currentThread, amount, account.getBalance());
         }
         else {
             System.out.format("抱歉，%s, 已经余额不足\n", currentThread);
