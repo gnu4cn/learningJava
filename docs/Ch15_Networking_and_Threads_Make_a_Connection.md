@@ -1563,7 +1563,7 @@ public class RyanAndMonicaJob implements Runnable {
 该程序某次运行的输出为：
 
 ```console
-java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                         ✔ 
+$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                         ✔ 
 Monica 即将进行支取，数额为 80, 此时余额为 100
 Ryan 即将进行支取，数额为 30, 此时余额为 100
 Ryan 即将睡过去
@@ -1575,5 +1575,21 @@ Ryan 完成了支取，支出数额 30, 此时账户余额为 70
 账户已透支！余额为 -10
 账户已透支！余额为 -10
 ```
+
+**方法 makeWithdrawal() 始终会在支取一边款项之前，对余额进行检查，然而还是透支了账户**。
+
+**这是一种情形**：
+
+Ryan 查看了余额，发现有足够的钱，然后睡了过去。
+
+与此同时，Monica 来了，并查看了余额。她也发现账户里有足够的钱。她不知到Ryan要醒过来并完成支取。
+
+Monica 睡了过去。
+
+Ryan 醒了，并完成了支取。
+
+Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查看余额和取出一笔钱的期间，Ryan 醒过来了并从账户里取走了钱。
+
+**Monica 之前对账户的检查，是无效的，这是由于Ryan虽然完成了对账户余额的检查，但Monica 检查的时间，还是在Ryan取钱的过程中（Monica's check of the account was not valid, because Ryan had already checked and was still in the middle of making a withdrawal）**。
 
 
