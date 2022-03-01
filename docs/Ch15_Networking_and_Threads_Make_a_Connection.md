@@ -1592,4 +1592,18 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 
 **Monica 之前对账户的检查，是无效的，这是由于Ryan虽然完成了对账户余额的检查，但Monica 检查的时间，还是在Ryan取钱的过程中（Monica's check of the account was not valid, because Ryan had already checked and was still in the middle of making a withdrawal）**。
 
+那么在 Ryan 醒过来并完成他的支取事务之前，Monica就必须停止触及银行账户。相反在 Monica 醒过来之前，Ryan也必须停止触及银行账户。
 
+
+### 他们需要一把账户访问的锁！
+
+**They need a lock for account access**!
+
+**该锁像这样运作**：
+
+1） 存在一把与银行账户事务（检查余额并支取款项）关联的锁。锁只有一把钥匙，在没有人要访问银行账户的时候，锁与钥匙是在一起的。
+
+
+![事务锁的初始状态](images/Ch15_42.png)
+
+*图 42 - 事务锁的初始状态*
