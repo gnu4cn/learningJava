@@ -1626,3 +1626,10 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 
 
 *图 44 - 事务锁的释放*
+
+
+### 这里就需要 `makeWithdrawal()`方法以类似原子的方式运行⚛️
+
+**We need the `makeWithdrawal()` method to run as one *atomic* thing**.⚛️
+
+
