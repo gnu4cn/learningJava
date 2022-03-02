@@ -1628,8 +1628,14 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 *图 44 - 事务锁的释放*
 
 
-### 这里就需要 `makeWithdrawal()`方法以类似原子的方式运行⚛️
+### 这里就需要 `makeWithdrawal()`方法以类似原子的方式运行。⚛️
 
 **We need the `makeWithdrawal()` method to run as one *atomic* thing**.⚛️
+
+这里需要确保一旦某个线程进入了 `makeWithdrawal()`方法，就要允许这个线程，在其他线程可以进入这个方法之前，执行完这个方法（We need to make sure that once a thread enters the `makeWithdrawal()` method, *it must be allowed to finish the method* before any other thread can enter）。
+
+也就是说，这里需要确保一旦某个线程已检查了账户余额，那么那个线程就会被保证，*在其他线程可以检查账户余额之前*，此线程能够醒过来并完成支取（In other words, we need to make sure that once a thread has checked the account balance, that thread has a guarantee that it can wake up and finish the withdrawal *before any other thread can check the account balance*）！
+
+那么就要使用关键字 `synchronized`，来对方法加以修改，如此在某个时刻，就只有一个线程可以方法这个方法了（Use the `synchronized` keyword to modify a method so that only one thread at a time can access it）。
 
 
