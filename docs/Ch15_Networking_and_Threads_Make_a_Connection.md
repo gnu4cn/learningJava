@@ -1647,4 +1647,37 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 
 **为了对数据（好比这里的银行账户）进行保护，就要将对数据进行操作的那些方法，进行同步化处理**。
 
+这就是对银行账户施加保护的措施！不是把锁安在银行账户本身之上；而是给操作银行账户的事务加上锁。这样的话，某个线程就要去完成整个事务，就算线程执行到方法的一半睡了过去，也要有始有终（That's how you protect the bank account! You don't put a lock on the bank accout itself; you lock the method that does the banking transaction. That way, one thread gets to complete the whole transaction, start to finish, even if that thread falls asleep in the middle of the method）！
 
+那么问题来了，既然没有给银行账户加锁，那到底锁了什么呢？是那个方法吗？还是那个 `Runnable` 对象？还是线程本身？
+
+接下来会讨论整个问题。从代码上看，这是很简单的 -- 只需将 `synchronized` 修饰符，加到方法声明即可：
+
+```java
+private synchronized void makeWithdrawal (int amount) {
+
+    String currentThread = Thread.currentThread().getName();
+
+    System.out.format("---------\n%s 即将进行支取，支取数额为 %d\n", 
+            currentThread, amount, account.getBalance());
+
+    if (account.getBalance() >= amount){
+        try {
+            System.out.format("%s 即将睡过去\n", currentThread);
+
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {ex.printStackTrace();}
+
+        System.out.format("%s 醒过来了\n", currentThread);
+
+        account.withdraw(amount);
+        System.out.format("%s 完成了支取，支出数额 %d, 此时账户余额为 %d\n", 
+                currentThread, amount, account.getBalance());
+    }
+    else {
+        System.out.format("抱歉，%s, 已经余额不足, 余额为：%d\n", currentThread, account.getBalance());
+    }
+}
+```
+
+（致那些精通物理的本书读者朋友：是的，此处使用 “原子” 一词的惯例，并未反应整个亚原子的粒子事物。当在线程及事务语境下讲到“原子”时，就要做牛顿，而不是爱因斯坦。嘿，这可不是 写这本书的人 的约定。真要由“我们”来约定的话，就要用海森堡不确定原理，来描述任何与线程相关的东西了。）

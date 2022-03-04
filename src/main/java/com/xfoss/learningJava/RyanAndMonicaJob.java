@@ -32,7 +32,7 @@ public class RyanAndMonicaJob implements Runnable {
     }
 
     public void run () {
-        for (int x = 0; x < 10; x++) {
+        for (int x = 0; x < 5; x++) {
             int random;
 
             while (true) {
@@ -53,11 +53,11 @@ public class RyanAndMonicaJob implements Runnable {
         }
     }
 
-    private void makeWithdrawal (int amount) {
+    private synchronized void makeWithdrawal (int amount) {
 
         String currentThread = Thread.currentThread().getName();
 
-        System.out.format("%s 即将进行支取，数额为 %d, 此时余额为 %d\n", 
+        System.out.format("---------\n%s 即将进行支取，支取数额为 %d\n", 
                 currentThread, amount, account.getBalance());
 
         if (account.getBalance() >= amount){
@@ -74,7 +74,7 @@ public class RyanAndMonicaJob implements Runnable {
                     currentThread, amount, account.getBalance());
         }
         else {
-            System.out.format("抱歉，%s, 已经余额不足\n", currentThread);
+            System.out.format("抱歉，%s, 已经余额不足, 余额为：%d\n", currentThread, account.getBalance());
         }
     }
 }
