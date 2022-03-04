@@ -1642,3 +1642,9 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 
 
 *图 45 - 关键字`synchronized`*
+
+**关键字`synchronized`表示，线程为了访问这些同步代码，是需要一把钥匙的（The `synchronized` keyword means that a thread needs a key in order to access the synchronized code）**。
+
+**为了对数据（好比这里的银行账户）进行保护，就要将对数据进行操作的那些方法，进行同步化处理**。
+
+
