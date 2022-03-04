@@ -1638,4 +1638,7 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 
 那么就要使用关键字 `synchronized`，来对方法加以修改，如此在某个时刻，就只有一个线程可以方法这个方法了（Use the `synchronized` keyword to modify a method so that only one thread at a time can access it）。
 
+![关键字`synchronized`](images/Ch15_45.png)
 
+
+*图 45 - 关键字`synchronized`*
