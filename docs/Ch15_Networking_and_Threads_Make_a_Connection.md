@@ -1690,7 +1690,21 @@ private synchronized void makeWithdrawal (int amount) {
 
 这些锁不是基于每个 *方法* 的，他们是基于每个 *对象* 的。在某个对象有两个同步方法时，也不是简单表明不可以让两个线程同时进入同一方法。而是表示不能让两个线程，同时进入这两个同步方法的 *任意一个* （The locks are not per *method*, they are per *object*. If an object has two synchronized methods, it does not simply mean that you can't have two threads entering *any* of the synchronized methods）。
 
+请设想一下这个情况。在有着多个可以潜在对某个对象的多个实例变量，进行操作的方法时，那么全部这些方法，都需要使用 `synchronized` 保护起来（Think about it. If you have multiple methods that can potentially act on an object's instance variables, all those methods need to be protected with `synchronized`）。
+
+同步的目的，是要保护重要数据。但请记住，锁住的并非时数据本身，是将那些要 *存取* 数据的方法，进行了同步化改造（The goal of synchronization is to protect critical data. But remember, you don't lock the data itself, you synchronize the methods that *access* that data）。
+
 ![关于对象的锁(object's lock)](images/Ch15_46.png)
 
 
 *图 46 - 关于对象的锁(object's lock)*
+
+> **每个 Java 对象都有一把锁。一把锁也仅有一把钥匙**。
+>
+> **多数时候，对象锁都是开着的，也没有人在乎他开着**。
+>
+> **而在对象有了一些同步方法时，线程就只有在可以拿到对象锁的钥匙时，才能进入到这些同步方法之一中去执行了**。也就是说，只有在另一方法不再持有那把钥匙的时候。
+
+那么在某个线程自底往上贯穿其调用栈（从线程作业的那个 `run()` 方法开始），而突然碰到一个同步化方法时，会发生什么呢？这个时候线程就会意识到，他需要在进入这个同步化方法前，获取那个对象的钥匙。他会查找那把钥匙（这都是由JVM处理的；Java中没有访问对象锁的API），并在钥匙可用时，线程就会抓取到钥匙而进入到那个同步方法。
+
+而在这个时间点之前，线程就会挂起，
