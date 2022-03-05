@@ -1690,7 +1690,7 @@ private synchronized void makeWithdrawal (int amount) {
 
 这些锁不是基于每个 *方法* 的，他们是基于每个 *对象* 的。在某个对象有两个同步方法时，也不是简单表明不可以让两个线程同时进入同一方法。而是表示不能让两个线程，同时进入这两个同步方法的 *任意一个* （The locks are not per *method*, they are per *object*. If an object has two synchronized methods, it does not simply mean that you can't have two threads entering *any* of the synchronized methods）。
 
-![关于对象的锁(object's lock)](images/CH15_46.png)
+![关于对象的锁(object's lock)](images/Ch15_46.png)
 
 
 *图 46 - 关于对象的锁(object's lock)*
