@@ -1681,3 +1681,16 @@ private synchronized void makeWithdrawal (int amount) {
 ```
 
 （致那些精通物理的本书读者朋友：是的，此处使用 “原子” 一词的惯例，并未反应整个亚原子的粒子事物。当在线程及事务语境下讲到“原子”时，就要做牛顿，而不是爱因斯坦。嘿，这可不是 写这本书的人 的约定。真要由“我们”来约定的话，就要用海森堡不确定原理，来描述任何与线程相关的东西了。）
+
+### 运用对象锁
+
+**Using an object's lock**
+
+每个对象都有一把锁。多数时候，那把锁都是开着的，同时可设想对象旁边始终有那么一把钥匙在那里。这些对象锁，只会在有着同步方法时，才生效。在某个对象有着一个或多个同步方法时，*线程就只有在可以获取到这个对象的锁时，才能进入到同步方法*（Every object has a lock. Most of the time, the lock is unlocked, and you can imagine a virtual key sitting with it. Object locks come into play only when there are synchronized methods. When an object has one or more sychronized methods, *a thread can enter a synchronized method only if the thread can get the key to the object's lock*）！
+
+这些锁不是基于每个 *方法* 的，他们是基于每个 *对象* 的。在某个对象有两个同步方法时，也不是简单表明不可以让两个线程同时进入同一方法。而是表示不能让两个线程，同时进入这两个同步方法的 *任意一个* （The locks are not per *method*, they are per *object*. If an object has two synchronized methods, it does not simply mean that you can't have two threads entering *any* of the synchronized methods）。
+
+![关于对象的锁(object's lock)](images/CH15_46.png)
+
+
+*图 46 - 关于对象的锁(object's lock)*
