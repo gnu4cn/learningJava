@@ -37,7 +37,7 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.learningJava.RyanAndMonicaJob"
+    mainClassName = "com.xfoss.learningJava.TestSyncTest"
     getMainClass().set(mainClassName)
 }
 

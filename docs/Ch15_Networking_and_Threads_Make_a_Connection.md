@@ -1692,7 +1692,7 @@ private synchronized void makeWithdrawal (int amount) {
 
 请设想一下这个情况。在有着多个可以潜在对某个对象的多个实例变量，进行操作的方法时，那么全部这些方法，都需要使用 `synchronized` 保护起来（Think about it. If you have multiple methods that can potentially act on an object's instance variables, all those methods need to be protected with `synchronized`）。
 
-同步的目的，是要保护重要数据。但请记住，锁住的并非时数据本身，是将那些要 *存取* 数据的方法，进行了同步化改造（The goal of synchronization is to protect critical data. But remember, you don't lock the data itself, you synchronize the methods that *access* that data）。
+同步的目的，是要保护重要数据。但请记住，锁住的并非数据本身，而是将那些要 *存取* 数据的方法，进行了同步化改造（The goal of synchronization is to protect critical data. But remember, you don't lock the data itself, you synchronize the methods that *access* that data）。
 
 ![关于对象的锁(object's lock)](images/Ch15_46.png)
 
@@ -1707,4 +1707,163 @@ private synchronized void makeWithdrawal (int amount) {
 
 那么在某个线程自底往上贯穿其调用栈（从线程作业的那个 `run()` 方法开始），而突然碰到一个同步化方法时，会发生什么呢？这个时候线程就会意识到，他需要在进入这个同步化方法前，获取那个对象的钥匙。他会查找那把钥匙（这都是由JVM处理的；Java中没有访问对象锁的API），并在钥匙可用时，线程就会抓取到钥匙而进入到那个同步方法。
 
-而在这个时间点之前，线程就会挂起，
+而在这个时间点之前，线程就会纠结于那把锁，就好像线程的存亡，取决于这个锁一样。在线程执行完毕这个同步方法之前，他是不会放弃这把锁的。进而在此线程持有这把锁期间，就不会由其他线程，能够进入到 *任何* 该对象的那些同步方法，这是由于那个对象的唯一钥匙，已不再可用（From that point forward, the thread hangs on to that key like the thread's life depends on it. The thread won't give up the key until it completes the synchronized method. So while that thread is holding the key, no other threads can enter *any* of that object's synchronized methods, because the one key for that object won't be available）。
+
+### 可怕的“更新丢失”问题
+
+**The dreaded "Lost Update" problem**
+
+这是另外一个经典的、来自于数据库领域的并发问题。这个问题与Ryan和Monica的故事密切相关，不过这里是要用这个示例，来说明几个其他的要点（Here's another classic concurrency problem, that comes from the database world. It's closely related to the Ryan and Monica story, but we'll use this example to illustrate a few more points）。
+
+这里所说的更新丢失，是围绕这样一个过程展开的：
+
+- 步骤一：获取账户中的余额
+
+```java
+int i = balance;
+```
+
+
+- 步骤二：给余额加 1
+
+```java
+// 或许这个不是个原子过程（Probably not an atomic process）
+balance = i + 1;
+```
+
+即使这里是要更为常见的语法：`balance++;` 同样不能确保编译后的代码，将是一个 “原子化的过程（atomic process）”。事实上，这个过程根本就不会是个原子化的过程（In fact, it probably won't）。
+
+在这个“更新丢失”问题中，有着两个线程，他们都尝试要对余额进行递增操作。请阅读下面的代码，然后就会看到真正的问题所在。
+
+```java
+package com.xfoss.learningJava;
+
+class TestSync implements Runnable {
+    private int balance;
+
+    public void run () {
+        String threadName = Thread.currentThread().getName();
+
+        for (int i = 0; i < 10; i++){
+            increment();
+            System.out.format("%s 存了一块钱，现在余额为 %d\n", threadName, balance);
+        }
+    }
+
+    private void increment () {
+        int i = balance;
+        balance = i + 1;
+    }
+
+    public TestSync () {
+        Thread a = new Thread(TestSync.this);
+        Thread b = new Thread(TestSync.this);
+
+        a.setName("Ryan");
+        b.setName("Monica");
+
+        a.start();
+        b.start();
+    }
+
+    public static void main (String[] args) {
+        new TestSync();
+    }
+}
+```
+
+
+此程序运行结果：
+
+```console
+> java -jar .\Pictures\com.xfoss.learningJava-0.0.1.jar
+Ryan 存了一块钱，现在余额为 1
+Ryan 存了一块钱，现在余额为 3
+Ryan 存了一块钱，现在余额为 4
+Ryan 存了一块钱，现在余额为 5
+Ryan 存了一块钱，现在余额为 6
+Monica 存了一块钱，现在余额为 2
+Monica 存了一块钱，现在余额为 8
+Monica 存了一块钱，现在余额为 9
+Monica 存了一块钱，现在余额为 10
+Monica 存了一块钱，现在余额为 11
+Monica 存了一块钱，现在余额为 12
+Monica 存了一块钱，现在余额为 13
+Monica 存了一块钱，现在余额为 14
+Monica 存了一块钱，现在余额为 15
+Monica 存了一块钱，现在余额为 16
+Ryan 存了一块钱，现在余额为 7
+Ryan 存了一块钱，现在余额为 17
+Ryan 存了一块钱，现在余额为 18
+Ryan 存了一块钱，现在余额为 19
+Ryan 存了一块钱，现在余额为 20
+```
+
+
+修改为这样后:
+
+```java
+package com.xfoss.learningJava;
+
+class TestSync implements Runnable {
+    private int balance;
+
+    public void run () {
+        String threadName = Thread.currentThread().getName();
+
+        for (int i = 0; i < 10; i++){
+            increment();
+            System.out.format("%s 存了一块钱，现在余额为 %d\n", threadName, balance);
+        }
+    }
+
+    private void increment () {
+        int i = balance;
+        balance = i + 1;
+    }
+}
+
+public class TestSyncTest {
+    public static void main (String[] args) {
+        TestSync job = new TestSync();
+
+        Thread a = new Thread(job);
+        Thread b = new Thread(job);
+
+        a.setName("Ryan");
+        b.setName("Monica");
+
+        a.start();
+        b.start();
+    }
+}
+```
+
+运行结果为：
+
+```console
+> java -jar .\Pictures\com.xfoss.learningJava-0.0.1.jar
+Ryan 存了一块钱，现在余额为 1
+Ryan 存了一块钱，现在余额为 3
+Ryan 存了一块钱，现在余额为 4
+Ryan 存了一块钱，现在余额为 5
+Ryan 存了一块钱，现在余额为 6
+Ryan 存了一块钱，现在余额为 7
+Ryan 存了一块钱，现在余额为 8
+Ryan 存了一块钱，现在余额为 9
+Ryan 存了一块钱，现在余额为 10
+Ryan 存了一块钱，现在余额为 11
+Monica 存了一块钱，现在余额为 2
+Monica 存了一块钱，现在余额为 12
+Monica 存了一块钱，现在余额为 13
+Monica 存了一块钱，现在余额为 14
+Monica 存了一块钱，现在余额为 15
+Monica 存了一块钱，现在余额为 16
+Monica 存了一块钱，现在余额为 17
+Monica 存了一块钱，现在余额为 18
+Monica 存了一块钱，现在余额为 19
+Monica 存了一块钱，现在余额为 20
+```
+
+
+> **注**：实际上，上面两种写法，是不是一样的效果呢？
