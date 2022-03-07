@@ -1811,6 +1811,7 @@ class TestSync implements Runnable {
     public void run () {
         String threadName = Thread.currentThread().getName();
 
+        // 每个线程循环10次，每次循环将余额递增
         for (int i = 0; i < 10; i++){
             increment();
             System.out.format("%s 存了一块钱，现在余额为 %d\n", threadName, balance);
@@ -1818,6 +1819,12 @@ class TestSync implements Runnable {
     }
 
     private void increment () {
+        // 这里是重要的地方！对余额的递增，是通过加 1 到之前读取余额时余额
+        // 的值上的（而不是加 1 到当前的那个余额值上）
+        //
+        // Here's the crucial part! We increment the balance by adding
+        // 1 to whatever the value of balance was AT THE TIME WE READ
+        // IT (rather than adding 1 to whatever the CURRENT value is)
         int i = balance;
         balance = i + 1;
     }
@@ -1867,3 +1874,39 @@ Monica 存了一块钱，现在余额为 20
 
 
 > **注**：实际上，上面两种写法，是不是一样的效果呢？
+
+
+### 下面来运行一下这个程序......
+
+**Let's run this code...**
+
+1) 线程 A 运行一会儿
+
+```pseudocode
+将余额值放到变量 i 中；
+余额为 0，因此 i 现在就是 0；
+将余额的值设置为 i+1 的结果；
+现在余额为 1；
+将余额的值放到变量 i 中；
+余额为 1，因此 i 现在就是 1；
+将余额值设置为 i+1 的结果；
+现在余额为 2；
+```
+
+
+2) 线程 B 运行一会儿
+
+```pseudocode
+将余额值放到变量 i 中；
+余额为 2，因此 i 现在就是 2；
+将余额的值设置为 i+1 的结果；
+现在余额为 3；
+将余额的值放到变量 i 中；
+余额为 1，因此 i 现在就是 3；
+
+[现在，在线程 B 将余额值设置为 4 之前，就从正在运行
+被送回到了可运行状态]
+```
+
+
+3) 线程 A 再度运行，

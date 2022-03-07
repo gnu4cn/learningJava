@@ -10,10 +10,15 @@ class TestSync implements Runnable {
             increment();
             System.out.format("%s 存了一块钱，现在余额为 %d\n", threadName, balance);
         }
+
+        System.out.format("线程：%s 执行完毕, 现在余额为：%d\n-------------\n", threadName, balance);
+    }
+
+    public int getBalance () {
+        return balance;
     }
 
     private void increment () {
-        int i = balance;
-        balance = i + 1;
+        balance++;
     }
 }
