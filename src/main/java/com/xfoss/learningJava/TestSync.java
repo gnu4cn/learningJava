@@ -18,7 +18,7 @@ class TestSync implements Runnable {
         return balance;
     }
 
-    private void increment () {
+    private synchronized void increment () {
         balance++;
     }
 }
