@@ -1904,9 +1904,41 @@ Monica 存了一块钱，现在余额为 20
 将余额的值放到变量 i 中；
 余额为 1，因此 i 现在就是 3；
 
-[现在，在线程 B 将余额值设置为 4 之前，就从正在运行
+[此时，在线程 B 将余额值设置为 4 之前，就从正在运行
 被送回到了可运行状态]
 ```
 
 
-3) 线程 A 再度运行，
+3) 线程 A 再度运行，在他之前离开的地方继续（Thread A runs again, picking up where it left off）
+
+```pseudocode
+将余额值放到变量 i 中；
+余额为 3，因此 i 现在就是 3；
+将余额的值设置为 i+1 的结果；
+现在余额为 4；
+将余额的值放到变量 i 中；
+余额为 4，因此 i 现在就是 4；
+将余额值设置为 i+1 的结果；
+现在余额为 5；
+```
+
+
+4) 线程 B 再度运行，并精确地在他之前离开的地方继续（Thread B runs again, and pickes up exactly where it left off）!
+
+```pseudocode
+将余额值设置为 i+1 的结果；
+// 哎呀！！
+//
+// 线程 A 将余额更新为了 5，但现在线程 B 回来继续运行，而
+// 践踏了线程 A 所做出的更新，就如同线程 A 的更新从来也
+// 没发生过一样。
+//
+// Thread A updated it to 5, but now B came back and stepped
+// on top of the update A made, as if A's update never happened.
+现在余额为 4；
+```
+
+
+> **这里就丢失了线程 A 所做出的那些更新！由于线程 B 先前完成了余额的 “读取”，且在线程 B 醒来后，就只是如同他不曾错过一些事情一样，继续运行着（We lost the last updates that Thread A made! Thread B had previously done a 'read' of the value of balance, and when B woke up, it just kept going as if it never missed a beat）**。
+
+
