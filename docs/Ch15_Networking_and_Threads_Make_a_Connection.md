@@ -1941,4 +1941,31 @@ Monica 存了一块钱，现在余额为 20
 
 > **这里就丢失了线程 A 所做出的那些更新！由于线程 B 先前完成了余额的 “读取”，且在线程 B 醒来后，就只是如同他不曾错过一些事情一样，继续运行着（We lost the last updates that Thread A made! Thread B had previously done a 'read' of the value of balance, and when B woke up, it just kept going as if it never missed a beat）**。
 
+### 将方法 `increment()` 构造成原子化。使其成为同步方法！⚛️
 
+**Make the `increment()` method atomic. Synchronize it**!⚛️
+
+同步化 `increment()` 方法，就解决了 “更新丢失” 问题，这是因为同步化就让该方法中的两个步骤，成为了一个不可分割的单元了（Synchronizing the `increment()` method solves the "Lost Update" problem, because it keeps the two steps in the method as one unbreakable unit）。
+
+
+```java
+private synchronized void increment () {
+    balance++;
+}
+```
+
+
+> **一旦线程进入到这个方法，就必须确保在其他线程可以进入这个方法之前，其中所有步骤执行完毕（作为一个原子过程）**。
+
+
+## 答疑
+
+- **听起来把万物都同步化是个不错的注意，因为这样就可以实现线程安全了（Sounds like it's a good idea to synchronize everything, just to be thread-safe）。**
+
+> 不是这样的，这不是个好主意。同步化并非没有代价。首先，同步方法是有确切开销的。也就是说，在代码遇到同步方法时，就会存在性能问题（虽然通常不会注意到这样的性能问题），这是由于解决 “对象锁的钥匙是否可用” 的这个问题需要时间（Nope, it's not a good idea. Synchronization doesn't come for free. First, a synchronized method has a certain amount of overhead. In other words, when code hit a synchronized method, there's going to be a performance hit(although typically, you'd never notice it) while the matter of "is the key available?" is resolved）。
+>
+> 其次，由于同步化操作对并发有限制，因此同步方法会减慢程序运行速度。换句话说，同步方法会强制其他线程排队等待他们的运行轮次。这可能在你编写的代码中不成其为问题，但必须考虑到这个问题（Second, a synchronzied method can slow your program down because synchronization restricts concurrency. In other words, a synchronzied method forces other threads to get in line and wait their turn. This might not be a problem in your code, but you have to consider it）。
+>
+> 第三，也是最可怕的，就是同步方法会导致死锁！（请参阅后面的部分，Third, and most frightening, synchronized methods can lead to deadlock）!
+>
+>
