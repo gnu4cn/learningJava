@@ -1968,4 +1968,39 @@ private synchronized void increment () {
 >
 > 第三，也是最可怕的，就是同步方法会导致死锁！（请参阅后面的部分，Third, and most frightening, synchronized methods can lead to deadlock）!
 >
->
+> 有一条良好的经验法则，就是仅做最低限度、对那些确实应该进行同步的方法进行同步化。并且事实上，可以在较方法更小的级别的粒度上，进行同步化操作。虽然在本书中没有用到，但仍然可以使用 `synchronize` 关键字，在一个或多个语句级别，而不是整个方法层面，进行更细粒度的同步化操作（A good rule of thumb is to synchronize only the bare minimum that should be synchronized. And in fact, you can synchronize at a granularity that's even smaller than a method. We don't use it in the book, but you can use the `synchronized` keyword to synchronize at the more fine-grained level of one or more statements, rather than at the whole-method level）。
+
+
+```java
+// go() 方法中的 doStuff() 不需要被同步化，因此这里就
+// 没有将整个的 go() 方法同步化。
+//
+// doStuff() doesn't need to be synchronized, so we don't
+// synchronize the whole method.
+public void go () {
+    doStuff();
+
+    // 此时，就只有这其中的两个方法调用被编为一个原子化
+    // 单元了。当在某个方法中使用 synchronized 关键字，而
+    // 不是在方法声明中使用整个关键字时，就必须给提供一个
+    // 参数，这个参数即为线程需要获得对象锁钥匙所对应的对象。
+    //
+    // Now, only these two method calls are grouped into
+    // one atomic unit. When you use the synchronized keyword
+    // WITHIN a method, rather than in a method declaration, you
+    // have to provide an argument that is the object whose key
+    // the thread needs to get.
+    //
+    // 尽管也有其他实现方式，但几乎总是会在当前对象（this）上
+    // 进行同步化。那正是在整个方法被同步时，所要锁上的同一个
+    // 对象。
+    //
+    // Although there are other ways to do it, you will almost
+    // always synchronize on the current object(this). That's the
+    // same object you'd lock if the whole method were synchronized.
+    synchronized (this) {
+        criticalStuff();
+        moreCriticalStuff();
+    }
+}
+```
