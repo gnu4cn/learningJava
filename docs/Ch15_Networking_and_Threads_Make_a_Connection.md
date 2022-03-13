@@ -2069,4 +2069,6 @@ public void go () {
 
 在运用同步代码时要谨慎，这是因为没有什么东西会像线程死锁那样，将程序拖入到动弹不得的地步。在有着同时持有对方所需对象锁钥匙的两个进程时候，就会发生线程死锁。这种情形无可救药，没有解决办法，因此这两个线程就只有坐在那里静静等待。再等待。再等待（Be careful when you use synchronized code, because nothing will bring your program to its knees like thread deadlock. Thread deadlock happens when you have two threads, both of which are holding a key the other thread wants. There's no way out of this scenario, so the two threads will simply sit and wait. And wait. And wait）。
 
+若熟悉数据库或其他一些应用服务器，那么就会明白这个问题；数据库通常有着类似同步化这样的机制。不过一种真正的事务管理系统，一些时候是可以解决死锁问题的。这样的系统会作出假设，比如在两个事务耗费过长时间完成时，就相当于发生了死锁。然而与Java不同，应用服务器是可以执行一次 “事务回滚”，从而将被回滚事务的状态，退回到这个事务（所谓事务，即是指那个原子部分）开始之前（If you're familiar with databases or other application servers, you might recognize the problem; databases often have a locking mechanism somewhat like synchronizaion. But a real transaction management system can sometimes deal with deadlock. It might assume, for example, that deadlock might have occured when two transactions are taking too long to complete. But unlike Java, the application server can do a "transaction rollback" that returns the state of the rolled-back transaction to where it was before the transaction(the atomic part) began）。
 
+Java 不具备处理死锁的机制。
