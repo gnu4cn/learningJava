@@ -2063,4 +2063,10 @@ public void go () {
 [继续运行......]
 ```
 
+### 同步化的致命一面
+
+**The deadly side of synchronization**
+
+在运用同步代码时要谨慎，这是因为没有什么东西会像线程死锁那样，将程序拖入到动弹不得的地步。在有着同时持有对方所需对象锁钥匙的两个进程时候，就会发生线程死锁。这种情形无可救药，没有解决办法，因此这两个线程就只有坐在那里静静等待。再等待。再等待（Be careful when you use synchronized code, because nothing will bring your program to its knees like thread deadlock. Thread deadlock happens when you have two threads, both of which are holding a key the other thread wants. There's no way out of this scenario, so the two threads will simply sit and wait. And wait. And wait）。
+
 
