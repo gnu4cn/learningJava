@@ -2073,4 +2073,29 @@ public void go () {
 
 Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发生。那么就要依赖程序员来精心设计。在发现正写着为数不少的多线程代码时，那么大概就要去研修一下 Scott Oaks 和 Henry Wong 合著的 《Java 线程》（"Java Threads"）一书，以掌握避开死锁的一些设计技巧。这些技巧中最常见的一个，就是要留意涉及到那些线程的启动顺序（Java has no mechanism to handle deadlock. It won't even *know* deadlock occured. So it's up to you to design carefully. If you find yourself writing much multithreaded code, you might want to study "Java Threads" by Scott Oaks and Henry Wong for design tips on avoiding deadlock. One of the most common tips is to pay attention to the order in which your threads are started）。
 
+> **死锁发生的必要条件即是，存在两个对象与两个线程**。
+>
+> **All it takes for deadlock are two objects and two threads**.
 
+**一个简单的死锁场景**：
+
+1) 线程 A 进入到对象 `foo` 的某个同步方法，同时获取到了该对象锁的钥匙；
+
+然后线程 A 拿着 `foo` 对象锁的钥匙睡了过去。
+
+
+2) 线程 B 进入到对象 `bar` 的某个同步方法，同时获取到该 `bar` 对象锁的钥匙；
+
+线程 `B` 尝试进入 `foo` 对象的某个同步方法，然而线程 B 无法获取到那把钥匙（由于线程 A 持有着）。这时线程 B 就会去到等待室，知道那把 `foo` 的钥匙可用。这时 `bar` 的钥匙是由线程 B 保留着的。
+
+3) 线程 A 醒了过来（仍就持有着 `foo` 的钥匙），并尝试进入到对象 `bar` 的某个同步方法，然而线程 A 没法获取到那把钥匙，这时因为线程 B 持有着那把钥匙。这个时候线程 A 就会进入等待室，直到 `bar` 的钥匙可用（不过这钥匙将永远不会可用！）
+
+线程 A 在获取到 `bar` 的钥匙之前无法运行，然而这个时候`bar`的钥匙是在线程 B 手里，同时线程 B 又由于线程 A 持有着 `foo` 的钥匙也无法运行......
+
+** 重点
+
+- 静态方法 `Thread.sleep()` 会强制线程，在传递给这个 `sleep` 方法的参数时长之内，离开运行状态。`Thread.sleep(200)`会将线程置于睡眠状态 200 毫秒；
+- `sleep()`方法会抛出一个受检查的异常（`InterruptedException`），因此所以对 `sleep()`方法的调用，都必须封装在 `try/catch`代码块中，或是被声明出来；
+- 尽管不能保证某个线程在醒来时可以到达可运行行程队列的末尾，但为了有助于确保全部线程都有机会运行，仍就可使用 `sleep()` 方法。醒来的线程，依然可能会回到可运行队列的前端。在多数情况下，为保持手头的线程良好切换，只需编写一些时间设置恰当的 `sleep()` 方法即可（You can use `sleep()` to help make sure all threads get a chance to run, although there's no guarantee that when a thread wakes up it'll go to the end of the runnable line. It might, for example, go right back to the front. In most cases, approciately-timed `sleep()` calls are all you need to keep your threads switching nicely）；
+- 使用 `setName()` 方法（是的，又一个惊喜），就可以给某个线程取名字。虽然所有线程都有默认名字，不过给他们一个显式的名字，可以有助于对这些线程加以追踪，尤其是在使用 `print` 语句进行程序调试的时候；
+-
