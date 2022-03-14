@@ -2071,7 +2071,7 @@ public void go () {
 
 若熟悉数据库或其他一些应用服务器，那么就会明白这个问题；数据库通常有着类似同步化这样的机制。不过一种真正的事务管理系统，一些时候是可以解决死锁问题的。这样的系统会作出假设，比如在两个事务耗费过长时间完成时，就相当于发生了死锁。然而与Java不同，应用服务器是可以执行一次 “事务回滚”，从而将被回滚事务的状态，退回到这个事务（所谓事务，即是指那个原子部分）开始之前（If you're familiar with databases or other application servers, you might recognize the problem; databases often have a locking mechanism somewhat like synchronizaion. But a real transaction management system can sometimes deal with deadlock. It might assume, for example, that deadlock might have occured when two transactions are taking too long to complete. But unlike Java, the application server can do a "transaction rollback" that returns the state of the rolled-back transaction to where it was before the transaction(the atomic part) began）。
 
-Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发生。那么就要依赖程序员来精心设计。在发现正写着为数不少的多线程代码时，那么大概就要去研修一下 Scott Oaks 和 Henry Wong 合著的 《Java 线程》（"Java Threads"）一书，以掌握避开死锁的一些设计技巧。这些技巧中最常见的一个，就是要留意涉及到那些线程的启动顺序（Java has no mechanism to handle deadlock. It won't even *know* deadlock occured. So it's up to you to design carefully. If you find yourself writing much multithreaded code, you might want to study "Java Threads" by Scott Oaks and Henry Wong for design tips on avoiding deadlock. One of the most common tips is to pay attention to the order in which your threads are started）。
+Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发生。那么就要依赖程序员来精心设计。在发现正写着为数不少的多线程代码时，那么大概就要去研修一下 Scott Oaks 和 Henry Wong 合著的 《Java 线程》（"Java Threads"）一书，以掌握避开死锁的一些设计技巧。这些技巧中最常见的一个，就是要留意涉及到的那些线程启动顺序（Java has no mechanism to handle deadlock. It won't even *know* deadlock occured. So it's up to you to design carefully. If you find yourself writing much multithreaded code, you might want to study "Java Threads" by Scott Oaks and Henry Wong for design tips on avoiding deadlock. One of the most common tips is to pay attention to the order in which your threads are started）。
 
 > **死锁发生的必要条件即是，存在两个对象与两个线程**。
 >
@@ -2098,4 +2098,10 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 - `sleep()`方法会抛出一个受检查的异常（`InterruptedException`），因此所以对 `sleep()`方法的调用，都必须封装在 `try/catch`代码块中，或是被声明出来；
 - 尽管不能保证某个线程在醒来时可以到达可运行行程队列的末尾，但为了有助于确保全部线程都有机会运行，仍就可使用 `sleep()` 方法。醒来的线程，依然可能会回到可运行队列的前端。在多数情况下，为保持手头的线程良好切换，只需编写一些时间设置恰当的 `sleep()` 方法即可（You can use `sleep()` to help make sure all threads get a chance to run, although there's no guarantee that when a thread wakes up it'll go to the end of the runnable line. It might, for example, go right back to the front. In most cases, approciately-timed `sleep()` calls are all you need to keep your threads switching nicely）；
 - 使用 `setName()` 方法（是的，又一个惊喜），就可以给某个线程取名字。虽然所有线程都有默认名字，不过给他们一个显式的名字，可以有助于对这些线程加以追踪，尤其是在使用 `print` 语句进行程序调试的时候；
--
+- 在运用线程时，而又存在两个或多个线程都对内存堆上的某个对象进行访问时，就会遇到严重问题；
+- 在两个或多个线程同时访问同一对象时，若一个线程在仍处于对某个对象的重要状态进行操作的过程中，就离开了他的正在运行状态，这样就会导致数据损坏（Two or more threads accessing the same object can lead to data corruption if one thread, for example, leaves the running state while still in the middle of manipulating an object's critical state）；
+- 要让对象成为线程安全，就要找出哪些语句应作为原子过程加以对待。也就是说，要找出（线程中的）哪些方法，必须在其他线程进入到这些同一对象上的相同方法之前，就要运行完毕（To make your objects thread-safe, decide which statements should be treated as one atomic process. In other words, decide which methods must run to completion before another thread enters the same method on the same object）；
+- 在要防止有两个线程进入到某个方法时，就要使用关键字 `synchronized` 来修正这个方法的声明；
+- 每个对象都有唯一一把锁，那把锁的钥匙也只有一把。多数时候不需关心那把锁；只有在对象有着同步方法时，那把锁才会生效；
+- 在线程尝试进入某个同步方法时，该线程必须获取到其所操作对象（线程的方法将尝试操作的对象）的钥匙。在钥匙不可用时（由于另一线程已持有该钥匙），那么线程就会进入到类似等待室的某个地方，直到那把钥匙可用为止；
+- 即使某个对象有着多个同步方法，他仍然只有一把钥匙。一旦有线程进入到那个对象的某个同步方法，就不会有其他线程可以这个对象的其他任何同步方法。这样的限制，实现了通过将那些对该对象数据进行操作的方法，进行同步化而对数据进行保护的目的（Even if an object has more than one synchronized method, there is still only one key. Once any thread has entered a synchronized method on that object, no thread can enter any other synchronized method on the sam object. This restriction lets you protect your data by synchronizing any method that manipulates the data）。
