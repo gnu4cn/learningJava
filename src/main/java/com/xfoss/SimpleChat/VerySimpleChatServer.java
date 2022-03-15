@@ -13,6 +13,7 @@ public class VerySimpleChatServer {
         try {
             ServerSocket serverSock = new ServerSocket(15000);
 
+            System.out.println("聊天服务器已建立");
             while(true) {
                 Socket clientSocket = serverSock.accept();
                 PrintWriter writer = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
