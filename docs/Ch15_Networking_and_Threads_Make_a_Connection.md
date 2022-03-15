@@ -2110,6 +2110,10 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 
 回到本章刚开始的时候，那里构建了可将外送消息发送到服务器，但无法收到任何东西的 `SimpleChatClient`。还记得吗？由于在那里需要一次干两件事的方法：在将消息发送给服务器（用户与GUI进行交互）的同时，要从服务器读取传入的消息，进而将这些传入消息显式在那个滚动文本区；因此那正是首次涉及到这整个线程问题的地方。
 
+> 是的，本章确实有这么一个结尾。然而现在还不是......
+>
+> Yes, there really IS an end to this chapter. But not yet...
+
 
 ```java
 package com.xfoss.SimpleChat;
@@ -2132,6 +2136,13 @@ public class SimpleChatClient extends JFrame {
         new SimpleChatClient("简单的聊天客户端");
     }
 
+    // 这里是 SimpleChatClient 的构造函数，是些已经见到过的 GUI
+    // 代码。只是其中增加了两句构造新的 readerThread 并启动这个
+    // 线程的语句。
+    //
+    // This is mostly GUI code you've seen before. Nothing special
+    // except the highlighted part where we start the new 'reader'
+    // thread.
     public SimpleChatClient (String winTitle) {
         super(winTitle);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -2158,6 +2169,14 @@ public class SimpleChatClient extends JFrame {
 
         setUpNetworking();
 
+        // 这里使用一个新的内部类，作为新线程的 Runnable(作业)，启动
+        // 了一个新线程。该线程的作业，是从服务器的套接字流进行读取，之后
+        // 在滚动文本区显示出全部传入消息。
+        //
+        // We're starting a new thread, using a new inner class as the 
+        // Runnable(job) for the thread. The thread's job is to read 
+        // from the server's socket stream, displaying any incoming
+        // messages in the scrolling text area.
         Thread readerThread = new Thread(new IncomingReader());
         readerThread.start();
 
@@ -2167,6 +2186,11 @@ public class SimpleChatClient extends JFrame {
     }
 
     class SendBtnListener implements ActionListener {
+        // 这里没有什么新东西。在用户点击了发送按钮时，这个方法就会
+        // 把文本字段的内容，发送到服务器。
+        //
+        // Nothing new here. When the user clicks the send button, this
+        // method sends the contents of the text field to the server.
         public void actionPerformed(ActionEvent ev){
             try {
                 writer.println(outgoing.getText());
@@ -2178,6 +2202,17 @@ public class SimpleChatClient extends JFrame {
         }
     }
 
+    // 这就是新线程完成的那些操作！！
+    //
+    // 在这个 run() 方法中，操作位处一个循环里（只要从服务器获取到的东西不是
+    // null），一次读取一行文本，并将读取到的各行，添加到那个滚动文本区（再
+    // 加上一个新行字符）。
+    //
+    // This is what the thread does!!
+    //
+    // In the run() method, it stays in a loop(as long as what it gets from
+    // the server is not null), reading a line at a time and adding each line
+    // to the scrolling text area(along with a new line characer).
     class IncomingReader implements Runnable {
         public void run () {
             String msg;
@@ -2192,11 +2227,21 @@ public class SimpleChatClient extends JFrame {
     }
 
     public void setUpNetworking () {
+        // 这里使用套接字，还获取到输入与输出流. 这个输出流在之前就已被用于往服务器
+        // 发送消息了，但现在这里要使用输入流，这样新的 ‘reader’ 线程，才能从服务器
+        // 获取到消息。
+        //
+        // We're using the socket to get the input and output streams. We were already
+        // using the output stream to send to the server, but now we're using the input
+        // stream so that the new 'reader' thread can get messages from the server.
         try {
             sock = new Socket("192.168.153.134", 15000);
+
             InputStreamReader streamReader = new InputStreamReader(sock.getInputStream(), "UTF-8");
             reader = new BufferedReader (streamReader);
+
             writer = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), "UTF-8"));
+
             System.out.println("网络通信已建立");
         } catch (IOException ex){ex.printStackTrace();}
     }
