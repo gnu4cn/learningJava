@@ -70,7 +70,7 @@ public class SimpleChatClient extends JFrame {
 
             try{
                 while ((msg = reader.readLine()) != null) {
-                    System.out.format("读取到消息 %s", msg);
+                    System.out.format("读取到消息 %s\n", msg);
                     incoming.append(String.format("%s \n", msg));
                 }
             } catch (Exception ex){ex.printStackTrace();}
