@@ -23,7 +23,6 @@ repositories {
 
 dependencies {
     files("./")
-    implementation("edu.sc.seis.launch4j:launch4j:2.5.1")
     implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
     implementation("net.java.dev.jna:jna:5.5.0")
@@ -37,7 +36,8 @@ description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
-    mainClassName = "com.xfoss.learningJava.TestSyncTest"
+    mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
+    // mainClassName = "com.xfoss.SimpleChat.SimpleChatClient"
     getMainClass().set(mainClassName)
 }
 
@@ -69,10 +69,4 @@ tasks {
 
 tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "1.8"
-}
-
-tasks.withType<DefaultLaunch4jTask> {
-    outfile = "QuizCardBuilder.exe"
-    icon = "$projectDir/src/main/resources/images/icon.ico"
-    productName = "QuizCard"
 }

@@ -11,7 +11,7 @@ public class VerySimpleChatServer {
         clientOutputStreams = new ArrayList();
 
         try {
-            ServerSocket serverSock = new ServerSocket(5000);
+            ServerSocket serverSock = new ServerSocket(15000);
 
             while(true) {
                 Socket clientSocket = serverSock.accept();

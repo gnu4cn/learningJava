@@ -2105,3 +2105,11 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 - 每个对象都有唯一一把锁，那把锁的钥匙也只有一把。多数时候不需关心那把锁；只有在对象有着同步方法时，那把锁才会生效；
 - 在线程尝试进入某个同步方法时，该线程必须获取到其所操作对象（线程的方法将尝试操作的对象）的钥匙。在钥匙不可用时（由于另一线程已持有该钥匙），那么线程就会进入到类似等待室的某个地方，直到那把钥匙可用为止；
 - 即使某个对象有着多个同步方法，他仍然只有一把钥匙。一旦有线程进入到那个对象的某个同步方法，就不会有其他线程可以这个对象的其他任何同步方法。这样的限制，实现了通过将那些对该对象数据进行操作的方法，进行同步化而对数据进行保护的目的（Even if an object has more than one synchronized method, there is still only one key. Once any thread has entered a synchronized method on that object, no thread can enter any other synchronized method on the sam object. This restriction lets you protect your data by synchronizing any method that manipulates the data）。
+
+## 新的改进过的 `SimpleChatClient`
+
+回到本章刚开始的时候，那里构建了可将外送消息发送到服务器，但无法收到任何东西的 `SimpleChatClient`。还记得吗？由于在那里需要一次干两件事的方法：在将消息发送给服务器（用户与GUI进行交互）的同时，要从服务器读取传入的消息，进而将这些传入消息显式在那个滚动文本区；因此那正是首次涉及到这整个线程问题的地方。
+
+
+```java
+```
