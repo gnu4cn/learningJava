@@ -2094,7 +2094,7 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 
 ## 重点
 
-- 静态方法 `Thread.sleep()` 会强制线程，在传递给这个 `sleep` 方法的参数时长之内，离开运行状态。`Thread.sleep(200)`会将线程置于睡眠状态 200 毫秒；
+- 静态方法 `Thread.sleep()` 会强制线程，在传递给这个 `sleep` 方法的参数时长之内，离开运行状态。比如`Thread.sleep(200)`会将线程置于睡眠状态 200 毫秒；
 - `sleep()`方法会抛出一个受检查的异常（`InterruptedException`），因此所以对 `sleep()`方法的调用，都必须封装在 `try/catch`代码块中，或是被声明出来；
 - 尽管不能保证某个线程在醒来时可以到达可运行行程队列的末尾，但为了有助于确保全部线程都有机会运行，仍就可使用 `sleep()` 方法。醒来的线程，依然可能会回到可运行队列的前端。在多数情况下，为保持手头的线程良好切换，只需编写一些时间设置恰当的 `sleep()` 方法即可（You can use `sleep()` to help make sure all threads get a chance to run, although there's no guarantee that when a thread wakes up it'll go to the end of the runnable line. It might, for example, go right back to the front. In most cases, approciately-timed `sleep()` calls are all you need to keep your threads switching nicely）；
 - 使用 `setName()` 方法（是的，又一个惊喜），就可以给某个线程取名字。虽然所有线程都有默认名字，不过给他们一个显式的名字，可以有助于对这些线程加以追踪，尤其是在使用 `print` 语句进行程序调试的时候；
@@ -2104,7 +2104,7 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 - 在要防止有两个线程进入到某个方法时，就要使用关键字 `synchronized` 来修正这个方法的声明；
 - 每个对象都有唯一一把锁，那把锁的钥匙也只有一把。多数时候不需关心那把锁；只有在对象有着同步方法时，那把锁才会生效；
 - 在线程尝试进入某个同步方法时，该线程必须获取到其所操作对象（线程的方法将尝试操作的对象）的钥匙。在钥匙不可用时（由于另一线程已持有该钥匙），那么线程就会进入到类似等待室的某个地方，直到那把钥匙可用为止；
-- 即使某个对象有着多个同步方法，他仍然只有一把钥匙。一旦有线程进入到那个对象的某个同步方法，就不会有其他线程可以这个对象的其他任何同步方法。这样的限制，实现了通过将那些对该对象数据进行操作的方法，进行同步化而对数据进行保护的目的（Even if an object has more than one synchronized method, there is still only one key. Once any thread has entered a synchronized method on that object, no thread can enter any other synchronized method on the sam object. This restriction lets you protect your data by synchronizing any method that manipulates the data）。
+- 即使某个对象有着多个同步方法，他仍然只有一把钥匙。一旦有线程进入到那个对象的某个同步方法，就不会有其他线程可以进入到这个对象的其他任何同步方法。这样的限制，实现了通过将那些对该对象数据进行操作的方法，进行同步化而对数据进行保护的目的（Even if an object has more than one synchronized method, there is still only one key. Once any thread has entered a synchronized method on that object, no thread can enter any other synchronized method on the sam object. This restriction lets you protect your data by synchronizing any method that manipulates the data）。
 
 ## 新的改进过的 `SimpleChatClient`
 
