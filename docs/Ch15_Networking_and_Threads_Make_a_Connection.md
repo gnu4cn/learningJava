@@ -2254,6 +2254,76 @@ public class SimpleChatClient extends JFrame {
 
 对于之前两个版本的 `ChatClient`，都可以使用下面这个服务器代码。所宣称过的全部服务器应答，在这里都是有效的。为了将代码裁剪到最基本的功能，这里拿掉了很多令其成一个真正服务器的部分。也就是说，虽然这个服务器可以运行，但至少有上千种方式可以破坏掉他。若在结束本教程后想要一个真正良好的服务器程序，那么请回到这里进行修改，让这个服务器代码更为鲁棒（You can use this server code for both versions of the `ChatClient`. Every possible disclainer ever disclaimed is in effect here. To keep the code stripped down to the bare essentials, we took out a lot of parts that you'd need to make this a real server. In other words, it works, but there are at least a hundred ways to break it. If you want a Really Good Sharpen Your Pencil for after you've finished this book, come back and make this server code more robust）。
 
-而另一个可能的动手机会，且是一个现在就可以进行的，就是自己来注释这个服务器代码。这样在由自己搞清楚发生了什么的情况下，与由编者来解释相比，可以更好地掌握。
+而另一个可能的动手机会，且是一个现在就可以进行的，就是自己来注释这个服务器代码。这样在由自己搞清楚发生了什么的情况下，与由编者来解释相比，可以更好地掌握。还有就是，这是已经编写好的代码，因此真的没有必要掌握他的全部。这个服务器代码只是为了支持上面讲到的两个版本的`ChatClient`而已。
 
+> **要运行 `ChatClient` 程序，就需要两个终端。首先在一个终端中启动这个服务器，随后在另一终端中启动客户端**。
 
+```java
+package com.xfoss.SimpleChat;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class VerySimpleChatServer {
+    ArrayList clientOutputStreams;
+
+    public VerySimpleChatServer () {
+        clientOutputStreams = new ArrayList();
+
+        try {
+            ServerSocket serverSock = new ServerSocket(15000);
+
+            System.out.println("聊天服务器已建立");
+            while(true) {
+                Socket clientSocket = serverSock.accept();
+                PrintWriter writer = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
+                clientOutputStreams.add(writer);
+
+                Thread t = new Thread(new ClientHandler(clientSocket));
+                t.start();
+                System.out.println("已获取到一个连接");
+            }
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+
+    public class ClientHandler implements Runnable {
+        BufferedReader reader;
+        Socket sock;
+
+        public ClientHandler (Socket clientSocket) {
+            try {
+                sock = clientSocket;
+                InputStreamReader isReader = new InputStreamReader(sock.getInputStream(), "UTF-8");
+                reader = new BufferedReader(isReader);
+            } catch (Exception ex) {ex.printStackTrace();}
+        }
+
+        public void run () {
+            String message;
+            try {
+                while ((message = reader.readLine()) != null) {
+                    System.out.format("读取到：%s\n", message);
+                    tellEveryOne(message);
+                }
+            } catch (Exception ex) {ex.printStackTrace();}
+        }
+    }
+    
+    public void tellEveryOne(String message) {
+        Iterator it = clientOutputStreams.iterator();
+
+        while(it.hasNext()) {
+            try {
+                PrintWriter writer = (PrintWriter) it.next();
+                writer.println(message);
+                writer.flush();
+            } catch (Exception ex) {ex.printStackTrace();}
+        }
+    }
+
+    public static void main(String[] args) {
+        new VerySimpleChatServer();
+    }
+}
+```
