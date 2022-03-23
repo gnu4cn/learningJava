@@ -2327,3 +2327,13 @@ public class VerySimpleChatServer {
     }
 }
 ```
+
+## 答疑（同步的问题）
+
+- **对于静态变量状态的保护，又是怎样的呢？在有着修改静态变量状态的静态方法时，还仍然可以使用同步化吗（What about protecting static variable state？If you have static methods that chagne the static variable state, can still use synchronization）**？
+
+> 是的！请记住那些静态方法，是对类运行而非对该类运行的。那么就会想要知道，到底哪些对象的锁，将用在静态方法上呢？毕竟，可能还不曾有那个类的一个实例存在。而幸运的是，就如同每个 *类* 都有其自己的锁一样，每个已加载的 *类*，也有着一把锁。那就意味着，在内存堆上存在三个 `Dog` 对象时，就会有总共四把 `Dog`相关的锁。其中三把属于这个三个`Dog`实例，同时有一把属于`Dog`类本身。在对某个静态方法进行同步化时，Java就会使用类本身的那把锁。因此在对某个类的两个静态方法进行同步化时，线程就需要类的锁，来进入这两个方法（Yes! Remember that static methods run against the class and not against an individual instance of the class. So you might wonder whose object's lock would be used on a static method? After all, there might not even *be* any instances of that class. Fortunately, just as each *object* has its own lock, each loaded *class* has a lock. That means that if you have three `Dog` objects on your heap, you have a total of four `Dog`-related locks. Three belonging to the three `Dog` instances, and one belonging to the `Dog` class itself. When you synchronize a static method, Java uses the lock of the class itself. So if you synchronize two static methods in a single class, a thread will need the class lock to enter *either* of the methods）。
+
+- **那什么是线程优先级呢？我曾听说那是一种可以对调度施加控制的方式（What are thread priorities? I've heard that's a way you can control scheduling）**。
+
+> 线程优先级 *可能* 有助于对调度器施加影响，
