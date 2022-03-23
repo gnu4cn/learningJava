@@ -2247,3 +2247,13 @@ public class SimpleChatClient extends JFrame {
     }
 }
 ```
+
+### 那个相当相当简单的聊天服务器
+
+**The really really simple Chat Server**
+
+对于之前两个版本的 `ChatClient`，都可以使用下面这个服务器代码。所宣称过的全部服务器应答，在这里都是有效的。为了将代码裁剪到最基本的功能，这里拿掉了很多令其成一个真正服务器的部分。也就是说，虽然这个服务器可以运行，但至少有上千种方式可以破坏掉他。若在结束本教程后想要一个真正良好的服务器程序，那么请回到这里进行修改，让这个服务器代码更为鲁棒（You can use this server code for both versions of the `ChatClient`. Every possible disclainer ever disclaimed is in effect here. To keep the code stripped down to the bare essentials, we took out a lot of parts that you'd need to make this a real server. In other words, it works, but there are at least a hundred ways to break it. If you want a Really Good Sharpen Your Pencil for after you've finished this book, come back and make this server code more robust）。
+
+而另一个可能的动手机会，且是一个现在就可以进行的，就是自己来注释这个服务器代码。这样在由自己搞清楚发生了什么的情况下，与由编者来解释相比，可以更好地掌握。
+
+
