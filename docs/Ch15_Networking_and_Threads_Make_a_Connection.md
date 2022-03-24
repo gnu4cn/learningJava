@@ -2337,3 +2337,8 @@ public class VerySimpleChatServer {
 - **那什么是线程优先级呢？我曾听说那是一种可以对调度施加控制的方式（What are thread priorities? I've heard that's a way you can control scheduling）**。
 
 > 线程优先级 *可能* 有助于对调度器施加影响，但他们仍就不会提供到任何的保证。线程优先级是开发者就某个线程的重要性，而向调度器进行通知（也仅是在调度器确实有线程优先级实现的情况下）的一些数字。大体上，在某个具有较高优先级的线程，突然变成可运行状态时，调度器会将较低优先级的线程踢出正在运行状态。然而......再次声明，“并无保证”。建议只有在打算对 *性能* 施加影响时，才使用优先级的设置，但绝不要依赖线程优先级去保证程序正确（Thread priorities *might* help you influence the schedular, but they still don't offer any guarantee. Thread priorities are numerical values that tell the scheduler（if it cares） how important a thread is to you. In general, the scheduler will kick a lower priority thread out of the running state if a higher priority thread suddenly becomes runnable. But...one more time, say it with me now, "there is no guarantee." We recommend that you use priorities only if you want to influence *performance*, but never, ever rely on them for program correctness）。
+
+- **为何不是仅仅将要对数据加以保护的类中所有读取器与设置器进行同步化呢？比如对于类 `BankAccount`，为何不可以只同步 `checkBalance()` 和 `withdraw()`，而是同步了 `Runnable` 类的 `makeWithdrawal()` 方法呢（Why don't you just synchronize all the getters and setters from the class with the data you're trying to protect? Like, why couldn't we have synchronized just the `checkBalance()` and `withdrawal()` methods from class `BankAccount`, instead of synchronizing the `makeWithdrawal()` method from the `Runnable`s class）**？
+
+
+- 
