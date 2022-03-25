@@ -2356,3 +2356,13 @@ public class VerySimpleChatServer {
 **他将连接到一个简单的 `MusicServer`，从而就能与其他 `BeatBox`客户端，相互发送和接收节拍编排**。
 
 **代码是相当长的，因此完整代码清单实际上是在附录A里头**。
+
+### 最终的 `BeatBox`客户端程序
+
+此代码的绝大部分，与先前几章的代码厨房的代码是一样的，因此就不再全部注释了。新的几个部分包括：
+
+- 图形用户界面GUI -- 增加了显示传入消息（实际上是个滚动清单）文本区组件和一个文本字段组件；
+
+- 网络通信NETWORKING -- 与本章中的 `SimpleChatClient` 一样，`BeatBox`现在会连接到服务器，并获取到一个输入与输出流；
+
+- 线程THREADS -- 又一次与 `SimpleChatClient`类似，这里启动了一个 `reader` 类来保持对来自服务器的传入消息的找寻。不过这里的传入消息不光是文本，而是包含了 **两个** 对象：`String`的消息和序列化的`ArrayList`（the serialized `ArrayList`即保存所有勾选框状态的那个东西。）
