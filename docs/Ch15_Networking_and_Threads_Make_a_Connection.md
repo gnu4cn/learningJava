@@ -2348,3 +2348,11 @@ public class VerySimpleChatServer {
 - 当然他就在他醒来后，再度取得那把钥匙，这样他就可以调用那个同步的 `withdraw()`方法，然而这样做仍留下了在同步化之前曾遇到过的同样问题！Ryan能够检查余额、睡过去，然后 Monica 就可以进入并在 Ryan 有机会醒来且完成他的提取之前，对余额进行检查（Of course he would grad the key again, after he wakes up, so that he can call the synchronized `withdraw()` method, but this still leaves us with the same problem we had before synchronization! Ryan can check the balance, go to sleep, and Monica can come in and also check the balance before Ryan has a chance to wakes up and completes his withdrawal）。
 -
 - 因此将全部存取方法进行同步化，从而阻止其他线程介入，可能是个不错的主意，但仍需把那些具有必须以一个原子单元方式执行语句的方法，加以同步化（So synchronizing all the access methods is probably a good idea, to prevent other threads from getting in, but you still need to synchronizing the methods that have statements that must execute as one atomic unit）。
+
+## 代码厨房（Code Kitchen）
+
+**这是最后一版的 `BeatBox`了**！
+
+**他将连接到一个简单的 `MusicServer`，从而就能与其他 `BeatBox`客户端，相互发送和接收节拍编排**。
+
+**代码是相当长的，因此完整代码清单实际上是在附录A里头**。
