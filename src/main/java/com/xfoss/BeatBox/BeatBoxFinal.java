@@ -13,7 +13,7 @@ import com.xfoss.Utils.XPlatformThings;
 public class BeatBoxFinal extends JFrame{
     JPanel mainPanel;
     JList incomingList;
-    JTextField userMessage;
+    JTextField userMessageBox;
     ArrayList<JCheckBox> checkboxList;
     int nextNum;
     Vector<String> listVector = new Vector<String>();
@@ -48,6 +48,8 @@ public class BeatBoxFinal extends JFrame{
         super("赛博 BeatBox");
 
         userName = name;
+        // 没什么新的东西......设置网络通信、I/O及构造（并启动）
+        // 那个 reader 线程。
         try {
             Socket sock = new Socket("127.0.0.1", 14242);
             out = new ObjectOutputStream(sock.getOutputStream());
@@ -58,6 +60,10 @@ public class BeatBoxFinal extends JFrame{
             System.out.println("无法连接 -- 你只能自己一个人玩了。");
             ex.printStackTrace();
         }
+
+        setUpMidi();
+
+        // 下面这些是 GUI 代码，没什么新东西
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/ico.png");
@@ -69,6 +75,7 @@ public class BeatBoxFinal extends JFrame{
         bg.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         checkboxList = new ArrayList<JCheckBox> ();
+
         Box btnBox = new Box(BoxLayout.Y_AXIS);
 
         JButton btnS = new JButton("开始▶");
@@ -83,8 +90,8 @@ public class BeatBoxFinal extends JFrame{
         btnReset.addActionListener(new ResetListener());
         btnBox.add(btnReset);
 
-        JButton btnSerializeIt = new JButton("将其序列化💾");
-        btnSerializeIt.addActionListener(new SendPatternListener());
+        JButton btnSerializeIt = new JButton("保存（序列化）💾");
+        btnSerializeIt.addActionListener(new SavePatternListener());
         btnBox.add(btnSerializeIt);
 
         JButton btnRestore = new JButton("恢复🔙");
@@ -104,6 +111,20 @@ public class BeatBoxFinal extends JFrame{
 
         tempoLabel = new JLabel(String.format("速度因子：%.2f", 1.00f)); 
         btnBox.add(tempoLabel);
+
+        JButton sendItBtn = new JButton("发出🚀");
+        sendItBtn.addActionListener(new SendListener());
+        btnBox.add(sendItBtn);
+
+        userMessageBox = new JTextField();
+        btnBox.add(userMessageBox);
+
+        incomingList = new JList();
+        incomingList.addListSelectionListener(new ListSelectionListener());
+        incomingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane theList = new JScrollPane(incomingList);
+        btnBox.add(theList);
+        incomingList.setListData(listVector);
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
@@ -127,8 +148,6 @@ public class BeatBoxFinal extends JFrame{
             checkboxList.add(c);
             mainPanel.add(c);
         }
-
-        setUpMidi();
 
         setBounds(50, 50, 640, 480);
         pack();
@@ -183,13 +202,21 @@ public class BeatBoxFinal extends JFrame{
         } catch(Exception e) {e.printStackTrace();}
     }
 
+    class ListSelectionListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev){}
+    }
+
     class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             buildTrackAndStart();
         }
     }
 
-    class SendPatternListener implements ActionListener {
+    class SendListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev){}
+    }
+
+    class SavePatternListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             boolean[] checkboxesState = new boolean[256];
 
