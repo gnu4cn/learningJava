@@ -119,6 +119,8 @@ public class BeatBoxFinal extends JFrame{
         userMessageBox = new JTextField();
         btnBox.add(userMessageBox);
 
+        // JList 是个之前不曾使用过的GUI部件。这正是传入消息得以显示出来
+        // 的地方。
         incomingList = new JList();
         incomingList.addListSelectionListener(new ListSelectionListener());
         incomingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
