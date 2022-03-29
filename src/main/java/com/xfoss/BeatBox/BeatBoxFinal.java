@@ -119,15 +119,18 @@ public class BeatBoxFinal extends JFrame{
         userMessageBox = new JTextField();
         btnBox.add(userMessageBox);
 
-        // JList 是个之前不曾使用过的GUI部件。这正是传入消息得以显示出来
-        // 的地方。
+        // JList 是个之前不曾使用过的GUI部件。这正是传入消息得以显示
+        // 的地方。与一般聊天那种只是查看传入消息所不同，在这个app中
+        // 是可以从传入消息清单中选择一条消息，来加载并演奏出所附带
+        // 的节拍编排。
         incomingList = new JList();
-        incomingList.addListSelectionListener(new ListSelectionListener());
+        incomingList.addListSelectionListener(new IncomingListSelectionListener());
         incomingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane theList = new JScrollPane(incomingList);
         btnBox.add(theList);
         incomingList.setListData(listVector);
 
+        // 这以后就没什么新东西了。
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
             nameBox.add(new Label(instrumentNames[i]));
@@ -156,11 +159,31 @@ public class BeatBoxFinal extends JFrame{
         setVisible(true);
     }
 
+    // 这就是那个线程作业 -- 从服务器读入数据。在该代码中，“数据”
+    // 将始终是两个序列化的对象：字符串的消息以及节拍编排（一个那些
+    // 勾选框状态值的 ArrayList）
+    //
+    //
     public class RemoteReader implements Runnable {
+        boolean[] checkboxState = null;
+        String nameToShow = null;
+        Object obj = null;
         public void run() {
+            try {
+                // 在有消息进入时，
+                while((obj=in.readObject()) != null) {
+                    System.out.format("已从服务器获取到一个对象\n%s\n", obj.getClass());
+                    String nameToShow = (String) obj;
+                    checkboxState = (boolean[]) in.readObject();
+                    otherSeqsMap.put(nameToShow, checkboxState);
+                    listVector.add(nameToShow);
+                    incomingList.setListData(listVector);
+                }
+            } catch (Exception ex) {ex.printStackTrace();}
         }
     }
 
+    // 获取音序器，构造一个音序，还构造了一个音轨
     public void setUpMidi () {
         try {
             s = MidiSystem.getSequencer();
@@ -177,6 +200,11 @@ public class BeatBoxFinal extends JFrame{
         seq.deleteTrack(t);
         t = seq.createTrack();
 
+        // 通过遍历这些勾选框而获取到他们的状态，并将这些状态
+        // 映射到某种乐器（还构造了该乐器的 MidiEvent），从而
+        // 构造出一个音轨。此操作相当复杂，不过也就只是在之前的
+        // 章节中那样，因此请参考之前的代码厨房，以再度获得完整
+        // 的说明。
         for (int i = 0; i < 16; i++){
             trackList = new int[16];
 
@@ -204,9 +232,31 @@ public class BeatBoxFinal extends JFrame{
         } catch(Exception e) {e.printStackTrace();}
     }
 
-    class ListSelectionListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev){}
+    // 以下是一些 GUI 的事件收听器。这些与先前章中的版本一致。
+    //
+    // 这几个GUI事件收听器是新加入的。
+    //
+    // 这是一个新的 ListSelectionListener 事件收听器，在用户在消息清单上
+    // 做出了一个选择时，该事件就会通知我们。在用户选中了一条消息时，这里
+    // 就会立即加载与该消息相关联的节拍编排（在一个名为 otherSeqsMap 的
+    // HashMap中），并开始演奏这个节拍编排。由于在获取 ListSelectionEvent 事件
+    // 时存在一些古怪的事情，因此这里有多个 if 条件测试。
+    class IncomingListSelectionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent ev){
+            if(!ev.getValueIsAdjusting()){
+                String selected = (String) incomingList.getSelectedValue();
+                if(selected != null) {
+                    // 现在去到乐器图谱，并修改其音序
+                    boolean[] selectedState = (boolean[]) otherSeqsMap.get(selected);
+                    changeSequence(selectedState);
+                    sequncer.stop();
+                    buildTrackAndStart();
+                }
+            }
+        }
     }
+
+    public void changeSequence(boolean[] state){}
 
     class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
@@ -214,8 +264,28 @@ public class BeatBoxFinal extends JFrame{
         }
     }
 
+    // 这里与发送一条字符串消息不同，是将两个对象（字符串消息与节拍
+    // 编排对象）进行序列化，并将这两个对象写到那个套接字输出流（到
+    // 服务器的）。
     class SendListener implements ActionListener {
-        public void actionPerformed(ActionEvent ev){}
+        public void actionPerformed(ActionEvent ev){
+            // 构造一个只保存那些勾选框状态的 ArrayList
+            boolean[] checkboxState = new boolean[256];
+            for (int i = 0; i < 256; i++) {
+                JCheckBox check = (JCheckBox) checkboxList.get(i);
+                if(check.isSelected()) checkboxState[i] = true;
+            }
+
+            String msgToSend = null;
+            try {
+                out.writeObject(String.format("%s%d: %s", userName, nextNum, userMessageBox.getText()));
+                out.writeObject(checkboxState);
+            } catch(Exception ex) {
+                System.out.println("抱歉兄弟。无法将其发送到服务器。");
+                ex.printStackTrace();
+            }
+            userMessageBox.setText("");
+        }
     }
 
     class SavePatternListener implements ActionListener {
