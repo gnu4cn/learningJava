@@ -183,6 +183,14 @@ public class BeatBoxFinal extends JFrame{
         }
     }
 
+    public class PlayMineListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            if(mySeq != null) {
+                seq = mySeq;
+            }
+        }
+    }
+
     // 获取音序器，构造一个音序，还构造了一个音轨
     public void setUpMidi () {
         try {
@@ -256,7 +264,15 @@ public class BeatBoxFinal extends JFrame{
         }
     }
 
-    public void changeSequence(boolean[] state){}
+    // 在用户选择了传入消息清单中的某条消息时，便会调用此方法。这里会
+    // 立即将编排修改为用户选中的那个编排。
+    public void changeSequence(boolean[] state){
+        for (int i = 0; i < 256; i++) {
+            JCheckBox check = (JCheckBox) checkboxList.get(i);
+            if (state[i]) check.setSelected(true);
+            else check.setSelected(false);
+        }
+    }
 
     class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
