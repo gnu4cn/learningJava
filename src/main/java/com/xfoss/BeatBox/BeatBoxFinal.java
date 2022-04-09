@@ -28,10 +28,22 @@ public class BeatBoxFinal extends JFrame{
     Track t;
     JLabel tempoLabel = null;
 
-    String [] instrumentNames = {"贝斯鼓（低音鼓）", "闭镲（闭合击镲）",
-        "空心钹（开音踩钹）", "小鼓（军鼓）", "双面钹（强音钹）", "拍手（拍掌声）",
-        "高音鼓（高音桶鼓）", "高音圆鼓（高音小鼓）", "沙锤（沙铃）", "口哨", "低音手鼓",
-        "牛铃（牛颈铃）", "颤音叉", "中低音桶鼓", "高音撞铃",
+    String [] instrumentNames = {
+        "贝斯鼓（低音鼓）", 
+        "闭镲（闭合击镲）",
+        "空心钹（开音踩钹）", 
+        "小鼓（军鼓）", 
+        "双面钹（强音钹）", 
+        "拍手（拍掌声）",
+        "高音鼓（高音桶鼓）", 
+        "高音圆鼓（高音小鼓）", 
+        "沙锤（沙铃）", 
+        "口哨", 
+        "低音手鼓",
+        "牛铃（牛颈铃）", 
+        "颤音叉", 
+        "中低音桶鼓", 
+        "高音撞铃",
         "开音高音手鼓"};
 
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
@@ -163,7 +175,18 @@ public class BeatBoxFinal extends JFrame{
     // 将始终是两个序列化的对象：字符串的消息以及节拍编排（一个那些
     // 勾选框状态值的 ArrayList）
     //
+    // 在消息传入进来时，这里就会读取（解序列化）那两个对象（消息与
+    // 那些布尔值的勾选框状态的 ArrayList 对象），并把他添加到那个 JList
+    // 组件。添加到 JList 是通过两步完成的：设置了一个该清单数据的矢量值（
+    // Vector, 矢量类型就是一种老式的 ArrayList），并在随后告诉那个 JList 去
+    // 使用那个矢量值，作为在那个清单中显式内容的源。
     //
+    // When a message comes in, we read(deserialize) the two objects(the
+    // message and the ArrayList of Boolean checkbox state values) and 
+    // add it to the JList component. Adding to a JList is a two-step
+    // thing: you keep a Vector of the lists data(Vector is an old-fashioned
+    // ArrayList), and then tell the JList to use that Vector as it's source for
+    // what to display in the list.
     public class RemoteReader implements Runnable {
         boolean[] checkboxState = null;
         String nameToShow = null;
@@ -184,6 +207,8 @@ public class BeatBoxFinal extends JFrame{
     }
 
     public class PlayMineListener implements ActionListener {
+        // 在用户从那个清单中选择了某个东西时，就会调用到这个方法
+        // 这里将立即把节拍编排，修改为用户所选的那个。
         public void actionPerformed (ActionEvent ev) {
             if(mySeq != null) {
                 seq = mySeq;
@@ -244,9 +269,9 @@ public class BeatBoxFinal extends JFrame{
     //
     // 这几个GUI事件收听器是新加入的。
     //
-    // 这是一个新的 ListSelectionListener 事件收听器，在用户在消息清单上
-    // 做出了一个选择时，该事件就会通知我们。在用户选中了一条消息时，这里
-    // 就会立即加载与该消息相关联的节拍编排（在一个名为 otherSeqsMap 的
+    // 这也是个新的东西......这是一个新的 ListSelectionListener 事件收听器，在
+    // 用户在消息清单上做出了一个选择时，该事件就会通知我们。在用户选中了一条
+    // 消息时，这里就会立即加载与该消息相关联的节拍编排（在一个名为 otherSeqsMap 的
     // HashMap中），并开始演奏这个节拍编排。由于在获取 ListSelectionEvent 事件
     // 时存在一些古怪的事情，因此这里有多个 if 条件测试。
     class IncomingListSelectionListener implements ListSelectionListener {
@@ -257,7 +282,7 @@ public class BeatBoxFinal extends JFrame{
                     // 现在去到乐器图谱，并修改其音序
                     boolean[] selectedState = (boolean[]) otherSeqsMap.get(selected);
                     changeSequence(selectedState);
-                    sequncer.stop();
+                    s.stop();
                     buildTrackAndStart();
                 }
             }
@@ -280,9 +305,9 @@ public class BeatBoxFinal extends JFrame{
         }
     }
 
-    // 这里与发送一条字符串消息不同，是将两个对象（字符串消息与节拍
-    // 编排对象）进行序列化，并将这两个对象写到那个套接字输出流（到
-    // 服务器的）。
+    // 这是个新的事件收听器......这里与发送一条字符串消息不同，是
+    // 将两个对象（字符串消息与节拍编排对象）进行序列化，并将这两
+    // 个对象写到那个套接字输出流（到服务器的）。
     class SendListener implements ActionListener {
         public void actionPerformed(ActionEvent ev){
             // 构造一个只保存那些勾选框状态的 ArrayList
