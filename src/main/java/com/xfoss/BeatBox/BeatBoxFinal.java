@@ -138,8 +138,10 @@ public class BeatBoxFinal extends JFrame{
         incomingList = new JList();
         incomingList.addListSelectionListener(new IncomingListSelectionListener());
         incomingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         JScrollPane theList = new JScrollPane(incomingList);
         btnBox.add(theList);
+
         incomingList.setListData(listVector);
 
         // 这以后就没什么新东西了。
@@ -156,6 +158,7 @@ public class BeatBoxFinal extends JFrame{
         GridLayout g = new GridLayout(16, 16);
         g.setVgap(1);
         g.setHgap(2);
+
         mainPanel = new JPanel(g);
         bg.add(BorderLayout.CENTER, mainPanel);
 
@@ -193,7 +196,6 @@ public class BeatBoxFinal extends JFrame{
         Object obj = null;
         public void run() {
             try {
-                // 在有消息进入时，
                 while((obj=in.readObject()) != null) {
                     System.out.format("已从服务器获取到一个对象\n%s\n", obj.getClass());
                     String nameToShow = (String) obj;
@@ -216,6 +218,8 @@ public class BeatBoxFinal extends JFrame{
         }
     }
 
+    // 全部有关 MIDI 的代码，都跟之前的版本一模一样。
+    //
     // 获取音序器，构造一个音序，还构造了一个音轨
     public void setUpMidi () {
         try {
@@ -317,7 +321,6 @@ public class BeatBoxFinal extends JFrame{
                 if(check.isSelected()) checkboxState[i] = true;
             }
 
-            String msgToSend = null;
             try {
                 out.writeObject(String.format("%s%d: %s", userName, nextNum, userMessageBox.getText()));
                 out.writeObject(checkboxState);
