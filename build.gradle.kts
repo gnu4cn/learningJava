@@ -15,9 +15,9 @@ plugins {
 }
 
 repositories {
-//    flatDir {
-//        dirs("src/main/java")
-//    }
+    flatDir {
+        dirs("src/main/java")
+    }
     mavenLocal()
     maven {
         url = uri("https://mirrors.huaweicloud.com/repository/maven/")

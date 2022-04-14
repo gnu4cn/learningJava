@@ -1,3 +1,5 @@
+package com.xfoss.CollectionAndGenerics;
+
 import java.util.*;
 import java.io.*;
 import com.xfoss.Utils.XPlatformThings;
