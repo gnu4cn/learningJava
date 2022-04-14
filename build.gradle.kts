@@ -15,6 +15,9 @@ plugins {
 }
 
 repositories {
+//    flatDir {
+//        dirs("src/main/java")
+//    }
     mavenLocal()
     maven {
         url = uri("https://mirrors.huaweicloud.com/repository/maven/")
@@ -37,7 +40,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
     // mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
-    mainClassName = "com.xfoss.SimpleChat.SimpleChatClient"
+    mainClassName = "com.xfoss.CollectionAndGenerics.JukeBox1"
     getMainClass().set(mainClassName)
 }
 
