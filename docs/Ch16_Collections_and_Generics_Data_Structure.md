@@ -345,4 +345,6 @@ Note: Some input files use unchecked or unsafe operations.
 
 ***然而这代码并没有跑起来***!
 
+编译器说，他无法找到适当的、取一个 `ArrayList<Song>` 作参数的 `sort` 方法，那么或许是这个 `sort()` 方法不喜欢一个 `Song`对象构成的 `ArrayList`？不过这个 `Collections.sort()` 方法又并不介意一个 `ArrayList<String>`，那么 `Song` 与 `String` 直接，到底有什么重要的区别呢？是什么差异导致了编译器的失败呢？
+
 
