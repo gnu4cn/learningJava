@@ -86,7 +86,7 @@ public class JukeBox1 {
 
 *图 3 - Java API - ArrayList*
 
-> *`ArrayList 有着很多方法，不过却没有可用于排序的*......
+> *`ArrayList` 有着很多方法，不过却没有可用于排序的*......
 
 
 ### `ArrayList` 并非唯一的集合
@@ -120,3 +120,17 @@ public class JukeBox1 {
 - **`LinkedHashMap`**
 
     与常规 `HashMap` 类似，但他可以记住其中元素（名/值对）插入的顺序，也可以被配置为记住那些最近被访问过元素的顺序（Like a regular `HashMap`, except it can remember the order in which elements(name/value pairs) were inserted, or it can be configured to remember the order in which elements were last accessed）。 
+
+
+### 可以使用`TreeSet`......，也可以使用`Collections.sort()方法`
+
+
+在将全部字符串（即那些歌曲标题）放入到一个 **`TreeSet`** 而非 `ArrayList`中时，这些字符串就会自动以正确位置，即字母顺序着地。之后无论何时打印出这个清单，这些元素都会始终以字母顺序输出。
+
+在需要一个 *集合（set）*（接下来就会讲到什么是集合），或可以肯定清单必须 *始终* 保持字母排序时，这样处理是相当不错的。
+
+不过在别的情况下，在不需要清单保持排序时，相比这样的需求，使用`TreeSet`就显得有些代价高昂 -- ***在每次往`TreeSet`插入元素时，`TreeSet`都必须花时间去找出应在何处插入这个元素***。而使用 `ArrayList`，由于新元素只会在清单末尾加入，那么元素插入就可以快得让人窒息。
+
+![Java API `java.util.Collections`](images/Ch16_04.png)
+
+*Java API `java.util.Collections`*
