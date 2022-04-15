@@ -213,3 +213,136 @@ public class JukeBox1 {
 
 
 *图 5 - 加入了 `Collections.sort()` 方法后的 `JukeBox1` 程序*
+
+
+### 然而现在需要的是 `Song` 对象，而不是那些简单的字符串
+
+现在老板想要清单中的那些具体 `Song` 类实例，而不仅仅是一些字符串，那么每个 `Song` 就要有更多的数据了。新的自动点唱机装置输出了更多的信息，那么这次这个文件就会有 *四个* 片段（令牌），而不再仅仅两个了。
+
+类 `Song` 是相当简单的，仅有一个感兴趣的特性 -- 一个重写了的 `toString()` 方法。请记住，这个 `toString()`方法，是在类 `Object` 中定义的，因此Java 中的每个类，都继承了这个方法。同事由于在打印某个对象（`System.out.println(anObject)`）时，会调用到这个对象上的 `toString()` 方法，因此就应该对其进行重写，来打印出一些比起默认唯一识别符代码，更具可读性的东西。在打印某个歌曲对象清单时，将调用到各个 `Song` 对象上的这个 `toString()` 方法。
+
+```java
+class Song {
+
+    // 这四个实例变量表示文件中的四个歌曲属性。
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    // 这些变量都是在新的 Song 对象被创建时，在构造器中设置的。
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    // 这些是四个属性的获取器方法。
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  时，就会调用清单中各个元素的这个 toString() 方法。
+    public String toString () {
+        return title;
+    }
+}
+```
+
+### 将 `JukeBox` 代码修改为使用 `Song` 对象而非那些字符串
+
+代码只会修改很少 -- 文件 I/O 代码还是一样，且解析代码也一样（`String.split()`静态方法），这次不一样的，是每行/每首歌曲将有 *四个* 令牌，同时全部四个都将用于构造一个新的 `Song` 对象。同时理所应当的这个 `ArrayList` 将是类型 `<Song>` 而非 `<String>` 了。
+
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox3 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList<Song> songList = new ArrayList<Song> ();
+    String wDir = XPlatformThings.getWorkingDir("learningJava");
+
+    public JukeBox3 () {
+        getSongs();
+        System.out.println(songList);
+
+        Collections.sort(songList);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox3();
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format("%s/SongListMore.txt", wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split("/");
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+```
+
+
+### 然而这代码不会被编译出来！
+
+
+```console
+/home/peng/eclipse-workspace/learningJava/src/main/java/com/xfoss/CollectionAndGenerics/JukeBox3.java:17:
+    error: no suitable method found for sort(ArrayList<Song>)
+           Collections.sort(songList);
+                      ^
+       method Collections.<T#1>sort(List<T#1>) is not applicable
+         (inference variable T#1 has incompatible bounds
+           equality constraints: Song
+           lower bounds: Comparable<? super T#1>)
+       method Collections.<T#2>sort(List<T#2>,Comparator<? super T#2>) is not applicable
+         (cannot infer type-variable(s) T#2
+           (actual and formal argument lists differ in length))
+  where T#1,T#2 are type-variables:
+    T#1 extends Comparable<? super T#1> declared in method <T#1>sort(List<T#1>)
+    T#2 extends Object declared in method <T#2>sort(List<T#2>,Comparator<? super T#2>)
+Note: Some input files use unchecked or unsafe operations.
+```
+
+某个地方出错了......那个 `Collections` 类明明是有个取`List` 做参数的 `sort()` 方法的。
+
+`ArrayList` 确实是一个 `List`，因为 `ArrayList` 实现了接口 `List`，那么......这代码 *应该* 跑起来的。
+
+***然而这代码并没有跑起来***!
+
+
