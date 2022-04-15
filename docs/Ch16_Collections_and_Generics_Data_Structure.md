@@ -85,3 +85,38 @@ public class JukeBox1 {
 ![Java API - ArrayList](images/Ch16_03.png)
 
 *图 3 - Java API - ArrayList*
+
+> *`ArrayList 有着很多方法，不过却没有可用于排序的*......
+
+
+### `ArrayList` 并非唯一的集合
+
+**`ArrayList` is not the only collection**
+
+> *我的确见到过一个名为 `TreeSet` 的集合类......并且文档讲到这个集合类保持着排序后的数据。我就想知道是不是应该使用`TreeSet`而非`ArrayList`......（I do see a collection class called `TreeSet`...and the docs say that it keeps your data sorted. I wonder if I should be using a `TreeSet` instead of an `ArrayList`...）*
+
+
+虽然`ArrayList`是在今后会用到最多的集合类，对于特殊情形，还是有一些其他的集合类。其中一些关键集合类，包括以下几个：
+
+> *请不要急于去了解别的那些集合类。稍后会涉及到更多的细节*。
+
+
+- **`TreeSet`**
+
+    让元素保持排序并防止重复（Keeps the elements sorted and prevents duplicates）。
+
+- **`HashMap`**
+
+    实现了名称/值对方式的元素存储与访问（Let you store and access elements as name/value pairs）。
+
+- **`LinkedList`**
+
+    令到诸如栈与队列等数据结构的创建容易起来（Make it easy to create structures like stacks or queues）。
+
+- **`HashSet`**
+
+    去除集合中的重复，同时对于给定元素，可快速在集合中找出来（Prevents duplicates in the collection, and given an element, can find that element in the collection quickly）。
+
+- **`LinkedHashMap`**
+
+    与常规 `HashMap` 类似，但他可以记住其中元素（名/值对）插入的顺序，也可以被配置为记住那些最近被访问过元素的顺序（Like a regular `HashMap`, except it can remember the order in which elements(name/value pairs) were inserted, or it can be configured to remember the order in which elements were last accessed）。 
