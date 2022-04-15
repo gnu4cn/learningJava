@@ -43,9 +43,13 @@ import java.io.*;
 import com.xfoss.Utils.XPlatformThings;
 
 public class JukeBox1 {
+
+    // 这里将把那些歌曲标题存储在一个字符串的 ArrayList 中。
     ArrayList<String> songList = new ArrayList<String> ();
+
     String wDir = XPlatformThings.getWorkingDir("learningJava");
 
+    // 启动加载文件并打印那个 songList 的 ArrayList 的构造函数。
     public JukeBox1 () {
         getSongs();
         System.out.println(songList);
@@ -55,6 +59,7 @@ public class JukeBox1 {
         new JukeBox1();
     }
 
+    // 这里并无什么特别之处......只是读取文件并针对各行调用 addSong() 方法。
     void getSongs() {
         try {
             File file = new File(String.format("%s/SongList.txt", wDir));
@@ -66,8 +71,11 @@ public class JukeBox1 {
         } catch (IOException ex) {ex.printStackTrace();}
     }
 
+    // 这个 addSong 方法就如同 I/O 章中 QuizCard 一样 -- 运用 split() 方法
+    // 将行（有着歌曲标题与艺术家）拆开为两个片段（令牌）。
     void addSong(String lineToParse) {
         String [] tokens = lineToParse.split("/");
+        // 这里只要歌曲标题，因此只将第一个令牌添加到 songList（即那个 ArrayList）。
         songList.add(tokens[0]);
     }
 }
@@ -77,6 +85,10 @@ public class JukeBox1 {
 ![JukeBox1](images/Ch16_02.png)
 
 *图 2 - JukeBox1*
+
+> *songList 会以这些歌曲标题被添加到这个 `ArrayList` （其中的顺序与这些歌曲在原始文本文件中的顺序相同）的顺序，打印出这些歌曲标题*。
+>
+> 显然这不是以字母顺序排序的！
 
 ### 然而类 `ArrayList` 并没有`sort()` 方法！
 
@@ -137,8 +149,67 @@ public class JukeBox1 {
 
 > *嗯......在 `Collections` 类中确实有个 `sort()` 方法。他会取得一个 `List`，同时由于`ArrayList`实现了 `List` 接口，因此 `ArrayList` `IS-A` `List`。归功于多态机制，就可以将`ArrayList`传递给声明了取得 `List` 的方法*。
 >
-> *请注意*：这并非是一个真正的 `Collections` 类的API文档；这里通过省略有关泛型（the generic type information, 将在本章后面讲到）的信息，而对其进行了简化，
+> *请注意*：这并非是一个真正的 `Collections` 类的API文档；这里通过省略有关泛型（the generic type, 将在本章后面讲到）的信息，而对其进行了简化。
 
 
 - **不是可以把元素添加到`ArrayList`的特定索引处，而不是他的末尾的吗 -- 确实有一个过载的`add()`方法，连同要添加的元素一道，还取得一个整型参数呢。那么这样就不会比直接插入到清单末尾更慢吗**？
+
+> 是的，在 `ArrayList` 末尾插入元素，在其他地方是要慢一些的。因此使用过载的`add(index, element)` 方法，就不如调用 `add(element)` -- 这会把添加的元素放在清单末尾，这样来得快。然而在大部分用到`ArrayList`的时候，是无需将某个元素放在指定索引处的。
+
+
 - **我看见那里有一个 `LinkedList` 类，那么是不是使用 `LinkedList`，就可以更好地实现在清单中间插入元素呢？至少我还记得大学时学过的数据结构课**......
+
+> 是的，讲得不错。在从清单中中间插入或移除元素时，`LinkedList`要快一些，然而对于大多数应用，除非是在处理 *巨量* 的元素，那么往 `LinkedList` 与 `ArrayList` 的中间插入的区别，通常不足以纳入考量。后面很快就会深入了解 `LinkedList` 类。
+
+### 把`Collections.sort()` 方法添加到 `JukeBox` 代码
+
+
+> **`Collections.sort()` 方法，会将字符串清单，以字母顺序进行排序**。
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox1 {
+    ArrayList<String> songList = new ArrayList<String> ();
+    String wDir = XPlatformThings.getWorkingDir("learningJava");
+
+    public JukeBox1 () {
+        getSongs();
+        System.out.println(songList);
+
+        // 对静态类 `Collections` 的 `sort()` 方法进行调用，并
+        // 再次打印处这个清单。这第二个打印输出，就是以字母顺序的了！
+        Collections.sort(songList);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox1();
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format("%s/SongList.txt", wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+        String [] tokens = lineToParse.split("/");
+        songList.add(tokens[0]);
+    }
+}
+```
+
+![加入了 `Collections.sort()` 方法后的 `JukeBox1` 程序](images/Ch16_05.png)
+
+
+*图 5 - 加入了 `Collections.sort()` 方法后的 `JukeBox1` 程序*
