@@ -77,3 +77,11 @@ public class JukeBox1 {
 ![JukeBox1](images/Ch16_02.png)
 
 *图 2 - JukeBox1*
+
+### 然而类 `ArrayList` 并没有`sort()` 方法！
+
+在检视 `ArrayList` 时，看起来那里是没有任何有关排序的方法。即便往上检索他的继承树也毫无助益--明显 ***在 `ArrayList` 上是无法调用到某个排序方法的***。
+
+![Java API - ArrayList](images/Ch16_03.png)
+
+*图 3 - Java API - ArrayList*
