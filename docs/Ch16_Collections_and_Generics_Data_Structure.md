@@ -359,6 +359,6 @@ Note: Some input files use unchecked or unsafe operations.
 
 *图 6 - Java API `Collections.sort()`*
 
-> WTF? 我都不知道该怎么去看这个方法声明。他讲了 `sort()` 要取一个 `List<T>` 的参数，然而 `T` 是个啥？还有在返回值类型前那一大坨又是啥？
+> * WTF? 我都不知道该怎么去看这个方法声明。他讲了 `sort()` 要取一个 `List<T>` 的参数，然而 `T` 是个啥？还有在返回值类型前那一大坨又是啥*？
 
 
