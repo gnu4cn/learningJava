@@ -384,3 +384,7 @@ Note: Some input files use unchecked or unsafe operations.
 ![没有泛型与带有泛型的对比](images/Ch16_07.png)
 
 *图 7 - 没有泛型与带有泛型的对比*
+
+> *现在有了泛型，就只能将 `Fish` 对象放入到这个 `ArrayList<Fish>` 中，因此那些从这个清单中取出的对象，就是些`Fish` 引用变量了。不必担心有人会把一个 `Volkswagen` 放在那里面，或者担心从那里取出的对象，不会确实是个兼容 `Fish` 的引用变量*。
+
+
