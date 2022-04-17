@@ -12,7 +12,7 @@
 
 你的任务，就是对这个数据进行管理，从而跟踪到歌曲流行度，生成一些报告，进而修改那些播放清单。这里并非要编写整个的 app -- 别的一些软件开放者/侍应生也会参与进来，你所要负责的，仅是对整个Java app内的数据加以管理和排序。而由于楼老板抵触数据库，因此数据是严格来说是个内存中的数据集（an in-memory data collection）。所得到的全部，就是那个自动唱机持续添加数据的文件。你的任务，就是从那里取得数据。
 
-先前我们已经掌握了怎样读取和解析该文件，并且到目前位置，都是将数据存储在一个 `ArrayList` 中的。
+先前我们已经掌握了怎样读取和解析该文件，并且到目前位置，都是将数据保管在一个 `ArrayList` 中的。
 
 **#1 挑战**
 
@@ -44,7 +44,7 @@ import com.xfoss.Utils.XPlatformThings;
 
 public class JukeBox1 {
 
-    // 这里将把那些歌曲标题存储在一个字符串的 ArrayList 中。
+    // 这里将把那些歌曲标题保管在一个字符串的 ArrayList 中。
     ArrayList<String> songList = new ArrayList<String> ();
 
     String wDir = XPlatformThings.getWorkingDir("learningJava");
@@ -374,3 +374,13 @@ Note: Some input files use unchecked or unsafe operations.
 这里就会讲到这个 -- *我们所写的全部涉及到泛型的代码，实际上都将是有关集合的代码（virtually all of the code you write that deals with generics will be collection-related code）*。虽然泛型可以其他一些方式使用，但泛型的要点，是可以写出类型安全的集合。也就是那些可以令到编译器阻止我们把一个 `Dog` 对象，放入到一个 `Duck` 清单里去的代码。
 
 > **注**：*关于 Collection 与 Set 的区别，请参考 [What is the difference between a set and a collection in Java?](https://www.quora.com/What-is-the-difference-between-a-set-and-a-collection-in-Java)*
+
+在泛型之前（即在 Java 5.0 之前），由于所有集合实现，都被声明为保存类型 `Object`，因此编译器不会在乎放入到某个集合的为何物。那时可将 *任何东西* 都放入到所有 `ArrayList`；这就好比所有 `ArrayList` 都被声明为了 `ArrayList<Object>`。
+
+> **有了泛型，就可以创建类型安全的集合，其中在编译时，而不是运行时就可以发现更多的问题**。
+>
+> **若没有泛型，那么编译器会痛快地允许将 `Pumpkin` 放入到本被假定为仅保管 `Cat` 对象的 `ArrayList`**。
+
+![没有泛型与带有泛型的对比](images/Ch16_07.png)
+
+*图 7 - 没有泛型与带有泛型的对比*
