@@ -567,3 +567,11 @@ public void takeThing(ArrayList<Animal> list)
 ### 还记得前面终端的地方吧......
 
 > *这仍然解释不了为什么那个 `sort` 方法在 `Song` 的 `ArrayList` 上失效，而在 `String` 的 `ArrayList` 上没有问题*......
+
+### 重新审视这个 `sort()` 方法
+
+那么就来试着读读这个 `sort()` 方法的文档，找出为何他对字符串清单排序没有问题，而不能对 `Song` 对象清单进行排序。看起来答案似乎是......
+
+![Java API - `Collections.sort()`](images/Ch16_09.png)
+
+*图 9 - Java API - `Collections.sort()`*
