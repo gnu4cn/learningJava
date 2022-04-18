@@ -530,4 +530,40 @@ public <T extends Animal> void takeThing (ArrayList<T> list)
 
 在类本身未用到类型参数时，仍然可以通过在一个相当不寻常的（不过仍然可行）的地方 -- *在返回值类型之前*，声明一个类型参数，从而给某个方法指定一个类型参数。上面这个方法，表示那个 `T` 可以是 “任何的`Animal`类型”（If the class itself doesn't use a type parameter, you can still specify one for a method, by declaring it in a really unusual(but available) space -- *before the return type*. This method says that `T` can be "any type of `Animal`"）。
 
+### 这里有点玄乎了......
 
+**Here's where it gets weird...**
+
+
+> *等下......这里一定有什么问题。既然可以取一个 `Animal` 的清单作参数，那么为什么不直接用 `ArrayList<Animal>` 呢？直接用 `takeThing(ArrayList<Animal> list)` 有什么问题*？
+>
+> *Wait...that can't be right. If you can take a list of `Animal`, why don't you just SAY that? what's wrong with just `takeThing(ArrayList<Animal> list)`*?
+
+这个：
+
+```java
+public <T extends Animal> void takeThing(ArrayList<T> list)
+```
+
+与下面这个 **并不** 一样：
+
+```java
+public void takeThing(ArrayList<Animal> list)
+```
+
+这两个都是合法的，但他们是 *不一样的*！
+
+第一个，其中的 `<T extends Animal>` 是方法声明的组成部分，表示了所有声明了类型为 `Animal` 或 `Animal`的子类型（比如`Dog` 或 `Cat`） 的 `ArrayList`, 都是合法的。那么就可以使用 `ArrayList<Dog>`、`ArrayList<Cat` 或 `ArrayList<Animal`，来运行上面的那个方法。
+
+然而......对于下面的那个方法，其中的方法参数（`ArrayList<Animal>`）则表示，*只有* `ArrayList<Animal>` 是合法的。也就是说，相比于头个版本取任何`Animal`类型（`Animal`、`Dog`、`Cat`等待）的 `ArrayList`，这第二个版本，就 *只会* 取类型为 `Animal` 的 `ArrayList`。不能取 `ArrayList<Dog>`，或 `ArrayList<Cat>`，只能是 `ArrayList<Animal>`。
+
+同时这似乎确实会破坏多态机制的要素。在本章结束时再回头来看仔细回顾到这一点，就会更加清楚分明。至于现在，请记住由于此刻仍在致力于搞清楚怎样对那个 `SongList` 进行排序，而这又将我们带入了对有着奇怪的泛型声明 `sort()` 方法文档的审视，因此对于泛型与多态机制的关系，还只是点到为止的（And yes, it does appare to voilate the point of polymorphism. But it will become clare when we revisit this in detail at the end of the chapter. For now, remember that we're only looking at this because we're still trying to figure out how to `sort()` that `SongList`, and that led us into looking at the API for the `sort()` method, which had this strange generic type declaration）。
+
+***此刻来讲，所要明白的，仅是上面那个版本是合法的，同时那意味着可将一个作为`Animal`或任何的`Animal`子类型的`ArrayList`传入进去***。
+
+那么现在就要回到那个 `sort()` 方法了......
+
+
+### 还记得前面终端的地方吧......
+
+> *这仍然解释不了为什么那个 `sort` 方法在 `Song` 的 `ArrayList` 上失效，而在 `String` 的 `ArrayList` 上没有问题*......
