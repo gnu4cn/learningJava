@@ -407,4 +407,13 @@ Note: Some input files use unchecked or unsafe operations.
 
 3) 声明（及触发）那些取泛型作参数的方法（declaring(and invoking) methods that take generic types）
 
+```java
+void foo(List<Song> list)
+x.foo(songList)
+```
+
 > ***注***：关于 call 与 invoke 的区别，请参考：[what is the difference between 'call' and 'invoke'?](https://www.quora.com/What-is-the-difference-between-call-and-invoke)
+
+在有着某个取一个参数，即 `Animal` 类型对象的 `ArrayList` 的方法时，到底那意味着什么呢？可否传递给这个方法一个 `Dog` 类型对象的 `ArrayList` 呢？后面就会讨论到与先前那种取老式普通数组作参数的方法相比，一些微妙而棘手的问题。
+
+（这实际上与上面第二点相同，但这正好说明多态与泛型在一起时的重要性。）
