@@ -417,3 +417,17 @@ x.foo(songList)
 在有着某个取一个参数，即 `Animal` 类型对象的 `ArrayList` 的方法时，到底那意味着什么呢？可否传递给这个方法一个 `Dog` 类型对象的 `ArrayList` 呢？后面就会讨论到与先前那种取老式普通数组作参数的方法相比，一些微妙而棘手的问题。
 
 （这实际上与上面第二点相同，但这正好说明多态与泛型在一起时的重要性。）
+
+
+### 运用泛型类（using generic CLASSES）
+
+由于 `ArrayList` 是这里最常用到的泛化类型，那么这里将以他的文档开始。要注意到泛化类的以下两个关键点：
+
+1) 这个 *类* 的声明（The *class* declaration）
+
+2) 那些实现元素添加的 *方法* 的声明（The *method* declarations that let you add elements）
+
+
+![Java API - ArrayList](images/Ch16_08.png)
+
+*图 8 - Java API - ArrayList*
