@@ -419,7 +419,7 @@ x.foo(songList)
 （这实际上与上面第二点相同，但这正好说明多态与泛型在一起时的重要性。）
 
 
-### 运用泛型类（using generic CLASSES）
+## 运用泛型类（using generic CLASSES）
 
 由于 `ArrayList` 是这里最常用到的泛化类型，那么这里将以他的文档开始。要注意到泛化类的以下两个关键点：
 
@@ -431,3 +431,29 @@ x.foo(songList)
 ![Java API - ArrayList](images/Ch16_08.png)
 
 *图 8 - Java API - ArrayList*
+
+
+### 理解 `ArrayList` 的文档
+
+（或者说，这里 “E” 的真正意义为何？）
+
+
+> **请将这里的 “E”，当作 “希望这个集合所保留与返回的元素类型”。（E 就是元素 Element 中的 E。）**
+>
+> **Think of "E" as a stand-in for "the type of element you want this collection to hold and return." (<ins>E</ins> is for <ins>E</ins>lement.)**
+
+```java
+// 这个 “E” 是在声明和创建某个 ArrayList 时，所用到具体
+// 类型的占位符。
+public class ArrayList<E>
+// ArrayList 是 AbstractList 的一个子类，因此不论指定了
+// 何种类型给这个 ArrayList, 都会自动用到类型 AbstractList 上。
+extends AbstractList<E>
+// 这个类型（即 <E> 的取值）同时将成为 List 接口的类型。
+implements List<E>, RandomAccess, Cloneable, Serializable {
+    // 这里是重点！这里的 “E” 决定了所能添加到这个 ArrayList
+    // 的物件类别。
+    public boolean add (E o)
+    // 其他代码
+}
+```
