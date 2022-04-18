@@ -575,3 +575,31 @@ public void takeThing(ArrayList<Animal> list)
 ![Java API - `Collections.sort()`](images/Ch16_09.png)
 
 *图 9 - Java API - `Collections.sort()`*
+
+**`sort()` 方法只能接收那些是 `Comparable` 对象的清单**。
+
+**`Song` 不是 `Comparable` 的子类型，因此就不能对 `Song` 清单进行 `sort()`**。
+
+**至少现在是不行的**......
+
+```java
+// 这里返回值前面声明的泛型参数，表示 “T” 必须是类型 Comparable。
+//
+// 请暂时忽略这里的 <? super T>。若真要问这是是什么，那么他表示
+// Comparable 类的类型参数，必须是类型 T，或 T 的一个子类型。
+//
+// 后面的那个 <T>，表示了 sort 函数仅可传入一个使用了参数化的、“对Comparable
+// 进行了扩展”的类型的清单（或清单的子类型，比如ArrayList）
+public static <T extends Comparable<? super T>> void sort(List<T> list)
+```
+
+> *嗯......我刚查看了一下 `String` 的文档，发现 `String` 并没有 *扩展* `Comparable` -- 他 *实现了* `Comparable`。*
+>
+> **`Comparable` 是个接口*。因此如果写 `T extends Comparable` 简直就是胡说八道*。
+
+
+![Java API - `String`](images/Ch16_10.png)
+
+*图 10 - Java API - `String`*
+
+
