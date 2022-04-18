@@ -387,4 +387,24 @@ Note: Some input files use unchecked or unsafe operations.
 
 > *现在有了泛型，就只能将 `Fish` 对象放入到这个 `ArrayList<Fish>` 中，因此那些从这个清单中取出的对象，就是些`Fish` 引用变量了。不必担心有人会把一个 `Volkswagen` 放在那里面，或者担心从那里取出的对象，不会确实是个兼容 `Fish` 的引用变量*。
 
+### 了解泛型
 
+**Learning generics**
+
+关于泛型，有很多需要掌握的东西，对于大多数程序员，则只需要了解下面三个：
+
+1) 创建一些泛化类的实例（creating instances of generified classess, 比如 `ArrayList`）
+
+`new ArrayList<Song> ()`
+
+在构造一个 `ArrayList` 时，就必须告诉这个 `ArrayList` 类型的变量，这个清单中将允许的对象类型，这就跟原先那些普通数组一样。
+
+2) 声明并赋值一些泛型的变量（declaring and assigning variables of generic types）
+
+`List<Song> songList = new ArrayList<Song> ()`
+
+多态机制与泛型到底是怎样一起生效的呢？在有着一个 `ArrayList<Animal>` 的引用变量时，可以将一个 `ArrayList<Dog>` 的变量赋值给他吗？对于一个 `List<Animal>` 的引用变量又如何呢？可以将一个 `ArrayList<Animal>` 对象，赋值给他吗？接下来就会看到.......
+
+3) 声明（及触发）那些取泛型作参数的方法（declaring(and invoking) methods that take generic types）
+
+> ***注***：关于 call 与 invoke 的区别，请参考：[what is the difference between 'call' and 'invoke'?](https://www.quora.com/What-is-the-difference-between-call-and-invoke)
