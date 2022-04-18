@@ -498,3 +498,36 @@ public class ArrayList<String> extends AbstractList<String> ... {
 - **这里就只能放一个 `E` 吗？因为 `sort` 的文档还使用了 `T`......**
 
 > 只要是合法的 Java 标识符，都可以使用。那就意味着所有可用于方法或变量名称的东西，都会用作类型参数（a type parameter）。不过有个约定，就是要使用单个字母（那么就应该使用单个字母），同时进一步的约定，就是除非专门编写了一个集合类，那么在使用 `E` 来表示 “集合将保留元素的类型”的地方，就要使用 `T`（You can use anything that's a legal Java identifier. That means anything that you could use for a method or variable name will work as a type parameter. But the convention is to use a single letter(so that's what you shold use), and a further convention is to use `T` unless you're specifically writing a collection calss, where you'd use `E` to represent the "type of the Element the collection will hold"）。
+
+### 运用泛型方法
+
+**Using generic METHODS**
+
+泛型 *类* 意味着 *类的声明* 包含了类型参数。而泛型 *方法*，表示方法声明在他的签名中，用到了一个类型参数（A generic *class* means that the *class declaration* includes a type parameter. A generic *method* means that the method declaration uses a type parameter in its signature）。
+
+在方法中使用类型参数的几种不同方式：
+
+1) 使用在类声明中定义的类型参数（using a type parameter defined in the class declaration）
+
+```java
+public class ArrayList<E> extends AbstractList<E> ... {
+    // 之所以可以在这里使用 "E", 完全是因为这个 "E" 已经作为
+    // 这个类的一部分被定义了。
+    public boolean add(E o)
+}
+```
+
+在声明类的某个类型参数时，就可以像使用某个 *具体* 类或接口类型那样，在任意地方使用这个类型了。于方法参数中声明的类型，就会被那个在初始化这个类时用到的类型所取代（When you declare a type parameter for the class, you can simply use that type any place that you'd use a *real* class or interface type. The type declared in the method argument is essentially replaced with the type you use when you instantiate the class）。
+
+2) 使用未在类声明中定义的某个类型参数（using a type parameter that was NOT defined in the class declaration）
+
+
+```java
+// 后面方法参数中之所以可以使用 <T>，是由于前面在方法声明中
+// 声明过 “T”。
+public <T extends Animal> void takeThing (ArrayList<T> list)
+```
+
+在类本身未用到类型参数时，仍然可以通过在一个相当不寻常的（不过仍然可行）的地方 -- *在返回值类型之前*，声明一个类型参数，从而给某个方法指定一个类型参数。上面这个方法，表示那个 `T` 可以是 “任何的`Animal`类型”（If the class itself doesn't use a type parameter, you can still specify one for a method, by declaring it in a really unusual(but available) space -- *before the return type*. This method says that `T` can be "any type of `Animal`"）。
+
+
