@@ -435,7 +435,7 @@ x.foo(songList)
 
 ### 理解 `ArrayList` 的文档
 
-（或者说，这里 “E” 的真正意义为何？）
+（或者说，这里 `E` 的真正意义为何？）
 
 
 > **请将这里的 “E”，当作 “希望这个集合所保留与返回的元素类型”。（E 就是元素 Element 中的 E。）**
@@ -457,3 +457,44 @@ implements List<E>, RandomAccess, Cloneable, Serializable {
     // 其他代码
 }
 ```
+
+这个 `E` 表示用于创建 `ArrayList` 实例的类型，在见到 `ArralyList` 文档中的 `E` 时，就可以暗自将其查找/替换为用于初始化 `ArrayList` 的那个 `<type>`。
+
+那么那个新的 `ArrayList<Song>` 就表示，在所有用到 `E` 的方法或变量声明中的 `E` 成为了 `Song`。
+
+
+### 在 `ArrayList` 下使用类型参数
+
+**Using type parameters with `ArrayList`**
+
+这段代码：
+
+```java
+ArrayList<String> thisList = new ArrayList<String>
+```
+
+意味着 `ArrayList`:
+
+```java
+public class ArrayList<E> extends AbstractList<E> ... {
+
+    public boolean add(E o) {...}
+    // 其他代码
+}
+```
+
+是被编译器这样来对待的：
+
+```java
+public class ArrayList<String> extends AbstractList<String> ... {
+
+    public boolean add(String o) {...}
+    // 其他代码
+}
+```
+
+也就是说，这里的 `E` 被那个在创建该 `ArrayList` 时所使用的 *具体* 类型（也被称为 *类型参数（type parameter）*）取代了。同时也是为何`ArrayList`的`add()` 方法不会允许将除了与这个 `E` 类型兼容的引用变量类型变量的对象之外，其他任何对象加以添加的原因。因此在构造了一个 `ArrayList<String>` 时，这个`add()`方法，突然间就变成了 `add(String o)`。在创建了类型为 `Dog` 的 `ArrayList` 时，那个 `add()` 就突然成为了 `add(Dog o)`。
+
+- **这里就只能放一个 `E` 吗？因为 `sort` 的文档还使用了 `T`......**
+
+> 只要是合法的 Java 标识符，都可以使用。那就意味着所有可用于方法或变量名称的东西，都会用作类型参数（a type parameter）。不过有个约定，就是要使用单个字母（那么就应该使用单个字母），同时进一步的约定，就是除非专门编写了一个集合类，那么在使用 `E` 来表示 “集合将保留元素的类型”的地方，就要使用 `T`（You can use anything that's a legal Java identifier. That means anything that you could use for a method or variable name will work as a type parameter. But the convention is to use a single letter(so that's what you shold use), and a further convention is to use `T` unless you're specifically writing a collection calss, where you'd use `E` to represent the "type of the Element the collection will hold"）。
