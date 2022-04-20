@@ -602,4 +602,16 @@ public static <T extends Comparable<? super T>> void sort(List<T> list)
 
 *图 10 - Java API - `String`*
 
+### 在泛型语境下，“扩展” 指的是 “扩展或实现”
+
+**In generics, "extends" means "extends or implements"**
+
+Java 工程师们必须要给到一种在参数化类型上施加约束的方式，从而才能对这个参数化类型加以限制，比如仅那些 `Animal` 的子类。然而还会需要将某个类型，约束到仅允许实现了某个特定接口的那些类。因此，就会存在这样的情形，其中需要一种语法，来让上述两种条件生效--继承与实现。也就是说，一种可以同时工作于 *扩展* 和 *实现* 语法（The Java engineers had to give you a way to put a constaint on a parameterized type, so that you can restrict it to, say, only subclasses of `Animal`. But you also need to constrain a type to allow only classes that implement a particular inteface. So here's a situation where we need one kind of syntax to work for both situations -- inheritance and implementation. In other words, that works for both `extends` and `implements`）。
+
+而胜出的词语就是...... `extends`。不过他所表达的真正意思是 `is-a`，且不管他右边的类型是接口还是类，`extends`都是有效的（And the winning word was... `extends`. But it really means `is-a`, and works regardless of whether the type on the right is an interface or a class）。
+
+> ***在泛型中，关键字`extends`的意思就是 `is-a`，并同时对类和接口生效***。
+>
+> ***In generics, the keyword `extends` really means `is-a`, and works for BOTH classes and interfaces***.
+
 
