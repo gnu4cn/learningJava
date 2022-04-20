@@ -655,4 +655,78 @@ a negative integer, zero, or a positive integer as this object is less than, equ
 > **在没有搞清楚这个问题之前，是无法实现这个 `Comparable` 接口的**。
 
 
+看起来似乎这个 `compareTo()` 方法将在某个 `Song` 对象上调用，将另一个对象的索引，传递给那个 `Song` 对象。运行`compareTo()`方法的那个对象，必须得出传递给他的那个`Song`，在清单中是要排在他自己前面、后面，还是与他一样的位置。
 
+现在首要工作，就是确定是什么使得一首歌曲高于另一歌曲，然后实现这个`compareTo()`方法来反应这一点。负数（任何负数）意味着被传递的 `Song` 对象高于运行此方法的`Song`对象。返回一个正数，则表明运行此方法的`Song`对象，高于传递给`compareTo()`方法的`Song`对象。返回零意味着这两个`Song`对象相等（至少在排序上来说是相等的......但不表示他们是同样的对象）。或许，有着两首标题相同的歌曲呢。
+
+（后面就会看到，这将带来非常多的可能......Which brings up a whole different can of worms we'll look at later...）
+
+
+> 动手写代码
+> 请写下你的想法和实现这个将按照歌曲标题，对这些`Song`对象进行排序的`compareTo()` 方法伪代码（或者更佳的是写出具体代码）。
+>
+> 提示：在循着正轨的情形下，代码将少于 3 行！
+
+### 新的、改进过的、可比较的 `Song` 类
+
+**The new, improved, comparable `Song` class**
+
+ 这里决定希望以歌曲标题来排序，你们就要将 `compareTo()`方法实现为，把传递给这个方法的`Song`的标题，与运行这个`compareTo()`方法的`Song`对象的标题进行比较。也就是说，运行这个方法的`Song`对象必须判断出他的标题，与该方法参数的`Song`对象标题相比起来如何。
+
+ 嗯......既然这个`Collections.sort()`方法在`String`类型的清单上是生效的，那么就知道 `String` 类一定是清楚字母排序的。我们又知道 `String` 类有一个 `compareTo()` 方法，那为什么不调用这个方法呢？那样的话，就可以简单地拿一个歌曲标题的字符串，将其自己和另一个歌曲标题比较就行了，还避开了比较，或者说字母排序算法呢！
+
+```java
+// 通常前一个 Song 与 Comparable<T> 中的 Song 是匹配的......这里
+// 指定了实现 Comparable 接口类可与之比较的类型。
+//
+// 这表示为排序目的， Song 对象可与其他 Song 对象比较。
+class Song implements Comparable<Song> {
+
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    // Collections.sort() 方法，会将一个 Song 对象，发送给 compareTo()
+    // 方法，来查看那个 Song 对象与运行这个方法的 Song 相比会怎样。
+    //
+    // 很简单！由于知道 String 有一个 compareTo() 方法，因此
+    // 这里只要把比较工作，传递给歌曲标题的 String 对象即可。
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
+    }
+
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    public String toString () {
+        return String.format("%s - %s", title, rating);
+    }
+}
+```
+
+现在，这个 `JukeBox3` 程序就工作了。他会打印出这个清单，随后调用 `Collections.sort()`，这个方法会将这些歌曲，按照歌曲标题的字母顺序排序。
+
+![新的、改进后的可比较 `Song` 类](images/Ch16_11.png)
+
+*图 11 - 新的、改进后的可比较`Song`类*

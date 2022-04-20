@@ -44,7 +44,7 @@ public class JukeBox3 {
     }
 }
 
-class Song {
+class Song implements Comparable<Song> {
 
     // 这四个实例变量表示文件中的四个歌曲属性。
     private String title;
@@ -58,6 +58,10 @@ class Song {
         artist = a;
         rating = r;
         bpm = b;
+    }
+
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
     }
 
     // 这些是四个属性的获取器方法。
@@ -81,6 +85,6 @@ class Song {
     //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
     //  时，就会调用清单中各个元素的这个 toString() 方法。
     public String toString () {
-        return title;
+        return String.format("%s - %s", title, rating);
     }
 }
