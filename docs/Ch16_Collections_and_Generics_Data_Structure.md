@@ -793,3 +793,18 @@ public interface Comparator<T> {
 - **那为什么不是 *每个* 类都实现 `Comparable` 接口**？
 
 > 你真的以为 *万事万物* 皆可排序？在有着一些不以任何自然方式排序的元素类型时，这个时候如果实现了 `Comparable` 接口，那么就会误导别的程序员了。且由于某位程序员可以他自己的定制 `Comparator`，来以他选择的方式加以比较，所以即使没有实现 `Comparable`接口，也不会有什么大的风险。
+
+### 将 `JukeBox` 更新为使用 `Comparator`
+
+这个代码中完成了三个新东西：
+
+1) 创建了一个实现 `Comparator` 的内部类（进而因此那个`compare()`方法会完成之前由`compareTo()`方法完成的工作）；
+
+2) 构造了这个 `Comparator` 内部类的实例；
+
+3) 调用了那个过载的 `sort()` 方法，同时给到他歌曲清单与这个 `Comparator` 内部类的实例。
+
+请注意：这里还更新了这个 `Song` 类的 `toString()` 方法，以同时打印出歌曲标题与艺人。（不管清单如何排序，新 `toString()` 方法都会打印出 `title: artist`。）
+
+
+
