@@ -14,8 +14,11 @@ public class JukeBox4 {
         getSongs();
         System.out.println(songList);
 
-        Collections.sort(songList);
+        //Collections.sort(songList);
+        TitleCompare titleCompare = new TitleCompare();
+        Collections.sort(songList, titleCompare);
         System.out.println(songList);
+
 
         ArtistCompare artistCompare = new ArtistCompare();
         Collections.sort(songList, artistCompare);
@@ -29,6 +32,12 @@ public class JukeBox4 {
     class ArtistCompare implements Comparator<Song> {
         public int compare(Song one, Song two) {
             return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    class TitleCompare implements Comparator<Song> {
+        public int compare (Song one, Song two) {
+            return one.getTitle().compareTo(two.getTitle());
         }
     }
 

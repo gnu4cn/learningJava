@@ -877,3 +877,80 @@ public class JukeBox4 {
 ![`java.util.Comparator` 接口的引入](images/Ch16_12.png)
 
 *图 12 - `java.util.Comparator` 接口的引入*
+
+> 请注意：通过保留先前在 `Song` 类中的 `compareTo()` 方法，这里仍将按歌曲标题排序作为了默认排序。另一种实现这两种排序的方法，就是同时将歌曲标题排序和艺人排序，以`Comparator`内部类的方式加以实现，从而完全不让 `Song` 去实现 `Comparable`接口。那就意味着全都要使用两参数版本的 `Collections.sort()`。
+
+
+### 动手写代码
+
+
+```
+package com.xfoss.CollectionAndGenerics;
+
+import java.io.*;
+import java.util.*;
+
+public class SortMountains {
+    LinkedList<Mountain> mtn = new LinkedList<Mountain> ();
+
+    class NameCompare implements Comparator<Mountain> {
+        public int compare (Mountain one, Mountain two) {
+            return one.getName().compareTo(two.getName());
+        }
+    }
+
+    class HeightCompare implements Comparator<Mountain> {
+        public int compare (Mountain one, Mountain two) {
+            return one.getHeight() - two.getHeight();
+        }
+    }
+
+    public SortMountains () {
+        mtn.add(new Mountain("Longs", 14255));
+        mtn.add(new Mountain("艾伯特", 14433));
+        mtn.add(new Mountain("玛努恩", 14156));
+        mtn.add(new Mountain("Castle", 14265));
+
+        System.out.format("输入的是：\n%s\n", mtn);
+
+        NameCompare nc = new NameCompare();
+        Collections.sort(mtn, nc);
+        System.out.format("依名称排序：\n%s\n", mtn);
+
+        HeightCompare hc = new HeightCompare();
+        Collections.sort(mtn, hc);
+        System.out.format("依高度排序：\n%s\n", mtn);
+    }
+
+    public static void main (String[] args) {
+        new SortMountains();
+    }
+}
+
+class Mountain {
+    private String name;
+    private int height;
+
+    public String getName () {
+        return name;
+    }
+
+    public int getHeight () {
+        return height;
+    }
+
+    public Mountain (String n, int h) {
+        name = n;
+        height = h;
+    }
+
+    public String toString () {
+        return String.format("%s: %d", name, height);
+    }
+}
+```
+
+
+![`SortMountains`](images/Ch16_13.png)
+
+*图 13 - `SortMountains`*
