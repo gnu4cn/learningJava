@@ -19,7 +19,7 @@
 **对这些歌曲，按照字母顺序排序**
 
 
-在某个文件中，有着一个歌曲的清单，其中各行分别表示一首歌曲，且歌曲标题与艺术家，是以正斜杠分开的。那么对这样的行进行解析，进而把全部歌曲放入到一个 `ArrayList` 里头就简单了。
+在某个文件中，有着一个歌曲的清单，其中各行分别表示一首歌曲，且歌曲标题与艺人，是以正斜杠分开的。那么对这样的行进行解析，进而把全部歌曲放入到一个 `ArrayList` 里头就简单了。
 
 ![SongList.txt](images/Ch16_01.png)
 
@@ -72,7 +72,7 @@ public class JukeBox1 {
     }
 
     // 这个 addSong 方法就如同 I/O 章中 QuizCard 一样 -- 运用 split() 方法
-    // 将行（有着歌曲标题与艺术家）拆开为两个片段（令牌）。
+    // 将行（有着歌曲标题与艺人）拆开为两个片段（令牌）。
     void addSong(String lineToParse) {
         String [] tokens = lineToParse.split("/");
         // 这里只要歌曲标题，因此只将第一个令牌添加到 songList（即那个 ArrayList）。
@@ -954,3 +954,45 @@ class Mountain {
 ![`SortMountains`](images/Ch16_13.png)
 
 *图 13 - `SortMountains`*
+
+
+### 好耶。排序全都工作起来了，不过现在有些重复的元素......
+
+排序已经运作得相当好了，现在已经掌握了怎样同时以 *歌曲标题* （使用那些 `Song` 对象的 `compareTo()` 方法）和 *歌曲艺人*（使用`Comparator`类的 `compare()` 方法）进行排序。然而这里有个之前未曾注意到的、那个自动点唱机文本文件中的新问题 -- ***排序后的清单中包含了重复元素***。
+
+看起来不论同一首歌是否已经被播放（并由此已被写入）到那个文本文件，那台晚餐点唱机都在持续地往那个文件写入。这个 `SongListMore.txt` 的点唱机文件，是已被播放过的全部歌曲的完整记录，并且有可能多次包含了同一首歌曲。
+
+```console
+// SongListMore.txt
+Pink Moon/Nick Drake/5/80
+Somersault/Zero 7/4/84
+Shiva Moon/Prem Joshua/6/120
+Circles/BT/5/110
+爱你一万年/Andy LAU/5/142
+Deep Channel/Afro Celts/4/120
+Passenger/Headmix/4/100
+Listen/Tahiti 80/5/90
+Listen/Tahiti 80/5/90
+Listen/Tahiti 80/5/90
+Circles/BT/5/110
+```
+
+> *现在由于自动点唱机正依序持续写入其所播放的每首歌曲，因此这个 `SongListMore` 的文本文件中，就有了重复项目。有人曾决定连续播放了三次 "Listen" 那首歌，接着又播放了 “Circles” 那首早先曾被播放的歌曲*。
+>
+> *因为有时会需要文本文件的全部信息，因此这里无法改变文本文件被写入的方式。那么就只有对 Java 代码进行修改了*。
+
+## 这里要的是 `Set` 而不再是 `List` 了
+
+从 `Collection` 的API文档，可以找出三个主要的接口，分别是**`List`**、**`Set`** 与 **`Map`**。`ArrayList` 是一种 `List`，但似乎 *`Set`* 才是这里所需要的。
+
+- **清单（LIST）** - 用在顺序为要的时候（when *sequence* matters）
+
+    是那些掌握了 ***索引位置*** 的集合（Collections that know about ***index position***）。
+
+    清单对某个元素在清单中的位置有所掌握。多个元素可引用同一对象（Lists know where something is in the list. You can have more than one element referencing the same object）。
+
+![`LIST` 图解](images/Ch16_14.png)
+
+*图 14 - `LIST` 图解*
+
+- **数据集（SET）** - 用在独特性为要的时候（when *uniqueness* matters）
