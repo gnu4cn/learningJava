@@ -996,3 +996,23 @@ Circles/BT/5/110
 *图 14 - `LIST` 图解*
 
 - **数据集（SET）** - 用在独特性为要的时候（when *uniqueness* matters）
+
+    是那些 ***不允许重复元素出现*** 的集合（Collections tht ***do not allow duplicates***）。
+
+    数据集知道哪些元素已经是在集合中了（`Set`s know whether something is already in the collection）。
+
+    在数据集中，是绝不可能有多个元素对同一对象进行引用的（或者多个元素引用被认为是相等的两个对象 -- 后面就会涉及何为对象相等的概念）。
+
+![数据集 `Set`](images/Ch16_15.png)
+
+*图 15 - 数据集 `Set`*
+
+- **映射（MAP）** - 用在要通过键来找到某个物件时（when *finding something by key* matters）
+
+    用到 ***键-值对*** 的集合（Collections that use ***key-value pairs***）。
+
+    映射知悉值是与给定的键关联起来的。两个键可以引用同样的值，但不能有重复的键。尽管这些键通常都是`String` 类类型的名字（因此就可以构造出比如名称/值这样的一些清单），但键也可以是别的对象。
+
+![映射`Map`](images/Ch16_16.png)
+
+*图 16 - 映射 `Map`*
