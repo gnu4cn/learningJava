@@ -569,7 +569,7 @@ public void takeThing(ArrayList<Animal> list)
 那么现在就要回到那个 `sort()` 方法了......
 
 
-### 还记得前面终端的地方吧......
+### 还记得前面中断的地方吧......
 
 > *这仍然解释不了为什么那个 `sort` 方法在 `Song` 的 `ArrayList` 上失效，而在 `String` 的 `ArrayList` 上没有问题*......
 
@@ -1016,3 +1016,14 @@ Circles/BT/5/110
 ![映射`Map`](images/Ch16_16.png)
 
 *图 16 - 映射 `Map`*
+
+
+### `Collection` 的API文档（部分）
+
+请注意虽然 `Map` 接口并没有真正对 `Collection` 接口进行扩展，但`Map`仍被看着是 “集合框架（Collection Frame）”（也被成为“集合API（Collections API）”）的一部分。因此即便映射没有将 `java.util.Collection` 包含在他们的继承树中，他们也仍然是集合。
+
+（请注意：下面的图并非整个的集合 API；还有一些其他的类和接口，不过列出来的是我们最为关心的一些。）
+
+![`Collection` 继承树（部分）](images/Ch16_17.png)
+
+*图 17 - `Collection` 继承树（部分）*
