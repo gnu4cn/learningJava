@@ -807,4 +807,73 @@ public interface Comparator<T> {
 请注意：这里还更新了这个 `Song` 类的 `toString()` 方法，以同时打印出歌曲标题与艺人。（不管清单如何排序，新 `toString()` 方法都会打印出 `title: artist`。）
 
 
+```java
+package com.xfoss.CollectionAndGenerics;
 
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox4 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList<Song> songList = new ArrayList<Song> ();
+    String wDir = XPlatformThings.getWorkingDir("learningJava");
+
+    public JukeBox4 () {
+        getSongs();
+        System.out.println(songList);
+
+        Collections.sort(songList);
+        System.out.println(songList);
+
+        // 这里构造了那个 Comparator 内部类的一个实例。
+        ArtistCompare artistCompare = new ArtistCompare();
+        // 这里运行了 sort() 方法，传递给他了这个歌曲清单和到上面新的定制
+        // Comparator 类型的一个对象。
+        Collections.sort(songList, artistCompare);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox4();
+    }
+
+    // 这里创建了一个新的、实现 Comparator 的内部类（请留意他的类型参数是与即将
+    // 比较的 -- 即这个实例中的 Song 的那些对象）是一致的。
+    class ArtistCompare implements Comparator<Song> {
+        public int compare(Song one, Song two) {
+            // 这里的 one.getArtist() 将成为一个字符串（即歌曲艺人）
+            //
+            // 由于字符串本身已经知道他们该怎样按字母排序，因此这里是
+            // 让这两个字符串变量（表示歌曲艺人）执行的具体比较。
+            return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format("%s/SongListMore.txt", wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split("/");
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+```
+
+![`java.util.Comparator` 接口的引入](images/Ch16_12.png)
+
+*图 12 - `java.util.Comparator` 接口的引入*
