@@ -44,6 +44,6 @@ public class Song implements Comparable<Song> {
     //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
     //  时，就会调用清单中各个元素的这个 toString() 方法。
     public String toString () {
-        return String.format("%s: %s", title, artist);
+        return title;
     }
 }

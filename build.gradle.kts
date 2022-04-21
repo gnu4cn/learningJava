@@ -40,7 +40,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 application {
     // mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
-    mainClassName = "com.xfoss.CollectionAndGenerics.SortMountains"
+    mainClassName = "com.xfoss.CollectionAndGenerics.JukeBox6"
     getMainClass().set(mainClassName)
 }
 
