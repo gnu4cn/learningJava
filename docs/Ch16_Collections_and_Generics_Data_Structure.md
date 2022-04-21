@@ -1027,3 +1027,13 @@ Circles/BT/5/110
 ![`Collection` 继承树（部分）](images/Ch16_17.png)
 
 *图 17 - `Collection` 继承树（部分）*
+
+
+![键（KEY）](images/Ch16_18.png)
+
+*图 18 - 键（KEY）*
+
+
+![映射（`Map`）继承树](images/Ch16_19.png)
+
+*图 19 - 映射（`Map`）继承树*
