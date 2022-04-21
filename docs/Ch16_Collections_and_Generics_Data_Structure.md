@@ -152,6 +152,8 @@ public class JukeBox1 {
 > *请注意*：这并非是一个真正的 `Collections` 类的API文档；这里通过省略有关泛型（the generic type, 将在本章后面讲到）的信息，而对其进行了简化。
 
 
+### 答疑
+
 - **不是可以把元素添加到`ArrayList`的特定索引处，而不是他的末尾的吗 -- 确实有一个过载的`add()`方法，连同要添加的元素一道，还取得一个整型参数呢。那么这样就不会比直接插入到清单末尾更慢吗**？
 
 > 是的，在 `ArrayList` 末尾插入元素，在其他地方是要慢一些的。因此使用过载的`add(index, element)` 方法，就不如调用 `add(element)` -- 这会把添加的元素放在清单末尾，这样来得快。然而在大部分用到`ArrayList`的时候，是无需将某个元素放在指定索引处的。
@@ -495,6 +497,9 @@ public class ArrayList<String> extends AbstractList<String> ... {
 
 也就是说，这里的 `E` 被那个在创建该 `ArrayList` 时所使用的 *具体* 类型（也被称为 *类型参数（type parameter）*）取代了。同时也是为何`ArrayList`的`add()` 方法不会允许将除了与这个 `E` 类型兼容的引用变量类型变量的对象之外，其他任何对象加以添加的原因。因此在构造了一个 `ArrayList<String>` 时，这个`add()`方法，突然间就变成了 `add(String o)`。在创建了类型为 `Dog` 的 `ArrayList` 时，那个 `add()` 就突然成为了 `add(Dog o)`。
 
+
+### 答疑
+
 - **这里就只能放一个 `E` 吗？因为 `sort` 的文档还使用了 `T`......**
 
 > 只要是合法的 Java 标识符，都可以使用。那就意味着所有可用于方法或变量名称的东西，都会用作类型参数（a type parameter）。不过有个约定，就是要使用单个字母（那么就应该使用单个字母），同时进一步的约定，就是除非专门编写了一个集合类，那么在使用 `E` 来表示 “集合将保留元素的类型”的地方，就要使用 `T`（You can use anything that's a legal Java identifier. That means anything that you could use for a method or variable name will work as a type parameter. But the convention is to use a single letter(so that's what you shold use), and a further convention is to use `T` unless you're specifically writing a collection calss, where you'd use `E` to represent the "type of the Element the collection will hold"）。
@@ -623,6 +628,8 @@ Java 工程师们必须要给到一种在参数化类型上施加约束的方式
 public static <T extends Comparable<? super T>> void sort(List<T> list)
 ```
 
+### 答疑
+
 - **为啥 Java 工程师们不造一个新关键字，`is`**?
 
 > 由于往语言添加一个新关键字，破坏了以较早版本编写Java代码，因此这样做是件相当大的事情。请设想一下 -- 可能使用了一个变量`is`（本书中确实使用了这个变量来表示输入流）。而由于将关键字用作代码标识符是不被允许的，那就意味着在这个关键字成为保留字之前，全部将其用作变量标识符的那些代码，就会失效。因此只要 Sun 公司的工程师有机会重用一个既有关键字，就比如这里的 `extends`，他们通常会选择重用这个既有关键字。然而这些工程师有时候别无选择......
@@ -741,13 +748,48 @@ class Song implements Comparable<Song> {
 
 然而那是个可怕又脆弱的办法，并且有更佳的做法。在希望对同一事物按多种方式排序时，有API内建的东西来实现此目的。
 
-**来再看看 `Collections` 类的文档。那里有另外一个重写的`sort()`方法 -- 这个会取一个 `Comparator` 类型的参数**。
+**来再看看 `Collections` 类的文档。那里有另外一个过载的`sort()`方法（a overloaded `sort()` method） -- 这个会取一个 `Comparator` 类型的参数**。
 
 
 ```java
 public static <T> void sort(List<T> list, Comparator<? super T> c)
 ```
 
-> *这个 `sort()` 方法，是重写来取得一个叫做 `Comparator` 的参数的*。
+> *这个 `sort()` 方法，是过载来取得一个叫做 `Comparator` 的参数的*。
 >
 > 提醒一下：请想想该怎样得到/构造出一个可对这些歌曲按照艺人而非歌曲标题进行排序的 `Comparator` 来。
+
+
+### 使用定制的 `Comparator`
+
+清单中的元素，可将其 *自身* 与他类型的另一元素，使用他的`compareTo()`方法以某种方式进行比较。但 `Comparator` 相对于这个元素的类型，是外部的东西--`Comparator`是个单独类。那么想要构造多少个 `Comparator` 类都可以！要以歌曲艺人来比较歌曲？那么就构造一个`ArtistComparator`类。要按照每分钟节拍数来比较？就构造一个 `BPMComparator`类。
+
+```java
+// java.util.Comparator
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+```
+
+> ***在将一个 `Comparator` 传递给这个 `sort()` 方法时，排序就由这个`Comparator`，而不是元素本书的 `compareTo()` 方法来确定了***。
+
+然后只需调用那个过载的、取 `List` 及帮助将清单中物件进行排序的 `sort()` 就可以了。
+
+取了 `Comparator` 参数的 `sort()` 方法，在将那些元素进行排序时，将使用这个 `Comparator` 参数，而不是元素本身的 `compareTo()` 方法。也就是说，在`sort()`方法获得了一个 `Comparator`时，这个方法就不会 *调用（call）* 那些清单中元素的 `compareTo()` 方法了。相反，这个`sort()`方法，会 *运行（invoke）* `Comparator` 上的 **`compare()`** 方法。
+
+因此，有下面的规则：
+
+- **运行单个参数的 `sort(List o)` 方法，表示清单元素的 `compareTo()` 方法决定了排序顺序。因此清单中那些元素，必须要实现 `Comparable` 接口**。
+
+- **运行过载的 `sort(List o, Comparator c)`** 表示清单元素的`compareTo()`方法不会被调用，而将使用这个 `Comparator` 的 `compare()` 方法。那就意味着清单中的元素，没有必要取实现 `Comparable` 接口***。
+
+### 答疑
+
+- **那么这意味着在某个类没有实现 `Comparable`，且没有源代码的情况下，仍然可以通过构造一个 `Comparator`，将这个类类型的物件进行排序了吗**？
+
+> 对的，可以那样做。另一个选项（在可行的情况下）则是对这个类进行子类化，而让子类去实现 `Comparable` 接口。
+
+
+- **那为什么不是 *每个* 类都实现 `Comparable` 接口**？
+
+> 你真的以为 *万事万物* 皆可排序？在有着一些不以任何自然方式排序的元素类型时，这个时候如果实现了 `Comparable` 接口，那么就会误导别的程序员了。且由于某位程序员可以他自己的定制 `Comparator`，来以他选择的方式加以比较，所以即使没有实现 `Comparable`接口，也不会有什么大的风险。
