@@ -1278,8 +1278,90 @@ public class Song implements Comparable<Song> {
 
 - **既然两个对象不相等，他们的哈希码又怎么会相同呢**？
 
-> `HashSet` 使用哈希码，来以一种实现元素更快访问的方式存储这些元素。在通过将一个对象拷贝（与索引值相反）给到 `ArrayList`，来尝试从这个 `ArrayList` 里找到那个对象时，这个`ArrayList`就必须从其开头开始搜寻，逐个查看该清单中的每个元素，以检查是否与要查找的对象匹配。而由于 `HashSet` 使用哈希码作为存储其元素的“桶”上的某种形式的标签，那么他就可以更加快速地找到某个对象。因此在讲到“我希望你找出这个数据集中与这个对象完全一样的那个对象......”时，`HashSet` 就会从这个给到他的 `Song` 对象的拷贝，获取到一个哈希码取值（比如，`742`），随后这个 `HashSet` 就会说，“噢，我准确地知道带有哈希码`#742` 的那个对象存储在哪里了.......”，同时他就直接前往到那个 `#742` 的桶那里了。
+> `HashSet` 使用哈希码，来以一种实现元素更快访问的方式存储这些元素。在通过将一个对象拷贝（与索引值相反）给到 `ArrayList`，来尝试从这个 `ArrayList` 里找到那个对象时，这个`ArrayList`就必须从其开头开始搜寻，逐个查看该清单中的每个元素，以检查是否与要查找的对象匹配。而由于 `HashSet` 使用哈希码作为存储其元素的“桶”上某种形式的标签，那么他就可以更加快速地找到某个对象。因此在讲到“我希望你找出这个数据集中与这个对象完全一样的那个对象......”时，`HashSet` 就会从这个给到他的 `Song` 对象拷贝，获取到一个哈希码取值（比如，`742`），随后这个 `HashSet` 就会说，“噢，我准确地知道带有哈希码`#742` 的那个对象存储在哪里了.......”，这个时候他就直接前往那个 `#742` 的桶那里了。
 >
-> 虽然这不是在计算机科学课程中学到的那么全，但对有效运用`HashSet`已经足够了。实际上，许多博士论文的题目，就是开放一种良好的哈希码算法，且比这本书想要要涵盖的内容还要多。
+> 虽然这不是在计算机科学课程中学到的那么全，但对有效运用`HashSet`已经足够了。实际上，许多博士论文的题目，就是开发一种良好的哈希码算法，且比这本书想要要涵盖的内容还要多。
 >
-> 重点在于，由于在 `hashCode()` 中使用的“哈希算法”，可能发生多个对象返回同一个值的情况，因此哈希码无需在两个对象相等时，也可以相同。当然那就意味着这多个对象就会落在`HashSet`中的同一个桶上（因为这每个桶表示了单个的哈希码值），但这并非世界末日。这可能意味着该 `HashSet` 并不那么高效而已（或者说这个 `HashSet` 已填充了数量极为巨大的元素了），然而加入这个 `HashSet` 在同一哈希码桶中找到多个对象，此时这个 `HashSet` 就会直接使用 `equals()` 方法，来检查是否有着一个完全匹配的对象。也就是说，哈希码取值有时是用于缩小搜索范围，而不是用于找出那个准确匹配的对象的，`HashSet` 仍然必须取得那个桶（即有着同样哈希值的那些对象所在的桶）中的全部对象，然后在这些对象上调用 `equals()` 方法，来检查他们是不是 `HashSet` 正在该桶中所要找的对象。
+> 重点在于，由于在 `hashCode()` 中使用的“哈希算法”，可能发生多个对象返回同一个值的情况，因此哈希码无需在两个对象相等时，也可以相同。当然那就意味着这多个对象就会落在`HashSet`中的同一个桶上（因为每个桶表示的是单个哈希码值），但这并非世界末日。这可能意味着此 `HashSet` 并不那么高效而已（或者说该 `HashSet` 已填充了数量极为巨大的元素），而假如这个 `HashSet` 在同一哈希码桶中找到多个对象，此时这个 `HashSet` 就会直接使用 `equals()` 方法，来检查是否有一个完全匹配的对象。也就是说，哈希码值有时是用于缩小搜索范围，而不是用于找出那个准确匹配的对象，`HashSet` 仍然必须取得那个桶（即有着同样哈希值的对象所在的桶）中的全部对象，然后在这些对象上调用 `equals()` 方法，来检查他们是不是 `HashSet` 正在该桶中所要找的对象。
+
+### 在希望数据集得以排序时，就要用到 `TreeSet`
+
+**And if we want the set to stay sorted, we've got `TreeSet`**
+
+与`HashSet`类似，`TreeSet`也可以防止重复。不过`TreeSet`还可以让清单 *保持* 排序。在使用 `TreeSet` 数据集不带参数的构造器来构造一个 `TreeSet` 时，那么这个 `TreeSet` 就会像 `Collections.sort()` 方法一样运作，该 `TreeSet` 运用其各个元素的 `compareTo()` 方法进行排序。还可以选择将一个 `Comparator` 对象，传递给 `TreeSet` 的构造器，让这个 `TreeSet` 使用传入的 `Comprator` 对象，取代前面提到的 `compareTo()` 方法。`TreeSet` 的不足之处在于，即使无需排序，人就要为这种数据集类型付出少量的性能代价。不过这少量的性能代价对大多数 apps 来说，都是难以觉察到的。
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox8 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList<Song> songList = new ArrayList<Song> ();
+    String wDir = XPlatformThings.getWorkingDir("learningJava");
+
+    public JukeBox8 () {
+        getSongs();
+        System.out.format("原本的 songList: \n%s\n", songList);
+
+        Collections.sort(songList);
+        System.out.format("依标题排序后的 songList: \n%s\n", songList);
+
+        HashSet<Song> songSet = new HashSet<Song> ();
+        songSet.addAll(songList);
+        System.out.format("作为 HashSet 的 songSet: \n%s\n", songSet);
+
+        // 这里初始化了一个 TreeSet。调用不带参数的 TreeSet 构造器表示
+        // 这个数据集将使用 Song 对象的 compareTo() 方法来排序。
+        //
+        // （这里也可以传入一个 Comparator 对象。）
+        TreeSet<Song> songTreeSet = new TreeSet<Song> ();
+        // 这里可以像 HashSet 那样，使用 addAll() 命令来添加所有歌曲。
+        //
+        // （也可以像之前在 ArrayList 中那样，使用 songTreeSet.add() 来单个地
+        // 添加那些歌曲。）
+        songTreeSet.addAll(songList);
+        System.out.format("作为 TreeSet 的 songTreeSet:\n%s\n", songTreeSet);
+    }
+
+    public static void main(String[] args){
+        new JukeBox8();
+    }
+
+    class ArtistCompare implements Comparator<Song> {
+        public int compare(Song one, Song two) {
+            return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    class TitleCompare implements Comparator<Song> {
+        public int compare (Song one, Song two) {
+            return one.getTitle().compareTo(two.getTitle());
+        }
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format("%s/SongListMore.txt", wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split("/");
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+```
