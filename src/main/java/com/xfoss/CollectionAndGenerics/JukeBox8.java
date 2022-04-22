@@ -12,22 +12,24 @@ public class JukeBox8 {
 
     public JukeBox8 () {
         getSongs();
-        System.out.format("原本的 songList: \n%s\n-----------------\n", songList);
+        System.out.format("原本的 songList: \n%s\n-----------------\n\n", songList);
 
         Collections.sort(songList);
-        System.out.format("依标题排序后的 songList: \n%s\n-----------------\n", songList);
+        System.out.format("依标题排序后的 songList: \n%s\n-----------------\n\n", songList);
 
         HashSet<Song> songSet = new HashSet<Song> ();
         songSet.addAll(songList);
-        System.out.format("作为 HashSet 的 songSet: \n%s\n-----------------\n", songSet);
+        System.out.format("作为 HashSet 的 songSet: \n%s\n-----------------\n\n", songSet);
 
         TreeSet<Song> songTreeSet = new TreeSet<Song> ();
         songTreeSet.addAll(songList);
-        System.out.format("作为 TreeSet 的 songTreeSet:\n%s\n-----------------\n", songTreeSet);
+        System.out.format("作为 TreeSet 的 songTreeSet:\n%s\n-----------------\n\n", songTreeSet);
 
         TreeSet<Song> songTreeSetSortedByArtist = new TreeSet<Song> (new ArtistCompare());
         songTreeSetSortedByArtist.addAll(songList);
-        System.out.format("往构造器传入一个Comparator参数的 TreeSet 后的 songTreeSetSortedByArtist:\n%s\n-----------------\n", songTreeSetSortedByArtist);
+        System.out.format("往 TreeSet 构造器传入一个 Comparator 参数 new ArtistCompare() 后的 songTreeSetSortedByArtist:\n%s\n-----------------\n\n", songTreeSetSortedByArtist);
+
+        System.exit(0);
     }
 
     public static void main(String[] args){
