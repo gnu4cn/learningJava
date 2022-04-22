@@ -1065,7 +1065,11 @@ public class JukeBox6 {
         Collections.sort(songList);
         System.out.format("排序后的 songList: \n%s\n", songList);
 
+        // 在这里，创建了一个新的参数化的 HashSet，来存储那些歌曲。
         HashSet<Song> songSet = new HashSet<Song> ();
+        // HashSet 有着一个简单的 addAll() 方法，可取得另一集合并运用该
+        // 集合来生成这个 HashSet. 他跟每次添加一个`Song`对象是同样得（
+        // 只是更简单了）。
         songSet.addAll(songList);
         System.out.format("作为 HashSet 的 songSet: \n%s\n", songSet);
     }
@@ -1113,3 +1117,22 @@ public class JukeBox6 {
 ![引入`HashSet`后的 `JukeBox` 运行结果](images/Ch16_20.png)
 
 *图 19 - 引入`HashSet`后的 `JukeBox` 运行结果*
+
+> *看来 `Set` 并没有什么帮助啊！这里仍然有那些全部的重复元素*！
+>
+> （*并且在把那个清单放入到 `HashSet` 中去时，还把顺序给搞没了，尽管后面会再去管这个顺序的事情*......）
+
+
+### 哪些东西会造成两个对象相等？
+
+**What makes two objects equal**?
+
+首先，就必须要问这个问题 -- 什么会造成两个 `Song` 的引用变量重复？答案就是他们必须是 ***相等的***。这两个引用变量是简单地指向完全是同一个对象？还是两个单独对象只是有着同样 *标题* 而已呢？
+
+这就引出了一个关键的话题：*引用* 等价与 *对象* 等价（*reference* equality vs. *object* equality）。
+
+
+> **再两个对象 `foo` 和 `bar` 相等时，那么 `foo.equals(bar)` 就一定是 `true`，且 `foo` 和 `bar` 的 `hashCode()` 方法返回值一定会返回同样的值。要让数据集`Set`将两个对象视为重复，那么就必须重写继承自类 `Object` 的 `hashCode()` 和 `equals()` ** 方法，如此就可以让两个不同的对象，被视为相等**。
+
+
+
