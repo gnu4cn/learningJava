@@ -1255,3 +1255,20 @@ public class Song implements Comparable<Song> {
 ![修改 `Song` 类后的 `HashSet` 输出](images/Ch16_24.png)
 
 *图 24 - 修改 `Song` 类后的 `HashSet` 输出*
+
+> *现在修改生效了！在打印输出那个 `HashSet` 时就不再有重复了。但这里并没有再次调用 `sort()` 方法，其在将那个 `ArrayList` 放到 `HashSet` 中时，那个`HashSet`并没有保留排序*。
+
+### Java 对象 `HashCode()` 与 `equals()` 相关的法则
+
+类 `Object` 的API文档，指明了以下必须遵守的法则：
+
+- 在两个对象相等时，那么他们就肯定有着一致的哈希码；
+- 两个对象相等时，在二者之一的任何一个上调用 `equals()` 方法，肯定都会返回 `true`。也就是说，`if (a.equals(b)) then (b.equals(a))`；
+- 两个对象有着同样哈希码是，他们不必相等。但如果他们相等，那么他们必定有着同样的哈希码；
+- 因此，在重写 `equals()` 方法时，就必须重写 `hashCode()`;
+- `hashCode()` 的默认行为，是给内存堆上的每个对象生成一个唯一的整数。因此若没有重写类的 `hashCode()`，那么那个类类型下的两个对象，用于不会相等；
+- `equals()` 的默认行为，为执行一次 `==` 的比较。也就是说，要测试两个引用变量是否引用了内存堆上的同一个对象。因此在没有重写类中的 `equals()` 方法时，由于引用不同对象的引用变量总会包含不同的二进制位模式，那么这两个引用变量就绝不会被认为是相等的（The default behavior of `equals()` is to do an `==` comparison. In other words, to test whether the two references refer to a single object on the heap. So if you don't override `equals()` in a class, no two objects can EVER be considered equal since references to two different objects will always contain a different bit pattern）；
+
+`a.equals(b)` 必须同时意味着 `a.hashCode() == b.hashCode()`。
+
+但 `a.hashCode() == b.hashCode()` 却并不一定表示 `a.equals(b)`。
