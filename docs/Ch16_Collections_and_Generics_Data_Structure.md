@@ -1179,3 +1179,79 @@ public class JukeBox6 {
 
 
 *图 23 - 对象重复检查机制：`hashCode()` 与 `equals()`*
+
+
+### 重写了 `hashCode()` 与 `equals()` 方法的`Song`类
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+
+public class Song implements Comparable<Song> {
+
+    // 这四个实例变量表示文件中的四个歌曲属性。
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    // 这些变量都是在新的 Song 对象被创建时，在构造器中设置的。
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
+    }
+
+    // 这些是四个属性的获取器方法。
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  时，就会调用清单中各个元素的这个 toString() 方法。
+    public String toString () {
+        return title;
+    }
+
+    // HashSet（或者别的其他会调用到此方法的东西） 会将这里的
+    // 参数 Object aSong（），发送给另一 `Song` 对象。
+    //
+    // 好消息是歌曲标题是个 `String`，而字符串是有一个重写的 equals() 
+    // 方法的。因此这里只要询问一个标题，他是否与另外一个标题相等即可。
+    public boolean equals(Object aSong) {
+        Song s = (Song) aSong;
+        return getTitle().equals(s.getTitle());
+    }
+
+    // 这里采取了与上面同样的处理......`String` 类已有一个重写的 hashCode() 
+    // 方法，因此只要然后在标题上调用的 hashCode() 方法的返回值就行了。请
+    // 注意这里的 hashCode() 与 equals() 是如何是要同一个实例变量的。
+    public int hashCode () {
+        return title.hashCode();
+    }
+}
+```
+
+![修改 `Song` 类后的 `HashSet` 输出](images/Ch16_24.png)
+
+*图 24 - 修改 `Song` 类后的 `HashSet` 输出*
