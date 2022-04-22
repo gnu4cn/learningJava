@@ -1244,8 +1244,8 @@ public class Song implements Comparable<Song> {
     }
 
     // 这里采取了与上面同样的处理......`String` 类已有一个重写的 hashCode() 
-    // 方法，因此只要然后在标题上调用的 hashCode() 方法的返回值就行了。请
-    // 注意这里的 hashCode() 与 equals() 是如何是要同一个实例变量的。
+    // 方法，因此只要标题上调用 hashCode() 方法的返回值就行了。请
+    // 注意这里的 hashCode() 与 equals() 是如何运用同一个实例变量。
     public int hashCode () {
         return title.hashCode();
     }
