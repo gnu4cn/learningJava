@@ -44,7 +44,10 @@ public class Song implements Comparable<Song> {
     //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
     //  时，就会调用清单中各个元素的这个 toString() 方法。
     public String toString () {
-        return title;
+        return String.format("\n%s:\t%s%s", 
+                title, 
+                (title.matches("\\A\\p{ASCII}*\\z") ? title.length() < 7 : title.length() * 2 < 7) ? "\t" : "", 
+                artist);
     }
 
     public boolean equals(Object aSong) {
