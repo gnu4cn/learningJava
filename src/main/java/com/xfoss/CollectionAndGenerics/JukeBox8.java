@@ -27,7 +27,7 @@ public class JukeBox8 {
 
         TreeSet<Song> songTreeSetSortedByArtist = new TreeSet<Song> (new ArtistCompare());
         songTreeSetSortedByArtist.addAll(songList);
-        System.out.format("往构造器传入一个Comparator参数的 TreeSet: songTreeSetSortedByArtist:\n%s\n-----------------\n", songTreeSetSortedByArtist);
+        System.out.format("往构造器传入一个Comparator参数的 TreeSet 后的 songTreeSetSortedByArtist:\n%s\n-----------------\n", songTreeSetSortedByArtist);
     }
 
     public static void main(String[] args){
