@@ -1440,3 +1440,78 @@ shell returned 1
 ### `TreeSet` 的元素 *务必* 要是可比较的
 
 **`TreeSet` elements MUST be comparable**
+
+`TreeSet` 可不会读心术，他没办法凭空搞清楚那些对象该怎么排序。因此就必须告诉 `TreeSet` 该怎么去对添加的对象 *怎样* 排序。
+
+**要使用 `TreeSet`，就要满足下面二者其一的要求**：
+
+- **清单中的元素，务必为实现了 *`Comparable` 类型的元素***
+    
+    前面的 `Book` 类没有实现 `Comparable` 接口，因此在运行时，那段代码不会运作。请设想一些，可怜的`TreeSet`在现实中唯一目的，就是令到其中的那些元素保持排序，并且有一次的 -- `TreeSet` 对如何排序这些 `Book` 对象毫无概念！因为 `TreeSet` 的 `add()` 方法没有取一个 `Comparable` 类型，这个`add()`方法取的是在创建该 `TreeSet` 时用到的类型，因此那段代码在编译时不会失败。也就是说，在前面写下了 `new TreeSet<Book> ()` 时，那么这个 `add()` 方法，也就成了 `add(Book)` 了。而那里又没有要求那个 `Book` 类要实现 `Comparable`！这样在把第二个元素添加到这个数据集时，程序就会失败。添加第二个元素的时候，正是这个数据集尝试调用其中一个对象的 `compareTo()` 方法的时候，然而.......调用不到（The `Book` class on the previous page didn't implement `Comparable`, so it wouldn't work at runtime. Think about it, the poor `TreeSet`'s sole purpose in life is to keep your elements sourted, and once again -- it had no idea how to sort `Book` objects! It doesn't fail at compile-time, because the `TreeSet` `add()` method dosen't take a `Comparable` type, the `TreeSet` `add()` method takes whatever type you used when you created the `TreeSet`. In other workds, if you say `new TreeSet<Book>()` the `add()` method is essentially `add(Book)`. And there's no requirement that the `Book` class implement `Comparable`! But it fials at runtime when you add the second element to the set. That's the first time the set tries to call one of the objects's `compareTo()` methods and... can't）。
+
+```java
+class Book implements Comparable<Book> {
+    private String title;
+    private String writer;
+
+    public Book (String t, String w) {
+        title = t;
+        writer = w;
+    }
+
+    public String getTitle () {
+        return title;
+    }
+
+    public String getWriter () {
+        return writer;
+    }
+
+    public int compareTo(Book b) {
+        return title.compareTo(b.getTitle());
+    }
+
+    public String toString() {
+        return String.format("%s: %s", title, writer);
+    }
+}
+```
+
+- **使用取 `Comparator` 参数的、过载的`TreeSet` 构造器**
+
+    `TreeSet` 与 `Collections.sort()` 方法的工作方式很像 -- 假设元素类型实现了 `Comparable` 接口时，可选择使用元素的 `compareTo()` 方法；而在知道怎样对数据集中的元素进行排序时，亦可使用一个定制的 `Comparator` 对象。而要使用一个定制的 `Comparator` 对象，就要调用那个取一个 `Comparator` 对象作参数的 `TreeSet` 的构造器。
+
+```java
+public class TestTree {
+
+    public TestTree () {
+        Book b1 = new Book ("How Cats Work", "Lenny Peng");
+        Book b2 = new Book ("Remix your Body", "Echo Feng");
+        Book b3 = new Book ("Finding Emo", "Rose Peng");
+
+        TreeSet<Book> tree = new TreeSet<Book> (new CompareWriter());
+        tree.add(b1);
+        tree.add(b2);
+        tree.add(b3);
+
+        System.out.println(tree);
+    }
+
+    class CompareWriter implements Comparator<Book> {
+        public int compare(Book b1, Book b2) {
+            return b1.getWriter().compareTo(b2.getWriter());
+        }
+    }
+
+    public static void main (String[] args) {
+        new TestTree();
+    }
+    
+}
+```
+
+
+![`TreeSet` 排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数](images/Ch16_26.png)
+
+
+*图 26 - `TreeSet` 排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数*
