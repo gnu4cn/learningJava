@@ -1514,4 +1514,4 @@ public class TestTree {
 ![`TreeSet` 排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数](images/Ch16_26.png)
 
 
-*图 26 - `TreeSet` 排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数*
+*图 26 - `TreeSet` 实现排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数*

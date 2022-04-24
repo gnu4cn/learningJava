@@ -15,7 +15,7 @@ public class TestTree {
         treeComparable.add(b2);
         treeComparable.add(b3);
 
-        System.out.format("使用 Comparable 元素：\n%s\n\n", treeComparable);
+        System.out.format("使用 Comparable 元素（按标题排序）：\n%s\n\n", treeComparable);
 
 
         TreeSet<Book> treeComparator = new TreeSet<Book> (new CompareWriter());
@@ -23,7 +23,7 @@ public class TestTree {
         treeComparator.add(b2);
         treeComparator.add(b3);
 
-        System.out.format("使用带 Comparator 参数的 TreeSet 的过载构造器：\n%s\n", treeComparator);
+        System.out.format("使用带 Comparator 参数的 TreeSet 的过载构造器（按作者排序）：\n%s\n", treeComparator);
     }
 
     class CompareWriter implements Comparator<Book> {
