@@ -1424,3 +1424,15 @@ Exception in thread "main" java.lang.ClassCastException: class com.xfoss.Collect
         at com.xfoss.CollectionAndGenerics.TestTree.main(TestTree.java:21)
 shell returned 1
 ```
+
+> 但在给 `Book` 类加上 `implements Comparable<Book>` 及 `public int compareTo(Book b)` 后，输出即为：
+
+```console
+[com.xfoss.CollectionAndGenerics.Book@44e81672, com.xfoss.CollectionAndGenerics.Book@60215eee, com.xfoss.CollectionAndGenerics.Book@4ca8195f]
+```
+
+> 此输出没有可读性可言。仍需重写 `Book` 类的 `toString()` 方法，重写该方法后的输出为：
+
+```console
+[Finding Emo, How Cats Work, Remix your Body]
+```
