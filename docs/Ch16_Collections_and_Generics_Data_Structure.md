@@ -1436,3 +1436,7 @@ shell returned 1
 ```console
 [Finding Emo, How Cats Work, Remix your Body]
 ```
+
+### `TreeSet` 的元素 *务必* 要是可比较的
+
+**`TreeSet` elements MUST be comparable**
