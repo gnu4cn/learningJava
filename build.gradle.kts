@@ -7,6 +7,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
+application {
+    // mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
+    mainClassName = "com.xfoss.CollectionAndGenerics.TestTree"
+    getMainClass().set(mainClassName)
+}
+
 plugins {
     application
     kotlin("jvm") version "1.3.50"
@@ -37,12 +43,6 @@ group = "Head First Java, Java 教程"
 version = "0.0.1"
 description = "轻松学Java"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-application {
-    // mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
-    mainClassName = "com.xfoss.CollectionAndGenerics.JukeBox8"
-    getMainClass().set(mainClassName)
-}
 
 tasks {
     withType<JavaCompile>() {

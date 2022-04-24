@@ -1365,3 +1365,62 @@ public class JukeBox8 {
     }
 }
 ```
+
+### `TreeSet` 应知必会
+
+**What you MUST know about `TreeSet`** ......
+
+虽然 `TreeSet`看起来简单，但请一定要搞清楚，运用他是要做什么。为了让你对 `TreeSet` 重要性有所思考，这里准备了一个练习。在完成这个练习之前，请勿继续往后阅读。这里是 *认真的*。
+
+### 动手写代码
+
+请看看这个代码。认真理解这个代码，然后回答下面的问题。（请注意：这段代码是没有语法错误的。）
+
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestTree {
+
+    public TestTree () {
+        Book b1 = new Book ("How Cats Work");
+        Book b2 = new Book ("Remix your Body");
+        Book b3 = new Book ("Finding Emo");
+
+        TreeSet<Book> tree = new TreeSet<Book> ();
+        tree.add(b1);
+        tree.add(b2);
+        tree.add(b3);
+
+        System.out.println(tree);
+    }
+}
+
+class Book {
+    private String title;
+    public Book (String t) {
+        title = t;
+    }
+}
+```
+
+1) 在编译此代码时会有什么样的结果？
+
+2) 在编译成功时，那么运行这个 `TestTree` 类，会有什么样的结果？
+
+3) 假如这段代码有个问题（编译时或运行时），那么该怎样来修改这个问题呢？
+
+
+> 这段代码可通过编译，但会出现运行时错误：
+
+```console
+Exception in thread "main" java.lang.ClassCastException: class com.xfoss.CollectionAndGenerics.Book cannot be cast to class java.lang.Comparable (com.xfoss.CollectionAndGenerics.Book is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+        at java.base/java.util.TreeMap.compare(TreeMap.java:1291)
+        at java.base/java.util.TreeMap.put(TreeMap.java:536)
+        at java.base/java.util.TreeSet.add(TreeSet.java:255)
+        at com.xfoss.CollectionAndGenerics.TestTree.<init>(TestTree.java:13)
+        at com.xfoss.CollectionAndGenerics.TestTree.main(TestTree.java:21)
+shell returned 1
+```
