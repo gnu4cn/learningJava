@@ -1522,4 +1522,8 @@ public class TestTree {
 
 清单与数据集都是极好的，但有的时候映射（a `Map`）则是最佳的集合（注意这里不是大写字母 `C` 的 `Collection` -- 请记住映射属于Java集合，但他们没有实现 `Collection`接口）。
 
-设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由[自动打包的原生值](Ch10_Numbers_and_Statics_Numbers_Matter.md#autoboxing)）。
+设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由 [自动打包的原生值](Ch10_Numbers_and_Statics_Numbers_Matter.md#autoboxing)）。
+
+![Java 中的映射](images/Ch16_27.png)
+
+*图 27 - Java 中的映射*
