@@ -1515,3 +1515,11 @@ public class TestTree {
 
 
 *图 26 - `TreeSet` 实现排序的两种不同方式：实现 `Comparable` 接口与使用 `Comparator` 作为构造器参数*
+
+## 已经见识了清单与数据集，那么现在就要用到映射（ `Map` ）
+
+**We've seen `List`s and `Set`s, now we'll use a `Map`**
+
+清单与数据集都是极好的，但有的时候映射（a `Map`）则是最佳的集合（注意这里不是大写字母 `C` 的 `Collection` -- 请记住映射属于Java集合，但他们没有实现 `Collection`接口）。
+
+设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由[自动打包的原生值](Ch10_Numbers_and_Statics_Numbers_Matter.md#autoboxing)）。
