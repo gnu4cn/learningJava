@@ -1527,3 +1527,36 @@ public class TestTree {
 ![Java 中的映射](images/Ch16_27.png)
 
 *图 27 - Java 中的映射*
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestMap {
+    public TestMap () {
+        // HashMap 需要 两个 类型参数 -- 一个用于键，另一个用于值。
+        HashMap<String, Integer> scores = new HashMap<String, Integer> ();
+
+        // 这里使用 put() 而不是 add() 方法，同时这里理所应当要取两个参数 (key, value)。
+        scores.put("Lenny", 42);
+        scores.put("Echo", 343);
+        scores.put("Rose", 420);
+
+        System.out.println(scores);
+        // 这个 get() 方法，要取一个键参数，并返回值（在此示例中，即为一个整数 Integer）。
+        System.out.println(scores.get("Echo"));
+    }
+
+
+    public static void main (String[] args) {
+        new TestMap();
+    }
+}
+```
+
+![Java 映射示例](images/Ch16_28.png)
+
+*图 28 - Java 映射示例*
+
+> 在打印映射时，会给出花括弧 `{}` ，而非在打印清单与数据集时方括弧 `[]` ，所包围起来的 `key=value` 键值对。
