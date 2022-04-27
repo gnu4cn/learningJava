@@ -9,7 +9,7 @@ import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 application {
     // mainClassName = "com.xfoss.SimpleChat.VerySimpleChatServer"
-    mainClassName = "com.xfoss.CollectionAndGenerics.TestMap"
+    mainClassName = "com.xfoss.CollectionAndGenerics.TestGenerics1"
     getMainClass().set(mainClassName)
 }
 

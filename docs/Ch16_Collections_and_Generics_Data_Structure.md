@@ -1560,3 +1560,74 @@ public class TestMap {
 *图 28 - Java 映射示例*
 
 > 在打印映射时，会给出花括弧 `{}` ，而非在打印清单与数据集时方括弧 `[]` ，所包围起来的 `key=value` 键值对。
+
+## 最后，回到泛型上来
+
+**Finally, back to generics**
+
+还记得本章早先曾谈到，方法取用那些带有泛型参数，会有多么的......*奇怪*。而这里所说的奇怪，是在多态语境下的。若觉得这里的东西变得离奇，那么只要继续往下看就好 -- 要讲清楚这个，还得要数页篇幅（Remember earlier in the chapter we talked about how methods that take arguments with generic types can be... *weird*. And we mean weird in the polymorphic sense. If things start to feel strane here, just keep going--it takes a few pages to really tell the whole story）。
+
+这里将从揭示一个 *数组* 参数，按多态方式运作的原理开始，随后就会看看类似的多态下泛型清单是如何工作的。以下代码编译和运行都不会有错误：
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics1 {
+    public TestGenerics1 () {
+        // 这里声明并创建了一个同时保存狗子和猫猫的 Animal 的数组。
+        Animal[] animals = {
+            new Dog(),
+            new Cat(),
+            new Dog()
+        };
+
+        // 这里声明并创建了一个仅保存 Dog 对象的 Dog 数组（编译器不会
+        // 允许把一个 Cat 对象放进去的）。
+        Dog[] dogs = {
+            new Dog(),
+            new Dog(),
+            new Dog()
+        };
+
+        // 这里使用了上面两种数组类型作为参数，对 takeAnimals() 方法
+        // 进行调用......
+        takeAnimals(animals);
+        takeAnimals(dogs);
+    }
+
+    // 这里的重点在于，由于 Dog IS-A Animal，因此 takeAnimals() 方法既可以取 Animal[] 做参数，也可以取
+    // Dog[] 做参数。可以看出多态机制发挥了作用。
+    public void takeAnimals(Animal[] animals) {
+        for (Animal a: animals) {
+            // 请记住，由于这里的参数 animals 是类型 Animal 的数组，并且这里没有执行任何
+            // 强制类型转换，因此这里能调用的，只能是在类型 Animal 中声明的方法。（这里又能将
+            // a 强制转换为什么呢？数组 animals 可能同时保存了 Dog 和 Cat 对象。）
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics1();
+    }
+}
+
+
+// 以下是简化了的 Animal 类继承层次。
+abstract class Animal {
+    void eat() {System.out.println("动物进食");}
+}
+
+class Dog extends Animal {
+    void bark (){ System.out.println("汪汪......");}
+}
+
+class Cat extends Animal {
+    void meow () {System.out.println("喵喵......");}
+}
+```
+
+![`TestGenerics1` 运行结果](images/Ch16_29.png)
+
+*图 29 - `TestGenerics1` 运行结果*
