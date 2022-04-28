@@ -1723,3 +1723,11 @@ public class TestGenerics2 {
         takeAnimals(dogs);
                     ^
 ```
+
+> 这代码看起来是那么的正确，但却错得离谱......（It looked so right, but went so wrong...）
+
+
+> *我还以为这代码应该没问题的呢？那就完全破坏了正在写的动物模拟应用，其中有一个取任意 `Animal` 类型的清单作参数的兽类程序，这样的话狗窝就可以交出一个狗子的清单，而猫窝就可以交出一个猫猫的清单......现在你跟我说不能这样，用集合来代替数组*？
+> *And I'm supposed to be OK with this? That totally screws my animal simulation where the veterinary program takes a list of any type of aniaml, so that a dog kennel can send a list of dogs, and a cat kennel can send a list of cats...now you're saying I can't do that if I use collections instead of arrays*?
+
+### 
