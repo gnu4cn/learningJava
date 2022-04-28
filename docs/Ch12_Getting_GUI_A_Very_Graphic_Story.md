@@ -929,7 +929,7 @@ class ColorButtonListener implements ActionListener {
 
 [](#InnerClassToTheRescue)
 
-**Inner class to the rescue!**
+**Inner class to the rescue**!
 
 > 注：听起来是不是很熟悉？哈哈，这里的内部类，就跟之前的 [`interface` 拯救了死亡钻石问题](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)（the Dead Diamon of Death）一样，解决了GUI中多个事件处理器的问题。
 
