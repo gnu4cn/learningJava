@@ -1819,4 +1819,4 @@ Exception in thread "main" java.lang.ArrayStoreException: com.xfoss.CollectionAn
 
 **Wildcards to the rescue**
 
-
+> **注**：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、[Interface to the rescue!](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)；2、[Inner class to the rescue!](Ch12_Getting_GUI_A_Very_Graphic_Story.md#inner_class_rescue)
