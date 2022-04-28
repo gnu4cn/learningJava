@@ -1631,3 +1631,50 @@ class Cat extends Animal {
 ![`TestGenerics1` 运行结果](images/Ch16_29.png)
 
 *图 29 - `TestGenerics1` 运行结果*
+
+
+### 运用多态参数与泛型
+
+**Using polymophic arguments and generics**
+
+通过上面的示例，这里就见识了多态下的数组是如何工作的了，那么在从数组切换到 `ArrayList` 时，多态机制还生效吗？听起来理由充分，不是吗？
+
+首先，来试试只有 `Animal` 类型的 `ArrayList`。这里只对其中的构造函数稍加改动：
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+// 这里简单地将 Animal[] 修改为了 ArrayList<Animal>。
+public class TestGenerics2 {
+    public TestGenerics2 () {
+        ArrayList<Animal> animals = new ArrayList<Animal> ();
+        // 由于 ArrayList 没有像数组创建那样的简便方式，因此这里
+        // 必须一次一个地添加 ArrayList 元素。
+        animals.add(new Dog());
+        animals.add(new Cat());
+        animals.add(new Dog());
+
+        // 这里的代码没变，只是现在的 animals 变量，引用的是 ArrayList 而
+        // 不再是之前的数组了。
+        takeAnimals(animals);
+    }
+
+    // 这个方法现在取用的是一个 ArrayList 类型的参数，而不再是之前的数组参数了，不过
+    // 其余的部分还是一样的。请记住，对于数组与集合，for 循环都是有效的。
+    public void takeAnimals(ArrayList<Animal> animals) {
+        for (Animal a: animals) {
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics2();
+    }
+}
+```
+
+![修改为 `ArrayList` 的 `TestGenerics2` 的运行结果](images/Ch16_30.png)
+
+*图 30 - 修改为 `ArrayList` 的 `TestGenerics2` 的运行结果*
