@@ -1727,7 +1727,33 @@ public class TestGenerics2 {
 > 这代码看起来是那么的正确，但却错得离谱......（It looked so right, but went so wrong...）
 
 
-> *我还以为这代码应该没问题的呢？那就完全破坏了正在写的动物模拟应用，其中有一个取任意 `Animal` 类型的清单作参数的兽类程序，这样的话狗窝就可以交出一个狗子的清单，而猫窝就可以交出一个猫猫的清单......现在你跟我说不能这样，用集合来代替数组*？
+> *我还以为这代码应该没问题的呢？那就完全破坏了正在写的动物模拟应用，其中有一个取任意 `Animal` 类型的清单作参数的兽类程序，这样的话狗窝就可以交出一个狗子的清单，而猫窝就可以交出一个猫猫的清单......现在你跟我说不能这样，不能用集合来代替数组*？
 > *And I'm supposed to be OK with this? That totally screws my animal simulation where the veterinary program takes a list of any type of aniaml, so that a dog kennel can send a list of dogs, and a cat kennel can send a list of cats...now you're saying I can't do that if I use collections instead of arrays*?
 
-### 
+### 如果允许这样做，会怎样呢？
+
+**What could happen if it were allowed**...
+
+请设想一下如果编译器允许避开那个报错。那就是允许将一个 `ArrayList<Dog>` 传递给这样声明的一个方法了：
+
+```java
+public void takeAnimals(ArrayList<Animal> animals) {
+    for (Animal a: animals) {
+        a.eat();
+    }
+}
+```
+
+*看起来* 这方法中是相当无害的，对吧？归根结底，多态机制的要义，就是 `Animal` 可以完成的所有事情（在此示例中，就是`eat()`方法），`Dog` 也是可以完成的。那么到底在那些`Dog`引用变量上的 `eat()` 方法调用有什么问题呢？
+
+*不存在*。什么问题也没有。
+
+*那段* 代码本身没有任何问题。然而请设想下面 *这段* 代码：
+
+```public void takeAnimals(ArrayList<Animal> animals) {
+    // 糟糕！这里恰好把一个 Cat 对象，给添加到了一个可能是个仅 Dog 类型的 ArrayList 中了。
+    animals.add(new Cat());
+}
+```
+
+那么这就是问题所在了。
