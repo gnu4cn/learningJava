@@ -1678,3 +1678,48 @@ public class TestGenerics2 {
 ![修改为 `ArrayList` 的 `TestGenerics2` 的运行结果](images/Ch16_30.png)
 
 *图 30 - 修改为 `ArrayList` 的 `TestGenerics2` 的运行结果*
+
+
+### 那么对于 `ArrayList<Dog>` 也行吗？
+
+由于多态机制的原因，编译器是允许将一个 `Dog` 数组，传递给有着`Animal`数组参数的方法的（正如`TestGenerics1`中那样）。当然这没有问题。同样一个 `ArrayList<Aniaml>`的参数，也可以传递给带有 `ArrayList<Animal>`参数的方法。因此这里一个大问题即是，这个 `ArrayList<Animal>` 参数，会接受一个 `ArrayList<Dog>`吗？既然在数组下可行，这里会不会也行呢？
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics2 {
+    public TestGenerics2 () {
+        ArrayList<Animal> animals = new ArrayList<Animal> ();
+        animals.add(new Dog());
+        animals.add(new Cat());
+        animals.add(new Dog());
+        // 我们知道这一行是没问题的。
+        takeAnimals(animals);
+
+        // 现在构造一个 Dog 类型的 ArrayList 并放入两个 Dog 对象进去。
+        ArrayList<Dog> dogs = new ArrayList<Dog> ();
+        dogs.add(new Dog());
+        dogs.add(new Dog());
+        // 现在这行将数组修改为 ArrayList 的代码会工作吗？
+        takeAnimals(dogs);
+    }
+
+    public void takeAnimals(ArrayList<Animal> animals) {
+        for (Animal a: animals) {
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics2();
+    }
+}
+```
+
+```console
+.../src/main/java/com/xfoss/CollectionAndGenerics/TestGenerics2.java:17: error: incompatible types: ArrayList<Dog> cannot be converted to ArrayList<Animal>
+        takeAnimals(dogs);
+                    ^
+```
