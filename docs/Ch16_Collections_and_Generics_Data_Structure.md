@@ -1756,4 +1756,51 @@ public void takeAnimals(ArrayList<Animal> animals) {
 }
 ```
 
-那么这就是问题所在了。
+那么这就是问题所在了。将一个`Cat`对象添加到一个`ArrayList<Animal>`确实没什么问题，并且这这正是之所以运用有着诸如`Aniaml`这样超类型`ArrayList`的要义所在--如此就可以把所有`Aniaml`子类型，都放在单个的`Animal`类型的`ArrayList`中（So that's the problem. There's certainly nothing wrong with adding a `Cat` to an `ArrayList<Animal>`, and that's the whole point of having an `ArrayList` of a supertype like `Animal`--so that you can put all types of animals in a single `Animal` `ArrayList`）。
+
+然而在将一个`Dog`类型的`ArrayList`--一个表示仅保存`Dog`对象的`ArrayList`--传递给这个取`Animal`类型的`ArrayList`参数的方法后，那么就会立即以出现在`Dog`类型清单中的`Cat`对象而告终。编译器知道如果允许将一个`Dog`类型`ArrayList`传入到那样的方法，就会有人在运行时，把一个`Cat`对象添加到那个`Dog`类型的清单。因此编译器就直接不会让你冒这个风险了。
+
+***在申明了一个取`ArrayList<Animal>`参数的方法时，这个方法便只能取`ArrayList<Animal>`参数，对于`ArrayList<Dog>`或`ArrayList<Cat>`，都是不可以的***。
+
+> *等一下......若这就是为何编译器不允许将 `Dog` 类型 `ArrayList`， 传入到以`Animal` 类型 `ArrayList`做参数的方法的原因--为阻止可能的将`Cat`对象放入到实际为`Dog`类型清单，那为何数组上为什么又可行呢？难道对于数组就没有这同样的问题吗？难道也不能把`Cat`对象添加到 `Dog[]`吗*？
+
+### `Array` 数组类型，是在运行时检查，但数据集类型的检查，是在编译时就发生了
+
+**`Array` types are checked again at runtime, but collection type checks happen only when you compile**
+
+假设像下面这样，*确实* 将一个 `Cat` 对象添加给了一个声明为 `Dog[]` 的数组（一个传入到声明为`Animal[]`的方法参数的数组，下面的写法，是一种相当合法的数组赋值；*注意*：Java 中的数组，是固定长度的，因此没有`append()`方法）。
+
+```java
+package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics3 {
+    public TestGenerics3 () {
+        Dog[] dogs = {
+            new Dog(),
+            new Dog(),
+            new Dog()
+        };
+
+        takeAnimals(dogs);
+    }
+
+    public void takeAnimals(Animal[] animals) {
+        // 这里将一个`Cat`对象放入到了一个 `Dog` 数组。由于编译器知道，这里
+        // 传递该方法的可能是个`Cat`数组或`Animal`数组，因此编译器是允许这样写
+        // 的，那么对于编译器来说，这可能是正确的。
+        animals[2] = new Cat();
+    }
+
+    public static void main (String[] args){
+        new TestGenerics3();
+    }
+}
+```
+
+这段代码可以编译，但在运行时，会抛出异常：
+
+![`TestGenerics3`运行时抛出异常](images/Ch16_31.png)
+
+*图 31 - `TestGenerics3`运行时抛出异常*
