@@ -9,9 +9,14 @@ public class TestGenerics2 {
         animals.add(new Cat());
         animals.add(new Dog());
         takeAnimals(animals);
+
+        ArrayList<Dog> dogs = new ArrayList<Dog> ();
+        dogs.add(new Dog());
+        dogs.add(new Dog());
+        takeAnimals(dogs);
     }
 
-    public void takeAnimals(ArrayList<Animal> animals) {
+    public void takeAnimals(ArrayList<? extends Animal> animals) {
         for (Animal a: animals) {
             a.eat();
         }

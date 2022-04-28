@@ -1820,3 +1820,21 @@ Exception in thread "main" java.lang.ArrayStoreException: com.xfoss.CollectionAn
 **Wildcards to the rescue**
 
 > **注**：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、[Interface to the rescue!](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)；2、[Inner class to the rescue!](Ch12_Getting_GUI_A_Very_Graphic_Story.md#inner_class_rescue)
+
+虽然看起来非同寻常，不过 *确实* 有种构建可接受任意 `Animal` 子类型的`ArrayList`作为方法参数的方式。最简单的做法，就是使用 **通配符（wildcard）** -- 正式因为这个原因，通配符才被显式地加入到Java编程语言的（it looks unusual, but there *is* a way to create a method argument that can accept an `ArrayList` of any `Animal` subtype. The simplest way is to use a **wildcard**--added to the Java language explicitly for this reason）。
+
+```java
+public void takeAnimals(ArrayList<? extends Animal> animals) {
+    for (Animal a: animals) {
+        a.eat();
+    }
+}
+```
+
+> *还记得吧，这里的关键字 `extends`的意思，根据他后面类型的不同，既可以是 `extends`，也可以是 `implements`。那么在想要取一个实现了 `Pet` 接口类型的 `ArrayList` 做参数时，就可以这样来申明这个参数*：
+
+```java
+ArrayList<? extends Pet>
+```
+
+
