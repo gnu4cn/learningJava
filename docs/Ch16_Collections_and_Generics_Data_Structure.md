@@ -1801,6 +1801,22 @@ public class TestGenerics3 {
 
 这段代码可以编译，但在运行时，会抛出异常：
 
-![`TestGenerics3`运行时抛出异常](images/Ch16_31.png)
+```console
+$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+Exception in thread "main" java.lang.ArrayStoreException: com.xfoss.CollectionAndGenerics.Cat
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.takeAnimals(TestGenerics3.java:17)
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.<init>(TestGenerics3.java:13)
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.main(TestGenerics3.java:21)
+```
 
-*图 31 - `TestGenerics3`运行时抛出异常*
+> *呃！至少JVM阻止了他的运行*。
+
+> *难道想要一种仍然可以使用多态数据集类型，作为方法参数的方式，以致我写的兽类程序可以取得`Dog`与`Cat`类型清单，就是异想天开吗？如果能那样做，那么就可以对清单进行遍历，从而既可以调用这些猫猫狗狗的 `immunize()` 方法，还必须确保无法将一个`Cat`对象添加到 `Dog` 类型清单方面的安全性。然而我猜我这个想法终将是个幻想而已了*......
+>
+> *Wouldn't it be dreamy if there were a way to still use polymorphic collection types as method arguments, so that my veterinary program could take `Dog` lists and `Cat` lists? That way I could loop through the lists and call their `immunize()` method, but it would still have to be safe so that you couldn't add a `Cat` in to the `Dog` list. But I guess that's just a fantasy*...
+
+### 通配符来挽救
+
+**Wildcards to the rescue**
+
+
