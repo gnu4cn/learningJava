@@ -1821,7 +1821,7 @@ Exception in thread "main" java.lang.ArrayStoreException: com.xfoss.CollectionAn
 
 > **注**：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、[Interface to the rescue!](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)；2、[Inner class to the rescue!](Ch12_Getting_GUI_A_Very_Graphic_Story.md#inner_class_rescue)
 
-虽然看起来非同寻常，不过 *确实* 有种构建可接受任意 `Animal` 子类型的`ArrayList`作为方法参数的方式。最简单的做法，就是使用 **通配符（wildcard）** -- 正式因为这个原因，通配符才被显式地加入到Java编程语言的（it looks unusual, but there *is* a way to create a method argument that can accept an `ArrayList` of any `Animal` subtype. The simplest way is to use a **wildcard**--added to the Java language explicitly for this reason）。
+虽然看起来非同寻常，不过 *确实* 有种创建可接受任意 `Animal` 子类型的`ArrayList`作为方法参数的方式。最简单的做法，就是使用 **通配符（wildcard）** -- 正式因为这个原因，通配符才被显式地加入到Java编程语言的（it looks unusual, but there *is* a way to create a method argument that can accept an `ArrayList` of any `Animal` subtype. The simplest way is to use a **wildcard**--added to the Java language explicitly for this reason）。
 
 ```java
 public void takeAnimals(ArrayList<? extends Animal> animals) {
@@ -1837,4 +1837,44 @@ public void takeAnimals(ArrayList<? extends Animal> animals) {
 ArrayList<? extends Pet>
 ```
 
+那么现在你肯定在想，“这有 *区别* 吗？不会还有之前同样的问题吧？上面的那个方法，并没有做什么危险的事情--仅仅是调用了任何`Animal`子类型都必定有的方法--然而有的人不还可以把这个方法，修改为把`Cat`对象添加到那个 *`Animal`*清单吗，即使这个清单实际上是个`ArrayList<Dog>`？而且由于在运行时这没有被检查呢，既然这样，这样做与不带通配符又有怎样的不同呢”？
 
+你的顾虑或许是对的。然而答案是否定的。当在声明中使用了通配符`<?>`时，编译器就不会允许将任何东西添加到那个清单了（）！
+
+> **当在方法声明中使用了通配符时，编译器会阻止任何的那些可能危害到被这个方法参数所引用清单的操作（When you use a wildcard in your method argument, the compiler will STOP you from doing anything that could hurt the list referenced by the method parameter）**。
+>
+> *注*：关于Java中的形式参数与实际参数：[Argument vs Parameter](https://www.geeksforgeeks.org/argument-vs-parameter-in-java/)
+>
+> **这个时候仍然可以运行这个清单中元素上的方法，但不可以往清单添加元素了**。
+>
+> **也就是说，可以对这些清单元素进行任何操作，但不能将新东西放入到这个清单。由于编译器不会允许任何在运行时可怕的操作，因此在运行时就是安全的**。
+> 
+> **那么，在那个 `takeAnimals()` 里边，这样做是没有问题的**：
+
+```java
+for (Animal a: animals) {
+    a.eat();
+}
+```
+
+> **但下面的就不会编译**：
+
+```java
+animals.add(new Dog());
+```
+
+> ***注*：除了 `add()` 方法不允许外，`set()` 方法也是不被允许的**：
+
+```java
+animals.set(0, new Dog());
+```
+
+> **编译时报出的错误都是**:
+
+```console
+.../src/main/java/com/xfoss/CollectionAndGenerics/TestGenerics2.java:20: error: incompatible types: Dog cannot be converted to CAP#1
+        animals.set(0, new Dog());
+                       ^
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Animal from capture of ? extends Animal
+```

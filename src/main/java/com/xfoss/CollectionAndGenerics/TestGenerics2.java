@@ -17,6 +17,8 @@ public class TestGenerics2 {
     }
 
     public void takeAnimals(ArrayList<? extends Animal> animals) {
+        animals.set(0, new Dog());
+
         for (Animal a: animals) {
             a.eat();
         }
