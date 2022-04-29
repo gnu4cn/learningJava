@@ -99,3 +99,4 @@ Kotlin DSL, 领域特定语言，Domain Specific Language
 - [联网与线程：构造连接](docs/Ch15_Networking_and_Threads_Make_a_Connection.md)
 - [集合与泛型：数据结构](docs/Ch16_Collections_and_Generics_Data_Structure.md)
 - [打包、JARS与部署：发布代码](docs/Ch17_Package_JARs_And_Deployment_Release_Your_Code.md)
+- [使用 RMI 特性进行远端部署：分布式计算](docs/Ch18_Remote_Deployment_with_RMI_Distributed_Computing.md)
