@@ -5,9 +5,9 @@ import java.util.*;
 public class TestGenerics3 {
     public TestGenerics3 () {
         Dog[] dogs = {
-            new Dog(),
-            new Dog(),
-            new Dog()
+            new Dog("Echo"),
+            new Dog("丁丁"),
+            new Dog("阿黄")
         };
 
         takeAnimals(dogs);

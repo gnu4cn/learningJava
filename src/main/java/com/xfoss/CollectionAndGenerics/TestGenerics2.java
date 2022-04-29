@@ -5,20 +5,20 @@ import java.util.*;
 public class TestGenerics2 {
     public TestGenerics2 () {
         ArrayList<Animal> animals = new ArrayList<Animal> ();
-        animals.add(new Dog());
+        animals.add(new Dog("丁丁"));
         animals.add(new Cat());
-        animals.add(new Dog());
+        animals.add(new Dog("阿飞"));
         takeAnimals(animals);
 
         ArrayList<Dog> dogs = new ArrayList<Dog> ();
-        dogs.add(new Dog());
-        dogs.add(new Dog());
-        takeAnimals(dogs);
+        dogs.add(new Dog("Echo"));
+        dogs.add(new Dog("阿黄"));
+
+        List<Dog> puppies = dogs;
+        System.out.println(puppies);
     }
 
     public void takeAnimals(ArrayList<? extends Animal> animals) {
-        animals.set(0, new Dog());
-
         for (Animal a: animals) {
             a.eat();
         }

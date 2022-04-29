@@ -98,3 +98,4 @@ Kotlin DSL, 领域特定语言，Domain Specific Language
 - [对象序列化与文件的输入/输出：对象保存](docs/Ch14_Serialization_and_File_I_O_Saving_Objects.md)
 - [联网与线程：构造连接](docs/Ch15_Networking_and_Threads_Make_a_Connection.md)
 - [集合与泛型：数据结构](docs/Ch16_Collections_and_Generics_Data_Structure.md)
+- [打包、JARS与部署：发布代码](docs/Ch17_Package_JARs_And_Deployment_Release_Your_Code.md)
