@@ -1847,7 +1847,7 @@ ArrayList<? extends Pet>
 >
 > **这个时候仍然可以运行这个清单中元素上的方法，但不可以往清单添加元素了**。
 >
-> **也就是说，可以对这些清单元素进行任何操作，但不能将新东西放入到这个清单。由于编译器不会允许任何在运行时可怕的操作，因此在运行时就是安全的**。
+> **也就是说，可以对这些清单元素进行任何操作，但不能将新东西放入到这个清单。由于编译器不会允许任何在运行时可怕操作，因此在运行时就是安全的**。
 > 
 > **那么，在那个 `takeAnimals()` 里边，这样做是没有问题的**：
 
@@ -1877,4 +1877,40 @@ animals.set(0, new Dog());
                        ^
   where CAP#1 is a fresh type-variable:
     CAP#1 extends Animal from capture of ? extends Animal
+```
+
+### 完成同样事情的替代语法
+
+**Alternate syntax for doing the same thing**
+
+或许还记得在之前讲到`Collections.sort()`方法时，在该方法的声明中，以一种不寻常的、类型参数声明在返回值前边的格式，使用了泛型。那只是一种声明类型参数的不同方式，结果仍是相同的：
+
+> *注*：Java 中涉及到 类型参数（the type parameter） 与 类型变量（the type variable）。
+
+**这种类型实参的声明方式**：
+
+```java
+public <T extends Animal> void takeThing(ArrayList<T> list)
+```
+
+**执行了与下面这种声明方式同样的事情**：
+
+```java
+public void takeThing(ArrayList<? extends Animal> list)
+```
+
+## 答疑
+
+- **既然这两种方式完成了同样的事情，那为何不优先使用其中一种方式呢**？
+
+> 是否要优先选择其中之一，完全取决于是不是想要在其他地方使用这个 `T`。比如如果希望那个方法有两个参数--这两个参数都是对`Animal` 进行扩展的类型的清单时，会怎样呢？在这种情况下，只声明一次这个类型参数，就更加高效了：
+
+```java
+public <T extends Animal> void takeThing(ArrayList<T> one, ArrayList<T> two)
+```
+
+> 而不需要像下面这样写：
+
+```java
+public void takeThing(ArrayList<? extends Animal> one, ArrayList<? extends Animal> two)
 ```
