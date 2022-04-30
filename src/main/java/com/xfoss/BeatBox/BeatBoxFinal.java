@@ -209,10 +209,9 @@ public class BeatBoxFinal extends JFrame{
     }
 
     public class PlayMineListener implements ActionListener {
-        // 在用户从那个清单中选择了某个东西时，就会调用到这个方法
-        // 这里将立即把节拍编排，修改为用户所选的那个。
         public void actionPerformed (ActionEvent ev) {
             if(mySeq != null) {
+                // 恢复到自己原先的编排
                 seq = mySeq;
             }
         }
