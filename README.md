@@ -13,7 +13,7 @@
 
     JDK的当前LTS版是 `JDK 17.0.1`（Oracle, 2021-11），你可以直接从 [Java Downloads | jdk.java.net](https://jdk.java.net/java-se-ri/11) 下载。openjdk-11+28_linux-x64_bin.tar.gz` 压缩包有 178.9M 大小。
 
-    运行下面的命令，就安装好 Oracle 的 JDK 了。
+    运行下面的命令，就安装好 OpenJDK 了。
 
 ```bash
 $sudo tar xf /path/to/openjdk-11+28_linux-x64_bin.tar.gz -C /opt/
