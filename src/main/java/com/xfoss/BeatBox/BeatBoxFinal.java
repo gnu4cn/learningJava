@@ -63,7 +63,7 @@ public class BeatBoxFinal extends JFrame{
         // 没什么新的东西......设置网络通信、I/O及构造（并启动）
         // 那个 reader 线程。
         try {
-            Socket sock = new Socket("127.0.0.1", 14242);
+            Socket sock = new Socket("192.168.153.134", 14242);
             out = new ObjectOutputStream(sock.getOutputStream());
             in = new ObjectInputStream(sock.getInputStream());
             Thread remote = new Thread(new RemoteReader());
