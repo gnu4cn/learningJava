@@ -74,8 +74,11 @@ public class BeatBoxFinal extends JFrame{
         }
 
         setUpMidi();
+        setUpGUI();
+    }
 
-        // 下面这些是 GUI 代码，没什么新东西
+    // 下面这些是 GUI 代码，没什么新东西
+    private void setUpGUI () {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         URL icoURI = getClass().getResource("/images/ico.png");
