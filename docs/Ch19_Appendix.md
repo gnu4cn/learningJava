@@ -116,4 +116,24 @@ int y = x << 2; // 此时二进制位为：1111 1111 1111 1111 1111 1111 1101 01
 
 **Immutability**
 
-在Java程序变得大起来时，最后就将不可避免地有着很多很多的 `String` 对象。为了安全目的，以及节省内存的缘故（请记住Java程序可在那些启用了Java的内存极少的移动电话上运行），Java中的字符串是不可更改的。
+### 为何要留意字符串是 `Immutable` 类型的？
+
+**Why do you care that Strings are `Immutable`**?
+
+在Java程序变得大起来时，最后就将不可避免地有着很多很多的 `String` 对象。为了安全目的，以及节省内存的缘故（请记住Java程序可在那些启用了Java的内存极少的移动电话上运行），Java中的字符串是不可更改的。这意味着在下面这样写代码时：
+
+```java
+String s = "0";
+
+for (int x = 1; x < 10; x++) {
+    s = s + x;
+}
+```
+
+这实际上进行的是在创建10个`String`对象（他们的值分别是 `0`、`01`、`012` 直到 `0123456789`）。最后的那个 `s` 中指向的是值为`0123456789`的字符串，但是此刻存在着多大 *十个* 的字符串！
+
+无论何时构造一个新的 `String` 对象，JVM 都会将其放入到一个名为 "字符串池（`String` Pool）" 的内存部分（是不是听起来很新奇？）。在字符串池中已经有一个同样值的`String`对象时，JVM就不再会创建一个重复的了，JVM会简单地将其他引用变量指向到这个既有条目。JVM之所以能侥幸做到这点，就是因为字符串具有不变性；引用变量无法修改某个`String`对象的值，是由于有别的引用变量引用了这同一个`String`对象（The JVM can get away with this because Strings are immutable; one reference variable can't change a `String`'s value out from under another reference variable referring to the same things）。
+
+`String`对象池的另一问题在于，垃圾回收器 *无法触及到那里*。因此在此示例中，除非碰巧随后要构造一个，比如说`01234`的`String`对象，那么在那个 `for` 循环中构造的前 9 个字符串，就将在那里白白浪费内存。
+
+
