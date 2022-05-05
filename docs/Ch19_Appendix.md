@@ -161,4 +161,4 @@ Integer iWrap = new Integer(42);
 >
 > *Roses are red, violets are blue*.
 >
-> ****Strings are immutable, wrappers are too**.
+> ***Strings are immutable, wrappers are too***.
