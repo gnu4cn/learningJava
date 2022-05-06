@@ -377,3 +377,15 @@ public class TestAnon extends JFrame {
     }
 }
 ```
+
+## 访问级别与访问修饰符（谁看见什么的问题）
+
+**Access Levels and Access Modifiers(Who Sees What)**
+
+Java 语言有着 *四个* 访问 *级别*，以及 *三个* 访问 *修饰符*。之所以只有 *三个* 修饰符，是因为 *默认的那个* （即在不使用任何访问修饰符时所得到的） *即为* 四个访问级别之一。
+
+### 访问级别
+
+（以他们各自限制程度排序，自最少限制到最大限制，in order of how restritive they are, from least to most restrictive）
+
+- `public`，`public`
