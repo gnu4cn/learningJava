@@ -277,4 +277,40 @@ class Foo {
 
 **Anonymous and Static Nested Classes**
 
+### 嵌套类有着多种形式
+
+**Nested classes come in many flavors**
+
+在本书的 GUI 事件处理章节，开始将内部（嵌套）类用作实现事件收听器接口的一个解决办法。那正是内部类的最常见、最实用及最具可读性的一种形式 -- 其中用到的类，是简单地嵌套在另一包含他们类的花括弧里头的（That's the most common, practical, and readable form of an inner class--where the class is simply nested within the curly braces of another enclosing class）。同时请记住，因为内部类是外部/包覆类的成员，这就意味着为了获取到一个内部类的实例，是需要外部类的一个实例的。
+
+然而，还有一些其他种类的内部类，包括 *静态* 及 *匿名* 的内部类。这里不会涉及到细节性的东西，但这里又不愿让你在看到一些人的代码中，奇怪语法时被震惊到。这是因为在Java语言下所能做的任何事情里头，或许没有什么能比匿名内部类，产生出更加怪模怪样的代码了。不过这里是要从一些更简单的东西开始 -- 静态嵌套类（Because out of virtually anything you can do with the Java language, perhaps nothing produces more bizarre-looking code than anonymous inner classes. But we'll start with something simpler--static nested classes）。
+
+### 静态嵌套类（Static nested classes）
+
+这里已知 `static` 的意思 -- 一些与类，而非特定实例捆绑的东西。而静态嵌套类，除了被关键字 `static` 标记了外，则与那些用于事件收听器的非静态类看起来是差不多的。
+
+```java
+package com.xfoss.Appendix;
+
+class FooOuter {
+    // 静态嵌套类只是 -- 包含在另一个类中，并用 static 标识符
+    // 标记了的类。
+    static class BarInner {
+        void sayIt () {
+            System.out.println("一个静态内部类的方法");
+        }
+    }
+}
+
+public class TestDrive {
+    public static void main (String[] args) {
+        // 由于静态嵌套类是......静态的，因此就不会用到外部类的实例。而只
+        // 使用这个静态嵌套类的名称，这与运行静态方法或访问静态变量的方式
+        // 是一致的。
+        FooOuter.BarInner foo = new FooOuter.BarInner();
+        foo.sayIt();
+    }
+}
+```
+
 
