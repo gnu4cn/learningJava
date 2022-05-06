@@ -313,4 +313,67 @@ public class TestDrive {
 }
 ```
 
+### 嵌套与内部类之间的区别
 
+**The difference between *nested* and *inner***
+
+所有定义在别的类作用范围内部的Java类，都被称作是 ***嵌套（nested）*** 类。而不管这个类是匿名的、静态的，还是正常的。只要他是在另一个类里头，那么技术上将，他就是个 *嵌套* 类。但那些 *非静态* 嵌套类，通常被称为是 *内部* 类，也就是本书早先叫做的那样。底线则是：所有内部类都是嵌套类，但并非所有嵌套类都是内部类。
+
+### 匿名内部类
+
+请设想正在编写一些 GUI 代码，而猛然意识到需要某个实现了 `ActionListener` 类的实例。却发现手头并没有一个 `ActionListener` 类型的实例。进而意识到还不曾编写过那种收听器的 *类*。这个时候有两个选择：
+
+1) 在代码中编写一个内部类，也就是前面GUI代码中所做的那种方式，进而对其初始化并将得到的实例，传入到按钮的事件注册（`addActionListener()`）方法；
+
+或者
+
+2) 就在这里，立即创建一个 *匿名* 内部类并对其进行初始化。***明确地就在需要收听器类型对象的地方***。没错，就是在通常要提供到实例的地方，创建类和相应的实例。请稍加思考一下这种做法 -- 那意味着是在通常只传入一个 *实例* 到方法参数的地方，传入了整个的 *类*！
+
+```java
+package com.xfoss.Appendix;
+
+import java.awt.event.*;
+import javax.swing.*;
+
+public class TestAnon extends JFrame {
+
+    public static void main (String[] args) {
+        new TestAnon();
+    }
+
+    public TestAnon () {
+
+        // 这里构造了一个视窗框，并添加了一个按钮，现在需要将
+        // 一个动作事件收听器注册到整个按钮。只是这里并没有构造
+        // 一个实现了 ActionListener 接口的类......
+        super("TestAnon");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton btn = new JButton ("点击");
+        // 正常情况下是要像下面这样做的--传入一个到某个内部类 -- 一个实现
+        // 了 ActionListener 接口（已经 actionPerformed() 方法）的内部类，实例
+        // 的引用变量......
+        // btn.addActionListener(quitListener);
+
+        // 不过现在传入不再是个引用变量，这里传入的是......整个新类的定义！！
+        // 也就是说，这里是在正好需要那个类的地方，直接写出的那个实现了
+        // ActionListener 接口的类。这种语法还自动创建了一个该类的实例。
+        //
+        // 请注意尽管 ActionListener 是个接口，但这里仍是写的 “new ActionListener()” 
+        // 而这样是无法构造出 ActionListener 类型的一个实例的！但这种语法真正的意义
+        // 在于，“创建一个新的，实现了 ActionListener 接口的类（不带名字），并顺便
+        // 在接下来提供到该接口所需的方法实现，即这里的 actionPerformed()”。
+        btn.addActionListener(new ActionListener () {
+            public void actionPerformed (ActionEvent ev) {
+                System.exit(0);
+            }
+        }); // 整个语句到这里才算结束！
+
+        getContentPane().add(btn);
+
+        setBounds(50, 50, 640, 480);
+        pack();
+        setVisible(true);
+    }
+}
+```
