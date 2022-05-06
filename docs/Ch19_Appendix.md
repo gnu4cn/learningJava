@@ -388,4 +388,5 @@ Java 语言有着 *四个* 访问 *级别*，以及 *三个* 访问 *修饰符*�
 
 （以他们各自限制程度排序，自最少限制到最大限制，in order of how restritive they are, from least to most restrictive）
 
-- `public`，`public`
+- `public` <-- `public` 表示任何地方的任何代码，都可以访问公开物件（这里的“物件”，指的是类、变量、方法、构造器等等）；
+- `protected` <-- 除了允许打包外部对`protected`装饰的物件进行子类化，从而对其进行继承外，与默认（不带访问级别修饰符）方式工作完全类似，同一打包中有着访问权限（`protected` works just like default(code in the same package has access), EXCEPT it also allows subclasses outside the package to inherit the protected thing）；
