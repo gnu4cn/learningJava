@@ -232,6 +232,49 @@ void doStuff () {
 
 在上个示例中，`y`是个块级变量，是在一个块中被声明的，同时在那个 `for` 循环结束时，`y` 就立即失去了其作用域了。***尽可能地优先使用本地变量而不是实例变量，进而优先使用块级变量而非本地变量，将令到所编写的 Java 程序更具可调试性与扩展性（Your Java programs will be more debuggable and expandable if you use local variables instead of instance variables, and block variables instead of local variables, whenever possible）***。编译器将确保代码编写者没有尝试使用已超出作用范围的变量，因此不必担心运行时崩溃问题。
 
-## 链式运行（Linked Invocations）
+## 链式调用/运行（Linked Invocations）
+
+由于本书尽量维持语法尽可能简洁和易读，因此本书中用到这个特性的地方很少。但在Java中，是有着许多合法捷径的，这些是在今后肯定会碰到的，尤其是在阅读其他人写的代码的时候。会遇到较为常见的代码结构之一，便是被称作 *链式调用/运行* 的东西。比如：
+
+```java
+StringBuffer sb = new StringBuffer ("spring");
+sb = sb.delete(3, 6).insert(2, "umme").deleteCharAt(1);
+System.out.format("sb = %s", sb);
+// 运行结果为：sb = summer
+```
+
+在上面代码的第二行，到底发生了什么呢？固然，这是个刻意为之的示例，不过仍需掌握该怎么去解读这些东西。
+
+1) 是从左往右进行处理的；
+
+2) 找出最左边方法调用的结果，此示例中即为 `sb.delete(3, 6)`。在检查了 API 文档中的 `StringBuffer`类后，就会发现这个 `delete()` 方法返回的是一个 `StringBuffer` 对象。运行 `delete()` 方法的结果，是个值为 `spr` 的 `StringBuffer` 对象；
+
+3) 接下来最左边的方法（`insert()`）是在新创建出的 `StringBuffer` 对象 `spr` 上调用的。该方法调用（即 `insert()` 方法）的结果，*同样* 是个 `StringBuffer` 对象（虽然该方法返回值不必与前一方法返回值类型一致），同时随着程序继续运行，所返回的对象又被用于右边的下一方法。理论上，在单个语句中是可以链接任意多想要的方法（虽然很少见到在一个语句中有多余三个链接方法）。若没有这样的链接特性，那么上面的第二行代码，将更具可读性，而看起来像下面这样：
+
+```java
+sb = sb.delete(3, 6);
+sb = sb.insert(2, "umme");
+sb = sb.deleteCharAt(1);
+```
+
+但还有一个之前曾见到用过的、更为常见而有用的实例，这里认为应该再次指出来。那就是在 `main()` 方法需要运行主类的一个实例方法，而又不需要保留一个到该类实例的 *引用变量* 时。也就是说，`main()`方法为可以运行此实例的 *方法* 之一，*仅*需要创建该实例即可。
+
+```java
+class Foo {
+    public static void main (String[] args) {
+        // 这里是要调用 go() 方法，而并不在意那个 Foo 的实例，因此就
+        // 没有刻意把这个新的 Foo 对象赋值给某个引用变量了。
+        new Foo().go();
+    }
+
+    void go () {
+        // 这里是那些真正想要的......
+    }
+}
+```
+
+## 匿名及静态嵌套类
+
+**Anonymous and Static Nested Classes**
 
 
