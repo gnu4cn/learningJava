@@ -212,4 +212,26 @@ java -ea TestDrive
 
 来看看这个示例：
 
+```java
+//               ↙ 方法代码块的开始
+void doStuff () {
+    // 作用范围为整个方法的本地变量
+    int x = 0;
+
+    //                           ↙ for 循环代码块的开头，同时 y 的作用范围仅限这个 for 循环！
+    for (int y = 0; y < 5; y++) {
+        // 这里没有问题，x 与 y 都是在作用域
+        x = x + y;
+//   ↙ 这是 for 循环代码块的结束
+    }
+
+    // 哎呀！这不会编译！这里的 y 是超出作用域了！（注意，这是与某些其他语言工作方式所不同的！）
+    x = x * y;
+}
+```
+
+在上个示例中，`y`是个块级变量，是在一个块中被声明的，同时在那个 `for` 循环结束时，`y` 就立即失去了其作用域了。***尽可能地优先使用本地变量而不是实例变量，进而优先使用块级变量而非本地变量，将令到所编写的 Java 程序更具可调试性与扩展性（Your Java programs will be more debuggable and expandable if you use local variables instead of instance variables, and block variables instead of local variables, whenever possible）***。编译器将确保代码编写者没有尝试使用已超出作用范围的变量，因此不必担心运行时崩溃问题。
+
+## 链式运行（Linked Invocations）
+
 
