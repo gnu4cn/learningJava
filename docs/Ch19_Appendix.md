@@ -484,4 +484,14 @@ void setCharAt(int index, char ch);                         // 替换指定的�
 
 ## 多维数组（Multidimensional Arrays）
 
+在多数语言中，在创建一个比如 4x2 的二维数组时，将会设想一个 4 个元素乘以 2 个元素，总共 8 个元素的矩形。然而在Java中，这样的数组实际上将是链接起来的 5 个数组！在Java中，二维数组直接就是个 **数组的数组**（In java, a two dimensional array is simply *an array of arrays*）。（而三维数组，则是个数组的数组的数组，而这里将把三维数组留给你自己去玩。）下面就是其工作原理
 
+```java
+int[][] a2d = new int[4][2];
+```
+
+根据这个语句，JVM 创建出有 4 个元素的数组。该数组中 *每个的* 元素，实际上都是到某个（新近创建出的）、有着 2 个元素的 `int` 数组的引用变量。
+
+![Java中一个二维整型数组的数据结构](images/Ch19_01.png)
+
+*图 1 - Java中一个二维整型数组的数据结构*
