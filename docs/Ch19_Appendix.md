@@ -563,3 +563,24 @@ if ( selectedBandMember == Members.JERRY ) {
 **用到的`enum`类型，都对 `java.lang.Enum` 类进行了扩展**
 
 在创建某个 `enum` 类型时，（本质上）是在创建一个新类，并且还 ***是在隐式地扩展着 `java.lang.Enum` 类***。是可以在枚举自己的源文件中，将枚举声明为其独有类，当然也可以作为别的类成员而声明（You can declare an enum as its own standalone class, in its own source file, or as a member of another class）。
+
+**在枚举下使用 `if` 与 `switch` 语句**
+
+运用刚才创建出的枚举类型，就可以使用 `if` 或 `switch` 语句，实现代码里的分支（Using the enum we just created, we can perform branches in our code using either `if` or `switch` statement）。还请注意这里既可以使用 `==`，或者 `.equals()` 方法，来对枚举类型实例进行比较。使用 `==` 被认为是更佳风格。
+
+```java
+// 将枚举值赋值给枚举类型的变量。
+Members n = Members.BOBBY;
+// 这两个语句工作正常！会打印出 “Rat Dog"。
+if (n.equals(Members.JERRY)) System.out.println("Jerrrrry!");
+if (n == Members.BOBBY) System.out.println("Rat Dog");
+
+Members ifName = Members.PHIL;
+// 突击测验！输出会是什么呢？
+// 答案：¡ʎpᴉssɐƆ dǝǝp oƃ
+switch (ifName) {
+    case JERRY: System.out.print("make it sing ");
+    case PHIL: System.out.print("go deep ");
+    case BOBBY: System.out.print("Cassidy! ");
+}
+```
