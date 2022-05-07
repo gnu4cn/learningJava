@@ -415,4 +415,27 @@ private
 
 由于在其他人的代码中会见到另外两个装饰符（`protected`与`default`），因此尽管不大会用到另外两个装饰符（`protected` 与 `default`），还是要知道他们的作用。
 
+### `default` 与 `protected`
+
+**`default`**
+
+`protected` 与 `default` 二者都是捆绑到封包的。默认访问级别比较简单 -- 表示只有 *同一封包里头* 的代码，才能访问带有默认访问级别的代码。那么比如对于某个`default`的类（这表示一个未被显示地声明为 `public` 的类），就只能被与该默认类在同一封包的其他类访问。
+
+然而所谓 *访问* 某个类，到底指的是什么呢？无权访问某个类的代码，甚至连 *想想* 该类都是不允许的（Code that does not have access to a class is not allowed to even *think* aobut the class）。而这里所说的 “想想”，指的是在代码中 *使用到* 整个类。比如，在由于访问限制，而没有对某个类的访问权限时，是不允许对整个类进行初始化，或者甚至不能用这个类来声明变量、参数或返回值类型的。直接就不可以将其敲入到你的代码中！若执意要敲入，那么编译器就会报出错误。
+
+请思考一下深层次的影响 -- 即使一些方法是`public`的，但如果这些方法是在一个默认类中，那么这些 `public` 的方法，也并非真的是 `public` 的了。在没法 `看到` 类的时候，也就无法访问其中的方法了。
+
+那为什么要将访问级别限制到只在同一封包内部呢？通常封包是设计为一组以一种关联集合方式工作的类（Typically, packages are designed as a group of classes that work together as a related set）。这样同一封包中的类，需要访问另一类的代码，就说得通了，同时作为一个封包，仅有少量类和方法暴露给外部世界（即封包外面的代码）。
+
+好吧，这就是 `default` 访问级别了。他是简单的 -- 在某个物件有着 `default` 访问级别时（请记住，这指的就是没有显式访问级别修饰符！），那么就只有与那个 `default` *物件*（类、变量、方法、内部类） 在同一封包里头的代码，才能访问那个 *物件*。
+
+
+**`protected`**
+
+受保护访问级别，与默认访问级别极为相似，只是有一个例外：*即使子类在所扩展超类封包外部*，这些子类仍运行 *继承* 受保护的物件。这就是了。这就是使用 `protected` 访问级别的全部好处 -- 这种实现了即使在超类所在封包外部的子类，也仍然 *继承到* 该超类包括方法与构造器等的组成部分（Protected access is almost identical to default access, with one exception: it allows subclasses to *inherit* the protected thing, *even if those subclasses are outside the package of the superclass they extend*. That's it. That's *all* `protected` buys you--the ability to let your subclasses be outside your superclass package, yet still *inherit* pieces of the class, including methods and constructors）。
+
+虽然许多开发者都发现，使用 `protected` 的理由极少，不过在一些设计中会用到他，同时终有一天你会发现他正是所要的访问级别。`protected`访问级别有趣的地方之一，就是--与其他访问级别不同--`protected`访问级别只使用于 *继承* 方面。在某个位处封包外部的子类有着到该超类（比如说这个超类有着一个 `protected` 的方法）的一个实例的 *引用变量* 时，那么这个子类是无法使用该超类类型的引用变量，访问到那个受保护方法的（One of the interesting things about `protected` is that--unlike the other access levels--`protected` access applies only to *inheritance*. If a subclass-outside-the-package has a *reference* to an instance of the superclass(the superclass that has, say, a `protected` method), the subclass can't access the protected method using that superclass reference）！该子类要能访问那个方法的唯一途径，就是通过 *继承到* 那个方法。也就是说，位处封包外部的子类，不具有对受保护方法的 *访问权限*，他只是*拥有* 经由继承得来的那个方法。
+
+## `String` 类与 `StringBuffer`/`StringBuilder` 的那些方法
+
 
