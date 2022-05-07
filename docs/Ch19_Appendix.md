@@ -438,4 +438,50 @@ private
 
 ## `String` 类与 `StringBuffer`/`StringBuilder` 的那些方法
 
+Java API 中最常用到的两个类，分别是 `String` 与 `StringBuffer` （还记得前面的 #9 就提到，`String`都是不可更改的，那么这里的`StringBuffer`/`StringBuilder`在要操作字符串时，要高效得多了）。而自Java 5.0 开始，除非是不常见的、需要线程安全的字符串操作，那么就应使用 `StringBuilder` 而不是 `StringBuffer`。下面是这些类中 **关键** 方法的简要概述：
+
+### *`String` 与 `StringBuffer`/`StringBuilder` 都有的方法*：
+
+```java
+char charAt(int index);                 // 在确切位置处是什么字符
+int length();                           // 这个字符串对象有多长
+String substring(int start, int end);   // 获取此对象的一部分
+String toString();                      // 该 String 对象的字符串值是什么
+```
+
+### *要连接字符串（to concatenate Strings）*:
+
+```java
+String concat(string);                  // 对于 String 类
+String append(String);                  // 对于 StringBuffer 与 StringBuilder
+```
+
+### *`String`类有这些方法*：
+
+```java
+String replace(char old, char new);     // 替换所有出现的某个字符
+String substring(int begin, int end);   // 获取某个字符串的一部分
+char [] toCharArray();                  // 转化为字符数组
+String toLowerCase();                   // 将所有字符转为小写
+String toUpperCase();                   // 将所有字符转为大写
+String trim();                          // 移除两端的空白字符
+String valueOf(char []);                // 从字符数组构造处一个 String 对象
+String valueOf(int i);                  // 从某个原生值构造出一个 String 对象，也支持其他类型的原生值
+```
+
+### *`StringBuffer`与`StringBuilder`有着的方法*：
+
+```java
+StringB... delete(int start, int end);                      // 删除某个部分
+StringB... insert(int offset, any primitive or a char[]);   // 插入一些东西
+StringB... replace(int start, int end, String s);           // 使用这个字符串替换该部分
+StringB... reverse();                                       // 从前往后逆转这个 StringB... 对象
+void setCharAt(int index, char ch);                         // 替换指定的字符
+```
+
+> *注意*：这里的 `StringB...` 既表示 `StringBuffer` 也表示 `StringBuilder`。
+
+
+## 多维数组（Multidimensional Arrays）
+
 
