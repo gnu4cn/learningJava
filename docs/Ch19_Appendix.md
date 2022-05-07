@@ -495,3 +495,59 @@ int[][] a2d = new int[4][2];
 ![Java中一个二维整型数组的数据结构](images/Ch19_01.png)
 
 *图 1 - Java中一个二维整型数组的数据结构*
+
+### 多维数组的使用
+
+- 要访问第三个数组中的第二个元素：`int x = a2d[2][1];   // 请记住，索引是基于 0 的！`
+- 要构造一个到这些子数组之一的一维数组引用变量：`int[] copy = a2d[1];`
+- 某个 2x3 数组的便捷初始化：`int[][] x = {{2, 3, 4}, {7, 8, 9}};`
+- 要构造一个有着不规则尺寸的二维数组（非对齐的、子数组长短不一的）：
+
+```java
+int[][] y = new int[2][];   // 仅构造那个长度为 2 的前一个数组
+y[0] = new int [3];     // 构造第一个长度为 3 的子数组
+y[1] = new int [5];     // 构造第二个长度为 5 的子数组
+```
+
+**还有一个排在第一位的、难以搞明白的东西**......
+
+## 枚举（也叫做枚举类型或 `Enums`）
+
+**Enumerations(also called Enumerated Types or Enums)**
+
+本书中曾讲到过一些定义在 API 中的常量，比如，`JFrame.EXIT_ON_CLOSE`。通过将某个变量标记为 `static final`，也可以创建我们自己的常量。然而在某些时候，会打算创建一套常量值，来表示某个变量 ***仅有的*** 有效值（But sometimes you'll want to create a set of constant values to represent the ***only*** valid values for a variable）。那么这套有效值，通常指的就是 *枚举*。在Java 5.0 之前，就只能在Java中进行半成品的枚举创建。而自Java 5.0起，就可以创建出成熟的、将为你的那些使用 Java 5.0 之前版本的朋友羡慕的枚举了。
+
+### 乐队里都有谁（Who's in the band）？
+
+这里假设是在创建一个喜爱乐队的网站，进而是要确保所有评论都被导向到某名特定乐队成员。
+
+### 老式的模仿出一个假的 “enum”:
+
+```
+public static final int JERRY = 1;
+public static final int BOBBY = 2;
+public static final int PHIL = 3;
+
+// 后面的代码
+
+// 我们正希望在此处获取到的 selectedBandMember 有着一个有效值！
+if(selectedBandMember == JERRY) {
+    // 完成有关JERRY 的事情
+}
+```
+
+这种技巧好的一面，是他确实令到代码更加容易阅读了。而另一个好苗头，则是甚至无法修改所创建的假冒枚举的值；`JERRY` 将始终为 `1`。这样做负面的地方，就是没有一种轻易或良好的方法，来确保`selectedBandMember`将始终为 `1`、`2`或 `3`。若一些隐藏很深的代码把 `selectedBandMember` 设置为了等于 `812`，那么这代码就会几近崩溃的......
+
+对于这同样情形，使用纯粹的Java 5.0 枚举特性，就不一样了。尽管这是个非常基础的枚举，但大多数枚举通常 *都是* 这样简单的。
+
+### 新的、正牌的 “枚举”：
+
+```java
+public enum Members { JERRY, BOBBY, PHIL };
+public Memebers selectedBandMember;
+
+// 后续代码
+
+if ( selectedBandMember == Members.JERRY ) {
+
+}

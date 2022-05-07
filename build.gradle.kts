@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 application {
-    mainClassName = "com.xfoss.Appendix.PrivateDemo"
+    mainClassName = "com.xfoss.Appendix.EnumDemo"
     getMainClass().set(mainClassName)
 }
 
