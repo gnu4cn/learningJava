@@ -543,11 +543,23 @@ if(selectedBandMember == JERRY) {
 ### 新的、正牌的 “枚举”：
 
 ```java
+// 这种类型看起来是不是像个简单的类定义啊？事实证明枚举确实
+// 是一种特殊的类。这里创建了一个叫做 “Members" 的枚举类型。
 public enum Members { JERRY, BOBBY, PHIL };
+// 这个 ”selectedBandMember" 即为类型 “Members" 的，且他只能有
+// ”JERRY“、”BOBBY“ 或 ”PHIL” 三个值之一。
 public Memebers selectedBandMember;
 
 // 后续代码
 
+// Members.JERRY 这样的语法，是对一个枚举 “实例” 的引用。
+// 
+// 现在就无需担心selectedBandMember这个变量的值了！
 if ( selectedBandMember == Members.JERRY ) {
-
+    // 执行 JERRY 相关的事情
 }
+```
+
+**用到的`enum`类型，都对 `java.lang.Enum` 类进行了扩展**
+
+在创建某个 `enum` 类型时，（本质上）是在创建一个新类，并且还 ***是在隐式地扩展着 `java.lang.Enum` 类***。是可以在枚举自己的源文件中，将枚举声明为其独有类，当然也可以作为别的类成员而声明（You can declare an enum as its own standalone class, in its own source file, or as a member of another class）。
