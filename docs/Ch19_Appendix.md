@@ -642,6 +642,8 @@ public class HfjEnum {
 }
 ```
 
+该程序的运行结果：
+
 ```console
 $java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
 JERRY, 他的乐器是：lead guitar, 他演唱的是：plaintively
