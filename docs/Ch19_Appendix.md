@@ -584,3 +584,69 @@ switch (ifName) {
     case BOBBY: System.out.print("Cassidy! ");
 }
 ```
+
+**类似枚举的真正迷惑人的版本（a really tricked-out version of a silimar enum）**
+
+可将诸如构造器、方法、变量，以及一些叫做常量专用的类代码体等的一大批物件，添加到枚举（You can add a bunch of things to your enum like a constructor, methods, variables, and someting called a constant-specific class body）。虽然他们并不常见，但或许会偶遇到这些语法。
+
+```java
+package com.xfoss.Appendix;
+
+public class HfjEnum {
+    enum Names {
+        // 这里的 “lead guitar” 是个传入到底下声明的构造器
+        // 的参数。
+        JERRY("lead guitar") { 
+            // 花括符中的这些，这些就是叫做“常量专用的类代码体（
+            // constant-specific class bodies）” 的东西。在枚举
+            // 定义中的基本方法sing() 于JERRY 或 BOBBY 上调用到时，请将
+            // 他们想作是对基本枚举方法（也就是那个本示例中的"sing()"
+            // 方法）的重写。
+            public String sings (){
+                return "plaintively";
+            }
+        },
+        BOBBY("rhythm guitar") {
+            public String sings () {
+                return "hoarsely";
+            }
+        },
+        PHIL("bass");
+
+        private String instrument;
+
+        // 这是该枚举的构造器。对于每个声明的枚举值，他都会运行
+        // 一次（本示例中这个构造器会运行三次）。
+        Names (String instrument) {
+            this.instrument = instrument;
+        }
+
+        // 下面两个方法，会在 "main()" 方法中被调用到。
+        public String getInstrument () {
+            return this.instrument;
+        }
+
+        public String sings () {
+            return "occasionally";
+        }
+    }
+
+    public static void main (String[] args) {
+        // 所有枚举类型，都带有一个内建的 "values()" 方法，该
+        // 方法一般是像下面这样，用在 “for" 循环中的。
+        for (Names n : Names.values()) {
+            System.out.format("%s, 他的乐器是：%s, 他演唱的是：%s\n", 
+                    n, n.getInstrument(), n.sings());
+        }
+    }
+}
+```
+
+```console
+$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+JERRY, 他的乐器是：lead guitar, 他演唱的是：plaintively
+BOBBY, 他的乐器是：rhythm guitar, 他演唱的是：hoarsely
+PHIL, 他的乐器是：bass, 他演唱的是：occasionally
+```
+
+> 请注意，只有在枚举值没有“常量专用类代码体（constant-specific class body）”的时候，才会调用到那个基本的 `sing()` 方法。
