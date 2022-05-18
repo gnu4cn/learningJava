@@ -1,6 +1,6 @@
-# 附录：十个未列入到本书正式章节的题目
+# 附录 A：十个未列入到本书正式章节的题目
 
-**Appendix: Ten Topics that almost made it into the Real Book**...
+**Appendix A: Ten Topics that almost made it into the Real Book**...
 
 > 这里的意思，是还有更多的内容？这本书还没完？
 

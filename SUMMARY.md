@@ -18,4 +18,5 @@
   * [Chapter 16 Collections and Generics: Data Structure](docs/Ch16_Collections_and_Generics_Data_Structure.md)
   * [Chapter 17 Package, JARs and Deployment: Release Your Code](docs/Ch17_Package_JARs_and_Deployment_Release_Your_Code.md)
   * [Chapter 18 Remote Deployment with RMI: Distributed Computing](docs/Ch18_Remote_Deployment_with_RMI_Distributed_Computing.md)
-  * [Appendix](docs/Ch19_Appendix.md)
+  * [Appendix A: Ten Topics that almost made it into the Real Book](docs/Ch19_Appendix_A.md)
+  * [Appendix B: Design Patterns](docs/Ch20_Appendix_B.md)
