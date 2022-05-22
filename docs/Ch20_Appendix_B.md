@@ -42,3 +42,27 @@
 @Override
 void mySuperMethod() {...}
 ```
+
+注释可以包含 *元素（elements）*，元素可以是据名的或不据名的，同时存在着这些元素的值：
+
+```java
+@Author (
+    name = "Benjamin Franklin",
+    date = "3/27/2003"
+)
+class myClass {...}
+```
+
+或者：
+
+```java
+@SuppressWarnings (value = "unchecked")
+void myMethod() {...}
+```
+
+在仅有一个名为 `value` 的元素时，那么元素名称是可以省略的，就像这样：
+
+```java
+@SuppressWarnings ("unchecked")
+void myMethod () {...}
+```
