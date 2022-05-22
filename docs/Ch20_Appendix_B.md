@@ -21,3 +21,24 @@
 - 以及怎样去实现重复性注释语法。
 
 （This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
+
+## 注释语法基础
+
+**Annotations Basics**
+
+### 注释语法的形式
+
+**The Format of an Annotation**
+
+注释语法的最简单形式，看起来像下面这样：
+
+```java
+@Entity
+```
+
+这个所在符号字符（`@`），是给编译器表明，接下来的是个注释。在下面的示例中，那个注释的名称为 `Override`:
+
+```java
+@Override
+void mySuperMethod() {...}
+```
