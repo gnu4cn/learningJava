@@ -11,3 +11,13 @@
 - **为编译器提供信息** -- 编译器可使用注释来探测错误或抑制告警信息（**Information for the compiler** -- Annotations can be used by the compiler to detect errors or suppress warnings）；
 - **编译时与部署时的处理** -- 软件工具可对注释信息加以处理，从而生成代码、XML文件等等（**Compile-time and deployment-time processing** -- Software tools can process annotation information to generate code, XML files, and so forth）;
 - **运行时的处理** -- 在运行时，可对一些注释进行检查（**Runtime processing** -- Some annotations are available to be examined at runtime）。
+
+本课程解释了：
+
+- 哪些地方可以使用注释语法、
+- 如何运用注释语法、
+- Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注释类型（annotation types）、
+- 类型注释如何与可插拔类型系统结合以编写出有着更强类型检查的代码，
+- 以及怎样去实现重复性注释语法。
+
+（This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
