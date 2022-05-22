@@ -14,7 +14,7 @@
 
 本课程解释了：
 
-- 哪些地方可以使用注释语法、
+- [哪些地方可以使用注释语法](#where)、
 - 如何运用注释语法、
 - Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注释类型（annotation types）、
 - 类型注释如何与可插拔类型系统结合以编写出有着更强类型检查的代码，
@@ -43,7 +43,7 @@
 void mySuperMethod() {...}
 ```
 
-注释可以包含 *元素（elements）*，元素可以是据名的或不据名的，同时存在着这些元素的值：
+注释可以包含 *元素（elements）*，元素可以是具名的或不具名的，同时存在着这些元素的值：
 
 ```java
 @Author (
@@ -66,3 +66,65 @@ void myMethod() {...}
 @SuppressWarnings ("unchecked")
 void myMethod () {...}
 ```
+
+在注释没有元素时，那么那对括号是可以省略的，就如同在上面的 `Override` 示例中那样。
+
+在同一声明上，使用多个注释也是可能的：
+
+```java
+@Author (name = "Jane Doe")
+@EBook
+class MyClass {...}
+```
+
+在若干注释有着同样类型时，此时就叫重复注释（a repeating annotation）：
+
+```java
+@Author(name = "Jane Doe")
+@Author(name = "John Smith")
+class MyClass {...}
+```
+
+Java SE 8 发布才开始支持重复注释。更多的有关情况，请参考 [重复注释](#repeating_annotations)
+
+注释类型可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注释（predefined Java annotations）](#predefined_java_annotations)。定义自己的注释类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注释类型。
+
+### <a id="where"></a>哪些地方可以使用注释语法
+
+可在声明上应用注释：类、字段、方法，以及其他一些程序元素的声明上。当在某个声明上运用了注释语法时，依照约定，每条注释常常占据自己的一行。
+
+自Java SE 8 发布开始，注释语法还可应用到类型的 *使用*。下面是一些示例：
+
+- 应用到类实例的创建表达式：
+
+```java
+new @interned MyObject();
+```
+
+- 类型强制转换：
+
+```java
+myString = (@NonNull String) str;
+```
+
+- `implements` 子语句（`implements` clause）：
+
+```java
+class UnmodifioableList<T> implements
+    @Readonly List<@Readonly T> {...}
+```
+
+- 抛出异常的声明（Thrown exception declarations）：
+
+```java
+void monitorTemperature() throws
+    @Critical TemperatureException {...}
+```
+
+这种形式的注释，叫做 *类型注释（a type annotation）*。有关类型注释的更多信息，请参考 [类型注释与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type_annotations_and_pluggable_type_systems)。
+
+## 注释类型的声明
+
+**Declaring a Annotation Type**
+
+
