@@ -30,7 +30,6 @@ repositories {
 }
 
 dependencies {
-    files("./")
     implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
     implementation("net.java.dev.jna:jna:5.5.0")
