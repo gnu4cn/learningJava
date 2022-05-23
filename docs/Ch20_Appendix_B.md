@@ -129,4 +129,33 @@ void monitorTemperature() throws
 
 许多的注解，在代码中都是起到替代注释的作用。
 
+设想某个软件团队，他们在编写所有类的代码体时，传统上都是以提供这些类重要信息的注释开始的：
 
+```java
+public class Generation3List extends Generation2List {
+    // Author: John Doe
+    // Date: 3/17/2002
+    // Current revision: 6
+    // Last modified: 4/12/2004
+    // By: Jane Doe
+    // Reviewers: Alice, Bill, Cindy
+    
+    // 真正的类代码从这里开始
+}
+```
+
+而要以注解来加入这些同样元数据，就必须首先定义出这个 *注解类型（annotation type）*。定义此注解类型的语法为：
+
+```java
+@interface ClassPreamble {
+    String author();
+    String date();
+    int currentVersion() default 1;
+    String lastModified() default "N/A";
+    String lastModifiedBy() default "N/A";
+    // 注意下面这个使用到数组
+    String[] reviewers();
+}
+```
+
+这个注解类型定义，看起来类似于接口定义，其中关键字 `interface` 前面冠以了位处符号（`@`）（当这个位处符号是在注解类型中时，就等于位处`AT`）。所有注解类型，都属于 *接口* 的一种形式，本课程稍后会讲到这一点。
