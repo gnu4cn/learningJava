@@ -391,4 +391,8 @@ public class MyHouse implements House {
 ```java
 public @interface Meal {...}
 
-@Meal ("breakfast", mainDish)
+@Meal("breakfast", mainDish="cereal")
+@Meal("lunch", mainDish="pizza")
+@Meal("dinner", mainDish="salad")
+public void evaluateDiet() {...}
+```
