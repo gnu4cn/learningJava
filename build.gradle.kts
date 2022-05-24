@@ -71,6 +71,7 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 
+    // 这个 task 可生成 Javadoc 文档！！
     withType<Javadoc> {
         source = sourceSets.main.get().allJava
     }
