@@ -22,11 +22,11 @@
 
 （This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
 
-## <a id="annotations-basics"></a>注解语法基础
+### <a id="annotations-basics"></a>注解语法基础
 
 **Annotations Basics**
 
-### 注解语法的形式
+#### 注解语法的形式
 
 **The Format of an Annotation**
 
@@ -89,7 +89,7 @@ class MyClass {...}
 
 注解类型可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解（predefined Java annotations）](#predefined_java_annotations)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
 
-### <a id="where"></a>哪些地方可以使用注解语法
+#### <a id="where"></a>哪些地方可以使用注解语法
 
 可在声明上应用注解：类、字段、方法，以及其他一些程序元素的声明上。当在某个声明上运用了注解语法时，依照约定，每条注解常常占据自己的一行。
 
@@ -123,7 +123,7 @@ void monitorTemperature() throws
 
 这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type_annotations_and_pluggable_type_systems)。
 
-## 注解类型的声明
+### 注解类型的声明
 
 **Declaring a Annotation Type**
 
@@ -191,13 +191,13 @@ import java.lang.annotation.*;
 }
 ```
 
-## <a id="predefined_annotation_types"></a>Java中预定义的注解类型
+### <a id="predefined_annotation_types"></a>Java中预定义的注解类型
 
 **Predefined Annotation Types**
 
 在 Java SE API 中，预先定义了一些注解类型。其中一些为Java编译器使用到，另一些是应用到别的注解的。
 
-### Java语言用到的注解类型
+#### Java语言用到的注解类型
 
 **Annotation Types Used by the Java Language**
 
@@ -246,7 +246,7 @@ void useDeprecatedMethod () {
 - **`@SafeVarargs`** 在对某个方法或构造器应用 `@SafeVarargs` 注解时，就假定了代码不会在其 `varargs` 实参上，执行潜在不安全的操作。在使用了此注解类型时，那些未受检查的、与 `varargs` 有关的告警，就会被抑制（`@SafeVarargs` annotation, when applied to a method or constructor, asserts that the code does not perform potentially unsafe oprations on its `varargs` parameter. When this annotation type is used, unchecked warnings relating to `varargs` are suppressed）。
 - **`@FunctionalInterface`** `@FunctionalInterface` 注解，是在 Java SE 8 中引入的，表示其所注解的类型声明，是计划作为Java语言规范中所定义的功能性接口（`@FunctionalInterface` annotation, introduced in Java SE 8, indicates that the type declaration is intended to be a functional interface, as defined by the Java Language Specification）。
 
-### 适用于其他注解的注解
+#### 适用于其他注解的注解
 
 **Annotations That Apply to Other Annotations**
 
@@ -268,7 +268,7 @@ void useDeprecatedMethod () {
 - **`@Inherited`** `@Inherited` 注解表示其所标记的注解类型，可从超类继承到（`@Inherited` annotation indicates that the annotation type can be inherited from the super class）。（默认是不可以从超类继承的。）在用户查询某个注解类型，而该类又没有这个类型的注解时，那么就会对这个类的超类查询此注解类型。此注解仅适用于类的声明。
 - **`@Repeatable`** `@Repeatable` 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 [重复注解（Repeating Annotations）](#repeating-annotations)。
 
-## 类型注解与可插拔类型系统
+### 类型注解与可插拔类型系统
 
 **Type Annotations and Pluggable Type Systems**
 
@@ -290,7 +290,7 @@ void useDeprecatedMethod () {
 
 在许多情形中，是不必编写自己的类型检查模组的。有很多第三方以及完成了这方面的工作。比如，或许会利用到华盛顿大学所创建的检查器框架 `Checker Framework`。该框架就包含了`NonNull` 模组，还有正则表达式模组（a regular module），以及互斥锁（a mutex lock module）。更多有关该检查器框架的信息，请参考 [检查器框架](https://checkerframework.org/)。
 
-## <a id="repeating-annotations"></a>重复注解
+### <a id="repeating-annotations"></a>重复注解
 
 **Repeating Annotations**
 
@@ -314,7 +314,7 @@ public class UnauthorizedAccessException extends SecurityException {...}
 
 由于兼容性的原因，重复注解是被保存在由Java编译器自动生成的 *容器注解（container annotation）* 中的。为了让编译器完成此操作，就要求在代码中包含下面这两个声明。
 
-### 步骤一、声明一个 `Repeatable` 类型的注解类型
+#### 步骤一、声明一个 `Repeatable` 类型的注解类型
 
 **Step 1: Declare a `Repeatable` Annotation Type**
 
@@ -335,7 +335,7 @@ public @interface Schedule {
 
 在没有首先将某个注解声明未可重复注解的情况下，将同一注解应用到某个声明，就会导致一个编译器错误。
 
-### 步骤二、声明出那个容纳注解类型
+#### 步骤二、声明出那个容纳注解类型
 
 **Step 2: Declare the Containing Annotation Type**
 
@@ -347,14 +347,24 @@ public @interface Schedules {
 }
 ```
 
-### 注解的获取
+#### 注解的获取
 
 **Retrieving Annotations**
 
 反射式API中，有着多个可用于获取到注解的方法。这些方法返回单个的、譬如`AnnotatedElement.getAnnotation(Class<T>)`这样的注解的表现，与存在 *一个* 这些方法所请求类型注解，而仅返回返回单个注解相比，是不会发生变化的（The behavior of the methods that return a single annotation, such as `AnnotatedElement.getAnnotation(Class<T>)`, are unchanged in that they only return a single annotation if *one* annotation of the requested type is present）。但若存在多个的所请求类型的注解时，那么就可以首先获取到这些注解的容器。这样的话，那些老旧代码会继续工作。在Java SE 8中引入的其他一些方法，则会对容器注解进行全面扫描，从而一次性返回多个注解，就如同 `AnnotatedElement.getAnnotationsByType(Class<T>)`那样。请参考 [`AnnotatedElement`](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/AnnotatedElement.html) 类规格，以了解有关全部方法的信息。
 
-### 设计上的考量
+#### 设计上的考量
 
 **Design Considerations**
 
 在设计某个注解类型时，必须考虑到那个类型下注释的 *基数（cardinality）*。目前会用到这个注解 0 次、1 次都是可能的，而在这个注释被标记为了 `@Repeatable` 时，那么就可以多次使用了。同时通过使用 `@Target` 元注解，还可以限制注解可用在何处。比如，即可创建一个可重复的、仅可用在方法及字段上的注解类型。为确保 *用到* 你所设计注解类型注解的程序员，发现他是灵活且强大的，那么就要仔细的加以设计（It is important to design your annotation type carefully to ensure the programmer *using* the annotation finds it to be as flexible and powerful as posssible）。
+
+## 提问与练习：注解
+
+### 问题
+
+1. 下面这个接口什么错了？
+
+```java
+public interface House {
+}
