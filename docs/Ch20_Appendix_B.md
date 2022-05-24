@@ -385,3 +385,10 @@ public class MyHouse implements House {
 ```
 
 那么在编译这个程序时，由于这里的 `open` 是已被弃用的（在上面的接口中），那么编译器就会产生一条告警消息。该怎样来处理那条告警消息呢？
+
+3. 下面的代码在编译时将不会出错吗？为什么不会出错，或者说为什么会出错呢？
+
+```java
+public @interface Meal {...}
+
+@Meal ("breakfast", mainDish)
