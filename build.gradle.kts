@@ -70,4 +70,8 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
+
+    withType<Javadoc> {
+        source = sourceSets.main.get().allJava
+    }
 }
