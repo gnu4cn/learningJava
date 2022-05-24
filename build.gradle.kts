@@ -14,6 +14,7 @@ application {
 
 plugins {
     application
+    id("java")
     kotlin("jvm") version "1.3.50"
     id("com.github.johnrengelman.shadow") version "5.1.0"
     id("edu.sc.seis.launch4j")  version "2.5.1"
@@ -66,8 +67,7 @@ tasks {
         from(sourcesMain.output)
     }
 
-}
-
-tasks.withType<KotlinCompile> {
-  kotlinOptions.jvmTarget = "1.8"
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 }
