@@ -367,4 +367,21 @@ public @interface Schedules {
 
 ```java
 public interface House {
+    @Deprecated
+    public void open();
+    public void openFrontDoor();
+    public void openBackDoor();
 }
+```
+
+2. 试想对问题 1 中所给的 `House` 接口的下面这个实现：
+
+```java
+public class MyHouse implements House {
+    public void open () {}
+    public void openFrontDoor () {}
+    public void openBackDoor() {}
+}
+```
+
+那么在编译这个程序时，由于这里的 `open` 是已被弃用的（在上面的接口中），那么编译器就会产生一条告警消息。该怎样来处理那条告警消息呢？
