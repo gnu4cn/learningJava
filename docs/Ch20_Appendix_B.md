@@ -408,7 +408,9 @@ public void evaluateDiet() {...}
 <details>
     <summary>答案</summary>
 
-    1. 文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
+### 问题
+
+    1. **答案**：文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
 
 ```java
 public interface House {
@@ -424,5 +426,51 @@ public interface House {
 }
 ```
 
-    2. 
+    2. **答案**：可给 `open` 方法的实现加上弃用注解（you can deprecate the implementation of `open`）：
+
+```java
+public class MyHouse implements House {
+    // 文档是从接口继承到的。
+    @Deprecated
+    public void open() {}
+    public void openFrontDoor() {}
+    public void openBackDoor() {}
+}
+```
+
+或者，可抑制告警信息：
+
+```java
+public class MyHouse implements House {
+    @SuppressWarinings("deprecation")
+    public void open() {}
+    public void openFrontDoor() {}
+    public void openBackDoor() {}
+}
+```
+
+    3. **答案**：此代码将编译失败。在JDK 8之前，是不支持可重复注解的。即便是在 JDK 8 中，由于其中的 `Meal` 注解类型，未被定义为可重复，因此该代码仍会编译失败。可通过加上 `@Repeatable` 元注解，并定义一个容器注解类型，来修复这个问题：
+
+```java
+public class AnnotationTest {
+    public @interface MealContainer {
+        Meal[] value();
+    }
+
+    @java.lang.annotation.Repeatable(MealContainer.class)
+    public @inerface Meal {
+        String value();
+        String mainDish();
+    }
+
+    @Meal(value="早餐", mainDish="麦片")
+    @Meal(value="午餐", mainDish="披萨")
+    @Meal(value="晚餐", mainDish="沙拉")
+    public void evaluateDiet() {}
+}
+```
+
+### 练习
+
+1. **答案**: 
 </details>
