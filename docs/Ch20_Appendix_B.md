@@ -406,7 +406,7 @@ public void evaluateDiet() {...}
 
 
 <details>
-    <summary>答案</summary>
+    <summary><h2>答案</h2></summary>
 
 ### 问题
 
