@@ -362,9 +362,9 @@ public @interface Schedules {
 
 在设计某个注解类型时，必须考虑到那个类型下注释的 *基数（cardinality）*。目前会用到这个注解 0 次、1 次都是可能的，而在这个注释被标记为了 `@Repeatable` 时，那么就可以多次使用了。同时通过使用 `@Target` 元注解，还可以限制注解可用在何处。比如，即可创建一个可重复的、仅可用在方法及字段上的注解类型。为确保 *用到* 你所设计注解类型注解的程序员，发现他是灵活且强大的，那么就要仔细的加以设计（It is important to design your annotation type carefully to ensure the programmer *using* the annotation finds it to be as flexible and powerful as posssible）。
 
-## 提问与练习：注解
+### 提问与练习：注解
 
-### 问题❓
+#### 问题❓
 
 1. 下面这个接口什么错了？
 
@@ -400,7 +400,7 @@ public @interface Meal {...}
 public void evaluateDiet() {...}
 ```
 
-### 练习🏋️
+#### 练习🏋️
 
 1. 请定义出一个带有元素 `id`、`synopsis`、`engineer` 及 `date`的、用于一项增强请求的注解类型。将其中 `engineer` 与 `date` 的默认值，分别指定为 `unassigned`和`unknown`（define an annotation type for an enhancement request with elements `id`, `synopsis`, `engineer`, and `date`. Specify the default value as `unassigned` for engineer and `unknown` for date）。
 
@@ -408,7 +408,7 @@ public void evaluateDiet() {...}
 <details>
     <summary><h3>答案🙋</h3></summary>
 
-### 问题
+#### 问题
 
 1. __答案__：文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
 
@@ -470,7 +470,7 @@ public class AnnotationTest {
 }
 ```
 
-### 练习
+#### 练习
 
 1.  __答案__ : 
 
