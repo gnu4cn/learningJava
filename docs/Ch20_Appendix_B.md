@@ -410,7 +410,7 @@ public void evaluateDiet() {...}
 
 ### 问题
 
-    1. <b>答案</b>：文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
+1. __答案__：文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
 
 ```java
 public interface House {
@@ -426,7 +426,7 @@ public interface House {
 }
 ```
 
-    2. <b>答案</b>：可给 `open` 方法的实现加上弃用注解（you can deprecate the implementation of `open`）：
+2. __答案__ ：可给 `open` 方法的实现加上弃用注解（you can deprecate the implementation of `open`）：
 
 ```java
 public class MyHouse implements House {
@@ -449,7 +449,7 @@ public class MyHouse implements House {
 }
 ```
 
-    3. <b>答案</b>：此代码将编译失败。在JDK 8之前，是不支持可重复注解的。即便是在 JDK 8 中，由于其中的 `Meal` 注解类型，未被定义为可重复，因此该代码仍会编译失败。可通过加上 `@Repeatable` 元注解，并定义一个容器注解类型，来修复这个问题：
+3. __答案__ ：此代码将编译失败。在JDK 8之前，是不支持可重复注解的。即便是在 JDK 8 中，由于其中的 `Meal` 注解类型，未被定义为可重复，因此该代码仍会编译失败。可通过加上 `@Repeatable` 元注解，并定义一个容器注解类型，来修复这个问题：
 
 ```java
 public class AnnotationTest {
@@ -472,5 +472,5 @@ public class AnnotationTest {
 
 ### 练习
 
-1. <b>答案</b>: 
+1.  __答案__ : 
 </details>
