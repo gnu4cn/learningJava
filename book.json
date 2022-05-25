@@ -9,7 +9,10 @@
         "readme": "README.md",
         "summary": "SUMMARY.md"
     },
-    "plugins": ["donate"],
+    "plugins": [
+        "donate",
+        "click-reveal"
+    ],
     "pluginsConfig": {
         "donate": {
             "wechat": "docs/images/611739062.jpg",
