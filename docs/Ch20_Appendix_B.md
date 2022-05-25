@@ -476,8 +476,9 @@ public class AnnotationTest {
 
 ```java
 /**
- * 这里的注释，描述了该增强请求
- * （the Request-for-Enhancement, RFE）注解类型。
+ * 这里的注释，对这个增强请求
+ * （the Request-for-Enhancement, RFE）注解
+ * 类型，进行了描述。
  */
 public @interface RequestForEnhancement {
     int id();
