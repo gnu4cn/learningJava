@@ -473,4 +473,17 @@ public class AnnotationTest {
 ### 练习
 
 1.  __答案__ : 
+
+```java
+/**
+ * 这里的注释，描述了该增强请求
+ * （the Request-for-Enhancement, RFE）注解类型。
+ */
+public @interface RequestForEnhancement {
+    int id();
+    String synopsis();
+    String engineer() default "[unassigned]";
+    String date() default "[unknown]";
+}
+```
 </details>
