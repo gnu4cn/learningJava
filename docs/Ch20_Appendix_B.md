@@ -405,9 +405,8 @@ public @interface Schedules {
 1. 请定义出一个带有元素 `id`、`synopsis`、`engineer` 及 `date`的、用于一项增强请求的注解类型。将其中 `engineer` 与 `date` 的默认值，分别指定为 `unassigned`和`unknown`（define an annotation type for an enhancement request with elements `id`, `synopsis`, `engineer`, and `date`. Specify the default value as `unassigned` for engineer and `unknown` for date）。
 
 
-### 答案🙋
 <details>
-    <summary><h3>答案🙋</h3></summary>
+    <summary>答案🙋</summary>
 
 #### 问题
 
@@ -488,4 +487,5 @@ public @interface Schedules {
         String date() default "[unknown]";
     }
     ```
+
 </details>
