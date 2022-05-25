@@ -397,22 +397,24 @@ Note: Some input files use unchecked or unsafe operations.
 
 1) 创建一些泛化类的实例（creating instances of generified classess, 比如 `ArrayList`）
 
-`new ArrayList<Song> ()`
 
-在构造一个 `ArrayList` 时，就必须告诉这个 `ArrayList` 类型的变量，这个清单中将允许的对象类型，这就跟原先那些普通数组一样。
+    `new ArrayList<Song> ()`
+
+    在构造一个 `ArrayList` 时，就必须告诉这个 `ArrayList` 类型的变量，这个清单中将允许的对象类型，这就跟原先那些普通数组一样。
 
 2) 声明并赋值一些泛型的变量（declaring and assigning variables of generic types）
 
-`List<Song> songList = new ArrayList<Song> ()`
 
-多态机制与泛型到底是怎样一起生效的呢？在有着一个 `ArrayList<Animal>` 的引用变量时，可以将一个 `ArrayList<Dog>` 的变量赋值给他吗？对于一个 `List<Animal>` 的引用变量又如何呢？可以将一个 `ArrayList<Animal>` 对象，赋值给他吗？接下来就会看到.......
+    `List<Song> songList = new ArrayList<Song> ()`
+
+    多态机制与泛型到底是怎样一起生效的呢？在有着一个 `ArrayList<Animal>` 的引用变量时，可以将一个 `ArrayList<Dog>` 的变量赋值给他吗？对于一个 `List<Animal>` 的引用变量又如何呢？可以将一个 `ArrayList<Animal>` 对象，赋值给他吗？接下来就会看到.......
 
 3) 声明（及触发）那些取泛型作参数的方法（declaring(and invoking) methods that take generic types）
 
-```java
-void foo(List<Song> list)
-x.foo(songList)
-```
+    ```java
+    void foo(List<Song> list)
+    x.foo(songList)
+    ```
 
 > ***注***：关于 call 与 invoke 的区别，请参考：[what is the difference between 'call' and 'invoke'?](https://www.quora.com/What-is-the-difference-between-call-and-invoke)
 
@@ -514,26 +516,27 @@ public class ArrayList<String> extends AbstractList<String> ... {
 
 1) 使用在类声明中定义的类型参数（using a type parameter defined in the class declaration）
 
-```java
-public class ArrayList<E> extends AbstractList<E> ... {
-    // 之所以可以在这里使用 "E", 完全是因为这个 "E" 已经作为
-    // 这个类的一部分被定义了。
-    public boolean add(E o)
-}
-```
 
-在声明类的某个类型参数时，就可以像使用某个 *具体* 类或接口类型那样，在任意地方使用这个类型了。于方法参数中声明的类型，就会被那个在初始化这个类时用到的类型所取代（When you declare a type parameter for the class, you can simply use that type any place that you'd use a *real* class or interface type. The type declared in the method argument is essentially replaced with the type you use when you instantiate the class）。
+    ```java
+    public class ArrayList<E> extends AbstractList<E> ... {
+        // 之所以可以在这里使用 "E", 完全是因为这个 "E" 已经作为
+        // 这个类的一部分被定义了。
+        public boolean add(E o)
+    }
+    ```
+
+    在声明类的某个类型参数时，就可以像使用某个 *具体* 类或接口类型那样，在任意地方使用这个类型了。于方法参数中声明的类型，就会被那个在初始化这个类时用到的类型所取代（When you declare a type parameter for the class, you can simply use that type any place that you'd use a *real* class or interface type. The type declared in the method argument is essentially replaced with the type you use when you instantiate the class）。
 
 2) 使用未在类声明中定义的某个类型参数（using a type parameter that was NOT defined in the class declaration）
 
 
-```java
-// 后面方法参数中之所以可以使用 <T>，是由于前面在方法声明中
-// 声明过 “T”。
-public <T extends Animal> void takeThing (ArrayList<T> list)
-```
+    ```java
+    // 后面方法参数中之所以可以使用 <T>，是由于前面在方法声明中
+    // 声明过 “T”。
+    public <T extends Animal> void takeThing (ArrayList<T> list)
+    ```
 
-在类本身未用到类型参数时，仍然可以通过在一个相当不寻常的（不过仍然可行）的地方 -- *在返回值类型之前*，声明一个类型参数，从而给某个方法指定一个类型参数。上面这个方法，表示那个 `T` 可以是 “任何的`Animal`类型”（If the class itself doesn't use a type parameter, you can still specify one for a method, by declaring it in a really unusual(but available) space -- *before the return type*. This method says that `T` can be "any type of `Animal`"）。
+    在类本身未用到类型参数时，仍然可以通过在一个相当不寻常的（不过仍然可行）的地方 -- *在返回值类型之前*，声明一个类型参数，从而给某个方法指定一个类型参数。上面这个方法，表示那个 `T` 可以是 “任何的`Animal`类型”（If the class itself doesn't use a type parameter, you can still specify one for a method, by declaring it in a really unusual(but available) space -- *before the return type*. This method says that `T` can be "any type of `Animal`"）。
 
 ### 这里有点玄乎了......
 
@@ -1446,7 +1449,7 @@ shell returned 1
 **要使用 `TreeSet`，就要满足下面二者其一的要求**：
 
 - **清单中的元素，务必为实现了 *`Comparable` 类型的元素***
-    
+
     前面的 `Book` 类没有实现 `Comparable` 接口，因此在运行时，那段代码不会运作。请设想一些，可怜的`TreeSet`在现实中唯一目的，就是令到其中的那些元素保持排序，并且有一次的 -- `TreeSet` 对如何排序这些 `Book` 对象毫无概念！因为 `TreeSet` 的 `add()` 方法没有取一个 `Comparable` 类型，这个`add()`方法取的是在创建该 `TreeSet` 时用到的类型，因此那段代码在编译时不会失败。也就是说，在前面写下了 `new TreeSet<Book> ()` 时，那么这个 `add()` 方法，也就成了 `add(Book)` 了。而那里又没有要求那个 `Book` 类要实现 `Comparable`！这样在把第二个元素添加到这个数据集时，程序就会失败。添加第二个元素的时候，正是这个数据集尝试调用其中一个对象的 `compareTo()` 方法的时候，然而.......调用不到（The `Book` class on the previous page didn't implement `Comparable`, so it wouldn't work at runtime. Think about it, the poor `TreeSet`'s sole purpose in life is to keep your elements sourted, and once again -- it had no idea how to sort `Book` objects! It doesn't fail at compile-time, because the `TreeSet` `add()` method dosen't take a `Comparable` type, the `TreeSet` `add()` method takes whatever type you used when you created the `TreeSet`. In other workds, if you say `new TreeSet<Book>()` the `add()` method is essentially `add(Book)`. And there's no requirement that the `Book` class implement `Comparable`! But it fials at runtime when you add the second element to the set. That's the first time the set tries to call one of the objects's `compareTo()` methods and... can't）。
 
 ```java

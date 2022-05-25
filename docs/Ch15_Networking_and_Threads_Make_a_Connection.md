@@ -35,47 +35,52 @@
 
 1) **客户端连接到服务器**
 
-**Client connects to the server**
 
-![`SimpleChat`应用原理（一）](images/Ch15_04.png)
+    **Client connects to the server**
 
-*图 4 - `SimpleChat`应用原理（一）- 客户端连接到服务器*
+    ![`SimpleChat`应用原理（一）](images/Ch15_04.png)
+
+    *图 4 - `SimpleChat`应用原理（一）- 客户端连接到服务器*
 
 
 2) **服务器构造一个连接，并将该客户端加入到参与者清单**
 
-**The server makes a connection and adds the client to the list of participants**
 
-![`SimpleChat`应用原理（二）](images/Ch15_05.png)
+    **The server makes a connection and adds the client to the list of participants**
 
-*图 5 - `SimpleChat`应用原理（二） - 服务器构造一个连接，并将该客户端加入到参与者清单*
+    ![`SimpleChat`应用原理（二）](images/Ch15_05.png)
+
+    *图 5 - `SimpleChat`应用原理（二） - 服务器构造一个连接，并将该客户端加入到参与者清单*
 
 
 3) **另一客户端进行连接**
 
-**Another client connects**
+
+    **Another client connects**
 
 
-![`SimpleChat`应用原理（三）](images/Ch15_06.png)
+    ![`SimpleChat`应用原理（三）](images/Ch15_06.png)
 
-*图 6 - `SimpleChat`应用原理（三） - 另一客户端进行连接*
+    *图 6 - `SimpleChat`应用原理（三） - 另一客户端进行连接*
 
 
 4) **客户端 A 发送一条消息给聊天服务**
 
-![`SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务](images/Ch15_07.png)
 
-*图 7 - `SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务*
+    ![`SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务](images/Ch15_07.png)
+
+    *图 7 - `SimpleChat`应用原理（四） - 客户端 A 发送一条消息给聊天服务*
 
 5) **服务器将该条消息，发布给所有参与者（包括原本的发送者）**
 
-![`SimpleChat`应用原理（五） - 该条消息被发布到全体参与者](images/Ch15_08.png)
 
-*图 8 - `SimpleChat`应用原理（五） - 该条消息被发布到全体参与者*
+    ![`SimpleChat`应用原理（五） - 该条消息被发布到全体参与者](images/Ch15_08.png)
 
-## 建立连接、发送数据，与数据接收
+    *图 8 - `SimpleChat`应用原理（五） - 该条消息被发布到全体参与者*
 
-**Connecting, Sending, and Receiving**
+    ## 建立连接、发送数据，与数据接收
+
+    **Connecting, Sending, and Receiving**
 
 为了让 `SimpleChat` 客户端运作，必须掌握以下三件事：
 
@@ -91,31 +96,34 @@
 
 1) **连接（Connect）**
 
-经由建立起一个 **套接字（Socket）** 连接，客户端连接到服务器。
 
-![`SimpleChat`客户端连接到服务器](images/Ch15_09.png)
+    经由建立起一个 **套接字（Socket）** 连接，客户端连接到服务器。
 
-*图 9 - `SimpleChat`客户端连接到服务器*
+    ![`SimpleChat`客户端连接到服务器](images/Ch15_09.png)
+
+    *图 9 - `SimpleChat`客户端连接到服务器*
 
 2) **发送（Send）**
 
-客户端将消息 **发送** 给服务器。
 
-![`SimpleChat`客户端将消息发送给服务器](images/Ch15_10.png)
+    客户端将消息 **发送** 给服务器。
+
+    ![`SimpleChat`客户端将消息发送给服务器](images/Ch15_10.png)
 
 
-*图 10 - `SimpleChat`客户端将消息发送给服务器*
+    *图 10 - `SimpleChat`客户端将消息发送给服务器*
 
 
 3) **接收（Receive）**
 
-客户端从服务器 **获取到** 消息。
+
+    客户端从服务器 **获取到** 消息。
 
 
-![`SimpleChat`客户端从服务器获取到消息](images/Ch15_11.png)
+    ![`SimpleChat`客户端从服务器获取到消息](images/Ch15_11.png)
 
 
-*图 11 - `SimpleChat`客户端从服务器获取到消息*
+    *图 11 - `SimpleChat`客户端从服务器获取到消息*
 
 ## 构造网络套接字连接
 
@@ -204,50 +212,53 @@ Socket chatSocket = new Socket("196.164.1.103", 5000);
 
 1) **构造一个到服务器的 `Socket` 连接**
 
-**Make a `Socket` connection to the server**
 
-```java
-// '127.0.0.1' 是 “localhost”，也就是此代码
-// 运行所在的机器的 IP 地址。在单台、独立机器上对客户端
-// 和服务器进行测试时，可使用这个 IP 地址。
-//
-// 而这个端口号，之前就讲过，5000是这里聊天服务器
-// 的端口号。
-Socket chatSocket = new Socket("127.0.0.1", 5000);
-```
+    **Make a `Socket` connection to the server**
+
+    ```java
+    // '127.0.0.1' 是 “localhost”，也就是此代码
+    // 运行所在的机器的 IP 地址。在单台、独立机器上对客户端
+    // 和服务器进行测试时，可使用这个 IP 地址。
+    //
+    // 而这个端口号，之前就讲过，5000是这里聊天服务器
+    // 的端口号。
+    Socket chatSocket = new Socket("127.0.0.1", 5000);
+    ```
 
 2) **构造一个链接到这个套接字底层（连接性）输入流的 `InputStreamReader`**
 
-**Make an `InputStreamReader` chained to the `Socket`'s low-level (connection) input stream**
 
-```java
-// InputStreamReader 是底层字节流（就比如这里的从套接字获取
-// 到的那个），与高级别字符流（如同后面那个作为链式流顶部的
-// `BufferedReader`）之间的“桥梁”
-// 
-// 这里只须从该套接字请求一个输入流即可！所获取到的，就是
-// 一个低级别的连接性流，不过这里只要将其链接到某个对文本
-// 更加友好的东西上（All we have to do is ASK the socket for
-// an input stream! It's a low-level connection stream, but we're
-// just gonna chain it to something more text-friendly）。
-InputStreamReader stream = new InputStreamReader(chatSocket.getInputStream());
-```
+    **Make an `InputStreamReader` chained to the `Socket`'s low-level (connection) input stream**
+
+    ```java
+    // InputStreamReader 是底层字节流（就比如这里的从套接字获取
+    // 到的那个），与高级别字符流（如同后面那个作为链式流顶部的
+    // `BufferedReader`）之间的“桥梁”
+    // 
+    // 这里只须从该套接字请求一个输入流即可！所获取到的，就是
+    // 一个低级别的连接性流，不过这里只要将其链接到某个对文本
+    // 更加友好的东西上（All we have to do is ASK the socket for
+    // an input stream! It's a low-level connection stream, but we're
+    // just gonna chain it to something more text-friendly）。
+    InputStreamReader stream = new InputStreamReader(chatSocket.getInputStream());
+    ```
 
 3) **构造一个 `BufferedReader`然后读取就是了**！
 
-**Make a `BufferedReader` and read**!
 
-```java
-// 把这个 BufferedReader 链接到 InputStreamReader （他又
-// 是链接到那个从套接字获得的底层连接性流的）。
-BufferedReader reader = new BufferedReader(stream);
-String message = reader.readLine();
-```
+    **Make a `BufferedReader` and read**!
 
-![从网络通信套接字读取数据的流链条](images/Ch15_17.png)
+    ```java
+    // 把这个 BufferedReader 链接到 InputStreamReader （他又
+    // 是链接到那个从套接字获得的底层连接性流的）。
+    BufferedReader reader = new BufferedReader(stream);
+    String message = reader.readLine();
+    ```
+
+    ![从网络通信套接字读取数据的流链条](images/Ch15_17.png)
 
 
-*图 17 - 从网络通信套接字读取数据的流链条*
+    *图 17 - 从网络通信套接字读取数据的流链条*
 
 
 ## 使用 `PrintWriter`往套接字写数据
@@ -258,49 +269,52 @@ String message = reader.readLine();
 
 1) **构造一个到服务器的 `Socket` 连接**
 
-**Make a `Socket` connection to the server**
 
-```java
-// 此部分与先前从套接字读取数据时一样 -- 要写到
-// 服务器，仍必须连接到服务器。
-Socket chatSocket = new Socket("127.0.0.1", 5000);
-```
+    **Make a `Socket` connection to the server**
+
+    ```java
+    // 此部分与先前从套接字读取数据时一样 -- 要写到
+    // 服务器，仍必须连接到服务器。
+    Socket chatSocket = new Socket("127.0.0.1", 5000);
+    ```
 
 
 2) **构造一个链接到套接字底层（连接性）输出流的 `PrintWriter`**
 
-**Make a `PrintWriter` chained to the `Socket`'s low-level(connection) output stream**
 
-```java
-// InputStreamReader 扮演了字符数据与从套接字低级别输出流获取到
-// 的字节之间的桥梁。通过将 PrintWriter 链接到套接字的输出流，就可以
-// 将字符串写到套接字连接了（PrintWriter acts as its own bridge
-// between character data and the bytes it gets from the Socket's
-// low-level output stream. By chaining a PrintWriter to the Socket's
-// output stream, we can write Strings to the Socket connection）。
-//
-// 这个套接字给到一个低级别连接性流，同时这里通过将这个连接性流
-// 交给 PrintWriter 的构造器，而把这个连接性流链接到
-// 新构造的 PrintWriter。
-PrintWriter writer = new PrintWriter(chatSocket.getOutputStream());
-```
+    **Make a `PrintWriter` chained to the `Socket`'s low-level(connection) output stream**
+
+    ```java
+    // InputStreamReader 扮演了字符数据与从套接字低级别输出流获取到
+    // 的字节之间的桥梁。通过将 PrintWriter 链接到套接字的输出流，就可以
+    // 将字符串写到套接字连接了（PrintWriter acts as its own bridge
+    // between character data and the bytes it gets from the Socket's
+    // low-level output stream. By chaining a PrintWriter to the Socket's
+    // output stream, we can write Strings to the Socket connection）。
+    //
+    // 这个套接字给到一个低级别连接性流，同时这里通过将这个连接性流
+    // 交给 PrintWriter 的构造器，而把这个连接性流链接到
+    // 新构造的 PrintWriter。
+    PrintWriter writer = new PrintWriter(chatSocket.getOutputStream());
+    ```
 
 
 3) **写（`print`）下一些内容**
 
-**Write(`print`) something**
 
-```java
-// println() 会在他发送的东西末尾加一个另起一行（'/n'）
-writer.println("要发送的消息");
-// print() 不会添加那个另起一行（'/n'）
-writer.print("另一条消息");
-```
+    **Write(`print`) something**
 
-![往套接字写入数据的流链条](images/Ch15_18.png)
+    ```java
+    // println() 会在他发送的东西末尾加一个另起一行（'/n'）
+    writer.println("要发送的消息");
+    // print() 不会添加那个另起一行（'/n'）
+    writer.print("另一条消息");
+    ```
+
+    ![往套接字写入数据的流链条](images/Ch15_18.png)
 
 
-*图 18 - 往套接字写入数据的流链条*
+    *图 18 - 往套接字写入数据的流链条*
 
 
 ## `DailyAdviceClient` 程序
@@ -315,25 +329,27 @@ writer.print("另一条消息");
 
 1） **连接**
 
-**Connect**
 
-客户端连接到服务器，并从他获取到一个输入流（Client connects to the server and gets an input stream from it）。
+    **Connect**
 
-![`AdviceGuy` app 建立连接](images/Ch15_19.png)
+    客户端连接到服务器，并从他获取到一个输入流（Client connects to the server and gets an input stream from it）。
 
-*图 19 - `AdviceGuy` app 建立连接*
+    ![`AdviceGuy` app 建立连接](images/Ch15_19.png)
+
+    *图 19 - `AdviceGuy` app 建立连接*
 
 
 2) **读取**
 
-**Read**
 
-客户端从服务器读取一条消息（Client reads a message from the server）。
+    **Read**
 
-![`AdviceGuy` app 读取消息](images/Ch15_20.png)
+    客户端从服务器读取一条消息（Client reads a message from the server）。
+
+    ![`AdviceGuy` app 读取消息](images/Ch15_20.png)
 
 
-*图 20 - `AdviceGuy` app 读取消息*
+    *图 20 - `AdviceGuy` app 读取消息*
 
 
 ### `DailyAdviceClient` 的代码
@@ -396,48 +412,51 @@ public class DailyAdviceClient {
 
 1) 服务器应用在某个特定端口上，构造一个 `ServerSocket`
 
-```java
-ServerSocket serverSock = new ServerSocket(4242);
-```
 
-这行语句就启动了服务器应用收听那些目的为端口`4242`、进入的客户端请求（This starts the server application listening for client requests coming in for port `4242`）。
+    ```java
+    ServerSocket serverSock = new ServerSocket(4242);
+    ```
 
-![服务器应用构造一个 `ServerSocket`](images/Ch15_21.png)
+    这行语句就启动了服务器应用收听那些目的为端口`4242`、进入的客户端请求（This starts the server application listening for client requests coming in for port `4242`）。
+
+    ![服务器应用构造一个 `ServerSocket`](images/Ch15_21.png)
 
 
-*图 21 - 服务器应用构造一个 `ServerSocket`*
+    *图 21 - 服务器应用构造一个 `ServerSocket`*
 
 
 2) 客户端构造一个到服务器应用的 `Socket` 连接
 
-**Client makes a `Socket` connection to the server application**
 
-```java
-Socket sock = new Socket("190.165.1.103", 4242);
-```
+    **Client makes a `Socket` connection to the server application**
 
-客户端了解 IP 地址以及端口号（是由将改服务器app配置在那个端口上的人公布或给到编写客户端的人）
+    ```java
+    Socket sock = new Socket("190.165.1.103", 4242);
+    ```
 
-![客户端构造一个连接到服务器应用的 `Socket`](images/Ch15_22.png)
+    客户端了解 IP 地址以及端口号（是由将改服务器app配置在那个端口上的人公布或给到编写客户端的人）
+
+    ![客户端构造一个连接到服务器应用的 `Socket`](images/Ch15_22.png)
 
 
-*图 22 - 客户端构造一个连接到服务器应用的 `Socket`*
+    *图 22 - 客户端构造一个连接到服务器应用的 `Socket`*
 
 
 3) 服务器构造一个新的、与此客户端通信的 `Socket`
 
-**Server makes a new `Socket` to communicate with this client**
 
-```java
-Socket sock = serverSock.accept();
-```
+    **Server makes a new `Socket` to communicate with this client**
 
-在等待某个客户端 `Socket` 连接期间，这个`accept()`方法会阻塞（即闲在那里）。在有客户端最终尝试进行连接时，该方法就会返回一个知道怎样与客户端进行通信（即知道 *客户端* 的 IP地址和端口号），的普通老式套接字（在某个 *不同* 的端口上）。这个 `Socket`是在不同于 `ServerSocket` 的端口上的，因此 `ServerSocket` 才可以回去继续等待其他客户端的连接（The `accept()` method blocks(just sits there) while it's waiting for a client `Socket` connection. When a client finally tries to connect, the method returns a plain old `Socket` (on a *different* port) that knows how to communicate with the client(i.e., knows the *client*'s IP address and port number). The `Socket` is on a different port than the `ServerSocket`, so that the `ServerSocket` can go back to waiting for other clients）。
+    ```java
+    Socket sock = serverSock.accept();
+    ```
+
+    在等待某个客户端 `Socket` 连接期间，这个`accept()`方法会阻塞（即闲在那里）。在有客户端最终尝试进行连接时，该方法就会返回一个知道怎样与客户端进行通信（即知道 *客户端* 的 IP地址和端口号），的普通老式套接字（在某个 *不同* 的端口上）。这个 `Socket`是在不同于 `ServerSocket` 的端口上的，因此 `ServerSocket` 才可以回去继续等待其他客户端的连接（The `accept()` method blocks(just sits there) while it's waiting for a client `Socket` connection. When a client finally tries to connect, the method returns a plain old `Socket` (on a *different* port) that knows how to communicate with the client(i.e., knows the *client*'s IP address and port number). The `Socket` is on a different port than the `ServerSocket`, so that the `ServerSocket` can go back to waiting for other clients）。
 
 
-![服务器程序构造一个新的、与客户端通信的 `Socket`](images/Ch15_23.png)
+    ![服务器程序构造一个新的、与客户端通信的 `Socket`](images/Ch15_23.png)
 
-*图 23 - 服务器程序构造一个新的、与客户端通信的 `Socket`*
+    *图 23 - 服务器程序构造一个新的、与客户端通信的 `Socket`*
 
 
 ### `DailyAdviceServer` 程序代码
@@ -713,22 +732,25 @@ public class SimpleChatClientA extends JFrame {
 
 1) **选项一：每隔20秒轮询一次服务器（Option One: Poll the server every 20 seconds）**
 
-**优点（Pros）**: 是的，这是可行的。
 
-**弊端（Cons）**：服务器怎么知道客户端已经收到的消息与尚未收到的消息？服务器就不得不把消息存储起来，而不是在每次收到消息后只要分发并忘却。并且为什么间隔是20秒？这样的延迟对可用性有影响，而如果降低这个延迟值，又会带来对服务器不必要冲击。这个选项效率底下（The server would have to store the messages, rather than just doing a distribute-and-forget each time it gets one. And why 20 seconds? A delay like this affects usability, but as you reduce the delay, you risk hitting your server needlessly. Inefficient）。
+    **优点（Pros）**: 是的，这是可行的。
+
+    **弊端（Cons）**：服务器怎么知道客户端已经收到的消息与尚未收到的消息？服务器就不得不把消息存储起来，而不是在每次收到消息后只要分发并忘却。并且为什么间隔是20秒？这样的延迟对可用性有影响，而如果降低这个延迟值，又会带来对服务器不必要冲击。这个选项效率底下（The server would have to store the messages, rather than just doing a distribute-and-forget each time it gets one. And why 20 seconds? A delay like this affects usability, but as you reduce the delay, you risk hitting your server needlessly. Inefficient）。
 
 2) **选项二：在用户每次发送消息时从服务器读入一些东西（Option Two: Read something in from the server each time the user sends a message）**。
 
-**优点（Pros）**: 可行，很容易。
 
-**弊端（Cons）**：笨办法。为什么要选择这样的任意时间去查收那些消息？如果用户一直潜水不发送任何消息会怎样呢？
+    **优点（Pros）**: 可行，很容易。
+
+    **弊端（Cons）**：笨办法。为什么要选择这样的任意时间去查收那些消息？如果用户一直潜水不发送任何消息会怎样呢？
 
 
 3) **选项三：在服务器发出消息后立即读取消息（Option Three: Read messages as soon as they're sent from the server）**。
 
-**优点（Pros）**: 最为高效，最佳可用性。
 
-**弊端（Cons）**: 怎样在同一时间完成两件事情？应该把代码放在何处？这就会涉及到某处的一个一直等待着从服务器读取的循环。然而这个循环应该放在哪里呢？在启动了 GUI后，就只有在GUI部件发出事件后，程序才有动作了，其他情况下程序是不会有任何动作的（How do you do two things at the same time? Where would you put this code? You'd need a loop somewhere that was always waiting to read from the server. But where would that go? Once you launch the GUI, nothing happens until an event is fired by a GUI component）。
+    **优点（Pros）**: 最为高效，最佳可用性。
+
+    **弊端（Cons）**: 怎样在同一时间完成两件事情？应该把代码放在何处？这就会涉及到某处的一个一直等待着从服务器读取的循环。然而这个循环应该放在哪里呢？在启动了 GUI后，就只有在GUI部件发出事件后，程序才有动作了，其他情况下程序是不会有任何动作的（How do you do two things at the same time? Where would you put this code? You'd need a loop somewhere that was always waiting to read from the server. But where would that go? Once you launch the GUI, nothing happens until an event is fired by a GUI component）。
 
 > **在 Java 中，真的可以一边走路一边嚼口香糖**。
 
@@ -800,37 +822,40 @@ Java 中的多线程技术，意味着这里必须同时要了解 *线程* 及�
 
 1) **JVM 调用 `main()` 方法**
 
-```java
-public static void main(String[] args) {
-    ...
-}
-```
 
-![主进程](images/Ch15_28.png)
+    ```java
+    public static void main(String[] args) {
+        ...
+    }
+    ```
 
-*图 28 - 主进程*
+    ![主进程](images/Ch15_28.png)
+
+    *图 28 - 主进程*
 
 2) `main()` 启动一个新线程。在新线程开始运行的同时，主线程被临时冻结（`main()` starts a new thread. The main thread is temporarily frozen while the new thread starts running）。
 
-```java
-// 很快就会学到这里的 Runnable 对象 r 是什么意思。
-Runnable r = new MyThreadJob();
-Thread t = new Thread(t);
-t.start();
-Dog d = new Dog();
-```
 
-![主线程启动一个新的线程](images/Ch15_29.png)
+    ```java
+    // 很快就会学到这里的 Runnable 对象 r 是什么意思。
+    Runnable r = new MyThreadJob();
+    Thread t = new Thread(t);
+    t.start();
+    Dog d = new Dog();
+    ```
 
-*图 29 - 主线程启动一个新的线程*
+    ![主线程启动一个新的线程](images/Ch15_29.png)
+
+    *图 29 - 主线程启动一个新的线程*
 
 
 3) JVM 在新线程（用户线程A）与原本的主线程直接不断切换，直到两个线程执行完毕。
 
-![进入多线程执行阶段，在全部线程栈运行完毕之前，JVM于这些栈之间不断切换](images/Ch15_30.png)
+
+    ![进入多线程执行阶段，在全部线程栈运行完毕之前，JVM于这些栈之间不断切换](images/Ch15_30.png)
 
 
-*图 30 - 进入多线程执行阶段，在全部线程栈运行完毕之前，JVM于这些栈之间不断切换*
+    *图 30 - 进入多线程执行阶段，在全部线程栈运行完毕之前，JVM于这些栈之间不断切换*
 
 
 ### 怎样启动一个新线程
@@ -839,41 +864,44 @@ Dog d = new Dog();
 
 1) **构造一个 `Runnable` 对象（即该新线程的作业）**
 
-```java
-Runnable treadJob = new MyRunnable();
-```
 
-![构造一个`Runnable` 对象](images/Ch15_31.png)
+    ```java
+    Runnable treadJob = new MyRunnable();
+    ```
 
-*图 31 - 构造一个`Runnable` 对象*
+    ![构造一个`Runnable` 对象](images/Ch15_31.png)
 
-`Runnable` 是一个接口，后面马上就会学到。将会编写一个对 `Runnable` 接口进行实现的类，而正是在这个类中，去定义某个线程要执行的任务工作。也就是那些要在线程的新调用栈上运行的那个方法（`Runnable` is an interface you'll learn about on the next page. You'll write a class that implements the `Runnable` interface, and that class is where you'll define the work that a thread will perform. In other words, the method that will be run from the thread's new call stack）。
+    *图 31 - 构造一个`Runnable` 对象*
+
+    `Runnable` 是一个接口，后面马上就会学到。将会编写一个对 `Runnable` 接口进行实现的类，而正是在这个类中，去定义某个线程要执行的任务工作。也就是那些要在线程的新调用栈上运行的那个方法（`Runnable` is an interface you'll learn about on the next page. You'll write a class that implements the `Runnable` interface, and that class is where you'll define the work that a thread will perform. In other words, the method that will be run from the thread's new call stack）。
 
 
 2) **构造一个`Thread` 对象（即工具人线程）并把一个`Runnable`对象（即作业）交给他（Make a `Thread` object(the worker) and give tit a `Runnable`(the job)）**
 
-```java
-Thread myThread = new Thread(threadJob);
-```
 
-![以这个`Runnable`对象做参数，构造一个`Thread`对象](images/Ch15_32.png)
+    ```java
+    Thread myThread = new Thread(threadJob);
+    ```
 
-*图 32 - 以这个`Runnable`对象做参数，构造一个`Thread`对象*
+    ![以这个`Runnable`对象做参数，构造一个`Thread`对象](images/Ch15_32.png)
 
-将上面构造的新`Runnable`对象传递给 `Thread` 类构造器。这就告诉了新的`Thread`对象，要将哪个方法放在新执行栈 的底部 -- 当然是那个 `Runnable` 对象的 `run()` 方法。
+    *图 32 - 以这个`Runnable`对象做参数，构造一个`Thread`对象*
+
+    将上面构造的新`Runnable`对象传递给 `Thread` 类构造器。这就告诉了新的`Thread`对象，要将哪个方法放在新执行栈 的底部 -- 当然是那个 `Runnable` 对象的 `run()` 方法。
 
 
 3) **启动该线程（Start the `Thread`）**
 
-```java
-myThread.start();
-```
 
-在调用该`Thread`对象的`start()`方法前，什么也不会发生。对此方法的调用，正是由一个`Thread`实例，向一条新执行线程转变的时间点。在新线程启动起来时，新线程就取得那个`Runnable`对象的`run()`方法，并将其放在新线程栈的底部（Nothing happens until you call the `Thread`'s `start()` method. That's when you go from having just a `Thread` instance to having a new thread of execution. When the new thread starts up, it takes the `Runnable` object's `run()` method and puts it on the bottom of the new thread's stack）。
+    ```java
+    myThread.start();
+    ```
 
-![启动线程](images/Ch15_33.png)
+    在调用该`Thread`对象的`start()`方法前，什么也不会发生。对此方法的调用，正是由一个`Thread`实例，向一条新执行线程转变的时间点。在新线程启动起来时，新线程就取得那个`Runnable`对象的`run()`方法，并将其放在新线程栈的底部（Nothing happens until you call the `Thread`'s `start()` method. That's when you go from having just a `Thread` instance to having a new thread of execution. When the new thread starts up, it takes the `Runnable` object's `run()` method and puts it on the bottom of the new thread's stack）。
 
-*图 33 - 启动线程*
+    ![启动线程](images/Ch15_33.png)
+
+    *图 33 - 启动线程*
 
 
 ### 每个`Thread`对象都需要一项要执行的作业。即一个要放到新线程栈上的方法。
@@ -1416,40 +1444,44 @@ Ryan有次需要取 $50，所以他检查了账户余额，看到账户里有 $1
 
 1) **构造一个 `RyanAndMonicaJob`的实例**
 
-类`RyanAndMonicaJob`是 `Runnable`（即要执行的作业）的，同时 Monica 和 Ryan 都进行同样的事（检查余额与取钱），因此这里只需要一个实例。
 
-```java
-RyanAndMonicaJob theJob = new RyanAndMonicaJob();
-```
+    类`RyanAndMonicaJob`是 `Runnable`（即要执行的作业）的，同时 Monica 和 Ryan 都进行同样的事（检查余额与取钱），因此这里只需要一个实例。
+
+    ```java
+    RyanAndMonicaJob theJob = new RyanAndMonicaJob();
+    ```
 
 2) **以这同样的 `Runnable` 实例（即上面那个 `RyanAndMonicaJob`实例），构造两个线程**
 
-```java
-Thread one = new Thread(theJob);
-Thread two = new Thread(theJob);
-```
+
+    ```java
+    Thread one = new Thread(theJob);
+    Thread two = new Thread(theJob);
+    ```
 
 3) **分别对这两个线程进行命名和启动**
 
-```java
-one.setName("Ryan");
-two.setName("Monica");
 
-one.start();
-two.start();
-```
+    ```java
+    one.setName("Ryan");
+    two.setName("Monica");
+
+    one.start();
+    two.start();
+    ```
 
 4） **同时对两个线程执行他们的 `run()` 方法加以观察**（检查余额并取钱）
 
-一个线程代表 Ryan, 另一个表示 Monica。两个线程都持续对余额进行检查，并随后取出一笔钱，不过只有在不透支的情况下才支取！
 
-```java
-if (accout.getBalance() >= amount) {
-    try {
-        Thread.sleep(500);
-    } catch (InterruptedException ex) {ex.printStackTrace();}
-}
-```
+    一个线程代表 Ryan, 另一个表示 Monica。两个线程都持续对余额进行检查，并随后取出一笔钱，不过只有在不透支的情况下才支取！
+
+    ```java
+    if (accout.getBalance() >= amount) {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {ex.printStackTrace();}
+    }
+    ```
 
 **在方法 `run()` 里头，完成 Ryan 和 Monica 正要做的 -- 检查账户余额，并在有足够钱的情况下，取出一笔钱**。
 
@@ -1604,18 +1636,18 @@ Monica 醒了，并完成了支取。这里就有个大问题了！在Monica查�
 1） 存在一把与银行账户事务（检查余额并支取款项）关联的锁。锁只有一把钥匙，在没有人要访问银行账户的时候，锁与钥匙是在一起的。
 
 
-![事务锁的初始状态](images/Ch15_42.png)
+    ![事务锁的初始状态](images/Ch15_42.png)
 
-*图 42 - 事务锁的初始状态*
+    *图 42 - 事务锁的初始状态*
 
 
 2) 在 Ryan 打算访问银行账户时（去查看余额及支取款项），他就要锁上那把锁并把钥匙揣在自己兜里。现在，在Ryan交出钥匙前，就没有人可以对该账户进行访问了。
 
 
-![给事务锁上锁](images/Ch15_43.png)
+    ![给事务锁上锁](images/Ch15_43.png)
 
 
-*图 43 - 给事务锁上锁*
+    *图 43 - 给事务锁上锁*
 
 
 3) **在Ryan完成有关银行账户事务的操作之前，他都是把这把钥匙揣在兜里的**。此时他有着唯一的那把钥匙，因此在 Ryan 解锁账户并退还钥匙之前，Monica 就无法对银行账户（或支票簿）进行访问。
@@ -1882,61 +1914,65 @@ Monica 存了一块钱，现在余额为 20
 
 1) 线程 A 运行一会儿
 
-```pseudocode
-将余额值放到变量 i 中；
-余额为 0，因此 i 现在就是 0；
-将余额的值设置为 i+1 的结果；
-现在余额为 1；
-将余额的值放到变量 i 中；
-余额为 1，因此 i 现在就是 1；
-将余额值设置为 i+1 的结果；
-现在余额为 2；
-```
+
+    ```pseudocode
+    将余额值放到变量 i 中；
+    余额为 0，因此 i 现在就是 0；
+    将余额的值设置为 i+1 的结果；
+    现在余额为 1；
+    将余额的值放到变量 i 中；
+    余额为 1，因此 i 现在就是 1；
+    将余额值设置为 i+1 的结果；
+    现在余额为 2；
+    ```
 
 
 2) 线程 B 运行一会儿
 
-```pseudocode
-将余额值放到变量 i 中；
-余额为 2，因此 i 现在就是 2；
-将余额的值设置为 i+1 的结果；
-现在余额为 3；
-将余额的值放到变量 i 中；
-余额为 1，因此 i 现在就是 3；
 
-[此时，在线程 B 将余额值设置为 4 之前，就从正在运行
-被送回到了可运行状态]
-```
+    ```pseudocode
+    将余额值放到变量 i 中；
+    余额为 2，因此 i 现在就是 2；
+    将余额的值设置为 i+1 的结果；
+    现在余额为 3；
+    将余额的值放到变量 i 中；
+    余额为 1，因此 i 现在就是 3；
+
+    [此时，在线程 B 将余额值设置为 4 之前，就从正在运行
+    被送回到了可运行状态]
+    ```
 
 
 3) 线程 A 再度运行，在他之前离开的地方继续（Thread A runs again, picking up where it left off）
 
-```pseudocode
-将余额值放到变量 i 中；
-余额为 3，因此 i 现在就是 3；
-将余额的值设置为 i+1 的结果；
-现在余额为 4；
-将余额的值放到变量 i 中；
-余额为 4，因此 i 现在就是 4；
-将余额值设置为 i+1 的结果；
-现在余额为 5；
-```
+
+    ```pseudocode
+    将余额值放到变量 i 中；
+    余额为 3，因此 i 现在就是 3；
+    将余额的值设置为 i+1 的结果；
+    现在余额为 4；
+    将余额的值放到变量 i 中；
+    余额为 4，因此 i 现在就是 4；
+    将余额值设置为 i+1 的结果；
+    现在余额为 5；
+    ```
 
 
 4) 线程 B 再度运行，并精确地在他之前离开的地方继续（Thread B runs again, and pickes up exactly where it left off）!
 
-```pseudocode
-将余额值设置为 i+1 的结果；
-// 哎呀！！
-//
-// 线程 A 将余额更新为了 5，但现在线程 B 回来继续运行，而
-// 践踏了线程 A 所做出的更新，就如同线程 A 的更新从来也
-// 没发生过一样。
-//
-// Thread A updated it to 5, but now B came back and stepped
-// on top of the update A made, as if A's update never happened.
-现在余额为 4；
-```
+
+    ```pseudocode
+    将余额值设置为 i+1 的结果；
+    // 哎呀！！
+    //
+    // 线程 A 将余额更新为了 5，但现在线程 B 回来继续运行，而
+    // 践踏了线程 A 所做出的更新，就如同线程 A 的更新从来也
+    // 没发生过一样。
+    //
+    // Thread A updated it to 5, but now B came back and stepped
+    // on top of the update A made, as if A's update never happened.
+    现在余额为 4；
+    ```
 
 
 > **这里就丢失了线程 A 所做出的那些更新！由于线程 B 先前完成了余额的 “读取”，且在线程 B 醒来后，就只是如同他不曾错过一些事情一样，继续运行着（We lost the last updates that Thread A made! Thread B had previously done a 'read' of the value of balance, and when B woke up, it just kept going as if it never missed a beat）**。
@@ -2007,61 +2043,64 @@ public void go () {
 
 1) **线程 A 运行一会儿**
 
-```pseudocode
-尝试进入这个 increment() 方法；
 
-这个方法是同步的，因此就要 获取到此对象锁的钥匙
-把余额的取值，放入变量 i 中；
-余额是 0，因此 i 现在就是 0；
-将余额的至，设置为 i+1 的运算结果；
-现在余额就是 1；
-交回这把钥匙（由于线程A已经完成了 increment() 方法的执行）；
-再次进入 increment() 方法并获取到钥匙；
-将余额的值放入变量 i 中；
-余额为 1，因此 i 现在就是 1；
+    ```pseudocode
+    尝试进入这个 increment() 方法；
 
-[现在线程 A 被送回到可运行状态，不过由于他尚未完成这个同步方法的
-执行，因此线程 A 仍然拿着那把钥匙]
-```
+    这个方法是同步的，因此就要 获取到此对象锁的钥匙
+    把余额的取值，放入变量 i 中；
+    余额是 0，因此 i 现在就是 0；
+    将余额的至，设置为 i+1 的运算结果；
+    现在余额就是 1；
+    交回这把钥匙（由于线程A已经完成了 increment() 方法的执行）；
+    再次进入 increment() 方法并获取到钥匙；
+    将余额的值放入变量 i 中；
+    余额为 1，因此 i 现在就是 1；
+
+    [现在线程 A 被送回到可运行状态，不过由于他尚未完成这个同步方法的
+    执行，因此线程 A 仍然拿着那把钥匙]
+    ```
 
 2) **线程 B 被（线程调度器）选中去运行**
 
-```psedudocode
-尝试进入这个 increment() 方法。该方法是同步的，因此这里就需要获取到锁的钥匙；
 
-钥匙不可用。
+    ```psedudocode
+    尝试进入这个 increment() 方法。该方法是同步的，因此这里就需要获取到锁的钥匙；
 
-[现在线程 B 被送进一个 ‘对象锁不可用’ 类似休息室的
-地方（now thread B is sent into a 'object lock not available' lounge）]
-```
+    钥匙不可用。
+
+    [现在线程 B 被送进一个 ‘对象锁不可用’ 类似休息室的
+    地方（now thread B is sent into a 'object lock not available' lounge）]
+    ```
 
 3) **线程 A 再度运行，从他上次离开的地方继续运行（请记住，他仍然持有那把对象锁的钥匙）**
 
-**Thread A runs again, picking up where it left off(remember, it still has the key)**
 
-```pseudocode
-将余额的值设置为 i+1 的运算结果；
-现在余额为 2；
+    **Thread A runs again, picking up where it left off(remember, it still has the key)**
 
-线程 A 退回对象锁的钥匙；
+    ```pseudocode
+    将余额的值设置为 i+1 的运算结果；
+    现在余额为 2；
 
-[现在线程 A 被送回到可运行状态，但由于他已经完成了这个 increment()
-方法的运行，这个线程就不再持有那把对象锁了]
-```
+    线程 A 退回对象锁的钥匙；
+
+    [现在线程 A 被送回到可运行状态，但由于他已经完成了这个 increment()
+    方法的运行，这个线程就不再持有那把对象锁了]
+    ```
 
 4) **线程 B 被（线程调度器）选中去运行**
 
 
-```pseudocode
-线程 B 尝试进入这个 increment() 方法。该方法是同步的，因此这里
-就需要获取到对象锁的钥匙；
+    ```pseudocode
+    线程 B 尝试进入这个 increment() 方法。该方法是同步的，因此这里
+    就需要获取到对象锁的钥匙；
 
-这次这把钥匙是可用的，那么就获取到该钥匙了；
+    这次这把钥匙是可用的，那么就获取到该钥匙了；
 
-将余额的值放入到变量 i 中；
+    将余额的值放入到变量 i 中；
 
-[继续运行......]
-```
+    [继续运行......]
+    ```
 
 ### 同步化的致命一面
 
@@ -2081,16 +2120,19 @@ Java 不具备处理死锁的机制。他甚至不会 *获悉到* 死锁的发�
 
 1) 线程 A 进入到对象 `foo` 的某个同步方法，同时获取到了该对象锁的钥匙；
 
-然后线程 A 拿着 `foo` 对象锁的钥匙睡了过去。
+
+    然后线程 A 拿着 `foo` 对象锁的钥匙睡了过去。
 
 
 2) 线程 B 进入到对象 `bar` 的某个同步方法，同时获取到该 `bar` 对象锁的钥匙；
 
-线程 `B` 尝试进入 `foo` 对象的某个同步方法，然而线程 B 无法获取到那把钥匙（由于线程 A 持有着）。这时线程 B 就会去到等待室，知道那把 `foo` 的钥匙可用。这时 `bar` 的钥匙是由线程 B 保留着的。
+
+    线程 `B` 尝试进入 `foo` 对象的某个同步方法，然而线程 B 无法获取到那把钥匙（由于线程 A 持有着）。这时线程 B 就会去到等待室，知道那把 `foo` 的钥匙可用。这时 `bar` 的钥匙是由线程 B 保留着的。
 
 3) 线程 A 醒了过来（仍就持有着 `foo` 的钥匙），并尝试进入到对象 `bar` 的某个同步方法，然而线程 A 没法获取到那把钥匙，这时因为线程 B 持有着那把钥匙。这个时候线程 A 就会进入等待室，直到 `bar` 的钥匙可用（不过这钥匙将永远不会可用！）
 
-线程 A 在获取到 `bar` 的钥匙之前无法运行，然而这个时候`bar`的钥匙是在线程 B 手里，同时线程 B 又由于线程 A 持有着 `foo` 的钥匙也无法运行......
+
+    线程 A 在获取到 `bar` 的钥匙之前无法运行，然而这个时候`bar`的钥匙是在线程 B 手里，同时线程 B 又由于线程 A 持有着 `foo` 的钥匙也无法运行......
 
 ## 重点
 
