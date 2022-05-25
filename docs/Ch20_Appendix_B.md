@@ -216,6 +216,9 @@ import java.lang.annotation.*;
 }
 ```
 
+> **注意**：[deprecated method not mentioned in javadoc](https://stackoverflow.com/questions/40969698/deprecated-method-not-mentioned-in-javadoc)
+> `javadoc`默认只收集 `public` 或 `protected` 元素的文档。
+
 - **`@Override`** `@Override` 注解告诉编译器，该元素是要重写在某个超类中声明的元素。在 [继承与多态机制](Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.md) 中讨论了方法的重写。
 
 ```java
