@@ -403,3 +403,26 @@ public void evaluateDiet() {...}
 ### 练习
 
 1. 请定义出一个带有元素 `id`、`synopsis`、`engineer` 及 `date`的、用于一项增强请求的注解类型。将其中 `engineer` 与 `date` 的默认值，分别指定为 `unassigned`和`unknown`（define an annotation type for an enhancement request with elements `id`, `synopsis`, `engineer`, and `date`. Specify the default value as `unassigned` for engineer and `unknown` for date）。
+
+
+<details>
+    <summary>答案</summary>
+
+    1. 文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
+
+```java
+public interface House {
+    /**
+     * @deprecated 对 open 方法的使用是不鼓励的，请使用
+     * openFrontDoor 或 openBackDoor 予以代替。
+     *
+     */
+    @Deprecated
+    public void open();
+    public void openFrontDoor();
+    public void openBackDoor();
+}
+```
+
+    2. 
+</details>

@@ -1,7 +1,7 @@
 package com.xfoss.Annotations;
 
 @SuppressWarnings("deprecation")
-class Apartment extends Building implements House {
+class Apartment extends Building {
     public Apartment (String n) {
         super(n);
     }
@@ -10,20 +10,23 @@ class Apartment extends Building implements House {
         super(n, a);
     }
 
-    public void open () {
-        System.out.println("房子打开了");
+    @Override
+    public void open() {
+        System.out.println("公寓已打开");
     }
 
-    public void openFrontDoor () {
-        System.out.println("房子前门打开了");
+    @Override
+    public void openFrontDoor(){
+        System.out.println("公寓前门已打开");
     }
 
-    public void openBackDoor () {
-        System.out.println("房子后门打开了\n");
+    @Override
+    public void openBackDoor(){
+        System.out.println("公寓后门已打开\n");
     }
 }
 
-class Building {
+class Building implements House {
     private String name;
     private String address;
 
@@ -52,6 +55,12 @@ class Building {
         name = n;
         address = a;
     }
+
+    @Deprecated
+    public void open () {}
+    public void openFrontDoor () {}
+    public void openBackDoor () {}
+
 
     @Override
     public String toString () {

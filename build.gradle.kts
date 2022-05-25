@@ -7,17 +7,17 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
-application {
-    mainClassName = "com.xfoss.Annotations.AnnotationTestDrive"
-    getMainClass().set(mainClassName)
-}
-
 plugins {
-    application
-    java
+    id("application")
+    id("java")
     kotlin("jvm") version "1.3.50"
     id("com.github.johnrengelman.shadow") version "5.1.0"
     id("edu.sc.seis.launch4j")  version "2.5.1"
+}
+
+application {
+    mainClassName = "com.xfoss.Annotations.AnnotationTestDrive" 
+    // mainClass.set(mainClassName)
 }
 
 repositories {
@@ -50,7 +50,7 @@ tasks {
 
     jar {
         manifest {
-            attributes (mapOf("Main-Class" to application.mainClassName))
+            attributes (mapOf("Main-Class" to application.getMainClass()))
         }
 
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
