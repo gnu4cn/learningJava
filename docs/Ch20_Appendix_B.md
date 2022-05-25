@@ -368,37 +368,37 @@ public @interface Schedules {
 
 1. 下面这个接口什么错了？
 
-```java
-public interface House {
-    @Deprecated
-    public void open();
-    public void openFrontDoor();
-    public void openBackDoor();
-}
-```
+    ```java
+    public interface House {
+        @Deprecated
+        public void open();
+        public void openFrontDoor();
+        public void openBackDoor();
+    }
+    ```
 
 2. 试想对问题 1 中所给的 `House` 接口的下面这个实现：
 
-```java
-public class MyHouse implements House {
-    public void open () {}
-    public void openFrontDoor () {}
-    public void openBackDoor() {}
-}
-```
+    ```java
+    public class MyHouse implements House {
+        public void open () {}
+        public void openFrontDoor () {}
+        public void openBackDoor() {}
+    }
+    ```
 
-那么在编译这个程序时，由于这里的 `open` 是已被弃用的（在上面的接口中），那么编译器就会产生一条告警消息。该怎样来处理那条告警消息呢？
+    那么在编译这个程序时，由于这里的 `open` 是已被弃用的（在上面的接口中），那么编译器就会产生一条告警消息。该怎样来处理那条告警消息呢？
 
 3. 下面的代码在编译时将不会出错吗？为什么不会出错，或者说为什么会出错呢？
 
-```java
-public @interface Meal {...}
+    ```java
+    public @interface Meal {...}
 
-@Meal("breakfast", mainDish="cereal")
-@Meal("lunch", mainDish="pizza")
-@Meal("dinner", mainDish="salad")
-public void evaluateDiet() {...}
-```
+    @Meal("breakfast", mainDish="cereal")
+    @Meal("lunch", mainDish="pizza")
+    @Meal("dinner", mainDish="salad")
+    public void evaluateDiet() {...}
+    ```
 
 #### 练习🏋️
 
@@ -413,79 +413,79 @@ public void evaluateDiet() {...}
 
 1. __答案__：文档应当体现出为何 `open` 被弃用，以及应当用什么来代替他。比如：
 
-```java
-public interface House {
-    /**
-     * @deprecated 对 open 方法的使用是不鼓励的，请使用
-     * openFrontDoor 或 openBackDoor 予以代替。
-     *
-     */
-    @Deprecated
-    public void open();
-    public void openFrontDoor();
-    public void openBackDoor();
-}
-```
+    ```java
+    public interface House {
+        /**
+         * @deprecated 对 open 方法的使用是不鼓励的，请使用
+         * openFrontDoor 或 openBackDoor 予以代替。
+         *
+         */
+        @Deprecated
+        public void open();
+        public void openFrontDoor();
+        public void openBackDoor();
+    }
+    ```
 
 2. __答案__ ：可给 `open` 方法的实现加上弃用注解（you can deprecate the implementation of `open`）：
 
-```java
-public class MyHouse implements House {
-    // 文档是从接口继承到的。
-    @Deprecated
-    public void open() {}
-    public void openFrontDoor() {}
-    public void openBackDoor() {}
-}
-```
+    ```java
+    public class MyHouse implements House {
+        // 文档是从接口继承到的。
+        @Deprecated
+        public void open() {}
+        public void openFrontDoor() {}
+        public void openBackDoor() {}
+    }
+    ```
 
-或者，可抑制告警信息：
+    或者，可抑制告警信息：
 
-```java
-public class MyHouse implements House {
-    @SuppressWarinings("deprecation")
-    public void open() {}
-    public void openFrontDoor() {}
-    public void openBackDoor() {}
-}
-```
+    ```java
+    public class MyHouse implements House {
+        @SuppressWarinings("deprecation")
+        public void open() {}
+        public void openFrontDoor() {}
+        public void openBackDoor() {}
+    }
+    ```
 
 3. __答案__ ：此代码将编译失败。在JDK 8之前，是不支持可重复注解的。即便是在 JDK 8 中，由于其中的 `Meal` 注解类型，未被定义为可重复，因此该代码仍会编译失败。可通过加上 `@Repeatable` 元注解，并定义一个容器注解类型，来修复这个问题：
 
-```java
-public class AnnotationTest {
-    public @interface MealContainer {
-        Meal[] value();
-    }
+    ```java
+    public class AnnotationTest {
+        public @interface MealContainer {
+            Meal[] value();
+        }
 
-    @java.lang.annotation.Repeatable(MealContainer.class)
-    public @inerface Meal {
-        String value();
-        String mainDish();
-    }
+        @java.lang.annotation.Repeatable(MealContainer.class)
+        public @inerface Meal {
+            String value();
+            String mainDish();
+        }
 
-    @Meal(value="早餐", mainDish="麦片")
-    @Meal(value="午餐", mainDish="披萨")
-    @Meal(value="晚餐", mainDish="沙拉")
-    public void evaluateDiet() {}
-}
-```
+        @Meal(value="早餐", mainDish="麦片")
+        @Meal(value="午餐", mainDish="披萨")
+        @Meal(value="晚餐", mainDish="沙拉")
+        public void evaluateDiet() {}
+    }
+    ```
 
 #### 练习
 
 1.  __答案__ : 
 
-```java
-/**
- * 这里的注释，对这个增强请求
- * （the Request-for-Enhancement, RFE）注解
- * 类型，进行了描述。
- */
-public @interface RequestForEnhancement {
-    int id();
-    String synopsis();
-    String engineer() default "[unassigned]";
-    String date() default "[unknown]";
-}
-```
+    ```java
+    /**
+     * 这里的注释，对这个增强请求
+     * （the Request-for-Enhancement, RFE）注解
+     * 类型，进行了描述。
+     */
+    public @interface RequestForEnhancement {
+        int id();
+        String synopsis();
+        String engineer() default "[unassigned]";
+        String date() default "[unknown]";
+    }
+    ```
 </details>
