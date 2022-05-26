@@ -17,8 +17,8 @@
 - [哪些地方可以使用注解语法](#where)、
 - 如何运用注解语法、
 - [Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）](#predefined_annotation_types)、
-- 类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码，
-- 以及怎样去实现重复性注解语法。
+- [类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码](#type-annotations-and-pluggable-type-systems)，
+- [以及怎样去实现重复性注解语法](#repeating-annotations)。
 
 （This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
 
@@ -271,7 +271,7 @@ void useDeprecatedMethod () {
 - **`@Inherited`** `@Inherited` 注解表示其所标记的注解类型，可从超类继承到（`@Inherited` annotation indicates that the annotation type can be inherited from the super class）。（默认是不可以从超类继承的。）在用户查询某个注解类型，而该类又没有这个类型的注解时，那么就会对这个类的超类查询此注解类型。此注解仅适用于类的声明。
 - **`@Repeatable`** `@Repeatable` 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 [重复注解（Repeating Annotations）](#repeating-annotations)。
 
-### 类型注解与可插拔类型系统
+### <a id="type-annotations-and-pluggable-type-systems"></a>类型注解与可插拔类型系统
 
 **Type Annotations and Pluggable Type Systems**
 
