@@ -21,19 +21,21 @@
 
 1) **运用对象序列化**
 
-**Use *serialization***
 
-对留存了被压扁（序列化的）对象的一个文件进行写入。随后程序就从这个文件读取这些序列化的对象，并将他们充实回到活生生的、有呼吸的、存在于内存堆的对象（Write a file that holds flattened(serialized) objects. Then have your program read the serialized objects from the file and inflate them back into living, breathing, heap-inhabiting objects）。
+    **Use *serialization***
 
-**在数据会被其他程序使用到时**：
+    对留存了被压扁（序列化的）对象的一个文件进行写入。随后程序就从这个文件读取这些序列化的对象，并将他们充实回到活生生的、有呼吸的、存在于内存堆的对象（Write a file that holds flattened(serialized) objects. Then have your program read the serialized objects from the file and inflate them back into living, breathing, heap-inhabiting objects）。
+
+    **在数据会被其他程序使用到时**：
 
 2) **写入 *普通文本* 文件**
 
-**Write *a plain text* file**
 
-写入到一个带有分隔符，从而可被其他程序解析的文件。比如就可以写入到一个由制表符分隔的、可被电子表格或数据库应用使用的文件（Write a file, with delimiters that other programs can parse. For example, a tab-delimited file that a spreadsheet or database application can use）。
+    **Write *a plain text* file**
 
-当然并非只有这两个选项。可以所选的任意格式来保存数据。除了往文件中写入字符，还可以将数据写为字节（Instead of writing characters, for example, you can write your data as bytes）。还可以把那些 Java 原生值当作 Java 原生值来写入文件 -- 对于整数、长整数、布尔值等原生值类型，是有相应方法来写入文件的。但不管使用何种方法来保存数据，文件`I/O`的基本技巧总是不变的：把一些数据写入到 *某个东西（something）*，而通常这某个东西要么是磁盘上的文件、要么就是来自网络连接的流（But regardless of the method you use, the fundamental `I/O` techniques are pretty much the same: write some data to *something*, and usually that something is either a file on disk or a stream coming from a network connection）。读取数据则是同样的过程，只是反过来而已：从磁盘上的文件或某个网络连接，读取到一些数据。同时本章所讨论的内容，是在未使用到某种具体数据库时，所涉及的数据保存。
+    写入到一个带有分隔符，从而可被其他程序解析的文件。比如就可以写入到一个由制表符分隔的、可被电子表格或数据库应用使用的文件（Write a file, with delimiters that other programs can parse. For example, a tab-delimited file that a spreadsheet or database application can use）。
+
+    当然并非只有这两个选项。可以所选的任意格式来保存数据。除了往文件中写入字符，还可以将数据写为字节（Instead of writing characters, for example, you can write your data as bytes）。还可以把那些 Java 原生值当作 Java 原生值来写入文件 -- 对于整数、长整数、布尔值等原生值类型，是有相应方法来写入文件的。但不管使用何种方法来保存数据，文件`I/O`的基本技巧总是不变的：把一些数据写入到 *某个东西（something）*，而通常这某个东西要么是磁盘上的文件、要么就是来自网络连接的流（But regardless of the method you use, the fundamental `I/O` techniques are pretty much the same: write some data to *something*, and usually that something is either a file on disk or a stream coming from a network connection）。读取数据则是同样的过程，只是反过来而已：从磁盘上的文件或某个网络连接，读取到一些数据。同时本章所讨论的内容，是在未使用到某种具体数据库时，所涉及的数据保存。
 
 ## 对状态进行保存
 
@@ -43,36 +45,37 @@
 
 1) 选项一
 
-**把这三个序列化的游戏角色写到某个文件**
 
-创建出一个文件，并写入三个序列化角色对象。这个文件在作为文本进行读取时，并无任何意义：
+    **把这三个序列化的游戏角色写到某个文件**
 
-```console
- ̈ÌsrGameCharacter 
- ̈%gê8MÛIpowerLjava/lang/
- String;[weaponst[Ljava/lang/
- String;xp2tlfur[Ljava.lang.String;≠“VÁ
- È{Gxptbowtswordtdustsq~»tTrolluq~tb
- are handstbig axsq~xtMagicianuq~tspe
- llstinvisibility
- ```
+    创建出一个文件，并写入三个序列化角色对象。这个文件在作为文本进行读取时，并无任何意义：
+
+    ```console
+     ̈ÌsrGameCharacter 
+     ̈%gê8MÛIpowerLjava/lang/
+     String;[weaponst[Ljava/lang/
+     String;xp2tlfur[Ljava.lang.String;≠“VÁ
+     È{Gxptbowtswordtdustsq~»tTrolluq~tb
+     are handstbig axsq~xtMagicianuq~tspe
+     llstinvisibility
+     ```
 
  2) 选项二
 
- **写入普通文本文件**
+     **写入普通文本文件**
 
- 创建出一个文件，并写入三行文本，每行一个游戏角色，用逗号分隔角色状态的各个部分：
+     创建出一个文件，并写入三行文本，每行一个游戏角色，用逗号分隔角色状态的各个部分：
 
- ```console
- 50,Elf,bow, sword,dust
- 200,Troll,bare hands,big ax
- 120,Magician,spells,invisibility
- ```
+     ```console
+     50,Elf,bow, sword,dust
+     200,Troll,bare hands,big ax
+     120,Magician,spells,invisibility
+     ```
 
- ![对象存储图解](images/Ch14_02.png)
+     ![对象存储图解](images/Ch14_02.png)
 
 
-*图 2 - 对象存储图解*
+    *图 2 - 对象存储图解*
 
 ## 把序列化对象写到某个文件
 
@@ -80,41 +83,45 @@
 
 1) **构造一个 *`FileOutputStream`* 对象**
 
-```java
-// 构造出一个 FileOutputStream 对象。FileOutputStream 知道怎样去
-// 连接（并创建出）一个文件。
-// 
-// 若这个 “MyGame.ser” 文件不存在，那么他就会被自动创建出来。
-FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
-```
+
+    ```java
+    // 构造出一个 FileOutputStream 对象。FileOutputStream 知道怎样去
+    // 连接（并创建出）一个文件。
+    // 
+    // 若这个 “MyGame.ser” 文件不存在，那么他就会被自动创建出来。
+    FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
+    ```
 
 2) **构造一个 *`ObjectOutputStream` 对象***
 
-```java
-// ObjectOutputStream 实现对象写到文件，但他无法直接连接到
-// 文件。他需要喂入一个“helper”。这实际上就是把一个流“链接”
-// 到另一个上（This is actually called 'chaining' one stream
-// to another）。
-ObjectOutputStream oStream = new ObjectOutputStream(fileStream);
-```
+
+    ```java
+    // ObjectOutputStream 实现对象写到文件，但他无法直接连接到
+    // 文件。他需要喂入一个“helper”。这实际上就是把一个流“链接”
+    // 到另一个上（This is actually called 'chaining' one stream
+    // to another）。
+    ObjectOutputStream oStream = new ObjectOutputStream(fileStream);
+    ```
 
 3) **写入对象**
 
-```java
-// 对这些由 characterOne, Two, Three 所表示的对象进行序列化操作
-// 并将他们写到文件 “MyGame.ser” 中。
-oStream.writeObject(characterOne);
-oStream.writeObject(characterTwo);
-oStream.writeObject(characterThree);
-```
+
+    ```java
+    // 对这些由 characterOne, Two, Three 所表示的对象进行序列化操作
+    // 并将他们写到文件 “MyGame.ser” 中。
+    oStream.writeObject(characterOne);
+    oStream.writeObject(characterTwo);
+    oStream.writeObject(characterThree);
+    ```
 
 4) **关闭 `ObjectOutputStream`**
 
-```java
-// 关闭了顶部的流，就会关闭其下所有的其他流，因此 `FileOutputStream` 
-// （及那个文件）就会自动关闭。
-oStream.close();
-```
+
+    ```java
+    // 关闭了顶部的流，就会关闭其下所有的其他流，因此 `FileOutputStream` 
+    // （及那个文件）就会自动关闭。
+    oStream.close();
+    ```
 
 **在各种流中，数据从一处往另一处移动（Data moves in streams from one place to another）**。
 
@@ -371,52 +378,57 @@ class Chat implements Serializable {
 
 1) **构造一个 `FileInputStream`**
 
-```java
-// 构造一个 FileInputStream 对象。这里的 FileInputStream 就
-// 知道怎样去连接上要给既有的文件。
-//
-// 在文件 "MyGame.ser" 不存在时，将得到一个异常。
-FileInputStream fileStream = new FileInputStream("MyGame.ser");
-```
+
+    ```java
+    // 构造一个 FileInputStream 对象。这里的 FileInputStream 就
+    // 知道怎样去连接上要给既有的文件。
+    //
+    // 在文件 "MyGame.ser" 不存在时，将得到一个异常。
+    FileInputStream fileStream = new FileInputStream("MyGame.ser");
+    ```
 
 2) **构造一个 `ObjectInputStream`**
 
-```java
-// ObjectInputStream 允许读取对象，但他无法直接连接到某个
-// 文件。他需要被链接到一个连接性流，这个示例中就是链接到
-// 的一个 FileInputStream。
-ObjectInputStream os = new ObjectInputStream(fileStream)
-```
+
+    ```java
+    // ObjectInputStream 允许读取对象，但他无法直接连接到某个
+    // 文件。他需要被链接到一个连接性流，这个示例中就是链接到
+    // 的一个 FileInputStream。
+    ObjectInputStream os = new ObjectInputStream(fileStream)
+    ```
 
 3) **读取那些对象**
 
-```java
-// 在每次写下 readObject() 方法时，就获得了流中的下一个
-// 对象。因此将以这些对象被写入的同样顺序，把这些对象读取
-// 回来。若尝试读取多于写入的对象时，就会得到一个大大的异常。
-Object one = os.readObject();
-Object two = os.readObject();
-Object three = os.readObject();
-```
+
+    ```java
+    // 在每次写下 readObject() 方法时，就获得了流中的下一个
+    // 对象。因此将以这些对象被写入的同样顺序，把这些对象读取
+    // 回来。若尝试读取多于写入的对象时，就会得到一个大大的异常。
+    Object one = os.readObject();
+    Object two = os.readObject();
+    Object three = os.readObject();
+    ```
 
 4) **对读取到的这些对象，进行类型强制转换**
 
-```java
-// readObject() 方法的返回值是类型 Object 的（就跟
-// ArrayList那里的情况一样），因此就必须将其强制
-// 转换回所知的真实类型。
-GameCharacter elf = (GameCharacter) one;
-GameCharacter troll = (GameCharacter) two;
-GameCharacter magician = (GameCharacter) three;
-```
+
+    ```java
+    // readObject() 方法的返回值是类型 Object 的（就跟
+    // ArrayList那里的情况一样），因此就必须将其强制
+    // 转换回所知的真实类型。
+    GameCharacter elf = (GameCharacter) one;
+    GameCharacter troll = (GameCharacter) two;
+    GameCharacter magician = (GameCharacter) three;
+    ```
 
 5) **关闭 `ObjectInputStream`**
 
-```java
-// 关闭了顶部的流也就关闭了其下的那些流，因此 FileInputStream
-// （以及那个文件）就会自动关闭。
-os.close();
-```
+
+    ```java
+    // 关闭了顶部的流也就关闭了其下的那些流，因此 FileInputStream
+    // （以及那个文件）就会自动关闭。
+    os.close();
+    ```
 
 ### 解序列化期间发生了什么？
 
@@ -902,39 +914,44 @@ class QuizCard {
 
 1) **构造一个表示既有文件的 `File` 对象**
 
-```java
-File f = new File("MyCode.txt");
-```
+
+    ```java
+    File f = new File("MyCode.txt");
+    ```
 
 2) **新建一个目录**
 
-```java
-File dir = new File("Chapter7");
-dir.mkdir();
-```
+
+    ```java
+    File dir = new File("Chapter7");
+    dir.mkdir();
+    ```
 
 3) **列出某个目录的内容**
 
-```java
-if (dir.isDirectory()) {
-    String[] dirContents = dir.list();
-    for (int i = 0; i < dirContents.length; i++) {
-        System.out.println(dirContents[i]);
+
+    ```java
+    if (dir.isDirectory()) {
+        String[] dirContents = dir.list();
+        for (int i = 0; i < dirContents.length; i++) {
+            System.out.println(dirContents[i]);
+        }
     }
-}
-```
+    ```
 
 4) **获取文件或目录的绝对路径**
 
-```java
-System.out.println(dir.getAbsolutePath());
-```
+
+    ```java
+    System.out.println(dir.getAbsolutePath());
+    ```
 
 5) **删除某个文件或目录（删除成功时返回 `true`）**
 
-```java
-boolean isDeleted = f.delete();
-```
+
+    ```java
+    boolean isDeleted = f.delete();
+    ```
 
 ## 缓存之美
 
@@ -1381,22 +1398,24 @@ Class com.xfoss.learningJava.Dog is not Serializable.
 
 1) 使用命令行工具 `serialver` 获取这个类的版本 ID（`serialVersionUID`）
 
-![使用命令行工具`serialver`，获取类的 `serialVersionUID`](images/Ch14_29.png)
 
-*图 29 - 使用命令行工具`serialver`，获取类的 `serialVersionUID`*
+    ![使用命令行工具`serialver`，获取类的 `serialVersionUID`](images/Ch14_29.png)
+
+    *图 29 - 使用命令行工具`serialver`，获取类的 `serialVersionUID`*
 
 2) 将上面的输出，粘贴到类中
 
-```java
-public class Dog {
-    private static final long serialVersionUID = 1720600418317157466L;
 
-    private String name;
-    private int size;
+    ```java
+    public class Dog {
+        private static final long serialVersionUID = 1720600418317157466L;
 
-    // 以下是方法的代码
-}
-```
+        private String name;
+        private int size;
+
+        // 以下是方法的代码
+    }
+    ```
 
 
 3) 确保在对这个类做出修改时，自己要对这个类做出修改所带来的后果负责！比如就要确保新的 `Dog` 类能够以默认值，来处理在 `Dog` 被序列化后，所添加的那些实例变量的解序列化（For example, be sure that your new `Dog` class can deal with an old `Dog` be deserialized with default values for instance variables added to the class after the `Dog` was serialized）。

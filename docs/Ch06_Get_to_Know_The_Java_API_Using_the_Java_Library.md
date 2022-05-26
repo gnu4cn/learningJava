@@ -26,44 +26,48 @@ _怎么才知道我要用到Java API的某个类，该如何从“要完成某�
 
 1) 普通的老式 `array`，在创建出来时就必须知道大小。
 
-但对于 `ArrayList` 来说，就只需要生成一个类型为 `ArrayList`的对象就行。因为随着有对象加入或移除，`ArrayList`对象的大小会增加或收缩。
 
-```java
-String[] a = new String[2];
-ArrayList<String> al = new ArrayList<String> ();
-```
+    但对于 `ArrayList` 来说，就只需要生成一个类型为 `ArrayList`的对象就行。因为随着有对象加入或移除，`ArrayList`对象的大小会增加或收缩。
+
+    ```java
+    String[] a = new String[2];
+    ArrayList<String> al = new ArrayList<String> ();
+    ```
 
 2) 要将某个对象放入到常规数组中，就必须为其指定一个特定位置。
 
-（而且这个位置，必须要是从 `0` 到小于该数组长度的一个值。）
 
-```java
-myList[1] = b;
-```
+    （而且这个位置，必须要是从 `0` 到小于该数组长度的一个值。）
 
-在指定的索引位置超出了该数组的边界时（比如对于一个声明了大小为2的数组，在尝试将某个值赋给索引3时），运行时就会报错（`java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`）。但对于 `ArrayList`，就可以使用 `add(anInt, anObject)` 方法，或是只写 `add(anObject)`，就可以为新加入的对象，分配到空间。
+    ```java
+    myList[1] = b;
+    ```
 
-```java
-myList.add(b);
-```
+    在指定的索引位置超出了该数组的边界时（比如对于一个声明了大小为2的数组，在尝试将某个值赋给索引3时），运行时就会报错（`java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`）。但对于 `ArrayList`，就可以使用 `add(anInt, anObject)` 方法，或是只写 `add(anObject)`，就可以为新加入的对象，分配到空间。
+
+    ```java
+    myList.add(b);
+    ```
 
 3) 数组所使用的语法，在Java中的其他任何地方都不会用到。
 
-但 `ArrayList` 就是普通的 Java 对象，因此没有特殊的语法。
 
-```java
-myList[1];
-```
+    但 `ArrayList` 就是普通的 Java 对象，因此没有特殊的语法。
+
+    ```java
+    myList[1];
+    ```
 
 4) 自 Java 5.0 开始，`ArrayList` 就已经是参数化的了（parameterized）。
 
-```java
-ArrayList<String>
-```
 
-这里的在尖括号中的 `String` 是一个 “类型参数”（`type parameter`）。 `ArrayList<String>` 的意思是，“一个字符串清单”，以示与 `ArrayList<Dog>` 表示“一个 Dog 的清单”的不同。
+    ```java
+    ArrayList<String>
+    ```
 
-如今使用 `<type>` 这样的语法，就可以声明并创建 `ArrayList` 变量所能保存的对象类型。在“集合”章节将会仔细审视 `ArrayList` 中的参数化类型语法。现在只需要知道，这种语法是一种强制编译器，只允许特定类型的对象，放入到 `ArrayList` 中的办法。
+    这里的在尖括号中的 `String` 是一个 “类型参数”（`type parameter`）。 `ArrayList<String>` 的意思是，“一个字符串清单”，以示与 `ArrayList<Dog>` 表示“一个 Dog 的清单”的不同。
+
+    如今使用 `<type>` 这样的语法，就可以声明并创建 `ArrayList` 变量所能保存的对象类型。在“集合”章节将会仔细审视 `ArrayList` 中的参数化类型语法。现在只需要知道，这种语法是一种强制编译器，只允许特定类型的对象，放入到 `ArrayList` 中的办法。
 
 ## 构造器函数（The `constructor` function）
 
@@ -298,10 +302,12 @@ you'll just have to type
 
 1) 翻书
 
-一本 Java 参考书，就是去发现Java库里有些什么的最好办法。
+
+    一本 Java 参考书，就是去发现Java库里有些什么的最好办法。
 
 2) 查看线上的 HTML API 文档
 
-Java 本身就有着一套良好的线上文档，名字就叫 Java API。这套文档又是另外一套更大的名为 Java 5 标准版文档的一部分，这些线上文档还必须得去单独下载；这些文档不是和 Java 程序一起提供的。
 
-这些API文档，在要进一步了解某个类及其方法时，最好的参考资料。比如在查阅参考书时，在 `java.util`包中发现一个名为 `Calendar` 的类时，参考书只能告诉你这个类的有限的、仅能让你明白这个类正是你要用到的一点点内容，在你需要了解更多的有关这个类的信息时，就可以在线上文档里找到。
+    Java 本身就有着一套良好的线上文档，名字就叫 Java API。这套文档又是另外一套更大的名为 Java 5 标准版文档的一部分，这些线上文档还必须得去单独下载；这些文档不是和 Java 程序一起提供的。
+
+    这些API文档，在要进一步了解某个类及其方法时，最好的参考资料。比如在查阅参考书时，在 `java.util`包中发现一个名为 `Calendar` 的类时，参考书只能告诉你这个类的有限的、仅能让你明白这个类正是你要用到的一点点内容，在你需要了解更多的有关这个类的信息时，就可以在线上文档里找到。

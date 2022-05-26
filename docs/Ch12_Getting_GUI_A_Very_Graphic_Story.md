@@ -37,30 +37,33 @@
 1) 构造一个视窗框（一个 `JFrame`）:
 
 
-```java
-JFrame frame = new JFrame();
-```
+    ```java
+    JFrame frame = new JFrame();
+    ```
 
 2) 构造一个小部件（widget, 如按钮、文本字段等等）：
 
-```java
-JButton button = new JButton("点我");
-```
+
+    ```java
+    JButton button = new JButton("点我");
+    ```
 
 3) 把这个小部件添加到窗框
 
-```java
-// 并没有 直接 把物件添加到窗框。可把窗框当作是视窗周围的
-// 窗框（the trim around the window），而把物件放在窗玻璃上的
-frame.getContentPane().add(button);
-```
+
+    ```java
+    // 并没有 直接 把物件添加到窗框。可把窗框当作是视窗周围的
+    // 窗框（the trim around the window），而把物件放在窗玻璃上的
+    frame.getContentPane().add(button);
+    ```
 
 4) 显示这个窗框（给予其一个尺寸并令其可见）
 
-```java
-frame.setSize(300, 300);
-frame.setVisible(true);
-```
+
+    ```java
+    frame.setSize(300, 300);
+    frame.setVisible(true);
+    ```
 
 ### 第一个GUI：在窗框上的一个按钮
 
@@ -106,9 +109,10 @@ public class SimpleGui1 {
 
 2) 一种 **获悉** 何时触发这个方法的机制。也就是说，一种获悉用户在什么时候点击了按钮的方式！
 
-![GUI 编程关注点：小部件上的事件](images/Ch12_02.png)
 
-*图 2 - GUI 编程关注点：小部件上的事件*
+    ![GUI 编程关注点：小部件上的事件](images/Ch12_02.png)
+
+    *图 2 - GUI 编程关注点：小部件上的事件*
 
 
 ## 答疑
@@ -336,43 +340,46 @@ addKeyListener(KeyListener k)
 
 1) **在窗框上放置小部件（Put widgets on a frame）**
 
-此方式可以把按钮、菜单、单选按钮等小部件放上去。
+
+    此方式可以把按钮、菜单、单选按钮等小部件放上去。
 
 
-```java
-frame.getContentPane().add(myButton);
-```
+    ```java
+    frame.getContentPane().add(myButton);
+    ```
 
-`javax.swing`包有着十多种小部件类型。
+    `javax.swing`包有着十多种小部件类型。
 
-![往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上](images/Ch12_07.png)
+    ![往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上](images/Ch12_07.png)
 
 
-*图 7 - 往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上*
+    *图 7 - 往GUI上放东西之一：把`javax.swing`中的小部件放在窗框上*
 
 
 2) **在小部件上绘制 2D 图形**
 
-运用图形对象，来绘制形状。
 
-```java
-graphics.fillOval(70, 70, 100, 100);
-```
+    运用图形对象，来绘制形状。
 
-除了方块和圆形之外，还可以绘制很多很多的形状；`Java2D` API 充满了有趣、复杂的图形方法。
+    ```java
+    graphics.fillOval(70, 70, 100, 100);
+    ```
 
-![往GUI上放东西之二：运用 `Java2D` API 在小部件上绘制图形](images/Ch12_08.png)
+    除了方块和圆形之外，还可以绘制很多很多的形状；`Java2D` API 充满了有趣、复杂的图形方法。
+
+    ![往GUI上放东西之二：运用 `Java2D` API 在小部件上绘制图形](images/Ch12_08.png)
 
 
 3) **把 JPEG 图片放在小部件上**
 
-可将自己的图像放在某个小部件上。
 
-```java
-graphics.drawImage(myPic, 10, 10, this);
-```
+    可将自己的图像放在某个小部件上。
 
-![往GUI上放东西之三：将图像放在小部件上](images/Ch12_09.png)
+    ```java
+    graphics.drawImage(myPic, 10, 10, this);
+    ```
+
+    ![往GUI上放东西之三：将图像放在小部件上](images/Ch12_09.png)
 
 
 ## 构造自己的绘制小部件
@@ -835,99 +842,101 @@ public class SimpleGui3C implements ActionListener {
 
 1) 选项一
 
-**实现两个 `actionPerformed()` 方法**
 
-```java
-class MyGui implements ActionListener {
-    // 很多代码过后：
-    public void actionPerformed(ActionEvent ev) {
-        frame.repaint();
+    **实现两个 `actionPerformed()` 方法**
+
+    ```java
+    class MyGui implements ActionListener {
+        // 很多代码过后：
+        public void actionPerformed(ActionEvent ev) {
+            frame.repaint();
+        }
+
+        // 然而这样写是行不通的！（回顾一下方法过载就知道）
+        public void actionPerformed(ActionEvent ev) {
+            label.setText("那真痛！");
+        }
     }
+    ```
 
-    // 然而这样写是行不通的！（回顾一下方法过载就知道）
-    public void actionPerformed(ActionEvent ev) {
-        label.setText("那真痛！");
-    }
-}
-```
-
-**缺点是：做不到**！在Java类中不能实现同一个方法两次。这样不会编译的。并且就是 *可以*，那么事件源又怎样知道应该调用两个方法中的哪一个呢？
+    **缺点是：做不到**！在Java类中不能实现同一个方法两次。这样不会编译的。并且就是 *可以*，那么事件源又怎样知道应该调用两个方法中的哪一个呢？
 
 
 2）选项二
 
-**把同一事件收听者，同时注册到两个按钮上**。
 
-```java
-class MyGui implements ActionListener {
-    // 在这里声明一堆实例
+    **把同一事件收听者，同时注册到两个按钮上**。
 
-    public void go {
-        // 构建 GUI
-        colorButton = new JButton("改变圆圈");
-        labelButton = new JButton("修改标签");
-        colorButton.addActionListener(this);
-        labelButton.addActionListener(this);
-        // 这里有更多的 GUI 代码 ......
+    ```java
+    class MyGui implements ActionListener {
+        // 在这里声明一堆实例
+
+        public void go {
+            // 构建 GUI
+            colorButton = new JButton("改变圆圈");
+            labelButton = new JButton("修改标签");
+            colorButton.addActionListener(this);
+            labelButton.addActionListener(this);
+            // 这里有更多的 GUI 代码 ......
+        }
+
+        public void actionPerformed(ActionEvent ev) {
+            if(ev.getSource() == colorButton) frame.repaint();
+            else label.setText("那真痛！");
+        }
     }
+    ```
 
-    public void actionPerformed(ActionEvent ev) {
-        if(ev.getSource() == colorButton) frame.repaint();
-        else label.setText("那真痛！");
-    }
-}
-```
-
-**缺点：这样写确实能行，但这多半不是那么的面向对象不是。** 单个的事件处理器去做许多不同的事情，就意味着让单个方法去完成许多不同的事情。那么在需要修改要处理的某个 *事件源* 的时候，就必定会去动那个 *所有事件源* 的事件处理器。这样的写法有时 *确实是* 一个好办法，但通常这样写会破坏可维护性及扩展性。
+    **缺点：这样写确实能行，但这多半不是那么的面向对象不是。** 单个的事件处理器去做许多不同的事情，就意味着让单个方法去完成许多不同的事情。那么在需要修改要处理的某个 *事件源* 的时候，就必定会去动那个 *所有事件源* 的事件处理器。这样的写法有时 *确实是* 一个好办法，但通常这样写会破坏可维护性及扩展性。
 
 3) 选项三
 
-**构造两个单独的 `ActionListener` 类**
 
-```java
-class MyGui {
-    JFrame frame;
-    JLabel label;
+    **构造两个单独的 `ActionListener` 类**
 
-    void gui () {
-        // 用于初始化出两个事件收听者，并把其一注册到修改圆圈
-        // 按钮，另一个注册到修改标签按钮的代码
+    ```java
+    class MyGui {
+        JFrame frame;
+        JLabel label;
+
+        void gui () {
+            // 用于初始化出两个事件收听者，并把其一注册到修改圆圈
+            // 按钮，另一个注册到修改标签按钮的代码
+        }
+    } // 类结束
+    ```
+
+    ---
+
+    ```java
+    class ColorButtonListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 这里不会运作！因为这个类中没有到 'MyGui' 类中
+            // 变量 'frame' 的引用
+            frame.repaint();
+        }
     }
-} // 类结束
-```
+    ```
 
----
+    ---
 
-```java
-class ColorButtonListener implements ActionListener {
-    public void actionPerformed (ActionEvent ev) {
-        // 这里不会运作！因为这个类中没有到 'MyGui' 类中
-        // 变量 'frame' 的引用
-        frame.repaint();
+    ```java
+    class ColorButtonListener implements ActionListener {
+        public void actionPerformed (ActionEvent ev) {
+            // 有问题！因为这个类中没有到变量 'label' 的引用
+            label.setText("那真痛！");
+        }
     }
-}
-```
+    ```
 
----
+    **缺点：这些事件收听者类，不会具有到他们需要进行操作的那些变量 -- `frame`及`label` 的访问**。这一点是可以修复的，但就不得不给到这两个事件收听者类，到GUI主类 `MyGui` 的引用变量，这样才能在 `actionPerformed()` 方法内部，使用上 GUI 类 `MyGui` 的引用变量，从而访问到 GUI 主类 `MyGui` 的变量 `frame`与`label`。然而那样做就破坏了封装，因此可能就需要构造各个 GUI 小部件的获取器方法（getter methods, 比如`getFrame()`、`getLabel` 等等）。并且还可能需要给这两个事件收听者类编写构造器，从而可将GUI主类的引用变量，在这些事件收听者对象实例化时，传递给这些事件收听者。好吧，这就变得更加乱糟糟，还更复杂了。
 
-```java
-class ColorButtonListener implements ActionListener {
-    public void actionPerformed (ActionEvent ev) {
-        // 有问题！因为这个类中没有到变量 'label' 的引用
-        label.setText("那真痛！");
-    }
-}
-```
-
-**缺点：这些事件收听者类，不会具有到他们需要进行操作的那些变量 -- `frame`及`label` 的访问**。这一点是可以修复的，但就不得不给到这两个事件收听者类，到GUI主类 `MyGui` 的引用变量，这样才能在 `actionPerformed()` 方法内部，使用上 GUI 类 `MyGui` 的引用变量，从而访问到 GUI 主类 `MyGui` 的变量 `frame`与`label`。然而那样做就破坏了封装，因此可能就需要构造各个 GUI 小部件的获取器方法（getter methods, 比如`getFrame()`、`getLabel` 等等）。并且还可能需要给这两个事件收听者类编写构造器，从而可将GUI主类的引用变量，在这些事件收听者对象实例化时，传递给这些事件收听者。好吧，这就变得更加乱糟糟，还更复杂了。
 
 ***必须要有别的办法才行***！
 
 > 若既可以有两个不同的事件收听者类，同时这两个类还能够访问到 GUI 主类中的实例变量，也就是这两个事件收听者类，看起来会属于那个GUI 主类，这要是能做到可就太好了。这样就可以鱼与熊掌二者兼得了（Then you'd have the best of both worlds）。好吧，这可能只是个美梦罢了。不过这只是脑洞大一点而已......
 
 ## <a id="inner_class_rescue"></a>内部类来拯救！
-
-[](#InnerClassToTheRescue)
 
 **Inner class to the rescue**!
 
@@ -1181,20 +1190,23 @@ public class MultiWidgetsAndEvents {
 
 1) 在特定 `x` 与 `y` 坐标绘制一个物体
 
-```java
-// 里左边 20 像素，离顶部 50 像素
-g.fillOval(20, 50, 100, 100);
-```
+
+    ```java
+    // 里左边 20 像素，离顶部 50 像素
+    g.fillOval(20, 50, 100, 100);
+    ```
 
 2) 在不同的 `x` 与 `y` 坐标重绘
 
-```java
-// 离左边 25 像素，离顶部 55 像素
-// （该物体就往下和往右移动了一点点）
-g.fillOval(25, 55, 100, 100);
-```
+
+    ```java
+    // 离左边 25 像素，离顶部 55 像素
+    // （该物体就往下和往右移动了一点点）
+    g.fillOval(25, 55, 100, 100);
+    ```
 
 3) 以不断变化的 x 与 y 值，继续重复之前的步骤，直到应该停下来为止。
+
 
 ### 答疑
 
@@ -1411,27 +1423,31 @@ track.add(noteOff);
 
 1) 构造一个报文示例：
 
-```java
-ShortMessage first = new ShortMessage();
-```
+
+    ```java
+    ShortMessage first = new ShortMessage();
+    ```
 
 2) 以各种MIDI指令来调用 `setMessage()` 方法（Call `setMessage()` with the instructions）
 
-```java
-first.setMessage(192, 1, instrument, 0);
-```
+
+    ```java
+    first.setMessage(192, 1, instrument, 0);
+    ```
 
 3) 给此报文构造一个 `MidiEvent` 事件
 
-```java
-MidiEvent noteOn = new MidiEvent(first, 1);
-```
+
+    ```java
+    MidiEvent noteOn = new MidiEvent(first, 1);
+    ```
 
 4) 将该事件添加到音轨上
 
-```java
-track.add(notOn);
-```
+
+    ```java
+    track.add(notOn);
+    ```
 
 **下面就来构建一个构造报文并返回一个 `MidiEvent` 对象的静态工具方法（Let's build a static utility method that makes a message and returns a `MidiEvent`）**
 

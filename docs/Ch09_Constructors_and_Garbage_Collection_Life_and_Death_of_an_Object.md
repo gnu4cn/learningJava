@@ -315,30 +315,34 @@ Color c = new Color();
 
 1) 构造器是在某种类类型上写关键字 `new` 所运行的代码
 
-```java
-Duck d = new Duck();
-```
+
+    ```java
+    Duck d = new Duck();
+    ```
 
 2) 构造器必须有着与类同样的名字，且 **没有** 返回值类型
 
-```java
-public Duck (int size) {}
-```
+
+    ```java
+    public Duck (int size) {}
+    ```
 
 3) 当类里没写构造器时，编译器就会放入一个默认的构造器。默认构造器都是不带参数的构造器。
 
-```java
-public Duck () {}
-```
+
+    ```java
+    public Duck () {}
+    ```
 
 4) 类中可以写多个构造器，只要他们的参数清单不同即可。在类中有着多个构造器时，就用到了 Java 的过载构造器特性。
 
-```java
-public Duck () {}
-public Duck (int size) {}
-public Duck (String name) {}
-public Duck (String name, int size) {}
-```
+
+    ```java
+    public Duck () {}
+    public Duck (int size) {}
+    public Duck (String name) {}
+    public Duck (String name, int size) {}
+    ```
 
 > 脑力大挑战
 >
@@ -627,5 +631,3 @@ Buffy
 
 
 *图 22 - 对象回收：引用变量永久脱离作用范围*
-
-

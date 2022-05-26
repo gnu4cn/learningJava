@@ -189,31 +189,33 @@ try {
 
 1) **具风险性的方法的异常抛出代码**：
 
-```java
-// 该方法 必须 告诉（通过声明）外部世界，他抛出了一个 BadException
-public void takeRisk () throws BadException {
-    if (abandonAllHope) {
-        // 创建一个新的 Exception 对象并将其抛出
-        throw new BadException();
+
+    ```java
+    // 该方法 必须 告诉（通过声明）外部世界，他抛出了一个 BadException
+    public void takeRisk () throws BadException {
+        if (abandonAllHope) {
+            // 创建一个新的 Exception 对象并将其抛出
+            throw new BadException();
+        }
     }
-}
-```
+    ```
 
 2) **调用这个风险方法的代码**：
 
-```java
-public void crossFingers () {
-    try {
-        anObject.takeRisk();
-    } catch (BadException ex) {
-        System.out.println("Aaargh!");
-        // 即使不能从异常中恢复过来，至少也可以使用所有例外都会
-        // 继承的 printStackTrace() 方法
-        // 获取到一个栈轨迹（a stack trace）信息。
-        ex.printStackTrace();
+
+    ```java
+    public void crossFingers () {
+        try {
+            anObject.takeRisk();
+        } catch (BadException ex) {
+            System.out.println("Aaargh!");
+            // 即使不能从异常中恢复过来，至少也可以使用所有例外都会
+            // 继承的 printStackTrace() 方法
+            // 获取到一个栈轨迹（a stack trace）信息。
+            ex.printStackTrace();
+        }
     }
-}
-```
+    ```
 
 > 一个方法讲捕获到另一个方法所抛出的东西。例外总是被抛回给调用者。
 > 抛出异常的方法，必须声明他可能会抛出的异常。
@@ -404,33 +406,35 @@ main方法的结束
 
 1) **可使用那些抛出异常的超类，来进行异常的声明**。
 
-```java
-public void doLaundry () throws ClothingException {
-                                // 由于这里声明的是 ClothingException
-                                // 那么就可以抛出 ClothingException 的任意子类类型的异常对象
-                                // 就是说 doLaundry() 方法可抛出 PantsException、LingerieException
-                                // TeeShirtException 以及 DressShirtException，而无需显示地
-                                // 分别进行声明
-```
+
+    ```java
+    public void doLaundry () throws ClothingException {
+                                    // 由于这里声明的是 ClothingException
+                                    // 那么就可以抛出 ClothingException 的任意子类类型的异常对象
+                                    // 就是说 doLaundry() 方法可抛出 PantsException、LingerieException
+                                    // TeeShirtException 以及 DressShirtException，而无需显示地
+                                    // 分别进行声明
+    ```
 
 2) **使用所抛出异常的超类，就可以 捕获 这些异常**。
 
-```java
-try {
-    laundry.doLaundry();
-} catch (ClothingException cex) { // 这就可以捕获到任意 ClothingException 的子类了
-    // 恢复代码
-}
-```
+
+    ```java
+    try {
+        laundry.doLaundry();
+    } catch (ClothingException cex) { // 这就可以捕获到任意 ClothingException 的子类了
+        // 恢复代码
+    }
+    ```
 
 
-```java
-try {
-    laundry.doLaundry();
-} catch (ShirtException sex) { // 这就只能捕获 TeeShirtException 与 DressShirtException
-    // 恢复代码
-}
-```
+    ```java
+    try {
+        laundry.doLaundry();
+    } catch (ShirtException sex) { // 这就只能捕获 TeeShirtException 与 DressShirtException
+        // 恢复代码
+    }
+    ```
 
 ### 虽然可以使用一个大的超级多态捕获来捕获全部异常，但不表示应该这样做。
 
@@ -566,57 +570,59 @@ public class Washer {
 
 1) **对异常进行处理（HANDLE）**
 
-将有风险的调用，放在某个 `try/catch` 中
 
-```java
-try {
-    laundry.doLaundry();
-} catch (ClothingException cex) {
-    // 这里的捕获参数，最好是一个可以捕获到 doLaundry() 所
-    // 抛出的全部异常、足够大的异常类类型。不然编译器仍然
-    // 会抱怨没有对所有异常进行捕获。
-    // 
-    // 恢复代码
-}
-```
+    将有风险的调用，放在某个 `try/catch` 中
+
+    ```java
+    try {
+        laundry.doLaundry();
+    } catch (ClothingException cex) {
+        // 这里的捕获参数，最好是一个可以捕获到 doLaundry() 所
+        // 抛出的全部异常、足够大的异常类类型。不然编译器仍然
+        // 会抱怨没有对所有异常进行捕获。
+        // 
+        // 恢复代码
+    }
+    ```
 
 
 2) **声明异常（规避异常, DECLARE(duck it)）**
 
-声明调用方法会抛出与所调用的风险方法同样的异常（Declare the YOUR method throws the same exceptions as the risky method you're calling）。
 
-```java
-// doLaundry()方法抛出了一个 ClothingException 类类型的异常
-// 而作为其调用者的 foo() 方法，只需要通过声明该异常，就可以
-// 避开这个异常。无需 try/catch
-void foo() throws ClothingException {
-    laundry.doLaundry();
-}
-```
+    声明调用方法会抛出与所调用的风险方法同样的异常（Declare the YOUR method throws the same exceptions as the risky method you're calling）。
 
-不过现在就意味着那些 `foo()` 方法的调用者就必须要遵守这条 “处理抑或声明” 的法则了。在 `foo()` 方法规避了这个例外（通过对其进行声明），同时 `main()` 调用了 `foo()` 时，那么 `main()` 就必须对该例外进行处理。
-
-```java
-public class Washer {
-    Laundry laundry = new Laundry();
-
-    public void foo () throws ClothingException {
+    ```java
+    // doLaundry()方法抛出了一个 ClothingException 类类型的异常
+    // 而作为其调用者的 foo() 方法，只需要通过声明该异常，就可以
+    // 避开这个异常。无需 try/catch
+    void foo() throws ClothingException {
         laundry.doLaundry();
     }
+    ```
 
-    public static void main (String [] args) {
-        // 麻烦了！现在 main() 就不会编译了，同时
-        // 会收到一个 “unreported exception” 的报错。
-        // 编译器所关心的是，foo() 方法抛出了一个异常
-        Washer a = new Washer ();
-        // 因为 foo() 方法规避了由 doLaundry() 所抛出
-        // 的 ClothingException 类类型的异常，那么
-        // main() 就必须把 a.foo() 包装在一个 try/catch
-        // 中，或必须也要对异常进行声明，throws ClothingException !
-        a.foo();
+    不过现在就意味着那些 `foo()` 方法的调用者就必须要遵守这条 “处理抑或声明” 的法则了。在 `foo()` 方法规避了这个例外（通过对其进行声明），同时 `main()` 调用了 `foo()` 时，那么 `main()` 就必须对该例外进行处理。
+
+    ```java
+    public class Washer {
+        Laundry laundry = new Laundry();
+
+        public void foo () throws ClothingException {
+            laundry.doLaundry();
+        }
+
+        public static void main (String [] args) {
+            // 麻烦了！现在 main() 就不会编译了，同时
+            // 会收到一个 “unreported exception” 的报错。
+            // 编译器所关心的是，foo() 方法抛出了一个异常
+            Washer a = new Washer ();
+            // 因为 foo() 方法规避了由 doLaundry() 所抛出
+            // 的 ClothingException 类类型的异常，那么
+            // main() 就必须把 a.foo() 包装在一个 try/catch
+            // 中，或必须也要对异常进行声明，throws ClothingException !
+            a.foo();
+        }
     }
-}
-```
+    ```
 
 ## 回到前面的 `BeatBox` app 的代码
 
@@ -658,61 +664,65 @@ public class MusicTest1 {
 
 1) **不能在没有 `try` 的情况下使用 `catch` 或 `finally`关键字**
 
-**You cannot have a `catch` or `finally` without a `try`**
 
-```java
-void go () {
-    Foo f = new Foo ();
+    **You cannot have a `catch` or `finally` without a `try`**
 
-    f.foo();
+    ```java
+    void go () {
+        Foo f = new Foo ();
 
-    // 非法！`try` 在哪里？
-    catch (FooException ex) {}
-}
-```
+        f.foo();
+
+        // 非法！`try` 在哪里？
+        catch (FooException ex) {}
+    }
+    ```
 
 2) **在 `try` 与 `catch` 直接不能再放置代码**
 
-**You cannot put code between the `try` and the `catch`**
 
-```java
-try {
-    x.doStuff();
-}
-// 非法！不能在 `try` 与 `catch` 之间放置代码
-int y = 43;
-catch (Exception ex) {}
-```
+    **You cannot put code between the `try` and the `catch`**
+
+    ```java
+    try {
+        x.doStuff();
+    }
+    // 非法！不能在 `try` 与 `catch` 之间放置代码
+    int y = 43;
+    catch (Exception ex) {}
+    ```
 
 
 3) **`try`后面只能/且必须有 `catch` 或/及 `finally`**
 
-**A `try` MUST be followed by either a `catch` or a `finally`**
+
+    **A `try` MUST be followed by either a `catch` or a `finally`**
 
 
-```java
-try {
-    x.doStuff();
-} finally {
-    // 合法。因为这里尽管没有 `catch`，但却有个 `finally`。
-    // 但不能只有 `try` 一个
-    // 
-    // 清理工作
-}
-```
+    ```java
+    try {
+        x.doStuff();
+    } finally {
+        // 合法。因为这里尽管没有 `catch`，但却有个 `finally`。
+        // 但不能只有 `try` 一个
+        // 
+        // 清理工作
+    }
+    ```
 
 4) **在`try`后只有`finally`（不带`catch`）时，仍然必须对异常进行声明**。
 
-**A `try` with only a `finally`(no `catch`) must still declare the exception**.
 
-```java
-// 不带 `catch` 的 `try`，不满足 `handle/declare` 法则
-void go() throws FooException {
-    try {
-        x.doStuff();
-    } finally {}
-}
-```
+    **A `try` with only a `finally`(no `catch`) must still declare the exception**.
+
+    ```java
+    // 不带 `catch` 的 `try`，不满足 `handle/declare` 法则
+    void go() throws FooException {
+        try {
+            x.doStuff();
+        } finally {}
+    }
+    ```
 
 ## 代码厨房
 
@@ -739,36 +749,41 @@ void go() throws FooException {
 
 1) 获取到一个 **`Sequencer`** 对象并打开他
 
-```java
-Sequencer player = MidiSystem.getSequencer();
-player.open();
-```
+
+    ```java
+    Sequencer player = MidiSystem.getSequencer();
+    player.open();
+    ```
 
 2) 构造一个新的 **序列（Sequence）**
 
-```java
-Sequence seq = new Sequence(timing, 4);
-```
+
+    ```java
+    Sequence seq = new Sequence(timing, 4);
+    ```
 
 
 3) 从新构造的 `Sequence` 获取到一个新的 **音轨（Track）**
 
-```java
-Track t = seq.createTrack();
-```
+
+    ```java
+    Track t = seq.createTrack();
+    ```
 
 4) 使用一系列的 **`MidiEvent`**s 来对音轨进行填充，然后把这个`Sequence`对象交给音序器
 
-```java
-t.add(myMidiEvent);
-player.setSetquence(seq);
-```
+
+    ```java
+    t.add(myMidiEvent);
+    player.setSetquence(seq);
+    ```
 
 5) 按下播放按钮（ ▶  ）。必须要启动 `start()` 这个音序器才行
 
-```java
-player.start();
-```
+
+    ```java
+    player.start();
+    ```
 
 ### 一个非常早期的声音播放器 app
 
@@ -850,38 +865,42 @@ MIDI 指令实际上是放在 `Message` 类类型的对象中的；而 `MidiEven
 
 1) 构造一个 `Message` 对象
 
-```java
-ShortMessage a = new ShortMessage();
-```
+
+    ```java
+    ShortMessage a = new ShortMessage();
+    ```
 
 2) 把 **指令** （`Instruction`） 放在 `Message` 对象里
 
-```java
-// 此消息（报文，message）讲的是，“开始演奏 44 号音符”
-// （在下面的内容中，将涉及其他 3 个数字说的是什么）
-a.setMessage(144, 1, 44, 10);
-```
+
+    ```java
+    // 此消息（报文，message）讲的是，“开始演奏 44 号音符”
+    // （在下面的内容中，将涉及其他 3 个数字说的是什么）
+    a.setMessage(144, 1, 44, 10);
+    ```
 
 3) 使用这个 `Message` 对象，来构造出一个新的 `MidiEvent` 对象
 
-```java
-// 所有指令都是在消息中，而 MidiEvent对象加入则是，应在何时
-// 触发指令的、时间维度中的时刻。这个 MidiEvent 说的就是在
-// 第一拍的时候，触发消息 'a'。
-MidiEvent noteOn = new MidiEvent(a, 1);
-```
+
+    ```java
+    // 所有指令都是在消息中，而 MidiEvent对象加入则是，应在何时
+    // 触发指令的、时间维度中的时刻。这个 MidiEvent 说的就是在
+    // 第一拍的时候，触发消息 'a'。
+    MidiEvent noteOn = new MidiEvent(a, 1);
+    ```
 
 4) 把`MidiEvent`添加到 **音轨`Track`上**
 
-```java
-// 音轨（a Track） 保存了全部的 MidiEvent 对象。音序 Sequence 对象
-// 是通过各个 MidiEvent 事件对象应在何时发生的方式，来组织这些
-// MidiEvent 对象的，且随后的音序器 Sequencer 对象，便以这种顺序，把
-// 这些 MidiEvent 对象回放出来。在时间维度上的某个精准的同一时刻，可以有
-// 很多 MidiEvent 事件发出。比如，可能想要同时演奏两个音符，或者要两种
-// 不同乐器在同一时间演奏不同的声音等等。
-track.add(noteOn);
-```
+
+    ```java
+    // 音轨（a Track） 保存了全部的 MidiEvent 对象。音序 Sequence 对象
+    // 是通过各个 MidiEvent 事件对象应在何时发生的方式，来组织这些
+    // MidiEvent 对象的，且随后的音序器 Sequencer 对象，便以这种顺序，把
+    // 这些 MidiEvent 对象回放出来。在时间维度上的某个精准的同一时刻，可以有
+    // 很多 MidiEvent 事件发出。比如，可能想要同时演奏两个音符，或者要两种
+    // 不同乐器在同一时间演奏不同的声音等等。
+    track.add(noteOn);
+    ```
 
 ### MIDI 消息/报文：`MidiEvent`对象的核心所在
 

@@ -28,32 +28,37 @@
 
 1) 构造一个视窗（一个 `JFrame`）
 
-```java
-JFrame frame = new JFrame("新视窗");
-```
+
+    ```java
+    JFrame frame = new JFrame("新视窗");
+    ```
 
 2) 构造一个组件（按钮、文本字段等等）
 
-```java
-JButton button = new JButton("点我");
-```
+
+    ```java
+    JButton button = new JButton("点我");
+    ```
 
 3) 将这个组件添加到这个视窗框
 
-```java
-frame.getContentPane().add(BorderLayout.EAST, button);
-```
+
+    ```java
+    frame.getContentPane().add(BorderLayout.EAST, button);
+    ```
 
 4) 把他显示出来（给到视窗框一个大小，并令其可见）
 
-```java
-frame.setSize(300, 300);
-frame.setVisible(true);
-```
 
-![构造Java GUI 的步骤](images/Ch13_02.png)
+    ```java
+    frame.setSize(300, 300);
+    frame.setVisible(true);
+    ```
 
-*图 2 - 构造Java GUI 的步骤*
+    ![构造Java GUI 的步骤](images/Ch13_02.png)
+
+    *图 2 - 构造Java GUI 的步骤*
+
 
 ## 关于布局管理器
 
@@ -648,36 +653,41 @@ JTextField field = new JTextField("你的姓名", 20);
 
 1) 从 `JTextField` 实例获取文本
 
-```java
-System.out.println(field.getText());
-```
+
+    ```java
+    System.out.println(field.getText());
+    ```
 
 2) 放入文本
 
-```java
-field.setText("内容");
-// 这行语句清空该字段
-field.setText("");
-```
+
+    ```java
+    field.setText("内容");
+    // 这行语句清空该字段
+    field.setText("");
+    ```
 
 3) 在用户按下回车时获取到一个 `ActionEvent`
 
-```java
-// 若真的想要在用户每次按键时听到，那还可以对按键事件进行注册
-field.addActionListener(myActionListener);
-```
+
+    ```java
+    // 若真的想要在用户每次按键时听到，那还可以对按键事件进行注册
+    field.addActionListener(myActionListener);
+    ```
 
 4) 选择/高亮字段中的文本
 
-```java
-field.selectAll();
-```
+
+    ```java
+    field.selectAll();
+    ```
 
 5) 将光标放回到该文本字段（这样用户才可以开始输入）
 
-```java
-filed.requestFocus();
-```
+
+    ```java
+    filed.requestFocus();
+    ```
 
 ### `JTextArea`
 
@@ -698,44 +708,49 @@ JTextArea text = new JTextArea("关于你......", 10, 20);
 
 1) 令其只有纵向的滚动条
 
-```java
-// 构造一个 JScrollPane 并给到那个要滚动的文本区
-JScrollPane scroller = new JScrollPane(text);
-// 开启自动换行
-text.setLineWrap(true);
 
-// 告诉滚动窗格仅使用一个纵向的滚动条
-scroller.setVerticalScollBarPolicy(ScrollPaneConstants.VERICAL_SCROLLBAR_ALWAYS);
-scroller.setHorizontalScollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    ```java
+    // 构造一个 JScrollPane 并给到那个要滚动的文本区
+    JScrollPane scroller = new JScrollPane(text);
+    // 开启自动换行
+    text.setLineWrap(true);
 
-// 重要！！是把文本区给到滚动窗格（经由滚动窗格的构造器），随后
-// 把滚动窗格添加到面板。不是直接把文本区添加到面板！
-panel.add(scroller);
-```
+    // 告诉滚动窗格仅使用一个纵向的滚动条
+    scroller.setVerticalScollBarPolicy(ScrollPaneConstants.VERICAL_SCROLLBAR_ALWAYS);
+    scroller.setHorizontalScollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+    // 重要！！是把文本区给到滚动窗格（经由滚动窗格的构造器），随后
+    // 把滚动窗格添加到面板。不是直接把文本区添加到面板！
+    panel.add(scroller);
+    ```
 
 2) 替换文本区中的文本
 
-```java
-text.setText("并非所有失踪的人都在流浪");
-```
+
+    ```java
+    text.setText("并非所有失踪的人都在流浪");
+    ```
 
 3) 往文本区中的文本追加内容
 
-```java
-text.append("按钮已被点击");
-```
+
+    ```java
+    text.append("按钮已被点击");
+    ```
 
 4) 选择/高亮显示文本区中的文本
 
-```java
-text.selectAll();
-```
+
+    ```java
+    text.selectAll();
+    ```
 
 5) 把光标放回文本区（这样用户就可以开始输入）
 
-```java
-text.requestFocus();
-```
+
+    ```java
+    text.requestFocus();
+    ```
 
 **`JTextArea`示例**
 
@@ -802,26 +817,29 @@ JCheckBox check = new JCheckBox("前往 11 层");
 
 1) 监听某个条目的事件（在该条目被勾选或取消勾选时）
 
-```java
-check.addItemListener(this);
-```
+
+    ```java
+    check.addItemListener(this);
+    ```
 
 2) 处理事件（并搞清楚该条目是否被勾选）
 
-```java
-public void itemStateChanged (ItemEvent ev){
-    String onOrOff = "off";
-    if (check.isSelected()) onOrOff = "on";
-    System.out.format("勾选框是 %s", onOrOff);
-}
-```
+
+    ```java
+    public void itemStateChanged (ItemEvent ev){
+        String onOrOff = "off";
+        if (check.isSelected()) onOrOff = "on";
+        System.out.format("勾选框是 %s", onOrOff);
+    }
+    ```
 
 3) 以代码方式勾选或取消勾选条目
 
-```java
-check.setSelected(true);
-check.setSelected(false);
-```
+
+    ```java
+    check.setSelected(true);
+    check.setSelected(false);
+    ```
 
 - **布局管理器带来的麻烦，与他们的价值相比，难道不是更多吗？如果必须要面对这些麻烦，那还不如直接对物件的大小与所在坐标硬编码呢**。
 
@@ -855,48 +873,53 @@ JList<String> l = new JList<String>(listEntries);
 
 1) 令到其有个垂直的滚动条
 
-```java
-// 这就跟 JTextArea 一样 -- 构造一个 JScrollPane（并给他清单）
-// 随后把这个滚动区域（而非这个清单）添加到面板
-JScrollPane scroller = new JScrollPane(list);
-scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-panel.add(scroller);
-```
+    ```java
+    // 这就跟 JTextArea 一样 -- 构造一个 JScrollPane（并给他清单）
+    // 随后把这个滚动区域（而非这个清单）添加到面板
+    JScrollPane scroller = new JScrollPane(list);
+    scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+    panel.add(scroller);
+    ```
 
 2) 设置滚动前显示的行数
 
-```java
-list.setVisibleRowCount(4);
-```
+
+    ```java
+    list.setVisibleRowCount(4);
+    ```
 
 3) 限制用户一次选择一个物件
 
-```java
-list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-```
+
+    ```java
+    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    ```
 
 4) 对清单选择事件进行注册
 
-```java
-list.addListSelectionListener(this);
-```
+
+    ```java
+    list.addListSelectionListener(this);
+    ```
 
 5) 对事件进行处理（找出清单中哪个物件被选中）
 
-```java
-public void valueChanged(ListSelectionEvent lse) {
-    // 若不加入这个 if 条件测试，那么就会收到这个
-    // 事件两次
-    if (!lse.getValueIsAdjusting()) {
-        // getSelectedValue() 方法返回的其实是一个对象。清单
-        // 并不止于字符串对象。
-        String selection = (String) list.getSelectedValue();
-        System.out.println(selection);
+
+    ```java
+    public void valueChanged(ListSelectionEvent lse) {
+        // 若不加入这个 if 条件测试，那么就会收到这个
+        // 事件两次
+        if (!lse.getValueIsAdjusting()) {
+            // getSelectedValue() 方法返回的其实是一个对象。清单
+            // 并不止于字符串对象。
+            String selection = (String) list.getSelectedValue();
+            System.out.println(selection);
+        }
     }
-}
-```
+    ```
 
 ## 代码厨房
 
