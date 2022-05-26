@@ -1,4 +1,4 @@
-# Java 编程学习项目
+# Java 编程学习项目 ☕️
 
 在线阅读 [java.xfoss.com](https://java.xfoss.com)。
 
