@@ -1,17 +1,5 @@
 package com.xfoss.Annotations;
 
-import java.lang.annotation.*;
-
-@Documented
-@interface ClassPreamble {
-    String author();
-    String date();
-    int currentRevision() default 1;
-    String lastModified() default "N/A";
-    String lastModifiedBy() default "N/A";
-    String[] reviewers();
-}
-
 @ClassPreamble (
     author = "Lenny Peng",
     date = "5/26/2022",
@@ -51,6 +39,6 @@ public class Villa extends Building {
 
     @Override
     public String toString () {
-        return String.format("%s, 价格：%,.2f\n", super.toString(), price);
+        return String.format("名称：%s，地址：%s, 价格：%,.2f\n", super.getName(), super.getAddress(), price);
     }
 }
