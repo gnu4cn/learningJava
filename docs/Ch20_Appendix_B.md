@@ -121,7 +121,7 @@ void monitorTemperature() throws
     @Critical TemperatureException {...}
 ```
 
-这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type_annotations_and_pluggable_type_systems)。
+这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type-annotations-and-pluggable-type-systems)。
 
 ### 注解类型的声明
 
