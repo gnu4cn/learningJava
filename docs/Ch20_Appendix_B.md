@@ -16,7 +16,7 @@
 
 - [哪些地方可以使用注解语法](#where)、
 - 如何运用注解语法、
-- [Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）](#predefined_annotation_types)、
+- [Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）](#predefined-annotation-types)、
 - [类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码](#type-annotations-and-pluggable-type-systems)，
 - [以及怎样去实现重复性注解语法](#repeating-annotations)。
 
@@ -85,9 +85,9 @@ class MyClass {...}
 class MyClass {...}
 ```
 
-从 Java SE 8 发布才开始支持重复注解。更多的有关情况，请参考 [重复注解](#repeating_annotations)
+从 Java SE 8 发布才开始支持重复注解。更多的有关情况，请参考 [重复注解](#repeating-annotations)
 
-注解类型可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解（predefined Java annotations）](#predefined_java_annotations)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
+注解类型（a Annotation Type）可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解（predefined Java annotations）](#predefined-java-annotations)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
 
 #### <a id="where"></a>哪些地方可以使用注解语法
 
@@ -191,7 +191,7 @@ import java.lang.annotation.*;
 }
 ```
 
-### <a id="predefined_annotation_types"></a>Java中预定义的注解类型
+### <a id="predefined-annotation-types"></a>Java中预定义的注解类型
 
 **Predefined Annotation Types**
 
