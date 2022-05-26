@@ -93,12 +93,12 @@ class MyClass {...}
 
 可在将注解应用在各种声明上：类、字段、方法，以及其他一些程序元素的声明。当在某个声明上运用了注解语法时，依照约定，每条注解常常占据自己的一行。
 
-自Java SE 8 发布开始，注解语法还可应用到类型的 *使用*。下面是一些示例：
+自Java SE 8 发布开始，注解语法还可应用到类型的 *运用*。下面是一些示例：
 
 - 应用到类实例的创建表达式：
 
 ```java
-new @interned MyObject();
+new @Interned MyObject();
 ```
 
 - 类型强制转换：
@@ -123,9 +123,12 @@ void monitorTemperature() throws
 
 这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type-annotations-and-pluggable-type-systems)。
 
+
 ### 注解类型的声明
 
 **Declaring a Annotation Type**
+
+> **注**：除了 `java.lang` 和 `java.lang.annotations` 包中预定义的注解类型，对应定制注解，均需先声明注解类型，才能使用该注解类型下的注解实例。所有注解类型，都是特殊的接口，类型为 `@interface`。
 
 许多的注解，在代码中都是起到替代注释的作用。
 

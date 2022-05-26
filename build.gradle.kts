@@ -16,8 +16,12 @@ plugins {
 }
 
 application {
-    mainClassName = "com.xfoss.Annotations.AnnotationTestDrive" 
+    mainClassName = "com.xfoss.Annotations.CustomAnnotationTypeDemo" 
     // mainClass.set(mainClassName)
+}
+
+sourceSets.getByName("main") {
+    java.srcDir("src/main/java")
 }
 
 repositories {
