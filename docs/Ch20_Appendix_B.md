@@ -591,17 +591,74 @@ FAILURE: Build failed with an exception.
 
 `@Override` 就是标记型注解的一个例子。
 
+**示例**
+
 ```java
 @TestAnnotation()
 ```
 
 ### 类别二：单一取值型注解
 
+这类注解仅包含一个成员，进而允许简写形式的对该成员取值的指定（These annotations contain only one member and allow a shorthand form of specifying the value of the member）。在应用到此类型注解时，就只需指定那个成员的值，而无需指定该成员的名称。然而，为了用上这种简写，其成员的名称必须是 `value`。
+
+**示例**
+
+```java
+@TestAnnotation("testing")
+```
+
 ### 类别三： 完整注解
+
+这类注解包含了多个数据成员、名称、取值、成员取值对（These annotations consist of multiple data members, names, values, pairs）。
+
+**示例**
+
+```java
+@TestAnnotation(owner="Rahul", value="Class Geeks")
+```
 
 ### 类别四：类型注解
 
+这类注解可应用到任何用到类型的地方（These annotations can be applied to any place where a type is being used）。比如，可对某个方法的返回值类型进行注解。这些注解在声明时，就已被 `@Target` 注解过了（These are declared annotated with `@Target` annotation）。
+
+**示例**
+
+
+```java
+package com.xfoss.Annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE_USE)
+@interface TypeAnnoDemo {}
+
+public class GFG {
+    public static void main (String args[])
+    {
+        @TypeAnnoDemo String string = "我已被某个类型注解给注解过了";
+        System.out.println(string);
+        abc();
+    }
+
+    static @TypeAnnoDemo int abc ()
+    {
+        System.out.println("此函数的返回值类型已被注解过了");
+        return 0;
+    }
+}
+```
+
+**输出**
+
+```console
+我已被某个类型注解给注解过了
+此函数的返回值类型已被注解过了
+```
+
 ### 类别五：重复性注解
+
+这类注解可多次应用到单个项目（these are the annotations that can be applied to a single item more than onece）。注解要能够可重复，其所属类型就必须被 `@Repeatable`注解给注解过，而`@Repeatable`则是在 `java.lang.annotation`包中定义的元注解。`@Repeatable`对某个注解类型进行注解时，他的`value`字段指定了被注解的可重复注解类型的 **容器类型（container type）**。容器被指定为某种 `value` 字段为被 `@Repeatable` 注解的可重复注解类型注解类型，
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入

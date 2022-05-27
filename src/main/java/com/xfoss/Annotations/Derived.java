@@ -10,7 +10,12 @@ class Base {
 
 public class Derived extends Base {
 
-    @Override public void display(int x)
+    @Override public void display()
+    {
+        System.out.println("重写的 display()");
+    }
+
+    public void display(int x)
     {
         System.out.format("重写的 display(int), %d", x);
     }
