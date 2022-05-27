@@ -658,7 +658,11 @@ public class GFG {
 
 ### 类别五：重复性注解
 
-这类注解可多次应用到单个项目（these are the annotations that can be applied to a single item more than onece）。注解要能够可重复，其所属类型就必须被 `@Repeatable`注解给注解过，而`@Repeatable`则是在 `java.lang.annotation`包中定义的元注解。`@Repeatable`对某个注解类型进行注解时，他的`value`字段指定了被注解的可重复注解类型的 **容器类型（container type）**。容器被指定为某种 `value` 字段为被 `@Repeatable` 注解的可重复注解类型注解类型，
+这类注解可多次应用到单个项目（these are the annotations that can be applied to a single item more than onece）。注解要能够可重复，其所属类型就必须被 `@Repeatable`注解给注解过，而`@Repeatable`则是在 `java.lang.annotation`包中定义的元注解。`@Repeatable`对某个注解类型进行注解时，他的`value`字段指定了被注解的可重复注解类型的 **容器类型（container type）**。而 **容器的指定，是指`value`字段是该可重复注解类型的数组的一个注解（the container is specified as annotation whose `value` field is an array of the repeatable annotation type）**。因此，要创建可重复注解，首先就要创建容器注解，进而将创建出的容器注解类型，作为参数指定给那个 `@Repeatable` 注解（也就是说元注解`@Repeatable` 是有参数的）。
+
+**示例**
+
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
