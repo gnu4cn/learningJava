@@ -508,7 +508,7 @@ public @interface Schedules {
 
 ### Java 中注解的继承层次
 
-![Java 注解继承层次](images/Ch20_01.png)
+[![Java 注解继承层次](images/Ch20_01.png)](images/Ch20_01.png)
 
 *图 1 - Java 注解继承层次*
 
