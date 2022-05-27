@@ -494,6 +494,25 @@ public @interface Schedules {
 </details>
 
 
+## 另一个注解教程
+
+> *引用自*：[Annotations in Java](https://www.geeksforgeeks.org/annotations-in-java/)
+
+注解用于提供程序的补充信息（Annotations are used to provide supplemental information about a program）。
+
+- 注解以 `@` 开头；
+- 注解不会改变已编译好的程序的行为；
+- 注解帮助将一些 *元数据*（信息）与实例变量、构造器、方法、类等的程序元素关联起来（Annotations help to associate *metadata*(infomation) to the program elements i.e. instance variables, constructors, methods, classes, etc.）；
+- 由于注解能够改变编译器对待程序的方式，因此注解并非纯粹的注释。请参阅下面的代码；
+- 大体上注解是用于提供额外信息的，因此可作为 XML 与一些 Java 标记性接口的替代。
+
+### Java 中注解的继承层次
+
+![Java 注解继承层次](images/Ch20_01.png)
+
+*图 1 - Java 注解继承层次*
+
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
