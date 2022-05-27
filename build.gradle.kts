@@ -16,7 +16,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.xfoss.Annotations.CustomAnnotationTypeDemo" 
+    mainClassName = "com.xfoss.Annotations.Derived" 
     // mainClass.set(mainClassName)
 }
 

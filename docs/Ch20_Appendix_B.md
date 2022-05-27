@@ -513,6 +513,62 @@ public @interface Schedules {
 *图 1 - Java 注解继承层次*
 
 
+**实操（Implementation）**：
+
+> ***注意**：由于这里提到了重写（override），但并未进行重写，而是对 `display` 方法进行了过载（overloaded），因此这里会抛出编译器错误*。
+
+```java
+// 用于演示注解并非仅仅是代码注释的 Java 程序。
+
+package com.xfoss.Annotations;
+
+// 第一个类
+class Base {
+
+    // 方法
+    public void display ()
+    {
+        System.out.println("类 Base 的 display()");
+    }
+}
+
+// 第二个类
+// 是主类（Main Class）
+public class Derived extends Base {
+
+    // 对上面那个类中已有的方法进行重写
+    @Override public void display (int x)
+    {
+        // 在调用这个方法时运行的打印语句
+        System.out.println("派生的 sisplay()");
+    }
+
+    // 第二个方法
+    // 这是主驱动类方法（main driver method）
+    public static void main (String args[])
+    {
+        // 在 main() 方法中创建出这个类的对象
+        Derived obj = new Derived();
+
+        // 在 main() 方法中调用 display() 方法
+        obj.display();
+    }
+}
+```
+
+**输出**:
+
+```console
+.../src/main/java/com/xfoss/Annotations/Derived.java:13: error: method does not override or implement a method from a supertype
+    @Override public void display(int x)
+    ^
+    1 error
+
+FAILURE: Build failed with an exception.
+```
+
+只需将参数 `(int x)` 移除或移除 `@Override`，程序就会正常编译。
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
