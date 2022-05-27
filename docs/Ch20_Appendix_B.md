@@ -569,6 +569,39 @@ FAILURE: Build failed with an exception.
 
 只需将参数 `(int x)` 移除或移除 `@Override`，程序就会正常编译。
 
+### 注解分类（Categories of Annotations）
+
+如下所示，粗略地划分，有着 5 个类别的注解：
+
+1. 标记型注解（marker Annotations）
+
+2. 单一取值型注解（single value Annotations）
+
+3. 完整注解（full Annotations）
+
+4. 类型注解（type Annotations）
+
+5. 重复型注解（repeating Annotations）
+
+下面将逐一讨论这些类别的注解，并在需要的地方附带上示例代码。
+
+### 类别一：标记型注解
+
+其唯一目的就是对某个声明进行标记。这类注解不包含成员，进而也没有任何数据。因此，他们作为注解而存在就足够了（Thus, its presence as an annotation is sufficient）。由于这类标记型接口不包含成员，那么仅仅确定它是存在还是不存在就已足够。
+
+`@Override` 就是标记型注解的一个例子。
+
+```java
+@TestAnnotation()
+```
+
+### 类别二：单一取值型注解
+
+### 类别三： 完整注解
+
+### 类别四：类型注解
+
+### 类别五：重复性注解
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
