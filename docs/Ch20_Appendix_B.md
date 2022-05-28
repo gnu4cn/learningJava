@@ -846,6 +846,24 @@ Deprecated display()
 
 这是一个告诉工具某个注解将要被编写文档的标记型接口。注解不会被包含进 `Javadoc` 的注释中（it is a marker interface that tells a tool that an annotation is to be documented. Annotations are not included in `Javadoc` comments）。`@Documented` 注解在代码中的使用，会开启诸如 `Javadoc` 这样的工具对其的处理，并将注解类型信息，包含进生成的文档中。
 
+
+**注解 5：`@Target`**
+
+这个注解设计只被用作给另一注解当注解（元注解，*meta annotation*）。`@Target` 会取一个参数，而该参数必须是来自`ElementType`枚举类型（`java.lang.annotation.ElementType`）的常量。该参数指定了被 `@Target`注解的注解，可应用到那些类型的声明上。下面给出了`ElementType`枚举类型所包含的常量，以及他们各自所对象的声明类型。
+
+| `@Target` 常量 | 可应用到的注解 |
+| :- | :- |
+| `ANNOTATION_TYPE` | 另一注解 |
+| `CONSTRUCTOR` | 构造器 |
+| `FIELD` | 字段（实例变量） |
+| `LOCAL_VARIABLE` | 本地变量 |
+| `METHOD` | 方法 |
+| `PACKAGE` | 包 |
+| `PARAMETER` | 方法的参数 |
+| `TYPE` | 类、接口或枚举（Class, Interface, or enumeration） |
+
+*表一 - `ElementType` 枚举类型下的各个常量*
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
