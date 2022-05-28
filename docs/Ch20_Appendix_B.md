@@ -713,6 +713,139 @@ public class Main {
 @com.xfoss.Annotations.MyRepeatedAnnos(value={@com.xfoss.Annotations.Word(word="First", value=1), @com.xfoss.Annotations.Word(word="Second", value=2)})
 ```
 
+### 预定义/标准注解
+
+**Predefined/Standard Annotations**
+
+如同在上面的继承层次图中看到的那样，Java 普遍定义了 7 个内建注解。
+
+- 其中四个是从 `java.lang.annotation` 包导入的：`@Rentention`、`@Documented`、`@Target` 与 `@Inherited`；
+- 另外三个包含在 `java.lang` 包中：`@Deprecated`、`@Override` 和 `@SuppressWarnings`。
+
+**注解一：`@Deprecated`**
+
+- 这是个标记型注解。他表明某个声明已作废，而已被更新的形式所取代；
+- 在某个元素已被启用时，那么还应同时使用 `Javadoc` 的 [`@deprecated` 标签](http://docs.oracle.com/javase/1.5.0/docs/guide/javadoc/deprecation/deprecation.html#javadoc_tag]；
+- `@deprecated` 标签用于文档，而`@Deprecated` 注解则是用于运行时反射（runtime reflection）；
+- 在同时使用到 `@deprecated` 标签和 `@Deprecated` 注解时，前者有着更高的优先级。
+
+**示例**
+
+```java
+package com.xfoss.Annotations;
+
+public class DeprecatedTest {
+    @Deprecated
+    public void Display()
+    {
+        System.out.println("Deprecatedtest display()");
+    }
+
+    public static void main(String args[])
+    {
+        DeprecatedTest d1 = new DeprecatedTest();
+        d1.Display();
+    }
+}
+```
+
+**输出**
+
+```console
+Deprecatedtest display()
+```
+
+> **注**：该程序在编译时，会报出以下错误：
+
+```console
+注: .../src/main/java/com/xfoss/Annotations/AnnotationTestDrive.java使用或覆盖了已过时的 API。
+```
+
+**注解二：`@Override`**
+
+这是个只能用在方法上的标记型注解。被 `@Override` 注解过的方法，必须对来自超类的某个方法进行重写。若被注解的方法没有这样做，那么就会导致一个编译时错误。使用这个注解来确保某个超类方法真的被重写了，而非简单地被过载（overloaded）。
+
+**示例**
+
+```java
+package com.xfoss.Annotations;
+
+class BaseCls
+{
+    public void Display()
+    {
+        System.out.println("BaseCls diplay()");
+    }
+
+    public static void main(String args[])
+    {
+        BaseCls t1 = new DerivedCls();
+        t1.Display();
+    }
+}
+
+class DerivedCls extends BaseCls 
+{
+    @Override
+    public void Display()
+    {
+        System.out.println("DerivedCls display()");
+    }
+}
+```
+
+**输出**
+
+```console
+DerivedCls display()
+```
+
+**注解三：`@SuppressWarnings`**
+
+使用 `@SuppressWarnings` 注解来告诉编译器，对特定编译器告警加以抑制。通过字符串形式的告警名称，来指定要抑制的告警。这种类型的注解，可应用到全部类型的声明。
+
+Java 将告警分组成两个类别。分别是 `deprecated` 与 `unchecked`。在老旧代码碰到使用了泛型的代码时，就会生成`unchecked`的告警（Any `unchecked` warning is generated when a legacy code interfaces with a code that uses generics）。
+
+**示例**
+
+```java
+// 用于演示 SuppressWarnings 注解的 Java 程序
+package com.xfoss.Annotations;
+
+// 类 1
+class DeprecatedTest
+{
+    @Deprecated
+    public void Display()
+    {
+        System.out.println("Deprecated display()");
+    }
+}
+
+// 类 2
+public class SuppressWarningTest
+{
+    // 若将下面的注解注释掉，那么程序就会产生告警
+    @SuppressWarnings({"checked", "deprecation"})
+    public static void main(String args[])
+    {
+        DeprecatedTest d1 = new DeprecatedTest();
+        d1.Display();
+    }
+}
+```
+
+**输出**
+
+```console
+Deprecated display()
+```
+
+
+**注解 4：`@Documented`**
+
+这是一个告诉工具某个注解将要被编写文档的标记型接口。注解不会被包含进 `Javadoc` 的注释中（it is a marker interface that tells a tool that an annotation is to be documented. Annotations are not included in `Javadoc` comments）。`@Documented` 注解在代码中的使用，会开启诸如 `Javadoc` 这样的工具对其的处理，并将注解类型信息，包含进生成的文档中。
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
