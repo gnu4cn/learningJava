@@ -16,7 +16,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.xfoss.Annotations.GFG" 
+    mainClassName = "com.xfoss.Annotations.Main" 
     // mainClass.set(mainClassName)
 }
 
