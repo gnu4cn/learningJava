@@ -662,6 +662,56 @@ public class GFG {
 
 **示例**
 
+```java
+package com.xfoss.Annotations;
+
+import java.lang.annotation.*;
+import java.lang.reflect.Method;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Repeatable(MyRepeatedAnnos.class)
+@interface Word
+{
+    String word() default "Hello";
+    int value() default 0;
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyRepeatedAnnos
+{
+    Word[] value();
+}
+
+public class Main {
+    @Word(word = "First", value = 1)
+    @Word(word = "Second", value = 2)
+    public static void newMethod()
+    {
+        Main obj = new Main();
+
+        try {
+            Class<?> c = obj.getClass();
+
+            Method m = c.getMethod("newMethod");
+
+            Annotation anno = m.getAnnotation(MyRepeatedAnnos.class);
+            System.out.println(anno);
+        }
+        catch (NoSuchMethodException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) { newMethod(); }
+}
+```
+
+**输出**
+
+```console
+@com.xfoss.Annotations.MyRepeatedAnnos(value={@com.xfoss.Annotations.Word(word="First", value=1), @com.xfoss.Annotations.Word(word="Second", value=2)})
+```
 
 ## 拉姆达 Lambda 表达式
 
