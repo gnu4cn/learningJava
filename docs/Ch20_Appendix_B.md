@@ -683,6 +683,12 @@ import java.lang.reflect.Method;
 }
 
 public class Main {
+
+    // 注意：这里初始化 @Word 类型的注解时：
+    //      1. 不能使用非静态实例变量。这个注解的初始化，是属于其
+    // 所注解的静态方法 newMethod() 的上下文的；
+    //      2. 也不能使用静态实例变量。“element value must be a 
+    // constant expression”，因此只能使用静态 final 的常量。
     @Word(word = "First", value = 1)
     @Word(word = "Second", value = 2)
     public static void newMethod()

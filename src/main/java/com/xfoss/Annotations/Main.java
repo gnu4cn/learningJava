@@ -18,7 +18,9 @@ import java.lang.reflect.Method;
 }
 
 public class Main {
-    @Word(word = "First", value = 1)
+    private static String first = "First";
+
+    @Word(word = first, value = 1)
     @Word(word = "Second", value = 2)
     public static void newMethod()
     {
