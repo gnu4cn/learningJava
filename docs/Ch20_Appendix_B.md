@@ -868,7 +868,7 @@ Deprecated display()
 | `PARAMETER` | 方法的参数 |
 | `TYPE` | 类、接口或枚举（Class, Interface, or enumeration） |
 
-*表一 - `ElementType` 枚举类型下的各个常量*
+*表一, `ElementType` 枚举类型下的各个常量*
 
 可在 `@Target` 注解中指定一个或多个的这些值。在指定多个值时，就必须将这些值指定在一个大括号分隔的清单中（To specify multiple values, we must specify them within a braces-delimited list）。比如，可使用这个 `@Target` 注解：`@Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})` 来指定某个注解只应用到字段及本地变量。
 
