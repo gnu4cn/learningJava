@@ -870,6 +870,16 @@ Deprecated display()
 
 *表一 - `ElementType` 枚举类型下的各个常量*
 
+可在 `@Target` 注解中指定一个或多个的这些值。在指定多个值时，就必须将这些值指定在一个大括号分隔的清单中（To specify multiple values, we must specify them within a braces-delimited list）。比如，可使用这个 `@Target` 注解：`@Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})` 来指定某个注解只应用到字段及本地变量。
+
+**`@Rentention` 注解**
+
+这个注解确定了其所注解的注解，应保留在何处及保留多长时间（it determines where and how long the annotation is retent）。`@Rentention` 注解可以有三个取值：
+
+- **`SOURCE`**: 注解将保留在源代码级别，并被编译器所忽略；
+- **`CLASS`**：注解将保留在编译时，并被 JVM 所忽略；
+- **`RUNTIME`**：这些注解将保留在运行时。
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
