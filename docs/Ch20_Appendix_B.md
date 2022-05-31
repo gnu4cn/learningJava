@@ -893,7 +893,10 @@ Deprecated display()
 }
 ```
 
-在应用这些用户定义注解之前
+在实现用户定义注解之前，请将以下各个要点，作为定制注解的重要原则（Do keep these certain points as rules for custom annotations before implementing user-defined annotations）。
+
+1. `AnnotationName` 是个接口；
+2. 
 
 ## 拉姆达 Lambda 表达式
 
