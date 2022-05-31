@@ -893,7 +893,7 @@ Deprecated display()
 }
 ```
 
-在应用
+在应用这些用户定义注解之前
 
 ## 拉姆达 Lambda 表达式
 
