@@ -29,10 +29,7 @@ repositories {
     flatDir {
         dirs("src/main/java")
     }
-    mavenLocal()
-    maven {
-        url = uri("https://mirrors.huaweicloud.com/repository/maven/")
-    }
+    // ~/.gradle/init.gradle 设置了别的 repo
 }
 
 dependencies {
