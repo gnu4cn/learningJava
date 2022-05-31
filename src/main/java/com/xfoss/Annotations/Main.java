@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 }
 
 public class Main {
-    private static String first = "First";
+    private static final String first = "First";
 
     @Word(word = first, value = 1)
     @Word(word = "Second", value = 2)
