@@ -886,6 +886,13 @@ Deprecated display()
 
 **语法**：声明
 
+```java
+[Access Specifier] @interface<AnnotationName>
+{
+    DataType <Method Name>() [default value];
+}
+```
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
