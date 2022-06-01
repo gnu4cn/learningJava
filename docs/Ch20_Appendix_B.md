@@ -901,6 +901,11 @@ Deprecated display()
 4. `default` 值是可选的；
 5. 其中的方法返回值类型，应是原生值、枚举、字符串、类名称，或者原生值、枚举、字符串或类名称等类型的数组（the return type of method should be either primitive, enum, string, class name, or array of primitive, enum, string, or class name type）。
 
+**示例**：
+
+```java
+```
+
 ## 拉姆达 Lambda 表达式
 
 ## 依赖注入
