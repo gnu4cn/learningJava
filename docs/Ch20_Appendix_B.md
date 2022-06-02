@@ -904,8 +904,89 @@ Deprecated display()
 **示例**：
 
 ```java
+package com.xfoss.Annotations;
+
+import java.lang.annotation.*;
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@interface TestAnnotation
+{
+    String Developer() default "Lenny";
+    String Expirydate();
+}
+
+public class Test
+{
+    @TestAnnotation(Developer="Echo", Expirydate="01-10-2020")
+    void fun1()
+    {
+        System.out.println("测试方法 1");
+    }
+
+    @TestAnnotation(Developer="Anil", Expirydate="01-10-2020")
+    void fun2()
+    {
+        System.out.println("测试方法 2");
+    }
+
+    public static void main(String args[])
+    {
+        System.out.println("你好");
+    }
+}
+```
+
+**输出**：
+
+```console
+你好
 ```
 
 ## 拉姆达 Lambda 表达式
 
+**Java 8 中的 Lambda 表达式（Lambda Expressions in Java 8）**
+
+拉姆达表达式本质上是 [功能接口](#functional_interface) （带有单个抽象方法的接口，被称为功能接口。`java.lang.Runnable` 即是功能接口的一个示例）的表征。拉姆达表达式实现的是唯一抽象方法，进而因此实现的是功能接口。拉姆达表达式是在 Java 8 中加入的特性，从而提供了以下的这些功能。
+
+- 实现了将功能作为方法参数的处理，或者说将代码当作数据的处理（enable to treat functionality as a method argument, or code as data）；
+- 可创建出不属于任何类的函数（a function can be created without belonging to any class）；
+- 拉姆达表达式，可像对象一样传递，并在需要时被执行（a lambda expression can be passed around as if it was an object and executed on demand）。
+
+```java
+package com.xfoss.LambdaExpr;
+
+interface FuncInterface
+{
+    void abstractFun(int x);
+
+    default void normalFun()
+    {
+        System.out.println("你好");
+    }
+}
+
+class Test
+{
+    public static void main(String args[])
+    {
+        FuncInterface fobj = (int x) -> System.out.println(2*x);
+
+        fobj.abstractFun(5);
+    }
+}
+```
+
+**输出**：
+
+```java
+10
+```
+
+![拉姆达表达式](images/Ch20_02.png)
+
+*图 2 - 拉姆达表达式*
+
 ## 依赖注入
+
+## <a id="functional_interface"></a>功能接口

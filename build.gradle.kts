@@ -9,7 +9,7 @@ import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 
 application {
-    mainClassName = "com.xfoss.Annotations.Main" 
+    mainClassName = "com.xfoss.LambdaExpr.Test" 
     // mainClass.set(mainClassName)
 }
 
