@@ -1018,6 +1018,36 @@ lambda operator -> body
 
 请注意：拉姆达表达式恰如函数，他们跟函数一样接受参数（lambda expressions are just like functions and they accept parameters just like functions）。
 
+```java
+package com.xfoss.LambdaExpr;
+
+import java.util.ArrayList;
+
+class TestDrive
+{
+    public static void main(String args[]){
+
+        ArrayList<Integer> arrL = new ArrayList<Integer>();
+        for(int i = 1; i < 5; i++) arrL.add(i);
+
+        arrL.forEach(n -> System.out.println(n));
+
+        arrL.forEach(n -> {if(n%2 == 0) System.out.println(n);});
+    }
+}
+```
+
+**输出**：
+
+```console
+1
+2
+3
+4
+2
+4
+```
+
 ## 依赖注入
 
 ## <a id="functional_interface"></a>功能接口
