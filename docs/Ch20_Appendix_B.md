@@ -987,6 +987,37 @@ class Test
 
 *图 2 - 拉姆达表达式*
 
+
+**语法**：
+
+```java
+lambda operator -> body
+```
+
+其中拉姆达运算符（`lambda operator`）可以是：
+
+- **零参数**：
+
+```java
+() -> System.out.println("零参数的拉姆达（Zero parameter lambda）")；
+```
+
+- **一个参数**：
+
+```java
+(p) -> System.out.format("一个参数：%s", p);
+```
+
+在那个变量的类型可从上下文推导出来时，那么小括号的使用就不是强制的（it is not mandatory to use parentheses, if the type of that variable can be inferred from the context）。
+
+- **多个参数**：
+
+```java
+(p1, p2) -> System.out.format("多个参数：%s, %s", p1, p2);
+```
+
+请注意：拉姆达表达式恰如函数，他们跟函数一样接受参数（lambda expressions are just like functions and they accept parameters just like functions）。
+
 ## 依赖注入
 
 ## <a id="functional_interface"></a>功能接口
