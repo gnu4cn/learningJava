@@ -1113,7 +1113,7 @@ public class LambdaExprDemo
 你好 极客
 ```
 
-## 要点：
+### 要点：
 
 - 拉姆达表达式的函数体，可以包含零个、一个或更多的语句（the body of a lambda expression can contain zero, one or more statements）；
 - 在只有单个语句时，花括号不是强制性的，同时该匿名函数的返回值类型与函数体表达式一致（when there is a single statement curly brackets are not mandatory and the return type of the anonymous function is the same as that of the body expression）；
@@ -1122,3 +1122,5 @@ public class LambdaExprDemo
 ## 依赖注入
 
 ## <a id="functional_interface"></a>功能接口
+
+## <a id="consumer"></a> 消费者，Consumer
