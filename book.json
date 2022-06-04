@@ -11,7 +11,8 @@
     },
     "plugins": [
         "donate",
-        "click-reveal"
+        "click-reveal",
+        "sitemap"
     ],
     "pluginsConfig": {
         "donate": {
@@ -28,7 +29,10 @@
             "yahei",
             "katex",
             "-search"
-        ]
+        ],
+        "sitemap": {
+            "hostname": "https://java.xfoss.com/"
+        }
     },
     "pdf": {
         "pageNumbers": true, 

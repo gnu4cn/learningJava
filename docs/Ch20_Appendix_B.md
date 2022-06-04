@@ -1125,4 +1125,4 @@ Java 永远是一种面向对象的编程语言（Java has forever remained an O
 
 **功能接口**是之只包含一个抽象方法的接口。他们可只有一项用于展示的功能。自Java 8 开始，就可以使用 [拉姆达表达式](#lambda-expressions) 来表示功能接口的实例了。功能接口可以有任意数量的默认方法（a functional interface can have any number of default methods）。***`Runnable`、`ActionListener`、`Comparable`*** 等都是功能接口的一些示例。
 
-
+功能接口又被称为 **单一抽象方法接口（Single Abstract Method Interface）**。简称 **SAM 接口**。
