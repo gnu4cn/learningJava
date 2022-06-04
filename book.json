@@ -2,7 +2,7 @@
     "gitbook": "3.x.x",
     "title": "轻松学Java（Head First Java）",
     "description": "深入掌握Java, 不难",
-    "language": "zh",
+    "language": "zh-hans",
     "catalog": ["docs"],
     "outputfile": "summary-gen.md",
     "structure": {
