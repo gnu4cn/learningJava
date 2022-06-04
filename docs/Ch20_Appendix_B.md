@@ -1048,6 +1048,77 @@ class TestDrive
 4
 ```
 
+请注意拉姆达表达式 ***只可用于实现功能接口***。在上面的示例中同样是这样的，其中的拉姆达表达式实现的是 [消费者](#consumer) 功能接口（Consumer Functional Interface）。
+
+```java
+// 用于对拉姆达表达式工作原理进行演示的 Java 程序
+package com.xfoss.LambdaExpr;
+
+public class LambdaExprDemo
+{
+    // 函数 operation 是使用拉姆达表达式实现的
+    interface FuncInter1
+    {
+        int operation(int a, int b);
+    }
+
+    // 这里的 sayMessage() 也是使用拉姆达表达式实现的
+    interface FuncInter2
+    {
+        void sayMessage(String message);
+    }
+
+    // 由这个具体的 operate 方法来完成 FuncInter1 中
+    // 在 ‘a’ 与 ‘b’ 上的运算
+    private int operate(int a, int b, FuncInter1 fobj)
+    {
+        return fobj.operation(a, b);
+    }
+
+    public static void main(String args[])
+    {
+        // 用于两个参数相加的拉姆达表达式
+        // x 与 y 的数据类型是非必须的。
+        // 该表达式实现了 'FuncInter1' 接口
+        FuncInter1 add = (int x, int y) -> x + y;
+
+        // 用于两个参数相乘的拉姆达表达式
+        // 这个表达式同样实现了 'FuncInter1' 接口
+        FuncInter1 multiply = (int x, int y) -> x * y;
+
+        // 创建一个 LambdaExprDemo 的实力，来以 operate 的
+        // 不同拉姆达表达式实现，对其进行调用
+        LambdaExprDemo dobj = new LambdaExprDemo();
+
+        // 使用拉姆达表达式，将两个数相加
+        System.out.format("加法为 %d\n", dobj.operate(6, 3, add));
+
+        // 使用拉姆达表达式，将两个数相乘
+        System.out.format("乘法为 %d\n", dobj.operate(6, 3, multiply));
+
+        // 单个参数的拉姆达表达式
+        // 此表达式实现了 'FuncInter2' 接口
+        FuncInter2 fobj = message -> System.out.format("你好 %s\n", message);
+
+        fobj.sayMessage("极客");
+    }
+}
+```
+
+**输出**：
+
+```console
+加法为 9
+乘法为 18
+你好 极客
+```
+
+## 要点：
+
+- 拉姆达表达式的函数体，可以包含零个、一个或更多的语句（the body of a lambda expression can contain zero, one or more statements）；
+- 在只有单个语句时，花括号不是强制性的，同时该匿名函数的返回值类型与函数体表达式一致（when there is a single statement curly brackets are not mandatory and the return type of the anonymous function is the same as that of the body expression）；
+- 在有多个语句时，那么这些语句就必须用花括号括起来（形成一个代码块），且该匿名函数的返回值类型，与由此代码块所返回的值类型一致，或者即为在未返回任何东西时的 `void`（when there are more than one statements, then these must be enclosed in curly brackets(a code block) and the return type of the anonymous function is the same as the type of the value return within the code block, or `void` if nothing is returned）。
+
 ## 依赖注入
 
 ## <a id="functional_interface"></a>功能接口
