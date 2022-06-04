@@ -943,7 +943,7 @@ public class Test
 你好
 ```
 
-## 拉姆达 Lambda 表达式
+## <a id="lambda-expressions"></a>拉姆达 Lambda 表达式
 
 **Java 8 中的 Lambda 表达式（Lambda Expressions in Java 8）**
 
@@ -1048,7 +1048,7 @@ class TestDrive
 4
 ```
 
-请注意拉姆达表达式 ***只可用于实现功能接口***。在上面的示例中同样是这样的，其中的拉姆达表达式实现的是 [消费者](#consumer) 功能接口（Consumer Functional Interface）。
+请注意拉姆达表达式 ***只可用于实现功能接口***。在上面的示例中同样是这样的，其中的拉姆达表达式实现的是 [消费者](https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html) 功能接口（Consumer Functional Interface）。
 
 ```java
 // 用于对拉姆达表达式工作原理进行演示的 Java 程序
@@ -1119,8 +1119,10 @@ public class LambdaExprDemo
 - 在只有单个语句时，花括号不是强制性的，同时该匿名函数的返回值类型与函数体表达式一致（when there is a single statement curly brackets are not mandatory and the return type of the anonymous function is the same as that of the body expression）；
 - 在有多个语句时，那么这些语句就必须用花括号括起来（形成一个代码块），且该匿名函数的返回值类型，与由此代码块所返回的值类型一致，或者即为在未返回任何东西时的 `void`（when there are more than one statements, then these must be enclosed in curly brackets(a code block) and the return type of the anonymous function is the same as the type of the value return within the code block, or `void` if nothing is returned）。
 
-## 依赖注入
-
 ## <a id="functional_interface"></a>功能接口
 
-## <a id="consumer"></a> 消费者，Consumer
+Java 永远是一种面向对象的编程语言（Java has forever remained an Object-Oriented Programming language）。而由于Java 是一种面向对象编程语言，那么就可以声称，除了一些原生数据类型，和一些为完整性与简单性目的而采用的原生方法外， Java 编程语言中所出现全部事物，都可以由对象来表达（by object-oriented programming language, we can declare that everything present in the Java programming language rotates throughout the Objects, except for some of the primitive data types and primitive methods for integrity and simplicity）。在称为 Java 的编程语言中，是没有任何单独函数的。Java 编程语言中的函数，都是某个类的组成部分，而若某人想要调用这些函数，那么他们就必须使用到类或类的对象，来调用这些函数。
+
+**功能接口**是之只包含一个抽象方法的接口。他们可只有一项用于展示的功能。自Java 8 开始，就可以使用 [拉姆达表达式](#lambda-expressions) 来表示功能接口的实例了。功能接口可以有任意数量的默认方法（a functional interface can have any number of default methods）。***`Runnable`、`ActionListener`、`Comparable`*** 等都是功能接口的一些示例。
+
+
