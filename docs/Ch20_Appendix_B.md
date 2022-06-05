@@ -1227,9 +1227,9 @@ class TestDrive {
 
 在上述四个接口中间，前三个，也就是`Consumer`、`Predicate`，与 `Function` ，还有着以下延伸补充：
 
-1. `Consumer` -> 双向消费者，`Bi-Consumer`；
-2. `Predicate` -> 双向判断，`Bi-Predicate`；
-3. `Function` -> 双向函数、一元算子/运算符、二元算子/运算符等（`Bi-Function`, Unary Operator, Binary Operator）。
+1. `Consumer` -> `Bi-Consumer`；
+2. `Predicate` -> `Bi-Predicate`；
+3. `Function` -> `Bi-Function`、一元算子/运算符、二元算子/运算符等（`Bi-Function`, Unary Operator, Binary Operator）。
 
 1. `Consumer` 消费者
 
@@ -1250,3 +1250,15 @@ class TestDrive {
 2. **判断（`Predicate`）**
 
 在现代科学的逻辑下，接受一个参数，并根据这个参数而相应地生成一个布尔值作为应答的函数，就被成为判断（in scientific logic, a function that accepts an argument and, in return, generates a boolean value as an answer is known as a predicate）。与此类似，在Java 编程语言中，Java 的判断功能接口，则是一类接受单个值或参数，而在这单个值或参数上进行某种处理，进而返回一个布尔值（`True`或`False`）的应答。`Predicate`功能接口的实现，还封装了 Java 中的筛选过程（用于在某种已有提供的判断基础上，对流式组件进行筛选的过程，the implementation of the `Predicate` functional interface also encapsualates the logic of filtering(a process that is used to filter stream components on the base of a provided predicate) in Java）。
+
+正如 `Consumer` 功能接口意义，`Predicate` 功能接口也有一些扩展。他们分别是 `IntPredicate`、`DoublePredicate`，以及 `LongPredicate`。这些类型的判断功能接口，都只接受一个原生数据类型或原生值，作为参数。
+
+**`Bi-Predicate`** -- `Bi-Predicate` 同样是 `Predicate` 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。
+
+**`Predicate` 功能接口的语法**：
+
+```java
+public interface Predicate<T> {
+    boolean test(T t);
+}
+```
