@@ -1216,4 +1216,31 @@ class TestDrive {
 - `ActionListener` -> 此接口只包含了 `actionPerformed()` 方法；
 - `Callable` -> 此接口只包含了 `call()` 方法。
 
+**Java SE 8 包含了四大类功能接口**，可分别应用于多种情形。
 
+这四个大类分别是：
+
+1. [消费者（Consumer）](#consumer);
+2. [宾格（Predicate）](#predicate);
+3. [函数（Function）](#function);
+4. [提供者（Supplier）](#supplier)。
+
+在上述四个接口中间，前三个，也就是`Consumer`、`Predicate`，与 `Function` ，还有着以下延伸补充：
+
+1. `Consumer` -> 双向消费者，`Bi-Consumer`；
+2. `Predicate` -> 双向宾格，`Bi-Predicate`；
+3. `Function` -> 双向函数、一元算子/运算符、二元算子/运算符等（`Bi-Function`, Unary Operator, Binary Operator）。
+
+1. `Consumer` 消费者
+
+功能接口中的消费者接口，是一类只接受一个参数，或者说只接受一个提升参数（the consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument）。消费者接口没有返回值。他什么也不会返回。`Consumer`还有一些功能变种 -- `DoubleConsumer`、`IntConsumer`，以及 `LongConsumer`。这些变种接受原生值作为参数。
+
+除了这些变种外，还有另外一种被称为`Bi-Consumer`的`Consumer`变种。
+
+**`Bi-Consumer`** -- 是`Consumer`接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 `Bi-Consumer`，则会取两个参数。`Consumer`与`Bi-Consumer`二者都没有返回值。`Bi-Consumer`与`Consumer`接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 `Bi-Consumer` 接口。
+
+**`Consumer` 功能接口的语法/原型**：
+
+```java
+Consumer<Integer> consumer = (value) -> System.out.println(value);
+```
