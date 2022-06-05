@@ -1262,3 +1262,16 @@ public interface Predicate<T> {
     boolean test(T t);
 }
 ```
+
+判断功能接口还可以用类来实现。下面给出的就是用类实现判断功能接口的语法：
+
+```java
+public class CheckForNull implements Predicate {
+    
+    @Override
+    public boolean test(Object o)
+    {
+        return o != null;
+    }
+}
+```
