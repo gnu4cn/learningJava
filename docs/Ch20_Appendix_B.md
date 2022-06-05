@@ -1249,29 +1249,41 @@ class TestDrive {
 
 2. **判断（`Predicate`）**
 
-在现代科学的逻辑下，接受一个参数，并根据这个参数而相应地生成一个布尔值作为应答的函数，就被成为判断（in scientific logic, a function that accepts an argument and, in return, generates a boolean value as an answer is known as a predicate）。与此类似，在Java 编程语言中，Java 的判断功能接口，则是一类接受单个值或参数，而在这单个值或参数上进行某种处理，进而返回一个布尔值（`True`或`False`）的应答。`Predicate`功能接口的实现，还封装了 Java 中的筛选过程（用于在某种已有提供的判断基础上，对流式组件进行筛选的过程，the implementation of the `Predicate` functional interface also encapsualates the logic of filtering(a process that is used to filter stream components on the base of a provided predicate) in Java）。
+    在现代科学的逻辑下，接受一个参数，并根据这个参数而相应地生成一个布尔值作为应答的函数，就被成为判断（in scientific logic, a function that accepts an argument and, in return, generates a boolean value as an answer is known as a predicate）。与此类似，在Java 编程语言中，Java 的判断功能接口，则是一类接受单个值或参数，而在这单个值或参数上进行某种处理，进而返回一个布尔值（`True`或`False`）的应答。`Predicate`功能接口的实现，还封装了 Java 中的筛选过程（用于在某种已有提供的判断基础上，对流式组件进行筛选的过程，the implementation of the `Predicate` functional interface also encapsualates the logic of filtering(a process that is used to filter stream components on the base of a provided predicate) in Java）。
 
-正如 `Consumer` 功能接口意义，`Predicate` 功能接口也有一些扩展。他们分别是 `IntPredicate`、`DoublePredicate`，以及 `LongPredicate`。这些类型的判断功能接口，都只接受一个原生数据类型或原生值，作为参数。
+    正如 `Consumer` 功能接口意义，`Predicate` 功能接口也有一些扩展。他们分别是 `IntPredicate`、`DoublePredicate`，以及 `LongPredicate`。这些类型的判断功能接口，都只接受一个原生数据类型或原生值，作为参数。
 
-**`Bi-Predicate`** -- `Bi-Predicate` 同样是 `Predicate` 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。
+    **`Bi-Predicate`** -- `Bi-Predicate` 同样是 `Predicate` 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。
 
-**`Predicate` 功能接口的语法**：
+    **`Predicate` 功能接口的语法**：
 
-```java
-public interface Predicate<T> {
-    boolean test(T t);
-}
-```
-
-判断功能接口还可以用类来实现。下面给出的就是用类实现判断功能接口的语法：
-
-```java
-public class CheckForNull implements Predicate {
-    
-    @Override
-    public boolean test(Object o)
-    {
-        return o != null;
+    ```java
+    public interface Predicate<T> {
+        boolean test(T t);
     }
-}
-```
+    ```
+
+    判断功能接口还可以用类来实现。下面给出的就是用类实现判断功能接口的语法：
+
+    ```java
+    public class CheckForNull implements Predicate {
+        
+        @Override
+        public boolean test(Object o)
+        {
+            return o != null;
+        }
+    }
+    ```
+
+    Java 判断功能接口，还可以用拉姆达表达式实现。下面给出了`Predicate`功能接口实现的示例：
+
+    ```java
+    Predicate predicate = (value) -> value != null;
+    ```
+
+    由于使用拉姆达表达式的 Java 中功能接口实现，与使用类的实现，完成的都是同样工作，即返回了相同输出，但前者更具可管理能力，且更加高效。
+
+3. `Function` 函数功能接口
+
+    函数是 Java 中功能接口的一种只接受单个参数，并在所需处理之后返回一个值的类别（a function is a type of functional interface in Java that receives only a single argument and returns a value after the required processing）。
