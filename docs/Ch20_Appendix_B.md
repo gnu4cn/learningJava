@@ -1131,4 +1131,89 @@ Java 永远是一种面向对象的编程语言（Java has forever remained an O
 
 在功能接口中，因为默认情况下，在接口内部定义的方法，只会是`abstract` 方法，因此使用关键字 `abstract` 就是，即无需使用关键字 `abstract`。同样也可以将拉姆达表达式，称为功能接口的实例。
 
-在 Java 8 之前，就必须创建出匿名内部类的对象，或者必须有实现这些接口。
+在 Java 8 之前，就必须创建出匿名内部类的对象，或者必须要实现这些接口。
+
+```java
+// 用于演示功能接口的 Java 程序
+package com.xfoss.FunctionalInterface;
+
+class Test {
+    public static void main(String args[]) {
+        // 创建匿名内部类对象
+        new Thread(new Runnable() {
+            @Override public void run()
+            {
+                System.out.println("新的线程已创建");
+            }
+        }).start();
+    }
+}
+```
+
+**输出**：
+
+```console
+新的线程已创建
+```
+
+自 Java 8 开始，就可以像下面这样，将 [拉姆达表达式](#lambda-expressions) 赋值给其功能接口对象：
+
+```java
+// 用于演示使用了拉姆达表达式的功能接口实现的 Java 程序
+package com.xfoss.FunctionalInterface;
+
+class Test {
+    public static void main(String args[]) {
+        // 创建对象的拉姆达表达式
+        new Thread( () -> {
+                System.out.println("新的线程已创建");
+        }).start();
+    }
+}
+```
+
+```console
+新的线程已创建
+```
+
+### 关于 `@FunctionalInterface` 注解
+
+`@FunctionalInterface` 注解用于确保功能接口不可以有多于一个的抽象方法。若出现了多于一个的抽象方法，那么编译器就会标示出一个 `Unexcepted @FunctionalInterface annotation` 消息。不过并非强制要求使用此注解。
+
+```java
+package com.xfoss.FunctionalInterface;
+
+@FunctionalInterface
+interface Square {
+    int calculate(int x);
+}
+
+class TestDrive {
+    public static void main(String args[])
+    {
+        int a = 5;
+
+        Square s = (int x) -> x * x;
+
+        int ans = s.calculate(a);
+        System.out.println(ans);
+    }
+}
+```
+
+**输出**：
+
+```console
+25
+```
+
+### 一些内建的 Java 功能接口
+
+自Java SE 1.8 开始，就有了许多的转换成了功能接口的接口。这全部接口都是以 `@FunctionalInterface` 注解过的。这些接口如下所示：
+
+- `Runnable` -> 此接口只包含了 `run()` 方法；
+- `Comparable` -> 此接口只保护了 `compareTo()` 方法；
+- `ActionListener` -> 此接口只包含了 `actionPerformed()` 方法；
+- `Callable` -> 此接口只包含了 `call()` 方法。
+
+
