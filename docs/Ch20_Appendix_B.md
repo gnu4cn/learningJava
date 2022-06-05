@@ -1221,26 +1221,32 @@ class TestDrive {
 这四个大类分别是：
 
 1. [消费者（Consumer）](#consumer);
-2. [宾格（Predicate）](#predicate);
+2. [判断（Predicate）](#predicate);
 3. [函数（Function）](#function);
 4. [提供者（Supplier）](#supplier)。
 
 在上述四个接口中间，前三个，也就是`Consumer`、`Predicate`，与 `Function` ，还有着以下延伸补充：
 
 1. `Consumer` -> 双向消费者，`Bi-Consumer`；
-2. `Predicate` -> 双向宾格，`Bi-Predicate`；
+2. `Predicate` -> 双向判断，`Bi-Predicate`；
 3. `Function` -> 双向函数、一元算子/运算符、二元算子/运算符等（`Bi-Function`, Unary Operator, Binary Operator）。
 
 1. `Consumer` 消费者
 
-功能接口中的消费者接口，是一类只接受一个参数，或者说只接受一个提升参数（the consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument）。消费者接口没有返回值。他什么也不会返回。`Consumer`还有一些功能变种 -- `DoubleConsumer`、`IntConsumer`，以及 `LongConsumer`。这些变种接受原生值作为参数。
+    功能接口中的消费者接口，是一类只接受一个参数，或者说只接受一个提升参数（the consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument）。消费者接口没有返回值。他什么也不会返回。`Consumer`还有一些功能变种 -- `DoubleConsumer`、`IntConsumer`，以及 `LongConsumer`。这些变种接受原生值作为参数。
 
-除了这些变种外，还有另外一种被称为`Bi-Consumer`的`Consumer`变种。
+    除了这些变种外，还有另外一种被称为`Bi-Consumer`的`Consumer`变种。
 
-**`Bi-Consumer`** -- 是`Consumer`接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 `Bi-Consumer`，则会取两个参数。`Consumer`与`Bi-Consumer`二者都没有返回值。`Bi-Consumer`与`Consumer`接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 `Bi-Consumer` 接口。
+    **`Bi-Consumer`** -- 是`Consumer`接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 `Bi-Consumer`，则会取两个参数。`Consumer`与`Bi-Consumer`二者都没有返回值。`Bi-Consumer`与`Consumer`接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 `Bi-Consumer` 接口。
 
-**`Consumer` 功能接口的语法/原型**：
+    **`Consumer` 功能接口的语法/原型**：
 
-```java
-Consumer<Integer> consumer = (value) -> System.out.println(value);
-```
+    ```java
+    Consumer<Integer> consumer = (value) -> System.out.println(value);
+    ```
+
+    Java `Consumer` 功能接口的这个实现，会将作为参数传入的值，打印到那个打印语句。这个实现使用了Java 的拉姆达函数。
+
+2. **判断（`Predicate`）**
+
+在现代科学的逻辑下，接受一个参数，并根据这个参数而相应地生成一个布尔值作为应答的函数，就被成为判断（in scientific logic, a function that accepts an argument and, in return, generates a boolean value as an answer is known as a predicate）。与此类似，在Java 编程语言中，Java 的判断功能接口，则是一类接受单个值或参数，而在这单个值或参数上进行某种处理，进而返回一个布尔值（`True`或`False`）的应答。`Predicate`功能接口的实现，还封装了 Java 中的筛选过程（用于在某种已有提供的判断基础上，对流式组件进行筛选的过程，the implementation of the `Predicate` functional interface also encapsualates the logic of filtering(a process that is used to filter stream components on the base of a provided predicate) in Java）。
