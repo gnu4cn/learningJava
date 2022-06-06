@@ -1231,6 +1231,8 @@ class TestDrive {
 2. `Predicate` -> `Bi-Predicate`；
 3. `Function` -> `Bi-Function`、一元算子/运算符、二元算子/运算符等（`Bi-Function`, Unary Operator, Binary Operator）。
 
+下面对这四个功能接口一一说明。
+
 1. `Consumer` 消费者
 
     功能接口中的消费者接口，是一类只接受一个参数，或者说只接受一个提升参数（the consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument）。消费者接口没有返回值。他什么也不会返回。`Consumer`还有一些功能变种 -- `DoubleConsumer`、`IntConsumer`，以及 `LongConsumer`。这些变种接受原生值作为参数。
