@@ -1296,4 +1296,46 @@ class TestDrive {
 3. `Function` 函数功能接口
 
 
-    函数是 Java 中功能接口的一种只接受单个参数，并在所需处理之后返回一个值的类别（a function is a type of functional interface in Java that receives only a single argument and returns a value after the required processing）。
+    函数是 Java 中功能接口的一种只接受单个参数，并在完成所需处理之后返回一个值的类别。由于原生类型无法应用泛型参数，所以`Function` 接口有着许多版本，并且是需要这些版本的函数接口的。在诸如双精度数、整数、长整型数等原生类型中，众多不同版本的函数接口，属于工具性的接口，并被广泛使用。在参数中还会用到这些原生值类型的不同顺序组合（a function is a type of functional interface in Java that receives only a single argument and returns a value after the required processing. There are many versions of `Function` interfaces because a primitive type can't imply a general type argument, so we need these versions of function interfaces. Many different versions of the function interfaces are instrumental and are commonly used in primitive types like double, int, long. The different sequences of these primitive types are also used in the argument）。
+
+    这许多的函数接口版本，如下所示：
+
+    - **Bi-Function** - `Bi-Function` 大致与 `Function` 有联系。除此之外，`Bi-Function` 是取两个参数的，而 `Function` 则接受一个参数。
+
+    **`Bi-Function` 的原型和语法如下**：
+
+    ```java
+        @FunctionalInterface
+        public interface BiFunction<T, U, R>
+        {
+            R apply(T t, U u);
+            ......
+        }
+    ```
+
+    在上面的接口代码中，`T, U` 是输入，而那里只有一个输出，即 `R`。
+
+    - **一元运算符和二元运算符（Unary Operator and Binary Operator）** - 还有两个别的功能接口，分别叫做一元运算符和二元运算符。他们都各自对 `Function` 与 `Bi-Function` 进行了扩展。简单地说，一元运算符扩展了 `Function`，而二元运算符则扩展了 `Bi-Function`。
+
+    **一元运算符和二元运算符的原型如下**：
+
+    1. 一元运算符（Unary Operator）
+
+        ```java
+        @FunctionalInterface
+        public interface UnaryOperator<T> extends Function<T, U>
+        {
+            ......
+        }
+        ```
+
+    2. 二元运算符（Binary Operator）
+
+        ```java
+        @FunctionalInterface
+        public interface BinaryOperator<T> extends BiFunction<T, U, R>
+        {
+            ......
+        }
+        ```
+
