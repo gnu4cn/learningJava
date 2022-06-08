@@ -1401,3 +1401,18 @@ G极客
 G极客测试
 G极客2
 ```
+
+
+### 要点/洞察（Important Points/Observations）
+
+以下是 Java 中功能接口有关的一些突出点：
+
+1. 在功能接口里面，只支持一个抽象方法。在功能接口注解，也就是 `@FunctionalInterface` 没有被实现，或没有以函数接口方式加以编写出来时，那名就可以在其中声明多于一个的抽象方法。不过在这种有着多于一个的功能接口情形中，那个接口就不在被叫做功能接口了。那是叫做非功能接口（in functional interfaces, there is only one abstract method supported. If the annotation of a functional interface, i.e., `@FunctionalInterface` is not implemented or written with a function interface, more than one abstract method can be declared inside it. However, in this situation with more than one functional interface, that interface will not be called a functional interface. It is called a non-functional interface）；
+
+2. 由于 `@FunctionalInterface` 注解只是个自愿使用的注解，因此并不要求使用这个注解。之所以要写下这个注解，是因为其有助于在编译器层面的检查。除开这个目的，这个注解就是可选的；
+
+3. 可将无限多的方法（不管是静态的还是默认的），添加到功能接口。直白地将，功能接口对静态及默认方法的包含，没有限制；
+
+4. 对来自父类方法的重写，不会破坏Java中功能接口的规则；
+
+5. `java.util.function` 包，包含了许多 Java 8 中的内建功能接口。
