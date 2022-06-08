@@ -1220,10 +1220,10 @@ class TestDrive {
 
 这四个大类分别是：
 
-1. [消费者（Consumer）](#consumer);
-2. [判断（Predicate）](#predicate);
-3. [函数（Function）](#function);
-4. [提供者（Supplier）](#supplier)。
+1. 消费者（Consumer）;
+2. 判断（Predicate）;
+3. 函数（Function）;
+4. 提供者（Supplier）。
 
 在上述四个接口中间，前三个，也就是`Consumer`、`Predicate`，与 `Function` ，还有着以下延伸补充：
 
@@ -1233,7 +1233,6 @@ class TestDrive {
 
 下面对这四个功能接口一一说明。
 
-### <a id="consumer"></a>
 
 1. **`Consumer` 消费者**
 
@@ -1254,7 +1253,6 @@ class TestDrive {
 
     Java `Consumer` 功能接口的这个实现，会将作为参数传入的值，打印到那个打印语句。这个实现使用了Java 的拉姆达函数。
 
-### <a id="predicate"></a>
 
 2. **判断（`Predicate`）**
 
@@ -1297,7 +1295,6 @@ class TestDrive {
 
     由于使用拉姆达表达式的 Java 中功能接口实现，与使用类的实现，完成的都是同样工作，即返回了相同输出，但前者更具可管理能力，且更加高效。
 
-### <a id="function"></a>
 
 3. **`Function` 函数功能接口**
 
@@ -1350,7 +1347,6 @@ class TestDrive {
 
     而另一边，二元运算符则与 `Bi-Function` 相仿，要取两个值，并返回一个值。但与一元运算符类似，输入与输出值必须一致且要是同样类型（on the other way, `Binary Operator` takes two values and returns one value comparable to `Bi-Function` but similar like `Unary Operator`, the input and out value types must be identical and of the same type）。
 
-### <a id="supplier"></a> 
 
 4. **提供者（`Supplier`）**
 
