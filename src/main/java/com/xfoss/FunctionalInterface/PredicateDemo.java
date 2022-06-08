@@ -12,8 +12,6 @@ class PredicateDemo {
 
         Predicate<String> p = (s) -> s.startsWith("G");
 
-        for (String st : names){
-            if (p.test(st)) System.out.println(st);
-        }
+        for (String st : names) if (p.test(st)) System.out.println(st);
     }
 }

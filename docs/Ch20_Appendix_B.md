@@ -1366,4 +1366,38 @@ class TestDrive {
         }
         ```
 
+```java
+package com.xfoss.FunctionalInterface;
 
+import java.util.*;
+import java.util.function.Predicate;
+
+class PredicateDemo {
+    public static void main(String args[])
+    {
+
+        // 创建一个字符串的清单
+        List<String> names = Arrays.asList(
+                "G极客", "G极客测试", "g1", "Q问答", "G极客2");
+
+        // 将这个判断类型声明为字符串，同时使用拉姆达表达式
+        // 创建出对象
+        Predicate<String> p = (s) -> s.startsWith("G");
+
+        // 对那个清单进行迭代
+        for (String st : names){
+            // 调用对象上的 test 方法
+            if (p.test(st)) System.out.println(st);
+        }
+    }
+}
+```
+
+
+**输出**
+
+```console
+G极客
+G极客测试
+G极客2
+```

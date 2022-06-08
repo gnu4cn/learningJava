@@ -7,7 +7,8 @@
         "doc": "docs"
     },
     "scripts": {
-        "start": "./gradlew build && java -jar build/libs/com.xfoss.learningJava-0.0.1.jar"
+        "start": "./gradlew build && java -jar build/libs/com.xfoss.learningJava-0.0.1.jar",
+        "git-push": "git add . && git commit -m \"Update.\" && git push"
     },
     "repository": {
         "type": "git",
