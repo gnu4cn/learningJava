@@ -1242,7 +1242,7 @@ class TestDrive {
     除了这些变种外，还有另外一种被称为`Bi-Consumer`的`Consumer`变种。
 
 
-    **`Bi-Consumer`** -- 是`Consumer`接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 `Bi-Consumer`，则会取两个参数。`Consumer`与`Bi-Consumer`二者都没有返回值。`Bi-Consumer`与`Consumer`接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 `Bi-Consumer` 接口。
+    - **`Bi-Consumer`** -- 是`Consumer`接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 `Bi-Consumer`，则会取两个参数。`Consumer`与`Bi-Consumer`二者都没有返回值。`Bi-Consumer`与`Consumer`接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 `Bi-Consumer` 接口。
 
 
     **`Consumer` 功能接口的语法/原型**：
