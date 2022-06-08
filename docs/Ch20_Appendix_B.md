@@ -1339,3 +1339,31 @@ class TestDrive {
         }
         ```
 
+
+        从上面的示例，就可以明白一元运算符只接受一个参数，并只返回单个参数。还有就是，在一元运算符中，输入与输出值都要一致，并且要是同样的类型（we can understand from the above example that the `Unary Operator` accepts only one argument and returns a single argument only. Still, in `Unary Operator` both the input and output values must be identical and of the same type）。
+
+        而另一边，二元运算符则与 `Bi-Function` 相仿，要取两个值，并返回一个值。但与一元运算符类似，输入与输出值必须一致且要是同样类型（on the other way, `Binary Operator` takes two values and returns one value comparable to `Bi-Function` but similar like `Unary Operator`, the input and out value types must be identical and of the same type）。
+
+    4. <a id="supplier"></a> **提供者（`Supplier`）**
+
+        `Supplier` 功能接口，也是功能接口的一种类型，这种类型的功能接口，不取任何的输入或参数，而仍会返回单个输出。此种类型的功能接口，一般用于一些值的延迟生成。提供者功能接口也用于对任意序列生成的逻辑。比如 -- `斐波那契数列`背后的逻辑，就可以再 `Stream.generate` 方法的帮助下生成，而`Stream.generate`方法，就是通过提供者功能接口实现的（`Supplier` functional interface is also a type of functional interface that does not take any input or argument and ye returns a single output. This type of functional interface is generally used in the lazy generation of values. `Supplier` functional interfaces are also used for defining the logic for the generation of any sequence. For example - The logic behind the Fibonacci Series can be generated with the help of the `Stream.generate` method, which is implemented by the `Supplier` functional Interface）。
+
+        `Supplier` 功能接口的不同扩展，包括了许多其他提供者函数，比如 `BooleanSupplier`、`DoubleSupplier`、`LongSupplier`及 `IntSupplier` 等等。这些所有衍生特定类型的返回值类型，也都只是他们各自相应的原生值类型（the different extensions of the `Supplier` functional inteface hold many other supplier functions like `BooleanSupplier`, `DoubleSupplier`, `LongSupplier`, and `IntSupplier`. The return type of all these further specializations is their corresponding primitives only）。
+
+        **`Supplier` 功能接口的语法/原型如下**：
+
+        ```java
+        @FunctionalInterface
+        public interface Supplier<T> {
+
+            // 获取到一个结果
+            ........
+
+            // 返回这个特定结果
+            .........
+
+            T.get();
+        }
+        ```
+
+
