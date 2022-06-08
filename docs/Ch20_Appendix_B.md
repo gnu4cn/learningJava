@@ -1262,7 +1262,7 @@ class TestDrive {
     正如 `Consumer` 功能接口意义，`Predicate` 功能接口也有一些扩展。他们分别是 `IntPredicate`、`DoublePredicate`，以及 `LongPredicate`。这些类型的判断功能接口，都只接受一个原生数据类型或原生值，作为参数。
 
 
-    **`Bi-Predicate`** -- `Bi-Predicate` 同样是 `Predicate` 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。
+    - **`Bi-Predicate`** -- `Bi-Predicate` 同样是 `Predicate` 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。
 
 
     **`Predicate` 功能接口的语法**：
