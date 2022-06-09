@@ -1425,4 +1425,11 @@ G极客2
 
 **Reflection in Java**
 
-`Reflection` 是个在运行时，用于对方法、类及接口进行检查和修改的 API。在 `java.lang.reflect` 包下，提供了用于反射的那些所需类，那么要搞清楚反射，
+`Reflection` 是个在运行时，用于对方法、类及接口进行检视和修改的 API。在 `java.lang.reflect` 包下，提供了用于反射的那些所需类，那么要搞清楚反射，就离不开这个包。下面这个视觉教学资料，对这个包进行了演示，以对其有更好的掌握：
+
+![`java.lang.reflect`](images/Ch20_03.png)
+
+*图 3 - `java.lang.reflect`*
+
+- 反射给到了对象所属类，以及通过使用对象可执行其所属类的哪些方法（reflection gives us information about the class to which an object belongs and also the methods of that class that can be executed by using the object）；
+- 经由反射，就可以在运行时，在不考虑用到的方法访问指定符的情况下，对方法加以调用（through reflection, we can invoke methods at runtime irrespective of the access specifier used with them）。
