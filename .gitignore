@@ -63,3 +63,4 @@ hs_err_pid*
 
 *.pdf
 node_modules
+package-lock.json
