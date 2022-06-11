@@ -1432,4 +1432,9 @@ G极客2
 *图 3 - `java.lang.reflect`*
 
 - 反射给到了对象所属类，以及通过使用对象可执行其所属类的哪些方法（reflection gives us information about the class to which an object belongs and also the methods of that class that can be executed by using the object）；
-- 经由反射，就可以在运行时，在不考虑用到的方法访问指定符的情况下，对方法加以调用（through reflection, we can invoke methods at runtime irrespective of the access specifier used with them）。
+- 经由反射，就可以在运行时，在不考虑要用到方法的访问指定符情况下，对方法加以调用（through reflection, we can invoke methods at runtime irrespective of the access specifier used with them）。
+
+
+![关于反射 API](images/Ch20_04.png)
+
+*图 4 - 关于反射 API*
