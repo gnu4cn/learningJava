@@ -1449,4 +1449,38 @@ G极客2
 | 方法 | 使用 `getMethods()` 方法，来获取到某个对象所属类的那些公共方法。 |
 
 
-*表 1 - 反射机制如何分别作用在类、构造器与方法*
+*表 1 - 反射机制如何获取到对象所属类、所属类的构造器与方法*
+
+在知道方法的名字和他的那些参数类型时，就可以通过反射机制调用到那个方法。为此，要用到下面所讲的两个方法：
+
+1. `getDeclaredMethod()`
+2. `invoke()`
+
+**方式 1**：`getDelcaredMethod()`: 这会创建出一个要调用方法的对象出来；
+
+**语法**：此方法的语法为：
+
+```java
+Class.getDeclaredMethod(name, parameterType)
+```
+
+**参数**：
+
+- 即将创建出对象的方法名字（name of a method whose object is to be created)
+- 一个类对象的数组（an array of `Class` objects）
+
+**方法 2**：`invoke()`: 在运行时，用下面的方式，他就会对这个类的方法进行调用；
+
+**语法**：
+
+```java
+Method.invoke(Object, parameter)
+```
+
+> **提示*：在该类的这个方法不接受任何参数时，那么就要将 `null` 作为参赛加以传递*。
+
+> **注意*：经由反射机制，就可以在某个类对象的帮助下，访问到这个类的私有变量及私有方法，进而可通过上面讲到的对象，对方法进行调用。为此就要用到下面两个方法*。
+
+**方法 3**：`Class.getDeclaredField(FieldName)`: 使用此方法来获取私有字段（变量/方法）。将返回一个指定字段名称的、 `Field` 类型的对象；
+
+**方法 4**：`Field.setAccessible(true)`: 实现了与该字段访问修饰符无关的情况下，对该字段的访问（Allows to access the field irrespective of the access modifier used with the field）。
