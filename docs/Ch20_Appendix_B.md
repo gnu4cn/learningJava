@@ -1484,3 +1484,12 @@ Method.invoke(Object, parameter)
 **方法 3**：`Class.getDeclaredField(FieldName)`: 使用此方法来获取私有字段（变量/方法）。将返回一个指定字段名称的、 `Field` 类型的对象；
 
 **方法 4**：`Field.setAccessible(true)`: 实现了与该字段访问修饰符无关的情况下，对该字段的访问（Allows to access the field irrespective of the access modifier used with the field）。
+
+### 从反射式 API 得到的重要认知
+
+**Important observations Drawn From Reflection API**
+
+- 实现 **扩展能力特性（Extensibility Features）**：应用程序可通过运用那些具备扩展能力对象中的实例完整名称，来创建出这些实例来，从而利用上这些外部的、用户定义的类（an application may make use of external, user-defined classes by creating instances of extensibility objects using their full-qualified names）；
+- 用于 **调试及测试工具（Debugging and Testing tools）**：程序调试员会运用反射机制的属性，对类私有成员进行查看；
+- 带来 **性能开销（Performance Overhead）**：相比于非反射的同类，反射操作有着较低性能，因此应避免在那些性能敏感的应用中、频繁调用到的代码部门，使用反射机制；
+- 实现 **内部暴露（Exposure of Internals）**: 反射式代码破坏了抽象机制，从而会改变平台升级的方面的表现（reflective code breaks abstractions and therefore may change behavior with upgrades os the platform）。
