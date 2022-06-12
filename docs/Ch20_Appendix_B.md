@@ -1619,7 +1619,7 @@ class Demo {
 **输出**：
 
 ```console
-$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                            1 ✘ 
+java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                              ✔ 
 ---------------------
 类的名字为 com.xfoss.Reflection.Test
 ---------------------
