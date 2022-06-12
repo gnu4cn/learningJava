@@ -38,7 +38,7 @@ class Demo {
         System.out.format("构造器的名字为 %s\n", constructor.getName());
 
         System.out.println("类的公共方法分别为：");
-        Method[] methods = cls.getMethods();
+        Method[] methods = cls.getDeclaredMethods();
         for (Method method : methods) System.out.println(method.getName());
 
         Method methodCall1 = cls.getDeclaredMethod("method2", int.class);
