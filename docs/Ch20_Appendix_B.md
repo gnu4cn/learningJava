@@ -1497,59 +1497,120 @@ Method.invoke(Object, parameter)
 **示例**：
 
 ```java
+// 用于演示反射机制运用的 Java 程序
 package com.xfoss.Reflection;
 
+// 导入所需的类: Constructor、Field 及 Method
 import java.lang.reflect.*;
 
+// 类 1
+// 将创建这个类的对象
 class Test {
     
+    // 创建出一个私有字段（实例变量）
     private String s;
 
+    // 该类的构造器
+    //
+    // 方法 1
+    // 公共构造器
     public Test() { s = "极客空间"; }
 
+    // 方法 2
+    // 不带参数
     public void method1()
     {
         System.out.format("------------------\n该字符串为 %s\n", s);
     }
 
+    // 方法 3
+    // 一个整形参赛
     public void method2(int n)
     {
         System.out.format("------------------\n该数字为 %d\n", n);
     }
 
+    // 方法 4
+    // 这是个私有方法
     private void method3()
     {
         System.out.println("------------------\n私有方法被调用了");
     }
 }
 
+// 类 2
+// 主类
 class Demo {
     
+    // 主类的驱动器方法
     public static void main(String args[]) throws Exception
     {
 
+        // 创建出将对其属性进行查看的对象
+
+        // 在 main() 方法中创建一个类 1 的对象
         Test obj = new Test();
 
+        // 使用 getClass() 方法，从这个对象创建
+        // 出类对象（class object）
         Class cls = obj.getClass();
-        System.out.format("类的名字为 %s\n", cls.getName());
 
+        // 使用 getName() 方法，打印出类的名字
+        System.out.format("---------------------\n类的名字为 %s\n---------------------\n",
+                cls.getName());
+
+        // 通过该类对象，获取到其构造器
         Constructor constructor = cls.getConstructor();
-        System.out.format("构造器的名字为 %s\n", constructor.getName());
 
+        // 使用 getName() 方法，打印出构造器的名字
+        System.out.format("构造器的名字为 %s\n---------------------\n",
+                constructor.getName());
+
+        // 这个语句只是显示消息
         System.out.println("类的公共方法分别为：");
-        Method[] methods = cls.getMethods();
+
+        // 通过在该类对象上使用 getDeclaredMethods() 方法获取到
+        // 该类的那些声明的方法（getMethods() 将获取到全部方法）
+        Method[] methods = cls.getDeclaredMethods();
+
+        // 打印出这些方法的名字
         for (Method method : methods) System.out.println(method.getName());
 
+        // 经由提供到方法名字及参数类，作为 getDeclaredMethod() 
+        // 方法的参数，创建出指定方法的对象
         Method methodCall1 = cls.getDeclaredMethod("method2", int.class);
+
+        // 在运行时调用该方法
         methodCall1.invoke(obj, 19);
 
+        // 通过将字段名字作为参数，提供到 getDeclaredField() 方法
+        // 创建出指定字段的对象来
         Field field = cls.getDeclaredField("s");
+
+        // 这个语句实现了在无关乎该字段（实例变量）访问指示符
+        // 的情况下，对该字段的访问
+        field.setAccessible(true);
+
+        // 这里的 set() 方法，取了这个对象及要赋给私有字段‘s’
+        // 的新值
         field.set(obj, "Java");
 
+        // 经由提供作为参数的方法名字给 getDeclaredMethod()
+        // 创建出指定方法的对象来
         Method methodCall2 = cls.getDeclaredMethod("method1");
+
+        // 在运行时调用该方法
         methodCall2.invoke(obj);
 
+        // 经由提供作为参数的方法名字给 getDeclaredMethod()
+        // 创建出指定方法的对象来
         Method methodCall3 = cls.getDeclaredMethod("method3");
+
+        // 这个语句实现在无关乎该方法的访问指示符的情况下
+        // 对象对该方法的访问
+        methodCall3.setAccessible(true);
+
+        // 在运行时调研这个方法
         methodCall3.invoke(obj);
     }
 }
@@ -1558,29 +1619,20 @@ class Demo {
 **输出**：
 
 ```console
-$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                            1 ✘ 
+---------------------
 类的名字为 com.xfoss.Reflection.Test
+---------------------
 构造器的名字为 com.xfoss.Reflection.Test
+---------------------
 类的公共方法分别为：
 method2
 method1
-wait
-wait
-wait
-equals
-toString
-hashCode
-getClass
-notify
-notifyAll
+method3
 ------------------
 该数字为 19
-Exception in thread "main" java.lang.IllegalAccessException: class com.xfoss.Reflection.Demo cannot access a member of class com.xfoss.Reflection.Test with modifiers "private"
-    	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:394)
-	    at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674)
-    	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1140)
-	    at java.base/java.lang.reflect.Field.set(Field.java:817)
-    	at com.xfoss.Reflection.Demo.main(Demo.java:48)
+------------------
+该字符串为 Java
+------------------
+私有方法被调用了
 ```
-
-> **说明*：在 `field.set(obj, "Java");` 语句处，由于 `s` 是私有实例变量，导致了异常*。

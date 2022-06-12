@@ -32,10 +32,12 @@ class Demo {
         Test obj = new Test();
 
         Class cls = obj.getClass();
-        System.out.format("类的名字为 %s\n", cls.getName());
+        System.out.format("---------------------\n类的名字为 %s\n---------------------\n",
+                cls.getName());
 
         Constructor constructor = cls.getConstructor();
-        System.out.format("构造器的名字为 %s\n", constructor.getName());
+        System.out.format("构造器的名字为 %s\n---------------------\n",
+                constructor.getName());
 
         System.out.println("类的公共方法分别为：");
         Method[] methods = cls.getDeclaredMethods();
@@ -45,12 +47,14 @@ class Demo {
         methodCall1.invoke(obj, 19);
 
         Field field = cls.getDeclaredField("s");
+        field.setAccessible(true);
         field.set(obj, "Java");
 
         Method methodCall2 = cls.getDeclaredMethod("method1");
         methodCall2.invoke(obj);
 
         Method methodCall3 = cls.getDeclaredMethod("method3");
+        methodCall3.setAccessible(true);
         methodCall3.invoke(obj);
     }
 }
