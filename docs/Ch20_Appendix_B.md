@@ -1509,17 +1509,17 @@ class Test {
 
     public void method1()
     {
-        System.out.format("该字符串为 %s\n", s);
+        System.out.format("------------------\n该字符串为 %s\n", s);
     }
 
     public void method2(int n)
     {
-        System.out.format("该数字为 %d\n", n);
+        System.out.format("------------------\n该数字为 %d\n", n);
     }
 
     private void method3()
     {
-        System.out.println("私有方法被调用了");
+        System.out.println("------------------\n私有方法被调用了");
     }
 }
 
@@ -1531,33 +1531,25 @@ class Demo {
         Test obj = new Test();
 
         Class cls = obj.getClass();
-
         System.out.format("类的名字为 %s\n", cls.getName());
 
         Constructor constructor = cls.getConstructor();
-
-        System.out.format("构造器的名字为 %s", constructor.getName());
+        System.out.format("构造器的名字为 %s\n", constructor.getName());
 
         System.out.println("类的公共方法分别为：");
-
         Method[] methods = cls.getMethods();
-
         for (Method method : methods) System.out.println(method.getName());
 
         Method methodCall1 = cls.getDeclaredMethod("method2", int.class);
-
         methodCall1.invoke(obj, 19);
 
         Field field = cls.getDeclaredField("s");
-
         field.set(obj, "Java");
 
         Method methodCall2 = cls.getDeclaredMethod("method1");
-
         methodCall2.invoke(obj);
 
         Method methodCall3 = cls.getDeclaredMethod("method3");
-
         methodCall3.invoke(obj);
     }
 }
@@ -1568,7 +1560,8 @@ class Demo {
 ```console
 $java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
 类的名字为 com.xfoss.Reflection.Test
-构造器的名字为 com.xfoss.Reflection.Test类的公共方法分别为：
+构造器的名字为 com.xfoss.Reflection.Test
+类的公共方法分别为：
 method2
 method1
 wait
@@ -1580,11 +1573,14 @@ hashCode
 getClass
 notify
 notifyAll
+------------------
 该数字为 19
 Exception in thread "main" java.lang.IllegalAccessException: class com.xfoss.Reflection.Demo cannot access a member of class com.xfoss.Reflection.Test with modifiers "private"
-	    at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:394)
+    	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:394)
 	    at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674)
     	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1140)
-    	at java.base/java.lang.reflect.Field.set(Field.java:817)
-    	at com.xfoss.Reflection.Demo.main(Demo.java:54)
+	    at java.base/java.lang.reflect.Field.set(Field.java:817)
+    	at com.xfoss.Reflection.Demo.main(Demo.java:48)
 ```
+
+> **说明*：在 `field.set(obj, "Java");` 语句处，由于 `s` 是私有实例变量，导致了异常*。
