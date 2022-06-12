@@ -9,7 +9,7 @@ import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 
 application {
-    mainClassName = "com.xfoss.FunctionalInterface.PredicateDemo" 
+    mainClassName = "com.xfoss.Reflection.Demo" 
     // mainClass.set(mainClassName)
 }
 

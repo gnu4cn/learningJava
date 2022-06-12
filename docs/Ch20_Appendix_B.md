@@ -1492,4 +1492,99 @@ Method.invoke(Object, parameter)
 - 实现 **扩展能力特性（Extensibility Features）**：应用程序可通过运用那些具备扩展能力对象中的实例完整名称，来创建出这些实例来，从而利用上这些外部的、用户定义的类（an application may make use of external, user-defined classes by creating instances of extensibility objects using their full-qualified names）；
 - 用于 **调试及测试工具（Debugging and Testing tools）**：程序调试员会运用反射机制的属性，对类私有成员进行查看；
 - 带来 **性能开销（Performance Overhead）**：相比于非反射的同类，反射操作有着较低性能，因此应避免在那些性能敏感的应用中、频繁调用到的代码部门，使用反射机制；
-- 实现 **内部暴露（Exposure of Internals）**: 反射式代码破坏了抽象机制，从而会改变平台升级的方面的表现（reflective code breaks abstractions and therefore may change behavior with upgrades os the platform）。
+- 实现 **内部暴露（Exposure of Internals）**: 反射式代码破坏了抽象机制，从而会改变平台升级的方面的表现（reflective code breaks abstractions and therefore may change behavior with upgrades of the platform）。
+
+**示例**：
+
+```java
+package com.xfoss.Reflection;
+
+import java.lang.reflect.*;
+
+class Test {
+    
+    private String s;
+
+    public Test() { s = "极客空间"; }
+
+    public void method1()
+    {
+        System.out.format("该字符串为 %s\n", s);
+    }
+
+    public void method2(int n)
+    {
+        System.out.format("该数字为 %d\n", n);
+    }
+
+    private void method3()
+    {
+        System.out.println("私有方法被调用了");
+    }
+}
+
+class Demo {
+    
+    public static void main(String args[]) throws Exception
+    {
+
+        Test obj = new Test();
+
+        Class cls = obj.getClass();
+
+        System.out.format("类的名字为 %s\n", cls.getName());
+
+        Constructor constructor = cls.getConstructor();
+
+        System.out.format("构造器的名字为 %s", constructor.getName());
+
+        System.out.println("类的公共方法分别为：");
+
+        Method[] methods = cls.getMethods();
+
+        for (Method method : methods) System.out.println(method.getName());
+
+        Method methodCall1 = cls.getDeclaredMethod("method2", int.class);
+
+        methodCall1.invoke(obj, 19);
+
+        Field field = cls.getDeclaredField("s");
+
+        field.set(obj, "Java");
+
+        Method methodCall2 = cls.getDeclaredMethod("method1");
+
+        methodCall2.invoke(obj);
+
+        Method methodCall3 = cls.getDeclaredMethod("method3");
+
+        methodCall3.invoke(obj);
+    }
+}
+```
+
+**输出**：
+
+```console
+$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+类的名字为 com.xfoss.Reflection.Test
+构造器的名字为 com.xfoss.Reflection.Test类的公共方法分别为：
+method2
+method1
+wait
+wait
+wait
+equals
+toString
+hashCode
+getClass
+notify
+notifyAll
+该数字为 19
+Exception in thread "main" java.lang.IllegalAccessException: class com.xfoss.Reflection.Demo cannot access a member of class com.xfoss.Reflection.Test with modifiers "private"
+	    at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:394)
+	    at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674)
+    	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1140)
+    	at java.base/java.lang.reflect.Field.set(Field.java:817)
+    	at com.xfoss.Reflection.Demo.main(Demo.java:54)
+```
