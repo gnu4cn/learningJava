@@ -9,7 +9,7 @@ import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 
 application {
-    mainClassName = "com.xfoss.Reflection.Demo" 
+    mainClassName = "com.xfoss.SNMPv3Demo.SNMPv3_Demo" 
     // mainClass.set(mainClassName)
 }
 
@@ -22,17 +22,18 @@ plugins {
 }
 
 sourceSets.getByName("main") {
-    java.srcDir("src/main/java")
+    java.srcDir("src")
 }
 
 repositories {
     flatDir {
-        dirs("src/main/java")
+        dirs("lib")
     }
     // ~/.gradle/init.gradle 设置了别的 repo
 }
 
 dependencies {
+    implementation("org.snmp4j:snmp4j:3.7.0")
     implementation("commons-io:commons-io:2.6")
     implementation("com.diogonunes:JColor:5.2.0")
     implementation("net.java.dev.jna:jna:5.5.0")
