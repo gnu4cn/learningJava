@@ -26,26 +26,44 @@ import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 public class SNMPv3_Demo {
-    final static OID[] columnOids = new OID[] {
-        new OID("1.3.6.1.2.1.1.3.0"),               // 运行时间？
-            new OID("1.3.6.1.2.1.1.5.0"),           // UPS 名称
-            new OID("1.3.6.1.2.1.33.1.3.3.1.2.1"),  // U1 工频
-            new OID("1.3.6.1.2.1.33.1.3.3.1.2.2"),  // V1 工频
-            new OID("1.3.6.1.2.1.33.1.3.3.1.2.3"),  // W1 工频
-            new OID("1.3.6.1.2.1.33.1.3.3.1.3.1"),  // U1 电压
-            new OID("1.3.6.1.2.1.33.1.3.3.1.3.2"),  // V1 电压
-            new OID("1.3.6.1.2.1.33.1.3.3.1.3.3"),  // W1 电压
-            new OID("1.3.6.1.2.1.33.1.5.1.0"),      // U2-V2-W2 工频
-            new OID("1.3.6.1.2.1.33.1.5.3.1.2.1"),  // U2 电压
-            new OID("1.3.6.1.2.1.33.1.5.3.1.2.1"),  // V2 电压
-            new OID("1.3.6.1.2.1.33.1.5.3.1.2.1")   // W2 电压
+    final static String[] columnOids = new String[] {
+        "1.3.6.1.2.1.1.3.0",               // 运行时间？
+            "1.3.6.1.2.1.1.5.0",           // UPS 名称
+            "1.3.6.1.2.1.33.1.3.3.1.2.1",  // U1 工频
+            "1.3.6.1.2.1.33.1.3.3.1.2.2",  // V1 工频
+            "1.3.6.1.2.1.33.1.3.3.1.2.3",  // W1 工频
+            "1.3.6.1.2.1.33.1.3.3.1.3.1",  // U1 电压
+            "1.3.6.1.2.1.33.1.3.3.1.3.2",  // V1 电压
+            "1.3.6.1.2.1.33.1.3.3.1.3.3",  // W1 电压
+            "1.3.6.1.2.1.33.1.5.1.0",      // U2-V2-W2 工频
+            "1.3.6.1.2.1.33.1.5.3.1.2.1",  // U2 电压
+            "1.3.6.1.2.1.33.1.5.3.1.2.1",  // V2 电压
+            "1.3.6.1.2.1.33.1.5.3.1.2.1"   // W2 电压
     };
 
-    final static String nmsAdmin = System.getenv("SNMP_ADMIN");
-    final static String authKey = System.getenv("SNMP_AUTH_KEY");
-    final static String privKey = System.getenv("SNMP_PRIV_KEY");
-
     public static void main(String[] args) throws IOException, InterruptedException {
+        sendRequest(snmpInit(), createGetPdu(columnOids), targetInit("10.12.10.108", "161"));
+    }
+
+    private static UserTarget targetInit(String hostIp, String port) {
+        String nmsAdmin = System.getenv("SNMP_ADMIN");
+
+        UserTarget target = new UserTarget();
+        target.setVersion(SnmpConstants.version3);
+        target.setAddress(new UdpAddress(String.format("%s/%s", hostIp, port)));
+        target.setSecurityLevel(SecurityLevel.AUTH_PRIV);
+        target.setSecurityName(new OctetString(nmsAdmin));
+        target.setTimeout(3000);	//3s
+        target.setRetries(3);
+
+        return target;
+    }
+
+    private static Snmp snmpInit() throws IOException, InterruptedException {
+        String nmsAdmin = System.getenv("SNMP_ADMIN");
+        String authKey = System.getenv("SNMP_AUTH_KEY");
+        String privKey = System.getenv("SNMP_PRIV_KEY");
+
 
         OctetString localEngineID = new OctetString(MPv3.createLocalEngineID());
         Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
@@ -72,18 +90,10 @@ public class SNMPv3_Demo {
         //snmp.getUSM().addUser(new OctetString("nmsAdmin"), new OctetString("0002651100"), user);
         snmp.getUSM().addUser(new OctetString(nmsAdmin), user);
 
-        UserTarget target = new UserTarget();
-        target.setVersion(SnmpConstants.version3);
-        target.setAddress(new UdpAddress("10.12.10.108/161"));
-        target.setSecurityLevel(SecurityLevel.AUTH_PRIV);
-        target.setSecurityName(new OctetString(nmsAdmin));
-        target.setTimeout(3000);	//3s
-        target.setRetries(3);
-
-        sendRequest(snmp, createGetPdu(), target);
+        return snmp;
     }
 
-    private static PDU createGetPdu() {
+    private static PDU createGetPdu(String[] columnOids) {
 
         // OctetString contextEngineId = new OctetString("0002651100[02]");
         OctetString contextEngineId = new OctetString();
@@ -93,8 +103,8 @@ public class SNMPv3_Demo {
         pdu.setContextEngineID(contextEngineId);	//if not set, will be SNMP engine id
         //pdu.setContextName(contextName);  //must be same as SNMP agent
 
-        for ( OID oid: columnOids ){
-            pdu.add(new VariableBinding(oid));	//sysUpTime
+        for ( String oid: columnOids ){
+            pdu.add(new VariableBinding(new OID(oid)));	//sysUpTime
         }
 
         return pdu;
