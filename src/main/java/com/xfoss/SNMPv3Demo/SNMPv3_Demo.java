@@ -41,9 +41,38 @@ public class SNMPv3_Demo {
             "1.3.6.1.2.1.33.1.5.3.1.2.1"   // W2 电压
     };
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        sendRequest(snmpInit(), createGetPdu(columnOids), targetInit("10.12.10.108", "161"));
+    public static void main(String[] args) {
+        sendRequest("10.12.10.108", "161", columnOids);
     }
+
+    private static void sendRequest(String hostIp, String portNo, String[] columnOids)
+        {
+            PDU response = new PDU();
+            try {
+                Snmp snmp = snmpInit();
+                UserTarget target = targetInit(hostIp, portNo);
+                PDU pdu = createGetPdu(columnOids);
+                ResponseEvent responseEvent = snmp.send(pdu, target);
+
+                response = responseEvent.getResponse();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (response == null) {
+                System.out.println("TimeOut...");
+            } else {
+                if (response.getErrorStatus() == PDU.noError) {
+                    List<? extends VariableBinding> vbs = response.getVariableBindings();
+                    // Vector <? extends VariableBinding> vbs = response.getVariableBindings();
+                    for (VariableBinding vb : vbs) {
+                        System.out.format("%s, %s, %s\n", vb, vb.getVariable().getSyntaxString(), vb.getVariable());
+                    }
+                } else {
+                    System.out.println("Error:" + response.getErrorStatusText());
+                }
+            }
+        }
 
     private static UserTarget targetInit(String hostIp, String port) {
         String nmsAdmin = System.getenv("SNMP_ADMIN");
@@ -110,23 +139,4 @@ public class SNMPv3_Demo {
         return pdu;
     }
 
-    private static void sendRequest(Snmp snmp, PDU pdu, UserTarget target)
-            throws IOException {
-            ResponseEvent responseEvent = snmp.send(pdu, target);
-            PDU response = responseEvent.getResponse();
-
-            if (response == null) {
-                System.out.println("TimeOut...");
-            } else {
-                if (response.getErrorStatus() == PDU.noError) {
-                    List<? extends VariableBinding> vbs = response.getVariableBindings();
-                    // Vector <? extends VariableBinding> vbs = response.getVariableBindings();
-                    for (VariableBinding vb : vbs) {
-                        System.out.format("%s, %s, %s\n", vb, vb.getVariable().getSyntaxString(), vb.getVariable());
-                    }
-                } else {
-                    System.out.println("Error:" + response.getErrorStatusText());
-                }
-            }
-    }
 }
