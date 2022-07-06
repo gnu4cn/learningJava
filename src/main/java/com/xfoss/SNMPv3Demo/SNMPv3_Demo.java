@@ -83,10 +83,9 @@ public class SNMPv3_Demo {
         target.setTimeout(3000);	//3s
         target.setRetries(3);
 
-        OctetString contextEngineId = new OctetString("0002651100[02]");
-        // OctetString contextEngineId = new OctetString();
+        // OctetString contextEngineId = new OctetString("0002651100[02]");
+        OctetString contextEngineId = new OctetString();
         sendRequest(snmp, createGetPdu(contextEngineId), target);
-        snmpWalk(snmp, target, contextEngineId);
     }
 
     private static PDU createGetPdu(OctetString contextEngineId) {
@@ -114,26 +113,12 @@ public class SNMPv3_Demo {
                     List<? extends VariableBinding> vbs = response.getVariableBindings();
                     // Vector <? extends VariableBinding> vbs = response.getVariableBindings();
                     for (VariableBinding vb : vbs) {
-                        System.out.println(vb + " ," + vb.getVariable().getSyntaxString());
+                        System.out.format("%s, %s, %s\n", vb, vb.getVariable().getSyntaxString(), vb.getVariable());
                     }
                 } else {
                     System.out.println("Error:" + response.getErrorStatusText());
                 }
             }
-    }
-
-    private static void snmpWalk(Snmp snmp, UserTarget target, OctetString contextEngineId) {
-        TableUtils utils = new TableUtils(snmp,
-                new MyDefaultPDUFactory(PDU.GETNEXT, //GETNEXT or GETBULK)
-                contextEngineId));
-        utils.setMaxNumRowsPerPDU(5);	//only for GETBULK, set max-repetitions, default is 10
-
-        // If not null, all returned rows have an index in a range (lowerBoundIndex, upperBoundIndex]
-        List<TableEvent> l = utils.getTable(target, columnOids, new OID("3"), new OID("10"));
-        for (TableEvent e : l) {
-            System.out.println(e);
-            System.out.println("已连接上？");
-        }
     }
 
     private static class MyDefaultPDUFactory extends DefaultPDUFactory {
