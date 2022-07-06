@@ -49,7 +49,7 @@ public class SNMPv3_Demo {
 
         OctetString localEngineID = new OctetString(MPv3.createLocalEngineID());
         Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
-        //
+
         // https://stackoverflow.com/questions/57273315/snmp4j-client-gives-unsupported-security-level
         //
         // In SNMP4J 3.x the security protocol AuthSHA (and AuthMD5) are no longer added
@@ -80,12 +80,14 @@ public class SNMPv3_Demo {
         target.setTimeout(3000);	//3s
         target.setRetries(3);
 
-        // OctetString contextEngineId = new OctetString("0002651100[02]");
-        OctetString contextEngineId = new OctetString();
-        sendRequest(snmp, createGetPdu(contextEngineId), target);
+        sendRequest(snmp, createGetPdu(), target);
     }
 
-    private static PDU createGetPdu(OctetString contextEngineId) {
+    private static PDU createGetPdu() {
+
+        // OctetString contextEngineId = new OctetString("0002651100[02]");
+        OctetString contextEngineId = new OctetString();
+
         ScopedPDU pdu = new ScopedPDU();
         pdu.setType(PDU.GET);
         pdu.setContextEngineID(contextEngineId);	//if not set, will be SNMP engine id
