@@ -24,9 +24,6 @@ import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
-import org.snmp4j.util.DefaultPDUFactory;
-import org.snmp4j.util.TableEvent;
-import org.snmp4j.util.TableUtils;
 
 public class SNMPv3_Demo {
     final static OID[] columnOids = new OID[] {
@@ -119,23 +116,5 @@ public class SNMPv3_Demo {
                     System.out.println("Error:" + response.getErrorStatusText());
                 }
             }
-    }
-
-    private static class MyDefaultPDUFactory extends DefaultPDUFactory {
-        private OctetString contextEngineId = null;
-
-        public MyDefaultPDUFactory(int pduType, OctetString contextEngineId) {
-            super(pduType);
-            this.contextEngineId = contextEngineId;
-        }
-
-        @Override
-        public PDU createPDU(Target target) {
-            PDU pdu = super.createPDU(target);
-            if (target.getVersion() == SnmpConstants.version3) {
-                ((ScopedPDU)pdu).setContextEngineID(contextEngineId);
-            }
-            return pdu;
-        }		
     }
 }
