@@ -83,8 +83,8 @@ public class SNMPv3_Demo {
         target.setTimeout(3000);	//3s
         target.setRetries(3);
 
-        // OctetString contextEngineId = new OctetString("0002651100[02]");
-        OctetString contextEngineId = new OctetString();
+        OctetString contextEngineId = new OctetString("0002651100[02]");
+        // OctetString contextEngineId = new OctetString();
         sendRequest(snmp, createGetPdu(contextEngineId), target);
         snmpWalk(snmp, target, contextEngineId);
     }
