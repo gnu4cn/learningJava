@@ -1,4 +1,4 @@
-package com.xfoss.SNMPv3Demo;
+package com.xfoss.Utils;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +25,11 @@ import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
-public class SNMPv3_Demo {
+public class SNMPv3API {
+    final static String SNMP_USER = System.getenv("SNMP_ADMIN");
+    final static String AUTH_KEY = System.getenv("SNMP_AUTH_KEY");
+    final static String PRIV_KEY = System.getenv("SNMP_PRIV_KEY");
+
     final static String[] columnOids = new String[] {
         "1.3.6.1.2.1.1.3.0",               // 运行时间？
             "1.3.6.1.2.1.1.5.0",           // UPS 名称
@@ -45,7 +49,7 @@ public class SNMPv3_Demo {
         sendRequest("10.12.10.108", "161", columnOids);
     }
 
-    private static void sendRequest(String hostIp, String portNo, String[] columnOids)
+    public static void sendRequest(String hostIp, String portNo, String[] columnOids)
         {
             PDU response = new PDU();
             try {
@@ -75,13 +79,12 @@ public class SNMPv3_Demo {
         }
 
     private static UserTarget targetInit(String hostIp, String port) {
-        String nmsAdmin = System.getenv("SNMP_ADMIN");
 
         UserTarget target = new UserTarget();
         target.setVersion(SnmpConstants.version3);
         target.setAddress(new UdpAddress(String.format("%s/%s", hostIp, port)));
         target.setSecurityLevel(SecurityLevel.AUTH_PRIV);
-        target.setSecurityName(new OctetString(nmsAdmin));
+        target.setSecurityName(new OctetString(SNMP_USER));
         target.setTimeout(3000);	//3s
         target.setRetries(3);
 
@@ -89,10 +92,6 @@ public class SNMPv3_Demo {
     }
 
     private static Snmp snmpInit() throws IOException, InterruptedException {
-        String nmsAdmin = System.getenv("SNMP_ADMIN");
-        String authKey = System.getenv("SNMP_AUTH_KEY");
-        String privKey = System.getenv("SNMP_PRIV_KEY");
-
 
         OctetString localEngineID = new OctetString(MPv3.createLocalEngineID());
         Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
@@ -110,14 +109,14 @@ public class SNMPv3_Demo {
 
         // Add User
         UsmUser user = new UsmUser(
-                new OctetString(nmsAdmin),
-                AuthSHA.ID, new OctetString(authKey),
-                PrivDES.ID, new OctetString(privKey)
+                new OctetString(SNMP_USER),
+                AuthSHA.ID, new OctetString(AUTH_KEY),
+                PrivDES.ID, new OctetString(PRIV_KEY)
                 );
         //If the specified SNMP engine id is specified, this user can only be used with the specified engine ID
         //So if it's not correct, will get an error that can't find a user from the user table.
         //snmp.getUSM().addUser(new OctetString("nmsAdmin"), new OctetString("0002651100"), user);
-        snmp.getUSM().addUser(new OctetString(nmsAdmin), user);
+        snmp.getUSM().addUser(new OctetString(SNMP_USER), user);
 
         return snmp;
     }

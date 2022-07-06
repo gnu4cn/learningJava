@@ -9,7 +9,7 @@ import edu.sc.seis.launch4j.tasks.DefaultLaunch4jTask
 
 
 application {
-    mainClassName = "com.xfoss.SNMPv3Demo.SNMPv3_Demo" 
+    mainClassName = "com.xfoss.Utils.SNMPv3API" 
     // mainClass.set(mainClassName)
 }
 
