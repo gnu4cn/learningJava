@@ -43,7 +43,7 @@ Animal anim = new Animal ();
 *图 4 - 创建出一个 Animal 对象时*
 
 
-__ 一个 `new Animal()` 对象会是怎样的__ ？
+__一个 `new Animal()` 对象会是怎样的__ ？
 
 ![一些可怕的对象](images/Ch08_05.png)
 
