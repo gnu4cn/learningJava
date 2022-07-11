@@ -2,11 +2,11 @@ package com.xfoss.learningJava;
 
 import java.io.*;
 import java.util.Objects;
-import com.xfoss.Utils.XPlatformThings;
+import com.xfoss.Utils.XPlatformHelper;
 
 public class ReadFile {
     public static void main (String[] args) {
-        String wd = XPlatformThings.getWorkingDir("learningJava");
+        String wd = XPlatformHelper.getWorkingDir("learningJava");
 
         try {
             File f = new File(String.format("%s/data/MyText.txt", wd));

@@ -2,13 +2,13 @@ package com.xfoss.CollectionAndGenerics;
 
 import java.util.*;
 import java.io.*;
-import com.xfoss.Utils.XPlatformThings;
+import com.xfoss.Utils.XPlatformHelper;
 
 public class JukeBox6 {
 
     // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
     ArrayList<Song> songList = new ArrayList<Song> ();
-    String wDir = XPlatformThings.getWorkingDir("learningJava");
+    String wDir = XPlatformHelper.getWorkingDir("learningJava");
 
     public JukeBox6 () {
         getSongs();

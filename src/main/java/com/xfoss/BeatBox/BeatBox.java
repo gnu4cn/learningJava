@@ -7,7 +7,6 @@ import java.util.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
-import com.xfoss.Utils.XPlatformThings;
 
 public class BeatBox extends JFrame{
     JPanel mainPanel;

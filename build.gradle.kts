@@ -16,7 +16,7 @@ application {
 plugins {
     id("application")
     id("java")
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "5.1.0"
     id("edu.sc.seis.launch4j")  version "2.5.1"
 }

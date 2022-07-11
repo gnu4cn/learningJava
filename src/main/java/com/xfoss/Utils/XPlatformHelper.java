@@ -2,7 +2,7 @@ package com.xfoss.Utils;
 
 import java.io.File;
 
-public class XPlatformThings {
+public class XPlatformHelper {
     private static String OS = (System.getProperty("os.name")).toUpperCase();
 
     public static String getWorkingDir (String appName) {

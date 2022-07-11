@@ -2,11 +2,11 @@ package com.xfoss.CollectionAndGenerics;
 
 import java.util.*;
 import java.io.*;
-import com.xfoss.Utils.XPlatformThings;
+import com.xfoss.Utils.XPlatformHelper;
 
 public class JukeBox1 {
     ArrayList<String> songList = new ArrayList<String> ();
-    String wDir = XPlatformThings.getWorkingDir("learningJava");
+    String wDir = XPlatformHelper.getWorkingDir("learningJava");
 
     public JukeBox1 () {
         getSongs();

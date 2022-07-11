@@ -8,7 +8,6 @@ import java.util.*;
 import java.awt.event.*;
 import java.net.*;
 import javax.swing.event.*;
-import com.xfoss.Utils.XPlatformThings;
 
 public class BeatBoxFinal extends JFrame{
     JPanel mainPanel;

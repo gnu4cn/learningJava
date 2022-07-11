@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.util.*;
-import com.xfoss.Utils.XPlatformThings;
+import com.xfoss.Utils.XPlatformHelper;
 
 public class Pond implements Serializable {
     private transient Duck duck = new Duck();
@@ -14,7 +14,7 @@ public class Pond implements Serializable {
 
         try {
             FileOutputStream fStream = new FileOutputStream(String.format("%s/Pond.ser", 
-                        XPlatformThings.getWorkingDir("learningJava")));
+                        XPlatformHelper.getWorkingDir("learningJava")));
             ObjectOutputStream oStream = new ObjectOutputStream(fStream);
 
             oStream.writeObject(pond);

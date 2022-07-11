@@ -46,52 +46,71 @@ public class SNMPv3API {
     };
 
     public static void main(String[] args) {
-        sendRequest("10.12.10.108", "161", columnOids);
+        for (String oid: columnOids) {
+            String result = sendRequest(
+                    "10.12.10.108", 
+                    "161", 
+                    oid,
+                    SNMP_USER,
+                    AUTH_KEY,
+                    PRIV_KEY);
+            System.out.println(result);
+        }
     }
 
-    public static void sendRequest(String hostIp, String portNo, String[] columnOids)
-        {
-            PDU response = new PDU();
-            try {
-                Snmp snmp = snmpInit();
-                UserTarget target = targetInit(hostIp, portNo);
-                PDU pdu = createGetPdu(columnOids);
-                ResponseEvent responseEvent = snmp.send(pdu, target);
+    public static String sendRequest(
+            String hostIp, 
+            String portNo, 
+            String columnOid, 
+            String securityName, 
+            String authKey, 
+            String privKey
+            ) 
+    {
+        PDU response = new PDU();
+        try {
+            Snmp snmp = snmpInit(securityName, authKey, privKey);
+            UserTarget target = targetInit(hostIp, portNo, securityName);
+            PDU pdu = createGetPdu(columnOid);
+            ResponseEvent responseEvent = snmp.send(pdu, target);
 
-                response = responseEvent.getResponse();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            response = responseEvent.getResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: 连接 SNMP 对象时失败/Failed to connect to the SNMP server.";
+        }
 
-            if (response == null) {
-                System.out.println("TimeOut...");
-            } else {
-                if (response.getErrorStatus() == PDU.noError) {
-                    List<? extends VariableBinding> vbs = response.getVariableBindings();
-                    // Vector <? extends VariableBinding> vbs = response.getVariableBindings();
-                    for (VariableBinding vb : vbs) {
-                        System.out.format("%s, %s, %s\n", vb, vb.getVariable().getSyntaxString(), vb.getVariable());
-                    }
-                } else {
-                    System.out.println("Error:" + response.getErrorStatusText());
+        if (response == null) {
+            return new String("Error: 获取 SNMP 数据失败/Failed to fetch SNMP OID data.");
+        } else {
+            if (response.getErrorStatus() == PDU.noError) {
+                List<? extends VariableBinding> vbs = response.getVariableBindings();
+                // Vector <? extends VariableBinding> vbs = response.getVariableBindings();
+                for (VariableBinding vb : vbs) {
+                    return vb.getVariable().toString();
                 }
+            } else {
+                return String.format("Error: %s", response.getErrorStatusText());
             }
         }
 
-    private static UserTarget targetInit(String hostIp, String port) {
+        return "Complete";
+    }
+
+    private static UserTarget targetInit(String hostIp, String port, String securityName) {
 
         UserTarget target = new UserTarget();
         target.setVersion(SnmpConstants.version3);
         target.setAddress(new UdpAddress(String.format("%s/%s", hostIp, port)));
         target.setSecurityLevel(SecurityLevel.AUTH_PRIV);
-        target.setSecurityName(new OctetString(SNMP_USER));
+        target.setSecurityName(new OctetString(securityName));
         target.setTimeout(3000);	//3s
         target.setRetries(3);
 
         return target;
     }
 
-    private static Snmp snmpInit() throws IOException, InterruptedException {
+    private static Snmp snmpInit(String securityName, String authKey, String privKey) throws IOException, InterruptedException {
 
         OctetString localEngineID = new OctetString(MPv3.createLocalEngineID());
         Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
@@ -109,19 +128,19 @@ public class SNMPv3API {
 
         // Add User
         UsmUser user = new UsmUser(
-                new OctetString(SNMP_USER),
-                AuthSHA.ID, new OctetString(AUTH_KEY),
-                PrivDES.ID, new OctetString(PRIV_KEY)
+                new OctetString(securityName),
+                AuthSHA.ID, new OctetString(authKey),
+                PrivDES.ID, new OctetString(privKey)
                 );
         //If the specified SNMP engine id is specified, this user can only be used with the specified engine ID
         //So if it's not correct, will get an error that can't find a user from the user table.
         //snmp.getUSM().addUser(new OctetString("nmsAdmin"), new OctetString("0002651100"), user);
-        snmp.getUSM().addUser(new OctetString(SNMP_USER), user);
+        snmp.getUSM().addUser(new OctetString(securityName), user);
 
         return snmp;
     }
 
-    private static PDU createGetPdu(String[] columnOids) {
+    private static PDU createGetPdu(String columnOid) {
 
         // OctetString contextEngineId = new OctetString("0002651100[02]");
         OctetString contextEngineId = new OctetString();
@@ -131,11 +150,8 @@ public class SNMPv3API {
         pdu.setContextEngineID(contextEngineId);	//if not set, will be SNMP engine id
         //pdu.setContextName(contextName);  //must be same as SNMP agent
 
-        for ( String oid: columnOids ){
-            pdu.add(new VariableBinding(new OID(oid)));	//sysUpTime
-        }
+        pdu.add(new VariableBinding(new OID(columnOid)));	//sysUpTime
 
         return pdu;
     }
-
 }
