@@ -480,7 +480,7 @@ list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！�
 
 **一个原生整数的 `ArrayList`**
 
-***在没有 “自动打包” 特性时（Java 5.0 之前的版本）***
+***在没有 “自动装箱” 特性时（Java 5.0 之前的版本）***
 
 ```java
 public void doNumsOldWay () {
@@ -495,17 +495,17 @@ public void doNumsOldWay () {
 }
 ```
 
-### <a id="autoboxing"></a>自动打包：模糊原生值与对象之间的界线
+### <a id="autoboxing"></a>自动装箱：模糊原生值与对象之间的界线
 
 ***Autoboxing: bluring the line between primitive and object***
 
-Java 5.0 加入进来的自动打包特性（the autoboxing feature），就可以 *自动* 完成原生值到包装对象的转换！
+Java 5.0 加入进来的自动装箱特性（the autoboxing feature），就可以 *自动* 完成原生值到包装对象的转换！
 
 下面瞧瞧在构造一个保存整数的 `ArrayList` 时，发生了什么。
 
 **一个原生整数的 `ArrayList`**
 
-***有着自动打包时（Java 5.0 及以后的版本中）***
+***有着自动装箱时（Java 5.0 及以后的版本中）***
 
 ```java
 public void doNumsNewWay () {
@@ -528,16 +528,16 @@ public void doNumsNewWay () {
 
 * **既然要保存 `int`s, 为什么不声明一个 `ArrayList<int>` 呢**？
 
-> 因为...不可以这样。请记住，泛型规则（the rule for generic types）就是，你只能指定的，仅为类或接口的类型，并非原生类型。因此 `ArrayList<int>` 是不会被编译的。不过就如同上面的代码，实际上这并不重要，因为编译器允许把整数放到 `ArrayList<Integer>` 中去。事实上，在使用兼容Java 5.0 的编译器时，对于把原生值放入到清单为原生值包装类类型的 `ArrayList`，是没有办法阻止的，也因为在这样的编译器下，自动打包是默认启用的。那么就可以把原生布尔值放入到 `ArrayList<Boolean>`中，把字符放入到 `ArrayList<Character>`里。
+> 因为...不可以这样。请记住，泛型规则（the rule for generic types）就是，你只能指定的，仅为类或接口的类型，并非原生类型。因此 `ArrayList<int>` 是不会被编译的。不过就如同上面的代码，实际上这并不重要，因为编译器允许把整数放到 `ArrayList<Integer>` 中去。事实上，在使用兼容Java 5.0 的编译器时，对于把原生值放入到清单为原生值包装类类型的 `ArrayList`，是没有办法阻止的，也因为在这样的编译器下，自动装箱是默认启用的。那么就可以把原生布尔值放入到 `ArrayList<Boolean>`中，把字符放入到 `ArrayList<Character>`里。
 
 
-### 自动打包几乎无处不在
+### 自动装箱几乎无处不在
 
 **Autoboxing works almost everywhere**
 
-自动打包特性不光是可以完成数据集（a collection）中原生值的打包和解包......还可以让我们在几乎所有期望得到原生值，或原生值包装的任何地方，去方便地直接二者互用。这就非常方便了！
+自动装箱特性不光是可以完成数据集（a collection）中原生值的打包和解包......还可以让我们在几乎所有期望得到原生值，或原生值包装的任何地方，去方便地直接二者互用。这就非常方便了！
 
-**自动打包的乐趣**
+**自动装箱的乐趣**
 
 * **作为方法的参数使用**
 
