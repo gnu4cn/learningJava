@@ -10,32 +10,65 @@
         "summary": "SUMMARY.md"
     },
     "plugins": [
-        "donate",
-        "click-reveal",
-        "sitemap"
+        "highlight-code",
+        "fontsettings",
+        "include-codeblock@^3.0.2",
+        "tbfed-pagefooter@^0.0.1",
+        "sectionx@^3.1.0",
+        "sitemap",
+        "code",
+        "-lunr",
+        "-search",
+        "-sharing",
+        "-fontsettings",
+        "cuav-chapters",
+        "heading-anchors",
+        "splitter",
+        "theme-door",
+        "search-pro-fixed"
     ],
+    "variables": {
+        "doorTheme": {
+            "nav": [
+                {
+                    "url": "https://rust-lang.xfoss.com",
+                    "target": "_blank",
+                    "name": "学习 Rust 编程语言 · ⚙️"
+                },
+                {
+                    "url": "https://ccna.xfoss.com",
+                    "target": "_blank",
+                    "name": "学习 “网络通信” 技术 CCNA · 🖧"
+                }
+            ]
+
+        }
+    },
     "pluginsConfig": {
-        "donate": {
-            "wechat": "docs/images/611739062.jpg",
-            "alipay": "docs/images/633086908.jpg",
-            "button": "打赏"
+        "doorTheme": {
+            "search-placeholder": "请输入关键字搜索",
+            "logo": "./docs/images/openjdk_java.png",
+            "favicon": "./docs/images/java-lang.ico"
         },
-        "fontSettings": {
-            "theme": "white",
-            "family": "msyh",
-            "size": 2
+        "include-codeblock": {
+            "template": "ace",
+            "unindent": true,
+            "edit": true
         },
-        "plugins": [
-            "yahei",
-            "katex",
-            "-search"
-        ],
+        "tbfed-pagefooter": {
+            "copyright": "Copyleft @ java-lang.xfoss.com 2022",
+            "modify_label": "该文件修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "sectionx": {
+            "tag": "b"
+        },
         "sitemap": {
-            "hostname": "https://java.xfoss.com/"
+            "hostname": "https://java-lang.xfoss.com/"
         }
     },
     "pdf": {
-        "pageNumbers": true, 
+        "pageNumbers": true,
         "fontFamily": "Arial",
         "fontSize": 12,
         "paperSize": "a4",

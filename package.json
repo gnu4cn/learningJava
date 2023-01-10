@@ -1,27 +1,51 @@
 {
-    "name": "learningjava",
-    "version": "0.1.0",
-    "description": "A project for learning JAVA language.",
-    "main": "index.js",
-    "directories": {
-        "doc": "docs"
-    },
-    "scripts": {
-        "start": "./gradlew build && java -jar build/libs/com.xfoss.learningJava-0.0.1.jar",
-        "git-push": "git add . && git commit -m \"Update.\" && git push"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/gnu4cn/learningJava.git"
-    },
-    "keywords": [
-        "JAVA",
-        "learning"
-    ],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/gnu4cn/learningJava/issues"
-    },
-    "homepage": "https://github.com/gnu4cn/learningJava#readme"
+  "name": "learningjava",
+  "version": "0.1.0",
+  "description": "A project for learning JAVA language.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "./gradlew build && java -jar build/libs/com.xfoss.learningJava-0.0.1.jar",
+    "git-push": "git add . && git commit -m \"Update.\" && git push",
+    "sl-checkout": "sl pull && sl go main",
+    "sl-push": "sl add . && sl commit -m \"Updated.\" && sl push",
+    "serve": "npx honkit serve --port=10445 --lrport=35711 &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnu4cn/learningJava.git"
+  },
+  "keywords": [
+    "JAVA",
+    "learning"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnu4cn/learningJava/issues"
+  },
+  "homepage": "https://github.com/gnu4cn/learningJava#readme",
+  "devDependencies": {
+    "gitbook-plugin-back-to-top-button": "^0.1.4",
+    "gitbook-plugin-cuav-chapters": "^1.0.3",
+    "gitbook-plugin-fontsettings": "^2.0.0",
+    "gitbook-plugin-heading-anchors": "^1.0.3",
+    "gitbook-plugin-highlight-code": "^1.0.0",
+    "gitbook-plugin-theme-comscore": "^0.0.3",
+    "honkit": "^4.0.4"
+  },
+  "dependencies": {
+    "gitbook-plugin-ace": "^0.3.2",
+    "gitbook-plugin-code": "^0.1.0",
+    "gitbook-plugin-include-codeblock": "^3.2.3",
+    "gitbook-plugin-search-pro-fixed": "^1.0.1",
+    "gitbook-plugin-sectionx": "^3.1.0",
+    "gitbook-plugin-sitemap": "^1.2.0",
+    "gitbook-plugin-splitter": "^0.0.8",
+    "gitbook-plugin-tbfed-pagefooter": "^0.0.1",
+    "gitbook-plugin-theme-door": "^1.0.2"
+  }
+
 }
