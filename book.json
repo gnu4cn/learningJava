@@ -39,6 +39,16 @@
                     "url": "https://ccna.xfoss.com",
                     "target": "_blank",
                     "name": "学习 “网络通信” 技术 CCNA · 🖧"
+                },
+                {
+                    "url": "https://ts-lang.xfoss.com",
+                    "target": "_blank",
+                    "name": "学习 TypeScript 语言 · 🖹"
+                },
+                {
+                    "url": "https://xfoss.com",
+                    "target": "_blank",
+                    "name": "捐助，donation · 💰"
                 }
             ]
 
