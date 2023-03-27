@@ -1,0 +1,929 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>异常处理：冒险行为</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html" class="active"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="例外处理风险行为"><a class="header" href="#例外处理风险行为">例外处理：风险行为</a></h1>
+<p><strong>Exception Handling: Risky Behavior</strong></p>
+<blockquote>
+<p>那肯定有风险，但在有什么事情出错的时候，可以处理风险。</p>
+</blockquote>
+<p><strong>发生了状况。文件不在那里。服务器宕机了</strong>。不过你是多么优秀的程序员，都没办法掌控所有事情。总会有些事情会出错。甚至错得离谱。在编写有风险的方法时，就需要代码来处理可能发生的不好情况。那么怎么知道某个方法具有风险呢？同时又要把 <em>处理</em> <strong>例外</strong> 情形的代码放在哪里呢？到目前为止，都还没有真正面对过任何风险。在运行时确实有出错的情况，但这些问题主要是自己编写代码的缺陷。也就是代码漏洞（bugs）。这些在开发时（development time, compilation time and runtime）都可以修复。然而这一章所说的问题处理代码，指的不是之前的那种，而是在运行时无法确保可以工作的代码。比如那些期望文件就在某个目录、服务器是在运行，或者线程确实保持睡眠等等的代码。同时也必须完成对异常处理的掌握。因为就要构建一个 “MIDI 音乐播放器”了。</p>
+<h2 id="构造一个music-machine的应用"><a class="header" href="#构造一个music-machine的应用">构造一个“Music Machine”的应用</a></h2>
+<p>在接下来的三章，会构建几个有着些许不同的声音应用，包括一个 “BeatBox Drum Machine”。实际上，在本教程完结时，就会写出一个可以把鼓节拍循环，像聊天室应用一样中聊天一样，发送给其他玩家的多玩家版本。虽然可以从GUI章节拷贝写好的程序，不过也可以马上开始编写这个应用的各个部分。</p>
+<p>虽然不是每个IT部门都需要这样的一个 “BeatBox” 服务器，这里编写这个应用的目的是更好地掌握 Java 语言。构建的目的是在学习 Java 时可以带来些乐趣而已。</p>
+<p><strong>完工后的 “BeatBox” 应用看起来像下面这样</strong>：</p>
+<p><img src="images/Ch11_01.png" alt="完成后的“BeatBox”应用" /></p>
+<p><em>图 1 - 完成后的“BeatBox”应用</em></p>
+<p>玩法是在16个“节拍”的各种乐器的复选框中打勾。比如，在节拍 1（16拍中的）时，贝斯鼓和沙锤就会演奏，节拍 2 上就什么也不会演奏，而在节拍 3 上则是沙锤和踩镲......明白了吧。点击“开始（Start）”按钮，程序就会循环播放编排的这些模式，直到点击 “停止（Stop）”停下来为止。在任何时候都可以通过将这些模式发送给 <code>BeatBox</code>服务器，对自己编排的模式加以“捕获（capture）”（这样其他玩家就可以收听到）。通过点击聊天框中的消息，还可以收听到和消息一起发出来的收到的曲目。</p>
+<h2 id="先从简单的开始"><a class="header" href="#先从简单的开始">先从简单的开始</a></h2>
+<p><strong>We'll start with the basics</strong></p>
+<p>显然在完成这整个的程序前，需要学习一些东西，包括怎样去构建一个 <code>Swing</code> GUI，怎样通过网络通信与另一台机器连接，还需要一个小型的 <code>I/O</code>，从而可以一些东西发送给其他机器。</p>
+<p>当然还有 <code>JavaSound</code> 这个 API了。本章就要从这个API开始。现在先不要想 GUI的事情，忘掉网络通信和<code>I/O</code>，而是要专心获取到一些由 MIDI 产生、可以从电脑中传出来的声音。即使对 MIDI，也就是一种读取或构造音乐的技术不了解，也不用担心。</p>
+<p>所有需要掌握的内容，这里都有讲到。几乎可以嗅到一个唱片生意的味道。</p>
+<h3 id="关于-javasound-api"><a class="header" href="#关于-javasound-api">关于 <code>JavaSound</code> API</a></h3>
+<p><code>JavaSound</code>是自 1.3 版本开始加入到 Java 中的一套类与接口。这些类与接口并非特别的附加组件；他们是标准 J2SE 类库的一部分。<code>JavaSound</code>又被分为了两个部分：<code>MIDI</code>和<code>Sampled</code>。这里只使用到 <code>MIDI</code>。<code>MIDI</code>表示“乐器数字接口（Musical Instrument Digital Interface）”，同时也是各种不同种类的电音设备得以通信的标准协议（a standard protocol for getting different kinds of electronic sound equipment to communicate）。但对于这里的 <code>BeatBox</code> app，可以把 <code>MIDI</code> 想作 <em>某种类型的乐谱</em>，可将一些装置，比如某种高科技的“演奏钢琴”，放进这个表格。也就是说，MIDI数据本身并没有包含任何的 <em>声音</em>，他保存的是由MIDI所读取的、某种乐器的、可以回放的 <em>指令</em>（MIDI data doesn't actually include any <em>sound</em>, but it does include the <em>instructions</em> that a MIDI-reading instrument can play back）。或以另一个比方说，可把某个MIDI文件当作一个HTML文档，那么乐器就会对这个MIDI文件进行渲染（也就是演奏这个MIDI文件），如同Web浏览器渲染HTML文档一样。</p>
+<p>MIDI数据说的是要做 <em>什么</em>（奏出一个中音<code>C</code>调，还有多大力度，以及这个音有多长等等），但MIDI数据并不会描述会听到的 <em>声音</em>。MIDI是不知道怎样去发出长笛、钢琴或者 Jimi Hendrix 吉他声的。对于这些真实的声音，是需要某种可以读取和演奏MIDI文件的乐器（即MIDI设备）的。不过MIDI设备通常更像 <em>一整个乐队或乐团</em> 的很多种乐器了。这些乐器可以是实体装置，比如摇滚乐手使用的电子键盘合成器，也可以是存在于电脑种的、完全由软件构建的乐器。</p>
+<p>对于这里的 <code>BeatBox</code>应用，只会使用到Java自带的、内建的、纯软件的乐器。这些乐器叫做 <em>合成器（synthesizer）</em> （有人也称他们为 <em>软件合成器（software synth）</em>），因为他们可以 <em>创建出</em> 声音来。就是能听到的声音。</p>
+<p><img src="images/Ch11_02.png" alt="关于MIDI文件" /></p>
+<p><em>图 2 - 关于MIDI文件</em></p>
+<h3 id="首先需要一个-sequencer"><a class="header" href="#首先需要一个-sequencer">首先需要一个 <code>Sequencer</code></a></h3>
+<p>在可以播放出一个声音出来之前，首先就需要一个 <code>Sequence</code>对象。音序器是一个可以接收全部MIDI数据并将其发送到相应乐器的对象（The sequencer is the object that takes all the MIDI data and sends it to the right instruments）。正是这个东东，负责把音乐 <em>播放</em> 出来。音序器可以完成很多不同的事情，这里只是将其作为一个回访设备使用而已。就跟立体声音响上的CD播放器一样，只不过还有一些其他附加功能特性。类 <code>Sequencer</code>是在 <code>javax.sound.midi</code>包中（这个包是自版本1.3开始的Java的标准库）。因此首先就要确保可以构造（或获取到）一个<code>Sequencer</code>对象。</p>
+<pre><code class="language-java">package com.xfoss.BeatBox;
+
+// 这里导入了 javax.sound.midi 包
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        // 这里需要一个 Sequencer 对象。他是要用到的MIDI设备/乐器
+        // 的主要部分。他就是把所有MIDI信息编排为一首“乐曲”的那个
+        // 东东。但这里不会由我们自己去构造一个全新的 Sequencer 
+        // 对象 -- 必须请求 MidiSystem 给出一个来（与之前的用到的 
+        // Calendar 类中的静态方法 getInstance() 类似）
+        Sequencer seq = MidiSystem.getSequencer();
+
+        System.out.println(&quot;我们就得到了一个‘音序器（Sequencer）’&quot;);
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+</code></pre>
+<p>然而在编译编译这段代码时，就会抛出错误：</p>
+<pre><code class="language-console">[ERROR] .../src/main/java/com/xfoss/BeatBox/MusicTest1.java:[7,48] unreported exception javax.sound.midi.MidiUnavailableException; must be caught or declared to be thrown
+</code></pre>
+<p><strong>显然有地方出错了</strong>！</p>
+<p>这段代码不会被编译！编译器说有一个必须被捕获或声明的“未报告的例外（异常）”（The compiler says there's an &quot;unreported exception&quot; that must be caught or declared）。</p>
+<h3 id="在打算调用的方法在某个不是由自己本人编写的类中存在风险时会发生什么呢"><a class="header" href="#在打算调用的方法在某个不是由自己本人编写的类中存在风险时会发生什么呢">在打算调用的方法（在某个不是由自己本人编写的类中）存在风险时，会发生什么呢？</a></h3>
+<p><img src="images/Ch11_03.png" alt="异常处理原理" /></p>
+<p><em>图 3 - 异常处理原理</em></p>
+<h3 id="java中的方法使用异常来告诉调用代码不好的事情发生了运行失败"><a class="header" href="#java中的方法使用异常来告诉调用代码不好的事情发生了运行失败">Java中的方法使用异常来告诉调用代码，“不好的事情发生了。运行失败”</a></h3>
+<p><strong>Methods in Java use <em>exceptions</em> to tell the calling code, &quot;Something Bad Happened. I failed&quot;</strong></p>
+<p>Java的异常处理机制，作为处理运行时发生的“例外情形”方式，具有干净明亮的特点；可允许把全部的错误处理代码，放在易于阅读的位置。这种机制是基于代码编写者对调用到的方法具有风险性的了解（即调用的方法 <em>可能</em> 产生一个异常），因此就可以编写应对那种可能性的代码。在已经知道调用某个特定方法时可能得到异常时，就可以对导致异常的故障有所准备 -- 或许还可以从异常中恢复过来。</p>
+<p>那么，又怎样才能获悉某个方法是否会抛出异常呢？可以在具风险性的方法中，发现某个 <code>throws</code> 的线索。</p>
+<p><strong>方法 <code>getSequencer()</code> 带有风险。可能在运行时失败。因此他就必须 “声明” 在调用他时所有承担的风险</strong>。</p>
+<p><img src="images/Ch11_04.png" alt="Java语言中方法抛出异常的约定示例" /></p>
+<p><em>图 4 - Java语言中方法抛出异常的约定示例</em></p>
+<h3 id="编译器也需要明确代码编写者是否知悉所调用的方法具有风险性"><a class="header" href="#编译器也需要明确代码编写者是否知悉所调用的方法具有风险性">编译器也需要明确代码编写者是否知悉所调用的方法具有风险性</a></h3>
+<p><strong>The compiler needs to know that YOU know you're calling a risky method</strong>.</p>
+<p>如果能够把风险代码使用 <code>try/catch</code> 包装起来，那么编译器就会轻松很多。</p>
+<p>代码编写者运用<code>try/catch</code>代码块，就可以就告诉编译器，自己知道在所调用的方法中，可能会发生某种异常情况，同时准备好处理这种异常了。编译器不会关心怎样处理的异常；他只会关心代码编写者已经注意到有异常。</p>
+<blockquote>
+<p>亲爱的编译器：
+我了解这里会有风险，你认为这样做值得吗？我应该怎么做呢？
+Waikiki的 geeky</p>
+<p>亲爱的geeky:
+生命苦短（尤其是在内存堆上）。就承担那个风险吧。尝试（<code>try</code>）一下。只要在事情不妙的时候，在事情失控之前，可以捕获（<code>catch</code>）到所有问题就好。</p>
+</blockquote>
+<pre><code class="language-java">package com.xfoss.BeatBox;
+
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        try {
+            // 把有风险的东西放在一个 'try' 的代码块中
+            Sequencer seq = MidiSystem.getSequencer();
+            System.out.println(&quot;我们就得到了一个‘音序器（Sequencer）’&quot;);
+        } catch (MidiUnavailableException e) {
+            // 构造一个用于在异常情形发生时 -- 也就是调用 getSequencer() 时
+            // 抛出了 MidiUnavailableException 时，要做什么的 ‘catch’ 代码块 
+            System.out.println(&quot;Bummer&quot;);
+        }
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+</code></pre>
+<blockquote>
+<p>这里就要 <strong>尝试（TRY）</strong> 一下这个冒险的事，并且就要在失败时 <strong>捕获（CATCH）</strong> 自己了。</p>
+</blockquote>
+<h3 id="异常就是一个类型为-exception-的对象"><a class="header" href="#异常就是一个类型为-exception-的对象">异常就是一个......类型为 <code>Exception</code> 的对象</a></h3>
+<p>这可是一件好事，因为比如如果异常为类型<code>Broccoli</code>类型时，要记住他的类型就很难了。</p>
+<p><img src="images/Ch11_05.png" alt="类 Exception 本质" /></p>
+<p><em>图 5 - 类 <code>Exception</code> 本质</em></p>
+<p>回顾讲多态的那些章就知道，类型为 <code>Exception</code> 的某个对象，可以是类 <code>Exception</code> 任何子类的实例。</p>
+<p>由于把 <em>异常</em> 当作了一个普通对象，那么 <em>捕获</em> 到的就是个对象了。接下来的代码中，<code>catch</code> 的参数就被声明为了类型 <code>Exception</code>，同时参数引用变量为 <code>ex</code>。</p>
+<pre><code class="language-java">try {
+    // 这里完成一些有风险的事情
+} catch (Exception ex) { // 这就跟声明某个普通方法的参数是一样的
+    // 尝试从异常中恢复过来
+    // 这里的代码只会在抛出了某个异常时才运行。
+}
+</code></pre>
+<p>在 <code>catch</code> 代码块中编写什么，取决于抛出什么样的异常。比如在某台服务器宕机时，可能就会使用这个<code>catch</code>代码块来对另一台服务器进行尝试。在需要的文件不存在时，可能会请求用户帮助找到那个文件。</p>
+<h3 id="既然是自己编写的代码-捕获-了异常那么又是谁的代码-抛出-的异常呢"><a class="header" href="#既然是自己编写的代码-捕获-了异常那么又是谁的代码-抛出-的异常呢">既然是自己编写的代码 <strong>捕获</strong> 了异常，那么又是谁的代码 <strong>抛出</strong> 的异常呢？</a></h3>
+<p>在以后的代码编写生涯中，花在异常 <em>处理</em> 上的时间，要比花在 <em>创建</em> 与 <em>抛出</em> 他们的时间，会多得多。现在只要知道在代码 <em>调用</em> 风险方法 -- 某个声明了异常的方法时 -- 是那个风险方法 <em>抛出</em> 异常给作为调用者的你。</p>
+<p>在实际项目中，抛出异常的类和处理异常的类，都会由自己去编写。事实上到底谁去编写这些代码真的不重要......重要的是明白到底是那个方法 <em>抛出</em> 的异常，以及那个方法去 <em>捕获</em> 异常。</p>
+<p><img src="images/Ch11_06.png" alt="调用风险方法及异常的抛出" /></p>
+<p><em>图 6 - 调用风险方法及异常的抛出</em></p>
+<p>在编写的代码会抛出异常时，就必须 <em>声明</em> 那个异常。</p>
+<ol>
+<li>
+<p><strong>具风险性的方法的异常抛出代码</strong>：</p>
+<pre><code class="language-java">// 该方法 必须 告诉（通过声明）外部世界，他抛出了一个 BadException
+public void takeRisk () throws BadException {
+    if (abandonAllHope) {
+        // 创建一个新的 Exception 对象并将其抛出
+        throw new BadException();
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>调用这个风险方法的代码</strong>：</p>
+<pre><code class="language-java">public void crossFingers () {
+    try {
+        anObject.takeRisk();
+    } catch (BadException ex) {
+        System.out.println(&quot;Aaargh!&quot;);
+        // 即使不能从异常中恢复过来，至少也可以使用所有例外都会
+        // 继承的 printStackTrace() 方法
+        // 获取到一个栈轨迹（a stack trace）信息。
+        ex.printStackTrace();
+    }
+}
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>一个方法讲捕获到另一个方法所抛出的东西。例外总是被抛回给调用者。
+抛出异常的方法，必须声明他可能会抛出的异常。</p>
+</blockquote>
+<h3 id="编译器会检查所有东西除了运行时异常-runtimeexceptions"><a class="header" href="#编译器会检查所有东西除了运行时异常-runtimeexceptions">编译器会检查所有东西，除了运行时异常（ <code>RuntimeException</code>s）</a></h3>
+<p><strong>编译器要确保</strong>：</p>
+<ol>
+<li>
+<p>在代码中抛出了某个异常时，就必须在方法声明中，使用关键字 <code>throws</code> 对其进行声明。</p>
+</li>
+<li>
+<p>在调用到某个抛出了异常的方法时（也就是说，该方法声明了他会抛出异常），就必须就已经注意到可能的异常进行 <em>通告（acknowledge）</em>。让编译器得以放行的一种方式，就是把调用包装在一个 <code>try/catch</code> 中。（本章后面就会讲到第二种方法）</p>
+</li>
+</ol>
+<p><img src="images/Ch11_07.png" alt="运行时异常与非运行时异常" /></p>
+<p><em>图 7 - 运行时异常与非运行时异常</em></p>
+<h2 id="答疑"><a class="header" href="#答疑">答疑</a></h2>
+<ul>
+<li><strong>请等一下！怎么就说这是我们第一次不得不对异常进行 <code>try/catch</code> 操作呢？之前不是已经见到过 <code>NullPointerException</code> 和 <code>DivideByZero</code> 这样的异常了吗？在 <code>Integer.parseInt()</code> 那里就已经得到过 <code>NumberFormatException</code>。对这些异常，怎么就不是必须捕获呢</strong>？</li>
+</ul>
+<blockquote>
+<p>编译器会关注所有 <code>Exception</code> 子类，但会把特殊类型 <code>RuntimeException</code> 排除在外。对<code>RuntimeException</code>进行扩展的所有异常类，都可以通过编译器检查。运行时异常可在任何地方抛出，带或不带<code>throws</code>声明，有或没有 <code>try/catch</code> 代码块都无关紧要。编译器不会把精力放在，对某个方法声明他抛出了一个 <code>RuntimeException</code> ，或者调用者知晓可能在运行时收到异常的检查上。</p>
+</blockquote>
+<ul>
+<li><strong>你这个含糊其辞的回答，让我更加迷糊了。到底为何编译器不会关注这些运行时异常呢？难道这些运行时异常不会让程序进入停止运行状态吗</strong>？</li>
+</ul>
+<blockquote>
+<p>绝大多数运行时异常，都是由代码逻辑引起，而非那种在运行时编程者无法预测或防止的失效情形造成。编程者无法保证需要的文件就在那里，无法确保服务器是开机的。但却可以确保代码在对某个数组进行索引时，不会超出那个数组的边界（这正是 <code>.length</code> 属性的职责所在）。</p>
+<p>在开发和测试阶段，确实允许运行时异常的存在。但肯定不希望在 <code>try/catch</code> 代码块中编写代码，比如这样就会带来额外开销，去捕获那些压根儿就不应该出现的异常。</p>
+<p><code>try/catch</code> 是用来应对异常情况，而不是代码中的缺陷。在真的无法确保可以调用成功时，才去使用 <code>catch</code> 代码块，让程序从异常中恢复过来。或者至少可以打印出一条消息与栈踪迹的调试信息给用户，这样用户还可以找出到底发生了什么问题。</p>
+</blockquote>
+<h2 id="重点"><a class="header" href="#重点">重点</a></h2>
+<ul>
+<li>方法在运行时出现某些东西失效的情况下，可以抛出一个异常。</li>
+<li>某个异常总是一个<code>Exception</code>类类型的对象。（也就是如同那些多态章中所讲的那样，所有异常都是源自某个可以在其继承树往上找到 <code>Exception</code> 类的子类，An exception is always an object of type Exception.(Which, as you remember from the polymorphism chapters means the object is from a class that has <code>Exception</code> somewhere up its inheritance tree)）。</li>
+<li>编译器不会留意那些类型为 <code>RuntimeException</code> 的异常。不必对 <code>RuntimeException</code>进行声明，或将其包装在 <code>try/catch</code> 代码块中（不过这样做也是可以的，声明和/或放在 <code>try/catch</code> 代码块中都行）。</li>
+<li>所有编译器关心的异常，叫做“受检查异常”，指的就是“编译器要检查的异常”。只有那些运行时异常会排除在编译器检查之外。依照此规则，那么除运行时异常外，其他所有异常都必须在代码中加以通告。</li>
+<li>方法使用关键字 <code>throw</code>，并在其后带上一个新构造的异常对象，来抛出某个异常：</li>
+</ul>
+<pre><code class="language-java">throw new NoCaffeinException ();
+</code></pre>
+<ul>
+<li>抛出了受检查异常的方法，<em><strong>必须</strong></em> 使用一条 <code>throws Exception</code> 声明进行宣告。</li>
+<li>在代码调用了某个 “抛出受检查异常” 方法（a checking-exception-throwing method）时，就让编译器放心，已经对异常有所准备，并采取了预防措施。</li>
+<li>在已准备好处理异常（受检查异常）时，就要把抛出异常的方法调用，放在 <code>try/catch</code> 代码块中，并把异常处理/恢复代码，放在 <code>catch</code> 代码块中。</li>
+<li>在尚未准备好处理异常时，仍然可以通过正式 “躲开” 异常，来让编译器满意。在本章稍后，将对这种躲开异常进行说明。</li>
+</ul>
+<blockquote>
+<p><strong>元认知技巧</strong></p>
+<p>在要掌握某种新东西时，可以把学习新内容安排在睡前。那么一旦放下了这本书（假设可以离这本书远远的），就不要再干别的事了。大脑需要时间去处理阅读和学习的内容。或许这个过程需要数小时。如果再学习Java之余，还要做其他的事情，那么之前学到的Java技能，就不会那么牢固。</p>
+<p>不过这对于掌握某项体育技能并没有效果。比如练习跆拳道就不会影响 Java 的学习。</p>
+<p>要求得最好效果，最好是在睡觉前看这本书。</p>
+</blockquote>
+<h2 id="trycatch-代码块中的流程控制"><a class="header" href="#trycatch-代码块中的流程控制"><code>try/catch</code> 代码块中的流程控制</a></h2>
+<p><strong>Flow control in <code>try/catch</code> blocks</strong></p>
+<p>在对具风险的方法进行调用事，可能发生两种情况。风险方法要么成功，这时<code>try</code>代码块就会跑完，要么风险方法抛回一个异常给调用方法。</p>
+<p><img src="images/Ch11_08.png" alt="try/catch 代码块中的流控：无异常抛出时" /></p>
+<p><em>图 8 - <code>try/catch</code> 代码块中的流程控制：无异常抛出时</em></p>
+<p><img src="images/Ch11_09.png" alt="try/catch 代码块中的流程控制：抛出异常时" /></p>
+<p><em>图 9 - <code>try/catch</code> 代码块中的流程控制：抛出异常时</em></p>
+<h2 id="finally不论何种情形都要执行的操作"><a class="header" href="#finally不论何种情形都要执行的操作"><code>finally</code>：不论何种情形，都要执行的操作</a></h2>
+<p><strong>Finally: for the things you want to do no matter what</strong>.</p>
+<p>在尝试煮饭时，总是要打开炉子的。</p>
+<p>即使煮饭 <strong>失败</strong>，也总是要关上炉子的。</p>
+<p>即便煮饭 <strong>成功</strong>，还是必须关上炉子。</p>
+<p><em><strong>不论发生什么，都是要关上炉子</strong></em>!</p>
+<p><strong><code>finally</code> 代码块就是放置那些与异常无关，必须要执行的代码的地方（A <code>finally</code> block is where you put code that must run regardless of an exception）</strong>。</p>
+<pre><code class="language-java">try {
+    turnOvenOn ();
+    x.bake();
+} catch (BakingException ex) {
+    ex.printStackTrace();
+} finally {
+    turnOvenOff();
+}
+</code></pre>
+<p>若没有这么一个 <code>finally</code> 关键字，就必须把 <code>turnOvenOff()</code> 方法同时放在 <code>try</code> 和 <code>catch</code> 代码块中，就是因为 <em><strong>不论何种情况，都必须关掉炉子</strong></em>。而有了这样一个 <code>finally</code> 的代码块，就可以把所以清理代码放在一处，而不是像下面这样重复：</p>
+<pre><code class="language-java">try {
+    turnOvenOn();
+    x.bake();
+    turnOvenOff();
+} catch (BakingException ex) {
+    ex.printStackTrace();
+    turnOvenOff();
+}
+</code></pre>
+<ul>
+<li><strong>在 <code>try</code> 代码块失败（某个异常）时</strong>，程序流程控制会立即移动至 <code>catch</code> 代码块。随着 <code>catch</code> 代码块执行完毕，<code>finally</code> 代码块就会运行。在 <code>finally</code> 代码块执行完毕后，会继续运行调用方法中的其余代码；</li>
+<li><strong>在 <code>try</code> 代码块成功（无异常）时</strong>，程序流程控制会跳过 <code>catch</code> 代码块并移动至 <code>finally</code> 代码块。在 <code>finally</code> 代码块执行完毕后，就继续运行调用方法的其余代码；</li>
+<li><strong>即使 <code>try</code> 或 <code>catch</code> 代码块带有 <code>return</code> 语句，这里的 <code>finally</code> 代码块仍会运行</strong>！程序流程会跳往 <code>finally</code> 代码块，然后在跳回到 <code>return</code> 语句。</li>
+</ul>
+<pre><code class="language-java">package com.xfoss.learningJava;
+
+class ScaryException extends Exception {};
+
+public class TestExceptions {
+    public static void main (String [] args) {
+        String test = &quot;yes&quot;;
+
+        try {
+            System.out.println(&quot;开始尝试&quot;);
+            doRisky(test);
+            System.out.println(&quot;尝试结束&quot;);
+        } catch (ScaryException ex) {
+            System.out.println(&quot;可怕的异常&quot;);
+            ex.printStackTrace();
+        } finally {
+            System.out.println(&quot;`finally` 代码块&quot;);
+        }
+
+        System.out.println(&quot;main方法的结束&quot;);
+    }
+
+    static void doRisky (String test) throws ScaryException {
+        System.out.println(&quot;开始冒险&quot;);
+
+        if (&quot;yes&quot;.equals(test)) {
+            throw new ScaryException ();
+        }
+
+        System.out.println(&quot;冒险结束&quot;);
+        return;
+    }
+}
+</code></pre>
+<p>上面的代码输出为：</p>
+<pre><code class="language-console">开始尝试
+开始冒险
+可怕的异常
+com.xfoss.learningJava.ScaryException
+        at com.xfoss.learningJava.TestExceptions.doRisky(TestExceptions.java:27)
+        at com.xfoss.learningJava.TestExceptions.main(TestExceptions.java:11)
+`finally` 代码块
+main方法的结束
+</code></pre>
+<p>在 <code>String test = &quot;no&quot;</code> 时，其输出为：</p>
+<pre><code class="language-console">开始尝试
+开始冒险
+冒险结束
+尝试结束
+`finally` 代码块
+main方法的结束
+</code></pre>
+<h2 id="多态的异常"><a class="header" href="#多态的异常">多态的异常</a></h2>
+<p><strong>Exceptions are polymorphic</strong></p>
+<p>记住，异常都是些对象。与其他对象相比，异常没有什么特别之处，除了可被 <em><strong>抛出</strong></em> 之外。那么与其他良好的对象一样，异常也可被多态地予以引用。比如对于某个 <code>LingerieException</code> 类型的对象，就可以赋值给某个 <code>ClothingException</code> 的引用变量。而一个 <code>PantsException</code>，也可以赋值给某个 <code>Exception</code> 类类型的引用变量。明白了吗？异常的多态特性，所带来的好处就是，方法不必显式地声明其可能抛出的所以可能的异常（The benefit for exceptions is that a method doesn't have to explicitly declare every possible exception it might throw）；他只需要声明这些可能异常的超类即可。对于 <code>catch</code> 代码块同样如此 -- 只要<code>catch</code>代码块能够处理全部抛出的异常，就不必编写针对各种可能异常的 <code>catch</code> 代码块（或多个代码块）。</p>
+<p><img src="images/Ch11_10.png" alt="Exception 继承树" /></p>
+<p><em>图 10 - <code>Exception</code> 继承树</em></p>
+<ol>
+<li>
+<p><strong>可使用那些抛出异常的超类，来进行异常的声明</strong>。</p>
+<pre><code class="language-java">public void doLaundry () throws ClothingException {
+                                // 由于这里声明的是 ClothingException
+                                // 那么就可以抛出 ClothingException 的任意子类类型的异常对象
+                                // 就是说 doLaundry() 方法可抛出 PantsException、LingerieException
+                                // TeeShirtException 以及 DressShirtException，而无需显示地
+                                // 分别进行声明
+</code></pre>
+</li>
+<li>
+<p><strong>使用所抛出异常的超类，就可以 捕获 这些异常</strong>。</p>
+<pre><code class="language-java">try {
+    laundry.doLaundry();
+} catch (ClothingException cex) { // 这就可以捕获到任意 ClothingException 的子类了
+    // 恢复代码
+}
+</code></pre>
+<pre><code class="language-java">try {
+    laundry.doLaundry();
+} catch (ShirtException sex) { // 这就只能捕获 TeeShirtException 与 DressShirtException
+    // 恢复代码
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="虽然可以使用一个大的超级多态捕获来捕获全部异常但不表示应该这样做"><a class="header" href="#虽然可以使用一个大的超级多态捕获来捕获全部异常但不表示应该这样做">虽然可以使用一个大的超级多态捕获来捕获全部异常，但不表示应该这样做。</a></h3>
+<p><strong>Just because you CAN catch everything with one big super polymorphic catch, doesn't always mean you SHOULD</strong>.</p>
+<p>在编写异常处理代码时，可以在 <code>catch</code> 子语句处使用超级类型 <code>Exception</code>，从而仅用一个的 <code>catch</code> 代码块，就可以捕获到可能抛出的所有例外。</p>
+<pre><code class="language-java">try {
+    laundry.doLaundry ();
+} catch (Exception ex) {
+    // 恢复代码......
+    // 问题是，要从哪里恢复呢？这个 catch 代码块将捕获
+    // 所有全部的异常，那么就没法知道到底什么地方出错了。
+}
+</code></pre>
+<h3 id="为需要专门处理的每个异常都编写不同的-catch-代码块"><a class="header" href="#为需要专门处理的每个异常都编写不同的-catch-代码块">为需要专门处理的每个异常，都编写不同的 <code>catch</code> 代码块。</a></h3>
+<p><strong>Write a different catch block for each exception that you need to handle uniquely</strong>.</p>
+<p>比如在代码处理 <code>TeeShirtException</code>不同于处理 <code>LingrieException</code>时，就要为他们分别编写 <code>catch</code> 代码块。而假如可以同样方式对待<code>ClothingException</code>的其他子类型，那么就可以加入一个 <code>ClothingException</code>的 <code>catch</code> 代码块，来处理其余的异常。</p>
+<pre><code class="language-java">try {
+    laundry.doLaundry();
+} catch (TeeShirtException tex) {
+    // 从 TeeShirtException 中恢复过来
+} catch (LingrieException lex) {    // TeeShirtException 与 LingrieException 都需要
+                                    // 不同的恢复代码，因此就要使用不同的捕获代码块
+    // 从 LingrieException 中恢复过来
+} catch (ClothingException cex) { // 在这里捕获索取其他的 ClothingException 异常
+    // 从所有其他异常中恢复过来
+}
+</code></pre>
+<h3 id="有多个-catch-代码块时必须以从小到大的顺序排序"><a class="header" href="#有多个-catch-代码块时必须以从小到大的顺序排序">有多个 <code>catch</code> 代码块时，必须以从小到大的顺序排序</a></h3>
+<p><strong>Multiple catch blocks must be ordered from smallest to biggest</strong></p>
+<p><img src="images/Ch11_11.png" alt="多个catch代码块的排序" /></p>
+<p><em>图 11 - 多个<code>catch</code>代码块的排序</em></p>
+<p>在<code>Exception</code>继承树越往上的类，他的捕获“筐子”就会越大。而沿继承树往下，到越来越精细的 <code>Exception</code> 类的时候，捕获“筐子”就会越来越小。这与先前的多态机制别无二致。</p>
+<p><code>ShirtException</code>捕获对于接收 <code>TeeShirtException</code>或<code>DressShirtException</code>（以及将来的全部对<code>ShirtException</code>进行扩展的子类），是足够大的。而<code>ClothingException</code>则要更大（即使用类型<code>ClothingException</code>可对更多的东西进行引用）。除了接收<code>ClothingException</code>的异常之外，他还可以接收全部<code>ClothingException</code>的那些子类：<code>PantsException</code>、<code>UniformException</code>、<code>LingrieException</code>及<code>ShirtException</code>等等。随意 <code>catch</code> 捕获参数的始祖，就是 <strong><code>Exception</code></strong>；他会捕获所有异常，包括运行时（不受检查）异常，因此除了测试目的之外，多半是用不到这个最大的 <code>Exception</code>类类型的。</p>
+<h3 id="不能把较大的筐子放在比他们小的筐子之上"><a class="header" href="#不能把较大的筐子放在比他们小的筐子之上">不能把较大的“筐子”放在比他们小的“筐子”之上</a></h3>
+<p><strong>You can't put bigger baskets above smaller baskets</strong></p>
+<p>当然可以这样做，只是这样做编译不了的。这些捕获块与挑选最匹配的过载方法不一样。对于多个的 <code>catch</code> 代码块，JVM只是简单地从第一个捕获块开始，一直往下运作，直到发现一个可以处理异常的、足够宽泛的（也就是在继承树上足够高）捕获为止。若第一个<code>catch</code>代码块的就是 <code>catch (Exception ex)</code>，那么编译器就已经知道，没有地方再添加其他捕获参数了 -- 所以永远不会走到后面的捕获代码块。</p>
+<p><img src="images/Ch11_12.png" alt="不良的catch代码块顺序" /></p>
+<p><em>图 12 - 不良的<code>catch</code>代码块顺序</em></p>
+<blockquote>
+<p>在有着多个 <code>catch</code> 代码块时，捕获参数的大写至关重要（Size matters when you have multiple catch blocks）。有着最大“筐子”的捕获参数，就必须放在底部。否则那些较小的“筐子”就变得无用了。</p>
+<p><em><strong>（继承树上）同辈份异常类的顺序没什么讲究，因为他们不会捕获到归属对方的异常</strong></em>。</p>
+<p>没人会介意把 <code>ShirtException</code> 放在 <code>LingrieException</code> 之上。因为尽管由于 <code>ShirtException</code> 可以捕获到其他一些类（他自己的那些子类）， 而相比于 <code>LingrieException</code> 是个更大（更宽泛）的类型，但 <code>ShirtException</code> 是捕获不到 <code>LingrieException</code> 的，因此就不存在问题。</p>
+</blockquote>
+<h2 id="在不打算处理异常时只需躲开即可"><a class="header" href="#在不打算处理异常时只需躲开即可">在不打算处理异常时，只需躲开即可</a></h2>
+<p><strong>When you don't want to handle an exception... just duck it</strong></p>
+<p><strong>在不打算对某个异常进行处理时，可通过 <em>声明</em> 这个异常，来 <em>躲开</em> 该异常</strong>。</p>
+<p><strong>If you don't want ot handle an exception, you can <em>duck</em> it by <em>declaring</em> it</strong>.</p>
+<blockquote>
+<p>这是什么鬼？我可不会捕获这个鬼东西。我要闪人了 -- 就让后来者去处理吧。</p>
+</blockquote>
+<p>在对某个风险方法进行调用时，编译器需要明确调用者对此有所知悉。多数情况下，是通过把风险调用包装在 <code>try/catch</code> 中告知编译器的。但也有别的方式，那就是 <em>避开</em> 异常，而让那些对这个调用方法进行调用的方法去捕获该异常。</p>
+<p>很简单 -- 只需要 <em>声明</em> 一下调用方法抛出异常即可。虽然在调用方法中声明了抛出异常，但抛出异常的却不是调用方法，这一点无关紧要。调用方法仍然是让异常直接通过的方法（It's easy -- all you have to do is <em>declare</em> that <em>you</em> throw the exceptions. Even though, technically, <em>you</em> aren't the one doing the throwing, it doesn't matter. You're still the one letting the exception whiz right on by）。</p>
+<p>然而在避开异常时，就不会有 <code>try/catch</code> 语句了，那么在风险方法（<code>doLaunch()</code>）真的抛出了异常时，会怎么样呢？</p>
+<p>在某个方法抛出异常时，则这个抛出异常的方法，就会立即被从栈上弹出，而异常就会被抛给栈上往下的第一个方法 -- 也就是那个 <em>调用者方法</em> （When a method throws an exception, that method is popped off the stack immediately， and the exception is thrown to the next method down the stack -- the <em>caller</em>）。但在调用者方法是个 <em>逃避者</em> 时，就没有这个异常的捕获了，因此调用者方法就立即从栈上弹出，而这个异常就被抛给栈上的下一个方法，如此这般......那么到哪里结束呢？后面就会看到。</p>
+<pre><code class="language-java">// foo()这个调用者方法，并没有真的抛出这个异常，而因为
+// 没有针对他调用的这个风险方法的 try/catch，所以 foo()
+// 就成了“风险方法”。这是因为现在不过哪个方法要调用 foo()
+// 都必须要对此异常进行处理。
+public void foo() throws ReallyBadException {
+    // 不带 try/catch 地调用某个风险方法
+    laundry.doLaundry();
+}
+</code></pre>
+<h3 id="通过声明异常的规避只是延后了必然"><a class="header" href="#通过声明异常的规避只是延后了必然">通过声明异常的规避，只是延后了必然</a></h3>
+<p><strong>Ducking (by declaring) only delays the inevitable</strong></p>
+<p><strong>迟早都要有人来处理异常。但要是 <code>main()</code> 方法规避了异常呢</strong>？</p>
+<pre><code class="language-java">public class Washer {
+    Laundry laundry = new Laundry();
+
+    // 这里的 foo() 和 main() 两个方法都规避了那个异常
+    // （通过声明他），那么就没有人去处理这个异常了！
+    // 这对于编译来说毫无违和感。
+    public void foo() throws ClothingException {
+        laundry.doLaundry();
+    }
+
+    public static void main (String [] args) throws ClothingException {
+        Washer a = new Washer ();
+        a.foo();
+    }
+}
+</code></pre>
+<p><img src="images/Ch11_13.png" alt="main()方法抛出异常的特别情形" /></p>
+<p><em>图 13 - <code>main()</code>方法抛出异常的特别情形</em></p>
+<h3 id="要么处理要么声明这是铁律"><a class="header" href="#要么处理要么声明这是铁律">要么处理，要么声明。这是铁律。</a></h3>
+<p><strong>Handle or Declare. It's the law</strong>.</p>
+<p><strong>到这里，就见识过了在调用某个风险（有异常抛出）的方法时，满足编译器检查的两个方式</strong>。</p>
+<ol>
+<li>
+<p><strong>对异常进行处理（HANDLE）</strong></p>
+<p>将有风险的调用，放在某个 <code>try/catch</code> 中</p>
+<pre><code class="language-java">try {
+    laundry.doLaundry();
+} catch (ClothingException cex) {
+    // 这里的捕获参数，最好是一个可以捕获到 doLaundry() 所
+    // 抛出的全部异常、足够大的异常类类型。不然编译器仍然
+    // 会抱怨没有对所有异常进行捕获。
+    // 
+    // 恢复代码
+}
+</code></pre>
+</li>
+<li>
+<p><strong>声明异常（规避异常, DECLARE(duck it)）</strong></p>
+<p>声明调用方法会抛出与所调用的风险方法同样的异常（Declare the YOUR method throws the same exceptions as the risky method you're calling）。</p>
+<pre><code class="language-java">// doLaundry()方法抛出了一个 ClothingException 类类型的异常
+// 而作为其调用者的 foo() 方法，只需要通过声明该异常，就可以
+// 避开这个异常。无需 try/catch
+void foo() throws ClothingException {
+    laundry.doLaundry();
+}
+</code></pre>
+<p>不过现在就意味着那些 <code>foo()</code> 方法的调用者就必须要遵守这条 “处理抑或声明” 的法则了。在 <code>foo()</code> 方法规避了这个例外（通过对其进行声明），同时 <code>main()</code> 调用了 <code>foo()</code> 时，那么 <code>main()</code> 就必须对该例外进行处理。</p>
+<pre><code class="language-java">public class Washer {
+    Laundry laundry = new Laundry();
+
+    public void foo () throws ClothingException {
+        laundry.doLaundry();
+    }
+
+    public static void main (String [] args) {
+        // 麻烦了！现在 main() 就不会编译了，同时
+        // 会收到一个 “unreported exception” 的报错。
+        // 编译器所关心的是，foo() 方法抛出了一个异常
+        Washer a = new Washer ();
+        // 因为 foo() 方法规避了由 doLaundry() 所抛出
+        // 的 ClothingException 类类型的异常，那么
+        // main() 就必须把 a.foo() 包装在一个 try/catch
+        // 中，或必须也要对异常进行声明，throws ClothingException !
+        a.foo();
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="回到前面的-beatbox-app-的代码"><a class="header" href="#回到前面的-beatbox-app-的代码">回到前面的 <code>BeatBox</code> app 的代码</a></h2>
+<p>现在是不是完全忘掉了，这一章开始的时候，初步涉及了一些 <code>JavaSound</code> 的代码。在那里已经创建了一个 <code>Sequencer</code> 的对象，而由于<code>Midi.getSequencer()</code>方法声明了一个受检查的异常（a checked exception, <code>MidiUnavailableException</code>），导致那段代码无法编译。现在就可以通过把对该方法的调用，包装在一个 <code>try/catch</code> 中，修复这个问题了。</p>
+<pre><code class="language-java">package com.xfoss.BeatBox;
+
+import javax.sound.midi.*;
+
+public class MusicTest1 {
+    public void play () {
+        try {
+            // 因为把对风险方法 MidiSystem.getSequencer() 包装
+            // 在了 try/catch 代码块中，现在对该方法的调用就没有问题了
+            Sequencer seq = MidiSystem.getSequencer();
+            System.out.println(&quot;我们就得到了一个‘音序器（Sequencer）’&quot;);
+        } catch (MidiUnavailableException ex) {
+            // 这里的捕获参数必须是 “恰当” 的异常。若这里写
+            // catch(FileNetFoundException f)，那么这段代码也不会编译
+            // 因为从多态上讲，一个 MidiUnavailableException 并不适合
+            // FileNotFoundException
+            //
+            // 请记住光是有 catch 代码块还不够，还必须捕获到抛出的异常！
+            System.out.println(&quot;Bummer&quot;);
+        }
+    }
+
+    public static void main(String [] args) {
+        MusicTest1 mt = new MusicTest1 ();
+        mt.play();
+    }
+}
+</code></pre>
+<h3 id="异常处理的四条规则"><a class="header" href="#异常处理的四条规则">异常处理的四条规则</a></h3>
+<ol>
+<li>
+<p><strong>不能在没有 <code>try</code> 的情况下使用 <code>catch</code> 或 <code>finally</code>关键字</strong></p>
+<p><strong>You cannot have a <code>catch</code> or <code>finally</code> without a <code>try</code></strong></p>
+<pre><code class="language-java">void go () {
+    Foo f = new Foo ();
+
+    f.foo();
+
+    // 非法！`try` 在哪里？
+    catch (FooException ex) {}
+}
+</code></pre>
+</li>
+<li>
+<p><strong>在 <code>try</code> 与 <code>catch</code> 直接不能再放置代码</strong></p>
+<p><strong>You cannot put code between the <code>try</code> and the <code>catch</code></strong></p>
+<pre><code class="language-java">try {
+    x.doStuff();
+}
+// 非法！不能在 `try` 与 `catch` 之间放置代码
+int y = 43;
+catch (Exception ex) {}
+</code></pre>
+</li>
+<li>
+<p><strong><code>try</code>后面只能/且必须有 <code>catch</code> 或/及 <code>finally</code></strong></p>
+<p><strong>A <code>try</code> MUST be followed by either a <code>catch</code> or a <code>finally</code></strong></p>
+<pre><code class="language-java">try {
+    x.doStuff();
+} finally {
+    // 合法。因为这里尽管没有 `catch`，但却有个 `finally`。
+    // 但不能只有 `try` 一个
+    // 
+    // 清理工作
+}
+</code></pre>
+</li>
+<li>
+<p><strong>在<code>try</code>后只有<code>finally</code>（不带<code>catch</code>）时，仍然必须对异常进行声明</strong>。</p>
+<p><strong>A <code>try</code> with only a <code>finally</code>(no <code>catch</code>) must still declare the exception</strong>.</p>
+<pre><code class="language-java">// 不带 `catch` 的 `try`，不满足 `handle/declare` 法则
+void go() throws FooException {
+    try {
+        x.doStuff();
+    } finally {}
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="代码厨房"><a class="header" href="#代码厨房">代码厨房</a></h2>
+<blockquote>
+<p>虽然后面的代码不需要自己去编写（可以在后面找到已经编写好的），然如果能够自己动手编写，就会有很多乐趣。</p>
+<p>本章接下来的部分是可选的；可使用这个 音乐app 的全部已编写好的代码；</p>
+<p>但如果要了解有关 <code>JavaSound</code> 声音子系统的更多细节，那么就应该继续看下去。</p>
+</blockquote>
+<h3 id="构造真实的声音"><a class="header" href="#构造真实的声音">构造真实的声音</a></h3>
+<p><strong>Making actual sound</strong></p>
+<p>还记得在本章开头的地方，我们在那里对 MIDI 数据如何保存那些，描述应该演奏些什么（以及该怎样演奏）的指令进行了审视，同时还提及了 MIDI 数据并没有真实地 <em>创建出我们所听到的任何声音</em>。要让声音从喇叭中发出来，就必须通过启动某种实体MIDI乐器，抑或“虚拟”乐器（软件合成器），把 MIDI数据交给一些接受 MIDI 指令，并将这些 MIDI 指令渲染出来的 MIDI 设备。这里只会用到软件装置，而下面就是 <code>JavaSound</code> 声音子系统中的运作方式：</p>
+<p><strong>需要 <em>四个</em> 东西</strong>：</p>
+<p><img src="images/Ch11_14.png" alt="JavaSound中演奏出声音的四个要件" /></p>
+<p><em>图 14 - <code>JavaSound</code>中演奏出声音的四个要件</em></p>
+<p><strong>同时需要五个步骤</strong>：</p>
+<ol>
+<li>
+<p>获取到一个 <strong><code>Sequencer</code></strong> 对象并打开他</p>
+<pre><code class="language-java">Sequencer player = MidiSystem.getSequencer();
+player.open();
+</code></pre>
+</li>
+<li>
+<p>构造一个新的 <strong>序列（Sequence）</strong></p>
+<pre><code class="language-java">Sequence seq = new Sequence(timing, 4);
+</code></pre>
+</li>
+<li>
+<p>从新构造的 <code>Sequence</code> 获取到一个新的 <strong>音轨（Track）</strong></p>
+<pre><code class="language-java">Track t = seq.createTrack();
+</code></pre>
+</li>
+<li>
+<p>使用一系列的 **<code>MidiEvent</code>**s 来对音轨进行填充，然后把这个<code>Sequence</code>对象交给音序器</p>
+<pre><code class="language-java">t.add(myMidiEvent);
+player.setSetquence(seq);
+</code></pre>
+</li>
+<li>
+<p>按下播放按钮（ ▶  ）。必须要启动 <code>start()</code> 这个音序器才行</p>
+<pre><code class="language-java">player.start();
+</code></pre>
+</li>
+</ol>
+<h3 id="一个非常早期的声音播放器-app"><a class="header" href="#一个非常早期的声音播放器-app">一个非常早期的声音播放器 app</a></h3>
+<p><strong>Your very first sound player app</strong></p>
+<p>编写下面的代码并运行。就会听到有人在演奏钢琴上的一个音符！（好吧，可能不是某 <em>人</em>，而是某 <em>物</em> 在演奏。）</p>
+<pre><code class="language-java">package com.xfoss.BeatBox;
+
+// 不要忘记导入 midi 包
+import javax.sound.midi.*;
+
+public class MiniMiniMusicApp {
+    public static void main (String [] args){
+        MiniMiniMusicApp mini = new MiniMiniMusicApp();
+        mini.play();
+    }
+
+    public void play () {
+        try {
+            // 获取一个音序器 Sequencer 并把他打开（这样就可以对其进行使用......
+            // 音序器不会一来就是打开的）
+            Sequencer player = MidiSystem.getSequencer();
+            player.open();
+
+            // 不要急于了解这些音序 Sequence 构造器的参数。这里只需要拷贝下来
+            // 就可以了（把他们当作已编写好的参数）
+            Sequence seq = new Sequence(Sequence.PPQ, 4);
+
+            // 从上面构造的 Sequence 实例请求一个音轨 Track。
+            // 请记住音轨是存在于音序上的，同时 MIDI 数据又
+            // 存在于音轨中
+            Track track = seq.createTrack();
+
+            // 把一些 MIDI 事件（MidiEvent）放入到音轨中。这部分就更是
+            // 些已经编写好的代码了。需要留意的就是 setMessage() 方法的
+            // 那些参数，还有 MidiEvent 构造器的那些参数。接下来就会看到
+            // 这些参数。
+            ShortMessage a = new ShortMessage();
+            a.setMessage(144, 1, 44, 100);
+            MidiEvent noteOn = new MidiEvent(a, 1);
+            track.add(noteOn);
+
+            ShortMessage b = new ShortMessage();
+            b.setMessage(128, 1, 44, 100);
+            MidiEvent noteOff = new MidiEvent(b, 16);
+            track.add(noteOff);
+
+            // 把这个音序交给音序器（就好比把光盘放入到光盘播放器）
+            player.setSequence(seq);
+            // 启动（start()）音序器，就好比按下 PLAY 按键
+            player.start();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h3 id="构造一个-midievent-乐曲数据"><a class="header" href="#构造一个-midievent-乐曲数据">构造一个 <code>MidiEvent</code> （乐曲数据）</a></h3>
+<p><strong>Making a <code>MidiEvent</code> (song data)</strong></p>
+<p>一个 <code>MidiEvent</code> 对象，就是构成乐曲组成部分的一条指令（A <code>MidiEvent</code> is an instruction for part of a song）。而一系列的 <code>MidiEvent</code> 对象，就像是乐谱一样，或者像是自动钢琴的卷轴。这里所关心的绝大部分<code>MidiEvent</code>，都是描述 <em><strong>要做的事</strong></em> 以及 <em><strong>做这事的时刻</strong></em>。时间部分的时刻尤其重要，因为对于音乐来说，时机就是全部（The moment in time part matters, since timing is everything in music）。音符接着一个音符。正是由于 <code>MidiEvent</code>如此详细，所以就必须要讲清楚，在什么时候 <em>开始</em> 演奏音符（即一个 <code>NOTE ON</code> 事件），还有在什么时候 <em>停止</em> 演奏这个音符（即 <code>NOTE OFF</code> 事件）。那么就可以联想到，在“开始演奏音符 G”（<code>NOTE ON</code>）消息之前，去发出“停止演奏音符 G”（<code>NOTE OFF</code> 消息），是不行的。</p>
+<p>MIDI 指令实际上是放在 <code>Message</code> 类类型的对象中的；而 <code>MidiEvent</code> 则是结合 <code>Message</code>与发出这个<code>Message</code>的时间维度上的某个时刻，而的来的。也就是说，某个<code>Message</code>对象可能为 “开始演奏中音C调”，然后对应的<code>MidiEvent</code>对象可能说的是“在第4拍处出发这个消息”。</p>
+<p>那么这样看来，总是需要（同时）一个 <code>Message</code> 与一个 <code>MidiEent</code>。</p>
+<p><code>Message</code> 对象将的是要做 <em>什么</em>，而 <code>MidiEvent</code> 讲的是 <em>什么时候</em> 做这个事情。</p>
+<blockquote>
+<p><code>MidiEvent</code> 对象描述了要做 <strong>什么</strong> 以及 <strong>何时</strong> 做这个事情。</p>
+<p>每条指令都必须包含用于该指令的时刻（Every instruction must include the <strong>timing</strong> for that instruction）。</p>
+<p>也就是说，某个动作应该在 <strong>哪一</strong> 拍出现（In other words, at which <strong>beat</strong> that thing should happen）。</p>
+</blockquote>
+<ol>
+<li>
+<p>构造一个 <code>Message</code> 对象</p>
+<pre><code class="language-java">ShortMessage a = new ShortMessage();
+</code></pre>
+</li>
+<li>
+<p>把 <strong>指令</strong> （<code>Instruction</code>） 放在 <code>Message</code> 对象里</p>
+<pre><code class="language-java">// 此消息（报文，message）讲的是，“开始演奏 44 号音符”
+// （在下面的内容中，将涉及其他 3 个数字说的是什么）
+a.setMessage(144, 1, 44, 10);
+</code></pre>
+</li>
+<li>
+<p>使用这个 <code>Message</code> 对象，来构造出一个新的 <code>MidiEvent</code> 对象</p>
+<pre><code class="language-java">// 所有指令都是在消息中，而 MidiEvent对象加入则是，应在何时
+// 触发指令的、时间维度中的时刻。这个 MidiEvent 说的就是在
+// 第一拍的时候，触发消息 'a'。
+MidiEvent noteOn = new MidiEvent(a, 1);
+</code></pre>
+</li>
+<li>
+<p>把<code>MidiEvent</code>添加到 <strong>音轨<code>Track</code>上</strong></p>
+<pre><code class="language-java">// 音轨（a Track） 保存了全部的 MidiEvent 对象。音序 Sequence 对象
+// 是通过各个 MidiEvent 事件对象应在何时发生的方式，来组织这些
+// MidiEvent 对象的，且随后的音序器 Sequencer 对象，便以这种顺序，把
+// 这些 MidiEvent 对象回放出来。在时间维度上的某个精准的同一时刻，可以有
+// 很多 MidiEvent 事件发出。比如，可能想要同时演奏两个音符，或者要两种
+// 不同乐器在同一时间演奏不同的声音等等。
+track.add(noteOn);
+</code></pre>
+</li>
+</ol>
+<h3 id="midi-消息报文midievent对象的核心所在"><a class="header" href="#midi-消息报文midievent对象的核心所在">MIDI 消息/报文：<code>MidiEvent</code>对象的核心所在</a></h3>
+<p>MIDI 消息保存了 MIDI 事件中指出要做什么的部分。即要音序器干什么的具体指令。指令的第一个参数，总会是消息/报文的类型。而其他三个参数的取值，就依赖于报文的类型。比如，类型编号为 <code>144</code> 的报文，表示的是 <code>NOTE ON</code>类型。而音序器为了执行一个 <code>NOTE ON</code> 指令，就需要了解其他一些东西。可以设想音序器在讲，“好的，我将演奏一个音符，但是 <em>在哪个通道</em> 呢？也就是说，是要演奏一个鼓的音符，还是钢琴的音符？还有是 <em>哪个音符</em> 呢？ 是中音 C 调，还是 D 调高音？还有在演奏时，以 <em>什么样的速度</em> 来演奏这个音符呢？”</p>
+<blockquote>
+<p><code>Message</code>对象，讲了要做什么，<code>MidiEvent</code>对象讲的是何时来做这些（The <code>Message</code> says what to do, the <code>MidiEvent</code> says when to do it）。</p>
+</blockquote>
+<p>要构造一个 MIDI 报文，就要构造一个 <code>ShortMessage</code> 类的实例，并在运行其 <code>setMessage()</code> 方法时，传入报文的四个参数。但要记住，报文只讲了要做什么，因此还需要把报文“发出”的时间添加上，从而让报文成为一个事件（But remember, the message says only <em>what</em> to do, so you still need to stuff the message into an event that adds <em>when</em> that message should 'fire'）。</p>
+<p><strong>报文剖析（Anatomy of a message）</strong></p>
+<p><code>setMessage()</code> 方法的第一个参数，表示的是报文的 “类型（type）”，根据这个表示类型的参数的不同，其他三个参数就会表示不同的东西。</p>
+<p><img src="images/Ch11_15.png" alt="MIDI 报文解析" /></p>
+<p><em>图 15 - MIDI 报文解析</em></p>
+<h3 id="修改报文"><a class="header" href="#修改报文">修改报文</a></h3>
+<p><strong>Change a message</strong></p>
+<p>既然知道了 MIDI 报文是什么，那么就可以开始实验了。可以对要演奏的音符、音符持续时间、添加更多音符等进行修改，甚至改变乐器。</p>
+<p><img src="images/Ch11_16.png" alt="MIDI 报文实验" /></p>
+<p><em>图 16 - MIDI 报文实验</em></p>
+<h3 id="第二版使用命令行参数来进行声音实验"><a class="header" href="#第二版使用命令行参数来进行声音实验">第二版：使用命令行参数来进行声音实验</a></h3>
+<p><strong>Version 2: Using command-line args to experiment with sounds</strong></p>
+<p>这个版本仍指挥演奏单个音符，不过可以使用命令行参数来改变乐器与音符。实验是通过传入两个从 <code>0</code> 到 <code>127</code> 之间的整数值的方式进行的。第一个整数值对乐器进行设置，第二个设置要演奏的音符。</p>
+<h2 id="codekitchens其余部分的分布"><a class="header" href="#codekitchens其余部分的分布"><code>CodeKitchens</code>其余部分的分布</a></h2>
+<p><strong>Where we're headed with the rest of the <code>CodeKitchens</code></strong></p>
+<p><strong>第15章：目标app</strong></p>
+<p>在做完后，就会有个可用的 <code>BeatBox</code> app，同时也是一个 <code>Drum Chat</code>的客户端。那需要学习有关GUI（包括事件处理）、<code>I/O</code>、网络通信以及线程等知识。后面连续三章（12、13及14）将先后学习这些内容。</p>
+<p><img src="images/Ch11_17.png" alt="完成后的 BeatBox app" /></p>
+<p><em>图 17 - 完成后的 <code>BeatBox</code> app</em></p>
+<hr />
+<p><strong>第12章：MIDI 事件</strong></p>
+<p>在第12章，会构建一个小型的、给MIDI 音乐的节拍绘制上随机矩形的 &quot;音乐视频（music video）&quot;（这样讲是有点牵强的，This CodeKitchen lets us build a little &quot;music video&quot;(bit of a stretch to call it that...) that draws random rectrangles to the beat of the MIDI music）。那里将学习到构建并演奏很多的MIDI事件（相比于这里的仅仅一两个事件而言）。</p>
+<p><img src="images/Ch11_18.png" alt="第12章构建的 BeatBox app" /></p>
+<p><em>图 18 - 第12章构建的 <code>BeatBox</code> app</em></p>
+<p><strong>第13章：单机版的 <code>BeatBox</code></strong></p>
+<p>在那里具体构建真实的 <code>BeatBox</code>，其 GUI 以及其他的全部。但那是有功能限制的 -- 在修改曲谱时，就会丢失先前的曲谱。因为还没有保存及恢复特性，同时无法与网络进行通信。（不过可以用这里的 <code>BeatBox</code> app 来练习编曲技能。）</p>
+<p><img src="images/Ch11_19.png" alt="第13章构建的单机版BeatBox app" /></p>
+<p><em>图 19 - 第13章构建的单机版<code>BeatBox</code> app</em></p>
+<p><strong>第 14 章：保存与恢复特性</strong></p>
+<p>在已经构造出良好曲谱后，这里就可以将其保存到文件了，且能够在需要再次演奏这个曲谱时，重新加载他。这样就为最终版本（第15章）做好了准备，第15章那儿就不再保存到文件，而是经由网络把曲谱发送到聊天服务器。</p>
+<p><img src="images/Ch11_20.png" alt="第14章的BeatBox app：保存与恢复" /></p>
+<p><em>图 20 - 第14章的<code>BeatBox</code> app：保存与恢复</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Ch10_Numbers_and_Statics_Numbers_Matter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Ch12_Getting_GUI_A_Very_Graphic_Story.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Ch10_Numbers_and_Statics_Numbers_Matter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Ch12_Getting_GUI_A_Very_Graphic_Story.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,1784 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>集合与泛型：数据结构</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html" class="active"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="集合与泛型数据结构"><a class="header" href="#集合与泛型数据结构">集合与泛型：数据结构</a></h1>
+<p><strong>Collections and Generics: Data Structure</strong></p>
+<p><strong>在 Java 里头，排序就是小菜一碟</strong>。无需编写自己的排序算法，就有了收集与操纵数据的全部工具（除非在阅读本章时，正坐在计算机科学101, CS 101 课程的教室里，那么在我们Java程序员简单地调用一个Java API中方法时，你就要去编写那个排序方法了）。Java 的集合框架，有着一种几乎全部需要完成事情的数据结构（The Java Collections Framework has a data structure that should work for virtually anything you'll ever need to do）。想要有个可轻易持续地往其上添加的清单吗？想要通过名字来找到某个物件吗？想要创建一个可自动排除所有重复项目的清单吗？要按照对你背后捅刀次数，对你的同事们排个序吗？把你的宠物，按照他们掌握的把戏排个序怎么样？本章就是关于这些的......</p>
+<h2 id="追踪自动唱机上歌曲流行度"><a class="header" href="#追踪自动唱机上歌曲流行度">追踪自动唱机上歌曲流行度</a></h2>
+<p><strong>Tracking song popularity on your jukebox</strong></p>
+<p>恭喜你获得了新的任务--管理楼氏餐厅的自动唱机系统。这自动唱机里头，本身并没有Java，不过在每次有人点播了一首歌时，歌曲数据就会被追加到一个简单的文本文件。</p>
+<p>你的任务，就是对这个数据进行管理，从而跟踪到歌曲流行度，生成一些报告，进而修改那些播放清单。这里并非要编写整个的 app -- 别的一些软件开放者/侍应生也会参与进来，你所要负责的，仅是对整个Java app内的数据加以管理和排序。而由于楼老板抵触数据库，因此数据是严格来说是个内存中的数据集（an in-memory data collection）。所得到的全部，就是那个自动唱机持续添加数据的文件。你的任务，就是从那里取得数据。</p>
+<p>先前我们已经掌握了怎样读取和解析该文件，并且到目前位置，都是将数据保管在一个 <code>ArrayList</code> 中的。</p>
+<p><strong>#1 挑战</strong></p>
+<p><strong>对这些歌曲，按照字母顺序排序</strong></p>
+<p>在某个文件中，有着一个歌曲的清单，其中各行分别表示一首歌曲，且歌曲标题与艺人，是以正斜杠分开的。那么对这样的行进行解析，进而把全部歌曲放入到一个 <code>ArrayList</code> 里头就简单了。</p>
+<p><img src="images/Ch16_01.png" alt="SongList.txt" /></p>
+<p><em>图 1 - SongList.txt</em></p>
+<blockquote>
+<p><em>这就是那个自动点唱机设备所写入的文件。这里的代码必须读取整个文件，随后对歌曲数据进行操作</em>。</p>
+</blockquote>
+<p>老板只对歌曲标题感兴趣，因此现在就可以简单地构造一个只有歌曲标题的清单就行。</p>
+<p>然而会发现整个清单不是以字母顺序的......这里可以做点什么呢？</p>
+<p>我们知道对于一个 <code>ArrayList</code> 来说，那些元素保持着将其插入到清单中的顺序，那么把这些元素放入到 <code>ArrayList</code> 中，就不会留意到他们的字母排序的，除非......<code>ArrayList</code>类中，有着一个<code>sort()</code>方法。</p>
+<p><strong>下面就是到目前为止，不带排序的样子</strong>：</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox1 {
+
+    // 这里将把那些歌曲标题保管在一个字符串的 ArrayList 中。
+    ArrayList&lt;String&gt; songList = new ArrayList&lt;String&gt; ();
+
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    // 启动加载文件并打印那个 songList 的 ArrayList 的构造函数。
+    public JukeBox1 () {
+        getSongs();
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox1();
+    }
+
+    // 这里并无什么特别之处......只是读取文件并针对各行调用 addSong() 方法。
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongList.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    // 这个 addSong 方法就如同 I/O 章中 QuizCard 一样 -- 运用 split() 方法
+    // 将行（有着歌曲标题与艺人）拆开为两个片段（令牌）。
+    void addSong(String lineToParse) {
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+        // 这里只要歌曲标题，因此只将第一个令牌添加到 songList（即那个 ArrayList）。
+        songList.add(tokens[0]);
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_02.png" alt="JukeBox1" /></p>
+<p><em>图 2 - JukeBox1</em></p>
+<blockquote>
+<p><em>songList 会以这些歌曲标题被添加到这个 <code>ArrayList</code> （其中的顺序与这些歌曲在原始文本文件中的顺序相同）的顺序，打印出这些歌曲标题</em>。</p>
+<p>显然这不是以字母顺序排序的！</p>
+</blockquote>
+<h3 id="然而类-arraylist-并没有sort-方法"><a class="header" href="#然而类-arraylist-并没有sort-方法">然而类 <code>ArrayList</code> 并没有<code>sort()</code> 方法！</a></h3>
+<p>在检视 <code>ArrayList</code> 时，看起来那里是没有任何有关排序的方法。即便往上检索他的继承树也毫无助益--明显 <em><strong>在 <code>ArrayList</code> 上是无法调用到某个排序方法的</strong></em>。</p>
+<p><img src="images/Ch16_03.png" alt="Java API - ArrayList" /></p>
+<p><em>图 3 - Java API - ArrayList</em></p>
+<blockquote>
+<p><em><code>ArrayList</code> 有着很多方法，不过却没有可用于排序的</em>......</p>
+</blockquote>
+<h3 id="arraylist-并非唯一的集合"><a class="header" href="#arraylist-并非唯一的集合"><code>ArrayList</code> 并非唯一的集合</a></h3>
+<p><strong><code>ArrayList</code> is not the only collection</strong></p>
+<blockquote>
+<p><em>我的确见到过一个名为 <code>TreeSet</code> 的集合类......并且文档讲到这个集合类保持着排序后的数据。我就想知道是不是应该使用<code>TreeSet</code>而非<code>ArrayList</code>......（I do see a collection class called <code>TreeSet</code>...and the docs say that it keeps your data sorted. I wonder if I should be using a <code>TreeSet</code> instead of an <code>ArrayList</code>...）</em></p>
+</blockquote>
+<p>虽然<code>ArrayList</code>是在今后会用到最多的集合类，对于特殊情形，还是有一些其他的集合类。其中一些关键集合类，包括以下几个：</p>
+<blockquote>
+<p><em>请不要急于去了解别的那些集合类。稍后会涉及到更多的细节</em>。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong><code>TreeSet</code></strong></p>
+<p>让元素保持排序并防止重复（Keeps the elements sorted and prevents duplicates）。</p>
+</li>
+<li>
+<p><strong><code>HashMap</code></strong></p>
+<p>实现了名称/值对方式的元素存储与访问（Let you store and access elements as name/value pairs）。</p>
+</li>
+<li>
+<p><strong><code>LinkedList</code></strong></p>
+<p>令到诸如栈与队列等数据结构的创建容易起来（Make it easy to create structures like stacks or queues）。</p>
+</li>
+<li>
+<p><strong><code>HashSet</code></strong></p>
+<p>去除集合中的重复，同时对于给定元素，可快速在集合中找出来（Prevents duplicates in the collection, and given an element, can find that element in the collection quickly）。</p>
+</li>
+<li>
+<p><strong><code>LinkedHashMap</code></strong></p>
+<p>与常规 <code>HashMap</code> 类似，但他可以记住其中元素（名/值对）插入的顺序，也可以被配置为记住那些最近被访问过元素的顺序（Like a regular <code>HashMap</code>, except it can remember the order in which elements(name/value pairs) were inserted, or it can be configured to remember the order in which elements were last accessed）。 </p>
+</li>
+</ul>
+<h3 id="可以使用treeset也可以使用collectionssort方法"><a class="header" href="#可以使用treeset也可以使用collectionssort方法">可以使用<code>TreeSet</code>......，也可以使用<code>Collections.sort()方法</code></a></h3>
+<p>在将全部字符串（即那些歌曲标题）放入到一个 <strong><code>TreeSet</code></strong> 而非 <code>ArrayList</code>中时，这些字符串就会自动以正确位置，即字母顺序着地。之后无论何时打印出这个清单，这些元素都会始终以字母顺序输出。</p>
+<p>在需要一个 <em>集合（set）</em>（接下来就会讲到什么是集合），或可以肯定清单必须 <em>始终</em> 保持字母排序时，这样处理是相当不错的。</p>
+<p>不过在别的情况下，在不需要清单保持排序时，相比这样的需求，使用<code>TreeSet</code>就显得有些代价高昂 -- <em><strong>在每次往<code>TreeSet</code>插入元素时，<code>TreeSet</code>都必须花时间去找出应在何处插入这个元素</strong></em>。而使用 <code>ArrayList</code>，由于新元素只会在清单末尾加入，那么元素插入就可以快得让人窒息。</p>
+<p><img src="images/Ch16_04.png" alt="Java API java.util.Collections" /></p>
+<p><em>图 4 - Java API <code>java.util.Collections</code></em></p>
+<blockquote>
+<p><em>嗯......在 <code>Collections</code> 类中确实有个 <code>sort()</code> 方法。他会取得一个 <code>List</code>，同时由于<code>ArrayList</code>实现了 <code>List</code> 接口，因此 <code>ArrayList</code> <code>IS-A</code> <code>List</code>。归功于多态机制，就可以将<code>ArrayList</code>传递给声明了取得 <code>List</code> 的方法</em>。</p>
+<p><em>请注意</em>：这并非是一个真正的 <code>Collections</code> 类的API文档；这里通过省略有关泛型（the generic type, 将在本章后面讲到）的信息，而对其进行了简化。</p>
+</blockquote>
+<h3 id="答疑"><a class="header" href="#答疑">答疑</a></h3>
+<ul>
+<li><strong>不是可以把元素添加到<code>ArrayList</code>的特定索引处，而不是他的末尾的吗 -- 确实有一个过载的<code>add()</code>方法，连同要添加的元素一道，还取得一个整型参数呢。那么这样就不会比直接插入到清单末尾更慢吗</strong>？</li>
+</ul>
+<blockquote>
+<p>是的，在 <code>ArrayList</code> 末尾插入元素，在其他地方是要慢一些的。因此使用过载的<code>add(index, element)</code> 方法，就不如调用 <code>add(element)</code> -- 这会把添加的元素放在清单末尾，这样来得快。然而在大部分用到<code>ArrayList</code>的时候，是无需将某个元素放在指定索引处的。</p>
+</blockquote>
+<ul>
+<li><strong>我看见那里有一个 <code>LinkedList</code> 类，那么是不是使用 <code>LinkedList</code>，就可以更好地实现在清单中间插入元素呢？至少我还记得大学时学过的数据结构课</strong>......</li>
+</ul>
+<blockquote>
+<p>是的，讲得不错。在从清单中中间插入或移除元素时，<code>LinkedList</code>要快一些，然而对于大多数应用，除非是在处理 <em>巨量</em> 的元素，那么往 <code>LinkedList</code> 与 <code>ArrayList</code> 的中间插入的区别，通常不足以纳入考量。后面很快就会深入了解 <code>LinkedList</code> 类。</p>
+</blockquote>
+<h3 id="把collectionssort-方法添加到-jukebox-代码"><a class="header" href="#把collectionssort-方法添加到-jukebox-代码">把<code>Collections.sort()</code> 方法添加到 <code>JukeBox</code> 代码</a></h3>
+<blockquote>
+<p><strong><code>Collections.sort()</code> 方法，会将字符串清单，以字母顺序进行排序</strong>。</p>
+</blockquote>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox1 {
+    ArrayList&lt;String&gt; songList = new ArrayList&lt;String&gt; ();
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    public JukeBox1 () {
+        getSongs();
+        System.out.println(songList);
+
+        // 对静态类 `Collections` 的 `sort()` 方法进行调用，并
+        // 再次打印处这个清单。这第二个打印输出，就是以字母顺序的了！
+        Collections.sort(songList);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox1();
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongList.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+        songList.add(tokens[0]);
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_05.png" alt="加入了 Collections.sort() 方法后的 JukeBox1 程序" /></p>
+<p><em>图 5 - 加入了 <code>Collections.sort()</code> 方法后的 <code>JukeBox1</code> 程序</em></p>
+<h3 id="然而现在需要的是-song-对象而不是那些简单的字符串"><a class="header" href="#然而现在需要的是-song-对象而不是那些简单的字符串">然而现在需要的是 <code>Song</code> 对象，而不是那些简单的字符串</a></h3>
+<p>现在老板想要清单中的那些具体 <code>Song</code> 类实例，而不仅仅是一些字符串，那么每个 <code>Song</code> 就要有更多的数据了。新的自动点唱机装置输出了更多的信息，那么这次这个文件就会有 <em>四个</em> 片段（令牌），而不再仅仅两个了。</p>
+<p>类 <code>Song</code> 是相当简单的，仅有一个感兴趣的特性 -- 一个重写了的 <code>toString()</code> 方法。请记住，这个 <code>toString()</code>方法，是在类 <code>Object</code> 中定义的，因此Java 中的每个类，都继承了这个方法。同事由于在打印某个对象（<code>System.out.println(anObject)</code>）时，会调用到这个对象上的 <code>toString()</code> 方法，因此就应该对其进行重写，来打印出一些比起默认唯一识别符代码，更具可读性的东西。在打印某个歌曲对象清单时，将调用到各个 <code>Song</code> 对象上的这个 <code>toString()</code> 方法。</p>
+<pre><code class="language-java">class Song {
+
+    // 这四个实例变量表示文件中的四个歌曲属性。
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    // 这些变量都是在新的 Song 对象被创建时，在构造器中设置的。
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    // 这些是四个属性的获取器方法。
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  时，就会调用清单中各个元素的这个 toString() 方法。
+    public String toString () {
+        return title;
+    }
+}
+</code></pre>
+<h3 id="将-jukebox-代码修改为使用-song-对象而非那些字符串"><a class="header" href="#将-jukebox-代码修改为使用-song-对象而非那些字符串">将 <code>JukeBox</code> 代码修改为使用 <code>Song</code> 对象而非那些字符串</a></h3>
+<p>代码只会修改很少 -- 文件 I/O 代码还是一样，且解析代码也一样（<code>String.split()</code>静态方法），这次不一样的，是每行/每首歌曲将有 <em>四个</em> 令牌，同时全部四个都将用于构造一个新的 <code>Song</code> 对象。同时理所应当的这个 <code>ArrayList</code> 将是类型 <code>&lt;Song&gt;</code> 而非 <code>&lt;String&gt;</code> 了。</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox3 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList&lt;Song&gt; songList = new ArrayList&lt;Song&gt; ();
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    public JukeBox3 () {
+        getSongs();
+        System.out.println(songList);
+
+        Collections.sort(songList);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox3();
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongListMore.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+</code></pre>
+<h3 id="然而这代码不会被编译出来"><a class="header" href="#然而这代码不会被编译出来">然而这代码不会被编译出来！</a></h3>
+<pre><code class="language-console">/home/peng/eclipse-workspace/learningJava/src/main/java/com/xfoss/CollectionAndGenerics/JukeBox3.java:17:
+    error: no suitable method found for sort(ArrayList&lt;Song&gt;)
+           Collections.sort(songList);
+                      ^
+       method Collections.&lt;T#1&gt;sort(List&lt;T#1&gt;) is not applicable
+         (inference variable T#1 has incompatible bounds
+           equality constraints: Song
+           lower bounds: Comparable&lt;? super T#1&gt;)
+       method Collections.&lt;T#2&gt;sort(List&lt;T#2&gt;,Comparator&lt;? super T#2&gt;) is not applicable
+         (cannot infer type-variable(s) T#2
+           (actual and formal argument lists differ in length))
+  where T#1,T#2 are type-variables:
+    T#1 extends Comparable&lt;? super T#1&gt; declared in method &lt;T#1&gt;sort(List&lt;T#1&gt;)
+    T#2 extends Object declared in method &lt;T#2&gt;sort(List&lt;T#2&gt;,Comparator&lt;? super T#2&gt;)
+Note: Some input files use unchecked or unsafe operations.
+</code></pre>
+<p>某个地方出错了......那个 <code>Collections</code> 类明明是有个取<code>List</code> 做参数的 <code>sort()</code> 方法的。</p>
+<p><code>ArrayList</code> 确实是一个 <code>List</code>，因为 <code>ArrayList</code> 实现了接口 <code>List</code>，那么......这代码 <em>应该</em> 跑起来的。</p>
+<p><em><strong>然而这代码并没有跑起来</strong></em>!</p>
+<p>编译器说，他无法找到适当的、取一个 <code>ArrayList&lt;Song&gt;</code> 作参数的 <code>sort</code> 方法，那么或许是这个 <code>sort()</code> 方法不喜欢一个 <code>Song</code>对象构成的 <code>ArrayList</code>？不过这个 <code>Collections.sort()</code> 方法又并不介意一个 <code>ArrayList&lt;String&gt;</code>，那么 <code>Song</code> 与 <code>String</code> 之间，到底有什么重要的区别呢？是什么差异导致了编译器的失败呢？</p>
+<p>当然你或许已经想到，“排序的 <em>依据</em> 到底是什么？” 这个 <code>sort</code> 方法是怎样知道，是什么造成一个 <code>Song</code> 大于 另一<code>Song</code> 对象的？显然在希望歌曲标题作为判断这些歌曲排序方式时，就需要某种方式，来告知这个 <code>sort</code> 方法，他需要使用标题，而非比如说每分钟的拍数（the beats per minute, bpm）。</p>
+<p>关于这点，正是这里接下来几页要讨论的问题，不过首先，让我们搞清楚，为何编译器甚至不会允许将一个 <code>Song</code> 的 <code>ArrayList</code> 传递给这个 <code>sort()</code> 方法。</p>
+<h3 id="collectionssort-方法的声明"><a class="header" href="#collectionssort-方法的声明"><code>Collections.sort()</code> 方法的声明</a></h3>
+<p><img src="images/Ch16_06.png" alt="Java API Collections.sort()" /></p>
+<p><em>图 6 - Java API <code>Collections.sort()</code></em></p>
+<blockquote>
+<p><em>WTF? 我都不知道该怎么去看这个方法声明。他讲了 <code>sort()</code> 要取一个 <code>List&lt;T&gt;</code> 的参数，然而 <code>T</code> 是个啥？还有在返回值类型前那一大坨又是啥</em>？</p>
+</blockquote>
+<p>从 API 文档（找找 <code>java.util.Collections</code> 类，然后滚动 <code>sort()</code> 方法），似乎这个 <code>sort()</code> 方法声明得...... <em>有些奇怪</em>。或者至少不同于先前见到的任何一个。</p>
+<p>那是因为，这个 <code>sort()</code> 方法（连同Java中整个集合框架中的其他东西），重度运用了 <em>泛型（generics）</em>。不论何时，但凡在 Java 源码或文档中，见到某个东西带有尖括号，那就意味着泛型 -- 一个添加到 Java 5.0 版本中的特性。因此在搞清楚为何可以对 <code>ArrayList</code> 中的字符串对象进行排序，而无法对 <code>Song</code> 对象的<code>ArrayList</code> 进行排序之前，这里就不得不掌握如何去理解文档。</p>
+<h2 id="泛型意味着更好的类型安全"><a class="header" href="#泛型意味着更好的类型安全">泛型意味着更好的类型安全</a></h2>
+<p><strong>Generics means more type-safety</strong></p>
+<p>这里就会讲到这个 -- <em>我们所写的全部涉及到泛型的代码，实际上都将是有关集合的代码（virtually all of the code you write that deals with generics will be collection-related code）</em>。虽然泛型可以其他一些方式使用，但泛型的要点，是可以写出类型安全的集合。也就是那些可以令到编译器阻止我们把一个 <code>Dog</code> 对象，放入到一个 <code>Duck</code> 清单里去的代码。</p>
+<blockquote>
+<p><strong>注</strong>：<em>关于 Collection 与 Set 的区别，请参考 <a href="https://www.quora.com/What-is-the-difference-between-a-set-and-a-collection-in-Java">What is the difference between a set and a collection in Java?</a></em></p>
+</blockquote>
+<p>在泛型之前（即在 Java 5.0 之前），由于所有集合实现，都被声明为保存类型 <code>Object</code>，因此编译器不会在乎放入到某个集合的为何物。那时可将 <em>任何东西</em> 都放入到所有 <code>ArrayList</code>；这就好比所有 <code>ArrayList</code> 都被声明为了 <code>ArrayList&lt;Object&gt;</code>。</p>
+<blockquote>
+<p><strong>有了泛型，就可以创建类型安全的集合，其中在编译时，而不是运行时就可以发现更多的问题</strong>。</p>
+<p><strong>若没有泛型，那么编译器会痛快地允许将 <code>Pumpkin</code> 放入到本被假定为仅保管 <code>Cat</code> 对象的 <code>ArrayList</code></strong>。</p>
+</blockquote>
+<p><img src="images/Ch16_07.png" alt="没有泛型与带有泛型的对比" /></p>
+<p><em>图 7 - 没有泛型与带有泛型的对比</em></p>
+<blockquote>
+<p><em>现在有了泛型，就只能将 <code>Fish</code> 对象放入到这个 <code>ArrayList&lt;Fish&gt;</code> 中，因此那些从这个清单中取出的对象，就是些<code>Fish</code> 引用变量了。不必担心有人会把一个 <code>Volkswagen</code> 放在那里面，或者担心从那里取出的对象，不会确实是个兼容 <code>Fish</code> 的引用变量</em>。</p>
+</blockquote>
+<h3 id="了解泛型"><a class="header" href="#了解泛型">了解泛型</a></h3>
+<p><strong>Learning generics</strong></p>
+<p>关于泛型，有很多需要掌握的东西，对于大多数程序员，则只需要了解下面三个：</p>
+<ol>
+<li>
+<p>创建一些泛化类的实例（creating instances of generified classess, 比如 <code>ArrayList</code>）</p>
+<p><code>new ArrayList&lt;Song&gt; ()</code></p>
+<p>在构造一个 <code>ArrayList</code> 时，就必须告诉这个 <code>ArrayList</code> 类型的变量，这个清单中将允许的对象类型，这就跟原先那些普通数组一样。</p>
+</li>
+<li>
+<p>声明并赋值一些泛型的变量（declaring and assigning variables of generic types）</p>
+<p><code>List&lt;Song&gt; songList = new ArrayList&lt;Song&gt; ()</code></p>
+<p>多态机制与泛型到底是怎样一起生效的呢？在有着一个 <code>ArrayList&lt;Animal&gt;</code> 的引用变量时，可以将一个 <code>ArrayList&lt;Dog&gt;</code> 的变量赋值给他吗？对于一个 <code>List&lt;Animal&gt;</code> 的引用变量又如何呢？可以将一个 <code>ArrayList&lt;Animal&gt;</code> 对象，赋值给他吗？接下来就会看到.......</p>
+</li>
+<li>
+<p>声明（及触发）那些取泛型作参数的方法（declaring(and invoking) methods that take generic types）</p>
+<pre><code class="language-java">void foo(List&lt;Song&gt; list)
+x.foo(songList)
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p><em><strong>注</strong></em>：关于 call 与 invoke 的区别，请参考：<a href="https://www.quora.com/What-is-the-difference-between-call-and-invoke">what is the difference between 'call' and 'invoke'?</a></p>
+</blockquote>
+<p>在有着某个取一个参数，即 <code>Animal</code> 类型对象的 <code>ArrayList</code> 的方法时，到底那意味着什么呢？可否传递给这个方法一个 <code>Dog</code> 类型对象的 <code>ArrayList</code> 呢？后面就会讨论到与先前那种取老式普通数组作参数的方法相比，一些微妙而棘手的问题。</p>
+<p>（这实际上与上面第二点相同，但这正好说明多态与泛型在一起时的重要性。）</p>
+<h2 id="运用泛型类using-generic-classes"><a class="header" href="#运用泛型类using-generic-classes">运用泛型类（using generic CLASSES）</a></h2>
+<p>由于 <code>ArrayList</code> 是这里最常用到的泛化类型，那么这里将以他的文档开始。要注意到泛化类的以下两个关键点：</p>
+<ol>
+<li>
+<p>这个 <em>类</em> 的声明（The <em>class</em> declaration）</p>
+</li>
+<li>
+<p>那些实现元素添加的 <em>方法</em> 的声明（The <em>method</em> declarations that let you add elements）</p>
+</li>
+</ol>
+<p><img src="images/Ch16_08.png" alt="Java API - ArrayList" /></p>
+<p><em>图 8 - Java API - ArrayList</em></p>
+<h3 id="理解-arraylist-的文档"><a class="header" href="#理解-arraylist-的文档">理解 <code>ArrayList</code> 的文档</a></h3>
+<p>（或者说，这里 <code>E</code> 的真正意义为何？）</p>
+<blockquote>
+<p><strong>请将这里的 “E”，当作 “希望这个集合所保留与返回的元素类型”。（E 就是元素 Element 中的 E。）</strong></p>
+<p><strong>Think of &quot;E&quot; as a stand-in for &quot;the type of element you want this collection to hold and return.&quot; (<ins>E</ins> is for <ins>E</ins>lement.)</strong></p>
+</blockquote>
+<pre><code class="language-java">// 这个 “E” 是在声明和创建某个 ArrayList 时，所用到具体
+// 类型的占位符。
+public class ArrayList&lt;E&gt;
+// ArrayList 是 AbstractList 的一个子类，因此不论指定了
+// 何种类型给这个 ArrayList, 都会自动用到类型 AbstractList 上。
+extends AbstractList&lt;E&gt;
+// 这个类型（即 &lt;E&gt; 的取值）同时将成为 List 接口的类型。
+implements List&lt;E&gt;, RandomAccess, Cloneable, Serializable {
+    // 这里是重点！这里的 “E” 决定了所能添加到这个 ArrayList
+    // 的物件类别。
+    public boolean add (E o)
+    // 其他代码
+}
+</code></pre>
+<p>这个 <code>E</code> 表示用于创建 <code>ArrayList</code> 实例的类型，在见到 <code>ArralyList</code> 文档中的 <code>E</code> 时，就可以暗自将其查找/替换为用于初始化 <code>ArrayList</code> 的那个 <code>&lt;type&gt;</code>。</p>
+<p>那么那个新的 <code>ArrayList&lt;Song&gt;</code> 就表示，在所有用到 <code>E</code> 的方法或变量声明中的 <code>E</code> 成为了 <code>Song</code>。</p>
+<h3 id="在-arraylist-下使用类型参数"><a class="header" href="#在-arraylist-下使用类型参数">在 <code>ArrayList</code> 下使用类型参数</a></h3>
+<p><strong>Using type parameters with <code>ArrayList</code></strong></p>
+<p>这段代码：</p>
+<pre><code class="language-java">ArrayList&lt;String&gt; thisList = new ArrayList&lt;String&gt;
+</code></pre>
+<p>意味着 <code>ArrayList</code>:</p>
+<pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; ... {
+
+    public boolean add(E o) {...}
+    // 其他代码
+}
+</code></pre>
+<p>是被编译器这样来对待的：</p>
+<pre><code class="language-java">public class ArrayList&lt;String&gt; extends AbstractList&lt;String&gt; ... {
+
+    public boolean add(String o) {...}
+    // 其他代码
+}
+</code></pre>
+<p>也就是说，这里的 <code>E</code> 被那个在创建该 <code>ArrayList</code> 时所使用的 <em>具体</em> 类型（也被称为 <em>类型参数（type parameter）</em>）取代了。同时也是为何<code>ArrayList</code>的<code>add()</code> 方法不会允许将除了与这个 <code>E</code> 类型兼容的引用变量类型变量的对象之外，其他任何对象加以添加的原因。因此在构造了一个 <code>ArrayList&lt;String&gt;</code> 时，这个<code>add()</code>方法，突然间就变成了 <code>add(String o)</code>。在创建了类型为 <code>Dog</code> 的 <code>ArrayList</code> 时，那个 <code>add()</code> 就突然成为了 <code>add(Dog o)</code>。</p>
+<h3 id="答疑-1"><a class="header" href="#答疑-1">答疑</a></h3>
+<ul>
+<li><strong>这里就只能放一个 <code>E</code> 吗？因为 <code>sort</code> 的文档还使用了 <code>T</code>......</strong></li>
+</ul>
+<blockquote>
+<p>只要是合法的 Java 标识符，都可以使用。那就意味着所有可用于方法或变量名称的东西，都会用作类型参数（a type parameter）。不过有个约定，就是要使用单个字母（那么就应该使用单个字母），同时进一步的约定，就是除非专门编写了一个集合类，那么在使用 <code>E</code> 来表示 “集合将保留元素的类型”的地方，就要使用 <code>T</code>（You can use anything that's a legal Java identifier. That means anything that you could use for a method or variable name will work as a type parameter. But the convention is to use a single letter(so that's what you shold use), and a further convention is to use <code>T</code> unless you're specifically writing a collection calss, where you'd use <code>E</code> to represent the &quot;type of the Element the collection will hold&quot;）。</p>
+</blockquote>
+<h3 id="运用泛型方法"><a class="header" href="#运用泛型方法">运用泛型方法</a></h3>
+<p><strong>Using generic METHODS</strong></p>
+<p>泛型 <em>类</em> 意味着 <em>类的声明</em> 包含了类型参数。而泛型 <em>方法</em>，表示方法声明在他的签名中，用到了一个类型参数（A generic <em>class</em> means that the <em>class declaration</em> includes a type parameter. A generic <em>method</em> means that the method declaration uses a type parameter in its signature）。</p>
+<p>在方法中使用类型参数的几种不同方式：</p>
+<ol>
+<li>
+<p>使用在类声明中定义的类型参数（using a type parameter defined in the class declaration）</p>
+<pre><code class="language-java">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; ... {
+    // 之所以可以在这里使用 &quot;E&quot;, 完全是因为这个 &quot;E&quot; 已经作为
+    // 这个类的一部分被定义了。
+    public boolean add(E o)
+}
+</code></pre>
+<p>在声明类的某个类型参数时，就可以像使用某个 <em>具体</em> 类或接口类型那样，在任意地方使用这个类型了。于方法参数中声明的类型，就会被那个在初始化这个类时用到的类型所取代（When you declare a type parameter for the class, you can simply use that type any place that you'd use a <em>real</em> class or interface type. The type declared in the method argument is essentially replaced with the type you use when you instantiate the class）。</p>
+</li>
+<li>
+<p>使用未在类声明中定义的某个类型参数（using a type parameter that was NOT defined in the class declaration）</p>
+<pre><code class="language-java">// 后面方法参数中之所以可以使用 &lt;T&gt;，是由于前面在方法声明中
+// 声明过 “T”。
+public &lt;T extends Animal&gt; void takeThing (ArrayList&lt;T&gt; list)
+</code></pre>
+<p>在类本身未用到类型参数时，仍然可以通过在一个相当不寻常的（不过仍然可行）的地方 -- <em>在返回值类型之前</em>，声明一个类型参数，从而给某个方法指定一个类型参数。上面这个方法，表示那个 <code>T</code> 可以是 “任何的<code>Animal</code>类型”（If the class itself doesn't use a type parameter, you can still specify one for a method, by declaring it in a really unusual(but available) space -- <em>before the return type</em>. This method says that <code>T</code> can be &quot;any type of <code>Animal</code>&quot;）。</p>
+</li>
+</ol>
+<h3 id="这里有点玄乎了"><a class="header" href="#这里有点玄乎了">这里有点玄乎了......</a></h3>
+<p><strong>Here's where it gets weird...</strong></p>
+<blockquote>
+<p><em>等下......这里一定有什么问题。既然可以取一个 <code>Animal</code> 的清单作参数，那么为什么不直接用 <code>ArrayList&lt;Animal&gt;</code> 呢？直接用 <code>takeThing(ArrayList&lt;Animal&gt; list)</code> 有什么问题</em>？</p>
+<p><em>Wait...that can't be right. If you can take a list of <code>Animal</code>, why don't you just SAY that? what's wrong with just <code>takeThing(ArrayList&lt;Animal&gt; list)</code></em>?</p>
+</blockquote>
+<p>这个：</p>
+<pre><code class="language-java">public &lt;T extends Animal&gt; void takeThing(ArrayList&lt;T&gt; list)
+</code></pre>
+<p>与下面这个 <strong>并不</strong> 一样：</p>
+<pre><code class="language-java">public void takeThing(ArrayList&lt;Animal&gt; list)
+</code></pre>
+<p>这两个都是合法的，但他们是 <em>不一样的</em>！</p>
+<p>第一个，其中的 <code>&lt;T extends Animal&gt;</code> 是方法声明的组成部分，表示了所有声明了类型为 <code>Animal</code> 或 <code>Animal</code>的子类型（比如<code>Dog</code> 或 <code>Cat</code>） 的 <code>ArrayList</code>, 都是合法的。那么就可以使用 <code>ArrayList&lt;Dog&gt;</code>、<code>ArrayList&lt;Cat</code> 或 <code>ArrayList&lt;Animal</code>，来运行上面的那个方法。</p>
+<p>然而......对于下面的那个方法，其中的方法参数（<code>ArrayList&lt;Animal&gt;</code>）则表示，<em>只有</em> <code>ArrayList&lt;Animal&gt;</code> 是合法的。也就是说，相比于头个版本取任何<code>Animal</code>类型（<code>Animal</code>、<code>Dog</code>、<code>Cat</code>等待）的 <code>ArrayList</code>，这第二个版本，就 <em>只会</em> 取类型为 <code>Animal</code> 的 <code>ArrayList</code>。不能取 <code>ArrayList&lt;Dog&gt;</code>，或 <code>ArrayList&lt;Cat&gt;</code>，只能是 <code>ArrayList&lt;Animal&gt;</code>。</p>
+<p>同时这似乎确实会破坏多态机制的要素。在本章结束时再回头来看仔细回顾到这一点，就会更加清楚分明。至于现在，请记住由于此刻仍在致力于搞清楚怎样对那个 <code>SongList</code> 进行排序，而这又将我们带入了对有着奇怪的泛型声明 <code>sort()</code> 方法文档的审视，因此对于泛型与多态机制的关系，还只是点到为止的（And yes, it does appare to voilate the point of polymorphism. But it will become clare when we revisit this in detail at the end of the chapter. For now, remember that we're only looking at this because we're still trying to figure out how to <code>sort()</code> that <code>SongList</code>, and that led us into looking at the API for the <code>sort()</code> method, which had this strange generic type declaration）。</p>
+<p><em><strong>此刻来讲，所要明白的，仅是上面那个版本是合法的，同时那意味着可将一个作为<code>Animal</code>或任何的<code>Animal</code>子类型的<code>ArrayList</code>传入进去</strong></em>。</p>
+<p>那么现在就要回到那个 <code>sort()</code> 方法了......</p>
+<h3 id="还记得前面中断的地方吧"><a class="header" href="#还记得前面中断的地方吧">还记得前面中断的地方吧......</a></h3>
+<blockquote>
+<p><em>这仍然解释不了为什么那个 <code>sort</code> 方法在 <code>Song</code> 的 <code>ArrayList</code> 上失效，而在 <code>String</code> 的 <code>ArrayList</code> 上没有问题</em>......</p>
+</blockquote>
+<h3 id="重新审视这个-sort-方法"><a class="header" href="#重新审视这个-sort-方法">重新审视这个 <code>sort()</code> 方法</a></h3>
+<p>那么就来试着读读这个 <code>sort()</code> 方法的文档，找出为何他对字符串清单排序没有问题，而不能对 <code>Song</code> 对象清单进行排序。看起来答案似乎是......</p>
+<p><img src="images/Ch16_09.png" alt="Java API - Collections.sort()" /></p>
+<p><em>图 9 - Java API - <code>Collections.sort()</code></em></p>
+<p><strong><code>sort()</code> 方法只能接收那些是 <code>Comparable</code> 对象的清单</strong>。</p>
+<p><strong><code>Song</code> 不是 <code>Comparable</code> 的子类型，因此就不能对 <code>Song</code> 清单进行 <code>sort()</code></strong>。</p>
+<p><strong>至少现在是不行的</strong>......</p>
+<pre><code class="language-java">// 这里返回值前面声明的泛型参数，表示 “T” 必须是类型 Comparable。
+//
+// 请暂时忽略这里的 &lt;? super T&gt;。若真要问这是是什么，那么他表示
+// Comparable 类的类型参数，必须是类型 T，或 T 的一个子类型。
+//
+// 后面的那个 &lt;T&gt;，表示了 sort 函数仅可传入一个使用了参数化的、“对Comparable
+// 进行了扩展”的类型的清单（或清单的子类型，比如ArrayList）
+public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list)
+</code></pre>
+<blockquote>
+<p><em>嗯......我刚查看了一下 <code>String</code> 的文档，发现 <code>String</code> 并没有 <em>扩展</em> <code>Comparable</code> -- 他 <em>实现了</em> <code>Comparable</code>。</em></p>
+<p><em><em><code>Comparable</code> 是个接口</em>。因此如果写 <code>T extends Comparable</code> 简直就是胡说八道</em>。</p>
+</blockquote>
+<p><img src="images/Ch16_10.png" alt="Java API - String" /></p>
+<p><em>图 10 - Java API - <code>String</code></em></p>
+<h3 id="在泛型语境下扩展-指的是-扩展或实现"><a class="header" href="#在泛型语境下扩展-指的是-扩展或实现">在泛型语境下，“扩展” 指的是 “扩展或实现”</a></h3>
+<p><strong>In generics, <code>extends</code> means &quot;<code>extends</code> or <code>implements</code>&quot;</strong></p>
+<p>Java 工程师们必须要给到一种在参数化类型上施加约束的方式，从而才能对这个参数化类型加以限制，比如仅那些 <code>Animal</code> 的子类。然而还会需要将某个类型，约束到仅允许实现了某个特定接口的那些类。因此，就会存在这样的情形，其中需要一种语法，来让上述两种条件生效--继承与实现。也就是说，一种可以同时工作于 <em>扩展</em> 和 <em>实现</em> 语法（The Java engineers had to give you a way to put a constaint on a parameterized type, so that you can restrict it to, say, only subclasses of <code>Animal</code>. But you also need to constrain a type to allow only classes that implement a particular inteface. So here's a situation where we need one kind of syntax to work for both situations -- inheritance and implementation. In other words, that works for both <code>extends</code> and <code>implements</code>）。</p>
+<p>而胜出的词语就是...... <code>extends</code>。不过他所表达的真正意思是 <code>is-a</code>，且不管他右边的类型是接口还是类，<code>extends</code>都是有效的（And the winning word was... <code>extends</code>. But it really means <code>is-a</code>, and works regardless of whether the type on the right is an interface or a class）。</p>
+<blockquote>
+<p><em><strong>在泛型中，关键字<code>extends</code>的意思就是 <code>is-a</code>，并同时对类和接口生效</strong></em>。</p>
+<p><em><strong>In generics, the keyword <code>extends</code> really means <code>is-a</code>, and works for BOTH classes and interfaces</strong></em>.</p>
+</blockquote>
+<pre><code class="language-java">// Comparable 是个接口，因此这里实际上应该读作，“T 必须是一个实现
+// 了 Comparable 接口的类型”。
+//
+// extends 右边的那个，具体是个类还是接口并不重要......这里总是要写
+// extends。
+public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list)
+</code></pre>
+<h3 id="答疑-2"><a class="header" href="#答疑-2">答疑</a></h3>
+<ul>
+<li><strong>为啥 Java 工程师们不造一个新关键字，<code>is</code></strong>?</li>
+</ul>
+<blockquote>
+<p>由于往语言添加一个新关键字，破坏了以较早版本编写Java代码，因此这样做是件相当大的事情。请设想一下 -- 可能使用了一个变量<code>is</code>（本书中确实使用了这个变量来表示输入流）。而由于将关键字用作代码标识符是不被允许的，那就意味着在这个关键字成为保留字之前，全部将其用作变量标识符的那些代码，就会失效。因此只要 Sun 公司的工程师有机会重用一个既有关键字，就比如这里的 <code>extends</code>，他们通常会选择重用这个既有关键字。然而这些工程师有时候别无选择......</p>
+<p>少数（极少）关键字就已被添加到这门语言了，比如在 Java 1.4 中的 <code>assert</code> 及 Java 1.5 中的 <code>enum</code>（附录就会讲到<code>enum</code>）。而这样做并不会破坏人们的代码，尽管有时会选择 <em>新</em> 版本的Java来编译和运行，那么这些代码就会跟较旧版本的Java下表现得一样。通过在命令行给编译器或JVM传递一个特别参数，比如，“是的，是的，我知道这是 Java 1.4，但请假装成 1.3， 因为在我的代码中使用了名为 <em>assert</em> 的变量，我之所以这样写，是因为你们这些Java工程师早先说这样写是没问题的......”，就可以实现此目的。</p>
+<p>（可通过在命令行敲入 <code>javac</code> （对于编译器）或 <code>java</code> （对于 JVM），其后不带任何东西，来检查这样的命令参数是否可用，随后就可以看到一个可用选项清单。关于这些 <code>javac</code> 及 <code>java</code> 命令的参数选项，在后面的部署章节会涉及。）</p>
+</blockquote>
+<h3 id="终于知道哪里错了那个-song-类需要实现-comparable"><a class="header" href="#终于知道哪里错了那个-song-类需要实现-comparable">终于知道哪里错了......那个 <code>Song</code> 类需要实现 <code>Comparable</code></a></h3>
+<p>只有在 <code>Song</code> 类实现了 <code>Comparable</code> 时，才能把那个 <code>ArrayList&lt;Song&gt;</code> 传递给那个 <code>sort()</code> 方法，这是由于 <code>sort()</code> 方法被声明的方式决定的。快速查看一下 API 文档，就会发现 <code>Comparable</code> 接口是相当简单的，只有一个方法要实现：</p>
+<pre><code class="language-java">// java.lang.Comparable
+public interface Comparable &lt;T&gt; {
+ int compareTo(T o);
+}
+</code></pre>
+<p>而这个<code>compareTo()</code>方法的文档，又讲到：</p>
+<pre><code class="language-console">Returns:
+
+a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+</code></pre>
+<blockquote>
+<p><strong>关键在于：到底是什么让一首歌曲小于、等于，或者大于另一首歌曲</strong>？</p>
+<p><strong>在没有搞清楚这个问题之前，是无法实现这个 <code>Comparable</code> 接口的</strong>。</p>
+</blockquote>
+<p>看起来似乎这个 <code>compareTo()</code> 方法将在某个 <code>Song</code> 对象上调用，将另一个对象的索引，传递给那个 <code>Song</code> 对象。运行<code>compareTo()</code>方法的那个对象，必须得出传递给他的那个<code>Song</code>，在清单中是要排在他自己前面、后面，还是与他一样的位置。</p>
+<p>现在首要工作，就是确定是什么使得一首歌曲高于另一歌曲，然后实现这个<code>compareTo()</code>方法来反应这一点。负数（任何负数）意味着被传递的 <code>Song</code> 对象高于运行此方法的<code>Song</code>对象。返回一个正数，则表明运行此方法的<code>Song</code>对象，高于传递给<code>compareTo()</code>方法的<code>Song</code>对象。返回零意味着这两个<code>Song</code>对象相等（至少在排序上来说是相等的......但不表示他们是同样的对象）。或许，有着两首标题相同的歌曲呢。</p>
+<p>（后面就会看到，这将带来非常多的可能......Which brings up a whole different can of worms we'll look at later...）</p>
+<blockquote>
+<p>动手写代码
+请写下你的想法和实现这个将按照歌曲标题，对这些<code>Song</code>对象进行排序的<code>compareTo()</code> 方法伪代码（或者更佳的是写出具体代码）。</p>
+<p>提示：在循着正轨的情形下，代码将少于 3 行！</p>
+</blockquote>
+<h3 id="新的改进过的可比较的-song-类"><a class="header" href="#新的改进过的可比较的-song-类">新的、改进过的、可比较的 <code>Song</code> 类</a></h3>
+<p><strong>The new, improved, comparable <code>Song</code> class</strong></p>
+<p>这里决定希望以歌曲标题来排序，你们就要将 <code>compareTo()</code>方法实现为，把传递给这个方法的<code>Song</code>的标题，与运行这个<code>compareTo()</code>方法的<code>Song</code>对象的标题进行比较。也就是说，运行这个方法的<code>Song</code>对象必须判断出他的标题，与该方法参数的<code>Song</code>对象标题相比起来如何。</p>
+<p>嗯......既然这个<code>Collections.sort()</code>方法在<code>String</code>类型的清单上是生效的，那么就知道 <code>String</code> 类一定是清楚字母排序的。我们又知道 <code>String</code> 类有一个 <code>compareTo()</code> 方法，那为什么不调用这个方法呢？那样的话，就可以简单地拿一个歌曲标题的字符串，将其自己和另一个歌曲标题比较就行了，还避开了比较，或者说字母排序算法呢！</p>
+<pre><code class="language-java">// 通常前一个 Song 与 Comparable&lt;T&gt; 中的 Song 是匹配的......这里
+// 指定了实现 Comparable 接口类可与之比较的类型。
+//
+// 这表示为排序目的， Song 对象可与其他 Song 对象比较。
+class Song implements Comparable&lt;Song&gt; {
+
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    // Collections.sort() 方法，会将一个 Song 对象，发送给 compareTo()
+    // 方法，来查看那个 Song 对象与运行这个方法的 Song 相比会怎样。
+    //
+    // 很简单！由于知道 String 有一个 compareTo() 方法，因此
+    // 这里只要把比较工作，传递给歌曲标题的 String 对象即可。
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
+    }
+
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    public String toString () {
+        return String.format(&quot;%s - %s&quot;, title, rating);
+    }
+}
+</code></pre>
+<p>现在，这个 <code>JukeBox3</code> 程序就工作了。他会打印出这个清单，随后调用 <code>Collections.sort()</code>，这个方法会将这些歌曲，按照歌曲标题的字母顺序排序。</p>
+<p><img src="images/Ch16_11.png" alt="新的、改进后的可比较 Song 类" /></p>
+<p><em>图 11 - 新的、改进后的可比较<code>Song</code>类</em></p>
+<h3 id="这里能够对清单排序了然而"><a class="header" href="#这里能够对清单排序了然而">这里能够对清单排序了，然而......</a></h3>
+<p>有了个新问题 -- 楼老板要的是这个歌曲清单的两种不同视图，一个以歌曲标题排序，一个以歌曲的艺人排序！</p>
+<p>但是在令到集合元素可比较（通过让<code>Song</code>类实现 <code>Comparable</code> 接口）时，只有一次机会来实现那个<code>compareTo()</code>方法。那么能做些什么呢？</p>
+<p>糟糕的做法，就是可以在 <code>Song</code> 类里头使用一个标志变量（a flag variable），然后在 <code>compareTo()</code> 中执行一个 <code>if</code> 测试，并根据这个标志变量是被设置为使用歌曲标题，还是歌曲艺人进行比较，而给出不同结果。</p>
+<p>然而那是个可怕又脆弱的办法，并且有更佳的做法。在希望对同一事物按多种方式排序时，有API内建的东西来实现此目的。</p>
+<p><strong>来再看看 <code>Collections</code> 类的文档。那里有另外一个过载的<code>sort()</code>方法（a overloaded <code>sort()</code> method） -- 这个会取一个 <code>Comparator</code> 类型的参数</strong>。</p>
+<pre><code class="language-java">public static &lt;T&gt; void sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c)
+</code></pre>
+<blockquote>
+<p><em>这个 <code>sort()</code> 方法，是过载来取得一个叫做 <code>Comparator</code> 的参数的</em>。</p>
+<p>提醒一下：请想想该怎样得到/构造出一个可对这些歌曲按照艺人而非歌曲标题进行排序的 <code>Comparator</code> 来。</p>
+</blockquote>
+<h3 id="使用定制的-comparator"><a class="header" href="#使用定制的-comparator">使用定制的 <code>Comparator</code></a></h3>
+<p>清单中的元素，可将其 <em>自身</em> 与他类型的另一元素，使用他的<code>compareTo()</code>方法以某种方式进行比较。但 <code>Comparator</code> 相对于这个元素的类型，是外部的东西--<code>Comparator</code>是个单独类。那么想要构造多少个 <code>Comparator</code> 类都可以！要以歌曲艺人来比较歌曲？那么就构造一个<code>ArtistComparator</code>类。要按照每分钟节拍数来比较？就构造一个 <code>BPMComparator</code>类。</p>
+<pre><code class="language-java">// java.util.Comparator
+public interface Comparator&lt;T&gt; {
+    int compare(T o1, T o2);
+}
+</code></pre>
+<blockquote>
+<p><em><strong>在将一个 <code>Comparator</code> 传递给这个 <code>sort()</code> 方法时，排序就由这个<code>Comparator</code>，而不是元素本书的 <code>compareTo()</code> 方法来确定了</strong></em>。</p>
+</blockquote>
+<p>然后只需调用那个过载的、取 <code>List</code> 及帮助将清单中物件进行排序的 <code>sort()</code> 就可以了。</p>
+<p>取了 <code>Comparator</code> 参数的 <code>sort()</code> 方法，在将那些元素进行排序时，将使用这个 <code>Comparator</code> 参数，而不是元素本身的 <code>compareTo()</code> 方法。也就是说，在<code>sort()</code>方法获得了一个 <code>Comparator</code>时，这个方法就不会 <em>调用（call）</em> 那些清单中元素的 <code>compareTo()</code> 方法了。相反，这个<code>sort()</code>方法，会 <em>运行（invoke）</em> <code>Comparator</code> 上的 <strong><code>compare()</code></strong> 方法。</p>
+<p>因此，有下面的规则：</p>
+<ul>
+<li>
+<p><strong>运行单个参数的 <code>sort(List o)</code> 方法，表示清单元素的 <code>compareTo()</code> 方法决定了排序顺序。因此清单中那些元素，必须要实现 <code>Comparable</code> 接口</strong>。</p>
+</li>
+<li>
+<p><strong>运行过载的 <code>sort(List o, Comparator c)</code></strong> 表示清单元素的<code>compareTo()</code>方法不会被调用，而将使用这个 <code>Comparator</code> 的 <code>compare()</code> 方法。那就意味着清单中的元素，没有必要取实现 <code>Comparable</code> 接口***。</p>
+</li>
+</ul>
+<h3 id="答疑-3"><a class="header" href="#答疑-3">答疑</a></h3>
+<ul>
+<li><strong>那么这意味着在某个类没有实现 <code>Comparable</code>，且没有源代码的情况下，仍然可以通过构造一个 <code>Comparator</code>，将这个类类型的物件进行排序了吗</strong>？</li>
+</ul>
+<blockquote>
+<p>对的，可以那样做。另一个选项（在可行的情况下）则是对这个类进行子类化，而让子类去实现 <code>Comparable</code> 接口。</p>
+</blockquote>
+<ul>
+<li><strong>那为什么不是 <em>每个</em> 类都实现 <code>Comparable</code> 接口</strong>？</li>
+</ul>
+<blockquote>
+<p>你真的以为 <em>万事万物</em> 皆可排序？在有着一些不以任何自然方式排序的元素类型时，这个时候如果实现了 <code>Comparable</code> 接口，那么就会误导别的程序员了。且由于某位程序员可以他自己的定制 <code>Comparator</code>，来以他选择的方式加以比较，所以即使没有实现 <code>Comparable</code>接口，也不会有什么大的风险。</p>
+</blockquote>
+<h3 id="将-jukebox-更新为使用-comparator"><a class="header" href="#将-jukebox-更新为使用-comparator">将 <code>JukeBox</code> 更新为使用 <code>Comparator</code></a></h3>
+<p>这个代码中完成了三个新东西：</p>
+<ol>
+<li>
+<p>创建了一个实现 <code>Comparator</code> 的内部类（进而因此那个<code>compare()</code>方法会完成之前由<code>compareTo()</code>方法完成的工作）；</p>
+</li>
+<li>
+<p>构造了这个 <code>Comparator</code> 内部类的实例；</p>
+</li>
+<li>
+<p>调用了那个过载的 <code>sort()</code> 方法，同时给到他歌曲清单与这个 <code>Comparator</code> 内部类的实例。</p>
+</li>
+</ol>
+<p>请注意：这里还更新了这个 <code>Song</code> 类的 <code>toString()</code> 方法，以同时打印出歌曲标题与艺人。（不管清单如何排序，新 <code>toString()</code> 方法都会打印出 <code>title: artist</code>。）</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox4 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList&lt;Song&gt; songList = new ArrayList&lt;Song&gt; ();
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    public JukeBox4 () {
+        getSongs();
+        System.out.println(songList);
+
+        Collections.sort(songList);
+        System.out.println(songList);
+
+        // 这里构造了那个 Comparator 内部类的一个实例。
+        ArtistCompare artistCompare = new ArtistCompare();
+        // 这里运行了 sort() 方法，传递给他了这个歌曲清单和到上面新的定制
+        // Comparator 类型的一个对象。
+        Collections.sort(songList, artistCompare);
+        System.out.println(songList);
+    }
+
+    public static void main(String[] args){
+        new JukeBox4();
+    }
+
+    // 这里创建了一个新的、实现 Comparator 的内部类（请留意他的类型参数是与即将
+    // 比较的 -- 即这个实例中的 Song 的那些对象）是一致的。
+    class ArtistCompare implements Comparator&lt;Song&gt; {
+        public int compare(Song one, Song two) {
+            // 这里的 one.getArtist() 将成为一个字符串（即歌曲艺人）
+            //
+            // 由于字符串本身已经知道他们该怎样按字母排序，因此这里是
+            // 让这两个字符串变量（表示歌曲艺人）执行的具体比较。
+            return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongListMore.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_12.png" alt="java.util.Comparator 接口的引入" /></p>
+<p><em>图 12 - <code>java.util.Comparator</code> 接口的引入</em></p>
+<blockquote>
+<p>请注意：通过保留先前在 <code>Song</code> 类中的 <code>compareTo()</code> 方法，这里仍将按歌曲标题排序作为了默认排序。另一种实现这两种排序的方法，就是同时将歌曲标题排序和艺人排序，以<code>Comparator</code>内部类的方式加以实现，从而完全不让 <code>Song</code> 去实现 <code>Comparable</code>接口。那就意味着全都要使用两参数版本的 <code>Collections.sort()</code>。</p>
+</blockquote>
+<h3 id="动手写代码"><a class="header" href="#动手写代码">动手写代码</a></h3>
+<pre><code>package com.xfoss.CollectionAndGenerics;
+
+import java.io.*;
+import java.util.*;
+
+public class SortMountains {
+    LinkedList&lt;Mountain&gt; mtn = new LinkedList&lt;Mountain&gt; ();
+
+    class NameCompare implements Comparator&lt;Mountain&gt; {
+        public int compare (Mountain one, Mountain two) {
+            return one.getName().compareTo(two.getName());
+        }
+    }
+
+    class HeightCompare implements Comparator&lt;Mountain&gt; {
+        public int compare (Mountain one, Mountain two) {
+            return one.getHeight() - two.getHeight();
+        }
+    }
+
+    public SortMountains () {
+        mtn.add(new Mountain(&quot;Longs&quot;, 14255));
+        mtn.add(new Mountain(&quot;艾伯特&quot;, 14433));
+        mtn.add(new Mountain(&quot;玛努恩&quot;, 14156));
+        mtn.add(new Mountain(&quot;Castle&quot;, 14265));
+
+        System.out.format(&quot;输入的是：\n%s\n&quot;, mtn);
+
+        NameCompare nc = new NameCompare();
+        Collections.sort(mtn, nc);
+        System.out.format(&quot;依名称排序：\n%s\n&quot;, mtn);
+
+        HeightCompare hc = new HeightCompare();
+        Collections.sort(mtn, hc);
+        System.out.format(&quot;依高度排序：\n%s\n&quot;, mtn);
+    }
+
+    public static void main (String[] args) {
+        new SortMountains();
+    }
+}
+
+class Mountain {
+    private String name;
+    private int height;
+
+    public String getName () {
+        return name;
+    }
+
+    public int getHeight () {
+        return height;
+    }
+
+    public Mountain (String n, int h) {
+        name = n;
+        height = h;
+    }
+
+    public String toString () {
+        return String.format(&quot;%s: %d&quot;, name, height);
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_13.png" alt="SortMountains" /></p>
+<p><em>图 13 - <code>SortMountains</code></em></p>
+<h3 id="好耶排序全都工作起来了不过现在有些重复的元素"><a class="header" href="#好耶排序全都工作起来了不过现在有些重复的元素">好耶。排序全都工作起来了，不过现在有些重复的元素......</a></h3>
+<p>排序已经运作得相当好了，现在已经掌握了怎样同时以 <em>歌曲标题</em> （使用那些 <code>Song</code> 对象的 <code>compareTo()</code> 方法）和 <em>歌曲艺人</em>（使用<code>Comparator</code>类的 <code>compare()</code> 方法）进行排序。然而这里有个之前未曾注意到的、那个自动点唱机文本文件中的新问题 -- <em><strong>排序后的清单中包含了重复元素</strong></em>。</p>
+<p>看起来不论同一首歌是否已经被播放（并由此已被写入）到那个文本文件，那台晚餐点唱机都在持续地往那个文件写入。这个 <code>SongListMore.txt</code> 的点唱机文件，是已被播放过的全部歌曲的完整记录，并且有可能多次包含了同一首歌曲。</p>
+<pre><code class="language-console">// SongListMore.txt
+Pink Moon/Nick Drake/5/80
+Somersault/Zero 7/4/84
+Shiva Moon/Prem Joshua/6/120
+Circles/BT/5/110
+爱你一万年/Andy LAU/5/142
+Deep Channel/Afro Celts/4/120
+Passenger/Headmix/4/100
+Listen/Tahiti 80/5/90
+Listen/Tahiti 80/5/90
+Listen/Tahiti 80/5/90
+Circles/BT/5/110
+</code></pre>
+<blockquote>
+<p><em>现在由于自动点唱机正依序持续写入其所播放的每首歌曲，因此这个 <code>SongListMore</code> 的文本文件中，就有了重复项目。有人曾决定连续播放了三次 &quot;Listen&quot; 那首歌，接着又播放了 “Circles” 那首早先曾被播放的歌曲</em>。</p>
+<p><em>因为有时会需要文本文件的全部信息，因此这里无法改变文本文件被写入的方式。那么就只有对 Java 代码进行修改了</em>。</p>
+</blockquote>
+<h2 id="这里要的是-set-而不再是-list-了"><a class="header" href="#这里要的是-set-而不再是-list-了">这里要的是 <code>Set</code> 而不再是 <code>List</code> 了</a></h2>
+<p>从 <code>Collection</code> 的API文档，可以找出三个主要的接口，分别是**<code>List</code><strong>、</strong><code>Set</code>** 与 <strong><code>Map</code></strong>。<code>ArrayList</code> 是一种 <code>List</code>，但似乎 <em><code>Set</code></em> 才是这里所需要的。</p>
+<ul>
+<li>
+<p><strong>清单（LIST）</strong> - 用在顺序为要的时候（when <em>sequence</em> matters）</p>
+<p>是那些掌握了 <em><strong>索引位置</strong></em> 的集合（Collections that know about <em><strong>index position</strong></em>）。</p>
+<p>清单对某个元素在清单中的位置有所掌握。多个元素可引用同一对象（Lists know where something is in the list. You can have more than one element referencing the same object）。</p>
+</li>
+</ul>
+<p><img src="images/Ch16_14.png" alt="LIST 图解" /></p>
+<p><em>图 14 - <code>LIST</code> 图解</em></p>
+<ul>
+<li>
+<p><strong>数据集（SET）</strong> - 用在独特性为要的时候（when <em>uniqueness</em> matters）</p>
+<p>是那些 <em><strong>不允许重复元素出现</strong></em> 的集合（Collections tht <em><strong>do not allow duplicates</strong></em>）。</p>
+<p>数据集知道哪些元素已经是在集合中了（<code>Set</code>s know whether something is already in the collection）。</p>
+<p>在数据集中，是绝不可能有多个元素对同一对象进行引用的（或者多个元素引用被认为是相等的两个对象 -- 后面就会涉及何为对象相等的概念）。</p>
+</li>
+</ul>
+<p><img src="images/Ch16_15.png" alt="数据集 Set" /></p>
+<p><em>图 15 - 数据集 <code>Set</code></em></p>
+<ul>
+<li>
+<p><strong>映射（MAP）</strong> - 用在要通过键来找到某个物件时（when <em>finding something by key</em> matters）</p>
+<p>用到 <em><strong>键-值对</strong></em> 的集合（Collections that use <em><strong>key-value pairs</strong></em>）。</p>
+<p>映射知悉值是与给定的键关联起来的。两个键可以引用同样的值，但不能有重复的键。尽管这些键通常都是<code>String</code> 类类型的名字（因此就可以构造出比如名称/值这样的一些清单），但键也可以是别的对象。</p>
+</li>
+</ul>
+<p><img src="images/Ch16_16.png" alt="映射Map" /></p>
+<p><em>图 16 - 映射 <code>Map</code></em></p>
+<h3 id="collection-的api文档部分"><a class="header" href="#collection-的api文档部分"><code>Collection</code> 的API文档（部分）</a></h3>
+<p>请注意虽然 <code>Map</code> 接口并没有真正对 <code>Collection</code> 接口进行扩展，但<code>Map</code>仍被看着是 “集合框架（Collection Frame）”（也被成为“集合API（Collections API）”）的一部分。因此即便映射没有将 <code>java.util.Collection</code> 包含在他们的继承树中，他们也仍然是集合。</p>
+<p>（请注意：下面的图并非整个的集合 API；还有一些其他的类和接口，不过列出来的是我们最为关心的一些。）</p>
+<p><img src="images/Ch16_17.png" alt="Collection 继承树（部分）" /></p>
+<p><em>图 17 - <code>Collection</code> 继承树（部分）</em></p>
+<p><img src="images/Ch16_18.png" alt="键（KEY）" /></p>
+<p><em>图 18 - 键（KEY）</em></p>
+<p><img src="images/Ch16_19.png" alt="映射（Map）继承树" /></p>
+<p><em>图 19 - 映射（<code>Map</code>）继承树</em></p>
+<h3 id="使用-hashset而不再是-arraylist"><a class="header" href="#使用-hashset而不再是-arraylist">使用 <code>HashSet</code>而不再是 <code>ArrayList</code></a></h3>
+<p>这里给 <code>JukeBox</code> 程序进行了增补，把这些歌曲放入到一个 <code>HashSet</code> 中。（请注意：这里省去了一些 <code>JukeBox</code> 的代码，省去的代码可从先前版本中拷出来。而为了更容易的查阅输出，这里也对先前版本的 <code>Song</code> 类中的 <code>toString()</code> 方法进行了修改，让其只输出歌曲标题，而不再同时输出歌曲标题 <em>和</em> 艺人。）</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox6 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList&lt;Song&gt; songList = new ArrayList&lt;Song&gt; ();
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    public JukeBox6 () {
+        getSongs();
+        System.out.format(&quot;原本的 songList: \n%s\n&quot;, songList);
+
+        Collections.sort(songList);
+        System.out.format(&quot;排序后的 songList: \n%s\n&quot;, songList);
+
+        // 在这里，创建了一个新的参数化的 HashSet，来存储那些歌曲。
+        HashSet&lt;Song&gt; songSet = new HashSet&lt;Song&gt; ();
+        // HashSet 有着一个简单的 addAll() 方法，可取得另一集合并运用该
+        // 集合来生成这个 HashSet. 他跟每次添加一个`Song`对象是同样得（
+        // 只是更简单了）。
+        songSet.addAll(songList);
+        System.out.format(&quot;作为 HashSet 的 songSet: \n%s\n&quot;, songSet);
+    }
+
+    public static void main(String[] args){
+        new JukeBox6();
+    }
+
+    class ArtistCompare implements Comparator&lt;Song&gt; {
+        public int compare(Song one, Song two) {
+            return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    class TitleCompare implements Comparator&lt;Song&gt; {
+        public int compare (Song one, Song two) {
+            return one.getTitle().compareTo(two.getTitle());
+        }
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongListMore.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_20.png" alt="引入HashSet后的 JukeBox 运行结果" /></p>
+<p><em>图 19 - 引入<code>HashSet</code>后的 <code>JukeBox</code> 运行结果</em></p>
+<blockquote>
+<p><em>看来 <code>Set</code> 并没有什么帮助啊！这里仍然有那些全部的重复元素</em>！</p>
+<p>（<em>并且在把那个清单放入到 <code>HashSet</code> 中去时，还把顺序给搞没了，尽管后面会再去管这个顺序的事情</em>......）</p>
+</blockquote>
+<h3 id="哪些东西会造成两个对象相等"><a class="header" href="#哪些东西会造成两个对象相等">哪些东西会造成两个对象相等？</a></h3>
+<p><strong>What makes two objects equal</strong>?</p>
+<p>首先，就必须要问这个问题 -- 什么会造成两个 <code>Song</code> 的引用变量重复？答案就是他们必须是 <em><strong>相等的</strong></em>。这两个引用变量是简单地指向完全是同一个对象？还是两个单独对象只是有着同样 <em>标题</em> 而已呢？</p>
+<p>这就引出了一个关键的话题：<em>引用</em> 等价与 <em>对象</em> 等价（<em>reference</em> equality vs. <em>object</em> equality）。</p>
+<blockquote>
+<p><strong>再两个对象 <code>foo</code> 和 <code>bar</code> 相等时，那么 <code>foo.equals(bar)</code> 就一定是 <code>true</code>，且 <code>foo</code> 和 <code>bar</code> 的 <code>hashCode()</code> 方法返回值一定会返回同样的值。要让数据集<code>Set</code>将两个对象视为重复，那么就必须重写继承自类 <code>Object</code> 的 <code>hashCode()</code> 和 <code>equals()</code> ** 方法，如此就可以让两个不同的对象，被视为相等</strong>。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>引用变量（Reference）等价</strong></p>
+<p><strong>两个引用变量，对应内存堆上一个对象</strong>。</p>
+<p>两个引用了内存堆上同一对象的引用变量，是相等的。这一点无可置疑。当于这两个引用变量上同时调用 <strong><code>hashCode()</code></strong>，会得到同样结果。在没有重写 <code>hashCode()</code> 方法时，这个方法的默认行为（请记住，这个方法是从类 <code>Object</code> 继承到的），即为每个对象将获取到一个唯一编号（多数版本的Java，都会给每个对象根据其在内存堆上的内存地址，而指派给各个对象一个哈希编码，因此不会有两个对象有同样的哈希编码）。</p>
+<p>在想要知道两个引用变量是否引用了同一对象时，就要使用 <code>==</code> 运算符，这个运算符（请记住）比较的是变量中的二进制位。在两个引用变量都指向同一对象时，他们的二进制位是一致的。</p>
+</li>
+</ul>
+<p><img src="images/Ch16_21.png" alt="引用变量（Reference） 相等" /></p>
+<p><em>图 21 - 引用变量（Reference） 相等</em></p>
+<ul>
+<li>
+<p><strong>对象（Object）等价</strong></p>
+<p><strong>两个引用变量，分别指向内存堆上的两个对象，但这两个对象被认为是 <em>具有等同的意义（meaningfully equivalent）</em></strong>。</p>
+<p>在希望将两个不同<code>Song</code>对象视为相等（比如决定了在两首歌曲同时有着一致的 <em>标题</em> 变量时），那么就必须 <em>同时</em> 重写从类 <code>Object</code> 继承的 <strong><code>hashCode()</code></strong> 和 <strong><code>equals()</code></strong> 两个方法。</p>
+<p>就如同上面所讲的，若没有重写 <code>hashCode()</code>，那么对象默认行为（来自 <code>Object</code> 类）就要给各个对象一个独特的哈希编码值。因此为确保两个等价对象返回同样哈希编码，就必须重写 <code>hashCode()</code> 方法。若要在 <em>两个</em> 对象上都调用 <code>equals()</code>，就还必须重写这个 <code>equals()</code> 方法，在传递给他另一对象时，总是让其返回 <code>true</code> 。</p>
+</li>
+</ul>
+<p><img src="images/Ch16_22.png" alt="对象（Object）相等" /></p>
+<p><em>图 22 - 对象（Object）相等</em></p>
+<h3 id="hashset-检查重复的机制hashcode-与-equals"><a class="header" href="#hashset-检查重复的机制hashcode-与-equals"><code>HashSet</code> 检查重复的机制：<code>hashCode()</code> 与 <code>equals()</code></a></h3>
+<p>在将对象放入到某个 <code>HashSet</code> 中时，就会使用该对象的哈希编码值，来判断把这个对象放在该数据集的何处。同时还会将该对象的哈希编码，与当前 <code>HashSet</code> 中全部其他对象的哈希编码进行比较，并在没有匹配的哈希编码时，这个 <code>HashSet</code> 就假定这个新的对象，不重复。</p>
+<p>也就是说，只要那些哈希编码各不相同，那么这个 <code>HashSet</code> 就假定这些对象不会相等！</p>
+<p>因此就必须重写 <code>hashCode()</code>，已确保这些对象，都有相同的值。</p>
+<p>然而两个有着同样 <code>hashCode()</code> 的对象，却又可能 <em>不</em> 相等（稍后就会讨论到这个问题），因此在 <code>HashSet</code> 找到两个哈希编码匹配的对象 -- 一个是正要插入的，另一个是已在这个数据集中的 -- 那么这时 <code>HashSet</code> 就会调用对象上的 <code>equals()</code> 方法之一，来检查这两个哈希编码一致的对象，是否真正 <em>是</em> 相等的。</p>
+<p>而在他们相等时，<code>HashSet</code>就知道，尝试添加的对象是数据集中某个对象的重复，因此这个添加就不会发生了。</p>
+<p>此时是收不到异常的，但<code>HashSet</code>类型的 <code>add()</code> 方法会返回一个布尔值，告知（在关切时）这个新对象是否已被添加。因此如果这个 <code>add()</code> 方法返回了 <code>false</code>，那么就知道这个新对象，就是数据集中已有的某个对象的重复。</p>
+<p><img src="images/Ch16_23.png" alt="对象重复检查机制：hashCode() 与 equals()" /></p>
+<p><em>图 23 - 对象重复检查机制：<code>hashCode()</code> 与 <code>equals()</code></em></p>
+<h3 id="重写了-hashcode-与-equals-方法的song类"><a class="header" href="#重写了-hashcode-与-equals-方法的song类">重写了 <code>hashCode()</code> 与 <code>equals()</code> 方法的<code>Song</code>类</a></h3>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+
+public class Song implements Comparable&lt;Song&gt; {
+
+    // 这四个实例变量表示文件中的四个歌曲属性。
+    private String title;
+    private String artist;
+    private String rating;
+    private String bpm;
+
+    // 这些变量都是在新的 Song 对象被创建时，在构造器中设置的。
+    Song (String t, String a, String r, String b) {
+        title = t;
+        artist = a;
+        rating = r;
+        bpm = b;
+    }
+
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
+    }
+
+    // 这些是四个属性的获取器方法。
+    public String getTitle () {
+        return title;
+    }
+
+    public String getArtist () {
+        return artist;
+    }
+
+    public String getRating () {
+        return rating;
+    }
+
+    public String getBpm () {
+        return bpm;
+    }
+
+    // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  时，就会调用清单中各个元素的这个 toString() 方法。
+    public String toString () {
+        return title;
+    }
+
+    // HashSet（或者别的其他会调用到此方法的东西） 会将这里的
+    // 参数 Object aSong（），发送给另一 `Song` 对象。
+    //
+    // 好消息是歌曲标题是个 `String`，而字符串是有一个重写的 equals() 
+    // 方法的。因此这里只要询问一个标题，他是否与另外一个标题相等即可。
+    public boolean equals(Object aSong) {
+        Song s = (Song) aSong;
+        return getTitle().equals(s.getTitle());
+    }
+
+    // 这里采取了与上面同样的处理......`String` 类已有一个重写的 hashCode() 
+    // 方法，因此只要标题上调用 hashCode() 方法的返回值就行了。请
+    // 注意这里的 hashCode() 与 equals() 是如何运用同一个实例变量。
+    public int hashCode () {
+        return title.hashCode();
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_24.png" alt="修改 Song 类后的 HashSet 输出" /></p>
+<p><em>图 24 - 修改 <code>Song</code> 类后的 <code>HashSet</code> 输出</em></p>
+<blockquote>
+<p><em>现在修改生效了！在打印输出那个 <code>HashSet</code> 时就不再有重复了。但这里并没有再次调用 <code>sort()</code> 方法，其在将那个 <code>ArrayList</code> 放到 <code>HashSet</code> 中时，那个<code>HashSet</code>并没有保留排序</em>。</p>
+</blockquote>
+<h3 id="java-对象-hashcode-与-equals-相关的法则"><a class="header" href="#java-对象-hashcode-与-equals-相关的法则">Java 对象 <code>HashCode()</code> 与 <code>equals()</code> 相关的法则</a></h3>
+<p><strong>类 <code>Object</code> 的API文档，指明了以下必须遵守的法则</strong>：</p>
+<ul>
+<li><strong>在两个对象相等时，那么他们就肯定有着一致的哈希码</strong>；</li>
+<li><strong>两个对象相等时，在二者之一的任何一个上调用 <code>equals()</code> 方法，肯定都会返回 <code>true</code>。也就是说，<code>if (a.equals(b)) then (b.equals(a))</code></strong>；</li>
+<li><strong>两个对象有着同样哈希码是，他们不必相等。但如果他们相等，那么他们必定有着同样的哈希码</strong>；</li>
+<li><strong>因此，在重写 <code>equals()</code> 方法时，就必须重写 <code>hashCode()</code></strong>;</li>
+<li><strong><code>hashCode()</code> 的默认行为，是给内存堆上的每个对象生成一个唯一的整数。因此若没有重写类的 <code>hashCode()</code>，那么那个类类型下的两个对象，用于不会相等</strong>；</li>
+<li><strong><code>equals()</code> 的默认行为，为执行一次 <code>==</code> 的比较。也就是说，要测试两个引用变量是否引用了内存堆上的同一个对象。因此在没有重写类中的 <code>equals()</code> 方法时，由于引用不同对象的引用变量总会包含不同的二进制位模式，那么这两个引用变量就绝不会被认为是相等的（The default behavior of <code>equals()</code> is to do an <code>==</code> comparison. In other words, to test whether the two references refer to a single object on the heap. So if you don't override <code>equals()</code> in a class, no two objects can EVER be considered equal since references to two different objects will always contain a different bit pattern）</strong>；</li>
+</ul>
+<p><strong><code>a.equals(b)</code> 必须同时意味着 <code>a.hashCode() == b.hashCode()</code></strong>。</p>
+<p><strong>但 <code>a.hashCode() == b.hashCode()</code> 却并不一定表示 <code>a.equals(b)</code></strong>。</p>
+<h3 id="答疑-4"><a class="header" href="#答疑-4">答疑</a></h3>
+<ul>
+<li><strong>既然两个对象不相等，他们的哈希码又怎么会相同呢</strong>？</li>
+</ul>
+<blockquote>
+<p><code>HashSet</code> 使用哈希码，来以一种实现元素更快访问的方式存储这些元素。在通过将一个对象拷贝（与索引值相反）给到 <code>ArrayList</code>，来尝试从这个 <code>ArrayList</code> 里找到那个对象时，这个<code>ArrayList</code>就必须从其开头开始搜寻，逐个查看该清单中的每个元素，以检查是否与要查找的对象匹配。而由于 <code>HashSet</code> 使用哈希码作为存储其元素的“桶”上某种形式的标签，那么他就可以更加快速地找到某个对象。因此在讲到“我希望你找出这个数据集中与这个对象完全一样的那个对象......”时，<code>HashSet</code> 就会从这个给到他的 <code>Song</code> 对象拷贝，获取到一个哈希码取值（比如，<code>742</code>），随后这个 <code>HashSet</code> 就会说，“噢，我准确地知道带有哈希码<code>#742</code> 的那个对象存储在哪里了.......”，这个时候他就直接前往那个 <code>#742</code> 的桶那里了。</p>
+<p>虽然这不是在计算机科学课程中学到的那么全，但对有效运用<code>HashSet</code>已经足够了。实际上，许多博士论文的题目，就是开发一种良好的哈希码算法，且比这本书想要要涵盖的内容还要多。</p>
+<p>重点在于，由于在 <code>hashCode()</code> 中使用的“哈希算法”，可能发生多个对象返回同一个值的情况，因此哈希码无需在两个对象相等时，也可以相同。当然那就意味着这多个对象就会落在<code>HashSet</code>中的同一个桶上（因为每个桶表示的是单个哈希码值），但这并非世界末日。这可能意味着此 <code>HashSet</code> 并不那么高效而已（或者说该 <code>HashSet</code> 已填充了数量极为巨大的元素），而假如这个 <code>HashSet</code> 在同一哈希码桶中找到多个对象，此时这个 <code>HashSet</code> 就会直接使用 <code>equals()</code> 方法，来检查是否有一个完全匹配的对象。也就是说，哈希码值有时是用于缩小搜索范围，而不是用于找出那个准确匹配的对象，<code>HashSet</code> 仍然必须取得那个桶（即有着同样哈希值的对象所在的桶）中的全部对象，然后在这些对象上调用 <code>equals()</code> 方法，来检查他们是不是 <code>HashSet</code> 正在该桶中所要找的对象。</p>
+</blockquote>
+<h3 id="在希望数据集得以排序时就要用到-treeset"><a class="header" href="#在希望数据集得以排序时就要用到-treeset">在希望数据集得以排序时，就要用到 <code>TreeSet</code></a></h3>
+<p><strong>And if we want the set to stay sorted, we've got <code>TreeSet</code></strong></p>
+<p>与<code>HashSet</code>类似，<code>TreeSet</code>也可以防止重复。不过<code>TreeSet</code>还可以让清单 <em>保持</em> 排序。在使用 <code>TreeSet</code> 数据集不带参数的构造器来构造一个 <code>TreeSet</code> 时，那么这个 <code>TreeSet</code> 就会像 <code>Collections.sort()</code> 方法一样运作，该 <code>TreeSet</code> 运用其各个元素的 <code>compareTo()</code> 方法进行排序。还可以选择将一个 <code>Comparator</code> 对象，传递给 <code>TreeSet</code> 的构造器，让这个 <code>TreeSet</code> 使用传入的 <code>Comprator</code> 对象，取代前面提到的 <code>compareTo()</code> 方法。<code>TreeSet</code> 的不足之处在于，即使无需排序，人就要为这种数据集类型付出少量的性能代价。不过这少量的性能代价对大多数 apps 来说，都是难以觉察到的。</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+import java.io.*;
+import com.xfoss.Utils.XPlatformThings;
+
+public class JukeBox8 {
+
+    // 这里将这个 ArrayList 从 String 修改为了 Song 对象。
+    ArrayList&lt;Song&gt; songList = new ArrayList&lt;Song&gt; ();
+    String wDir = XPlatformThings.getWorkingDir(&quot;learningJava&quot;);
+
+    public JukeBox8 () {
+        getSongs();
+        System.out.format(&quot;原本的 songList: \n%s\n&quot;, songList);
+
+        Collections.sort(songList);
+        System.out.format(&quot;依标题排序后的 songList: \n%s\n&quot;, songList);
+
+        HashSet&lt;Song&gt; songSet = new HashSet&lt;Song&gt; ();
+        songSet.addAll(songList);
+        System.out.format(&quot;作为 HashSet 的 songSet: \n%s\n&quot;, songSet);
+
+        // 这里初始化了一个 TreeSet。调用不带参数的 TreeSet 构造器表示
+        // 这个数据集将使用 Song 对象的 compareTo() 方法来排序。
+        //
+        // （这里也可以传入一个 Comparator 对象。）
+        TreeSet&lt;Song&gt; songTreeSet = new TreeSet&lt;Song&gt; ();
+        // 这里可以像 HashSet 那样，使用 addAll() 命令来添加所有歌曲。
+        //
+        // （也可以像之前在 ArrayList 中那样，使用 songTreeSet.add() 来单个地
+        // 添加那些歌曲。）
+        songTreeSet.addAll(songList);
+        System.out.format(&quot;作为 TreeSet 的 songTreeSet:\n%s\n&quot;, songTreeSet);
+    }
+
+    public static void main(String[] args){
+        new JukeBox8();
+    }
+
+    class ArtistCompare implements Comparator&lt;Song&gt; {
+        public int compare(Song one, Song two) {
+            return one.getArtist().compareTo(two.getArtist());
+        }
+    }
+
+    class TitleCompare implements Comparator&lt;Song&gt; {
+        public int compare (Song one, Song two) {
+            return one.getTitle().compareTo(two.getTitle());
+        }
+    }
+
+    void getSongs() {
+        try {
+            File file = new File(String.format(&quot;%s/SongListMore.txt&quot;, wDir));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                addSong(line);
+            }
+        } catch (IOException ex) {ex.printStackTrace();}
+    }
+
+    void addSong(String lineToParse) {
+
+        // 这里使用四个令牌（也就是歌曲文件中这一行的四个信息片段）创建
+        // 出一个新的 Song 对象，并将该 Song 对象添加到那个清单。
+        String [] tokens = lineToParse.split(&quot;/&quot;);
+
+        Song nextSong = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(nextSong);
+    }
+}
+</code></pre>
+<h3 id="treeset-应知必会"><a class="header" href="#treeset-应知必会"><code>TreeSet</code> 应知必会</a></h3>
+<p><strong>What you MUST know about <code>TreeSet</code></strong> ......</p>
+<p>虽然 <code>TreeSet</code>看起来简单，但请一定要搞清楚，运用他是要做什么。为了让你对 <code>TreeSet</code> 重要性有所思考，这里准备了一个练习。在完成这个练习之前，请勿继续往后阅读。这里是 <em>认真的</em>。</p>
+<h3 id="动手写代码-1"><a class="header" href="#动手写代码-1">动手写代码</a></h3>
+<p>请看看这个代码。认真理解这个代码，然后回答下面的问题。（请注意：这段代码是没有语法错误的。）</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestTree {
+
+    public TestTree () {
+        Book b1 = new Book (&quot;How Cats Work&quot;);
+        Book b2 = new Book (&quot;Remix your Body&quot;);
+        Book b3 = new Book (&quot;Finding Emo&quot;);
+
+        TreeSet&lt;Book&gt; tree = new TreeSet&lt;Book&gt; ();
+        tree.add(b1);
+        tree.add(b2);
+        tree.add(b3);
+
+        System.out.println(tree);
+    }
+}
+
+class Book {
+    private String title;
+    public Book (String t) {
+        title = t;
+    }
+}
+</code></pre>
+<ol>
+<li>
+<p>在编译此代码时会有什么样的结果？</p>
+</li>
+<li>
+<p>在编译成功时，那么运行这个 <code>TestTree</code> 类，会有什么样的结果？</p>
+</li>
+<li>
+<p>假如这段代码有个问题（编译时或运行时），那么该怎样来修改这个问题呢？</p>
+</li>
+</ol>
+<blockquote>
+<p>这段代码可通过编译，但会出现运行时错误：</p>
+</blockquote>
+<pre><code class="language-console">Exception in thread &quot;main&quot; java.lang.ClassCastException: class com.xfoss.CollectionAndGenerics.Book cannot be cast to class java.lang.Comparable (com.xfoss.CollectionAndGenerics.Book is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+        at java.base/java.util.TreeMap.compare(TreeMap.java:1291)
+        at java.base/java.util.TreeMap.put(TreeMap.java:536)
+        at java.base/java.util.TreeSet.add(TreeSet.java:255)
+        at com.xfoss.CollectionAndGenerics.TestTree.&lt;init&gt;(TestTree.java:13)
+        at com.xfoss.CollectionAndGenerics.TestTree.main(TestTree.java:21)
+shell returned 1
+</code></pre>
+<blockquote>
+<p>但在给 <code>Book</code> 类加上 <code>implements Comparable&lt;Book&gt;</code> 及 <code>public int compareTo(Book b)</code> 后，输出即为：</p>
+</blockquote>
+<pre><code class="language-console">[com.xfoss.CollectionAndGenerics.Book@44e81672, com.xfoss.CollectionAndGenerics.Book@60215eee, com.xfoss.CollectionAndGenerics.Book@4ca8195f]
+</code></pre>
+<blockquote>
+<p>此输出没有可读性可言。仍需重写 <code>Book</code> 类的 <code>toString()</code> 方法，重写该方法后的输出为：</p>
+</blockquote>
+<pre><code class="language-console">[Finding Emo, How Cats Work, Remix your Body]
+</code></pre>
+<h3 id="treeset-的元素-务必-要是可比较的"><a class="header" href="#treeset-的元素-务必-要是可比较的"><code>TreeSet</code> 的元素 <em>务必</em> 要是可比较的</a></h3>
+<p><strong><code>TreeSet</code> elements MUST be comparable</strong></p>
+<p><code>TreeSet</code> 可不会读心术，他没办法凭空搞清楚那些对象该怎么排序。因此就必须告诉 <code>TreeSet</code> 该怎么去对添加的对象 <em>怎样</em> 排序。</p>
+<p><strong>要使用 <code>TreeSet</code>，就要满足下面二者其一的要求</strong>：</p>
+<ul>
+<li>
+<p><strong>清单中的元素，务必为实现了 <em><code>Comparable</code> 类型的元素</em></strong></p>
+<p>前面的 <code>Book</code> 类没有实现 <code>Comparable</code> 接口，因此在运行时，那段代码不会运作。请设想一些，可怜的<code>TreeSet</code>在现实中唯一目的，就是令到其中的那些元素保持排序，并且有一次的 -- <code>TreeSet</code> 对如何排序这些 <code>Book</code> 对象毫无概念！因为 <code>TreeSet</code> 的 <code>add()</code> 方法没有取一个 <code>Comparable</code> 类型，这个<code>add()</code>方法取的是在创建该 <code>TreeSet</code> 时用到的类型，因此那段代码在编译时不会失败。也就是说，在前面写下了 <code>new TreeSet&lt;Book&gt; ()</code> 时，那么这个 <code>add()</code> 方法，也就成了 <code>add(Book)</code> 了。而那里又没有要求那个 <code>Book</code> 类要实现 <code>Comparable</code>！这样在把第二个元素添加到这个数据集时，程序就会失败。添加第二个元素的时候，正是这个数据集尝试调用其中一个对象的 <code>compareTo()</code> 方法的时候，然而.......调用不到（The <code>Book</code> class on the previous page didn't implement <code>Comparable</code>, so it wouldn't work at runtime. Think about it, the poor <code>TreeSet</code>'s sole purpose in life is to keep your elements sourted, and once again -- it had no idea how to sort <code>Book</code> objects! It doesn't fail at compile-time, because the <code>TreeSet</code> <code>add()</code> method dosen't take a <code>Comparable</code> type, the <code>TreeSet</code> <code>add()</code> method takes whatever type you used when you created the <code>TreeSet</code>. In other workds, if you say <code>new TreeSet&lt;Book&gt;()</code> the <code>add()</code> method is essentially <code>add(Book)</code>. And there's no requirement that the <code>Book</code> class implement <code>Comparable</code>! But it fials at runtime when you add the second element to the set. That's the first time the set tries to call one of the objects's <code>compareTo()</code> methods and... can't）。</p>
+</li>
+</ul>
+<pre><code class="language-java">class Book implements Comparable&lt;Book&gt; {
+    private String title;
+    private String writer;
+
+    public Book (String t, String w) {
+        title = t;
+        writer = w;
+    }
+
+    public String getTitle () {
+        return title;
+    }
+
+    public String getWriter () {
+        return writer;
+    }
+
+    public int compareTo(Book b) {
+        return title.compareTo(b.getTitle());
+    }
+
+    public String toString() {
+        return String.format(&quot;%s: %s&quot;, title, writer);
+    }
+}
+</code></pre>
+<ul>
+<li>
+<p><strong>使用取 <code>Comparator</code> 参数的、过载的<code>TreeSet</code> 构造器</strong></p>
+<p><code>TreeSet</code> 与 <code>Collections.sort()</code> 方法的工作方式很像 -- 假设元素类型实现了 <code>Comparable</code> 接口时，可选择使用元素的 <code>compareTo()</code> 方法；而在知道怎样对数据集中的元素进行排序时，亦可使用一个定制的 <code>Comparator</code> 对象。而要使用一个定制的 <code>Comparator</code> 对象，就要调用那个取一个 <code>Comparator</code> 对象作参数的 <code>TreeSet</code> 的构造器。</p>
+</li>
+</ul>
+<pre><code class="language-java">public class TestTree {
+
+    public TestTree () {
+        Book b1 = new Book (&quot;How Cats Work&quot;, &quot;Lenny Peng&quot;);
+        Book b2 = new Book (&quot;Remix your Body&quot;, &quot;Echo Feng&quot;);
+        Book b3 = new Book (&quot;Finding Emo&quot;, &quot;Rose Peng&quot;);
+
+        TreeSet&lt;Book&gt; tree = new TreeSet&lt;Book&gt; (new CompareWriter());
+        tree.add(b1);
+        tree.add(b2);
+        tree.add(b3);
+
+        System.out.println(tree);
+    }
+
+    class CompareWriter implements Comparator&lt;Book&gt; {
+        public int compare(Book b1, Book b2) {
+            return b1.getWriter().compareTo(b2.getWriter());
+        }
+    }
+
+    public static void main (String[] args) {
+        new TestTree();
+    }
+    
+}
+</code></pre>
+<p><img src="images/Ch16_26.png" alt="TreeSet 排序的两种不同方式：实现 Comparable 接口与使用 Comparator 作为构造器参数" /></p>
+<p><em>图 26 - <code>TreeSet</code> 实现排序的两种不同方式：实现 <code>Comparable</code> 接口与使用 <code>Comparator</code> 作为构造器参数</em></p>
+<h2 id="已经见识了清单与数据集那么现在就要用到映射-map-"><a class="header" href="#已经见识了清单与数据集那么现在就要用到映射-map-">已经见识了清单与数据集，那么现在就要用到映射（ <code>Map</code> ）</a></h2>
+<p><strong>We've seen <code>List</code>s and <code>Set</code>s, now we'll use a <code>Map</code></strong></p>
+<p>清单与数据集都是极好的，但有的时候映射（a <code>Map</code>）则是最佳的集合（注意这里不是大写字母 <code>C</code> 的 <code>Collection</code> -- 请记住映射属于Java集合，但他们没有实现 <code>Collection</code>接口）。</p>
+<p>设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由 <a href="Ch10_Numbers_and_Statics_Numbers_Matter.html#autoboxing">自动打包的原生值</a>）。</p>
+<p><img src="images/Ch16_27.png" alt="Java 中的映射" /></p>
+<p><em>图 27 - Java 中的映射</em></p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestMap {
+    public TestMap () {
+        // HashMap 需要 两个 类型参数 -- 一个用于键，另一个用于值。
+        HashMap&lt;String, Integer&gt; scores = new HashMap&lt;String, Integer&gt; ();
+
+        // 这里使用 put() 而不是 add() 方法，同时这里理所应当要取两个参数 (key, value)。
+        scores.put(&quot;Lenny&quot;, 42);
+        scores.put(&quot;Echo&quot;, 343);
+        scores.put(&quot;Rose&quot;, 420);
+
+        System.out.println(scores);
+        // 这个 get() 方法，要取一个键参数，并返回值（在此示例中，即为一个整数 Integer）。
+        System.out.println(scores.get(&quot;Echo&quot;));
+    }
+
+
+    public static void main (String[] args) {
+        new TestMap();
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_28.png" alt="Java 映射示例" /></p>
+<p><em>图 28 - Java 映射示例</em></p>
+<blockquote>
+<p>在打印映射时，会给出花括弧 <code>{}</code> ，而非在打印清单与数据集时方括弧 <code>[]</code> ，所包围起来的 <code>key=value</code> 键值对。</p>
+</blockquote>
+<h2 id="最后回到泛型上来"><a class="header" href="#最后回到泛型上来">最后，回到泛型上来</a></h2>
+<p><strong>Finally, back to generics</strong></p>
+<p>还记得本章早先曾谈到，方法取用那些带有泛型参数，会有多么的......<em>奇怪</em>。而这里所说的奇怪，是在多态语境下的。若觉得这里的东西变得离奇，那么只要继续往下看就好 -- 要讲清楚这个，还得要数页篇幅（Remember earlier in the chapter we talked about how methods that take arguments with generic types can be... <em>weird</em>. And we mean weird in the polymorphic sense. If things start to feel strane here, just keep going--it takes a few pages to really tell the whole story）。</p>
+<p>这里将从揭示一个 <em>数组</em> 参数，按多态方式运作的原理开始，随后就会看看类似的多态下泛型清单是如何工作的。以下代码编译和运行都不会有错误：</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics1 {
+    public TestGenerics1 () {
+        // 这里声明并创建了一个同时保存狗子和猫猫的 Animal 的数组。
+        Animal[] animals = {
+            new Dog(),
+            new Cat(),
+            new Dog()
+        };
+
+        // 这里声明并创建了一个仅保存 Dog 对象的 Dog 数组（编译器不会
+        // 允许把一个 Cat 对象放进去的）。
+        Dog[] dogs = {
+            new Dog(),
+            new Dog(),
+            new Dog()
+        };
+
+        // 这里使用了上面两种数组类型作为参数，对 takeAnimals() 方法
+        // 进行调用......
+        takeAnimals(animals);
+        takeAnimals(dogs);
+    }
+
+    // 这里的重点在于，由于 Dog IS-A Animal，因此 takeAnimals() 方法既可以取 Animal[] 做参数，也可以取
+    // Dog[] 做参数。可以看出多态机制发挥了作用。
+    public void takeAnimals(Animal[] animals) {
+        for (Animal a: animals) {
+            // 请记住，由于这里的参数 animals 是类型 Animal 的数组，并且这里没有执行任何
+            // 强制类型转换，因此这里能调用的，只能是在类型 Animal 中声明的方法。（这里又能将
+            // a 强制转换为什么呢？数组 animals 可能同时保存了 Dog 和 Cat 对象。）
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics1();
+    }
+}
+
+
+// 以下是简化了的 Animal 类继承层次。
+abstract class Animal {
+    void eat() {System.out.println(&quot;动物进食&quot;);}
+}
+
+class Dog extends Animal {
+    void bark (){ System.out.println(&quot;汪汪......&quot;);}
+}
+
+class Cat extends Animal {
+    void meow () {System.out.println(&quot;喵喵......&quot;);}
+}
+</code></pre>
+<p><img src="images/Ch16_29.png" alt="TestGenerics1 运行结果" /></p>
+<p><em>图 29 - <code>TestGenerics1</code> 运行结果</em></p>
+<h3 id="运用多态参数与泛型"><a class="header" href="#运用多态参数与泛型">运用多态参数与泛型</a></h3>
+<p><strong>Using polymophic arguments and generics</strong></p>
+<p>通过上面的示例，这里就见识了多态下的数组是如何工作的了，那么在从数组切换到 <code>ArrayList</code> 时，多态机制还生效吗？听起来理由充分，不是吗？</p>
+<p>首先，来试试只有 <code>Animal</code> 类型的 <code>ArrayList</code>。这里只对其中的构造函数稍加改动：</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+// 这里简单地将 Animal[] 修改为了 ArrayList&lt;Animal&gt;。
+public class TestGenerics2 {
+    public TestGenerics2 () {
+        ArrayList&lt;Animal&gt; animals = new ArrayList&lt;Animal&gt; ();
+        // 由于 ArrayList 没有像数组创建那样的简便方式，因此这里
+        // 必须一次一个地添加 ArrayList 元素。
+        animals.add(new Dog());
+        animals.add(new Cat());
+        animals.add(new Dog());
+
+        // 这里的代码没变，只是现在的 animals 变量，引用的是 ArrayList 而
+        // 不再是之前的数组了。
+        takeAnimals(animals);
+    }
+
+    // 这个方法现在取用的是一个 ArrayList 类型的参数，而不再是之前的数组参数了，不过
+    // 其余的部分还是一样的。请记住，对于数组与集合，for 循环都是有效的。
+    public void takeAnimals(ArrayList&lt;Animal&gt; animals) {
+        for (Animal a: animals) {
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics2();
+    }
+}
+</code></pre>
+<p><img src="images/Ch16_30.png" alt="修改为 ArrayList 的 TestGenerics2 的运行结果" /></p>
+<p><em>图 30 - 修改为 <code>ArrayList</code> 的 <code>TestGenerics2</code> 的运行结果</em></p>
+<h3 id="那么对于-arraylistdog-也行吗"><a class="header" href="#那么对于-arraylistdog-也行吗">那么对于 <code>ArrayList&lt;Dog&gt;</code> 也行吗？</a></h3>
+<p>由于多态机制的原因，编译器是允许将一个 <code>Dog</code> 数组，传递给有着<code>Animal</code>数组参数的方法的（正如<code>TestGenerics1</code>中那样）。当然这没有问题。同样一个 <code>ArrayList&lt;Aniaml&gt;</code>的参数，也可以传递给带有 <code>ArrayList&lt;Animal&gt;</code>参数的方法。因此这里一个大问题即是，这个 <code>ArrayList&lt;Animal&gt;</code> 参数，会接受一个 <code>ArrayList&lt;Dog&gt;</code>吗？既然在数组下可行，这里会不会也行呢？</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics2 {
+    public TestGenerics2 () {
+        ArrayList&lt;Animal&gt; animals = new ArrayList&lt;Animal&gt; ();
+        animals.add(new Dog());
+        animals.add(new Cat());
+        animals.add(new Dog());
+        // 我们知道这一行是没问题的。
+        takeAnimals(animals);
+
+        // 现在构造一个 Dog 类型的 ArrayList 并放入两个 Dog 对象进去。
+        ArrayList&lt;Dog&gt; dogs = new ArrayList&lt;Dog&gt; ();
+        dogs.add(new Dog());
+        dogs.add(new Dog());
+        // 现在这行将数组修改为 ArrayList 的代码会工作吗？
+        takeAnimals(dogs);
+    }
+
+    public void takeAnimals(ArrayList&lt;Animal&gt; animals) {
+        for (Animal a: animals) {
+            a.eat();
+        }
+    }
+
+    public static void main (String[] args){
+        new TestGenerics2();
+    }
+}
+</code></pre>
+<pre><code class="language-console">.../src/main/java/com/xfoss/CollectionAndGenerics/TestGenerics2.java:17: error: incompatible types: ArrayList&lt;Dog&gt; cannot be converted to ArrayList&lt;Animal&gt;
+        takeAnimals(dogs);
+                    ^
+</code></pre>
+<blockquote>
+<p>这代码看起来是那么的正确，但却错得离谱......（It looked so right, but went so wrong...）</p>
+</blockquote>
+<blockquote>
+<p><em>我还以为这代码应该没问题的呢？那就完全破坏了正在写的动物模拟应用，其中有一个取任意 <code>Animal</code> 类型的清单作参数的兽类程序，这样的话狗窝就可以交出一个狗子的清单，而猫窝就可以交出一个猫猫的清单......现在你跟我说不能这样，不能用集合来代替数组</em>？
+<em>And I'm supposed to be OK with this? That totally screws my animal simulation where the veterinary program takes a list of any type of aniaml, so that a dog kennel can send a list of dogs, and a cat kennel can send a list of cats...now you're saying I can't do that if I use collections instead of arrays</em>?</p>
+</blockquote>
+<h3 id="如果允许这样做会怎样呢"><a class="header" href="#如果允许这样做会怎样呢">如果允许这样做，会怎样呢？</a></h3>
+<p><strong>What could happen if it were allowed</strong>...</p>
+<p>请设想一下如果编译器允许避开那个报错。那就是允许将一个 <code>ArrayList&lt;Dog&gt;</code> 传递给这样声明的一个方法了：</p>
+<pre><code class="language-java">public void takeAnimals(ArrayList&lt;Animal&gt; animals) {
+    for (Animal a: animals) {
+        a.eat();
+    }
+}
+</code></pre>
+<p><em>看起来</em> 这方法中是相当无害的，对吧？归根结底，多态机制的要义，就是 <code>Animal</code> 可以完成的所有事情（在此示例中，就是<code>eat()</code>方法），<code>Dog</code> 也是可以完成的。那么到底在那些<code>Dog</code>引用变量上的 <code>eat()</code> 方法调用有什么问题呢？</p>
+<p><em>不存在</em>。什么问题也没有。</p>
+<p><em>那段</em> 代码本身没有任何问题。然而请设想下面 <em>这段</em> 代码：</p>
+<pre><code class="language-public void takeAnimals(ArrayList&lt;Animal&gt; animals) {">    // 糟糕！这里恰好把一个 Cat 对象，给添加到了一个可能是个仅 Dog 类型的 ArrayList 中了。
+    animals.add(new Cat());
+}
+</code></pre>
+<p>那么这就是问题所在了。将一个<code>Cat</code>对象添加到一个<code>ArrayList&lt;Animal&gt;</code>确实没什么问题，并且这这正是之所以运用有着诸如<code>Aniaml</code>这样超类型<code>ArrayList</code>的要义所在--如此就可以把所有<code>Aniaml</code>子类型，都放在单个的<code>Animal</code>类型的<code>ArrayList</code>中（So that's the problem. There's certainly nothing wrong with adding a <code>Cat</code> to an <code>ArrayList&lt;Animal&gt;</code>, and that's the whole point of having an <code>ArrayList</code> of a supertype like <code>Animal</code>--so that you can put all types of animals in a single <code>Animal</code> <code>ArrayList</code>）。</p>
+<p>然而在将一个<code>Dog</code>类型的<code>ArrayList</code>--一个表示仅保存<code>Dog</code>对象的<code>ArrayList</code>--传递给这个取<code>Animal</code>类型的<code>ArrayList</code>参数的方法后，那么就会立即以出现在<code>Dog</code>类型清单中的<code>Cat</code>对象而告终。编译器知道如果允许将一个<code>Dog</code>类型<code>ArrayList</code>传入到那样的方法，就会有人在运行时，把一个<code>Cat</code>对象添加到那个<code>Dog</code>类型的清单。因此编译器就直接不会让你冒这个风险了。</p>
+<p><em><strong>在申明了一个取<code>ArrayList&lt;Animal&gt;</code>参数的方法时，这个方法便只能取<code>ArrayList&lt;Animal&gt;</code>参数，对于<code>ArrayList&lt;Dog&gt;</code>或<code>ArrayList&lt;Cat&gt;</code>，都是不可以的</strong></em>。</p>
+<blockquote>
+<p><em>等一下......若这就是为何编译器不允许将 <code>Dog</code> 类型 <code>ArrayList</code>， 传入到以<code>Animal</code> 类型 <code>ArrayList</code>做参数的方法的原因--为阻止可能的将<code>Cat</code>对象放入到实际为<code>Dog</code>类型清单，那为何数组上为什么又可行呢？难道对于数组就没有这同样的问题吗？难道也不能把<code>Cat</code>对象添加到 <code>Dog[]</code>吗</em>？</p>
+</blockquote>
+<h3 id="array-数组类型是在运行时检查但数据集类型的检查是在编译时就发生了"><a class="header" href="#array-数组类型是在运行时检查但数据集类型的检查是在编译时就发生了"><code>Array</code> 数组类型，是在运行时检查，但数据集类型的检查，是在编译时就发生了</a></h3>
+<p><strong><code>Array</code> types are checked again at runtime, but collection type checks happen only when you compile</strong></p>
+<p>假设像下面这样，<em>确实</em> 将一个 <code>Cat</code> 对象添加给了一个声明为 <code>Dog[]</code> 的数组（一个传入到声明为<code>Animal[]</code>的方法参数的数组，下面的写法，是一种相当合法的数组赋值；<em>注意</em>：Java 中的数组，是固定长度的，因此没有<code>append()</code>方法）。</p>
+<pre><code class="language-java">package com.xfoss.CollectionAndGenerics;
+
+import java.util.*;
+
+public class TestGenerics3 {
+    public TestGenerics3 () {
+        Dog[] dogs = {
+            new Dog(),
+            new Dog(),
+            new Dog()
+        };
+
+        takeAnimals(dogs);
+    }
+
+    public void takeAnimals(Animal[] animals) {
+        // 这里将一个`Cat`对象放入到了一个 `Dog` 数组。由于编译器知道，这里
+        // 传递该方法的可能是个`Cat`数组或`Animal`数组，因此编译器是允许这样写
+        // 的，那么对于编译器来说，这可能是正确的。
+        animals[2] = new Cat();
+    }
+
+    public static void main (String[] args){
+        new TestGenerics3();
+    }
+}
+</code></pre>
+<p>这段代码可以编译，但在运行时，会抛出异常：</p>
+<pre><code class="language-console">$ java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+Exception in thread &quot;main&quot; java.lang.ArrayStoreException: com.xfoss.CollectionAndGenerics.Cat
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.takeAnimals(TestGenerics3.java:17)
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.&lt;init&gt;(TestGenerics3.java:13)
+        at com.xfoss.CollectionAndGenerics.TestGenerics3.main(TestGenerics3.java:21)
+</code></pre>
+<blockquote>
+<p><em>呃！至少JVM阻止了他的运行</em>。</p>
+</blockquote>
+<blockquote>
+<p><em>难道想要一种仍然可以使用多态数据集类型，作为方法参数的方式，以致我写的兽类程序可以取得<code>Dog</code>与<code>Cat</code>类型清单，就是异想天开吗？如果能那样做，那么就可以对清单进行遍历，从而既可以调用这些猫猫狗狗的 <code>immunize()</code> 方法，还必须确保无法将一个<code>Cat</code>对象添加到 <code>Dog</code> 类型清单方面的安全性。然而我猜我这个想法终将是个幻想而已了</em>......</p>
+<p><em>Wouldn't it be dreamy if there were a way to still use polymorphic collection types as method arguments, so that my veterinary program could take <code>Dog</code> lists and <code>Cat</code> lists? That way I could loop through the lists and call their <code>immunize()</code> method, but it would still have to be safe so that you couldn't add a <code>Cat</code> in to the <code>Dog</code> list. But I guess that's just a fantasy</em>...</p>
+</blockquote>
+<h3 id="通配符来挽救"><a class="header" href="#通配符来挽救">通配符来挽救</a></h3>
+<p><strong>Wildcards to the rescue</strong></p>
+<blockquote>
+<p><strong>注</strong>：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、<a href="Ch08_Interfaces_and_Abstract_Classes.html#interface_rescue">Interface to the rescue!</a>；2、<a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html#inner_class_rescue">Inner class to the rescue!</a></p>
+</blockquote>
+<p>虽然看起来非同寻常，不过 <em>确实</em> 有种创建可接受任意 <code>Animal</code> 子类型的<code>ArrayList</code>作为方法参数的方式。最简单的做法，就是使用 <strong>通配符（wildcard）</strong> -- 正式因为这个原因，通配符才被显式地加入到Java编程语言的（it looks unusual, but there <em>is</em> a way to create a method argument that can accept an <code>ArrayList</code> of any <code>Animal</code> subtype. The simplest way is to use a <strong>wildcard</strong>--added to the Java language explicitly for this reason）。</p>
+<pre><code class="language-java">public void takeAnimals(ArrayList&lt;? extends Animal&gt; animals) {
+    for (Animal a: animals) {
+        a.eat();
+    }
+}
+</code></pre>
+<blockquote>
+<p><em>还记得吧，这里的关键字 <code>extends</code>的意思，根据他后面类型的不同，既可以是 <code>extends</code>，也可以是 <code>implements</code>。那么在想要取一个实现了 <code>Pet</code> 接口类型的 <code>ArrayList</code> 做参数时，就可以这样来申明这个参数</em>：</p>
+</blockquote>
+<pre><code class="language-java">ArrayList&lt;? extends Pet&gt;
+</code></pre>
+<p>那么现在你肯定在想，“这有 <em>区别</em> 吗？不会还有之前同样的问题吧？上面的那个方法，并没有做什么危险的事情--仅仅是调用了任何<code>Animal</code>子类型都必定有的方法--然而有的人不还可以把这个方法，修改为把<code>Cat</code>对象添加到那个 *<code>Animal</code>*清单吗，即使这个清单实际上是个<code>ArrayList&lt;Dog&gt;</code>？而且由于在运行时这没有被检查呢，既然这样，这样做与不带通配符又有怎样的不同呢”？</p>
+<p>你的顾虑或许是对的。然而答案是否定的。当在声明中使用了通配符<code>&lt;?&gt;</code>时，编译器就不会允许将任何东西添加到那个清单了（）！</p>
+<blockquote>
+<p><strong>当在方法声明中使用了通配符时，编译器会阻止任何的那些可能危害到被这个方法参数所引用清单的操作（When you use a wildcard in your method argument, the compiler will STOP you from doing anything that could hurt the list referenced by the method parameter）</strong>。</p>
+<p><em>注</em>：关于Java中的形式参数与实际参数：<a href="https://www.geeksforgeeks.org/argument-vs-parameter-in-java/">Argument vs Parameter</a></p>
+<p><strong>这个时候仍然可以运行这个清单中元素上的方法，但不可以往清单添加元素了</strong>。</p>
+<p><strong>也就是说，可以对这些清单元素进行任何操作，但不能将新东西放入到这个清单。由于编译器不会允许任何在运行时可怕操作，因此在运行时就是安全的</strong>。</p>
+<p><strong>那么，在那个 <code>takeAnimals()</code> 里边，这样做是没有问题的</strong>：</p>
+</blockquote>
+<pre><code class="language-java">for (Animal a: animals) {
+    a.eat();
+}
+</code></pre>
+<blockquote>
+<p><strong>但下面的就不会编译</strong>：</p>
+</blockquote>
+<pre><code class="language-java">animals.add(new Dog());
+</code></pre>
+<blockquote>
+<p><strong><em>注</em>：除了 <code>add()</code> 方法不允许外，<code>set()</code> 方法也是不被允许的</strong>：</p>
+</blockquote>
+<pre><code class="language-java">animals.set(0, new Dog());
+</code></pre>
+<blockquote>
+<p><strong>编译时报出的错误都是</strong>:</p>
+</blockquote>
+<pre><code class="language-console">.../src/main/java/com/xfoss/CollectionAndGenerics/TestGenerics2.java:20: error: incompatible types: Dog cannot be converted to CAP#1
+        animals.set(0, new Dog());
+                       ^
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Animal from capture of ? extends Animal
+</code></pre>
+<h3 id="完成同样事情的替代语法"><a class="header" href="#完成同样事情的替代语法">完成同样事情的替代语法</a></h3>
+<p><strong>Alternate syntax for doing the same thing</strong></p>
+<p>或许还记得在之前讲到<code>Collections.sort()</code>方法时，在该方法的声明中，以一种不寻常的、类型参数声明在返回值前边的格式，使用了泛型。那只是一种声明类型参数的不同方式，结果仍是相同的：</p>
+<blockquote>
+<p><em>注</em>：Java 中涉及到 类型参数（the type parameter） 与 类型变量（the type variable）。</p>
+</blockquote>
+<p><strong>这种类型实参的声明方式</strong>：</p>
+<pre><code class="language-java">public &lt;T extends Animal&gt; void takeThing(ArrayList&lt;T&gt; list)
+</code></pre>
+<p><strong>执行了与下面这种声明方式同样的事情</strong>：</p>
+<pre><code class="language-java">public void takeThing(ArrayList&lt;? extends Animal&gt; list)
+</code></pre>
+<h2 id="答疑-5"><a class="header" href="#答疑-5">答疑</a></h2>
+<ul>
+<li><strong>既然这两种方式完成了同样的事情，那为何不优先使用其中一种方式呢</strong>？</li>
+</ul>
+<blockquote>
+<p>是否要优先选择其中之一，完全取决于是不是想要在其他地方使用这个 <code>T</code>。比如如果希望那个方法有两个参数--这两个参数都是对<code>Animal</code> 进行扩展的类型的清单时，会怎样呢？在这种情况下，只声明一次这个类型参数，就更加高效了：</p>
+</blockquote>
+<pre><code class="language-java">public &lt;T extends Animal&gt; void takeThing(ArrayList&lt;T&gt; one, ArrayList&lt;T&gt; two)
+</code></pre>
+<blockquote>
+<p>而不需要像下面这样写：</p>
+</blockquote>
+<pre><code class="language-java">public void takeThing(ArrayList&lt;? extends Animal&gt; one, ArrayList&lt;? extends Animal&gt; two)
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Ch15_Networking_and_Threads_Make_a_Connection.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Ch15_Networking_and_Threads_Make_a_Connection.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

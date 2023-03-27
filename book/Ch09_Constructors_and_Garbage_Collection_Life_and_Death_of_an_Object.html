@@ -1,0 +1,653 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>构造器与垃圾回收：对象的生与死</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html" class="active"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="构造器与垃圾回收对象的生命与死亡"><a class="header" href="#构造器与垃圾回收对象的生命与死亡">构造器与垃圾回收：对象的生命与死亡</a></h1>
+<p><strong>对象生下来又死去（Objects are born and objects die）</strong>。你负责了某个对象的生命周期。你决定何时及怎样去 <strong>构造</strong> 他。你决定何时去 <strong>摧毁</strong> 他。即使你没有亲自去 <em>摧毁</em> 某个对象，也是有意无意的 <em>抛弃</em> 了他。而一旦某个对象被抛弃，无情的 <strong>垃圾收集器（Garbage Collector, gc）</strong> 就会让他消失，收回该对象所占用的内存。要编写Java程序，就会创建对象。早晚都会让某些对象死去，否则就会耗尽运行内存。本章将了解对象是如何创建出来的，在他们存活的时候呆在哪里，以及如何高效地留存或弃用他们。这就是说要涉及到内存堆（the heap）、栈（the stack）、作用范围（scope）、构造器、超级构造器（super constructors）、空引用（null references）等等。警告：本章涉及可能令某些人反感的对象死亡的材料。介意者请勿阅读。</p>
+<h2 id="栈与堆java万物存在之处"><a class="header" href="#栈与堆java万物存在之处">栈与堆：Java万物存在之处</a></h2>
+<p>在了解创建对象涉及到的东西之前，就必须先往后一点。需要了解Java中各种东西都存在于什么地方（以及存在多长时间）。那就要了解栈和堆（the Stack and the Heap）。Java程序员关心内存的两个区域 -- 一个是对象所在的内存堆（the heap），另一个是方法执行（method invocations）与本地变量所在的栈（the stack）。在JVM启动时，就从所在的OS获取到一块内存，并使用这块内存来运行你的Java程序。至于有多少内存，以及后期是否可以调整大小，取决于所运行的JVM版本（以及在何种平台）。不过通常你没有话语权，且在良好编程下，也无需关心（这方面后期会讨论更多）。</p>
+<p>已知所有 <em>对象</em> 都存活在可垃圾回收的堆上，而对于那些 <em>变量</em> 在什么地方，还没有关注。变量存在于何处，取决于变量是何种类别。所谓“类别（kind）”，就跟 <em>类型（type）</em>，也就是原生变量与对象引用变量，有所不同。在讲到变量存在于何处时所关心的变量类别，是指 <em>实例</em> 变量与 <em>本地</em> 变量两种。本地变量又被成为是 <em>栈</em> 变量，之所以这样称呼，正是与其所存在的位置有关。</p>
+<p><img src="images/Ch09_01.png" alt="栈与堆，实例与本地变量" /></p>
+<p><em>图 1 - 栈与堆，实例与本地变量</em></p>
+<h2 id="方法是堆叠的methods-are-stacked"><a class="header" href="#方法是堆叠的methods-are-stacked">方法是堆叠的（Methods are stacked）</a></h2>
+<p>在对某个方法进行调用时，所调用的那个方法，就位处调用栈的顶部（When you call a method, the method lands on the top of a call stack）。这里被推到栈上去的，是一个叫做栈 <em>帧（frame）</em> 的新事物，栈帧驻留着方法的状态，包括正在执行哪一行代码，以及所有本地变量当前的值。</p>
+<p>在栈顶部的方法，始终是那个栈上当前正在运行的方法（此时假设只有一个栈，后续第14章会加入更多栈）。栈上的方法在抵达其最后的结束花括弧（表示方法执行完毕）后，就从栈上消失了，在这之前方法都是留在栈上的。在 <code>foo()</code> 方法调用 <code>bar()</code>方法时，那么 <code>bar()</code>方法是堆叠在 <code>foo()</code> 方法之上的。</p>
+<p><img src="images/Ch09_02.png" alt="有两个方法的调用栈" /></p>
+<p><em>图 2 - 有两个方法的调用栈</em></p>
+<p><img src="images/Ch09_03.png" alt="另一个栈场景" /></p>
+<p><em>图 3 - 另一个栈场景</em></p>
+<h2 id="对于是对象的那些本地变量的情况"><a class="header" href="#对于是对象的那些本地变量的情况">对于是对象的那些本地变量的情况</a></h2>
+<p>记住，保存了对某个对象的引用的非原生值变量，并不是对象本身（是到对象在堆上的地址）。前面已经知道了对象存活的地方 -- 在内存堆上。不论对象是被声明的还是创建出来的，对象都是在堆上。 <em><strong>当本地变量是一个到某对象的引用时，只是该变量（引用/遥控器）在栈上</strong></em>。</p>
+<p><em>对象本身，还是在堆上的</em>。</p>
+<pre><code class="language-java">public class StackRef {
+    public void foof {
+        barf();
+    }
+
+    public void barf () {
+        Duck d = new Duck (24);
+    }
+}
+</code></pre>
+<p><img src="images/Ch09_04.png" alt="本地变量为对象时的情况" /></p>
+<p><em>图 4 - 本地变量为对象时的情况</em></p>
+<ul>
+<li><strong>再问一次，<em>为何</em> 要了解这些栈/堆的情况？了解他们对编写 Java 程序有什么帮助？真的需要了解这些吗？</strong></li>
+</ul>
+<blockquote>
+<p>具备 Java 栈和堆的基础知识，对于掌握变量作用域（variable scope）、对象创建中的问题（object creation issues）、内存管理（memory management）、线程（threads），以及例外处理（exception handling）等等，至关重要。再后续章节，会涉及线程与例外处理，其他内容本章就会讲到。对特定JVM及/或平台上，栈和堆的实现细节不必了解。只需要了解这里讲到有关栈和堆的情况。如吃透了这里的内容，那么对上述的其他知识点的掌握，就会容易得多。记得我说过的，往后你会感谢我在这里啰嗦栈和堆的。</p>
+</blockquote>
+<h3 id="知识点"><a class="header" href="#知识点">知识点</a></h3>
+<ul>
+<li>Java有着两块我们所关心的内存：栈（the Stack）和堆（the Heap）</li>
+<li>实例变量是在类中、方法外部声明的变量</li>
+<li>本地变量是在方法里声明的变量，或方法的参数</li>
+<li>所有本地变量，都是存活在栈上的，在声明本地变量的相应方法的帧中</li>
+<li>对象引用变量像原生值变量那样运作 -- 若引用变量是作为本地变量声明，那么该引用变量在栈上</li>
+<li>所有对象都存活在堆中，不管对象的引用变量是本地变量，还是实例变量</li>
+</ul>
+<h2 id="既然本地变量存活在栈上那实例变量又存活在哪里呢"><a class="header" href="#既然本地变量存活在栈上那实例变量又存活在哪里呢">既然本地变量存活在栈上，那实例变量又存活在哪里呢？</a></h2>
+<p>在写下 <code>CellPhone()</code>时，Java就必须给那个 <code>CellPhone</code>对象在堆上分配空间。但要分配多少空间呢？就要给那个对象足够的空间，就是说要就足够的空间来保存对象的实例变量。那就得了，实例变量存活在堆上，在他们所属对象内部。</p>
+<p>请记住对象的实例变量的值，是存活在对象的内部的。在实例变量都是原生值时，Java根据原生变量类型，为这些实例变量分配空间。一个<code>int</code>实例变量，需要 32个二进制位，一个 <code>long</code>长整型需要 64个二进制位等等。Java并不去看原生变量里的值；对于一个 <code>int</code> 的变量，不管他的值是 <code>32,000,000</code>还是 <code>32</code>，其所占据的位大小，始终都是 32位。</p>
+<p>但如果实例变量是 <em>对象</em>，那又是怎样的呢？比如 <code>CellPhone</code> 就 <code>HAS-A</code> <code>Antenna</code>？也就是说，<code>CellPHone</code>有一个<code>Antenna</code>类型的引用变量。</p>
+<p>在对象有着一些除开原生变量的、对象引用变量的实例变量时，真正的问题就是：对象需要空间来保存他的那些引用变量所指的对象吗（When the new object has instance variables that are object references rather than primitives, the real question is: does the object need space for all of the objects it holds reference to）？答案是肯定的，但 <em>不准确</em>。不管哪种情况，Java都必须给实例变量 <em>值（values）</em> 分配空间。但要记住，引用变量不是 <em>对象</em> 本身，而仅仅是到对象的 <em>遥控器</em>。因此在 <code>CellPhone</code> 有一个声明为非原生类型的 <code>Antenna</code> 实例变量时，Java 就只需在 <code>CellPhone</code>对象里头，给 <code>Antenna</code> 的遥控器，而不是<code>Antenna</code>对象本身，分配空间即可。</p>
+<p>那么什么时候<code>Antenna</code>会在堆上获取到空间呢？首先就必须找到对象 <code>Antenna</code>本身在什么时候创建出来。这是由<code>Antenna</code>这个实例变量的声明决定的。在只声明了这个实例变量，而没有给他赋值的时候，就只有声明的这个引用变量（遥控器）的空间会被创建。</p>
+<pre><code class="language-java">private Antenna ant;
+</code></pre>
+<p>直到有新的 <code>Antenna</code> 对象赋值给这个对象引用实例变量，才会有真实的 <code>Antenna</code>对象在堆上创建出来。</p>
+<pre><code class="language-java">private Antenna ant = new Antenna();
+</code></pre>
+<p><img src="images/Ch09_05.png" alt="对象的实例变量" /></p>
+<p><em>图 5 - 对象的实例变量</em></p>
+<h2 id="对象创建的奇迹"><a class="header" href="#对象创建的奇迹">对象创建的奇迹</a></h2>
+<p>现在知道了变量与对象存活的地方，就可以深入到对象创建的神奇世界。请记住对象声明与赋值的三个步骤：声明一个引用变量，创建出一个对象，还有将对象赋值给引用变量。</p>
+<p>到现在为止，其中的第二步 -- 奇迹发生的地方和新对象 “诞生”的地方 -- 仍旧是个大秘团。准备好了解对象生命的一些实情了吗？ <em>希望你不要太过娇气</em>。</p>
+<p><img src="images/Ch09_06.png" alt="对象3步骤" /></p>
+<p><em>图 6 - 对象3步骤</em></p>
+<p><em><strong>这里是调用了一个名为 <code>Duck()</code> 的方法吗？因为他真的看起来像个方法</strong></em>。</p>
+<p><img src="images/Ch09_07.png" alt="对象创建的问题" /></p>
+<p><em>图 7 - 对象创建的问题</em></p>
+<p><em><strong>不是的</strong></em>。
+<em><strong>这里调用的是 <code>Duck</code> 构造器</strong></em>。</p>
+<p>构造器 <em>确实</em> 看起来且感觉很像是个方法，但他并不是一个方法。在写下关键字 <code>new</code> 时，他就有了运行的代码。也就是说，<em>在实例化某个对象时，所运行的代码</em> （It's got the code that runs when you say <code>new</code>. In other words, <em>the code that runs when you instantiate an object</em>）。</p>
+<p>运行构造器的唯一方式，就是使用关键字 <code>new</code> 加上类名字。JVM去找到类并运行类中的构造器（好吧，技术上讲这不是运行构造器的 <em>唯一</em> 方式。但这确实是从构造器 <em>外部</em> 运行他的唯一方式。是 <em>可以</em> 在构造器中有限制地调用另一个构造器的，本章后面会讲到这点）。</p>
+<blockquote>
+<p><em><strong>构造器</strong></em> 有着在实例化某个对象时运行的代码。也就是说，当于某个类类型上写下 <code>new</code> 时，所运行的代码。
+你所创建的或不是你创建的全部类，都有一个构造器。</p>
+</blockquote>
+<p><em><strong>那构造器在哪里呢？如果我们没有编写构造器，那又是谁编写的呢</strong></em>？</p>
+<p>自己是可以编写自己的类的构造器的（我们就即将那样做），但如果自己没有编写他，那么<em><strong>编译器将为你编写出一个来</strong></em>！</p>
+<p>编译器默认的构造器看起来是这样的：</p>
+<pre><code class="language-java">public Duck () {}
+</code></pre>
+<p><em><strong>注意到缺了什么吗？这和方法有什么不同的地方</strong></em>？</p>
+<p><img src="images/Ch09_08.png" alt="构造器与方法的不同" /></p>
+<p><em>图 8 - 构造器与方法的不同</em></p>
+<h3 id="构造一个-duck"><a class="header" href="#构造一个-duck">构造一个 <code>Duck</code></a></h3>
+<p><img src="images/Ch09_09.png" alt="构造器实例" /></p>
+<p><em>图 9 - 构造器实例</em></p>
+<pre><code class="language-console">$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Quack
+</code></pre>
+<h3 id="初始化某个新-duck对象的状态"><a class="header" href="#初始化某个新-duck对象的状态">初始化某个新 <code>Duck</code>对象的状态</a></h3>
+<p>多数人使用构造器来初始化对象的状态。也就是给对象的实例变量构造和赋值。</p>
+<pre><code class="language-java">public Duck () {
+    size = 34;
+}
+</code></pre>
+<p>在<code>Duck</code>类 <em>开发者</em> 知道 <code>Duck</code> 对象应该是多大的时候，这样做没有问题。但在希望由 <em>使用</em> <code>Duck</code> 类的程序员来决定，某个特定的 <code>Duck</code> 对象应该多大的时候会怎样呢？</p>
+<p>设想 <code>Duck</code> 有个 <code>size</code> 实例变量，同时希望使用这个<code>Duck</code>类的程序员来设置新 <code>Duck</code> 对象的 <code>size</code>。可以怎么办到呢？</p>
+<p>当然，可以给类加上一个设置器<code>setSize()</code>（setter）。但这样做会给 <code>Duck</code> 的 <code>size</code> 暂时没有取值（实例变量是有默认值的。对于数值原生值，为<code>0</code>或者浮点数的<code>0.0</code>，对于布尔值是 <code>false</code>，对于引用变量默认值是 <code>null</code>），并会让使用者必须用 <em>两条</em> 语句 -- 一条来创建 <code>Duck</code> 对象，一条来调用 <code>setSize()</code> 方法。下面的代码就是使用了一个设置器方法来设置新 <code>Duck</code> 的 <code>size</code> 初始值。</p>
+<p><img src="images/Ch09_10.png" alt="使用设置器而不是构造器参数的弊端" /></p>
+<p><em>图 10 - 使用设置器而不是构造器参数的弊端</em></p>
+<h3 id="答疑"><a class="header" href="#答疑">答疑</a></h3>
+<ul>
+<li><strong>既然编译器会提供构造器，那为何还有自己编写构造器</strong> ？</li>
+</ul>
+<blockquote>
+<p>在需要代码来帮助对象初始化，以及为使用该对象做好准备时，就必须编写自己的构造器。或许也会需要对象使用者的输入，才能完成对象的构建。就算自己不需要任何的构造器代码，但还是有必须编写构造器的理由，这一点与超类的构造器有关，后面很快就会讲到这点。</p>
+</blockquote>
+<ul>
+<li><strong>怎样区分构造器与普通方法？也可以让某个方法与类有相同的名字吗？</strong></li>
+</ul>
+<blockquote>
+<p>Java允许声明与类名字相同的方法。不过这样做不会使其成为构造器。将普通方法和构造器区别开的，就是返回值的类型。方法必须有一个返回值类型，与此相反，构造器就不能有返回值类型（<strong>注意：构造器返回的实际上是一个对象的引用</strong>！）。</p>
+</blockquote>
+<ul>
+<li><strong>构造器会被继承吗？在当前类的超类具有构造器，他本身没有构造器时，会将超类的构造器作为默认的构造器吗</strong>？</li>
+</ul>
+<blockquote>
+<p>不会。构造器是不被继承的。在后面后讨论这个问题。</p>
+</blockquote>
+<h3 id="使用构造器来对一些-duck-的重要状态进行初始化"><a class="header" href="#使用构造器来对一些-duck-的重要状态进行初始化">使用构造器来对一些 <code>Duck</code> 的重要状态进行初始化</a></h3>
+<p>若要求在对象状态（实例变量）的一个或多个部分未初始化之前，不能使用该对象的话，就应该在完成对象初始化之前，不应将 <code>Duck</code> 对象交给任何引用变量（If an object shouldn't be used until one or more parts of its state(instance variables) have been initialized, don't let anyone get ahold of a <code>Duck</code> object until you're finished initializing）！让别人构造一个需要再次调用 <code>setSize()</code> 这样的设置器，才能得到一个可以使用的构造器，是具有相当风险的。因为在调用设置器之前，就已经将这个未准备好的对象，交给了其引用变量。如果类 <code>Duck</code>的使用者不知道或者忘记了调用设置器，那么会怎样呢？</p>
+<p>放置初始化代码的最佳地点，就是在构造器中。只需要构造一个带有参数的构造器。</p>
+<p><img src="images/Ch09_11.png" alt="带有参数的构造器" /></p>
+<p><em>图 11 - 带有参数的构造器</em></p>
+<h2 id="让-duck-的构造更容易"><a class="header" href="#让-duck-的构造更容易">让 <code>Duck</code> 的构造更容易</a></h2>
+<p><strong>就要确保有一个不带参数的构造器</strong></p>
+<p>若 <code>Duck</code> 构造器接受一个参数时会怎样？想一下这个问题。在上面的示例中，只有一个 <code>Duck</code> 构造器 -- 并接收一个 <code>int</code> 参数作为 <code>Duck</code> 的大小。这或许不是个大问题，但将让那些尚不知道某个 <code>Duck</code> 应该多大的程序员，感到手足无措。如果 <code>Duck</code> 能有个默认的 <code>size</code>，就会很有帮助，那样 <code>Duck</code> 类的使用者，即使不知道一个合适的 <code>size</code>，也仍然可以构造出一个可工作的 <code>Duck</code>来。</p>
+<p><strong>设想打算让 <code>Duck</code> 的使用者，在构造<code>Duck</code> 时有两个选项 -- 一个时提供到<code>Duck</code>的 <code>size</code>（构造器参数），另一个则不指定 <code>size</code>，因此就要使用预先准备的 <em>默认</em> <code>Duck</code> <code>size</code></strong>。</p>
+<p>若只有一个构造器，那么肯定就实现不了这个。记住，某个方法（或构造器--适用同样的规则）有个参数，那么在执行该方法或构造器时，就 <em>必须</em> 传递一个适当的参数给他。就不能这样写，“如果没有传递任何东西给构造器，就使用默认的 <code>size</code>”，因为在没有传递一个 <code>int</code> 参数给构造器调用的话，就甚至不能进行编译的。<em>或许</em> 可以像下面这样写：</p>
+<p><img src="images/Ch09_12.png" alt="只使用一个构造器" />]</p>
+<p><em>图 12 - 只使用一个构造器</em></p>
+<p>这样做还是要求构造新 <code>Duck</code> 对象的程序员知道，传入一个 <code>0</code> 就可以得到默认 <code>Duck</code> <code>size</code> 的约定。这就很恶心了。要是其他程序员不知道呢？或者某人真的需要一个大小为零的 <code>Duck</code>呢？（假设大小为零的 <code>Duck</code> 是允许的。就是真的不想要大小为零的 <code>Duck</code> 对象存在，就要在构造器中放入验证代码来防止）关键是，不总是能识别出<code>Duck</code>的使用者，到底是真的想要一个大小为零的 <code>Duck</code>，还是他要传入一个 <code>0</code>来得到默认的 <code>Duck</code> <code>size</code>。</p>
+<p><strong>实际上，需要的是有两种构造新 <code>Duck</code>的方式</strong> :</p>
+<pre><code class="language-java">public class Duck2 {
+    int size;
+
+    public Duck2 () {
+        // 提供一个默认的 size
+        size = 27;
+    }
+
+    public Duck2 (int duckSize) {
+        // 使用 duckSize 参数
+        size = duckSize;
+    }
+}
+</code></pre>
+<p><strong>要构造一个已知 <code>size</code> 的新 <code>Duck</code> 时</strong> ：</p>
+<pre><code class="language-java">Duck2 d = new Duck2 (15);
+</code></pre>
+<p><strong>要构造一个不知道 <code>size</code> 的 <code>Duck</code> 时</strong> ：</p>
+<pre><code class="language-java">Duck2 d2 = new Ducks()
+</code></pre>
+<p>因此这种 <strong>构造 <code>Duck</code> 的双项选择</strong> 做法，就需要 <em>两个</em> 构造器。其一接收一个 <code>int</code> 参数，其二没有参数。 <strong>在类中有着多个构造器时，就是说使用了 <em>过载的构造器（overloaded constructors）</em></strong>。</p>
+<h2 id="编译器总是会自动构造一个不带参数的构造器吗-不会"><a class="header" href="#编译器总是会自动构造一个不带参数的构造器吗-不会">编译器总是会自动构造一个不带参数的构造器吗？ <em>不会！</em></a></h2>
+<p>你可能会想，在 <em>只</em> 编写了一个有参数的构造器时，编译器会发现那里没有不带参数的构造器，并自动为你补上这么一个。但这并不是编译器的行事方式。编译器 <em>只会在你完全没有编写构造器时</em>，才介入到构造器的生成中来。</p>
+<p><strong>在编写了带参数的构造器，且仍需一个不带参数的构造器时，就必须自己去构建这个不带参数的构造器</strong>！</p>
+<p>一旦你提供了一个构造器，<strong>不管</strong> 这个构造器是哪种，编译器就后退下来，并以为 “好的兄弟，看起来你负责了构造器这个事情”。</p>
+<p><strong>某个类中有了多个构造器时，那么这些构造器就 <em>必须</em> 带有不同的参数清单</strong>。</p>
+<p>参数清单包含了参数的顺序及类型。只要参数清单各异，那么就可以有着多个的构造器。对于方法，这条规则也是适用的，后面的章节会讲到。</p>
+<p>** <em>过载</em> 构造器，就是说，在类中可以有多个构造器**。</p>
+<p><strong>要通过编译，各个构造器就必须有 <em>不同</em> 的参数清单</strong>！</p>
+<p>下面的类是合法的，因为全部5个构造器，都有着不同的参数清单。若某个类的两个构造器，都接收 <code>int</code> 参数，那么该类就不会被编译。参数变量的名称，不作为考虑参数清单差异的考虑。参数变量的 <em>类型</em>（比如 <code>Dog</code>） 和 <em>顺序</em> 才影响参数清单差异。两个构造器可以有同样的类型，<em><strong>只要顺序不一样</strong></em> 就可以。接收一个字符串加一个整数的构造器，就不同于与接收一个整数与一个字符串的构造器。</p>
+<p><img src="images/Ch09_13.png" alt="合法的多个构造器" />]</p>
+<p><em>图 13 - 合法的多个构造器</em></p>
+<h2 id="知识点-1"><a class="header" href="#知识点-1">知识点</a></h2>
+<ul>
+<li>实例变量存活于他们所属的对象，因此也是在内存堆上的；</li>
+<li>若实例变量是多某个对象的引用变量，那么该引用变量及其所指的对象，都是在堆上的；</li>
+<li>构造器是在某个类类型上，提及 <code>new</code> 关键字时所运行的代码；</li>
+<li>构造器的名字，必须与类的名字相同，且不能有返回值类型；</li>
+<li>可使用构造器，来初始化将要构造对象的状态（即初始化对象的那些实例变量）；</li>
+<li>如类中没有构造器，那么编译器将放入一个默认的构造器；</li>
+<li>默认的构造器，总是不带参数的构造器；</li>
+<li>若在类中放入了构造器，那么编译器就不在会构建默认的构造器了；</li>
+<li>在已经放入了带参数的构造器后，还想要一个不带参数的构造器，就必须亲自构建那个不带参数的构造器；</li>
+<li>应尽可能的提供不带参数的构造器，这是为了让其他程序员可以更容易的构造一个能用的对象出来。通过不带参数的构造器提供到实例变量默认值；</li>
+<li>Java 的 “过载构造器”特性，是指类中可以有多个构造器；</li>
+<li>过载构造器必须有不同的参数清单；</li>
+<li>两个构造器不能有同样的参数清单。参数清单包括了参数类型和/或顺序；</li>
+<li>就是没有显式地赋值给实例变量，实例变量仍然具有默认值。对于原生变量，默认值为 <code>0</code>/<code>0.0</code>/<code>false</code>，对于引用变量，默认值为 <code>null</code>。</li>
+</ul>
+<h2 id="答疑-1"><a class="header" href="#答疑-1">答疑</a></h2>
+<ul>
+<li><strong>早前说到编写一个不带参数的构造器，是一种良好的编程习惯，那样就可以在其他人调用不带参数的构造器时，提供到 “缺失” 参数的默认值。但会不会有时候无法提供默认值？有时候类种不应该有着不带参数的构造器呢</strong>？</li>
+</ul>
+<blockquote>
+<p>对的。某些时候不带参数的构造器就毫无意义。在 Java API种就能见到这样的情况 -- 一些类就没有没有不带参数的构造器。比如类 <code>Color</code>，表示了某个 ... 颜色。<code>Color</code> 对象用于，比如设置或改变某个屏幕字体，或GUI按钮的颜色。在构造某个 <code>Color</code> 实例时，所构造的实例，就是某种特定颜色（也就是“死亡巧克力棕（Death-by-Chocolate Brown）”、“死机蓝屏蓝（Blue-Screen-of-Death Blue）”、“绯闻红（Scandalous Red）”等等）。在构建某个 <code>Color</code> 对象时，就必须以某种方式指定颜色。</p>
+</blockquote>
+<pre><code class="language-java">Color c = new Color(3, 45, 200);
+</code></pre>
+<blockquote>
+<p>（这里使用的就是表示RGB数值的三个整数。后面在 <code>Swing</code> 章，将使用到<code>Color</code>类。）否则将得到什么呢？Java API的程序员本来可以决定，一个不带参数的<code>Color</code>构造器给出可可爱爱的紫红色。不过最后还是理智决定（But good taste prevailed）。</p>
+</blockquote>
+<blockquote>
+<p>那么在尝试不通过参数就构造颜色时：</p>
+</blockquote>
+<pre><code class="language-java">Color c = new Color();
+</code></pre>
+<blockquote>
+<p>编译器就会吓坏，因为在类 <code>Color</code>里头，找不到不带参数的构造器。</p>
+</blockquote>
+<h3 id="小复习关于构造器需要记住的4件事"><a class="header" href="#小复习关于构造器需要记住的4件事">小复习：关于构造器，需要记住的4件事</a></h3>
+<ol>
+<li>
+<p>构造器是在某种类类型上写关键字 <code>new</code> 所运行的代码</p>
+<pre><code class="language-java">Duck d = new Duck();
+</code></pre>
+</li>
+<li>
+<p>构造器必须有着与类同样的名字，且 <strong>没有</strong> 返回值类型</p>
+<pre><code class="language-java">public Duck (int size) {}
+</code></pre>
+</li>
+<li>
+<p>当类里没写构造器时，编译器就会放入一个默认的构造器。默认构造器都是不带参数的构造器。</p>
+<pre><code class="language-java">public Duck () {}
+</code></pre>
+</li>
+<li>
+<p>类中可以写多个构造器，只要他们的参数清单不同即可。在类中有着多个构造器时，就用到了 Java 的过载构造器特性。</p>
+<pre><code class="language-java">public Duck () {}
+public Duck (int size) {}
+public Duck (String name) {}
+public Duck (String name, int size) {}
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>脑力大挑战</p>
+<p><strong>对于超类来讲是什么情况</strong>？
+<strong>在构造一个 <code>Dog</code> 时，<code>Canine</code> 的构造器，也会运行吗</strong>？
+<strong>在超类是抽象的时候，他甚至也需要一个构造器吗（If the superclass is abstract, should it even hava a constructor）</strong>?</p>
+<p>后面将讨论这些问题，现在可以不用想这些问题，而是可以思考一下构造器与超类，这两个东西在一起的影响。</p>
+</blockquote>
+<h2 id="答疑-2"><a class="header" href="#答疑-2">答疑</a></h2>
+<ul>
+<li><strong>构造器必须要是 <code>public</code> 的吗</strong>？</li>
+</ul>
+<blockquote>
+<p>不必是。构造器可以是 <code>public</code>、<code>protected</code>、<code>private</code> 或者 <em>默认（default）</em> （也就是没有访问修饰器，which means no access modifier at all）。在第16章及附录 B中将讨论 <em>默认</em> 访问修饰器。</p>
+</blockquote>
+<ul>
+<li>** <code>private</code> 的构造器怎么发挥作用呢？没人可以调用到这样的构造器，那么就不会有人能构造出一个新的对象来**！</li>
+</ul>
+<blockquote>
+<p>是不会构造出新的对象，但这样说并不完全正确。将某个东西标记为 <code>private</code> 并不是说没人可以访问到他，只是说 <em>类外部没人</em> 可以访问他。我敢打赌你一定是想到了 《第22条军规》（Bet you're thinking &quot;Catch-22&quot;）。只有在定义了私有构造器的类中的那些代码，才能构造那个类的新对象，但在没有构造出第一个对象的时候，又怎样才能从那个类的最初对象运行代码呢？<em>Patience grasshopper</em>。接下来的章里，将讨论这个问题。</p>
+</blockquote>
+<p><strong>等一下，我们似乎还没有讲到超类与继承，以及他们跟构造器是怎么相互作用的</strong>。</p>
+<p>这里就开始变得有趣了。还记得上一章里，讲到的 <code>Snowboard</code> 对象，其围绕着表示<code>Snowboard</code>类的 <code>Object</code> 部分的内部核心进行封装吗？这里最重要的地方，就是所有对象，都不仅保存了他自己声明的实例变量，同时还保存了 <em>所有来自其超类的东西</em> （最起码有类 <code>Object</code>的东西，因为所有类都扩展了 <code>Object</code>）。</p>
+<p>那么在某个对象被创建出来是（由于某人写下了关键字 <code>new</code>，除有人在某个时候在类类型之上写了 <code>new</code>之外，并无其他构造新对象的方式），对象就获取到其 <em>所有</em> 实例变量的空间，包括其从继承树往上继承到的，以及自身声明的实例变量。这得要花点时间才能搞清楚......某个超类就可能有着一些对私有变量进行封装的设置器方法（Think about it for a moment...a superclass might have setter methods encapsulating a private variable）。而那个变量，就必须存活于 <em>某处</em>。在某个对象被创建出来时，总是会有 <em>多个</em> 对象生成 -- 对象被生成，同时每个超类的对象也被生成。概念上讲，像下图这样去考虑这个问题将更好一些，那里所创建出的对象，有着分别表示各个超类的对象 <em>自身</em> 的 <em>各层</em>。</p>
+<p><img src="images/Ch09_14.png" alt="堆上的 Snowboard 类" />]</p>
+<p><em>图 14 - 堆上的 Snowboard 类</em></p>
+<h3 id="超类构造器在对象生命周期中的角色"><a class="header" href="#超类构造器在对象生命周期中的角色">超类构造器在对象生命周期中的角色</a></h3>
+<p><strong>The role of superclass constructors in an object's life</strong></p>
+<p><em><strong>在构造新的对象时，对象继承树中的所有构造器都必须运行（All the constructors in an object's inheritace tree must run when you make a object）</strong></em>。</p>
+<p>让我们细细品味这句话是什么意思（Let that sink in）。</p>
+<p>这意味着每个超类都有一个构造器（因为每个类都有一个构造器），同时沿继承层次往上的每个构造器，在子类的某个对象被创建出来时，都会运行。</p>
+<p>写下关键字 <code>new</code> 可是个大事情。这就开启了整个构造器链的反应（Saying <code>new</code> is a Big Deal. It starts the whole constructor chain reaction）。且就算抽象类，也是有构造器的。虽然不在在某个抽象类上写 <code>new</code>，但抽象类同样是超类，因此在有人构造某个具体类的实例时，抽象类的构造器同样会运行。</p>
+<p>超类构造器运行，是为了构造出对象的超类部分。记住，某个子类可能依据超类的状态（即超类实例变量的值），而继承超类的某些方法。对象要成型，他自身的所有超类部分必须要成型，这就是超类构造器 <em>必须</em> 运行的原因。继承树中所有类的实例变量，都必须被声明和初始化。基本 <code>Animal</code>中有 <code>Hippo</code> 未曾继承的实例变量（比如在实例变量为 <code>private</code>时），<code>Hippo</code>仍然会依赖<code>Animal</code>中 <em>使用</em> 到这些变量的方法。</p>
+<p><img src="images/Ch09_15.png" alt="构造器链" /></p>
+<p><em>图 15 - 构造器链</em></p>
+<p>在构造器运行时，他就立即沿构造器链往上，调用他的超类构造器，直到类<code>Object</code>的构造器（When a contructor runs, it immediately calls its superclass constructor, all the way up the chain until you get to the class <code>Object</code> constructor）。</p>
+<p>在后面的内容中，将了解怎样调用超类构造器，以及怎么亲自去调用超类构造器。还会了解在超类构造器带有参数时，该怎样去调用他们。</p>
+<pre><code class="language-java">package com.xfoss.learningJava;
+
+abstract class Animal {
+    Animal () {
+        System.out.println (&quot;Making an Animal&quot;);
+    }
+}
+
+abstract class Canine extends Animal {}
+abstract class Feline extends Animal {}
+
+class Dog extends Canine {}
+class Cat extends Feline {}
+class Hippo extends Animal {
+    Hippo () {
+        System.out.println(&quot;Making a Hippo&quot;);
+    }
+}
+
+public class AnimalTestDrive {
+    public static void main (String [] args) {
+        System.out.println(&quot;Starting...&quot;);
+        Hippo h = new Hippo();
+    }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-console">$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Starting...
+Making an Animal
+Making a Hippo
+</code></pre>
+<p><img src="images/Ch09_16.png" alt="构造器链" /></p>
+<p><em>图 16 - 构造器链（Constructor Chaining）</em></p>
+<h3 id="该怎样来亲自执行超类构造器"><a class="header" href="#该怎样来亲自执行超类构造器">该怎样来亲自执行超类构造器？</a></h3>
+<p><strong>How do you invoke a superclass constructor</strong>?</p>
+<p>你可能已经想到，比如对于 <code>Duck</code> 的构造器，在 <code>Duck</code> 扩展了 <code>Animal</code>时，就会去调用 <code>Animal()</code>。但不是这样干的：</p>
+<pre><code class="language-java">class Duck extends Animal {
+    int size;
+
+    Duck (int newSize) {
+        Animal (); // 错！不行，这样是非法的！
+        size = newSize;
+    }
+}
+</code></pre>
+<p>调用超构造器（a super constructor）的唯一方式，是通过调用 <code>super()</code>。对 -- <code>super()</code> 就会调用到 <em><strong>超构造器</strong></em>。</p>
+<p>时机在哪里呢（What are the odds）？</p>
+<pre><code class="language-java">class Duck extends Animal {
+    int size;
+
+    Duck (int newSize) {
+        super();
+        size = newSize;
+    }
+}
+</code></pre>
+<p>构造器 <code>Duck()</code> 中的 <code>super()</code> 调用，把超类构造器放置在栈顶部。而那个超类构造器又会干什么呢？<em>调用他自己的超类构造器</em>。如此这般，直到<code>Object</code>的构造器位于栈的顶部为止。一旦 <code>Object()</code> 运行完毕，他就从栈上被移除，同时栈上的下一个构造器（调用 <code>Object()</code> 的那个子类构造器）现在就位于顶部了。随后 <em>那个</em> 构造器也执行完毕，如此这般，直到最初的构造器位于栈顶部为止，到这里这个最初的构造器才执行完毕。</p>
+<blockquote>
+<p><strong>那么之前为什么就没这么做呢（And how is it that we've gotten away without doing it）</strong>?</p>
+</blockquote>
+<blockquote>
+<p>你或许已经接近发现事实真相了。
+<strong>在我们没有放入一个 <code>super()</code>时，我们的好友编译器就会放入一个</strong>。
+因此编译器在介入到构造器构造时，有两种方式（So the compiler gets involved in constructor-making in two ways）：</p>
+<ol>
+<li>在我们不提供构造器时：
+编译器放入一个这样的构造器：</li>
+</ol>
+</blockquote>
+<pre><code class="language-java">class ClassName {
+    super();
+}
+</code></pre>
+<blockquote>
+<ol start="2">
+<li>在提供了构造器却没有放入一个到 <code>super()</code> 的调用时</li>
+</ol>
+<p>编译器将在所有过载构造器中，放入一个到 <code>super()</code>的调用（除了那些调用了其他过载构造器的构造器中，这在后面会见到）。编译器所提供的调用是这样的：</p>
+</blockquote>
+<pre><code class="language-java">super();
+</code></pre>
+<blockquote>
+<p>且会一直是这样的。编译器插入的 <code>super()</code> 调用，始终是不带参数的。在超类有着过载构造器时，只会调用不带参数的构造器。</p>
+</blockquote>
+<h3 id="子类可以在父类之前就存在吗"><a class="header" href="#子类可以在父类之前就存在吗">子类可以在父类之前就存在吗？</a></h3>
+<p><strong>Can the child exist before the parents</strong>?</p>
+<p>在将超类想象为子类孩子的父辈时，就能搞清楚哪个会首先存在。<em><strong>对象的超类部分，必须要在子类部分构造之前就完全成型（构建完毕）</strong></em>。记住，子类对象可能依赖他所继承的超类的某些东西，因此这些被继承的东西有必要是完备的。这事没有商量的余地。超类构造器必须在子类构造器之前执行完毕。</p>
+<p>回顾前面的栈序列，就可以发现尽管首先运行的是 <code>Hippo()</code> 构造器（他是栈上第一个事物），但却是最后一个执行完毕的！各个子类构造器将立即运行他自己的超类构造器，直到 <code>Object</code> 构造器位居栈顶部为止。这是<code>Object</code>的构造器执行完毕，随后我们往下被带回到 <code>Animal</code> 的构造器。只有在 <code>Animal</code> 的构造器执行完毕，才能最终往下回到 <code>Hippo</code>构造器的剩余部分。因为这个原因：</p>
+<p><strong>对 <code>super()</code> 的调用，必须是每个构造器中的第一条语句</strong>（此规则也有例外，后面马上就会看到）！</p>
+<p><img src="images/Ch09_17.png" alt="对 super() 的调用" /></p>
+<p><em>图 17 - 对 <code>super()</code> 的调用</em></p>
+<h3 id="带参数的超类构造器"><a class="header" href="#带参数的超类构造器">带参数的超类构造器</a></h3>
+<p>若超类构造器带有参数会怎样呢？可将某些东西传递进入到 <code>super()</code> 调用吗？当然可以。如若不能，就无法去扩展那些，没有不带参数的构造器的类了。设想这样的场景：所有动物都有个名字。类 <code>Animal</code> 中有个 <code>getName()</code> 的方法，返回实例变量 <code>name</code> 的值。该实例变量被标记为了<code>private</code>，但子类（此示例中的 <code>Hippo</code>）继承了 <code>getName()</code> 方法。那么就有这个问题：<code>Hippo</code>有着一个 <code>getName()</code>方法（通过继承得到），但并没有 <code>name</code>这个实例变量。<code>Hippo</code>就不得不依赖自己的 <code>Animal</code>部分，来保存那个<code>name</code>的实例变量，并在某人调用到 <code>Hippo</code>对象上的 <code>getName()</code>方法时，返回 <code>name</code> 的值。但 <code>Animal</code> 部分该怎样获取到这个 <code>name</code> 呢？<code>Hippo</code>到他的 <code>Animal</code>部分的唯一引用，是经由 <code>super()</code> 实现的，那么那里就是 <code>Hippo</code> 把 <code>Hippo</code> 的名字，发送给他的 <code>Animal</code> 部分的地方，如此这般，<code>Animal</code> 部分才可以将 <code>Hippo</code>的名字，存储在那个 <code>private</code> 的 <code>name</code> 实例变量中。</p>
+<pre><code class="language-java">abstract class Animal {
+    private String name; // 所有动物（包括子类）都有一个名字
+
+    public String getName () { // Hippo 继承到的一个读取器方法（a getter method）
+        return name;
+    }
+
+    Animal (String theName) {
+        name = theName; // 接收名字并将其赋值给 name 实例变量的构造器
+    }
+}
+
+class Hippo extends Animal {
+    Hippo (String name) { // Hippo构造器接收一个名字
+        super(name); // 这个语句将名字在栈上向上发送给 Animal 构造器
+    }
+}
+
+public class AnimalTestDrive {
+    public static void main (String [] args) {
+        Hippo h = new Hippo(&quot;Buffy&quot;); // 构造一个 Hippo, 并将名字 &quot;Buffy&quot; 传递给 Hippo 构造器。
+        System.out.println(h.getName()); // 随后调用 Hippo 继承到的 getName() 方法
+    }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-console">$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Buffy
+</code></pre>
+<h3 id="从一个过载构造器运行另一个过载构造器"><a class="header" href="#从一个过载构造器运行另一个过载构造器">从一个过载构造器运行另一个过载构造器</a></h3>
+<p>在过载构造器具有处理不同参数类型的例外，而去做同样的事情时，会怎样呢（What if you have overloaded construtors that, with the exception of handling different argument types, all do the same thing）？显然是不希望在各个构造器中有 <em>重复（duplicate）</em> 代码（苦于维护等等），那么就有把大部分构造器代码（包括对 <code>super()</code> 的调用），放在 <em>一个</em> 过载构造器中。让其他构造器去运行这个真正构造器（The Real Constructor），并让这个真正构造器去完成对象构造工作。很简单：使用 <code>this()</code> 语句，或者 <code>this(aString)</code>，或者<code>this(27, x)</code>这样的语句即可。也就是说，只需将关键字 <code>this</code>，想象为 <strong>当前对象</strong> 即可。</p>
+<p><strong>只有在构造器中，才能写 <code>this</code>, 且必须是构造器的第一条语句</strong>！</p>
+<p>但那是个问题，不是吗？早先说过，<code>super()</code>必须是构造器中的第一条语句。好吧，上面这句话就是说，现在多了一个选择。</p>
+<p><strong>每个构造器都可以有一个 <code>super()</code> 或 <code>this()</code> 的调用，但不能两个同时调用</strong>！</p>
+<blockquote>
+<p><strong>在一个构造器中使用 <code>this()</code> 来调用同一类中的另一个构造器</strong>。
+<strong>可以在构造器中使用对 <code>this()</code> 的调用，但必须是构造器的第一条语句</strong>。
+<strong>构造器可以保有一个对 <code>super()</code> <em>或</em> <code>this()</code> 的调用，但不能同时使用 <code>super()</code> 和 <code>this()</code></strong>。</p>
+</blockquote>
+<p><img src="images/Ch09_18.png" alt="this() 与 super()" /></p>
+<p><em>图 18 - <code>this()</code> 和 <code>super()</code>的使用</em> </p>
+<h3 id="现在了解了对象是如何诞生的那么对象会存活多长时间呢"><a class="header" href="#现在了解了对象是如何诞生的那么对象会存活多长时间呢">现在了解了对象是如何诞生的，那么对象会存活多长时间呢？</a></h3>
+<p>对象的 <em>生命</em> 完全取决于指向他的引用变量的存活时间。在引用变量还是 “存活的” 时候，那么对象也就还存活在内存堆上。如果引用变量死去（马上就会讲到“引用变量死去”的意思），那么对象也会死去。</p>
+<p><strong>既然对象的生命取决于他的引用变量的存活时间，那么究竟 <em>变量</em> 会存活多长时间呢</strong>？</p>
+<p>变量存活时间，又取决于变量是 <em>本地</em> 变量还是 <em>实例</em> 变量。下面的代码展示了本地变量的存活时间。在示例中，变量是个原生值，但不论变量是原生值还是引用变量，他们的存活时间都是一样的。</p>
+<p><img src="images/Ch09_19.png" alt="本地变量存活时间" /></p>
+<p><em>图 19 - 本地变量存活时间</em></p>
+<p><strong>本地变量 <em>存活时间</em> 与 <em>作用范围</em> 的区别</strong>：</p>
+<ul>
+<li>
+<p><strong>存活时间（Life）</strong></p>
+<p>本地变量与其所在的栈帧同在。也就是说，<em>在其所属方法执行完毕之前，本地变量都是存活的</em>。</p>
+</li>
+<li>
+<p><strong>作用范围（Scope）</strong></p>
+<p>本地变量作用范围，仅限于声明变量的方法内部。在他自己的方法调用另一个方法期间，该变量仍然是存活的，但直到他的方法恢复运行之前，都不在他的作用范围中。<em><strong>只有当本地变量在其作用范围中时，才能使用那个变量</strong></em>。</p>
+</li>
+</ul>
+<p><img src="images/Ch09_20.png" alt="本地变量存活时间与作用范围" /></p>
+<p><em>图 20 - 本地变量存活时间与作用范围</em></p>
+<p>在本地变量处于存活状态是，他的状态就会持续存在。只要 <code>doStuff()</code> 方法还在栈上，那么变量 <code>b</code> 就会保持他的值不变。但变量 <code>b</code> 只能在 <code>doStuff()</code> 栈帧位于顶部时才能使用。也就是说，只有在本地变量的方法正在运行时（而非等待其上的栈帧执行完毕期间），才能使用那个本地变量。</p>
+<blockquote>
+<p><strong>Wrap vs. Encapsulation</strong></p>
+</blockquote>
+<blockquote>
+<p>Wrap, 缠绕，包裹起来，更形象
+Encapsulation, 封装，Java 中的 <code>getter</code> 和 <code>setter</code> 对 <code>private</code> 变量的封装，不如 wrap 形象，意义也大不相同</p>
+</blockquote>
+<h3 id="引用变量的存活时间问题"><a class="header" href="#引用变量的存活时间问题">引用变量的存活时间问题</a></h3>
+<p>对于原生变量与引用变量，规则是一样的。引用变量也只能在其作用范围使用，也就是说，除非在作用范围中有某个引用变量，否则就不能使用某个对象的遥控器。然而 <em>真正的</em> 问题是：</p>
+<p><strong>“引用变量的存活时间，是如何对其所指向的 <em>对象</em> 的存活时间施加影响的”</strong>？</p>
+<p>对象与对象的引用变量共存。在某个引用变量脱离作用范围却依然存活时，他 <em>所指向的</em> 对象，也依然是存活在内存堆上的。那么你就会问......“当引用变量所在方法结束，从而导致保存引用变量的栈帧被移除栈时，会发生什么呢”？</p>
+<p>如果那个引用变量是到对象的 <em>唯一</em> 引用，那么该对象此时就会在堆上被抛弃。随着栈帧的瓦解，那个引用变量也瓦解了，因此被抛弃的对象，现在就 <em>正式地</em> 吃席了。这里的窍门在于明白某个对象在什么时候 <em><strong>可被垃圾回收</strong></em>。</p>
+<p>一旦某个对象可被垃圾回收（eligible for garbage collection, GC），就不用操心怎么去收回被那个对象使用的内存的问题。在程序需要更多内存时，Java的垃圾回收特性，就会自动损毁掉部分或全部的可回收对象，从而避免内存耗尽。在所有可回收对象被投进垃圾场之前，是不会耗尽内存的（If your program gets low on memory, GC will destroy some or all of the eligible objects, to keep you from running out of RAM. You can still run out of memory, but <em>not</em> before all eligible objects have been hauled off to the dump）。你的任务就只是确保在用完对象后，及时抛弃他们即可（也就是让用完的对象成为可被垃圾回收的对象），这样垃圾回收器（the garbage collector,）就有东西可以回收了。如果一直吊着这些对象不放，垃圾回收就帮不上你，你就只有自己承担程序陷入耗尽内存而亡的风险了。</p>
+<blockquote>
+<p><strong>在没有指向对象的引用变量时，对象的存活没有价值、没有意义，也没有时间点</strong>。
+<strong>若不能捕获到对象，那么就没法要求对象完成任何事情，这时对象就是一堆废物的二进制位</strong>。
+<strong>但在某个对象不可到达时，垃圾回收器就会把他找出来。很快他就会消失</strong>。</p>
+</blockquote>
+<p><img src="images/Ch09_21.png" alt="对象的存活时间" /></p>
+<p><em>图 21 - 对象的存活时间</em></p>
+<p><img src="images/Ch09_22.png" alt="对象回收：引用变量永久脱离作用范围" /></p>
+<p><em>图 22 - 对象回收：引用变量永久脱离作用范围</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Ch08_Interfaces_and_Abstract_Classes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Ch10_Numbers_and_Statics_Numbers_Matter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Ch08_Interfaces_and_Abstract_Classes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Ch10_Numbers_and_Statics_Numbers_Matter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

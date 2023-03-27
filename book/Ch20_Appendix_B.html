@@ -1,0 +1,1527 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>附录 B：其他要点</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html" class="active"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="附录b其他特性"><a class="header" href="#附录b其他特性">附录B：其他特性</a></h1>
+<h2 id="注解语法"><a class="header" href="#注解语法">注解语法</a></h2>
+<p><strong>Annotations</strong></p>
+<p><em>注解</em>，是元数据的一种形式，提供了不作为程序本身部分的、有关程序的一些数据。注解对其所注解代码运作，并未直接影响（<em>Annotations</em>, a form of metadata, provide data about a program that is not part of the program itself. Annotations have no direct effect on the operation of the code they annotate）。</p>
+<p>注解有着多种用途，这些用途中：</p>
+<ul>
+<li><strong>为编译器提供信息</strong> -- 编译器可使用注解来探测错误或抑制告警信息（<strong>Information for the compiler</strong> -- Annotations can be used by the compiler to detect errors or suppress warnings）；</li>
+<li><strong>编译时与部署时的处理</strong> -- 软件工具可对注解信息加以处理，从而生成代码、XML文件等等（<strong>Compile-time and deployment-time processing</strong> -- Software tools can process annotation information to generate code, XML files, and so forth）;</li>
+<li><strong>运行时的处理</strong> -- 在运行时，可对一些注解进行检查（<strong>Runtime processing</strong> -- Some annotations are available to be examined at runtime）。</li>
+</ul>
+<p>本课程解释了：</p>
+<ul>
+<li><a href="#where">哪些地方可以使用注解语法</a>、</li>
+<li>如何运用注解语法、</li>
+<li><a href="#predefined-annotation-types">Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）</a>、</li>
+<li><a href="#type-annotations-and-pluggable-type-systems">类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码</a>，</li>
+<li><a href="#repeating-annotations">以及怎样去实现重复性注解语法</a>。</li>
+</ul>
+<p>（This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）</p>
+<h3 id="注解语法基础"><a class="header" href="#注解语法基础"><a id="annotations-basics"></a>注解语法基础</a></h3>
+<p><strong>Annotations Basics</strong></p>
+<h4 id="注解语法的形式"><a class="header" href="#注解语法的形式">注解语法的形式</a></h4>
+<p><strong>The Format of an Annotation</strong></p>
+<p>注解语法的最简单形式，看起来像下面这样：</p>
+<pre><code class="language-java">@Entity
+</code></pre>
+<p>这个所在符号字符（<code>@</code>），是给编译器表明，接下来的是个注解。在下面的示例中，那个注解的名称为 <code>Override</code>:</p>
+<pre><code class="language-java">@Override
+void mySuperMethod() {...}
+</code></pre>
+<p>注解可以包含 <em>元素（elements）</em>，元素可以是具名的或不具名的，同时存在着这些元素的值：</p>
+<pre><code class="language-java">@Author (
+    name = &quot;Benjamin Franklin&quot;,
+    date = &quot;3/27/2003&quot;
+)
+class myClass {...}
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-java">@SuppressWarnings (value = &quot;unchecked&quot;)
+void myMethod() {...}
+</code></pre>
+<p>在仅有一个名为 <code>value</code> 的元素时，那么元素名称是可以省略的，就像这样：</p>
+<pre><code class="language-java">@SuppressWarnings (&quot;unchecked&quot;)
+void myMethod () {...}
+</code></pre>
+<p>在注解没有元素时，那么那对括号是可以省略的，就如同在上面的 <code>Override</code> 示例中那样。</p>
+<p>在同一声明上，使用多个注解也是可能的：</p>
+<pre><code class="language-java">@Author (name = &quot;Jane Doe&quot;)
+@EBook
+class MyClass {...}
+</code></pre>
+<p>在若干注解有着同样类型时，此时就叫重复注解（a repeating annotation）：</p>
+<pre><code class="language-java">@Author(name = &quot;Jane Doe&quot;)
+@Author(name = &quot;John Smith&quot;)
+class MyClass {...}
+</code></pre>
+<p>从 Java SE 8 发布才开始支持重复注解。更多的有关情况，请参考 <a href="#repeating-annotations">重复注解</a></p>
+<p>注解类型（a Annotation Type）可以是定义在 Java SE API 的 <code>java.lang</code> 或 <code>java.lang.annotation</code> 包中类型之一。在上面的示例中，<code>Override</code>与 <code>SuppressWarnings</code>，就是 <a href="#predefined-annotation-types">预定义的Java 注解（predefined Java annotations）</a>。定义自己的注解类型，也是可能的。前面示例中的 <code>Author</code> 与 <code>EBook</code> 就属于自定义注解类型。</p>
+<h4 id="哪些地方可以使用注解语法"><a class="header" href="#哪些地方可以使用注解语法"><a id="where"></a>哪些地方可以使用注解语法</a></h4>
+<p>可在将注解应用在各种声明上：类、字段、方法，以及其他一些程序元素的声明。当在某个声明上运用了注解语法时，依照约定，每条注解常常占据自己的一行。</p>
+<p>自Java SE 8 发布开始，注解语法还可应用到类型的 <em>运用</em>。下面是一些示例：</p>
+<ul>
+<li>应用到类实例的创建表达式：</li>
+</ul>
+<pre><code class="language-java">new @Interned MyObject();
+</code></pre>
+<ul>
+<li>类型强制转换：</li>
+</ul>
+<pre><code class="language-java">myString = (@NonNull String) str;
+</code></pre>
+<ul>
+<li><code>implements</code> 子语句（<code>implements</code> clause）：</li>
+</ul>
+<pre><code class="language-java">class UnmodifioableList&lt;T&gt; implements
+    @Readonly List&lt;@Readonly T&gt; {...}
+</code></pre>
+<ul>
+<li>抛出异常的声明（Thrown exception declarations）：</li>
+</ul>
+<pre><code class="language-java">void monitorTemperature() throws
+    @Critical TemperatureException {...}
+</code></pre>
+<p>这种形式的注解，叫做 <em>类型注解（a type annotation）</em>。有关类型注解的更多信息，请参考 <a href="#type-annotations-and-pluggable-type-systems">类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）</a>。</p>
+<h3 id="注解类型的声明"><a class="header" href="#注解类型的声明">注解类型的声明</a></h3>
+<p><strong>Declaring a Annotation Type</strong></p>
+<blockquote>
+<p><strong>注</strong>：除了 <code>java.lang</code> 和 <code>java.lang.annotations</code> 包中预定义的注解类型，对应定制注解，均需先声明注解类型，才能使用该注解类型下的注解实例。所有注解类型，都是特殊的接口，类型为 <code>@interface</code>。</p>
+</blockquote>
+<p>许多的注解，在代码中都是起到替代注释的作用。</p>
+<p>设想某个软件团队，他们在编写所有类的代码体时，传统上都是以提供这些类重要信息的注释开始的：</p>
+<pre><code class="language-java">public class Generation3List extends Generation2List {
+    // Author: John Doe
+    // Date: 3/17/2002
+    // Current revision: 6
+    // Last modified: 4/12/2004
+    // By: Jane Doe
+    // Reviewers: Alice, Bill, Cindy
+    
+    // 真正的类代码从这里开始
+}
+</code></pre>
+<p>而要以注解来加入这些同样元数据，就必须首先定义出这个 <em>注解类型（annotation type）</em>。定义此注解类型的语法为：</p>
+<pre><code class="language-java">@interface ClassPreamble {
+    String author();
+    String date();
+    int currentVersion() default 1;
+    String lastModified() default &quot;N/A&quot;;
+    String lastModifiedBy() default &quot;N/A&quot;;
+    // 注意下面这个使用到数组
+    String[] reviewers();
+}
+</code></pre>
+<p>这个注解类型定义，看起来类似于接口定义，其中关键字 <code>interface</code> 前面冠以了位处符号（<code>@</code>）（当这个位处符号是在注解类型中时，就等于位处<code>AT</code>）。所有注解类型，都属于 <em>接口</em> 的一种形式，<a href="Ch08_Interfaces_and_Abstract_Classes.html#interface_rescue">本课程稍后</a>会讲到这一点。此刻还不需要掌握什么是接口。</p>
+<p>上面注解定义的代码体，包含了 <em>注解类型元素（annotation type element）</em> 的一些声明，这些什么看起来很像是一些方法。请留意这些注解类型元素，可定义一些可选的默认值。</p>
+<p>在注解类型定义好之后，带上填入的各个取值，就可以使用那种类型的注解了，如同下面这样：</p>
+<pre><code class="language-java">@ClassPreamble {
+    author = &quot;John Doe&quot;,
+    date = &quot;3/17/2002&quot;,
+    currentRevision = 6,
+    lastModified = &quot;4/12/2004&quot;,
+    lastModifiedBy = &quot;Jane Doe&quot;,
+    // 请注意这里的数组注解
+    reviewers = {&quot;Alice&quot;, &quot;Bob&quot;, &quot;Cindy&quot;}
+}
+public class Generation3List extends Generation2List {
+    // 类的代码从这里开始
+}
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：为了让 <code>@ClassPreamble</code> 中的信息，在 <code>Javadoc</code> 所生成的文档中出现，那么就必须以 <code>@Documented</code> 注解，来对 <code>@ClassPreamble</code> 的定义进行注解（To make the information in <code>@ClassPreamble</code> appear in <code>Javadoc-generated</code> documentation, you must annote the <code>@ClassPreamble</code> definition with the <code>@Documented</code> annotation）：</p>
+</blockquote>
+<pre><code class="language-java">// 为使用 @Documented 注解类型，就要导入该包
+import java.lang.annotation.*;
+
+@Documented
+@interface ClassPreamble {
+    // 那些注解元素的定义
+}
+</code></pre>
+<h3 id="java中预定义的注解类型"><a class="header" href="#java中预定义的注解类型"><a id="predefined-annotation-types"></a>Java中预定义的注解类型</a></h3>
+<p><strong>Predefined Annotation Types</strong></p>
+<p>在 Java SE API 中，预先定义了一些注解类型。其中一些为Java编译器使用到，另一些是应用到别的注解的。</p>
+<h4 id="java语言用到的注解类型"><a class="header" href="#java语言用到的注解类型">Java语言用到的注解类型</a></h4>
+<p><strong>Annotation Types Used by the Java Language</strong></p>
+<p>在包 <code>java.lang</code> 中预定义的注解类型为：<code>@Deprecated</code>、<code>@Override</code>及 <code>SuppressWarnings</code>。</p>
+<ul>
+<li><strong><code>@Deprecated</code></strong> <code>@Deprecated</code> 注解表明其所标记的元素，是 <em>已弃用的</em> 且不应再被使用。在程序使用了带有 <code>@Deprecated</code> 注解的方法、类或字段（实例变量）时，编译器就会生成一条告警信息。而在某个元素为已被弃用时，就应像下面这个示例一样，使用 <code>Javadoc</code> 的 <code>@deprecated</code> 标签，将其在文档中记录下来。在<code>Javadoc</code>的注释中，和在注解语法中同时使用位处符号（<code>@</code>）的做法，并非巧合：<code>Javadoc</code>与注解语法，在概念上是有关联的。同时，请留意<code>Javadoc</code>的标签是以小写的 <em><code>d</code></em> 打头的，而注解语法是以大写的 <code>D</code> 打头的。</li>
+</ul>
+<pre><code class="language-java">    // 接下来是 Javadoc 的注释
+     /**
+      * @deprecated
+      * 给出了为何这个方法被弃用的解释
+      */
+     @Deprecated
+     static void deprecatedMethod() {}
+}
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：<a href="https://stackoverflow.com/questions/40969698/deprecated-method-not-mentioned-in-javadoc">deprecated method not mentioned in javadoc</a>
+<code>javadoc</code>默认只收集 <code>public</code> 或 <code>protected</code> 元素的文档。</p>
+</blockquote>
+<ul>
+<li><strong><code>@Override</code></strong> <code>@Override</code> 注解告诉编译器，该元素是要重写在某个超类中声明的元素。在 <a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html">继承与多态机制</a> 中讨论了方法的重写。</li>
+</ul>
+<pre><code class="language-java">// 将方法标记为一个已被重写的超类方法
+@Override
+int overriddenMethod () {}
+</code></pre>
+<p>尽管在重写某个方法时，并不要求使用这个注解，不过这样做可以防止错误发生。在某个以 <code>@Override</code> 标记的方法，未能正确重写其超类的某个方法时，编译器就会生成一个错误消息。</p>
+<ul>
+<li><strong><code>@SuppressWarnings</code></strong> <code>@SuppressWarnings</code> 注解，告诉编译器要抑制一些本来会生成的告警信息。在下面的示例中，使用了某个已被弃用的方法，进而编译器一般会生成一条告警信息。不过在此实例中，由于这个注解，而导致该告警信息被抑制下来了。</li>
+</ul>
+<pre><code class="language-java">// 这里使用了一个已被弃用的方法，并告诉编译器不要生成一条告警消息
+@SuppressWarnings (&quot;deprecation&quot;)
+void useDeprecatedMethod () {
+    // 这里的已被弃用告警，就被抑制了
+    objectOne.deprecatedMethod();
+}
+</code></pre>
+<p>所有编译器告警，都是属于某个类别的。Java 语言规范（The Java Language Specification）列出了两个类别：<code>deprecation</code> 与 <code>unchecked</code>。在碰到那些引入 <a href="Ch16_Collections_and_Generics_Data_Structure.html">泛型</a> 之前所编写的老旧代码时，其中的 <code>unchecked</code> 告警便会出现。要将这多个类别的告警给抑制掉，就要使用下面的语法：</p>
+<pre><code class="language-java">@SuppressWarnings({&quot;unchecked&quot;, &quot;deprecation&quot;})
+</code></pre>
+<ul>
+<li><strong><code>@SafeVarargs</code></strong> 在对某个方法或构造器应用 <code>@SafeVarargs</code> 注解时，就假定了代码不会在其 <code>varargs</code> 实参上，执行潜在不安全的操作。在使用了此注解类型时，那些未受检查的、与 <code>varargs</code> 有关的告警，就会被抑制（<code>@SafeVarargs</code> annotation, when applied to a method or constructor, asserts that the code does not perform potentially unsafe oprations on its <code>varargs</code> parameter. When this annotation type is used, unchecked warnings relating to <code>varargs</code> are suppressed）。</li>
+<li><strong><code>@FunctionalInterface</code></strong> <code>@FunctionalInterface</code> 注解，是在 Java SE 8 中引入的，表示其所注解的类型声明，是计划作为Java语言规范中所定义的功能性接口（<code>@FunctionalInterface</code> annotation, introduced in Java SE 8, indicates that the type declaration is intended to be a functional interface, as defined by the Java Language Specification）。</li>
+</ul>
+<h4 id="适用于其他注解的注解"><a class="header" href="#适用于其他注解的注解">适用于其他注解的注解</a></h4>
+<p><strong>Annotations That Apply to Other Annotations</strong></p>
+<p>适用于其他注解的注解，叫做 <em>元注解（meta-annotations）</em>。在 <code>java.lang.annotation</code> 包中，定义了若干元注解类型。</p>
+<ul>
+<li><strong><code>@Retention</code></strong> <code>@Retention</code> 注解指定了所标记的那些注解该如何存储（<code>Retention</code> annotation specifies how the marked annotation is stored）:</li>
+<li><strong><code>@Documented</code></strong> <code>@Documented</code> 注解表示不论指定注解在何时被使用到，那些元素都应使用 <code>Javadoc</code> 工具以文档化处理。（默认情况下，注解是没有包含在 <code>Javadoc</code> 中的。<code>@Documented</code> annotation indicates that whenever the specified annotation is used those elements should be documented using the <code>Javadoc</code> tool）。有关 <code>Javadoc</code> 的更多信息，请参考 <a href="#javadoc-tool"><code>Javadoc</code> 工具部分</a>。</li>
+</ul>
+<ul>
+<li>
+<p><strong><code>Target</code></strong> <code>Target</code> 注解对另一注解进行标记，以限制所标记的注解可适用的Java元素种类。<code>@Target</code> 注解，会将以下的一些元素类型，指定为他的取值：</p>
+<ul>
+<li><code>ElementType.ANNOTATION_TYPE</code> - 被 <code>@Target</code> 注解标记的注解可适用于另一注解类型；</li>
+<li><code>ElementType.CONSTRUCTOR</code> - 被其标记的注解可适用于构造器；</li>
+<li><code>ElementType.FIELD</code> - 可适用于字段或属性；</li>
+<li><code>ElementType.LOCAL_VARIABLE</code> - 可适用于本地变量；</li>
+<li><code>ElementType.METHOD</code> - 可适用于方法级别的注解；</li>
+<li><code>ElementType.PACKAGE</code> - 可适用于包的声明；</li>
+<li><code>ElementType.PARAMETER</code> - 可适用于方法的参数；</li>
+<li><code>ElementType.Type</code> - 可适用于类的任意元素。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong><code>@Inherited</code></strong> <code>@Inherited</code> 注解表示其所标记的注解类型，可从超类继承到（<code>@Inherited</code> annotation indicates that the annotation type can be inherited from the super class）。（默认是不可以从超类继承的。）在用户查询某个注解类型，而该类又没有这个类型的注解时，那么就会对这个类的超类查询此注解类型。此注解仅适用于类的声明。</li>
+<li><strong><code>@Repeatable</code></strong> <code>@Repeatable</code> 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 <a href="#repeating-annotations">重复注解（Repeating Annotations）</a>。</li>
+</ul>
+<h3 id="类型注解与可插拔类型系统"><a class="header" href="#类型注解与可插拔类型系统"><a id="type-annotations-and-pluggable-type-systems"></a>类型注解与可插拔类型系统</a></h3>
+<p><strong>Type Annotations and Pluggable Type Systems</strong></p>
+<p>在 Java SE 8 发布之前，注解只能适用于声明。而自Java SE 8 发布开始，注解就还可以适用到任何 <em>类型用途（type use）</em> 了。这意味着在所有用到类型的地方，都可以使用注解。有用到类型之处的一些示例，包括类实例创建表达式（<code>new</code>）、类型转换（casts）、<code>implements</code> 子语句，以及 <code>throws</code> 子语句等。这种形式的注解，被称为 <em>类型注解（type annotation）</em>，在之前的 <a href="#annations-basics">注解基础</a>那里，给出了几个示例。</p>
+<p>之所以创建出这些类型注解，是为了以确保以更强大的类型检查方式，支持对Java程序的分析。Java SE 8发布，并未提供类型检查框架，不过Java SE 8 是允许编写（或下载）作为一个或多个可插拔式模组实现的、与Java 编译器结合使用的类型检查框架的（Type annotations were created to support improved analysis of Java programs way of ensuring stronger type checking. The Java SE 8 release does not provide a type checking framework, but it allows you to write(or download) a type checking framework that is implemented as one or more pluggable modules that are used in conjunction with the Java compiler）。</p>
+<p>比如，在想要程序中某个特定变量绝不被赋值 <code>null</code>，以期望避免触发 <code>NullPointerException</code>。那么就可以编写一个定制的插件，来对此进行检查。随后就要对代码进行修改，来对那个特定变量进行注解，从而表明其绝不会被赋值 <code>null</code>。此变量声明看起来将像这样：</p>
+<pre><code class="language-java">@NonNull String str;
+</code></pre>
+<p>在编译此代码时，就要在命令行包含进 <code>NonNull</code> 模组，那么编译器在探测到潜在问题时，就会打印出告警信息，进而允许对代码加以修改，以避免错误。在纠正了代码而消除了全部告警之后，在程序运行期间这特定错误便不再会出现了。</p>
+<p>可使用多个类型检查模组（multiple type-checking modules），其中各个模组对不同类别多维进行检查。这样的话，就可以在Java类型系统之上进行构建，在需要这些特定类型检查的各个时间点、位置，按需添加这些类型检查。</p>
+<p>明智地使用类型注解，加上可插拔类型检查器（pluggable type checkers）的存在，那么就可以编写出更加强大又不会出错的代码了。</p>
+<p>在许多情形中，是不必编写自己的类型检查模组的。有很多第三方以及完成了这方面的工作。比如，或许会利用到华盛顿大学所创建的检查器框架 <code>Checker Framework</code>。该框架就包含了<code>NonNull</code> 模组，还有正则表达式模组（a regular module），以及互斥锁（a mutex lock module）。更多有关该检查器框架的信息，请参考 <a href="https://checkerframework.org/">检查器框架</a>。</p>
+<h3 id="重复注解"><a class="header" href="#重复注解"><a id="repeating-annotations"></a>重复注解</a></h3>
+<p><strong>Repeating Annotations</strong></p>
+<p>有些情况下，会希望将同一注解应用到声明或类型运用（a declaration or type use）。自Java SE 8 发布开始，<em>重复注解</em> 才支持该特性。</p>
+<p>比如正在编写要用到定时器服务，来实现在给定时间或以某个特定时间表，去运行某个方法，类似于 UNIX 的 <code>cron</code> 服务的代码。那么就要设置一个定时器，来在一个月的最后一天，及每个周五晚上11点运行一个方法，<code>doPeriodicCleanup</code>。那么就要设置定时器运行，创建一个 <code>@Schedule</code> 注解，并将其两次应用到 <code>doPeriodicCleanup</code> 方法。第一次的使用，指定一个月的最后一天，同时第二次指定周五晚上11点，就跟下面的代码示例一样：</p>
+<pre><code class="language-java">@Schedule(dayOfMoth=&quot;last&quot;)
+@Schedule(dayOfWeek=&quot;Fri&quot;, hours=&quot;23&quot;)
+public void doPeriodicCleanup() {...}
+</code></pre>
+<p>上面这个示例，是将注解应用到方法。可在任何会用到标志注解的地方，对某个注解加以重复。比如，有着一个处理未授权访问异常的类。就可以对这个类注解上一个针对那些管理者的 <code>@Alert</code> 的注解，和一个针对系统管理员的 <code>@Alert</code>：</p>
+<pre><code class="language-java">@Alert(role=&quot;Manager&quot;)
+@Alert(role=&quot;Administrator&quot;)
+public class UnauthorizedAccessException extends SecurityException {...}
+</code></pre>
+<p>由于兼容性的原因，重复注解是被保存在由Java编译器自动生成的 <em>容器注解（container annotation）</em> 中的。为了让编译器完成此操作，就要求在代码中包含下面这两个声明。</p>
+<h4 id="步骤一声明一个-repeatable-类型的注解类型"><a class="header" href="#步骤一声明一个-repeatable-类型的注解类型">步骤一、声明一个 <code>Repeatable</code> 类型的注解类型</a></h4>
+<p><strong>Step 1: Declare a <code>Repeatable</code> Annotation Type</strong></p>
+<p>该注解类型必须被 <code>@Repeatable</code> 元注解（the <code>@Repeatable</code> meta-annotation）标记。下面的示例定义了一个定制的 <code>@Schedule</code> 可重复注解类型：</p>
+<pre><code class="language-java">import java.lang.annotation.Repeatable;
+
+@Repeatable(Schedules.class)
+public @interface Schedule {
+    String dayOfMonth() default &quot;first&quot;;
+    String dayOfWeek() default &quot;Mon&quot;;
+    int hour() default 12;
+}
+</code></pre>
+<p>那个 <code>@Repeatable</code> 元注解的取值，即在括号里的那个，即为Java编译器生成的、用于存储重复性注解的容器注解的类型（The value of the <code>@Repeatable</code> meta-annotation, in parentheses, is the type of the container annotation that the Java compiler generates to store repeating annotations）。在此示例中，那个容纳注解类型，即是 <code>Schedules</code>，那么重复性的 <code>@Schedule</code> 注解，就是存储在一个 <code>@Schedules</code> 的注解中的。</p>
+<p>在没有首先将某个注解声明未可重复注解的情况下，将同一注解应用到某个声明，就会导致一个编译器错误。</p>
+<h4 id="步骤二声明出那个容纳注解类型"><a class="header" href="#步骤二声明出那个容纳注解类型">步骤二、声明出那个容纳注解类型</a></h4>
+<p><strong>Step 2: Declare the Containing Annotation Type</strong></p>
+<p>容纳性注解类型，必须有着一个数组类型的 <code>value</code> 元素。该数组类型的组件类型，则必须时那个可重复注解类型。这个 <code>@Schedules</code> 容纳性类型的声明，就是下面这样：</p>
+<pre><code class="language-java">public @interface Schedules {
+    Schedule[] value();
+}
+</code></pre>
+<h3 id="注解的获取"><a class="header" href="#注解的获取">注解的获取</a></h3>
+<p><strong>Retrieving Annotations</strong></p>
+<p>反射式API中，有着多个可用于获取到注解的方法。这些方法返回单个的、譬如<code>AnnotatedElement.getAnnotation(Class&lt;T&gt;)</code>这样的注解的表现，与存在 <em>一个</em> 这些方法所请求类型注解，而仅返回返回单个注解相比，是不会发生变化的（The behavior of the methods that return a single annotation, such as <code>AnnotatedElement.getAnnotation(Class&lt;T&gt;)</code>, are unchanged in that they only return a single annotation if <em>one</em> annotation of the requested type is present）。但若存在多个的所请求类型的注解时，那么就可以首先获取到这些注解的容器。这样的话，那些老旧代码会继续工作。在Java SE 8中引入的其他一些方法，则会对容器注解进行全面扫描，从而一次性返回多个注解，就如同 <code>AnnotatedElement.getAnnotationsByType(Class&lt;T&gt;)</code>那样。请参考 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/AnnotatedElement.html"><code>AnnotatedElement</code></a> 类规格，以了解有关全部方法的信息。</p>
+<h3 id="设计上的考量"><a class="header" href="#设计上的考量">设计上的考量</a></h3>
+<p><strong>Design Considerations</strong></p>
+<p>在设计某个注解类型时，必须考虑到那个类型下注释的 <em>基数（cardinality）</em>。目前会用到这个注解 0 次、1 次都是可能的，而在这个注释被标记为了 <code>@Repeatable</code> 时，那么就可以多次使用了。同时通过使用 <code>@Target</code> 元注解，还可以限制注解可用在何处。比如，即可创建一个可重复的、仅可用在方法及字段上的注解类型。为确保 <em>用到</em> 你所设计注解类型注解的程序员，发现他是灵活且强大的，那么就要仔细的加以设计（It is important to design your annotation type carefully to ensure the programmer <em>using</em> the annotation finds it to be as flexible and powerful as posssible）。</p>
+<h3 id="提问与练习注解"><a class="header" href="#提问与练习注解">提问与练习：注解</a></h3>
+<h4 id="问题"><a class="header" href="#问题">问题❓</a></h4>
+<ol>
+<li>
+<p>下面这个接口什么错了？</p>
+<pre><code class="language-java">public interface House {
+    @Deprecated
+    public void open();
+    public void openFrontDoor();
+    public void openBackDoor();
+}
+</code></pre>
+</li>
+<li>
+<p>试想对问题 1 中所给的 <code>House</code> 接口的下面这个实现：</p>
+<pre><code class="language-java">public class MyHouse implements House {
+    public void open () {}
+    public void openFrontDoor () {}
+    public void openBackDoor() {}
+}
+</code></pre>
+<p>那么在编译这个程序时，由于这里的 <code>open</code> 是已被弃用的（在上面的接口中），那么编译器就会产生一条告警消息。该怎样来处理掉那条告警消息呢？</p>
+</li>
+<li>
+<p>下面的代码在编译时将不会出错吗？为什么不会出错，或者说为什么会出错呢？</p>
+<pre><code class="language-java">public @interface Meal {...}
+
+@Meal(&quot;breakfast&quot;, mainDish=&quot;cereal&quot;)
+@Meal(&quot;lunch&quot;, mainDish=&quot;pizza&quot;)
+@Meal(&quot;dinner&quot;, mainDish=&quot;salad&quot;)
+public void evaluateDiet() {...}
+</code></pre>
+</li>
+</ol>
+<h4 id="练习"><a class="header" href="#练习">练习🏋️</a></h4>
+<ol>
+<li>请定义出一个带有元素 <code>id</code>、<code>synopsis</code>、<code>engineer</code> 及 <code>date</code>的、用于一项增强请求的注解类型。将其中 <code>engineer</code> 与 <code>date</code> 的默认值，分别指定为 <code>unassigned</code>和<code>unknown</code>（define an annotation type for an enhancement request with elements <code>id</code>, <code>synopsis</code>, <code>engineer</code>, and <code>date</code>. Specify the default value as <code>unassigned</code> for engineer and <code>unknown</code> for date）。</li>
+</ol>
+<details>
+    <summary>答案🙋</summary>
+<h4 id="问题-1"><a class="header" href="#问题-1">问题</a></h4>
+<ol>
+<li>
+<p><strong>答案</strong>：文档应当体现出为何 <code>open</code> 被弃用，以及应当用什么来代替他。比如：</p>
+<pre><code class="language-java">public interface House {
+    /**
+     * @deprecated 对 open 方法的使用是不鼓励的，请使用
+     * openFrontDoor 或 openBackDoor 予以代替。
+     *
+     */
+    @Deprecated
+    public void open();
+    public void openFrontDoor();
+    public void openBackDoor();
+}
+</code></pre>
+</li>
+<li>
+<p><strong>答案</strong> ：可给 <code>open</code> 方法的实现加上弃用注解（you can deprecate the implementation of <code>open</code>）：</p>
+<pre><code class="language-java">public class MyHouse implements House {
+    // 文档是从接口继承到的。
+    @Deprecated
+    public void open() {}
+    public void openFrontDoor() {}
+    public void openBackDoor() {}
+}
+</code></pre>
+<p>或者，可抑制告警信息：</p>
+<pre><code class="language-java">public class MyHouse implements House {
+    @SuppressWarinings(&quot;deprecation&quot;)
+    public void open() {}
+    public void openFrontDoor() {}
+    public void openBackDoor() {}
+}
+</code></pre>
+</li>
+<li>
+<p><strong>答案</strong> ：此代码将编译失败。在JDK 8之前，是不支持可重复注解的。即便是在 JDK 8 中，由于其中的 <code>Meal</code> 注解类型，未被定义为可重复，因此该代码仍会编译失败。可通过加上 <code>@Repeatable</code> 元注解，并定义一个容器注解类型，来修复这个问题：</p>
+<pre><code class="language-java">public class AnnotationTest {
+    public @interface MealContainer {
+        Meal[] value();
+    }
+
+    @java.lang.annotation.Repeatable(MealContainer.class)
+    public @inerface Meal {
+        String value();
+        String mainDish();
+    }
+
+    @Meal(value=&quot;早餐&quot;, mainDish=&quot;麦片&quot;)
+    @Meal(value=&quot;午餐&quot;, mainDish=&quot;披萨&quot;)
+    @Meal(value=&quot;晚餐&quot;, mainDish=&quot;沙拉&quot;)
+    public void evaluateDiet() {}
+}
+</code></pre>
+</li>
+</ol>
+<h4 id="练习-1"><a class="header" href="#练习-1">练习</a></h4>
+<ol>
+<li>
+<p><strong>答案</strong> : </p>
+<pre><code class="language-java">/**
+ * 这里的注释，对这个增强请求
+ * （the Request-for-Enhancement, RFE）注解
+ * 类型，进行了描述。
+ */
+public @interface RequestForEnhancement {
+    int id();
+    String synopsis();
+    String engineer() default &quot;[unassigned]&quot;;
+    String date() default &quot;[unknown]&quot;;
+}
+</code></pre>
+</li>
+</ol>
+</details>
+<h2 id="另一个注解教程"><a class="header" href="#另一个注解教程">另一个注解教程</a></h2>
+<blockquote>
+<p><em>引用自</em>：<a href="https://www.geeksforgeeks.org/annotations-in-java/">Annotations in Java</a></p>
+</blockquote>
+<p>注解用于提供程序的补充信息（Annotations are used to provide supplemental information about a program）。</p>
+<ul>
+<li>注解以 <code>@</code> 开头；</li>
+<li>注解不会改变已编译好的程序的行为；</li>
+<li>注解帮助将一些 <em>元数据</em>（信息）与实例变量、构造器、方法、类等的程序元素关联起来（Annotations help to associate <em>metadata</em>(infomation) to the program elements i.e. instance variables, constructors, methods, classes, etc.）；</li>
+<li>由于注解能够改变编译器对待程序的方式，因此注解并非纯粹的注释。请参阅下面的代码；</li>
+<li>大体上注解是用于提供额外信息的，因此可作为 XML 与一些 Java 标记性接口的替代。</li>
+</ul>
+<h3 id="java-中注解的继承层次"><a class="header" href="#java-中注解的继承层次">Java 中注解的继承层次</a></h3>
+<p><img src="images/Ch20_01.png" alt="Java 注解继承层次" /></p>
+<p><em>图 1 - Java 注解继承层次</em></p>
+<p><strong>实操（Implementation）</strong>：</p>
+<blockquote>
+<p><em><strong>注意</strong>：由于这里提到了重写（override），但并未进行重写，而是对 <code>display</code> 方法进行了过载（overloaded），因此这里会抛出编译器错误</em>。</p>
+</blockquote>
+<pre><code class="language-java">// 用于演示注解并非仅仅是代码注释的 Java 程序。
+
+package com.xfoss.Annotations;
+
+// 第一个类
+class Base {
+
+    // 方法
+    public void display ()
+    {
+        System.out.println(&quot;类 Base 的 display()&quot;);
+    }
+}
+
+// 第二个类
+// 是主类（Main Class）
+public class Derived extends Base {
+
+    // 对上面那个类中已有的方法进行重写
+    @Override public void display (int x)
+    {
+        // 在调用这个方法时运行的打印语句
+        System.out.println(&quot;派生的 sisplay()&quot;);
+    }
+
+    // 第二个方法
+    // 这是主驱动类方法（main driver method）
+    public static void main (String args[])
+    {
+        // 在 main() 方法中创建出这个类的对象
+        Derived obj = new Derived();
+
+        // 在 main() 方法中调用 display() 方法
+        obj.display();
+    }
+}
+</code></pre>
+<p><strong>输出</strong>:</p>
+<pre><code class="language-console">.../src/main/java/com/xfoss/Annotations/Derived.java:13: error: method does not override or implement a method from a supertype
+    @Override public void display(int x)
+    ^
+    1 error
+
+FAILURE: Build failed with an exception.
+</code></pre>
+<p>只需将参数 <code>(int x)</code> 移除或移除 <code>@Override</code>，程序就会正常编译。</p>
+<h3 id="注解分类categories-of-annotations"><a class="header" href="#注解分类categories-of-annotations">注解分类（Categories of Annotations）</a></h3>
+<p>如下所示，粗略地划分，有着 5 个类别的注解：</p>
+<ol>
+<li>
+<p>标记型注解（marker Annotations）</p>
+</li>
+<li>
+<p>单一取值型注解（single value Annotations）</p>
+</li>
+<li>
+<p>完整注解（full Annotations）</p>
+</li>
+<li>
+<p>类型注解（type Annotations）</p>
+</li>
+<li>
+<p>重复型注解（repeating Annotations）</p>
+</li>
+</ol>
+<p>下面将逐一讨论这些类别的注解，并在需要的地方附带上示例代码。</p>
+<h3 id="类别一标记型注解"><a class="header" href="#类别一标记型注解">类别一：标记型注解</a></h3>
+<p>其唯一目的就是对某个声明进行标记。这类注解不包含成员，进而也没有任何数据。因此，他们作为注解而存在就足够了（Thus, its presence as an annotation is sufficient）。由于这类标记型接口不包含成员，那么仅仅确定它是存在还是不存在就已足够。</p>
+<p><code>@Override</code> 就是标记型注解的一个例子。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">@TestAnnotation()
+</code></pre>
+<h3 id="类别二单一取值型注解"><a class="header" href="#类别二单一取值型注解">类别二：单一取值型注解</a></h3>
+<p>这类注解仅包含一个成员，进而允许简写形式的对该成员取值的指定（These annotations contain only one member and allow a shorthand form of specifying the value of the member）。在应用到此类型注解时，就只需指定那个成员的值，而无需指定该成员的名称。然而，为了用上这种简写，其成员的名称必须是 <code>value</code>。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">@TestAnnotation(&quot;testing&quot;)
+</code></pre>
+<h3 id="类别三-完整注解"><a class="header" href="#类别三-完整注解">类别三： 完整注解</a></h3>
+<p>这类注解包含了多个数据成员、名称、取值、成员取值对（These annotations consist of multiple data members, names, values, pairs）。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">@TestAnnotation(owner=&quot;Rahul&quot;, value=&quot;Class Geeks&quot;)
+</code></pre>
+<h3 id="类别四类型注解"><a class="header" href="#类别四类型注解">类别四：类型注解</a></h3>
+<p>这类注解可应用到任何用到类型的地方（These annotations can be applied to any place where a type is being used）。比如，可对某个方法的返回值类型进行注解。这些注解在声明时，就已被 <code>@Target</code> 注解过了（These are declared annotated with <code>@Target</code> annotation）。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">package com.xfoss.Annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE_USE)
+@interface TypeAnnoDemo {}
+
+public class GFG {
+    public static void main (String args[])
+    {
+        @TypeAnnoDemo String string = &quot;我已被某个类型注解给注解过了&quot;;
+        System.out.println(string);
+        abc();
+    }
+
+    static @TypeAnnoDemo int abc ()
+    {
+        System.out.println(&quot;此函数的返回值类型已被注解过了&quot;);
+        return 0;
+    }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">我已被某个类型注解给注解过了
+此函数的返回值类型已被注解过了
+</code></pre>
+<h3 id="类别五重复性注解"><a class="header" href="#类别五重复性注解">类别五：重复性注解</a></h3>
+<p>这类注解可多次应用到单个项目（these are the annotations that can be applied to a single item more than onece）。注解要能够可重复，其所属类型就必须被 <code>@Repeatable</code>注解给注解过，而<code>@Repeatable</code>则是在 <code>java.lang.annotation</code>包中定义的元注解。<code>@Repeatable</code>对某个注解类型进行注解时，他的<code>value</code>字段指定了被注解的可重复注解类型的 <strong>容器类型（container type）</strong>。而 <strong>容器的指定，是指<code>value</code>字段是该可重复注解类型的数组的一个注解（the container is specified as annotation whose <code>value</code> field is an array of the repeatable annotation type）</strong>。因此，要创建可重复注解，首先就要创建容器注解，进而将创建出的容器注解类型，作为参数指定给那个 <code>@Repeatable</code> 注解（也就是说元注解<code>@Repeatable</code> 是有参数的）。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">package com.xfoss.Annotations;
+
+import java.lang.annotation.*;
+import java.lang.reflect.Method;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Repeatable(MyRepeatedAnnos.class)
+@interface Word
+{
+    String word() default &quot;Hello&quot;;
+    int value() default 0;
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyRepeatedAnnos
+{
+    Word[] value();
+}
+
+public class Main {
+
+    // 注意：这里初始化 @Word 类型的注解时：
+    //      1. 不能使用非静态实例变量。这个注解的初始化，是属于其
+    // 所注解的静态方法 newMethod() 的上下文的；
+    //      2. 也不能使用静态实例变量。“element value must be a 
+    // constant expression”，因此只能使用静态 final 的常量。
+    @Word(word = &quot;First&quot;, value = 1)
+    @Word(word = &quot;Second&quot;, value = 2)
+    public static void newMethod()
+    {
+        Main obj = new Main();
+
+        try {
+            Class&lt;?&gt; c = obj.getClass();
+
+            Method m = c.getMethod(&quot;newMethod&quot;);
+
+            Annotation anno = m.getAnnotation(MyRepeatedAnnos.class);
+            System.out.println(anno);
+        }
+        catch (NoSuchMethodException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) { newMethod(); }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">@com.xfoss.Annotations.MyRepeatedAnnos(value={@com.xfoss.Annotations.Word(word=&quot;First&quot;, value=1), @com.xfoss.Annotations.Word(word=&quot;Second&quot;, value=2)})
+</code></pre>
+<h3 id="预定义标准注解"><a class="header" href="#预定义标准注解">预定义/标准注解</a></h3>
+<p><strong>Predefined/Standard Annotations</strong></p>
+<p>如同在上面的继承层次图中看到的那样，Java 普遍定义了 7 个内建注解。</p>
+<ul>
+<li>其中四个是从 <code>java.lang.annotation</code> 包导入的：<code>@Rentention</code>、<code>@Documented</code>、<code>@Target</code> 与 <code>@Inherited</code>；</li>
+<li>另外三个包含在 <code>java.lang</code> 包中：<code>@Deprecated</code>、<code>@Override</code> 和 <code>@SuppressWarnings</code>。</li>
+</ul>
+<p><strong>注解一：<code>@Deprecated</code></strong></p>
+<ul>
+<li>这是个标记型注解。他表明某个声明已作废，而已被更新的形式所取代；</li>
+<li>在某个元素已被启用时，那么还应同时使用 <code>Javadoc</code> 的 [<code>@deprecated</code> 标签](http://docs.oracle.com/javase/1.5.0/docs/guide/javadoc/deprecation/deprecation.html#javadoc_tag]；</li>
+<li><code>@deprecated</code> 标签用于文档，而<code>@Deprecated</code> 注解则是用于运行时反射（runtime reflection）；</li>
+<li>在同时使用到 <code>@deprecated</code> 标签和 <code>@Deprecated</code> 注解时，前者有着更高的优先级。</li>
+</ul>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">package com.xfoss.Annotations;
+
+public class DeprecatedTest {
+    @Deprecated
+    public void Display()
+    {
+        System.out.println(&quot;Deprecatedtest display()&quot;);
+    }
+
+    public static void main(String args[])
+    {
+        DeprecatedTest d1 = new DeprecatedTest();
+        d1.Display();
+    }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">Deprecatedtest display()
+</code></pre>
+<blockquote>
+<p><strong>注</strong>：该程序在编译时，会报出以下错误：</p>
+</blockquote>
+<pre><code class="language-console">注: .../src/main/java/com/xfoss/Annotations/AnnotationTestDrive.java使用或覆盖了已过时的 API。
+</code></pre>
+<p><strong>注解二：<code>@Override</code></strong></p>
+<p>这是个只能用在方法上的标记型注解。被 <code>@Override</code> 注解过的方法，必须对来自超类的某个方法进行重写。若被注解的方法没有这样做，那么就会导致一个编译时错误。使用这个注解来确保某个超类方法真的被重写了，而非简单地被过载（overloaded）。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">package com.xfoss.Annotations;
+
+class BaseCls
+{
+    public void Display()
+    {
+        System.out.println(&quot;BaseCls diplay()&quot;);
+    }
+
+    public static void main(String args[])
+    {
+        BaseCls t1 = new DerivedCls();
+        t1.Display();
+    }
+}
+
+class DerivedCls extends BaseCls 
+{
+    @Override
+    public void Display()
+    {
+        System.out.println(&quot;DerivedCls display()&quot;);
+    }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">DerivedCls display()
+</code></pre>
+<p><strong>注解三：<code>@SuppressWarnings</code></strong></p>
+<p>使用 <code>@SuppressWarnings</code> 注解来告诉编译器，对特定编译器告警加以抑制。通过字符串形式的告警名称，来指定要抑制的告警。这种类型的注解，可应用到全部类型的声明。</p>
+<p>Java 将告警分组成两个类别。分别是 <code>deprecated</code> 与 <code>unchecked</code>。在老旧代码碰到使用了泛型的代码时，就会生成<code>unchecked</code>的告警（Any <code>unchecked</code> warning is generated when a legacy code interfaces with a code that uses generics）。</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-java">// 用于演示 SuppressWarnings 注解的 Java 程序
+package com.xfoss.Annotations;
+
+// 类 1
+class DeprecatedTest
+{
+    @Deprecated
+    public void Display()
+    {
+        System.out.println(&quot;Deprecated display()&quot;);
+    }
+}
+
+// 类 2
+public class SuppressWarningTest
+{
+    // 若将下面的注解注释掉，那么程序就会产生告警
+    @SuppressWarnings({&quot;checked&quot;, &quot;deprecation&quot;})
+    public static void main(String args[])
+    {
+        DeprecatedTest d1 = new DeprecatedTest();
+        d1.Display();
+    }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">Deprecated display()
+</code></pre>
+<p><strong>注解 4：<code>@Documented</code></strong></p>
+<p>这是一个告诉工具某个注解将要被编写文档的标记型接口。注解不会被包含进 <code>Javadoc</code> 的注释中（it is a marker interface that tells a tool that an annotation is to be documented. Annotations are not included in <code>Javadoc</code> comments）。<code>@Documented</code> 注解在代码中的使用，会开启诸如 <code>Javadoc</code> 这样的工具对其的处理，并将注解类型信息，包含进生成的文档中。</p>
+<p><strong>注解 5：<code>@Target</code></strong></p>
+<p>这个注解设计只被用作给另一注解当注解（元注解，<em>meta annotation</em>）。<code>@Target</code> 会取一个参数，而该参数必须是来自<code>ElementType</code>枚举类型（<code>java.lang.annotation.ElementType</code>）的常量。该参数指定了被 <code>@Target</code>注解的注解，可应用到那些类型的声明上。下面给出了<code>ElementType</code>枚举类型所包含的常量，以及他们各自所对象的声明类型。</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left"><code>@Target</code> 常量</th><th style="text-align: left">可应用到的注解</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>ANNOTATION_TYPE</code></td><td style="text-align: left">另一注解</td></tr>
+<tr><td style="text-align: left"><code>CONSTRUCTOR</code></td><td style="text-align: left">构造器</td></tr>
+<tr><td style="text-align: left"><code>FIELD</code></td><td style="text-align: left">字段（实例变量）</td></tr>
+<tr><td style="text-align: left"><code>LOCAL_VARIABLE</code></td><td style="text-align: left">本地变量</td></tr>
+<tr><td style="text-align: left"><code>METHOD</code></td><td style="text-align: left">方法</td></tr>
+<tr><td style="text-align: left"><code>PACKAGE</code></td><td style="text-align: left">包</td></tr>
+<tr><td style="text-align: left"><code>PARAMETER</code></td><td style="text-align: left">方法的参数</td></tr>
+<tr><td style="text-align: left"><code>TYPE</code></td><td style="text-align: left">类、接口或枚举（Class, Interface, or enumeration）</td></tr>
+</tbody></table>
+</div>
+<p><em>表一, <code>ElementType</code> 枚举类型下的各个常量</em></p>
+<p>可在 <code>@Target</code> 注解中指定一个或多个的这些值。在指定多个值时，就必须将这些值指定在一个大括号分隔的清单中（To specify multiple values, we must specify them within a braces-delimited list）。比如，可使用这个 <code>@Target</code> 注解：<code>@Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})</code> 来指定某个注解只应用到字段及本地变量。</p>
+<p><strong><code>@Rentention</code> 注解</strong></p>
+<p>这个注解确定了其所注解的注解，应保留在何处及保留多长时间（it determines where and how long the annotation is retent）。<code>@Rentention</code> 注解可以有三个取值：</p>
+<ul>
+<li><strong><code>SOURCE</code></strong>: 注解将保留在源代码级别，并被编译器所忽略；</li>
+<li><strong><code>CLASS</code></strong>：注解将保留在编译时，并被 JVM 所忽略；</li>
+<li><strong><code>RUNTIME</code></strong>：这些注解将保留在运行时。</li>
+</ul>
+<p><strong>注解 7：用户定义（定制）注解</strong></p>
+<p>用户定义注解可用于对程序元素，比如变量、构造器、方法等进行注解。这些注解可应用在紧接着元素声明（构造器、方法、类等等）开始的地方。</p>
+<p><strong>语法</strong>：声明</p>
+<pre><code class="language-java">[Access Specifier] @interface&lt;AnnotationName&gt;
+{
+    DataType &lt;Method Name&gt;() [default value];
+}
+</code></pre>
+<p>在实现用户定义注解之前，请将以下各个要点，作为定制注解的重要原则（Do keep these certain points as rules for custom annotations before implementing user-defined annotations）。</p>
+<ol>
+<li><code>AnnotationName</code> 是个接口；</li>
+<li>该参数不应与那些方法声明相关联，且在方法声明上不应使用 <code>throws</code> 子语句（the parameter should not be associated with method declarations and <code>throws</code> clause should not be used with method declaration）；</li>
+<li>其中的参数，将不会<code>null</code> 值，但可以有默认值；</li>
+<li><code>default</code> 值是可选的；</li>
+<li>其中的方法返回值类型，应是原生值、枚举、字符串、类名称，或者原生值、枚举、字符串或类名称等类型的数组（the return type of method should be either primitive, enum, string, class name, or array of primitive, enum, string, or class name type）。</li>
+</ol>
+<p><strong>示例</strong>：</p>
+<pre><code class="language-java">package com.xfoss.Annotations;
+
+import java.lang.annotation.*;
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@interface TestAnnotation
+{
+    String Developer() default &quot;Lenny&quot;;
+    String Expirydate();
+}
+
+public class Test
+{
+    @TestAnnotation(Developer=&quot;Echo&quot;, Expirydate=&quot;01-10-2020&quot;)
+    void fun1()
+    {
+        System.out.println(&quot;测试方法 1&quot;);
+    }
+
+    @TestAnnotation(Developer=&quot;Anil&quot;, Expirydate=&quot;01-10-2020&quot;)
+    void fun2()
+    {
+        System.out.println(&quot;测试方法 2&quot;);
+    }
+
+    public static void main(String args[])
+    {
+        System.out.println(&quot;你好&quot;);
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">你好
+</code></pre>
+<h2 id="拉姆达-lambda-表达式"><a class="header" href="#拉姆达-lambda-表达式"><a id="lambda-expressions"></a>拉姆达 Lambda 表达式</a></h2>
+<p><strong>Java 8 中的 Lambda 表达式（Lambda Expressions in Java 8）</strong></p>
+<p>拉姆达表达式本质上是 <a href="#functional_interface">功能接口(functioal interface)</a> （带有单个抽象方法的接口，被称为功能接口。<code>java.lang.Runnable</code> 即是功能接口的一个示例）的表征。拉姆达表达式实现的是唯一抽象方法，进而因此实现的是功能接口。拉姆达表达式是在 Java 8 中加入的特性，从而提供了以下的这些功能。</p>
+<ul>
+<li>实现了将功能作为方法参数的处理，或者说将代码当作数据的处理（enable to treat functionality as a method argument, or code as data）；</li>
+<li>可创建出不属于任何类的函数（a function can be created without belonging to any class）；</li>
+<li>拉姆达表达式，可像对象一样传递，并在需要时被执行（a lambda expression can be passed around as if it was an object and executed on demand）。</li>
+</ul>
+<pre><code class="language-java">package com.xfoss.LambdaExpr;
+
+interface FuncInterface
+{
+    void abstractFun(int x);
+
+    default void normalFun()
+    {
+        System.out.println(&quot;你好&quot;);
+    }
+}
+
+class Test
+{
+    public static void main(String args[])
+    {
+        FuncInterface fobj = (int x) -&gt; System.out.println(2*x);
+
+        fobj.abstractFun(5);
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-java">10
+</code></pre>
+<p><img src="images/Ch20_02.png" alt="拉姆达表达式" /></p>
+<p><em>图 2 - 拉姆达表达式</em></p>
+<p><strong>语法</strong>：</p>
+<pre><code class="language-java">lambda operator -&gt; body
+</code></pre>
+<p>其中拉姆达运算符（<code>lambda operator</code>）可以是：</p>
+<ul>
+<li><strong>零参数</strong>：</li>
+</ul>
+<pre><code class="language-java">() -&gt; System.out.println(&quot;零参数的拉姆达（Zero parameter lambda）&quot;)；
+</code></pre>
+<ul>
+<li><strong>一个参数</strong>：</li>
+</ul>
+<pre><code class="language-java">(p) -&gt; System.out.format(&quot;一个参数：%s&quot;, p);
+</code></pre>
+<p>在那个变量的类型可从上下文推导出来时，那么小括号的使用就不是强制的（it is not mandatory to use parentheses, if the type of that variable can be inferred from the context）。</p>
+<ul>
+<li><strong>多个参数</strong>：</li>
+</ul>
+<pre><code class="language-java">(p1, p2) -&gt; System.out.format(&quot;多个参数：%s, %s&quot;, p1, p2);
+</code></pre>
+<p>请注意：拉姆达表达式恰如函数，他们跟函数一样接受参数（lambda expressions are just like functions and they accept parameters just like functions）。</p>
+<pre><code class="language-java">package com.xfoss.LambdaExpr;
+
+import java.util.ArrayList;
+
+class TestDrive
+{
+    public static void main(String args[]){
+
+        ArrayList&lt;Integer&gt; arrL = new ArrayList&lt;Integer&gt;();
+        for(int i = 1; i &lt; 5; i++) arrL.add(i);
+
+        arrL.forEach(n -&gt; System.out.println(n));
+
+        arrL.forEach(n -&gt; {if(n%2 == 0) System.out.println(n);});
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">1
+2
+3
+4
+2
+4
+</code></pre>
+<p>请注意拉姆达表达式 <em><strong>只可用于实现功能接口</strong></em>。在上面的示例中同样是这样的，其中的拉姆达表达式实现的是 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html">消费者</a> 功能接口（Consumer Functional Interface）。</p>
+<pre><code class="language-java">// 用于对拉姆达表达式工作原理进行演示的 Java 程序
+package com.xfoss.LambdaExpr;
+
+public class LambdaExprDemo
+{
+    // 函数 operation 是使用拉姆达表达式实现的
+    interface FuncInter1
+    {
+        int operation(int a, int b);
+    }
+
+    // 这里的 sayMessage() 也是使用拉姆达表达式实现的
+    interface FuncInter2
+    {
+        void sayMessage(String message);
+    }
+
+    // 由这个具体的 operate 方法来完成 FuncInter1 中
+    // 在 ‘a’ 与 ‘b’ 上的运算
+    private int operate(int a, int b, FuncInter1 fobj)
+    {
+        return fobj.operation(a, b);
+    }
+
+    public static void main(String args[])
+    {
+        // 用于两个参数相加的拉姆达表达式
+        // x 与 y 的数据类型是非必须的。
+        // 该表达式实现了 'FuncInter1' 接口
+        FuncInter1 add = (int x, int y) -&gt; x + y;
+
+        // 用于两个参数相乘的拉姆达表达式
+        // 这个表达式同样实现了 'FuncInter1' 接口
+        FuncInter1 multiply = (int x, int y) -&gt; x * y;
+
+        // 创建一个 LambdaExprDemo 的实力，来以 operate 的
+        // 不同拉姆达表达式实现，对其进行调用
+        LambdaExprDemo dobj = new LambdaExprDemo();
+
+        // 使用拉姆达表达式，将两个数相加
+        System.out.format(&quot;加法为 %d\n&quot;, dobj.operate(6, 3, add));
+
+        // 使用拉姆达表达式，将两个数相乘
+        System.out.format(&quot;乘法为 %d\n&quot;, dobj.operate(6, 3, multiply));
+
+        // 单个参数的拉姆达表达式
+        // 此表达式实现了 'FuncInter2' 接口
+        FuncInter2 fobj = message -&gt; System.out.format(&quot;你好 %s\n&quot;, message);
+
+        fobj.sayMessage(&quot;极客&quot;);
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">加法为 9
+乘法为 18
+你好 极客
+</code></pre>
+<h3 id="要点"><a class="header" href="#要点">要点：</a></h3>
+<ul>
+<li>拉姆达表达式的函数体，可以包含零个、一个或更多的语句（the body of a lambda expression can contain zero, one or more statements）；</li>
+<li>在只有单个语句时，花括号不是强制性的，同时该匿名函数的返回值类型与函数体表达式一致（when there is a single statement curly brackets are not mandatory and the return type of the anonymous function is the same as that of the body expression）；</li>
+<li>在有多个语句时，那么这些语句就必须用花括号括起来（形成一个代码块），且该匿名函数的返回值类型，与由此代码块所返回的值类型一致，或者即为在未返回任何东西时的 <code>void</code>（when there are more than one statements, then these must be enclosed in curly brackets(a code block) and the return type of the anonymous function is the same as the type of the value return within the code block, or <code>void</code> if nothing is returned）。</li>
+</ul>
+<h2 id="功能接口"><a class="header" href="#功能接口"><a id="functional_interface"></a>功能接口</a></h2>
+<p>Java 永远是一种面向对象的编程语言（Java has forever remained an Object-Oriented Programming language）。而由于Java 是一种面向对象编程语言，那么就可以声称，除了一些原生数据类型，和一些为完整性与简单性目的而采用的原生方法外， Java 编程语言中所出现全部事物，都可以由对象来表达（by object-oriented programming language, we can declare that everything present in the Java programming language rotates throughout the Objects, except for some of the primitive data types and primitive methods for integrity and simplicity）。在称为 Java 的编程语言中，是没有任何单独函数的。Java 编程语言中的函数，都是某个类的组成部分，而若某人想要调用这些函数，那么他们就必须使用到类或类的对象，来调用这些函数。</p>
+<p><strong>功能接口</strong>是之只包含一个抽象方法的接口。他们可只有一项用于展示的功能。自Java 8 开始，就可以使用 <a href="#lambda-expressions">拉姆达表达式</a> 来表示功能接口的实例了。功能接口可以有任意数量的默认方法（a functional interface can have any number of default methods）。<em><strong><code>Runnable</code>、<code>ActionListener</code>、<code>Comparable</code></strong></em> 等都是功能接口的一些示例。</p>
+<p>功能接口又被称为 <strong>单一抽象方法接口（Single Abstract Method Interface）</strong>。简称 <strong>SAM 接口</strong>。Java 中的功能接口，属于提供到用户基础编程手段的新特性（functional interfaces in Java are the new feature that provides users with the approach of fundamental programming）。</p>
+<p>自Java SE 8 开始，与拉姆达表达式及方法引用一起，加入的功能接口，为的是令到代码更具可读性、更为干净和直观（functional interfaces are included in Java SE 8 with Lambda expressions and Method references in order to make code more readable, clean, and straightforward）。功能接口是那些确保精确地只包含一个抽象方法的接口。通过以 <strong>名为 <em><code>@FunctionalInterface</code></em></strong> 加以注解的接口表示方式，来运用和执行功能接口（functional interfaces are used and executed by representing the interface with an <strong>annotation called <em><code>@FunctionalInterface</code></em></strong>）。如同先前所讲的那样，功能接口可只包含一个抽象方法。不过功能接口却可以包含任意数量的默认与静态方法。</p>
+<p>在功能接口中，因为默认情况下，在接口内部定义的方法，只会是<code>abstract</code> 方法，因此使用关键字 <code>abstract</code> 就是，即无需使用关键字 <code>abstract</code>。同样也可以将拉姆达表达式，称为功能接口的实例。</p>
+<p>在 Java 8 之前，就必须创建出匿名内部类的对象，或者必须要实现这些接口。</p>
+<pre><code class="language-java">// 用于演示功能接口的 Java 程序
+package com.xfoss.FunctionalInterface;
+
+class Test {
+    public static void main(String args[]) {
+        // 创建匿名内部类对象
+        new Thread(new Runnable() {
+            @Override public void run()
+            {
+                System.out.println(&quot;新的线程已创建&quot;);
+            }
+        }).start();
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">新的线程已创建
+</code></pre>
+<p>自 Java 8 开始，就可以像下面这样，将 <a href="#lambda-expressions">拉姆达表达式</a> 赋值给其功能接口对象：</p>
+<pre><code class="language-java">// 用于演示使用了拉姆达表达式的功能接口实现的 Java 程序
+package com.xfoss.FunctionalInterface;
+
+class Test {
+    public static void main(String args[]) {
+        // 创建对象的拉姆达表达式
+        new Thread( () -&gt; {
+                System.out.println(&quot;新的线程已创建&quot;);
+        }).start();
+    }
+}
+</code></pre>
+<pre><code class="language-console">新的线程已创建
+</code></pre>
+<h3 id="关于-functionalinterface-注解"><a class="header" href="#关于-functionalinterface-注解">关于 <code>@FunctionalInterface</code> 注解</a></h3>
+<p><code>@FunctionalInterface</code> 注解用于确保功能接口不可以有多于一个的抽象方法。若出现了多于一个的抽象方法，那么编译器就会标示出一个 <code>Unexcepted @FunctionalInterface annotation</code> 消息。不过并非强制要求使用此注解。</p>
+<pre><code class="language-java">package com.xfoss.FunctionalInterface;
+
+@FunctionalInterface
+interface Square {
+    int calculate(int x);
+}
+
+class TestDrive {
+    public static void main(String args[])
+    {
+        int a = 5;
+
+        Square s = (int x) -&gt; x * x;
+
+        int ans = s.calculate(a);
+        System.out.println(ans);
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">25
+</code></pre>
+<h3 id="一些内建的-java-功能接口"><a class="header" href="#一些内建的-java-功能接口">一些内建的 Java 功能接口</a></h3>
+<p>自Java SE 1.8 开始，就有了许多的转换成了功能接口的接口。这全部接口都是以 <code>@FunctionalInterface</code> 注解过的。这些接口如下所示：</p>
+<ul>
+<li><code>Runnable</code> -&gt; 此接口只包含了 <code>run()</code> 方法；</li>
+<li><code>Comparable</code> -&gt; 此接口只保护了 <code>compareTo()</code> 方法；</li>
+<li><code>ActionListener</code> -&gt; 此接口只包含了 <code>actionPerformed()</code> 方法；</li>
+<li><code>Callable</code> -&gt; 此接口只包含了 <code>call()</code> 方法。</li>
+</ul>
+<p><strong>Java SE 8 包含了四大类功能接口</strong>，可分别应用于多种情形。</p>
+<p>这四个大类分别是：</p>
+<ol>
+<li>消费者（Consumer）;</li>
+<li>判断（Predicate）;</li>
+<li>函数（Function）;</li>
+<li>提供者（Supplier）。</li>
+</ol>
+<p>在上述四个接口中间，前三个，也就是<code>Consumer</code>、<code>Predicate</code>，与 <code>Function</code> ，还有着以下延伸补充：</p>
+<ol>
+<li><code>Consumer</code> -&gt; <code>Bi-Consumer</code>；</li>
+<li><code>Predicate</code> -&gt; <code>Bi-Predicate</code>；</li>
+<li><code>Function</code> -&gt; <code>Bi-Function</code>、一元算子/运算符、二元算子/运算符等（<code>Bi-Function</code>, Unary Operator, Binary Operator）。</li>
+</ol>
+<p>下面对这四个功能接口一一说明。</p>
+<ol>
+<li>
+<p><strong><code>Consumer</code> 消费者</strong></p>
+<p>功能接口中的消费者接口，是一类只接受一个参数，或者说只接受一个提升参数（the consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument）。消费者接口没有返回值。他什么也不会返回。<code>Consumer</code>还有一些功能变种 -- <code>DoubleConsumer</code>、<code>IntConsumer</code>，以及 <code>LongConsumer</code>。这些变种接受原生值作为参数。</p>
+<p>除了这些变种外，还有另外一种被称为<code>Bi-Consumer</code>的<code>Consumer</code>变种。</p>
+<ul>
+<li><strong><code>Bi-Consumer</code></strong> -- 是<code>Consumer</code>接口最为令人着迷的变种。消费者接口只会取一个参数，然而对于 <code>Bi-Consumer</code>，则会取两个参数。<code>Consumer</code>与<code>Bi-Consumer</code>二者都没有返回值。<code>Bi-Consumer</code>与<code>Consumer</code>接口一样，不会返回任何东西。在对映射数据结构进行遍历时，会用到 <code>Bi-Consumer</code> 接口。</li>
+</ul>
+<p><strong><code>Consumer</code> 功能接口的语法/原型</strong>：</p>
+<pre><code class="language-java">Consumer&lt;Integer&gt; consumer = (value) -&gt; System.out.println(value);
+</code></pre>
+<p>Java <code>Consumer</code> 功能接口的这个实现，会将作为参数传入的值，打印到那个打印语句。这个实现使用了Java 的拉姆达函数。</p>
+</li>
+<li>
+<p><strong>判断（<code>Predicate</code>）</strong></p>
+<p>在现代科学的逻辑下，接受一个参数，并根据这个参数而相应地生成一个布尔值作为应答的函数，就被成为判断（in scientific logic, a function that accepts an argument and, in return, generates a boolean value as an answer is known as a predicate）。与此类似，在Java 编程语言中，Java 的判断功能接口，则是一类接受单个值或参数，而在这单个值或参数上进行某种处理，进而返回一个布尔值（<code>True</code>或<code>False</code>）的应答。<code>Predicate</code>功能接口的实现，还封装了 Java 中的筛选过程（用于在某种已有提供的判断基础上，对流式组件进行筛选的过程，the implementation of the <code>Predicate</code> functional interface also encapsualates the logic of filtering(a process that is used to filter stream components on the base of a provided predicate) in Java）。</p>
+<p>正如 <code>Consumer</code> 功能接口意义，<code>Predicate</code> 功能接口也有一些扩展。他们分别是 <code>IntPredicate</code>、<code>DoublePredicate</code>，以及 <code>LongPredicate</code>。这些类型的判断功能接口，都只接受一个原生数据类型或原生值，作为参数。</p>
+<ul>
+<li><strong><code>Bi-Predicate</code></strong> -- <code>Bi-Predicate</code> 同样是 <code>Predicate</code> 功能接口的一个扩展，其取的是两个参数，而非一个参数，完成一些数据处理，进而返回布尔值。</li>
+</ul>
+<p><strong><code>Predicate</code> 功能接口的语法</strong>：</p>
+<pre><code class="language-java">public interface Predicate&lt;T&gt; {
+    boolean test(T t);
+}
+</code></pre>
+<p>判断功能接口还可以用类来实现。下面给出的就是用类实现判断功能接口的语法：</p>
+<pre><code class="language-java">public class CheckForNull implements Predicate {
+    
+    @Override
+    public boolean test(Object o)
+    {
+        return o != null;
+    }
+}
+</code></pre>
+<p>Java 判断功能接口，还可以用拉姆达表达式实现。下面给出了<code>Predicate</code>功能接口实现的示例：</p>
+<pre><code class="language-java">Predicate predicate = (value) -&gt; value != null;
+</code></pre>
+<p>由于使用拉姆达表达式的 Java 中功能接口实现，与使用类的实现，完成的都是同样工作，即返回了相同输出，但前者更具可管理能力，且更加高效。</p>
+</li>
+<li>
+<p><strong><code>Function</code> 函数功能接口</strong></p>
+<p>函数是 Java 中功能接口的一种只接受单个参数，并在完成所需处理之后返回一个值的类别。由于原生类型无法应用泛型参数，所以<code>Function</code> 接口有着许多版本，并且是需要这些版本的函数接口的。在诸如双精度数、整数、长整型数等原生类型中，众多不同版本的函数接口，属于工具性的接口，并被广泛使用。在参数中还会用到这些原生值类型的不同顺序组合（a function is a type of functional interface in Java that receives only a single argument and returns a value after the required processing. There are many versions of <code>Function</code> interfaces because a primitive type can't imply a general type argument, so we need these versions of function interfaces. Many different versions of the function interfaces are instrumental and are commonly used in primitive types like double, int, long. The different sequences of these primitive types are also used in the argument）。</p>
+<p>这许多的函数接口版本，如下所示：</p>
+<ul>
+<li><strong>Bi-Function</strong> - <code>Bi-Function</code> 大致与 <code>Function</code> 有联系。除此之外，<code>Bi-Function</code> 是取两个参数的，而 <code>Function</code> 则接受一个参数。</li>
+</ul>
+<p><strong><code>Bi-Function</code> 的原型和语法如下</strong>：</p>
+<pre><code class="language-java">    @FunctionalInterface
+    public interface BiFunction&lt;T, U, R&gt;
+    {
+        R apply(T t, U u);
+        ......
+    }
+</code></pre>
+<p>在上面的接口代码中，<code>T, U</code> 是输入，而那里只有一个输出，即 <code>R</code>。</p>
+<ul>
+<li><strong>一元运算符和二元运算符（Unary Operator and Binary Operator）</strong> - 还有两个别的功能接口，分别叫做一元运算符和二元运算符。他们都各自对 <code>Function</code> 与 <code>Bi-Function</code> 进行了扩展。简单地说，一元运算符扩展了 <code>Function</code>，而二元运算符则扩展了 <code>Bi-Function</code>。</li>
+</ul>
+<p><strong>一元运算符和二元运算符的原型如下</strong>：</p>
+<ol>
+<li>
+<p>一元运算符（Unary Operator）</p>
+<pre><code class="language-java">@FunctionalInterface
+public interface UnaryOperator&lt;T&gt; extends Function&lt;T, U&gt;
+{
+    ......
+}
+</code></pre>
+</li>
+<li>
+<p>二元运算符（Binary Operator）</p>
+<pre><code class="language-java">@FunctionalInterface
+public interface BinaryOperator&lt;T&gt; extends BiFunction&lt;T, U, R&gt;
+{
+    ......
+}
+</code></pre>
+</li>
+</ol>
+<p>从上面的示例，就可以明白一元运算符只接受一个参数，并只返回单个参数。还有就是，在一元运算符中，输入与输出值都要一致，并且要是同样的类型（we can understand from the above example that the <code>Unary Operator</code> accepts only one argument and returns a single argument only. Still, in <code>Unary Operator</code> both the input and output values must be identical and of the same type）。</p>
+<p>而另一边，二元运算符则与 <code>Bi-Function</code> 相仿，要取两个值，并返回一个值。但与一元运算符类似，输入与输出值必须一致且要是同样类型（on the other way, <code>Binary Operator</code> takes two values and returns one value comparable to <code>Bi-Function</code> but similar like <code>Unary Operator</code>, the input and out value types must be identical and of the same type）。</p>
+</li>
+<li>
+<p><strong>提供者（<code>Supplier</code>）</strong></p>
+<p><code>Supplier</code> 功能接口，也是功能接口的一种类型，这种类型的功能接口，不取任何的输入或参数，而仍会返回单个输出。此种类型的功能接口，一般用于一些值的延迟生成。提供者功能接口也用于对任意序列生成的逻辑。比如 -- <code>斐波那契数列</code>背后的逻辑，就可以再 <code>Stream.generate</code> 方法的帮助下生成，而<code>Stream.generate</code>方法，就是通过提供者功能接口实现的（<code>Supplier</code> functional interface is also a type of functional interface that does not take any input or argument and ye returns a single output. This type of functional interface is generally used in the lazy generation of values. <code>Supplier</code> functional interfaces are also used for defining the logic for the generation of any sequence. For example - The logic behind the Fibonacci Series can be generated with the help of the <code>Stream.generate</code> method, which is implemented by the <code>Supplier</code> functional Interface）。</p>
+<p><code>Supplier</code> 功能接口的不同扩展，包括了许多其他提供者函数，比如 <code>BooleanSupplier</code>、<code>DoubleSupplier</code>、<code>LongSupplier</code>及 <code>IntSupplier</code> 等等。这些所有衍生特定类型的返回值类型，也都只是他们各自相应的原生值类型（the different extensions of the <code>Supplier</code> functional inteface hold many other supplier functions like <code>BooleanSupplier</code>, <code>DoubleSupplier</code>, <code>LongSupplier</code>, and <code>IntSupplier</code>. The return type of all these further specializations is their corresponding primitives only）。</p>
+<p><strong><code>Supplier</code> 功能接口的语法/原型如下</strong>：</p>
+<pre><code class="language-java">@FunctionalInterface
+public interface Supplier&lt;T&gt; {
+
+    // 获取到一个结果
+    ........
+
+    // 返回这个特定结果
+    .........
+
+    T.get();
+}
+</code></pre>
+</li>
+</ol>
+<pre><code class="language-java">package com.xfoss.FunctionalInterface;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+class PredicateDemo {
+    public static void main(String args[])
+    {
+
+        // 创建一个字符串的清单
+        List&lt;String&gt; names = Arrays.asList(
+                &quot;G极客&quot;, &quot;G极客测试&quot;, &quot;g1&quot;, &quot;Q问答&quot;, &quot;G极客2&quot;);
+
+        // 将这个判断类型声明为字符串，同时使用拉姆达表达式
+        // 创建出对象
+        Predicate&lt;String&gt; p = (s) -&gt; s.startsWith(&quot;G&quot;);
+
+        // 对那个清单进行迭代
+        for (String st : names){
+            // 调用对象上的 test 方法
+            if (p.test(st)) System.out.println(st);
+        }
+    }
+}
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code class="language-console">G极客
+G极客测试
+G极客2
+</code></pre>
+<h3 id="要点洞察important-pointsobservations"><a class="header" href="#要点洞察important-pointsobservations">要点/洞察（Important Points/Observations）</a></h3>
+<p>以下是 Java 中功能接口有关的一些突出点：</p>
+<ol>
+<li>
+<p>在功能接口里面，只支持一个抽象方法。在功能接口注解，也就是 <code>@FunctionalInterface</code> 没有被实现，或没有以函数接口方式加以编写出来时，那名就可以在其中声明多于一个的抽象方法。不过在这种有着多于一个的功能接口情形中，那个接口就不在被叫做功能接口了。那是叫做非功能接口（in functional interfaces, there is only one abstract method supported. If the annotation of a functional interface, i.e., <code>@FunctionalInterface</code> is not implemented or written with a function interface, more than one abstract method can be declared inside it. However, in this situation with more than one functional interface, that interface will not be called a functional interface. It is called a non-functional interface）；</p>
+</li>
+<li>
+<p>由于 <code>@FunctionalInterface</code> 注解只是个自愿使用的注解，因此并不要求使用这个注解。之所以要写下这个注解，是因为其有助于在编译器层面的检查。除开这个目的，这个注解就是可选的；</p>
+</li>
+<li>
+<p>可将无限多的方法（不管是静态的还是默认的），添加到功能接口。直白地将，功能接口对静态及默认方法的包含，没有限制；</p>
+</li>
+<li>
+<p>对来自父类方法的重写，不会破坏Java中功能接口的规则；</p>
+</li>
+<li>
+<p><code>java.util.function</code> 包，包含了许多 Java 8 中的内建功能接口。</p>
+</li>
+</ol>
+<h2 id="java中的反射"><a class="header" href="#java中的反射">Java中的反射</a></h2>
+<p><strong>Reflection in Java</strong></p>
+<p><code>Reflection</code> 是个在运行时，用于对方法、类及接口进行检视和修改的 API。在 <code>java.lang.reflect</code> 包下，提供了用于反射的那些所需类，那么要搞清楚反射，就离不开这个包。下面这个视觉教学资料，对这个包进行了演示，以对其有更好的掌握：</p>
+<p><img src="images/Ch20_03.png" alt="java.lang.reflect" /></p>
+<p><em>图 3 - <code>java.lang.reflect</code></em></p>
+<ul>
+<li>反射给到了对象所属类，以及通过使用对象可执行其所属类的哪些方法（reflection gives us information about the class to which an object belongs and also the methods of that class that can be executed by using the object）；</li>
+<li>经由反射，就可以在运行时，在不考虑要用到方法的访问指定符情况下，对方法加以调用（through reflection, we can invoke methods at runtime irrespective of the access specifier used with them）。</li>
+</ul>
+<p><img src="images/Ch20_04.png" alt="关于反射 API" /></p>
+<p><em>图 4 - 关于反射 API</em></p>
+<p>可使用反射机制，来获取到有关类、构造器，及方法的有关信息，如下表格所示：</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">程序元素</th><th style="text-align: left">方法</th></tr></thead><tbody>
+<tr><td style="text-align: left">类</td><td style="text-align: left">使用 <code>getClass()</code> 方法来获取到某个对象所属的类名称。</td></tr>
+<tr><td style="text-align: left">构造器</td><td style="text-align: left">使用 <code>getConstructors()</code> 方法，来获取某个对象所属类的那些公共构造器。</td></tr>
+<tr><td style="text-align: left">方法</td><td style="text-align: left">使用 <code>getMethods()</code> 方法，来获取到某个对象所属类的那些公共方法。</td></tr>
+</tbody></table>
+</div>
+<p><em>表 1 - 反射机制如何获取到对象所属类、所属类的构造器与方法</em></p>
+<p>在知道方法的名字和他的那些参数类型时，就可以通过反射机制调用到那个方法。为此，要用到下面所讲的两个方法：</p>
+<ol>
+<li><code>getDeclaredMethod()</code></li>
+<li><code>invoke()</code></li>
+</ol>
+<p><strong>方式 1</strong>：<code>getDelcaredMethod()</code>: 这会创建出一个要调用方法的对象出来；</p>
+<p><strong>语法</strong>：此方法的语法为：</p>
+<pre><code class="language-java">Class.getDeclaredMethod(name, parameterType)
+</code></pre>
+<p><strong>参数</strong>：</p>
+<ul>
+<li>即将创建出对象的方法名字（name of a method whose object is to be created)</li>
+<li>一个类对象的数组（an array of <code>Class</code> objects）</li>
+</ul>
+<p><strong>方法 2</strong>：<code>invoke()</code>: 在运行时，用下面的方式，他就会对这个类的方法进行调用；</p>
+<p><strong>语法</strong>：</p>
+<pre><code class="language-java">Method.invoke(Object, parameter)
+</code></pre>
+<blockquote>
+<p><em><em>提示</em>：在该类的这个方法不接受任何参数时，那么就要将 <code>null</code> 作为参赛加以传递</em>。</p>
+</blockquote>
+<blockquote>
+<p><em><em>注意</em>：经由反射机制，就可以在某个类对象的帮助下，访问到这个类的私有变量及私有方法，进而可通过上面讲到的对象，对方法进行调用。为此就要用到下面两个方法</em>。</p>
+</blockquote>
+<p><strong>方法 3</strong>：<code>Class.getDeclaredField(FieldName)</code>: 使用此方法来获取私有字段（变量/方法）。将返回一个指定字段名称的、 <code>Field</code> 类型的对象；</p>
+<p><strong>方法 4</strong>：<code>Field.setAccessible(true)</code>: 实现了与该字段访问修饰符无关的情况下，对该字段的访问（Allows to access the field irrespective of the access modifier used with the field）。</p>
+<h3 id="从反射式-api-得到的重要认知"><a class="header" href="#从反射式-api-得到的重要认知">从反射式 API 得到的重要认知</a></h3>
+<p><strong>Important observations Drawn From Reflection API</strong></p>
+<ul>
+<li>实现 <strong>扩展能力特性（Extensibility Features）</strong>：应用程序可通过运用那些具备扩展能力对象中的实例完整名称，来创建出这些实例来，从而利用上这些外部的、用户定义的类（an application may make use of external, user-defined classes by creating instances of extensibility objects using their full-qualified names）；</li>
+<li>用于 <strong>调试及测试工具（Debugging and Testing tools）</strong>：程序调试员会运用反射机制的属性，对类私有成员进行查看；</li>
+<li>带来 <strong>性能开销（Performance Overhead）</strong>：相比于非反射的同类，反射操作有着较低性能，因此应避免在那些性能敏感的应用中、频繁调用到的代码部门，使用反射机制；</li>
+<li>实现 <strong>内部暴露（Exposure of Internals）</strong>: 反射式代码破坏了抽象机制，从而会改变平台升级的方面的表现（reflective code breaks abstractions and therefore may change behavior with upgrades of the platform）。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<pre><code class="language-java">// 用于演示反射机制运用的 Java 程序
+package com.xfoss.Reflection;
+
+// 导入所需的类: Constructor、Field 及 Method
+import java.lang.reflect.*;
+
+// 类 1
+// 将创建这个类的对象
+class Test {
+    
+    // 创建出一个私有字段（实例变量）
+    private String s;
+
+    // 该类的构造器
+    //
+    // 方法 1
+    // 公共构造器
+    public Test() { s = &quot;极客空间&quot;; }
+
+    // 方法 2
+    // 不带参数
+    public void method1()
+    {
+        System.out.format(&quot;------------------\n该字符串为 %s\n&quot;, s);
+    }
+
+    // 方法 3
+    // 一个整形参赛
+    public void method2(int n)
+    {
+        System.out.format(&quot;------------------\n该数字为 %d\n&quot;, n);
+    }
+
+    // 方法 4
+    // 这是个私有方法
+    private void method3()
+    {
+        System.out.println(&quot;------------------\n私有方法被调用了&quot;);
+    }
+}
+
+// 类 2
+// 主类
+class Demo {
+    
+    // 主类的驱动器方法
+    public static void main(String args[]) throws Exception
+    {
+
+        // 创建出将对其属性进行查看的对象
+
+        // 在 main() 方法中创建一个类 1 的对象
+        Test obj = new Test();
+
+        // 使用 getClass() 方法，从这个对象创建
+        // 出类对象（class object）
+        Class cls = obj.getClass();
+
+        // 使用 getName() 方法，打印出类的名字
+        System.out.format(&quot;---------------------\n类的名字为 %s\n---------------------\n&quot;,
+                cls.getName());
+
+        // 通过该类对象，获取到其构造器
+        Constructor constructor = cls.getConstructor();
+
+        // 使用 getName() 方法，打印出构造器的名字
+        System.out.format(&quot;构造器的名字为 %s\n---------------------\n&quot;,
+                constructor.getName());
+
+        // 这个语句只是显示消息
+        System.out.println(&quot;类的公共方法分别为：&quot;);
+
+        // 通过在该类对象上使用 getDeclaredMethods() 方法获取到
+        // 该类的那些声明的方法（getMethods() 将获取到全部方法）
+        Method[] methods = cls.getDeclaredMethods();
+
+        // 打印出这些方法的名字
+        for (Method method : methods) System.out.println(method.getName());
+
+        // 经由提供到方法名字及参数类，作为 getDeclaredMethod() 
+        // 方法的参数，创建出指定方法的对象
+        Method methodCall1 = cls.getDeclaredMethod(&quot;method2&quot;, int.class);
+
+        // 在运行时调用该方法
+        methodCall1.invoke(obj, 19);
+
+        // 通过将字段名字作为参数，提供到 getDeclaredField() 方法
+        // 创建出指定字段的对象来
+        Field field = cls.getDeclaredField(&quot;s&quot;);
+
+        // 这个语句实现了在无关乎该字段（实例变量）访问指示符
+        // 的情况下，对该字段的访问
+        field.setAccessible(true);
+
+        // 这里的 set() 方法，取了这个对象及要赋给私有字段‘s’
+        // 的新值
+        field.set(obj, &quot;Java&quot;);
+
+        // 经由提供作为参数的方法名字给 getDeclaredMethod()
+        // 创建出指定方法的对象来
+        Method methodCall2 = cls.getDeclaredMethod(&quot;method1&quot;);
+
+        // 在运行时调用该方法
+        methodCall2.invoke(obj);
+
+        // 经由提供作为参数的方法名字给 getDeclaredMethod()
+        // 创建出指定方法的对象来
+        Method methodCall3 = cls.getDeclaredMethod(&quot;method3&quot;);
+
+        // 这个语句实现在无关乎该方法的访问指示符的情况下
+        // 对象对该方法的访问
+        methodCall3.setAccessible(true);
+
+        // 在运行时调研这个方法
+        methodCall3.invoke(obj);
+    }
+}
+</code></pre>
+<p><strong>输出</strong>：</p>
+<pre><code class="language-console">java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                              ✔ 
+---------------------
+类的名字为 com.xfoss.Reflection.Test
+---------------------
+构造器的名字为 com.xfoss.Reflection.Test
+---------------------
+类的公共方法分别为：
+method2
+method1
+method3
+------------------
+该数字为 19
+------------------
+该字符串为 Java
+------------------
+私有方法被调用了
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Ch19_Appendix_A.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Ch19_Appendix_A.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

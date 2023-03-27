@@ -1,0 +1,676 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>附录 A：十个几乎会进到本书的题目</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html" class="active"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="附录-a十个未列入到本书正式章节的题目"><a class="header" href="#附录-a十个未列入到本书正式章节的题目">附录 A：十个未列入到本书正式章节的题目</a></h1>
+<p><strong>Appendix A: Ten Topics that almost made it into the Real Book</strong>...</p>
+<blockquote>
+<p>这里的意思，是还有更多的内容？这本书还没完？</p>
+</blockquote>
+<p>这本书涵盖了很多基础知识，而你也快要学完这本书了。感谢你认真学完本书，不过在你投身于Java编程之前，我们还是希望给你更多的一些准备。对于这个附录，也不可能给到你想要的全部，原本这里通过将字型像素点大小缩减到 <code>.00003</code>，而尽力将所有需要掌握的Java知识都包含进来（不是之前那些章节中包含的）。这样是可行的，但那样就没有人能够阅读了。就这样，这里抛弃了很多内容，仅保留了是个最优的方面作为了附录（We covered a lot of ground, and you're almost finished with this book. We'll miss you, but before we let you go, we wouldn't feel right about sending you out into JavaLand without a little more preparation. We can't possibly fit everything you'll need to know into this relatively small appendix. Actually, we <em>did</em> originally include everything you need to know about Java(not already covered by the other chapters), by reducing the type point size to <code>.00003</code>. It all fit, but nobody could read it. So, we threw most of it away, but kept the best bits for this Top Ten appendix）。</p>
+<p>这是本书 <em>真正的</em> 结尾了。当然还有一个索引（那也是必读部分）！</p>
+<h2 id="第10名位操作"><a class="header" href="#第10名位操作">第10名：位操作</a></h2>
+<p><strong>#10 Bit Manipulation</strong></p>
+<h3 id="为何要关注"><a class="header" href="#为何要关注">为何要关注？</a></h3>
+<p><strong>Why do you care</strong>?</p>
+<p>前面提到过，一个字节中有8个二进制位，短整型则有16个等待的事实。而在某些场合，可能需要对这些单独的二进制位，进行翻转。比如就可能出现给一台新的、启用了Java的烤面包机编写代码，并意识到由于严重的内存限制，一些确切的烤面包机设置，要在二进制位级别上加以控制。为了易于阅读，下面的代码注释中，仅展示了整数的后八位，而不是其整个的32位。</p>
+<h3 id="按位非运算符"><a class="header" href="#按位非运算符">按位非运算符：<code>~</code></a></h3>
+<p><strong>Bitwise NOT operator: <code>~</code></strong></p>
+<p>此运算符对原生值进行 “所有二进制位的翻转”：</p>
+<pre><code class="language-java">int x = 10;     // 其二进制位为 00001010
+x = ~x;         // 现在的二进制位为 11110101
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：只有能转化为整型的原生类型，才能做二进制位翻转的非运算。经测试，整型、字符等都可以进行非运算；而逻辑值、浮点数等其他类型则不行（<code>error: bad operand type float for unary operator '~'</code>）</p>
+</blockquote>
+<p>接下来的三个运算符，是对两个原生值，在位的基础上按位进行比较，进而返回一个基于这些位的比较的结果（The next three operators compare two primitives on a bit by bit basis, and return a result based on comparing these bits）。后面三个运算符都将用到下面整个示例：</p>
+<pre><code class="language-java">int x = 10;
+int y = 6;
+</code></pre>
+<h3 id="按位与运算符"><a class="header" href="#按位与运算符">按位与运算符：<code>&amp;</code></a></h3>
+<p><strong>Bitwise AND Operator: <code>&amp;</code></strong></p>
+<p>此运算符会返回一个仅在原先原本的两个二进制位 <em><strong>均为</strong></em> 开启时，二进制位才开启的值（This operator returns a value whose bits are turned on only if <em><strong>both</strong></em> bits are turned on）。</p>
+<pre><code class="language-java">int a = x &amp; y; // x 的二进制位为：0000 0010
+</code></pre>
+<h3 id="按位或运算符"><a class="header" href="#按位或运算符">按位或运算符：<code>|</code></a></h3>
+<p><strong>Bitwise OR Operator: <code>|</code></strong></p>
+<p>此运算符返回一个仅在两个原本两个二进制位 <em><strong>其一</strong></em> 为开启时，二进制位才开启的值（This operator returns a value whose bits are turned on only if <em><strong>either</strong></em> of the original bits are turned on）。</p>
+<pre><code class="language-java">int a = x | y;  // x 的二进制位为：0000 1110
+</code></pre>
+<h3 id="按位异或运算符"><a class="header" href="#按位异或运算符">按位异或运算符：<code>^</code></a></h3>
+<p><strong>Bitwise XOR(exclusive OR) Operator: <code>^</code></strong></p>
+<p>此运算符返回一个仅在原本两个二进制位 <em><strong>只有其一</strong></em> 开启时，二进制位才开启的值（This operator returns a value whose bits are turned on only if <em><strong>exactly one</strong></em> of the original bits are turned on）。</p>
+<pre><code class="language-java">int a = x ^ y;  // x 的二进制位为：0000 1100
+</code></pre>
+<h3 id="移位运算符"><a class="header" href="#移位运算符">移位运算符</a></h3>
+<p><strong>The Shift Operators</strong></p>
+<p>这些运算符取单个的整型原生变量，并对其全部二进制位在某个方向或另一方向上进行移位（或者说滑动）。只要稍加磨砺一下二进制数学技能，就应该知道，<em>往左</em> 对二进制位进行移位，就相当于把一个数 <em>乘以</em> 了某个二的某个幂次方，而 <em>往右</em> 移动二进制位，则相当于把一个数 <em>除以</em> 了一个二的某个幂次方（These operators take a single integer primitive and shift(or slide) all of its bits in one direction or another. If you want to dust off your binary math skills, you might realize that shifting bits <em>left</em> effectively <em>multiplies</em> a number by a power of two, and shifting <em>right</em> effectively <em>divides</em> a number by a power of two）。</p>
+<p>这里将使用下面的示例，来讲解接下来的三个运算符：</p>
+<pre><code class="language-java">int x = -11;    // 二进制位为：1111 1111 1111 1111 1111 1111 1111 0101
+</code></pre>
+<p>好吧，好吧，之前一直回避了整个问题，那么现在就来以世界上最简短形式，讲一下负数存储，与 <em>二进制补码（two's complement）</em> 的问题。请记住，整型数最左边的那一位，被叫做 <em>符号位（sign bit）</em>。Java中负整型数的符号位始终是开启的（即被设置为 <code>1</code>）。而正整型数的符号位，则始终是关闭的（<code>0</code>）。Java 使用了 <em>二进制</em> 补码公式（二补公式）来存储负数。为了采用二进制补码，去改变某个数的符号，就要将这个数的的所有二进制位加以翻转，然后加上 <code>1</code>（对于一个字节表示整数来讲，这就意味着要将 <code>0000 0001</code>加到翻转后的值），这就是所谓的“二补公式”。</p>
+<h3 id="向右移位运算符"><a class="header" href="#向右移位运算符">向右移位运算符：<code>&gt;&gt;</code></a></h3>
+<p><strong>Right Shift Operator: <code>&gt;&gt;</code></strong></p>
+<p>此运算符将某个数的所有二进制位，往右移动某个确切数目，对于移动后左侧留下的那些空白二进制位，将以原先二进制数最左边的位填充。因此<strong>符号位是不会改变的</strong>：</p>
+<pre><code class="language-java">int y = x &gt;&gt; 2; // 此时二进制位为：1111 1111 1111 1111 1111 1111 1111 1101 -&gt; -3
+</code></pre>
+<h3 id="无符号向右移位运算符"><a class="header" href="#无符号向右移位运算符">无符号向右移位运算符：<code>&gt;&gt;&gt;</code></a></h3>
+<p>此运算符与上面的右移运算符类似，但这个运算符会始终以零填充最左边的那些二进制位。因此 <strong>符号就可能会改变</strong>：</p>
+<pre><code class="language-java">int y = x &gt;&gt;&gt; 2;    // 此时二进制位为：0011 1111 1111 1111 1111 1111 1111 1101 -&gt; 1,073,741,821
+</code></pre>
+<h3 id="向左移位运算符"><a class="header" href="#向左移位运算符">向左移位运算符：<code>&lt;&lt;</code></a></h3>
+<p><strong>Left Shift Operator: <code>&lt;&lt;</code></strong></p>
+<p>此运算符与上面的无符号右移运算符类似，不过是往另一方向而已；最右边的那些二进制位是以全零填充的。因此 <strong>符号位可能改变</strong>。</p>
+<pre><code class="language-java">int y = x &lt;&lt; 2; // 此时二进制位为：1111 1111 1111 1111 1111 1111 1101 0100 -&gt; -44
+</code></pre>
+<h2 id="不变性"><a class="header" href="#不变性">不变性</a></h2>
+<p><strong>Immutability</strong></p>
+<h3 id="为何要留意字符串是-immutable-类型的"><a class="header" href="#为何要留意字符串是-immutable-类型的">为何要留意字符串是 <code>Immutable</code> 类型的？</a></h3>
+<p><strong>Why do you care that Strings are <code>Immutable</code></strong>?</p>
+<p>在Java程序变得大起来时，最后就将不可避免地有着很多很多的 <code>String</code> 对象。为了安全目的，以及节省内存的缘故（请记住Java程序可在那些启用了Java的内存极少的移动电话上运行），Java中的字符串是不可更改的。这意味着在下面这样写代码时：</p>
+<pre><code class="language-java">String s = &quot;0&quot;;
+
+for (int x = 1; x &lt; 10; x++) {
+    s = s + x;
+}
+</code></pre>
+<p>这实际上进行的是在创建10个<code>String</code>对象（他们的值分别是 <code>0</code>、<code>01</code>、<code>012</code> 直到 <code>0123456789</code>）。最后的那个 <code>s</code> 中指向的是值为<code>0123456789</code>的字符串，但是此刻存在着多大 <em>十个</em> 的字符串！</p>
+<p>无论何时构造一个新的 <code>String</code> 对象，JVM 都会将其放入到一个名为 &quot;字符串池（<code>String</code> Pool）&quot; 的内存部分（是不是听起来很新奇？）。在字符串池中已经有一个同样值的<code>String</code>对象时，JVM就不再会创建一个重复的了，JVM会简单地将其他引用变量指向到这个既有条目。JVM之所以能侥幸做到这点，就是因为字符串具有不变性；引用变量无法修改某个<code>String</code>对象的值，是由于有别的引用变量引用了这同一个<code>String</code>对象（The JVM can get away with this because Strings are immutable; one reference variable can't change a <code>String</code>'s value out from under another reference variable referring to the same things）。</p>
+<p><code>String</code>对象池的另一问题在于，垃圾回收器 <em>无法触及到那里</em>。因此在此示例中，除非碰巧随后要构造一个，比如说<code>01234</code>的<code>String</code>对象，那么在那个 <code>for</code> 循环中构造的前 9 个字符串，就将在那里白白浪费内存。</p>
+<h3 id="这样做为何能节省内存"><a class="header" href="#这样做为何能节省内存">这样做为何能节省内存？</a></h3>
+<p>好吧，若没有用心编写代码，<em>这种不可变性还是无法节省内存的</em>！不过在掌握了 <code>String</code> 类不可更改能力的原理时，那么就可以利用到不可更改性的有点，从而节省到内存。在势必要进行很多 <code>String</code> 对象操作（比如字符串连接等等）时，尽管有另一个类 <code>StringBuilder</code>更加适合这样的目的。关于 <code>StringBuilder</code>类，后面会有篇幅会讲到。</p>
+<h3 id="为何要对包装器的不可更改性加以留意"><a class="header" href="#为何要对包装器的不可更改性加以留意">为何要对包装器的不可更改性加以留意？</a></h3>
+<p><strong>Why do you care that Wrappers are <code>Immutable</code></strong>?</p>
+<p>之前在涉及到数学计算的那一章，曾讲到包装类的两个主要用途：</p>
+<ul>
+<li>将原生值加以包装，从而这个原生值可表现为一个对象；</li>
+<li>一些静态工具方法的使用（比如，<code>Integer.parseInt()</code>）。</li>
+</ul>
+<p>记住可像下面这样创建一个包装器对象，至关重要：</p>
+<pre><code class="language-java">Integer iWrap = new Integer(42);
+</code></pre>
+<p>其中 <code>iWrap</code> 就是包装器对象了。他的值将 <em>始终</em> 是 <code>42</code>。<em><strong>包装器对象，是没有设置器方法的（There is no setter method for a wrapper object）</strong></em>。当然，是可以将这个 <code>iWrap</code> 引用变量，指向一个 <em>不同的</em> 包装器对象的，然而这时就会有 <em>两个</em> 对象了。一旦创建出一个包装器对象，那么就没有办法去修改那个对象的 <em>值</em> 了！</p>
+<blockquote>
+<p><strong>牢牢记住</strong></p>
+<p><em>Roses are red, violets are blue</em>.</p>
+<p><em><strong>Strings are immutable, wrappers are too</strong></em>.</p>
+</blockquote>
+<h2 id="断言assertions"><a class="header" href="#断言assertions">断言（Assertions）</a></h2>
+<p>关于在开发Java程序的过程中，如何调试的问题，这里尚未涉及。相信大家是在命令行中学习Java语言的，就如同本书一直以来所做的那样。一旦成为了一名Java专业人员，就要决定使用某种集成开发环境了，就可能会用到别的调试工具。在过去的日子里，Java程序员要调试代码时，就会依赖大量贯穿于程序中间的 <code>System.out.println()</code> 语句，打印出当前变量的值，及“已达到此处”的消息，来检查流程控制是否正常工作。（第6章中已编写好的代码，就留下了代码中的一些<code>print</code>语句。）尔后一旦程序正确工作了，就要挨个地将所有这些 <code>System.out.println()</code> 语句再清理掉。这样做是繁琐且易于出错的。而自Java 1.4（即 5.0） 版本开始，程序调试就变得容易得多了。那么答案到底是什么呢？</p>
+<h3 id="断言assertions-1"><a class="header" href="#断言assertions-1">断言（Assertions）</a></h3>
+<p>断言就跟吃了兴奋剂的 <code>System.out.println()</code>语句一样。把断言添加到代码，就跟加入了 <code>println</code> 语句是一样的。Java 5.0 的编译器，假定即将编译的源文件是兼容 5.0 版本的，那么自 Java 5.0 开始，默认就开启了带断言的编译了。</p>
+<p>在运行时，若什么也没做，那么添加到代码的那些断言语句，就会被JVM忽略，且不会减慢程序运行。但在告诉了JVM <em>开启</em> 那些断言时，在无需修改任何一行代码的情况下，这些断言就将有助于程序调试！</p>
+<p>一些人曾抱怨，这必将在生产代码中留下这些断言语句，然而在代码已经部署在现场时，将这些断言语句留下来，会是相当有价值的。在客户遇到问题时，就可以指导他们在开启断言下，运行程序，然后让客户将输出发送过来。而在把这些断言从代码中剥离出来时，就永久失去了这样的选项了。同时保留下断言语句，并没有任何缺点；在断言未被开启时，他们是完全被JVM忽略的，因此并没有任何需要担心的性能问题。</p>
+<h3 id="怎样让断言发挥作用"><a class="header" href="#怎样让断言发挥作用">怎样让断言发挥作用</a></h3>
+<p><strong>How to make <code>Assertion</code>s work</strong></p>
+<p>在任何自认为某个事情 <em>必定为真</em> 的地方，加入断言语句。比如：</p>
+<pre><code class="language-java">assert (height &gt; 0);
+// 若 height &gt; 0 为真，那么程序将正常继续运行；
+// 若为假，那么将抛出一个 AssertionError 异常
+</code></pre>
+<p>而通过下面这样写，就可以将更多信息添加到栈轨迹（the stack trace）：</p>
+<pre><code class="language-java">assert (height &gt; 0) : String.format(&quot;height = %d weight = %d&quot;, height, weight);
+</code></pre>
+<h3 id="带有断言的编译和运行"><a class="header" href="#带有断言的编译和运行">带有断言的编译和运行</a></h3>
+<p><strong>Compiling and running with <code>Assetion</code>s</strong></p>
+<p>带有断言的 <em>编译</em>，与普通编译一样，不需要特定的命令行选项。</p>
+<p>而带有断言的 <em>运行</em>：</p>
+<pre><code class="language-console">java -ea TestDrive
+</code></pre>
+<h2 id="代码块作用域block-scope"><a class="header" href="#代码块作用域block-scope">代码块作用域（Block Scope）</a></h2>
+<p>在第9章里，曾讲到本地变量，是如何仅伴随驻留在栈上、其被声明所在的方法而存活的（In chapter 9, we talked about how local variables live only as long as the method in which they're declared stays on the stack）。然而一些变量甚至会有着 <strong>更短</strong> 的生命周期。在方法内部，常常会创建一些代码 <em>块</em>。虽然之前一直都在这样做，但还不曾特意 <em>讨论</em> 过 <em>代码块</em> 这个说法。典型的代码块，是出现在方法里面的，且是由花括弧 <code>{}</code> 界定出来。后续将见到的一些常见代码块，包括了循环（<code>for</code>、<code>while</code>）及条件表达式（比如 <code>if</code> 语句）等。</p>
+<p>来看看这个示例：</p>
+<pre><code class="language-java">//               ↙ 方法代码块的开始
+void doStuff () {
+    // 作用范围为整个方法的本地变量
+    int x = 0;
+
+    //                           ↙ for 循环代码块的开头，同时 y 的作用范围仅限这个 for 循环！
+    for (int y = 0; y &lt; 5; y++) {
+        // 这里没有问题，x 与 y 都是在作用域
+        x = x + y;
+//   ↙ 这是 for 循环代码块的结束
+    }
+
+    // 哎呀！这不会编译！这里的 y 是超出作用域了！（注意，这是与某些其他语言工作方式所不同的！）
+    x = x * y;
+}
+</code></pre>
+<p>在上个示例中，<code>y</code>是个块级变量，是在一个块中被声明的，同时在那个 <code>for</code> 循环结束时，<code>y</code> 就立即失去了其作用域了。<em><strong>尽可能地优先使用本地变量而不是实例变量，进而优先使用块级变量而非本地变量，将令到所编写的 Java 程序更具可调试性与扩展性（Your Java programs will be more debuggable and expandable if you use local variables instead of instance variables, and block variables instead of local variables, whenever possible）</strong></em>。编译器将确保代码编写者没有尝试使用已超出作用范围的变量，因此不必担心运行时崩溃问题。</p>
+<h2 id="链式调用运行linked-invocations"><a class="header" href="#链式调用运行linked-invocations">链式调用/运行（Linked Invocations）</a></h2>
+<p>由于本书尽量维持语法尽可能简洁和易读，因此本书中用到这个特性的地方很少。但在Java中，是有着许多合法捷径的，这些是在今后肯定会碰到的，尤其是在阅读其他人写的代码的时候。会遇到较为常见的代码结构之一，便是被称作 <em>链式调用/运行</em> 的东西。比如：</p>
+<pre><code class="language-java">StringBuffer sb = new StringBuffer (&quot;spring&quot;);
+sb = sb.delete(3, 6).insert(2, &quot;umme&quot;).deleteCharAt(1);
+System.out.format(&quot;sb = %s&quot;, sb);
+// 运行结果为：sb = summer
+</code></pre>
+<p>在上面代码的第二行，到底发生了什么呢？固然，这是个刻意为之的示例，不过仍需掌握该怎么去解读这些东西。</p>
+<ol>
+<li>
+<p>是从左往右进行处理的；</p>
+</li>
+<li>
+<p>找出最左边方法调用的结果，此示例中即为 <code>sb.delete(3, 6)</code>。在检查了 API 文档中的 <code>StringBuffer</code>类后，就会发现这个 <code>delete()</code> 方法返回的是一个 <code>StringBuffer</code> 对象。运行 <code>delete()</code> 方法的结果，是个值为 <code>spr</code> 的 <code>StringBuffer</code> 对象；</p>
+</li>
+<li>
+<p>接下来最左边的方法（<code>insert()</code>）是在新创建出的 <code>StringBuffer</code> 对象 <code>spr</code> 上调用的。该方法调用（即 <code>insert()</code> 方法）的结果，<em>同样</em> 是个 <code>StringBuffer</code> 对象（虽然该方法返回值不必与前一方法返回值类型一致），同时随着程序继续运行，所返回的对象又被用于右边的下一方法。理论上，在单个语句中是可以链接任意多想要的方法（虽然很少见到在一个语句中有多余三个链接方法）。若没有这样的链接特性，那么上面的第二行代码，将更具可读性，而看起来像下面这样：</p>
+</li>
+</ol>
+<pre><code class="language-java">sb = sb.delete(3, 6);
+sb = sb.insert(2, &quot;umme&quot;);
+sb = sb.deleteCharAt(1);
+</code></pre>
+<p>但还有一个之前曾见到用过的、更为常见而有用的实例，这里认为应该再次指出来。那就是在 <code>main()</code> 方法需要运行主类的一个实例方法，而又不需要保留一个到该类实例的 <em>引用变量</em> 时。也就是说，<code>main()</code>方法为可以运行此实例的 <em>方法</em> 之一，<em>仅</em>需要创建该实例即可。</p>
+<pre><code class="language-java">class Foo {
+    public static void main (String[] args) {
+        // 这里是要调用 go() 方法，而并不在意那个 Foo 的实例，因此就
+        // 没有刻意把这个新的 Foo 对象赋值给某个引用变量了。
+        new Foo().go();
+    }
+
+    void go () {
+        // 这里是那些真正想要的......
+    }
+}
+</code></pre>
+<h2 id="匿名及静态嵌套类"><a class="header" href="#匿名及静态嵌套类">匿名及静态嵌套类</a></h2>
+<p><strong>Anonymous and Static Nested Classes</strong></p>
+<h3 id="嵌套类有着多种形式"><a class="header" href="#嵌套类有着多种形式">嵌套类有着多种形式</a></h3>
+<p><strong>Nested classes come in many flavors</strong></p>
+<p>在本书的 GUI 事件处理章节，开始将内部（嵌套）类用作实现事件收听器接口的一个解决办法。那正是内部类的最常见、最实用及最具可读性的一种形式 -- 其中用到的类，是简单地嵌套在另一包含他们类的花括弧里头的（That's the most common, practical, and readable form of an inner class--where the class is simply nested within the curly braces of another enclosing class）。同时请记住，因为内部类是外部/包覆类的成员，这就意味着为了获取到一个内部类的实例，是需要外部类的一个实例的。</p>
+<p>然而，还有一些其他种类的内部类，包括 <em>静态</em> 及 <em>匿名</em> 的内部类。这里不会涉及到细节性的东西，但这里又不愿让你在看到一些人的代码中，奇怪语法时被震惊到。这是因为在Java语言下所能做的任何事情里头，或许没有什么能比匿名内部类，产生出更加怪模怪样的代码了。不过这里是要从一些更简单的东西开始 -- 静态嵌套类（Because out of virtually anything you can do with the Java language, perhaps nothing produces more bizarre-looking code than anonymous inner classes. But we'll start with something simpler--static nested classes）。</p>
+<h3 id="静态嵌套类static-nested-classes"><a class="header" href="#静态嵌套类static-nested-classes">静态嵌套类（Static nested classes）</a></h3>
+<p>这里已知 <code>static</code> 的意思 -- 一些与类，而非特定实例捆绑的东西。而静态嵌套类，除了被关键字 <code>static</code> 标记了外，则与那些用于事件收听器的非静态类看起来是差不多的。</p>
+<pre><code class="language-java">package com.xfoss.Appendix;
+
+class FooOuter {
+    // 静态嵌套类只是 -- 包含在另一个类中，并用 static 标识符
+    // 标记了的类。
+    static class BarInner {
+        void sayIt () {
+            System.out.println(&quot;一个静态内部类的方法&quot;);
+        }
+    }
+}
+
+public class TestDrive {
+    public static void main (String[] args) {
+        // 由于静态嵌套类是......静态的，因此就不会用到外部类的实例。而只
+        // 使用这个静态嵌套类的名称，这与运行静态方法或访问静态变量的方式
+        // 是一致的。
+        FooOuter.BarInner foo = new FooOuter.BarInner();
+        foo.sayIt();
+    }
+}
+</code></pre>
+<h3 id="嵌套与内部类之间的区别"><a class="header" href="#嵌套与内部类之间的区别">嵌套与内部类之间的区别</a></h3>
+<p><strong>The difference between <em>nested</em> and <em>inner</em></strong></p>
+<p>所有定义在别的类作用范围内部的Java类，都被称作是 <em><strong>嵌套（nested）</strong></em> 类。而不管这个类是匿名的、静态的，还是正常的。只要他是在另一个类里头，那么技术上将，他就是个 <em>嵌套</em> 类。但那些 <em>非静态</em> 嵌套类，通常被称为是 <em>内部</em> 类，也就是本书早先叫做的那样。底线则是：所有内部类都是嵌套类，但并非所有嵌套类都是内部类。</p>
+<h3 id="匿名内部类"><a class="header" href="#匿名内部类">匿名内部类</a></h3>
+<p>请设想正在编写一些 GUI 代码，而猛然意识到需要某个实现了 <code>ActionListener</code> 类的实例。却发现手头并没有一个 <code>ActionListener</code> 类型的实例。进而意识到还不曾编写过那种收听器的 <em>类</em>。这个时候有两个选择：</p>
+<ol>
+<li>
+<p>在代码中编写一个内部类，也就是前面GUI代码中所做的那种方式，进而对其初始化并将得到的实例，传入到按钮的事件注册（<code>addActionListener()</code>）方法；</p>
+<p>或者</p>
+</li>
+<li>
+<p>就在这里，立即创建一个 <em>匿名</em> 内部类并对其进行初始化。<em><strong>明确地就在需要收听器类型对象的地方</strong></em>。没错，就是在通常要提供到实例的地方，创建类和相应的实例。请稍加思考一下这种做法 -- 那意味着是在通常只传入一个 <em>实例</em> 到方法参数的地方，传入了整个的 <em>类</em>！</p>
+</li>
+</ol>
+<pre><code class="language-java">package com.xfoss.Appendix;
+
+import java.awt.event.*;
+import javax.swing.*;
+
+public class TestAnon extends JFrame {
+
+    public static void main (String[] args) {
+        new TestAnon();
+    }
+
+    public TestAnon () {
+
+        // 这里构造了一个视窗框，并添加了一个按钮，现在需要将
+        // 一个动作事件收听器注册到整个按钮。只是这里并没有构造
+        // 一个实现了 ActionListener 接口的类......
+        super(&quot;TestAnon&quot;);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton btn = new JButton (&quot;点击&quot;);
+        // 正常情况下是要像下面这样做的--传入一个到某个内部类 -- 一个实现
+        // 了 ActionListener 接口（已经 actionPerformed() 方法）的内部类，实例
+        // 的引用变量......
+        // btn.addActionListener(quitListener);
+
+        // 不过现在传入不再是个引用变量，这里传入的是......整个新类的定义！！
+        // 也就是说，这里是在正好需要那个类的地方，直接写出的那个实现了
+        // ActionListener 接口的类。这种语法还自动创建了一个该类的实例。
+        //
+        // 请注意尽管 ActionListener 是个接口，但这里仍是写的 “new ActionListener()” 
+        // 而这样是无法构造出 ActionListener 类型的一个实例的！但这种语法真正的意义
+        // 在于，“创建一个新的，实现了 ActionListener 接口的类（不带名字），并顺便
+        // 在接下来提供到该接口所需的方法实现，即这里的 actionPerformed()”。
+        btn.addActionListener(new ActionListener () {
+            public void actionPerformed (ActionEvent ev) {
+                System.exit(0);
+            }
+        }); // 整个语句到这里才算结束！
+
+        getContentPane().add(btn);
+
+        setBounds(50, 50, 640, 480);
+        pack();
+        setVisible(true);
+    }
+}
+</code></pre>
+<h2 id="访问级别与访问修饰符谁看见什么的问题"><a class="header" href="#访问级别与访问修饰符谁看见什么的问题">访问级别与访问修饰符（谁看见什么的问题）</a></h2>
+<p><strong>Access Levels and Access Modifiers(Who Sees What)</strong></p>
+<p>Java 语言有着 <em>四个</em> 访问 <em>级别</em>，以及 <em>三个</em> 访问 <em>修饰符</em>。之所以只有 <em>三个</em> 修饰符，是因为 <em>默认的那个</em> （即在不使用任何访问修饰符时所得到的） <em>即为</em> 四个访问级别之一。</p>
+<h3 id="访问级别"><a class="header" href="#访问级别">访问级别</a></h3>
+<p>（以他们各自限制程度排序，自最少限制到最大限制，in order of how restritive they are, from least to most restrictive）</p>
+<ul>
+<li><code>public</code> &lt;-- <code>public</code> 访问级别表示任何地方的任何代码，都可以访问公开物件（这里的“物件”，指的是类、变量、方法、构造器等等）；</li>
+<li><code>protected</code> &lt;-- 除了允许打包外部对<code>protected</code>装饰的物件进行子类化，从而对其进行继承外，与默认（不带访问级别修饰符）方式工作完全类似，即同一打包中有着访问权限（<code>protected</code> works just like default(code in the same package has access), EXCEPT it also allows subclasses outside the package to inherit the protected thing）；</li>
+<li><code>default</code> &lt;-- <code>default</code> 访问级别表示只有与具有<code>default</code>物件类在同一打包里头的代码，才能访问到该<code>default</code>的物件（<code>default</code> access means that only code within the same package as the class with the default thing can access the <code>default</code> thing）；</li>
+<li><code>private</code> &lt;-- <code>private</code> 访问级别表示只有同一类里头的代码，才能访问到该 <code>private</code> 物件。请记住这表示对类是<code>private</code>的，而非相对对象。一个 <code>Dog</code>对象可以看到另一<code>Dog</code>对象的私有成员，但<code>Cat</code>对象是无法看到<code>Dog</code>对象的私有成员的。</li>
+</ul>
+<h3 id="访问装饰符access-modifiers"><a class="header" href="#访问装饰符access-modifiers">访问装饰符（Access modifiers）</a></h3>
+<pre><code class="language-java">public 
+protected
+private
+</code></pre>
+<p>多数时间都将只会用到 <code>public</code> 与 <code>private</code> 访问级别。</p>
+<h3 id="public"><a class="header" href="#public"><code>public</code></a></h3>
+<p>对于类、常量（<code>static final</code>的变量），与那些要暴露给其他代码的方法（比如访问器和设置器），以及多数的构造器，就要使用 <code>public</code> 访问级别装饰符。</p>
+<h3 id="private"><a class="header" href="#private"><code>private</code></a></h3>
+<p>显然对于全部的实例变量，还有那些不打算外部代码调用到的方法（也就是说，被自己类中 <code>public</code> 方法使用的那些方法），请使用 <code>private</code> 装饰符。</p>
+<p>由于在其他人的代码中会见到另外两个装饰符（<code>protected</code>与<code>default</code>），因此尽管不大会用到另外两个装饰符（<code>protected</code> 与 <code>default</code>），还是要知道他们的作用。</p>
+<h3 id="default-与-protected"><a class="header" href="#default-与-protected"><code>default</code> 与 <code>protected</code></a></h3>
+<p><strong><code>default</code></strong></p>
+<p><code>protected</code> 与 <code>default</code> 二者都是捆绑到封包的。默认访问级别比较简单 -- 表示只有 <em>同一封包里头</em> 的代码，才能访问带有默认访问级别的代码。那么比如对于某个<code>default</code>的类（这表示一个未被显示地声明为 <code>public</code> 的类），就只能被与该默认类在同一封包的其他类访问。</p>
+<p>然而所谓 <em>访问</em> 某个类，到底指的是什么呢？无权访问某个类的代码，甚至连 <em>想想</em> 该类都是不允许的（Code that does not have access to a class is not allowed to even <em>think</em> aobut the class）。而这里所说的 “想想”，指的是在代码中 <em>使用到</em> 整个类。比如，在由于访问限制，而没有对某个类的访问权限时，是不允许对整个类进行初始化，或者甚至不能用这个类来声明变量、参数或返回值类型的。直接就不可以将其敲入到你的代码中！若执意要敲入，那么编译器就会报出错误。</p>
+<p>请思考一下深层次的影响 -- 即使一些方法是<code>public</code>的，但如果这些方法是在一个默认类中，那么这些 <code>public</code> 的方法，也并非真的是 <code>public</code> 的了。在没法 <code>看到</code> 类的时候，也就无法访问其中的方法了。</p>
+<p>那为什么要将访问级别限制到只在同一封包内部呢？通常封包是设计为一组以一种关联集合方式工作的类（Typically, packages are designed as a group of classes that work together as a related set）。这样同一封包中的类，需要访问另一类的代码，就说得通了，同时作为一个封包，仅有少量类和方法暴露给外部世界（即封包外面的代码）。</p>
+<p>好吧，这就是 <code>default</code> 访问级别了。他是简单的 -- 在某个物件有着 <code>default</code> 访问级别时（请记住，这指的就是没有显式访问级别修饰符！），那么就只有与那个 <code>default</code> <em>物件</em>（类、变量、方法、内部类） 在同一封包里头的代码，才能访问那个 <em>物件</em>。</p>
+<p><strong><code>protected</code></strong></p>
+<p>受保护访问级别，与默认访问级别极为相似，只是有一个例外：<em>即使子类在所扩展超类封包外部</em>，这些子类仍运行 <em>继承</em> 受保护的物件。这就是了。这就是使用 <code>protected</code> 访问级别的全部好处 -- 这种实现了即使在超类所在封包外部的子类，也仍然 <em>继承到</em> 该超类包括方法与构造器等的组成部分（Protected access is almost identical to default access, with one exception: it allows subclasses to <em>inherit</em> the protected thing, <em>even if those subclasses are outside the package of the superclass they extend</em>. That's it. That's <em>all</em> <code>protected</code> buys you--the ability to let your subclasses be outside your superclass package, yet still <em>inherit</em> pieces of the class, including methods and constructors）。</p>
+<p>虽然许多开发者都发现，使用 <code>protected</code> 的理由极少，不过在一些设计中会用到他，同时终有一天你会发现他正是所要的访问级别。<code>protected</code>访问级别有趣的地方之一，就是--与其他访问级别不同--<code>protected</code>访问级别只使用于 <em>继承</em> 方面。在某个位处封包外部的子类有着到该超类（比如说这个超类有着一个 <code>protected</code> 的方法）的一个实例的 <em>引用变量</em> 时，那么这个子类是无法使用该超类类型的引用变量，访问到那个受保护方法的（One of the interesting things about <code>protected</code> is that--unlike the other access levels--<code>protected</code> access applies only to <em>inheritance</em>. If a subclass-outside-the-package has a <em>reference</em> to an instance of the superclass(the superclass that has, say, a <code>protected</code> method), the subclass can't access the protected method using that superclass reference）！该子类要能访问那个方法的唯一途径，就是通过 <em>继承到</em> 那个方法。也就是说，位处封包外部的子类，不具有对受保护方法的 <em>访问权限</em>，他只是<em>拥有</em> 经由继承得来的那个方法。</p>
+<h2 id="string-类与-stringbufferstringbuilder-的那些方法"><a class="header" href="#string-类与-stringbufferstringbuilder-的那些方法"><code>String</code> 类与 <code>StringBuffer</code>/<code>StringBuilder</code> 的那些方法</a></h2>
+<p>Java API 中最常用到的两个类，分别是 <code>String</code> 与 <code>StringBuffer</code> （还记得前面的 #9 就提到，<code>String</code>都是不可更改的，那么这里的<code>StringBuffer</code>/<code>StringBuilder</code>在要操作字符串时，要高效得多了）。而自Java 5.0 开始，除非是不常见的、需要线程安全的字符串操作，那么就应使用 <code>StringBuilder</code> 而不是 <code>StringBuffer</code>。下面是这些类中 <strong>关键</strong> 方法的简要概述：</p>
+<h3 id="string-与-stringbufferstringbuilder-都有的方法"><a class="header" href="#string-与-stringbufferstringbuilder-都有的方法"><em><code>String</code> 与 <code>StringBuffer</code>/<code>StringBuilder</code> 都有的方法</em>：</a></h3>
+<pre><code class="language-java">char charAt(int index);                 // 在确切位置处是什么字符
+int length();                           // 这个字符串对象有多长
+String substring(int start, int end);   // 获取此对象的一部分
+String toString();                      // 该 String 对象的字符串值是什么
+</code></pre>
+<h3 id="要连接字符串to-concatenate-strings"><a class="header" href="#要连接字符串to-concatenate-strings"><em>要连接字符串（to concatenate Strings）</em>:</a></h3>
+<pre><code class="language-java">String concat(string);                  // 对于 String 类
+String append(String);                  // 对于 StringBuffer 与 StringBuilder
+</code></pre>
+<h3 id="string类有这些方法"><a class="header" href="#string类有这些方法"><em><code>String</code>类有这些方法</em>：</a></h3>
+<pre><code class="language-java">String replace(char old, char new);     // 替换所有出现的某个字符
+String substring(int begin, int end);   // 获取某个字符串的一部分
+char [] toCharArray();                  // 转化为字符数组
+String toLowerCase();                   // 将所有字符转为小写
+String toUpperCase();                   // 将所有字符转为大写
+String trim();                          // 移除两端的空白字符
+String valueOf(char []);                // 从字符数组构造处一个 String 对象
+String valueOf(int i);                  // 从某个原生值构造出一个 String 对象，也支持其他类型的原生值
+</code></pre>
+<h3 id="stringbuffer与stringbuilder有着的方法"><a class="header" href="#stringbuffer与stringbuilder有着的方法"><em><code>StringBuffer</code>与<code>StringBuilder</code>有着的方法</em>：</a></h3>
+<pre><code class="language-java">StringB... delete(int start, int end);                      // 删除某个部分
+StringB... insert(int offset, any primitive or a char[]);   // 插入一些东西
+StringB... replace(int start, int end, String s);           // 使用这个字符串替换该部分
+StringB... reverse();                                       // 从前往后逆转这个 StringB... 对象
+void setCharAt(int index, char ch);                         // 替换指定的字符
+</code></pre>
+<blockquote>
+<p><em>注意</em>：这里的 <code>StringB...</code> 既表示 <code>StringBuffer</code> 也表示 <code>StringBuilder</code>。</p>
+</blockquote>
+<h2 id="多维数组multidimensional-arrays"><a class="header" href="#多维数组multidimensional-arrays">多维数组（Multidimensional Arrays）</a></h2>
+<p>在多数语言中，在创建一个比如 4x2 的二维数组时，将会设想一个 4 个元素乘以 2 个元素，总共 8 个元素的矩形。然而在Java中，这样的数组实际上将是链接起来的 5 个数组！在Java中，二维数组直接就是个 <strong>数组的数组</strong>（In java, a two dimensional array is simply <em>an array of arrays</em>）。（而三维数组，则是个数组的数组的数组，而这里将把三维数组留给你自己去玩。）下面就是其工作原理</p>
+<pre><code class="language-java">int[][] a2d = new int[4][2];
+</code></pre>
+<p>根据这个语句，JVM 创建出有 4 个元素的数组。该数组中 <em>每个的</em> 元素，实际上都是到某个（新近创建出的）、有着 2 个元素的 <code>int</code> 数组的引用变量。</p>
+<p><img src="images/Ch19_01.png" alt="Java中一个二维整型数组的数据结构" /></p>
+<p><em>图 1 - Java中一个二维整型数组的数据结构</em></p>
+<h3 id="多维数组的使用"><a class="header" href="#多维数组的使用">多维数组的使用</a></h3>
+<ul>
+<li>要访问第三个数组中的第二个元素：<code>int x = a2d[2][1];   // 请记住，索引是基于 0 的！</code>;</li>
+<li>要构造一个到这些子数组之一的一维数组引用变量：<code>int[] copy = a2d[1];</code>;</li>
+<li>某个 <code>2 x 3</code> 数组的便捷初始化：<code>int [][] x = { {2, 3, 4}, {7, 8, 9} };</code>;</li>
+<li>要构造一个有着不规则尺寸的二维数组（非对齐的、子数组长短不一的）：</li>
+</ul>
+<pre><code class="language-java">int[][] y = new int[2][];   // 仅构造那个长度为 2 的前一个数组
+y[0] = new int [3];     // 构造第一个长度为 3 的子数组
+y[1] = new int [5];     // 构造第二个长度为 5 的子数组
+</code></pre>
+<p><strong>还有一个排在第一位的、难以搞明白的东西</strong>......</p>
+<h2 id="枚举也叫做枚举类型或-enums"><a class="header" href="#枚举也叫做枚举类型或-enums">枚举（也叫做枚举类型或 <code>Enums</code>）</a></h2>
+<p><strong>Enumerations(also called Enumerated Types or Enums)</strong></p>
+<p>本书中曾讲到过一些定义在 API 中的常量，比如，<code>JFrame.EXIT_ON_CLOSE</code>。通过将某个变量标记为 <code>static final</code>，也可以创建我们自己的常量。然而在某些时候，会打算创建一套常量值，来表示某个变量 <em><strong>仅有的</strong></em> 有效值（But sometimes you'll want to create a set of constant values to represent the <em><strong>only</strong></em> valid values for a variable）。那么这套有效值，通常指的就是 <em>枚举</em>。在Java 5.0 之前，就只能在Java中进行半成品的枚举创建。而自Java 5.0起，就可以创建出成熟的、将为你的那些使用 Java 5.0 之前版本的朋友羡慕的枚举了。</p>
+<h3 id="乐队里都有谁whos-in-the-band"><a class="header" href="#乐队里都有谁whos-in-the-band">乐队里都有谁（Who's in the band）？</a></h3>
+<p>这里假设是在创建一个喜爱乐队的网站，进而是要确保所有评论都被导向到某名特定乐队成员。</p>
+<h3 id="老式的模仿出一个假的-enum"><a class="header" href="#老式的模仿出一个假的-enum">老式的模仿出一个假的 “enum”:</a></h3>
+<pre><code>public static final int JERRY = 1;
+public static final int BOBBY = 2;
+public static final int PHIL = 3;
+
+// 后面的代码
+
+// 我们正希望在此处获取到的 selectedBandMember 有着一个有效值！
+if(selectedBandMember == JERRY) {
+    // 完成有关JERRY 的事情
+}
+</code></pre>
+<p>这种技巧好的一面，是他确实令到代码更加容易阅读了。而另一个好苗头，则是甚至无法修改所创建的假冒枚举的值；<code>JERRY</code> 将始终为 <code>1</code>。这样做负面的地方，就是没有一种轻易或良好的方法，来确保<code>selectedBandMember</code>将始终为 <code>1</code>、<code>2</code>或 <code>3</code>。若一些隐藏很深的代码把 <code>selectedBandMember</code> 设置为了等于 <code>812</code>，那么这代码就会几近崩溃的......</p>
+<p>对于这同样情形，使用纯粹的Java 5.0 枚举特性，就不一样了。尽管这是个非常基础的枚举，但大多数枚举通常 <em>都是</em> 这样简单的。</p>
+<h3 id="新的正牌的-枚举"><a class="header" href="#新的正牌的-枚举">新的、正牌的 “枚举”：</a></h3>
+<pre><code class="language-java">// 这种类型看起来是不是像个简单的类定义啊？事实证明枚举确实
+// 是一种特殊的类。这里创建了一个叫做 “Members&quot; 的枚举类型。
+public enum Members { JERRY, BOBBY, PHIL };
+// 这个 ”selectedBandMember&quot; 即为类型 “Members&quot; 的，且他只能有
+// ”JERRY“、”BOBBY“ 或 ”PHIL” 三个值之一。
+public Memebers selectedBandMember;
+
+// 后续代码
+
+// Members.JERRY 这样的语法，是对一个枚举 “实例” 的引用。
+// 
+// 现在就无需担心selectedBandMember这个变量的值了！
+if ( selectedBandMember == Members.JERRY ) {
+    // 执行 JERRY 相关的事情
+}
+</code></pre>
+<p><strong>用到的<code>enum</code>类型，都对 <code>java.lang.Enum</code> 类进行了扩展</strong></p>
+<p>在创建某个 <code>enum</code> 类型时，（本质上）是在创建一个新类，并且还 <em><strong>是在隐式地扩展着 <code>java.lang.Enum</code> 类</strong></em>。是可以在枚举自己的源文件中，将枚举声明为其独有类，当然也可以作为别的类成员而声明（You can declare an enum as its own standalone class, in its own source file, or as a member of another class）。</p>
+<p><strong>在枚举下使用 <code>if</code> 与 <code>switch</code> 语句</strong></p>
+<p>运用刚才创建出的枚举类型，就可以使用 <code>if</code> 或 <code>switch</code> 语句，实现代码里的分支（Using the enum we just created, we can perform branches in our code using either <code>if</code> or <code>switch</code> statement）。还请注意这里既可以使用 <code>==</code>，或者 <code>.equals()</code> 方法，来对枚举类型实例进行比较。使用 <code>==</code> 被认为是更佳风格。</p>
+<pre><code class="language-java">// 将枚举值赋值给枚举类型的变量。
+Members n = Members.BOBBY;
+// 这两个语句工作正常！会打印出 “Rat Dog&quot;。
+if (n.equals(Members.JERRY)) System.out.println(&quot;Jerrrrry!&quot;);
+if (n == Members.BOBBY) System.out.println(&quot;Rat Dog&quot;);
+
+Members ifName = Members.PHIL;
+// 突击测验！输出会是什么呢？
+// 答案：¡ʎpᴉssɐƆ dǝǝp oƃ
+switch (ifName) {
+    case JERRY: System.out.print(&quot;make it sing &quot;);
+    case PHIL: System.out.print(&quot;go deep &quot;);
+    case BOBBY: System.out.print(&quot;Cassidy! &quot;);
+}
+</code></pre>
+<p><strong>类似枚举的真正迷惑人的版本（a really tricked-out version of a silimar enum）</strong></p>
+<p>可将诸如构造器、方法、变量，以及一些叫做常量专用的类代码体等的一大批物件，添加到枚举（You can add a bunch of things to your enum like a constructor, methods, variables, and someting called a constant-specific class body）。虽然他们并不常见，但或许会偶遇到这些语法。</p>
+<pre><code class="language-java">package com.xfoss.Appendix;
+
+public class HfjEnum {
+    enum Names {
+        // 这里的 “lead guitar” 是个传入到底下声明的构造器
+        // 的参数。
+        JERRY(&quot;lead guitar&quot;) { 
+            // 花括符中的这些，这些就是叫做“常量专用的类代码体（
+            // constant-specific class bodies）” 的东西。在枚举
+            // 定义中的基本方法sing() 于JERRY 或 BOBBY 上调用到时，请将
+            // 他们想作是对基本枚举方法（也就是那个本示例中的&quot;sing()&quot;
+            // 方法）的重写。
+            public String sings (){
+                return &quot;plaintively&quot;;
+            }
+        },
+        BOBBY(&quot;rhythm guitar&quot;) {
+            public String sings () {
+                return &quot;hoarsely&quot;;
+            }
+        },
+        PHIL(&quot;bass&quot;);
+
+        private String instrument;
+
+        // 这是该枚举的构造器。对于每个声明的枚举值，他都会运行
+        // 一次（本示例中这个构造器会运行三次）。
+        Names (String instrument) {
+            this.instrument = instrument;
+        }
+
+        // 下面两个方法，会在 &quot;main()&quot; 方法中被调用到。
+        public String getInstrument () {
+            return this.instrument;
+        }
+
+        public String sings () {
+            return &quot;occasionally&quot;;
+        }
+    }
+
+    public static void main (String[] args) {
+        // 所有枚举类型，都带有一个内建的 &quot;values()&quot; 方法，该
+        // 方法一般是像下面这样，用在 “for&quot; 循环中的。
+        for (Names n : Names.values()) {
+            System.out.format(&quot;%s, 他的乐器是：%s, 他演唱的是：%s\n&quot;, 
+                    n, n.getInstrument(), n.sings());
+        }
+    }
+}
+</code></pre>
+<p>该程序的运行结果：</p>
+<pre><code class="language-console">$java -jar build/libs/com.xfoss.learningJava-0.0.1.jar
+JERRY, 他的乐器是：lead guitar, 他演唱的是：plaintively
+BOBBY, 他的乐器是：rhythm guitar, 他演唱的是：hoarsely
+PHIL, 他的乐器是：bass, 他演唱的是：occasionally
+</code></pre>
+<blockquote>
+<p>请注意，只有在枚举值没有“常量专用类代码体（constant-specific class body）”的时候，才会调用到那个基本的 <code>sing()</code> 方法。</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Ch20_Appendix_B.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Ch20_Appendix_B.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
