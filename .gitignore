@@ -1,12 +1,6 @@
 .gradle
 book
 
-
-theme/index.hbs
-theme/pagetoc.css
-theme/pagetoc.js
-
-
 bin/**
 target
 **/build/
