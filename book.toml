@@ -1,0 +1,11 @@
+[book]
+authors = ["Lenny Peng"]
+language = "zh_CN"
+multilingual = false
+src = "src"
+title = "Yet another Chinese Head First Java book."
+
+[preprocessor.pagetoc]
+[output.html]
+additional-css = ["theme/pagetoc.css"]
+additional-js  = ["theme/pagetoc.js"]
