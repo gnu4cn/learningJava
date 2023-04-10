@@ -232,7 +232,7 @@ public class Dog extends Object {}
 
 等一下，`Dog` 不是已经扩展了 `Canine` 了吗？好吧，编译器将让 `Canine` 去扩展 `Object`，然而 `Canine`又是扩展的 `Animal`。还是没问题，这个时候编译器又会去让 `Animal` 对 `Object` 进行扩展。
 
-__所有的没有显式扩展另一个类的类，都是隐式地扩展了 `Object`。__ 
+__所有的没有显式扩展另一个类的类，都是隐式地扩展了 `Object`。__
 
 那么，因为 `Dog` 扩展了 `Canine`，他就不算是直接扩展了 `Object`（但他还是间接扩展了 `Object`），对于 `Canine`，也是这样的，不过`Animal`则是直接扩展了 `Object`。
 
@@ -334,7 +334,7 @@ __当一个 `Dog` 不再像一个 `Dog` 那样行事时__
 ```java
 public void go () {
     Dog aDog = new Dog();
-    Dog sameDog = getObject (aDog); 
+    Dog sameDog = getObject (aDog);
 }
 
 public Object getObject (Object o) {
@@ -584,7 +584,7 @@ __那么我们真正需要的是什么呢__ ？
 
 允许致命死亡钻石的语言，因为不得不加入特殊规则来解决潜在的歧义，从而会带来一些恶心的复杂性。额外的那些规则，除了意味着在学习掌握这些规则时付出额外努力，还有在编写代码时对这些“特别实例”的关注。Java语言作为一种简单的语言，有着不会在某些情形下就随意改变的一致性规则。因此Java（与 C++ 不一样）就不用你去考虑这个致命死亡钻石问题。但这又回到了最初的问题！*怎么去解决这个 `Animal`/`Pet` 问题*？
 
-## <a id="interface_rescue"></a>使用接口来拯救！
+## 使用接口来拯救！
 
 **Interface to the rescue**!
 

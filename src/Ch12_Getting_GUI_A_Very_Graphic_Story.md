@@ -130,7 +130,7 @@ public class SimpleGui1 {
 
 - **听说 `Swing` 慢如蜗牛，没有人用这玩意儿**。
 
-> 以前或许是这样，现在可不是这样了。在性能差的机器上，或许会感受到 `Swing` 的痛点。但只要是一台不那么老旧的机器，在使用 Java 版本1.3及以后的版本的情况下，甚至感受不到 `Swing` GUI 与原生GUI的有什么不同。时至今日，`Swing`在所有类别的app中都有重度使用。 
+> 以前或许是这样，现在可不是这样了。在性能差的机器上，或许会感受到 `Swing` 的痛点。但只要是一台不那么老旧的机器，在使用 Java 版本1.3及以后的版本的情况下，甚至感受不到 `Swing` GUI 与原生GUI的有什么不同。时至今日，`Swing`在所有类别的app中都有重度使用。
 
 
 ## 获取用户事件
@@ -237,7 +237,7 @@ import java.awt.event.*;
 // （按钮只会把事件，交给那些 ActionListener 的实现者们）
 public class SimpleGui implements ActionListener {
 	JButton b;
-	
+
 	public static void main (String[] args) {
 		try {
 		SimpleGui gui = new SimpleGui();
@@ -245,29 +245,29 @@ public class SimpleGui implements ActionListener {
 		} catch (HeadlessException e) {
 			System.out.format("没有显示器，无法运行本程序。\n"
 					+ "错误代码\n"
-					+ "------------------------------\n%s\n", e);			
+					+ "------------------------------\n%s\n", e);
 		}
 	}
-	
+
 	public void go () {
         JFrame f = new JFrame ();
         b = new JButton ("点我");
-		
+
         // 2) 在按钮上注册对按钮事件感兴趣。这行对按钮讲，“把我
         // 添加到你的收听者清单”。
         // 这里传递的参数，必须 是某个实现了 ActionListener 接口
         // 的类的对象！！！
         b.addActionListener(this);
-        
+
         f.getContentPane().add(b);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(300, 300);
         f.setVisible(true);
 	}
-	
+
     // 3) 对 ActionListener 接口的 actionPerformed() 方法进行实现......
     // 这就是那个具体的事件处理方法!
-    // 
+    //
     // 按钮调用他的这个方法，来让用户知道某个事件发生了。此方法会将一个
     // ActionEvent 对象，作为参数发送给收听者，不过这里并不需要这个
     // 参数。这里知道事件发生了就足够了。
@@ -408,9 +408,9 @@ import javax.swing.*;
 // 到视窗框的小部件。不过这样的小部件是自己定制的而已。
 class MyDrawPanel extends JPanel {
 
-    // 这可是终极图形方法（This is the Big Important 
+    // 这可是终极图形方法（This is the Big Important
     // Graphics method）。代码编写者绝不会自己调用到这个
-    // 方法的。系统会调用这个方法，并说，“这里有个类型为 Graphics 
+    // 方法的。系统会调用这个方法，并说，“这里有个类型为 Graphics
     // 现在就可以在上面绘画的、很好的绘制平面。”
     public void paintComponent (Graphics g) {
 
@@ -456,7 +456,7 @@ public class CustomWidgetTestDrive {
         } catch (HeadlessException e) {
             System.out.format("没有显示器，无法运行本程序。\n"
                     + "错误代码\n"
-                    + "------------------------------\n%s\n", e);			
+                    + "------------------------------\n%s\n", e);
         }
     }
 }
@@ -736,7 +736,7 @@ Graphics2D g2d = (Graphics2D) g;
 
 ```java
 // 真正意义上说，并不应该这样写（使用这种单个参数的添加
-// 方式，This isn't really the way you're supposed to do it(the 
+// 方式，This isn't really the way you're supposed to do it(the
 // one-arg method)）。
 frame.getContentPane().add(button);
 ```
@@ -784,7 +784,7 @@ public class SimpleGui3C implements ActionListener {
         button.addActionListener(this);
 
         CustomDrawPanel drawPanel = new CustomDrawPanel();
-        
+
         // 把这两个小部件（按钮与绘制面板），分别添加到
         // 视窗框的两个区域
         frame.getContentPane().add(BorderLayout.SOUTH, button);
@@ -936,7 +936,7 @@ public class SimpleGui3C implements ActionListener {
 
 > 若既可以有两个不同的事件收听者类，同时这两个类还能够访问到 GUI 主类中的实例变量，也就是这两个事件收听者类，看起来会属于那个GUI 主类，这要是能做到可就太好了。这样就可以鱼与熊掌二者兼得了（Then you'd have the best of both worlds）。好吧，这可能只是个美梦罢了。不过这只是脑洞大一点而已......
 
-## <a id="inner_class_rescue"></a>内部类来拯救！
+## 内部类来拯救！
 
 **Inner class to the rescue**!
 
@@ -946,7 +946,7 @@ public class SimpleGui3C implements ActionListener {
 
 > **内部类可使用其外层类的全部方法及实例变量，*就是私有的也可以***。
 > **An inner class can use all the methods and variables of the outer class, *even the private ones***.
-> 
+>
 > **内部类在使用这些变量与方法时，就好像这些方法与变量是在他自己里声明的一样**。
 > **The inner class gets to use those variables and methods just as if the methods and variables were declared within the inner class**。
 
@@ -1020,7 +1020,7 @@ class OuterClass {
 
     // 构造一个内部类的实例
     InnerClass inner = new InnerClass();
-    
+
     public void doStuff () {
         // 调用内部对象上的方法
         inner.go();
@@ -1551,7 +1551,7 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
 
             // 对音序器上的这些事件进行注册。这个事件注册方法
             // 会取得事件收听者 以及 一个表示需要的 ControllerEvent
-            // 事件代码清单。这里想要的只是编号 127 
+            // 事件代码清单。这里想要的只是编号 127
             // 的 ControllerEvent
             int [] eventsIWant = {127};
             s.addControllerEventListener(this, eventsIWant);
@@ -1587,7 +1587,7 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
 
     public MidiEvent makeEvent (int comd, int chan, int one, int two, int tick) {
         MidiEvent ev = null;
-        
+
         try {
             ShortMessage a = new ShortMessage();
             a.setMessage(comd, chan, one, two);
@@ -1629,7 +1629,7 @@ class DrawingPanel extends JPanel implements ControllerEventListener {
     }
 
     public void paintComponent(Graphics g) {
-        // 
+        //
         // 这里必须要使用一个标志变量，因为 别的 一些东西也可能会触发
         // repaint()，而这里只希望在有 ControllerEvent 才进行绘制
         //
@@ -1643,12 +1643,12 @@ class DrawingPanel extends JPanel implements ControllerEventListener {
             int b = (int) (Math.random() * 250);
 
             g.setColor(new Color(r, gr, b));
-            
+
             int ht = (int)(Math.random() * 120 + 10);
             int width = (int) (Math.random() * 120 + 10);
             int x = (int) (Math.random() * 40 + 10);
             int y = (int) (Math.random() * 40 + 10);
-            
+
             g.fillRect(x, y, width, ht);
             msg = false;
         } // if 结束
@@ -1716,7 +1716,7 @@ public class MiniMusicPlayer3 {
 
     public MidiEvent makeEvent (int comd, int chan, int one, int two, int tick) {
         MidiEvent ev = null;
-        
+
         try {
             ShortMessage a = new ShortMessage();
             a.setMessage(comd, chan, one, two);
@@ -1746,13 +1746,13 @@ public class MiniMusicPlayer3 {
                 int b = (int) (Math.random() * 250);
 
                 g.setColor(new Color(r, gr, b));
-                 
+
                 int x = (int) (Math.random() * 40 + 10);
                 int y = (int) (Math.random() * 40 + 10);
-               
+
                 int ht = (int)(Math.random() * fHeight / 2 + 10);
                 int width = (int) (Math.random() * fWidth / 2 + 10);
-                
+
                 g.fillRect(x, y, width, ht);
                 msg = false;
             }

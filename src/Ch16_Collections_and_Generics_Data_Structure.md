@@ -131,7 +131,7 @@ public class JukeBox1 {
 
 - **`LinkedHashMap`**
 
-    与常规 `HashMap` 类似，但他可以记住其中元素（名/值对）插入的顺序，也可以被配置为记住那些最近被访问过元素的顺序（Like a regular `HashMap`, except it can remember the order in which elements(name/value pairs) were inserted, or it can be configured to remember the order in which elements were last accessed）。 
+    与常规 `HashMap` 类似，但他可以记住其中元素（名/值对）插入的顺序，也可以被配置为记住那些最近被访问过元素的顺序（Like a regular `HashMap`, except it can remember the order in which elements(name/value pairs) were inserted, or it can be configured to remember the order in which elements were last accessed）。
 
 
 ### 可以使用`TreeSet`......，也可以使用`Collections.sort()方法`
@@ -258,7 +258,7 @@ class Song {
     }
 
     // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
-    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs)
     //  时，就会调用清单中各个元素的这个 toString() 方法。
     public String toString () {
         return title;
@@ -1230,7 +1230,7 @@ public class Song implements Comparable<Song> {
     }
 
     // 由于在执行 System.out.println(aSongObject)时，希望看到歌曲标题，因此
-    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs) 
+    //  这里重写了 toString() 方法。在执行 System.out.println(aListOfSongs)
     //  时，就会调用清单中各个元素的这个 toString() 方法。
     public String toString () {
         return title;
@@ -1239,14 +1239,14 @@ public class Song implements Comparable<Song> {
     // HashSet（或者别的其他会调用到此方法的东西） 会将这里的
     // 参数 Object aSong（），发送给另一 `Song` 对象。
     //
-    // 好消息是歌曲标题是个 `String`，而字符串是有一个重写的 equals() 
+    // 好消息是歌曲标题是个 `String`，而字符串是有一个重写的 equals()
     // 方法的。因此这里只要询问一个标题，他是否与另外一个标题相等即可。
     public boolean equals(Object aSong) {
         Song s = (Song) aSong;
         return getTitle().equals(s.getTitle());
     }
 
-    // 这里采取了与上面同样的处理......`String` 类已有一个重写的 hashCode() 
+    // 这里采取了与上面同样的处理......`String` 类已有一个重写的 hashCode()
     // 方法，因此只要标题上调用 hashCode() 方法的返回值就行了。请
     // 注意这里的 hashCode() 与 equals() 是如何运用同一个实例变量。
     public int hashCode () {
@@ -1509,7 +1509,7 @@ public class TestTree {
     public static void main (String[] args) {
         new TestTree();
     }
-    
+
 }
 ```
 
@@ -1851,7 +1851,7 @@ ArrayList<? extends Pet>
 > **这个时候仍然可以运行这个清单中元素上的方法，但不可以往清单添加元素了**。
 >
 > **也就是说，可以对这些清单元素进行任何操作，但不能将新东西放入到这个清单。由于编译器不会允许任何在运行时可怕操作，因此在运行时就是安全的**。
-> 
+>
 > **那么，在那个 `takeAnimals()` 里边，这样做是没有问题的**：
 
 ```java

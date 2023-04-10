@@ -194,7 +194,7 @@ class Duck {
     public int getSize () {
         return size;
     }
-} 
+}
 ```
 
 ![实例变量与静态变量的区别](images/Ch10_04.png)
@@ -239,7 +239,7 @@ class Player {
 }                               // 原生整数（长整形、短整型等）：0
                                 // 原生浮点数（单精度、双精度）：0.0
                                 // 布尔值：false
-public class PlayerTestDrive {  // 对象引用变量：null 
+public class PlayerTestDrive {  // 对象引用变量：null
     public static void main (String[] args) {
         System.out.println(Player.playerCount);
         Player one = new Player ("Tiger Woods");
@@ -450,7 +450,7 @@ double y = Math.min(90876.5, 90876.49); // 返回 90876.5
 ```java
 int x = 32;
 ArrayList list = new ArrayList();
-list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！！ 
+list.add(x);    // 在 5.0 之前的 Java 版本中，这样写是不行的！！
                 // 那个时候 ArrayList 还没有 add(int) 方法
                 // 来接收整数！（那个时候的 ArrayList 只有
                 // 接收对象引用变量，而非原生值的 add() 方法）
@@ -495,7 +495,7 @@ public void doNumsOldWay () {
 }
 ```
 
-### <a id="autoboxing"></a>自动装箱：模糊原生值与对象之间的界线
+### 自动装箱：模糊原生值与对象之间的界线
 
 ***Autoboxing: bluring the line between primitive and object***
 
@@ -509,7 +509,7 @@ Java 5.0 加入进来的自动装箱特性（the autoboxing feature），就可�
 
 ```java
 public void doNumsNewWay () {
-                                    // 构造一个类型为 Integer 的 ArrayList 
+                                    // 构造一个类型为 Integer 的 ArrayList
     ArrayList<Integer> listOfNumbers = new ArrayList<Integer>;
 
     listOfNumbers.add(3); // 这样就加入进去了！
@@ -783,7 +783,7 @@ Exception in thread "main" java.util.IllegalFormatConversionException: d != java
 
 已经见到的两个示例：
 
-* `%,d` 是指“插入逗号，并把那个数字作为十进制整数进行格式化” 
+* `%,d` 是指“插入逗号，并把那个数字作为十进制整数进行格式化”
 
 以及
 
@@ -955,7 +955,7 @@ System.out.format("%tA, %tB %td", now);
 会报出告警：
 
 ```console
-[WARNING] 
+[WARNING]
 java.util.MissingFormatArgumentException: Format specifier '%tB'
 ```
 
@@ -1089,8 +1089,8 @@ $ java -jar target/com.xfoss.learningJava-0.0.1.jar
 
 *此输出就确认了以上的 `getTimeMillis()`、`add()`、`roll()`以及`set()`等方法是如何运作的*。
 
-> **注意**：The `java.util.Calendar.roll()` method adds(up) or subtracts(down) a single unit of time on the given time field without changing larger fields. -- *Java API* 
-> 
+> **注意**：The `java.util.Calendar.roll()` method adds(up) or subtracts(down) a single unit of time on the given time field without changing larger fields. -- *Java API*
+>
 > 这个方法有点古怪。
 
 ### `Calendar` API的一些亮眼之处

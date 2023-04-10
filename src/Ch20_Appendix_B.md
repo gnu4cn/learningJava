@@ -22,7 +22,7 @@
 
 （This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
 
-### <a id="annotations-basics"></a>注解语法基础
+### 注解语法基础
 
 **Annotations Basics**
 
@@ -89,7 +89,7 @@ class MyClass {...}
 
 注解类型（a Annotation Type）可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解（predefined Java annotations）](#predefined-annotation-types)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
 
-#### <a id="where"></a>哪些地方可以使用注解语法
+#### 哪些地方可以使用注解语法
 
 可在将注解应用在各种声明上：类、字段、方法，以及其他一些程序元素的声明。当在某个声明上运用了注解语法时，依照约定，每条注解常常占据自己的一行。
 
@@ -142,7 +142,7 @@ public class Generation3List extends Generation2List {
     // Last modified: 4/12/2004
     // By: Jane Doe
     // Reviewers: Alice, Bill, Cindy
-    
+
     // 真正的类代码从这里开始
 }
 ```
@@ -194,7 +194,7 @@ import java.lang.annotation.*;
 }
 ```
 
-### <a id="predefined-annotation-types"></a>Java中预定义的注解类型
+### Java中预定义的注解类型
 
 **Predefined Annotation Types**
 
@@ -274,7 +274,7 @@ void useDeprecatedMethod () {
 - **`@Inherited`** `@Inherited` 注解表示其所标记的注解类型，可从超类继承到（`@Inherited` annotation indicates that the annotation type can be inherited from the super class）。（默认是不可以从超类继承的。）在用户查询某个注解类型，而该类又没有这个类型的注解时，那么就会对这个类的超类查询此注解类型。此注解仅适用于类的声明。
 - **`@Repeatable`** `@Repeatable` 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 [重复注解（Repeating Annotations）](#repeating-annotations)。
 
-### <a id="type-annotations-and-pluggable-type-systems"></a>类型注解与可插拔类型系统
+### 类型注解与可插拔类型系统
 
 **Type Annotations and Pluggable Type Systems**
 
@@ -296,7 +296,7 @@ void useDeprecatedMethod () {
 
 在许多情形中，是不必编写自己的类型检查模组的。有很多第三方以及完成了这方面的工作。比如，或许会利用到华盛顿大学所创建的检查器框架 `Checker Framework`。该框架就包含了`NonNull` 模组，还有正则表达式模组（a regular module），以及互斥锁（a mutex lock module）。更多有关该检查器框架的信息，请参考 [检查器框架](https://checkerframework.org/)。
 
-### <a id="repeating-annotations"></a>重复注解
+### 重复注解
 
 **Repeating Annotations**
 
@@ -475,7 +475,7 @@ public @interface Schedules {
 
 #### 练习
 
-1.  __答案__ : 
+1.  __答案__ :
 
     ```java
     /**
@@ -687,7 +687,7 @@ public class Main {
     // 注意：这里初始化 @Word 类型的注解时：
     //      1. 不能使用非静态实例变量。这个注解的初始化，是属于其
     // 所注解的静态方法 newMethod() 的上下文的；
-    //      2. 也不能使用静态实例变量。“element value must be a 
+    //      2. 也不能使用静态实例变量。“element value must be a
     // constant expression”，因此只能使用静态 final 的常量。
     @Word(word = "First", value = 1)
     @Word(word = "Second", value = 2)
@@ -703,7 +703,7 @@ public class Main {
             Annotation anno = m.getAnnotation(MyRepeatedAnnos.class);
             System.out.println(anno);
         }
-        catch (NoSuchMethodException e) 
+        catch (NoSuchMethodException e)
         {
             e.printStackTrace();
         }
@@ -790,7 +790,7 @@ class BaseCls
     }
 }
 
-class DerivedCls extends BaseCls 
+class DerivedCls extends BaseCls
 {
     @Override
     public void Display()
@@ -943,7 +943,7 @@ public class Test
 你好
 ```
 
-## <a id="lambda-expressions"></a>拉姆达 Lambda 表达式
+## 拉姆达 Lambda 表达式
 
 **Java 8 中的 Lambda 表达式（Lambda Expressions in Java 8）**
 
@@ -1119,7 +1119,7 @@ public class LambdaExprDemo
 - 在只有单个语句时，花括号不是强制性的，同时该匿名函数的返回值类型与函数体表达式一致（when there is a single statement curly brackets are not mandatory and the return type of the anonymous function is the same as that of the body expression）；
 - 在有多个语句时，那么这些语句就必须用花括号括起来（形成一个代码块），且该匿名函数的返回值类型，与由此代码块所返回的值类型一致，或者即为在未返回任何东西时的 `void`（when there are more than one statements, then these must be enclosed in curly brackets(a code block) and the return type of the anonymous function is the same as the type of the value return within the code block, or `void` if nothing is returned）。
 
-## <a id="functional_interface"></a>功能接口
+## 功能接口
 
 Java 永远是一种面向对象的编程语言（Java has forever remained an Object-Oriented Programming language）。而由于Java 是一种面向对象编程语言，那么就可以声称，除了一些原生数据类型，和一些为完整性与简单性目的而采用的原生方法外， Java 编程语言中所出现全部事物，都可以由对象来表达（by object-oriented programming language, we can declare that everything present in the Java programming language rotates throughout the Objects, except for some of the primitive data types and primitive methods for integrity and simplicity）。在称为 Java 的编程语言中，是没有任何单独函数的。Java 编程语言中的函数，都是某个类的组成部分，而若某人想要调用这些函数，那么他们就必须使用到类或类的对象，来调用这些函数。
 
@@ -1278,7 +1278,7 @@ class TestDrive {
 
     ```java
     public class CheckForNull implements Predicate {
-        
+
         @Override
         public boolean test(Object o)
         {
@@ -1506,7 +1506,7 @@ import java.lang.reflect.*;
 // 类 1
 // 将创建这个类的对象
 class Test {
-    
+
     // 创建出一个私有字段（实例变量）
     private String s;
 
@@ -1541,7 +1541,7 @@ class Test {
 // 类 2
 // 主类
 class Demo {
-    
+
     // 主类的驱动器方法
     public static void main(String args[]) throws Exception
     {
@@ -1576,7 +1576,7 @@ class Demo {
         // 打印出这些方法的名字
         for (Method method : methods) System.out.println(method.getName());
 
-        // 经由提供到方法名字及参数类，作为 getDeclaredMethod() 
+        // 经由提供到方法名字及参数类，作为 getDeclaredMethod()
         // 方法的参数，创建出指定方法的对象
         Method methodCall1 = cls.getDeclaredMethod("method2", int.class);
 
@@ -1619,7 +1619,7 @@ class Demo {
 **输出**：
 
 ```console
-java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                              ✔ 
+java -jar build/libs/com.xfoss.learningJava-0.0.1.jar                              ✔
 ---------------------
 类的名字为 com.xfoss.Reflection.Test
 ---------------------
