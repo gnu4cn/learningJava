@@ -14,11 +14,11 @@
 
 本课程解释了：
 
-- [哪些地方可以使用注解语法](#where)、
+- [哪些地方可以使用注解语法](#哪些地方可以使用注解语法)、
 - 如何运用注解语法、
-- [Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）](#predefined-annotation-types)、
-- [类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码](#type-annotations-and-pluggable-type-systems)，
-- [以及怎样去实现重复性注解语法](#repeating-annotations)。
+- [Java 平台以及标准版（Standard Edtion, Java SE API）中有哪些可用的预定义好的注解类型（annotation types）](#java中预定义的注解类型)、
+- [类型注解如何与可插拔类型系统结合以编写出有着更强类型检查的代码](#类型注解与可插拔类型系统)，
+- [以及怎样去实现重复性注解语法](#重复注解)。
 
 （This lesson explains where annotations can be used, how to apply annotations, what predefined annotation types are available in the Java Platform, Standard Edition(Java SE API), how type annotations can be used in conjuncton with pluggable type systems to write stronger type checking, and how to implement repeating annotations.）
 
@@ -85,9 +85,9 @@ class MyClass {...}
 class MyClass {...}
 ```
 
-从 Java SE 8 发布才开始支持重复注解。更多的有关情况，请参考 [重复注解](#repeating-annotations)
+从 Java SE 8 发布才开始支持重复注解。更多的有关情况，请参考 [重复注解](#重复注解)
 
-注解类型（a Annotation Type）可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解（predefined Java annotations）](#predefined-annotation-types)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
+注解类型（a Annotation Type）可以是定义在 Java SE API 的 `java.lang` 或 `java.lang.annotation` 包中类型之一。在上面的示例中，`Override`与 `SuppressWarnings`，就是 [预定义的Java 注解，predefined Java annotations](#java中预定义的注解类型)。定义自己的注解类型，也是可能的。前面示例中的 `Author` 与 `EBook` 就属于自定义注解类型。
 
 #### 哪些地方可以使用注解语法
 
@@ -121,7 +121,7 @@ void monitorTemperature() throws
     @Critical TemperatureException {...}
 ```
 
-这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统（Type Annotations and Pluggable Type Systems）](#type-annotations-and-pluggable-type-systems)。
+这种形式的注解，叫做 *类型注解（a type annotation）*。有关类型注解的更多信息，请参考 [类型注解与可插拔类型系统，Type Annotations and Pluggable Type Systems](java中预定义的注解类型)。
 
 
 ### 注解类型的声明
@@ -161,7 +161,7 @@ public class Generation3List extends Generation2List {
 }
 ```
 
-这个注解类型定义，看起来类似于接口定义，其中关键字 `interface` 前面冠以了位处符号（`@`）（当这个位处符号是在注解类型中时，就等于位处`AT`）。所有注解类型，都属于 *接口* 的一种形式，[本课程稍后](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)会讲到这一点。此刻还不需要掌握什么是接口。
+这个注解类型定义，看起来类似于接口定义，其中关键字 `interface` 前面冠以了位处符号（`@`）（当这个位处符号是在注解类型中时，就等于位处`AT`）。所有注解类型，都属于 *接口* 的一种形式，[本课程稍后](Ch08_Interfaces_and_Abstract_Classes.md#使用接口来拯救)一点。此刻还不需要掌握什么是接口。
 
 上面注解定义的代码体，包含了 *注解类型元素（annotation type element）* 的一些声明，这些什么看起来很像是一些方法。请留意这些注解类型元素，可定义一些可选的默认值。
 
@@ -259,7 +259,8 @@ void useDeprecatedMethod () {
 适用于其他注解的注解，叫做 *元注解（meta-annotations）*。在 `java.lang.annotation` 包中，定义了若干元注解类型。
 
 - **`@Retention`** `@Retention` 注解指定了所标记的那些注解该如何存储（`Retention` annotation specifies how the marked annotation is stored）:
-- **`@Documented`** `@Documented` 注解表示不论指定注解在何时被使用到，那些元素都应使用 `Javadoc` 工具以文档化处理。（默认情况下，注解是没有包含在 `Javadoc` 中的。`@Documented` annotation indicates that whenever the specified annotation is used those elements should be documented using the `Javadoc` tool）。有关 `Javadoc` 的更多信息，请参考 [`Javadoc` 工具部分](#javadoc-tool)。
+- **`@Documented`** `@Documented` 注解表示不论指定注解在何时被使用到，那些元素都应使用 `Javadoc` 工具以文档化处理。（默认情况下，注解是没有包含在 `Javadoc` 中的。`@Documented` annotation indicates that whenever the specified annotation is used those elements should be documented using the `Javadoc` tool）。
+
 + **`Target`** `Target` 注解对另一注解进行标记，以限制所标记的注解可适用的Java元素种类。`@Target` 注解，会将以下的一些元素类型，指定为他的取值：
 
     - `ElementType.ANNOTATION_TYPE` - 被 `@Target` 注解标记的注解可适用于另一注解类型；
@@ -272,13 +273,13 @@ void useDeprecatedMethod () {
     - `ElementType.Type` - 可适用于类的任意元素。
 
 - **`@Inherited`** `@Inherited` 注解表示其所标记的注解类型，可从超类继承到（`@Inherited` annotation indicates that the annotation type can be inherited from the super class）。（默认是不可以从超类继承的。）在用户查询某个注解类型，而该类又没有这个类型的注解时，那么就会对这个类的超类查询此注解类型。此注解仅适用于类的声明。
-- **`@Repeatable`** `@Repeatable` 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 [重复注解（Repeating Annotations）](#repeating-annotations)。
+- **`@Repeatable`** `@Repeatable` 注解，是在Java SE 8 中引入的，表示所其所标记的注解，可多次应用到同意声明或类型用途。更多的有关信息，请参阅 [重复注解（Repeating Annotations）](#类别五重复性注解)。
 
 ### 类型注解与可插拔类型系统
 
 **Type Annotations and Pluggable Type Systems**
 
-在 Java SE 8 发布之前，注解只能适用于声明。而自Java SE 8 发布开始，注解就还可以适用到任何 *类型用途（type use）* 了。这意味着在所有用到类型的地方，都可以使用注解。有用到类型之处的一些示例，包括类实例创建表达式（`new`）、类型转换（casts）、`implements` 子语句，以及 `throws` 子语句等。这种形式的注解，被称为 *类型注解（type annotation）*，在之前的 [注解基础](#annations-basics)那里，给出了几个示例。
+在 Java SE 8 发布之前，注解只能适用于声明。而自Java SE 8 发布开始，注解就还可以适用到任何 *类型用途（type use）* 了。这意味着在所有用到类型的地方，都可以使用注解。有用到类型之处的一些示例，包括类实例创建表达式（`new`）、类型转换（casts）、`implements` 子语句，以及 `throws` 子语句等。这种形式的注解，被称为 *类型注解（type annotation）*，在之前的 [注解基础](#注解语法基础)那里，给出了几个示例。
 
 之所以创建出这些类型注解，是为了以确保以更强大的类型检查方式，支持对Java程序的分析。Java SE 8发布，并未提供类型检查框架，不过Java SE 8 是允许编写（或下载）作为一个或多个可插拔式模组实现的、与Java 编译器结合使用的类型检查框架的（Type annotations were created to support improved analysis of Java programs way of ensuring stronger type checking. The Java SE 8 release does not provide a type checking framework, but it allows you to write(or download) a type checking framework that is implemented as one or more pluggable modules that are used in conjunction with the Java compiler）。
 
@@ -947,7 +948,7 @@ public class Test
 
 **Java 8 中的 Lambda 表达式（Lambda Expressions in Java 8）**
 
-拉姆达表达式本质上是 [功能接口(functioal interface)](#functional_interface) （带有单个抽象方法的接口，被称为功能接口。`java.lang.Runnable` 即是功能接口的一个示例）的表征。拉姆达表达式实现的是唯一抽象方法，进而因此实现的是功能接口。拉姆达表达式是在 Java 8 中加入的特性，从而提供了以下的这些功能。
+拉姆达表达式本质上是 [功能接口，functioal interface](#功能接口) （带有单个抽象方法的接口，被称为功能接口。`java.lang.Runnable` 即是功能接口的一个示例）的表征。拉姆达表达式实现的是唯一抽象方法，进而因此实现的是功能接口。拉姆达表达式是在 Java 8 中加入的特性，从而提供了以下的这些功能。
 
 - 实现了将功能作为方法参数的处理，或者说将代码当作数据的处理（enable to treat functionality as a method argument, or code as data）；
 - 可创建出不属于任何类的函数（a function can be created without belonging to any class）；
@@ -1123,7 +1124,7 @@ public class LambdaExprDemo
 
 Java 永远是一种面向对象的编程语言（Java has forever remained an Object-Oriented Programming language）。而由于Java 是一种面向对象编程语言，那么就可以声称，除了一些原生数据类型，和一些为完整性与简单性目的而采用的原生方法外， Java 编程语言中所出现全部事物，都可以由对象来表达（by object-oriented programming language, we can declare that everything present in the Java programming language rotates throughout the Objects, except for some of the primitive data types and primitive methods for integrity and simplicity）。在称为 Java 的编程语言中，是没有任何单独函数的。Java 编程语言中的函数，都是某个类的组成部分，而若某人想要调用这些函数，那么他们就必须使用到类或类的对象，来调用这些函数。
 
-**功能接口**是之只包含一个抽象方法的接口。他们可只有一项用于展示的功能。自Java 8 开始，就可以使用 [拉姆达表达式](#lambda-expressions) 来表示功能接口的实例了。功能接口可以有任意数量的默认方法（a functional interface can have any number of default methods）。***`Runnable`、`ActionListener`、`Comparable`*** 等都是功能接口的一些示例。
+**功能接口**是之只包含一个抽象方法的接口。他们可只有一项用于展示的功能。自Java 8 开始，就可以使用 [拉姆达表达式](#拉姆达-lambda-表达式) 来表示功能接口的实例了。功能接口可以有任意数量的默认方法（a functional interface can have any number of default methods）。***`Runnable`、`ActionListener`、`Comparable`*** 等都是功能接口的一些示例。
 
 功能接口又被称为 **单一抽象方法接口（Single Abstract Method Interface）**。简称 **SAM 接口**。Java 中的功能接口，属于提供到用户基础编程手段的新特性（functional interfaces in Java are the new feature that provides users with the approach of fundamental programming）。
 
@@ -1156,7 +1157,7 @@ class Test {
 新的线程已创建
 ```
 
-自 Java 8 开始，就可以像下面这样，将 [拉姆达表达式](#lambda-expressions) 赋值给其功能接口对象：
+自 Java 8 开始，就可以像下面这样，将 [拉姆达表达式](#拉姆达-lambda-表达式) 赋值给其功能接口对象：
 
 ```java
 // 用于演示使用了拉姆达表达式的功能接口实现的 Java 程序

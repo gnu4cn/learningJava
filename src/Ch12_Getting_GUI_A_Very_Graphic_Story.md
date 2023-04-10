@@ -940,7 +940,7 @@ public class SimpleGui3C implements ActionListener {
 
 **Inner class to the rescue**!
 
-> 注：听起来是不是很熟悉？哈哈，这里的内部类，就跟之前的 [`interface` 拯救了死亡钻石问题](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)（the Dead Diamon of Death）一样，解决了GUI中多个事件处理器的问题。
+> 注：听起来是不是很熟悉？哈哈，这里的内部类，就跟之前的 [`interface` 拯救了死亡钻石问题](Ch08_Interfaces_and_Abstract_Classes.md#使用接口来拯救)（the Dead Diamon of Death）一样，解决了GUI中多个事件处理器的问题。
 
 *可* 将一个类嵌套在另一个类中。很简单吧。只需要确保内部类的定义，位于外层类的花括弧内部即可。
 

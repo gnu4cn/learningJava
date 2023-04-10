@@ -1525,7 +1525,7 @@ public class TestTree {
 
 清单与数据集都是极好的，但有的时候映射（a `Map`）则是最佳的集合（注意这里不是大写字母 `C` 的 `Collection` -- 请记住映射属于Java集合，但他们没有实现 `Collection`接口）。
 
-设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由 [自动打包的原生值](Ch10_Numbers_and_Statics_Numbers_Matter.md#autoboxing)）。
+设想想要一个像属性清单一样行事的集合，在那里给到一个名称，他就会给出与这个名称关联的值回来。虽然这些作为名称的键，通常是字符串，但他们也可以是任何的Java对象（或者也可以是，经由 [自动装箱的原生值](Ch10_Numbers_and_Statics_Numbers_Matter.md#自动装箱模糊原生值与对象之间的界线)）。
 
 ![Java 中的映射](images/Ch16_27.png)
 
@@ -1822,7 +1822,7 @@ Exception in thread "main" java.lang.ArrayStoreException: com.xfoss.CollectionAn
 
 **Wildcards to the rescue**
 
-> **注**：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、[Interface to the rescue!](Ch08_Interfaces_and_Abstract_Classes.md#interface_rescue)；2、[Inner class to the rescue!](Ch12_Getting_GUI_A_Very_Graphic_Story.md#inner_class_rescue)
+> **注**：本书出现了三次 to the rescue，这里是第三处，其余两处为：1、[Interface to the rescue!](Ch08_Interfaces_and_Abstract_Classes.md#使用接口来拯救)；2、[Inner class to the rescue!](Ch12_Getting_GUI_A_Very_Graphic_Story.md#内部类来拯救)
 
 虽然看起来非同寻常，不过 *确实* 有种创建可接受任意 `Animal` 子类型的`ArrayList`作为方法参数的方式。最简单的做法，就是使用 **通配符（wildcard）** -- 正式因为这个原因，通配符才被显式地加入到Java编程语言的（it looks unusual, but there *is* a way to create a method argument that can accept an `ArrayList` of any `Animal` subtype. The simplest way is to use a **wildcard**--added to the Java language explicitly for this reason）。
 
