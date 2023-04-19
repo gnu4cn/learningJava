@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+  <head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>轻松学Java（Head First Java） - Yet another Chinese Head First Java book.</title>
+
+
+    <!-- Custom HTML head -->
+    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/pagetoc.css">
+
+  </head>
+  <body>
+    <div id="body-container">
+      <!-- Provide site root to javascript -->
+      <script>
+        var path_to_root = "";
+        var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+      </script>
+
+      <!-- Work around some values being stored in localStorage wrapped in quotes -->
+      <script>
+        try {
+                  var theme = localStorage.getItem('mdbook-theme');
+                  var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                  if (theme.startsWith('"') && theme.endsWith('"')) {
+                            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                          }
+
+                  if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                          }
+                } catch (e) { }
+      </script>
+
+      <!-- Set the theme before any content is loaded, prevents flash -->
+      <script>
+        var theme;
+        try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+        if (theme === null || theme === undefined) { theme = default_theme; }
+        var html = document.querySelector('html');
+        html.classList.remove('no-js')
+        html.classList.remove('light')
+        html.classList.add(theme);
+        html.classList.add('js');
+      </script>
+
+      <!-- Hide / unhide sidebar before it is displayed -->
+      <script>
+        var html = document.querySelector('html');
+        var sidebar = null;
+        if (document.body.clientWidth >= 1080) {
+                  try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                  sidebar = sidebar || 'visible';
+                } else {
+                          sidebar = 'hidden';
+                        }
+        html.classList.remove('sidebar-visible');
+        html.classList.add("sidebar-" + sidebar);
+      </script>
+
+      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <div class="sidebar-scrollbox">
+          <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html" class="active">轻松学Java（Head First Java）</a></li><li class="chapter-item expanded "><a href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html"><strong aria-hidden="true">1.</strong> 快速投身于 Java：破冰</a></li><li class="chapter-item expanded "><a href="Ch02_Class_and_Objects_A_Trip_to_Objectville.html"><strong aria-hidden="true">2.</strong> 类与对象：对象村之旅</a></li><li class="chapter-item expanded "><a href="Ch03_Primitives_and_References_Know_Your_Variables.html"><strong aria-hidden="true">3.</strong> 原生与引用变量：了解你的那些变量</a></li><li class="chapter-item expanded "><a href="Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html"><strong aria-hidden="true">4.</strong> 用到实例变量的那些方法：对象行为机制</a></li><li class="chapter-item expanded "><a href="Ch05_Writing_a_Program_Extra-Strength_Methods.html"><strong aria-hidden="true">5.</strong> 编写一个程序：方法之附加力量</a></li><li class="chapter-item expanded "><a href="Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html"><strong aria-hidden="true">6.</strong> 了解 Java API：运用 Java 的库</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">继承和多态机制</li><li class="chapter-item expanded "><a href="Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html"><strong aria-hidden="true">7.</strong> 继承与多态：在对象村更好的过活</a></li><li class="chapter-item expanded "><a href="Ch08_Interfaces_and_Abstract_Classes.html"><strong aria-hidden="true">8.</strong> 接口及抽象类</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编译器、堆与栈</li><li class="chapter-item expanded "><a href="Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html"><strong aria-hidden="true">9.</strong> 构造器与垃圾回收：对象的生与死</a></li><li class="chapter-item expanded "><a href="Ch10_Numbers_and_Statics_Numbers_Matter.html"><strong aria-hidden="true">10.</strong> 数字与静态元素：数字为要</a></li><li class="chapter-item expanded "><a href="Ch11_Exception_Handling_Risky_Behavior.html"><strong aria-hidden="true">11.</strong> 异常处理：冒险行为</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">GUI</li><li class="chapter-item expanded "><a href="Ch12_Getting_GUI_A_Very_Graphic_Story.html"><strong aria-hidden="true">12.</strong> 得到图形用户界面：一个甚为形象的故事</a></li><li class="chapter-item expanded "><a href="Ch13_Using_Swing_Work_on_Your_Swing.html"><strong aria-hidden="true">13.</strong> 运用 Swing：工作于 Swing 之上</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">对象序列化与数据结构</li><li class="chapter-item expanded "><a href="Ch14_Serialization_and_File_I_O_Saving_Objects.html"><strong aria-hidden="true">14.</strong> 序列化为文件 I/O：保存对象</a></li><li class="chapter-item expanded "><a href="Ch15_Networking_and_Threads_Make_a_Connection.html"><strong aria-hidden="true">15.</strong> 网络通信与线程：构造连接</a></li><li class="chapter-item expanded "><a href="Ch16_Collections_and_Generics_Data_Structure.html"><strong aria-hidden="true">16.</strong> 集合与泛型：数据结构</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">完结部分</li><li class="chapter-item expanded "><a href="Ch17_Package_JARs_and_Deployment_Release_Your_Code.html"><strong aria-hidden="true">17.</strong> 打包、JARs 与部署：发布代码</a></li><li class="chapter-item expanded "><a href="Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html"><strong aria-hidden="true">18.</strong> 远端部署与 RMI：分布式计算</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="Ch19_Appendix_A.html"><strong aria-hidden="true">19.</strong> 附录 A：十个几乎会进到本书的题目</a></li><li class="chapter-item expanded "><a href="Ch20_Appendix_B.html"><strong aria-hidden="true">20.</strong> 附录 B：其他要点</a></li></ol>
+        </div>
+        <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+      </nav>
+
+      <div id="page-wrapper" class="page-wrapper">
+
+        <div class="page">
+                    <div id="menu-bar-hover-placeholder"></div>
+          <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+              <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                <i class="fa fa-bars"></i>
+              </button>
+              <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                <i class="fa fa-paint-brush"></i>
+              </button>
+              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+              </ul>
+              <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+
+            <h3 class="menu-title">Yet another Chinese Head First Java book.</h3>
+
+            <div class="right-buttons">
+              <a href="https://github.com/gnu4cn/learningJava" title="Git repository" aria-label="Git repository">
+                <i id="git-repository-button" class="fa fa-github"></i>
+              </a>
+ ・
+              <a href="https://books.xfoss.com" title="捐赠，donate" aria-label="捐赠，donate">
+                打赏，donate
+              </a>
+            </div>
+          </div>
+
+          <div id="search-wrapper" class="hidden">
+            <form id="searchbar-outer" class="searchbar-outer">
+              <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+            </form>
+            <div id="searchresults-outer" class="searchresults-outer hidden">
+              <div id="searchresults-header" class="searchresults-header"></div>
+              <ul id="searchresults">
+              </ul>
+            </div>
+          </div>
+
+          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+          <script>
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                          link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                        });
+          </script>
+
+          <div id="content" class="content">
+            <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+              <h1 id="java-编程学习项目-"><a class="header" href="#java-编程学习项目-">Java 编程学习项目 ☕️</a></h1>
+<p>在线阅读 <a href="https://java.xfoss.com">java.xfoss.com</a>。</p>
+<p>这是一个学习 Java 的项目。使用 Eclipse IDE/VIM、Gradle/NPM 构建工具。后期会涉及到 NPM 的使用。主要学习 Java 的基础知识，Java 本地应用程序的编写。 <strong>项目使用 JDK <code>11.0.12</code></strong> 语言环境。</p>
+<h2 id="0-环境搭建"><a class="header" href="#0-环境搭建">0. 环境搭建</a></h2>
+<p>本项目是在 Ubuntu Linux 20.04 LTS 上进行的。</p>
+<ul>
+<li>
+<p>安装JDK</p>
+<p>JDK的当前LTS版是 <code>JDK 17.0.1</code>（Oracle, 2021-11），你可以直接从 <a href="https://jdk.java.net/java-se-ri/11">Java Downloads | jdk.java.net</a> 下载。openjdk-11+28_linux-x64_bin.tar.gz` 压缩包有 178.9M 大小。</p>
+<p>运行下面的命令，就安装好 OpenJDK 了。</p>
+</li>
+</ul>
+<pre><code class="language-bash">$sudo tar xf /path/to/openjdk-11+28_linux-x64_bin.tar.gz -C /opt/
+$sudo ln -s /opt/openjdk-11+28 /opt/jdk
+$sudo update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/opt/jdk/bin/java&quot; 1
+$sudo update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;/opt/jdk/bin/javac&quot; 1
+</code></pre>
+<p>运行 <code>$java -version</code> 与 <code>$javac -version</code> 测试 JDK 是否安装妥当。</p>
+<ul>
+<li>
+<p>安装 <a href="https://gradle.org/">Gradle</a></p>
+<p>参考 Gradle 官网上使用 <a href="http://sdkman.io/">SDKMAN!</a> 直接安装即可。</p>
+</li>
+<li>
+<p>安装Maven</p>
+<p><a href="http://maven.apache.org/">Apache Maven</a> 可以直接下载，下载到的 <code>apache-maven-3.8.4-bin.tar.gz</code>压缩包，大小约 9M，安装步骤与JDK的略有不同：</p>
+</li>
+</ul>
+<pre><code class="language-bash">$sudo tar xf /path/to/apache-maven-3.8.4-bin.tar.gz -C /opt/
+$sudo ln -s /opt/apache-maven-3.8.4 /opt/mvn
+$sudo vim.gtk /etc/profile.d/mvn.sh
+$sudo chmod +x /etc/profile.d/mvn.sh
+</code></pre>
+<p>其中建立了一个 <code>/etc/profile.d/mvn.sh</code> 文件，并修改为了可执行文件。该文件的内容为：</p>
+<pre><code class="language-sh">export JAVA_HOME=/opt/jdk
+export M2_HOME=/opt/mvn
+export MAVEN_HOME=/opt/mvn
+export PATH=${M2_HOME}/bin:${PATH}
+</code></pre>
+<p>随后可将国内的华为 MAVEN 代码仓库，设置为MAVEN的默认代码仓库。运行如下命令：</p>
+<pre><code class="language-bash">$if [ -d $HOME&quot;/.m2&quot; ]; then :; else echo &quot;~/.abc not exist. Now create&quot;; mkdir $HOME&quot;/.m2&quot;; fi
+$wget -qO ~/.m2/settings.xml https://mirrors.huaweicloud.com/api/v1/configurations/maven?
+</code></pre>
+<ul>
+<li>安装NVM</li>
+<li>配置 <code>~/.vimrc</code></li>
+</ul>
+<h2 id="1-关于文件目录结构"><a class="header" href="#1-关于文件目录结构">1. 关于文件/目录结构</a></h2>
+<p>在编写 Java 程序时，使用 Maven 构建，必须以这样的 <code>src/main/java/com/xfoss/learningJava/*.java</code> 的文件/目录结构，否则会报错：</p>
+<pre><code class="language-bash">peng@uDesktop:~/eclipse-workspace/learningJava$ java -jar target/com.xfoss.learningJava-0.0.1.jar
+Error: Could not find or load main class com.xfoss.learningJava.PhraseOMatic
+Caused by: java.lang.ClassNotFoundException: com.xfoss.learningJava.PhraseOMatic
+</code></pre>
+<blockquote>
+<p>同时，<code>packege com.xfoss.com.learningJava;</code> 对应的包 <code>com.xfoss.learningJava</code> 必须以这个名字命名，这也是上面目录中 <code>/com/xfoss/learningJava</code> 的来源。</p>
+</blockquote>
+<h2 id="2-使用-exec-maven-plugin"><a class="header" href="#2-使用-exec-maven-plugin">2. 使用 <code>exec-maven-plugin</code></a></h2>
+<p>使用这个插件，可以开启 <code>mvn exec:java</code> 命令，实时运行（正在）编写的 Java 程序。该插件支持两种运行模式，一种是在 Maven 所在线程里运行（需要修改 MAVEN 运行参数 <code>export MAVEN_OPTS=-Xmx1024m</code>，以增加JVM虚拟机的运行内存）；另一种以独立线程运行（尚需测试）。</p>
+<h2 id="3-buildgradlekts-文件中的-kotlin-dsl-语法"><a class="header" href="#3-buildgradlekts-文件中的-kotlin-dsl-语法">3. <code>build.gradle.kts</code> 文件中的 kotlin dsl 语法</a></h2>
+<p>Kotlin DSL, 领域特定语言，Domain Specific Language</p>
+<blockquote>
+<p>参考： <a href="https://juejin.cn/post/6844903569372479501">Kotlin 之美 -- DSL 篇</a></p>
+</blockquote>
+<h2 id="目录"><a class="header" href="#目录">目录</a></h2>
+<h3 id="基础"><a class="header" href="#基础">基础</a></h3>
+<ul>
+<li><a href="docs/Ch02_Class_and_Object_A_Trip_to_Objectville.html">类与对象：对象村之旅</a></li>
+<li><a href="docs/Ch03_Primitives_and_References_Know_Your_Variables.html">原生与引用：熟知你的变量</a></li>
+<li><a href="docs/Ch04_Methods_Use_Instance_Variables_How_Objects_Behave.html">方法对实例变量的使用：对象的行为方式</a></li>
+<li><a href="docs/Ch05_Writing_a_Program_Extra-Strength_Methods.html">实战编程：给方法赋能</a></li>
+<li><a href="docs/Ch06_Get_to_Know_The_Java_API_Using_the_Java_Library.html">了解Java API：使用Java的库</a></li>
+</ul>
+<h3 id="继承和多态机制"><a class="header" href="#继承和多态机制">继承和多态机制</a></h3>
+<ul>
+<li><a href="docs/Ch07_Inheritance_and_Polymorphism_Better_Living_in_Objectville.html">继承与多态：追求对象村的更好生活</a></li>
+<li><a href="docs/Ch08_Interfaces_and_Abstract_Classes.html">接口与抽象类</a></li>
+</ul>
+<h3 id="编译器堆与栈"><a class="header" href="#编译器堆与栈">编译器、堆与栈</a></h3>
+<ul>
+<li><a href="docs/Ch09_Constructors_and_Garbage_Collection_Life_and_Death_of_an_Object.html">构造器与垃圾回收: 对象的生与死</a></li>
+<li><a href="docs/Ch10_Numbers_and_Statics_Numbers_Matter.html">数字与静态值：数字为要</a></li>
+<li><a href="docs/Ch11_Exception_Handling_Risky_Behavior.html">例外处理：危险行为</a></li>
+</ul>
+<h3 id="gui"><a class="header" href="#gui">GUI</a></h3>
+<ul>
+<li><a href="docs/Ch12_Getting_GUI_A_Very_Graphic_Story.html">获得GUI：一个甚为形象的故事</a></li>
+<li><a href="docs/Ch13_Using_Swing_Work_on_Your_Swing.html">运用 <code>Swing</code>: 在 <code>Swing</code> 上干活</a></li>
+</ul>
+<h3 id="对象序列化与数据结构"><a class="header" href="#对象序列化与数据结构">对象序列化与数据结构</a></h3>
+<ul>
+<li><a href="docs/Ch14_Serialization_and_File_I_O_Saving_Objects.html">对象序列化与文件的输入/输出：对象保存</a></li>
+<li><a href="docs/Ch15_Networking_and_Threads_Make_a_Connection.html">联网与线程：构造连接</a></li>
+<li><a href="docs/Ch16_Collections_and_Generics_Data_Structure.html">集合与泛型：数据结构</a></li>
+</ul>
+<h3 id="完结"><a class="header" href="#完结">完结</a></h3>
+<ul>
+<li><a href="docs/Ch17_Package_JARs_And_Deployment_Release_Your_Code.html">打包、JARS与部署：发布代码</a></li>
+<li><a href="docs/Ch18_Remote_Deployment_with_RMI_Distributed_Computing.html">使用 RMI 特性进行远端部署：分布式计算</a></li>
+</ul>
+<h3 id="附录"><a class="header" href="#附录">附录</a></h3>
+<ul>
+<li><a href="docs/Ch19_Appendix.html">附录 A：十个本书未列入正式章节的方面</a></li>
+<li><a href="docs/Ch20_Appendix_B.html">附录 B: 其他要点</a></li>
+</ul>
+
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+              <!-- Mobile navigation buttons -->
+
+              <a rel="next" href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+              </a>
+
+              <div style="clear: both"></div>
+            </nav>
+          </div>
+        </div>
+
+        <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+          <a rel="next" href="Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </nav>
+
+      </div>
+
+      <!-- Livereload script (if served using the cli tool) -->
+      <script>
+        const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+        const socket = new WebSocket(wsAddress);
+        socket.onmessage = function (event) {
+                  if (event.data === "reload") {
+                            socket.close();
+                            location.reload();
+                          }
+                };
+
+        window.onbeforeunload = function() {
+                  socket.close();
+                }
+      </script>
+
+
+
+      <script>
+        window.playground_copyable = true;
+      </script>
+
+
+      <script src="elasticlunr.min.js"></script>
+      <script src="mark.min.js"></script>
+      <script src="searcher.js"></script>
+
+      <script src="clipboard.min.js"></script>
+      <script src="highlight.js"></script>
+      <script src="book.js"></script>
+
+      <!-- Custom JS scripts -->
+      <script src="theme/pagetoc.js"></script>
+
+
+    </div>
+  </body>
+</html>
