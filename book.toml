@@ -4,6 +4,7 @@ language = "zh"
 multilingual = false
 src = "src"
 title = "Yet another Chinese Head First Java book."
+description = "《Head First Java》 中文版，Yet another Chinese Head First Java book."
 
 [preprocessor.pagetoc]
 [output.html]
