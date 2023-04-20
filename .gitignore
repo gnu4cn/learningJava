@@ -1,5 +1,5 @@
 .gradle
-index.html
+/index.html
 book
 
 bin/**
