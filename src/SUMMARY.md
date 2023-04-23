@@ -1,4 +1,7 @@
 [轻松学Java（Head First Java）](../README.md)
+
+---
+
 - [快速投身于 Java：破冰](Ch01_Dive_in_A_Quick_Dip_Breaking_the_Surface.md)
 - [类与对象：对象村之旅](Ch02_Class_and_Objects_A_Trip_to_Objectville.md)
 - [原生与引用变量：了解你的那些变量](Ch03_Primitives_and_References_Know_Your_Variables.md)
