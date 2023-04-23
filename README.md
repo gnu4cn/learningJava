@@ -21,7 +21,7 @@ cargo install mdbook
 
 ### 在 Windows 上
 
-在 “Powershell（管理员）”（"Administrator: Windows Powershell"） 中，先安装 choco
+在 “Powershell（管理员）”（"Administrator: Windows Powershell"） 中，先安装 `choco`
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
