@@ -12,6 +12,7 @@ additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
 git-repository-url = "https://github.com/gnu4cn/learningJava"
 git-repository-icon = "fa-github"
+google-analytics="G-73QXSNG4L1"
 
 [output.html.print]
 enable = false
