@@ -193,9 +193,9 @@ public Duck () {
 
 ### 使用构造器来对一些 `Duck` 的重要状态进行初始化
 
-若要求在对象状态（实例变量）的一个或多个部分未初始化之前，不能使用该对象的话，就应该在完成对象初始化之前，不应将 `Duck` 对象交给任何引用变量（If an object shouldn't be used until one or more parts of its state(instance variables) have been initialized, don't let anyone get ahold of a `Duck` object until you're finished initializing）！让别人构造一个需要再次调用 `setSize()` 这样的设置器，才能得到一个可以使用的构造器，是具有相当风险的。因为在调用设置器之前，就已经将这个未准备好的对象，交给了其引用变量。如果类 `Duck`的使用者不知道或者忘记了调用设置器，那么会怎样呢？
+如果某个对象在其状态的一个或多个部分（实例变量）被初始化之前不应该被使用，那么在咱们完成其初始化之前，就不要让任何人掌握一个 `Duck` 对象！让别人构造并获得一个新的 `Duck` 对象的引用，而这个对象还没有准备好使用，直到那个人转身调用 `setSize()` 方法通常太危险了！`Duck` 的用户怎么知道他需要在制作新的鸭子后调用 `setter` 方法呢？
 
-放置初始化代码的最佳地点，就是在构造器中。只需要构造一个带有参数的构造器。
+放置初始化代码的最佳位置是在构造函数中。而咱们需要做的就是创建出带参数的构造函数。
 
 ![带有参数的构造器](images/Ch09_11.png)
 
