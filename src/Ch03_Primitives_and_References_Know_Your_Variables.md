@@ -1,6 +1,6 @@
-# 原生与参考：熟知你的变量
+# 原生与引用：熟知你的变量
 
-变量有两种：**原生变量** （**primitive**）和 **参考变量** （**reference**）。到现在为止，我们在两个地方用到了变量：作为对象状态（实例变量），以及作为本地变量（在方法中声明的变量）。后面会把变量用作 **参数**（**arguments**, 由调用代码发送给方法的值），同时作为返回类型(**return types**，返回到方法调用者的值)。在前面已经见到了声明为简单的 **原生** 整数值（比如 `int` 类型）。也见到过声明为更为复杂的诸如字符串（`String`）或数组（`array`）变量。但在现实生活中，有着远比整数、字符串以及数组复杂的东西，比如一个有着 `Dog` 实例变量的 `PetOwner` 对象，或者有着 `Engine` 的 `Car` 对象，本章将揭开 Java 类型谜题，看看可以 **声明** （__declare__）出什么样的变量，在变量中可以 **放入** （**put in**）些什么东西，以及对变量可以进行什么操作。还会揭示 **垃圾回收堆**（**garbage-collectible heap**）上，所发生的事情。
+变量有两种：**原生变量** （**primitive**）和 **引用变量** （**reference**）。到现在为止，我们在两个地方用到了变量：作为对象状态（实例变量），以及作为本地变量（在方法中声明的变量）。后面会把变量用作 **参数**（**arguments**, 由调用代码发送给方法的值），同时作为返回类型(**return types**，返回到方法调用者的值)。在前面已经见到了声明为简单的 **原生** 整数值（比如 `int` 类型）。也见到过声明为更为复杂的诸如字符串（`String`）或数组（`array`）变量。但在现实生活中，有着远比整数、字符串以及数组复杂的东西，比如一个有着 `Dog` 实例变量的 `PetOwner` 对象，或者有着 `Engine` 的 `Car` 对象，本章将揭开 Java 类型谜题，看看可以 **声明** （__declare__）出什么样的变量，在变量中可以 **放入** （**put in**）些什么东西，以及对变量可以进行什么操作。还会揭示 **垃圾回收堆**（**garbage-collectible heap**）上，所发生的事情。
 
 
 ## 声明一个变量
@@ -15,7 +15,7 @@ Rabbit hopper = new Giraffe();
 
 别指望这代码会被编译出来。拜托!
 
-为了能让 **类型安全** （**type-safty**）发挥作用，就要声明变量的类型。变量是个整数？还是 `Dog`? 还是是单个的字符。变量类型有两种：**原生** （**primitive**）与 **对象引用**（**object reference**）。原生变量保存的是一些基础类型的值（可以理解为简单的位模式，simple bit patterns），包括整数、逻辑值以及浮点数。对象参考变量，则是保存了对对象的参考（_references to objects_）。
+为了能让 **类型安全** （**type-safty**）发挥作用，就要声明变量的类型。变量是个整数？还是 `Dog`? 还是是单个的字符。变量类型有两种：**原生** （**primitive**）与 **对象引用**（**object reference**）。原生变量保存的是一些基础类型的值（可以理解为简单的位模式，simple bit patterns），包括整数、逻辑值以及浮点数。对象引用变量，则是保存了对对象的引用（_references to objects_）。
 
 __所有变量，都必须有一个类型__。
 
@@ -106,12 +106,12 @@ __Java的保留字__
 | `class` | `extends` | `implements` | `import` | `instanceof` | `interface` | `new` | `package` | `super` | `this` |
 | `catch` | `finally` | `try` | `throw` | `throws` | `return` | `void` | `const` | `goto` | `enum` |
 
-**关于参考变量**
+**关于引用变量**
 
 * 实际上是不存在 **对象** 变量的（There is actually no such thing as an **object** variable）
-* 有的只是对象 **参考** 变量（There's only an object **reference** variable）
-* 对象参考变量所存储的，是表示一种访问对象的方式的数据位（An object reference variable holds bits that represent a way to access an object）
-* 对象参考变量，并非保存的是对象本身，而是类似于指针的东西，或者说是一个内存地址。就算在不知道某个参考变量里头具体是什么，我们也明白他到底是个什么，参考变量代表着唯一的对象。同时JVM也知道如何使用这个引用，来获取到某个对象。
+* 有的只是对象 **引用** 变量（There's only an object **reference** variable）
+* 对象引用变量所存储的，是表示一种访问对象的方式的数据位（An object reference variable holds bits that represent a way to access an object）
+* 对象引用变量，并非保存的是对象本身，而是类似于指针的东西，或者说是一个内存地址。就算在不知道某个引用变量里头具体是什么，我们也明白他到底是个什么，引用变量代表着唯一的对象。同时JVM也知道如何使用这个引用，来获取到某个对象。
 
 __对象引用__ 只是另一个变量值（An object reference is just another variable value）。
 
