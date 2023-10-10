@@ -6,6 +6,11 @@ src = "src"
 title = "Yet another Chinese Head First Java book."
 description = "《Head First Java》 中文版，Yet another Chinese Head First Java book."
 
+[preprocessor.last-changed]
+command = "mdbook-last-changed"
+renderer = ["html"]
+
+
 [preprocessor.pagetoc]
 [output.html]
 additional-css = ["theme/pagetoc.css"]
