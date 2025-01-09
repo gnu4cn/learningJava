@@ -98,3 +98,8 @@ if (b == c) { // false }
 | 可以有多个参数 | 方法 |
 | 有助于建立良好封装的。 | 访问器，修改器，`public`, `private` |
 | 总是独行的（I always fly solo）。 | `return` |
+
+
+（End）
+
+

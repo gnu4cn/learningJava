@@ -653,3 +653,8 @@ PHIL, 他的乐器是：bass, 他演唱的是：occasionally
 ```
 
 > 请注意，只有在枚举值没有“常量专用类代码体（constant-specific class body）”的时候，才会调用到那个基本的 `sing()` 方法。
+
+
+（End）
+
+

@@ -1248,3 +1248,8 @@ class WithStatic {
 * **IV**：静态方法是这中间最糟糕的了，因为使用静态方法常常意味着程序员是在进行过程思维，而没有以对象按照对象的独有状态来行事。
 * **SV**：当然，我知道应该把对象作为面向对象涉及的焦点，但正是由于有那么些无知的程序员......请不要全盘否定过程编程好吧。静态变量/方法仍然有其存在的必要，同时在需要到他们时，他们可以说是无可比拟的（don't throw the baby out with the bytecode. There's a time and place for statics, and when you need one, nothing else beats it）。
 * **IV**：好吧......你就自欺欺人吧（Riiiiiight. Whatever you need to tell yourself...）
+
+
+（End）
+
+

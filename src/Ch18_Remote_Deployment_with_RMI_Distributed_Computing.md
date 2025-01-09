@@ -7,3 +7,8 @@
 > *Everyone says long-distance relationships are hard, but with RMI, it's easy. No matter how far apart we *really* are, RMI makes it seem like we're together*.
 
 **隔得远远的并不一定有什么不好（Being remote doesn't have to be a bad thing）**。
+
+
+（End）
+
+

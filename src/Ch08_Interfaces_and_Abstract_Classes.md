@@ -707,3 +707,8 @@ public class Dog extends Canine implements Pet
 * 类可以实现多个 `interface`s；
 * 因为 *`interface`的全部方法，隐式的都是 `public` 与 `abstract` 的*，所以实现某个 `interface` 的类，就必须实现该 `interface` 的全部方法；
 * 使用关键字 `super` 来从子类中调用所重写方法的超类版本。比如 `super.runReport();`
+
+
+（End）
+
+

@@ -1917,3 +1917,8 @@ public <T extends Animal> void takeThing(ArrayList<T> one, ArrayList<T> two)
 ```java
 public void takeThing(ArrayList<? extends Animal> one, ArrayList<? extends Animal> two)
 ```
+
+
+（End）
+
+
