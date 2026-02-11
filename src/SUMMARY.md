@@ -1,4 +1,4 @@
-[轻松学Java（Head First Java）](../README.md)
+[轻松学Java（Head First Java）](README.md)
 
 ---
 
